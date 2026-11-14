@@ -14,13 +14,15 @@ mode. Only endpoints documented at https://docs.adaptionlabs.ai are called.
     request has no such field.
 
 record_evidence() stores Adaption's own numbers labelled as such. They are an optimisation target, not evidence of
-protocol quality (README §S9.5, last evaluation limit).
+protocol quality (README §S9.5, last evaluation limit). add_leaderboard_row() is the only writer of the leaderboard_*
+keys, and only for numbers a person copied from the public leaderboard page; nothing here fetches them.
 """
 from __future__ import annotations
 
 import hashlib
 import http.client
 import json
+import math
 import os
 import re
 import ssl
@@ -35,6 +37,9 @@ KEY_ENV = "ADAPTION_API_KEY"
 TRAINING_METHOD = "instruction"
 EVIDENCE_FILE = "adaption_evidence.json"
 EVIDENCE_SCHEMA_VERSION = 1  # the same convention as validation/winrate.py's report
+LEADERBOARD_SOURCE = "typed in by a person from the leaderboard page"
+LEADERBOARD_KEYS = ("leaderboard_task_win_rate", "leaderboard_domain_win_rate", "leaderboard_normalised_score",
+                    "leaderboard_percentile", "leaderboard_observed_at_utc", "leaderboard_source")
 RUN_DONE = frozenset({"succeeded", "failed", "cancelled"})
 CAVEAT = ("best_win_rate is Adaption's own optimisation target, measured on evaluations it derives from the uploaded "
           "dataset. It is not evidence of protocol quality; the held-out win rate is validation/winrate.py.")
@@ -231,6 +236,19 @@ def get_dataset_status(dataset_id, *, transport=None):
     return _json(_req("GET", f"/api/v1/datasets/{_seg(dataset_id, 'dataset id')}/status"), transport)
 
 
+def get_best_launch_config(dataset_id, *, transport=None):
+    """GET /api/v1/datasets/{id}/finetune/best-launch-config. Returns the best_job_config object (trained_model_name,
+    training_type, data_format, ...), or None where the docs say it is null: the run has not finished, or no best job was
+    chosen. Pass the result to record_evidence(launch_config=...)."""
+    body = _json(_req("GET", f"/api/v1/datasets/{_seg(dataset_id, 'dataset id')}/finetune/best-launch-config"), transport)
+    if "best_job_config" not in body:
+        raise AdaptionError("the best-launch-config response has no 'best_job_config'")
+    config = body["best_job_config"]
+    if config is not None and not isinstance(config, dict):
+        raise AdaptionError("best_job_config is neither an object nor null")
+    return config
+
+
 def _poll(fetch, done, *, first, cap, timeout, sleep, clock, what):
     start, wait, last = clock(), first, "no status yet"
     while True:
@@ -394,34 +412,122 @@ def _on_unit_scale(*values):
     return all(isinstance(v, (int, float)) and not isinstance(v, bool) and 0 <= v <= 1 for v in values)
 
 
-def record_evidence(run, out_dir, *, checkpoint_sha256=None, now=None):
+def _launch_fields(run_id, launch_config):
+    """trained_model_name, training_type and data_format from best_job_config; null when absent or not a string."""
+    if launch_config is None:
+        return {"trained_model_name": None, "training_type": None, "data_format": None}
+    if not isinstance(launch_config, dict):
+        raise ValueError("launch_config must be the best_job_config dict from get_best_launch_config, or None")
+    owner = launch_config.get("training_experiment_id")
+    if isinstance(owner, str) and owner and owner.lower() != str(run_id).lower():
+        raise ValueError("launch_config belongs to another run on this dataset; pass launch_config=None to record "
+                         "this run without it")
+    return {k: launch_config[k] if isinstance(launch_config.get(k), str) and launch_config[k] else None
+            for k in ("trained_model_name", "training_type", "data_format")}
+
+
+def _kept_leaderboard(path, run_id):
+    """Typed-in leaderboard_* values already in the file, but only for the same run and only if they are scalars."""
+    try:
+        old = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    if not isinstance(old, dict) or old.get("run_id") != run_id:
+        return {}
+    return {k: old[k] for k in LEADERBOARD_KEYS if k in old and (old[k] is None or isinstance(old[k], (str, int, float)))}
+
+
+def _write_record(path, record):
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    os.replace(tmp, path)
+
+
+def record_evidence(run, out_dir, *, checkpoint_sha256=None, launch_config=None, now=None):
     """Write out_dir/adaption_evidence.json from a run dict and return its path.
 
     The file is one flat object of snake_case keys with scalar values, so a UI can bind each key as it is. Only the
     fields below are copied, so no dataset, user or organisation id and no secret can reach the file. null means "not
-    known yet" (best_win_rate before an iteration finishes, completed_at_utc while running) or "not downloaded"
-    (checkpoint_sha256). target_reached is null unless both rates are on the 0 to 1 scale the docs give for
-    target_win_rate: they do not state best_win_rate's scale, and a percentage would otherwise read as "reached"."""
+    known yet" (best_win_rate before an iteration finishes, completed_at_utc while running), "not downloaded"
+    (checkpoint_sha256) or "not reported" (trained_model_name, training_type and data_format, which come only from
+    launch_config, the dict get_best_launch_config returns; one that names another run is refused). target_reached is
+    null unless both rates are on the 0 to 1 scale the docs give for target_win_rate: they do not state
+    best_win_rate's scale, and a percentage would otherwise read as "reached".
+
+    This function never creates the leaderboard_* keys (add_leaderboard_row does). Re-recording the same run keeps the
+    ones a person already typed in, so they are not lost; a different run starts without them."""
     if not isinstance(run, dict) or not run.get("id") or not run.get("status"):
         raise ValueError("run must be the dict returned by get_run or wait_for_run")
     if checkpoint_sha256 is not None and not re.fullmatch(r"[0-9a-f]{64}", str(checkpoint_sha256)):
         raise ValueError("checkpoint_sha256 must be 64 lowercase hex characters")
+    launch = _launch_fields(run["id"], launch_config)
     best, target = run.get("best_win_rate"), run.get("target_win_rate")
+    out = Path(out_dir)
+    path = out / EVIDENCE_FILE
     record = {
         "schema_version": EVIDENCE_SCHEMA_VERSION,
         "run_id": run["id"], "status": run["status"], "training_method": run.get("training_method"),
-        "base_model_id": run.get("model"), "iterations_completed": run.get("iterations_completed"),
+        "base_model_id": run.get("model"), **launch, "iterations_completed": run.get("iterations_completed"),
         "max_iterations": run.get("max_iterations"), "best_win_rate": best, "target_win_rate": target,
         "target_reached": best >= target if _on_unit_scale(best, target) else None,
         "checkpoint_sha256": checkpoint_sha256,
         "created_at_utc": _utc(run.get("created_at")), "completed_at_utc": _utc(run.get("completed_at")),
         "recorded_at_utc": _utc((now or datetime.now(timezone.utc)).isoformat()),
         "caveat": CAVEAT,
+        **_kept_leaderboard(path, run["id"]),
     }
-    out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    path = out / EVIDENCE_FILE
-    tmp = path.with_name(path.name + ".tmp")
-    tmp.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    os.replace(tmp, path)
+    _write_record(path, record)
+    return path
+
+
+def _finite(value, what, low=None, high=None):
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        raise ValueError(f"{what} must be a finite number, got {value!r}")
+    if (low is not None and value < low) or (high is not None and value > high):
+        raise ValueError(f"{what} must be between {low} and {high}, got {value!r}")
+    return value
+
+
+def _observed(value):
+    if isinstance(value, datetime):
+        moment = value
+    elif isinstance(value, str):
+        try:
+            moment = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+        except ValueError:
+            raise ValueError(f"observed_at_utc is not an ISO 8601 time: {value!r}") from None
+    else:
+        raise ValueError(f"observed_at_utc must be an ISO 8601 string or a datetime, got {value!r}")
+    if moment.tzinfo is None:
+        raise ValueError("observed_at_utc needs a UTC offset, for example 2026-11-14T16:30:00Z")
+    return moment.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def add_leaderboard_row(evidence_path, *, task_win_rate, domain_win_rate, normalised_score, percentile, observed_at_utc):
+    """Add the leaderboard_* keys to an evidence file written by record_evidence, for numbers a person copied from
+    https://adaptionlabs.ai/auto-scientist-leaderboard. Nothing here fetches them. Returns the path.
+
+    task_win_rate and domain_win_rate are fractions from 0 to 1: divide the page's percent by 100 (87.6% is 0.876).
+    normalised_score is the page's number (+2.37 is 2.37). percentile is the page's number from 0 to 100 (98th is 98).
+    observed_at_utc is when the page was read, with a UTC offset. leaderboard_source is fixed text. A later call replaces
+    an earlier row. Every value is checked before the file is touched."""
+    row = {
+        "leaderboard_task_win_rate": _finite(task_win_rate, "task_win_rate (a fraction; divide a percent by 100)", 0, 1),
+        "leaderboard_domain_win_rate": _finite(domain_win_rate, "domain_win_rate (a fraction; divide a percent by 100)",
+                                               0, 1),
+        "leaderboard_normalised_score": _finite(normalised_score, "normalised_score"),
+        "leaderboard_percentile": _finite(percentile, "percentile (0 to 100, as the page shows it)", 0, 100),
+        "leaderboard_observed_at_utc": _observed(observed_at_utc),
+        "leaderboard_source": LEADERBOARD_SOURCE,
+    }
+    path = Path(evidence_path)
+    try:
+        record = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        raise ValueError(f"cannot read {path} as JSON ({type(e).__name__})") from None
+    if not isinstance(record, dict) or record.get("schema_version") != EVIDENCE_SCHEMA_VERSION or not record.get("run_id"):
+        raise ValueError(f"{path} is not an evidence file written by record_evidence")
+    record.update(row)
+    _write_record(path, record)
     return path

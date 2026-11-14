@@ -10,7 +10,7 @@ import re
 import ssl
 import sys
 import urllib.parse
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -31,6 +31,13 @@ RUN = {"id": "run_1", "dataset_id": "ds_private", "model": "Qwen/Qwen3.5-9B", "s
 CREATED = {"dataset_id": "ds_9", "status": "pending",
            "upload_instructions": {"url": "https://storage.example.com/b/k?X-Amz-Signature=SIG", "method": "PUT",
                                    "s3_key": "k"}}
+LAUNCH = {"finetune_job_id": "job_1", "training_experiment_id": "run_1", "original_model_name": "Qwen/Qwen3.5-9B",
+          "trained_model_name": "adaption_qwen3_5_9b_rows_ab12cd34", "training_method": "sft", "training_type": "lora",
+          "data_format": "chat", "hyperparams": {"lora_r": 16}}
+LEADERBOARD = {"task_win_rate": 0.876, "domain_win_rate": 0.84, "normalised_score": 2.37, "percentile": 100,
+               "observed_at_utc": "2026-11-14T16:30:00Z"}
+LEADERBOARD_NAMES = {"leaderboard_task_win_rate", "leaderboard_domain_win_rate", "leaderboard_normalised_score",
+                     "leaderboard_percentile", "leaderboard_observed_at_utc", "leaderboard_source"}
 
 
 @pytest.fixture(autouse=True)
@@ -118,10 +125,34 @@ def test_get_run_and_dataset_status_use_the_documented_paths():
 @pytest.mark.parametrize("bad", ["", "a/b", "../x", "a b", "a?b", None, 5])
 def test_ids_that_could_change_the_path_are_refused(bad):
     fake = Fake()
-    for call in (ad.get_run, ad.get_dataset_status):
+    for call in (ad.get_run, ad.get_dataset_status, ad.get_best_launch_config):
         with pytest.raises(ValueError):
             call(bad, transport=fake)
     assert fake.calls == []
+
+
+def test_get_best_launch_config_uses_the_documented_route_and_returns_the_object():
+    fake = Fake((200, {"best_job_config": LAUNCH}))
+    assert ad.get_best_launch_config("ds_1", transport=fake) == LAUNCH
+    call = fake.calls[0]
+    assert (call["method"], call["url"]) == ("GET", API + "/api/v1/datasets/ds_1/finetune/best-launch-config")
+    assert call["headers"]["Authorization"] == "Bearer " + KEY and call["body"] is None
+
+
+def test_get_best_launch_config_returns_none_where_the_docs_say_it_is_null():
+    assert ad.get_best_launch_config("ds_1", transport=Fake((200, {"best_job_config": None}))) is None
+
+
+@pytest.mark.parametrize("body", [{}, {"best_job_config": "x"}, {"best_job_config": [1]}])
+def test_get_best_launch_config_refuses_a_reply_that_is_not_an_object_or_null(body):
+    with pytest.raises(ad.AdaptionError):
+        ad.get_best_launch_config("ds_1", transport=Fake((200, body)))
+
+
+def test_get_best_launch_config_reports_an_error_status_without_the_key():
+    with pytest.raises(ad.AdaptionError) as caught:
+        ad.get_best_launch_config("ds_1", transport=Fake((404, f"not found for {KEY}".encode())))
+    assert caught.value.status == 404 and KEY not in str(caught.value)
 
 
 # ---- dry run, confirm and guard -------------------------------------------------------------------------------------
@@ -401,18 +432,19 @@ def test_a_stale_part_file_is_not_deleted_or_overwritten(tmp_path):
 # ---- evidence -------------------------------------------------------------------------------------------------------
 
 def test_record_evidence_copies_only_the_documented_fields(tmp_path):
-    path = ad.record_evidence(RUN, tmp_path / "out", checkpoint_sha256="a" * 64,
+    path = ad.record_evidence(RUN, tmp_path / "out", checkpoint_sha256="a" * 64, launch_config=LAUNCH,
                               now=datetime(2026, 11, 14, 13, 0, tzinfo=timezone.utc))
     assert path == tmp_path / "out" / "adaption_evidence.json"
     text = path.read_text()
     assert json.loads(text) == {
         "schema_version": 1,
         "run_id": "run_1", "status": "succeeded", "training_method": "instruction", "base_model_id": "Qwen/Qwen3.5-9B",
+        "trained_model_name": "adaption_qwen3_5_9b_rows_ab12cd34", "training_type": "lora", "data_format": "chat",
         "iterations_completed": 3, "max_iterations": 3, "best_win_rate": 0.74, "target_win_rate": 0.7,
         "target_reached": True, "checkpoint_sha256": "a" * 64,
         "created_at_utc": "2026-11-14T10:00:00Z", "completed_at_utc": "2026-11-14T11:30:00Z",
         "recorded_at_utc": "2026-11-14T13:00:00Z", "caveat": ad.CAVEAT}
-    for private in ("ds_private", "user_42", "org_7", KEY, "n_epochs"):
+    for private in ("ds_private", "user_42", "org_7", KEY, "n_epochs", "job_1", "lora_r", "hyperparams"):
         assert private not in text
 
 
@@ -422,15 +454,145 @@ def test_record_evidence_says_null_when_nothing_was_downloaded_and_records_faile
     record = json.loads(ad.record_evidence(failed, tmp_path).read_text())
     assert record["status"] == "failed" and record["checkpoint_sha256"] is None and record["target_reached"] is None
     assert record["completed_at_utc"] is None and "boom" not in json.dumps(record)
+    assert [record[k] for k in ("trained_model_name", "training_type", "data_format")] == [None, None, None]
+
+
+def test_the_launch_fields_are_null_when_absent_empty_or_not_strings(tmp_path):
+    def fields(launch):
+        record = json.loads(ad.record_evidence(RUN, tmp_path, launch_config=launch).read_text())
+        return record["trained_model_name"], record["training_type"], record["data_format"]
+    assert fields(None) == (None, None, None) and fields({}) == (None, None, None)
+    assert fields({"trained_model_name": {"x": 1}, "training_type": "", "data_format": 5}) == (None, None, None)
+    assert fields({"trained_model_name": "m"}) == ("m", None, None)
+    assert fields(LAUNCH) == ("adaption_qwen3_5_9b_rows_ab12cd34", "lora", "chat")
+
+
+def test_a_launch_config_for_another_run_is_refused_and_nothing_is_written(tmp_path):
+    with pytest.raises(ValueError, match="another run"):
+        ad.record_evidence(RUN, tmp_path / "out", launch_config={**LAUNCH, "training_experiment_id": "run_other"})
+    assert not (tmp_path / "out").exists()
+
+
+def test_a_launch_config_is_accepted_when_the_run_matches_in_any_case_or_the_id_is_absent(tmp_path):
+    no_id = {k: v for k, v in LAUNCH.items() if k != "training_experiment_id"}
+    for config in ({**LAUNCH, "training_experiment_id": "RUN_1"}, {**LAUNCH, "training_experiment_id": None}, no_id):
+        record = json.loads(ad.record_evidence(RUN, tmp_path, launch_config=config).read_text())
+        assert record["training_type"] == "lora"
+
+
+@pytest.mark.parametrize("bad", [["x"], "lora", 5])
+def test_a_launch_config_that_is_not_a_dict_is_refused(tmp_path, bad):
+    with pytest.raises(ValueError):
+        ad.record_evidence(RUN, tmp_path, launch_config=bad)
+    assert list(tmp_path.iterdir()) == []
 
 
 def test_the_evidence_file_is_one_flat_object_of_snake_case_keys_with_scalar_values(tmp_path):
     snake = re.compile(r"[a-z][a-z0-9]*(_[a-z0-9]+)*\Z")
-    for name, run in (("done", RUN), ("running", {"id": "r", "status": "running", "model": "m"})):
-        record = json.loads(ad.record_evidence(run, tmp_path / name, checkpoint_sha256="b" * 64).read_text())
+    done = ad.record_evidence(RUN, tmp_path / "done", checkpoint_sha256="b" * 64, launch_config=LAUNCH)
+    ad.add_leaderboard_row(done, **LEADERBOARD)
+    running = ad.record_evidence({"id": "r", "status": "running", "model": "m"}, tmp_path / "running")
+    for path in (done, running):
+        record = json.loads(path.read_text())
         assert all(snake.match(k) for k in record), [k for k in record if not snake.match(k)]
         assert all(v is None or isinstance(v, (str, int, float, bool)) for v in record.values())
-    assert record["schema_version"] == 1
+        assert record["schema_version"] == 1
+
+
+def test_record_evidence_never_creates_leaderboard_keys(tmp_path):
+    record = json.loads(ad.record_evidence(RUN, tmp_path, launch_config=LAUNCH).read_text())
+    assert not [k for k in record if k.startswith("leaderboard_")]
+
+
+def test_add_leaderboard_row_adds_exactly_the_six_flat_keys_and_changes_nothing_else(tmp_path):
+    path = ad.record_evidence(RUN, tmp_path, launch_config=LAUNCH)
+    before = json.loads(path.read_text())
+    assert ad.add_leaderboard_row(path, **LEADERBOARD) == path
+    after = json.loads(path.read_text())
+    assert set(after) - set(before) == LEADERBOARD_NAMES
+    assert {k: after[k] for k in before} == before
+    assert {k: after[k] for k in LEADERBOARD_NAMES} == {
+        "leaderboard_task_win_rate": 0.876, "leaderboard_domain_win_rate": 0.84, "leaderboard_normalised_score": 2.37,
+        "leaderboard_percentile": 100, "leaderboard_observed_at_utc": "2026-11-14T16:30:00Z",
+        "leaderboard_source": "typed in by a person from the leaderboard page"}
+    assert set(ad.LEADERBOARD_KEYS) == LEADERBOARD_NAMES and after["schema_version"] == 1
+
+
+@pytest.mark.parametrize("given, stored", [
+    ("2026-11-14T17:30:00+01:00", "2026-11-14T16:30:00Z"), ("2026-11-14T16:30:00Z", "2026-11-14T16:30:00Z"),
+    ("2026-11-14T16:30:00.789Z", "2026-11-14T16:30:00Z"),
+    (datetime(2026, 11, 14, 16, 30, tzinfo=timezone.utc), "2026-11-14T16:30:00Z"),
+    (datetime(2026, 11, 14, 11, 30, tzinfo=timezone(timedelta(hours=-5))), "2026-11-14T16:30:00Z")])
+def test_the_observed_time_is_stored_as_utc(tmp_path, given, stored):
+    path = ad.record_evidence(RUN, tmp_path)
+    ad.add_leaderboard_row(path, **{**LEADERBOARD, "observed_at_utc": given})
+    assert json.loads(path.read_text())["leaderboard_observed_at_utc"] == stored
+
+
+@pytest.mark.parametrize("override", [
+    {"task_win_rate": -0.01}, {"task_win_rate": 1.01}, {"task_win_rate": 87.6}, {"task_win_rate": float("nan")},
+    {"task_win_rate": float("inf")}, {"task_win_rate": True}, {"task_win_rate": "0.8"}, {"task_win_rate": None},
+    {"domain_win_rate": -0.01}, {"domain_win_rate": 84}, {"domain_win_rate": float("nan")}, {"domain_win_rate": "0.84"},
+    {"percentile": -1}, {"percentile": 100.01}, {"percentile": float("nan")}, {"percentile": True}, {"percentile": "98"},
+    {"normalised_score": float("nan")}, {"normalised_score": float("inf")}, {"normalised_score": float("-inf")},
+    {"normalised_score": True}, {"normalised_score": "2.37"}, {"normalised_score": None},
+    {"observed_at_utc": "2026-11-14T16:30:00"}, {"observed_at_utc": datetime(2026, 11, 14, 16, 30)},
+    {"observed_at_utc": "yesterday"}, {"observed_at_utc": ""}, {"observed_at_utc": None}, {"observed_at_utc": 1731601800},
+])
+def test_leaderboard_values_outside_their_scale_are_refused_and_the_file_is_untouched(tmp_path, override):
+    path = ad.record_evidence(RUN, tmp_path)
+    before = path.read_bytes()
+    with pytest.raises(ValueError):
+        ad.add_leaderboard_row(path, **{**LEADERBOARD, **override})
+    assert path.read_bytes() == before
+
+
+def test_the_leaderboard_scale_boundaries_are_accepted(tmp_path):
+    path = ad.record_evidence(RUN, tmp_path)
+    for rate, percentile, score in ((0, 0, -3.1), (1, 100, 0), (0.5, 50.5, 12)):
+        ad.add_leaderboard_row(path, **{**LEADERBOARD, "task_win_rate": rate, "domain_win_rate": rate,
+                                        "percentile": percentile, "normalised_score": score})
+        record = json.loads(path.read_text())
+        assert (record["leaderboard_task_win_rate"], record["leaderboard_percentile"],
+                record["leaderboard_normalised_score"]) == (rate, percentile, score)
+
+
+@pytest.mark.parametrize("content", [None, "not json", "[1, 2]", '{"status": "x"}', '{"schema_version": 2, "run_id": "r"}',
+                                     '{"schema_version": 1}'])
+def test_add_leaderboard_row_refuses_a_file_that_is_not_an_evidence_file(tmp_path, content):
+    path = tmp_path / "adaption_evidence.json"
+    if content is not None:
+        path.write_text(content)
+    with pytest.raises(ValueError):
+        ad.add_leaderboard_row(path, **LEADERBOARD)
+    assert (path.read_text() == content) if content is not None else not path.exists()
+    assert [p.name for p in tmp_path.iterdir()] == ([] if content is None else ["adaption_evidence.json"])
+
+
+def test_a_second_row_replaces_the_first_and_leaves_no_temp_file(tmp_path):
+    path = ad.record_evidence(RUN, tmp_path)
+    ad.add_leaderboard_row(path, **LEADERBOARD)
+    ad.add_leaderboard_row(path, **{**LEADERBOARD, "percentile": 97, "observed_at_utc": "2026-11-15T09:00:00Z"})
+    record = json.loads(path.read_text())
+    assert record["leaderboard_percentile"] == 97 and record["leaderboard_observed_at_utc"] == "2026-11-15T09:00:00Z"
+    assert [p.name for p in tmp_path.iterdir()] == ["adaption_evidence.json"]
+
+
+def test_re_recording_the_same_run_keeps_the_typed_numbers_and_another_run_drops_them(tmp_path):
+    path = ad.record_evidence(RUN, tmp_path, launch_config=LAUNCH)
+    ad.add_leaderboard_row(path, **LEADERBOARD)
+    typed = {k: v for k, v in json.loads(path.read_text()).items() if k.startswith("leaderboard_")}
+    again = json.loads(ad.record_evidence(RUN, tmp_path, checkpoint_sha256="c" * 64, launch_config=LAUNCH).read_text())
+    assert {k: v for k, v in again.items() if k.startswith("leaderboard_")} == typed and len(typed) == 6
+    assert again["checkpoint_sha256"] == "c" * 64
+    other = ad.record_evidence({**RUN, "id": "run_2"}, tmp_path, launch_config={**LAUNCH, "training_experiment_id": "run_2"})
+    assert not [k for k in json.loads(other.read_text()) if k.startswith("leaderboard_")]
+
+
+def test_a_damaged_old_file_does_not_block_re_recording(tmp_path):
+    (tmp_path / "adaption_evidence.json").write_text("{ not json")
+    record = json.loads(ad.record_evidence(RUN, tmp_path).read_text())
+    assert record["run_id"] == "run_1" and not [k for k in record if k.startswith("leaderboard_")]
 
 
 def test_target_reached_compares_best_with_target_and_the_boundary_counts_as_reached(tmp_path):
