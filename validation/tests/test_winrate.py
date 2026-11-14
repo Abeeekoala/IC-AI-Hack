@@ -148,8 +148,8 @@ def _write(path, recs):
 
 
 def test_cli_reports_and_signals_a_red_flag_through_the_exit_code(tmp_path, capsys):
-    names = [("colony-pcr-screening", "colony-pcr"), ("colony-pcr-screening-hard", "colony-pcr"),
-             ("golden-gate-assembly", "golden-gate"), ("opentrons-rna-extraction", "rna-extraction")]
+    names = [("colony-pcr-screening", "colony-pcr-screening"), ("colony-pcr-screening-hard", "colony-pcr-screening"),
+             ("golden-gate-assembly", "golden-gate-assembly"), ("opentrons-rna-extraction", "opentrons-rna-extraction")]
     recs = []
     for i, (task, fam) in enumerate(names):
         recs += pair(task, fam, dict(passed=bool(i % 2)), dict(passed=True))
