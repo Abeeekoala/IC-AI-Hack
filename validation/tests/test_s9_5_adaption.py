@@ -466,13 +466,24 @@ def test_nothing_is_printed_while_calls_run(tmp_path, capsys):
     assert out.out == "" and out.err == ""
 
 
-def test_the_module_neither_prints_nor_logs_and_uses_only_the_standard_library():
+def _imported_modules():
     tree = ast.parse(Path(ad.__file__).read_text())
-    calls = {n.func.id for n in ast.walk(tree) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name)}
     modules = {a.name.split(".")[0] for n in ast.walk(tree) if isinstance(n, ast.Import) for a in n.names}
     modules |= {n.module.split(".")[0] for n in ast.walk(tree) if isinstance(n, ast.ImportFrom) and n.module}
+    calls = {n.func.id for n in ast.walk(tree) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name)}
+    return modules, calls
+
+
+def test_the_module_neither_prints_nor_logs():
+    modules, calls = _imported_modules()
     assert "print" not in calls and "logging" not in modules and "warnings" not in modules
-    assert modules - set(sys.stdlib_module_names) <= {"certifi"}  # optional CA bundle, imported inside try/except ImportError
+
+
+def test_the_module_uses_only_the_standard_library():
+    stdlib = getattr(sys, "stdlib_module_names", None)
+    if stdlib is None:
+        pytest.skip("sys.stdlib_module_names needs Python 3.10 or newer")
+    assert _imported_modules()[0] - set(stdlib) <= {"certifi"}  # optional CA bundle, imported inside try/except ImportError
 
 
 def test_the_default_transport_refuses_plain_http_before_connecting():
