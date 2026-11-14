@@ -20,6 +20,12 @@ structure:                          # stream B
   engine: boltz-2                   # MIT; do not switch to AF3 weights
   refolder: [esmfold, af2-no-msa]
 
+finetune:                           # stream D (S9.5) - block as documented in README section 5
+  base_model_id: null               # unpinned: set from the live AutoScientist model list before training
+  model_id: null                    # unpinned: exists only after a run; record run id + checkpoint SHA-256
+  eval_tasks: 11                    # Text2WetLab: 11 tasks, 7 families, before the refusal filter
+  seed: 20261114                    # bootstrap + any subsampling; Adaption's create request has no seed
+
 reproducibility:                    # stream D
   seed: 20261114
   pin_versions: true

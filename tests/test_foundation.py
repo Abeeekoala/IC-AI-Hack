@@ -38,12 +38,15 @@ i: 1.0e-5
 
 def test_repo_config_yaml_parses_with_all_streams_sections():
     cfg = load_config(ROOT / "config.yaml")
-    for sec in ("thresholds", "epitopes", "structure", "reproducibility", "paths", "network", "taxonomy",
+    for sec in ("thresholds", "epitopes", "structure", "finetune", "reproducibility", "paths", "network", "taxonomy",
                 "acquire", "annotate", "tools"):
         assert cfg.section(sec), sec
     assert cfg.get("thresholds.protegenicity") == [0.9, 0.85]
     assert cfg.get("annotate.vfdb.max_evalue") == pytest.approx(1e-5)
     assert cfg.get("reproducibility.seed") == 20261114
+    # stream D's S9.5 block (README section 5): numbers stay numbers, the two unpinned model ids stay None (not the string "null")
+    assert cfg.get("finetune.eval_tasks") == 11 and cfg.get("finetune.seed") == 20261114
+    assert cfg.raw["finetune"]["base_model_id"] is None and cfg.raw["finetune"]["model_id"] is None
     assert cfg.get("nope.nope", "dflt") == "dflt"
 
 
