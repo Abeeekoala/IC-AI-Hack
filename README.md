@@ -270,6 +270,8 @@ If neither passes, or the two are equal at every step, the pair is a **tie**. Th
 
 Report **n** (tasks scored, after the refusal rule below), the **win rate**, **loss rate** and **tie rate** (they sum to 1), and a 95% percentile bootstrap interval on each rate, from 10,000 resamples of the **task families**, not the tasks, because tasks in one family are not independent. Ties are reported in two parts, "neither passes" and "equal at every step", since the first says nothing about either model. `validation/winrate.py` computes all of it.
 
+**Running the models.** We found no documented way to call a trained model on Adaption, so we run the downloaded checkpoint ourselves. The base model and the fine-tune are served from one OpenAI-compatible server (the base model, and the base model with the adapter), so the two arms differ only by the adapter. `s9_5_generate.py` sends each task once per arm: a recorded pair is never run again, a reply cut off by `max_tokens` is recorded as a failed attempt and not as a refusal, and the decoding settings go into the generation manifest before the first request and into the S11 manifest before the run.
+
 **What this metric does not tell you:**
 
 - **Simulation passing is not correctness.** §S9 already says so, and the win rate inherits it. A win under rule 1 means the fine-tune's code ran and the base model's did not. It does not mean the protocol is right for the experiment.
@@ -302,7 +304,7 @@ If the base model refuses nothing here, both rates are 0% and the comparison is 
 
 The hackathon's "Best Use of Adaption" track asks for a fine-tune made with Adaption, ranked on Adaption's leaderboard by win rate against the base model, and for evidence of how Adaption was used. None of that exists yet. When a run is made, the evidence is:
 
-- `adaption_evidence.json`, written by `s9_5_adaption.record_evidence`: run id, base model id, training method, iterations, Adaption's `best_win_rate` and `target_win_rate`, and the SHA-256 of the downloaded checkpoint.
+- `adaption_evidence.json`, written by `s9_5_adaption.record_evidence`: run id, base model id, trained-model name, training method, iterations, Adaption's `best_win_rate` and `target_win_rate`, and the SHA-256 of the downloaded checkpoint. The leaderboard numbers (task and domain win rate, normalised score, percentile) are in no API, so a person types them in from the page with `add_leaderboard_row`, and the file says so.
 - The training manifest, the leakage-check report and the no-augmentation setting, which show what went into the run.
 - Our held-out win, loss and tie rates with their intervals, and both refusal rates (`validation/winrate.py`), labelled separately from Adaption's numbers.
 - Adaption's results page for the run (Training Winrates chart, trained model ID, weights export, AutoScientist config) and, if the run is ranked, its leaderboard row.
@@ -523,6 +525,7 @@ vaxforge/
 │   ├── s9plus_animate.py     # optional: command list → timeline → canvas
 │   ├── s9_5_finetune.py      # training manifest + run guard (family split, refusal filter)
 │   ├── s9_5_adaption.py      # AutoScientist client: dry run unless confirmed and guarded
+│   ├── s9_5_generate.py      # pass@1 generation against any OpenAI-compatible endpoint
 │   ├── s10_animal.py         # study design, power analysis, ARRIVE pack
 │   ├── s11_prereg.py         # manifest + timestamp
 │   └── s12_biosafety.py      # screening gate
