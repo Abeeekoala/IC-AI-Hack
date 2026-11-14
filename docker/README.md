@@ -52,6 +52,21 @@ docker run --rm -v <results folder>:/tmp/results -e MOUNT=<results folder> \
 
 No Docker at all? Run PSORTb elsewhere and import: `python -m vaxforge annotate runs/nmb --psortb-results results.txt`.
 
+## Opentrons simulator (stream C, S9) - separate Python interpreter
+
+Per stream C's note on the message board: `opentrons==7.5.0` needs Python 3.10 and pins `pydantic<2` and `numpy<2`, so it cannot share a
+virtual environment with a pydantic-2 pipeline. S9 therefore runs the simulator as a **subprocess of its own interpreter**. Set up that
+environment the way stream C documents it (Python 3.10, `opentrons==7.5.0`) and point `VAXFORGE_OT_PYTHON` at its Python:
+
+```powershell
+$env:VAXFORGE_OT_PYTHON = "C:\path\to\opentrons-venv\Scripts\python.exe"
+```
+```bash
+export VAXFORGE_OT_PYTHON=/path/to/opentrons-venv/bin/python
+```
+
+This is stream C's setting: S0-S2 do not read it, and `vaxforge doctor` does not check it. Not verified by stream A.
+
 ## BLAST on Windows with non-ASCII paths
 
 BLAST+ cannot open paths containing non-ASCII characters (e.g. `D:\数据\...`). `BlastRunner` therefore builds databases in an ASCII-only
