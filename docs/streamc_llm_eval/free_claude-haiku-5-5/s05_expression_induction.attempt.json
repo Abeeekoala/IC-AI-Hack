@@ -1,0 +1,75 @@
+{
+ "mode": "free",
+ "model": "claude-haiku-5-5",
+ "session": "s05_expression_induction",
+ "step_id": "s05",
+ "kind": "expression_induction",
+ "outcome": "PASS",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-haiku-5-5/s05_expression_induction.py",
+ "code_sha256": "2d0ea1229a0b65b8e4a02c003578ce9927ea7ece9a01d8a603890f0825a52b96",
+ "grade": {
+  "verdict": "PASS",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 10 uL outside 20-300 uL",
+    "event_idx": 4
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 10 uL outside 20-300 uL",
+    "event_idx": 5
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 10 uL outside 20-300 uL",
+    "event_idx": 6
+   }
+  ],
+  "reference_diff": null,
+  "n_events": 10,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 10,
+  "n_aspirate": 1,
+  "n_dispense": 3,
+  "n_pick_up_tip": 1,
+  "ul_aspirated": 30.0,
+  "n_pause": 1,
+  "n_comment": 3,
+  "n_banner_comments": 1,
+  "n_liquids_declared": 5,
+  "labware": [
+   "opentrons_96_tiprack_300ul",
+   "nest_96_wellplate_2ml_deep",
+   "nest_12_reservoir_15ml"
+  ],
+  "modules": [],
+  "pipettes": [
+   "p300_single_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}

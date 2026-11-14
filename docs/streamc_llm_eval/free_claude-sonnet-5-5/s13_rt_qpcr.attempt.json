@@ -1,0 +1,57 @@
+{
+ "mode": "free",
+ "model": "claude-sonnet-5-5",
+ "session": "s13_rt_qpcr",
+ "step_id": "s13",
+ "kind": "rt_qpcr",
+ "outcome": "PASS",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-sonnet-5-5/s13_rt_qpcr.py",
+ "code_sha256": "aae2b71483a63d2f5b15ab7046221e8c4f0cd395cb7bb10b951f40e81e059002",
+ "grade": {
+  "verdict": "PASS",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [],
+  "reference_diff": null,
+  "n_events": 69,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 69,
+  "n_aspirate": 20,
+  "n_dispense": 20,
+  "n_pick_up_tip": 5,
+  "ul_aspirated": 200.0,
+  "n_pause": 1,
+  "n_comment": 6,
+  "n_banner_comments": 6,
+  "n_liquids_declared": 5,
+  "labware": [
+   "opentrons_96_tiprack_20ul",
+   "opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap",
+   "nest_96_wellplate_100ul_pcr_full_skirt",
+   "nest_96_wellplate_100ul_pcr_full_skirt"
+  ],
+  "modules": [],
+  "pipettes": [
+   "p20_single_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}

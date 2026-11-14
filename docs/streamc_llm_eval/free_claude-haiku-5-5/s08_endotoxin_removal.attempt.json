@@ -1,0 +1,56 @@
+{
+ "mode": "free",
+ "model": "claude-haiku-5-5",
+ "session": "s08_endotoxin_removal",
+ "step_id": "s08",
+ "kind": "endotoxin_removal",
+ "outcome": "PASS",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-haiku-5-5/s08_endotoxin_removal.py",
+ "code_sha256": "357c920ba59499b09abcbd9f11070955904feb1ac2f8311c2f477f99d7cf2a55",
+ "grade": {
+  "verdict": "PASS",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [],
+  "reference_diff": null,
+  "n_events": 12,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 12,
+  "n_aspirate": 4,
+  "n_dispense": 4,
+  "n_pick_up_tip": 1,
+  "ul_aspirated": 400.0,
+  "n_pause": 1,
+  "n_comment": 1,
+  "n_banner_comments": 1,
+  "n_liquids_declared": 1,
+  "labware": [
+   "opentrons_96_tiprack_300ul",
+   "corning_96_wellplate_360ul_flat",
+   "nest_12_reservoir_15ml"
+  ],
+  "modules": [],
+  "pipettes": [
+   "p300_single_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}

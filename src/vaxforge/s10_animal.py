@@ -8,7 +8,10 @@ What it emits, as structured fields rather than prose:
   * a COMPUTED group size (noncentral-t power analysis, multiplicity-corrected);
   * a falsification map that pairs every upstream prediction with the animal readout
     that can refute it, built from the candidate's real S3/S5/S6/S7 data and degrading
-    to `not_testable_no_upstream_prediction` when that data is absent;
+    to `not_testable_no_upstream_prediction` when that data is absent. Every row also
+    carries `rule_if_testable`, the README's fixed "falsified if" rule for its readout (the
+    rule that WOULD apply, not a claim that the row was tested); `falsified_if` stays empty
+    for rows that are not testable;
   * randomisation, blinding, ONE primary endpoint, humane endpoints, a statistical
     analysis plan;
   * a populated ethics/regulatory checklist (ARRIVE 2.0 Essential 10, 3Rs, UK ASPA 1986,
@@ -358,6 +361,24 @@ class PeptidePool(BaseModel):
     peptides: list[EpitopeRef]
 
 
+# README section S10, "Falsification mapping": the fixed "falsified if" rule of each animal readout, keyed by the falsification row's
+# `upstream_stage` (README rows: S3 antigenicity rank, S5 T-cell epitopes, S5 B-cell epitopes, S6 population coverage, S7 structure /
+# conformation, Functional protection). The ONE source of truth: a testable row's `falsified_if` and EVERY row's `rule_if_testable` are
+# built from these strings, so the two cannot drift apart. The wording is this module's ASCII rendering of the README table ("NOT" for
+# the bold "not", "-" for the em dash, a final full stop); tests/wetlab/test_s10_rule_if_testable.py compares it with README.md itself.
+README_FALSIFIED_IF: dict[str, str] = {
+    "S3": "No titre rise over the adjuvant-only arm.",
+    "S5_T_cell": "Response to whole antigen but NOT to the predicted pools - antigen right, epitope prediction wrong.",
+    "S5_B_cell": "Sera bind the antigen but not the predicted epitopes.",
+    "S6": "Response absent in backgrounds predicted to be covered.",
+    "S7": "Sera recognise only the denatured form - the conformational epitope was an artifact.",
+    "functional": "Titres rise but functional activity is absent.",
+}
+# NOT README text: this module's own caveat on the T-cell rule. A testable T-cell row's `falsified_if` ends with it (that value is
+# unchanged); `rule_if_testable` carries the README rule only.
+T_CELL_RULE_CAVEAT = "(No response even to whole antigen is not informative about epitopes.)"
+
+
 class FalsificationRow(BaseModel):
     candidate_id: str
     protein_name: str
@@ -368,6 +389,11 @@ class FalsificationRow(BaseModel):
     upstream_data: dict[str, Any] = Field(default_factory=dict)
     animal_readout: str
     falsified_if: str | None = None
+    # The README's fixed "falsified if" rule for this animal readout (README_FALSIFIED_IF[upstream_stage]), on EVERY row, also when
+    # `falsified_if` is empty because the row is not testable. It is the rule that WOULD apply if the row were testable, not a claim
+    # that the row was tested: `status` says whether it was testable. None = no README rule recorded (the README has none for this
+    # readout, or the artifact was written before this field existed).
+    rule_if_testable: str | None = None
     status: Literal["testable", "not_testable_no_upstream_prediction", "not_testable_in_selected_species"]
     peptide_pools: list[PeptidePool] = Field(default_factory=list)
     controls: list[str] = Field(default_factory=list)
@@ -1145,7 +1171,7 @@ def _s3_row(c: Candidate) -> FalsificationRow:
         upstream_prediction=pred + ", i.e. predicts it is immunogenic.",
         upstream_data=data,
         animal_readout=readout,
-        falsified_if="No titre rise over the adjuvant-only arm.",
+        falsified_if=README_FALSIFIED_IF["S3"],
         status="testable",
         controls=["adjuvant-only arm", "naive/PBS arm", "pre-immunisation (day 0) serum from each animal"],
         note=(
@@ -1222,10 +1248,7 @@ def _falsification_rows(
                     upstream_prediction=pred,
                     upstream_data=data,
                     animal_readout=t_readout,
-                    falsified_if=(
-                        "Response to whole antigen but NOT to the predicted pools - antigen right, epitope "
-                        "prediction wrong. (No response even to whole antigen is not informative about epitopes.)"
-                    ),
+                    falsified_if=f"{README_FALSIFIED_IF['S5_T_cell']} {T_CELL_RULE_CAVEAT}",
                     status="testable",
                     peptide_pools=pools,
                     controls=ctrl,
@@ -1287,7 +1310,7 @@ def _falsification_rows(
                 upstream_prediction=f"S5 predicts {nl} linear and {nc} conformational B-cell epitopes.",
                 upstream_data={"n_linear": nl, "n_conformational": nc},
                 animal_readout=b_readout,
-                falsified_if="Sera bind the antigen but not the predicted epitopes.",
+                falsified_if=README_FALSIFIED_IF["S5_B_cell"],
                 status="testable",
                 peptide_pools=_pools(cid, b_refs, "B_linear", cfg.peptides_per_pool_max)
                 + _pools(cid, b_refs, "B_conformational", cfg.peptides_per_pool_max),
@@ -1352,7 +1375,7 @@ def _falsification_rows(
             rows.append(
                 FalsificationRow(
                     **s6_common,  # type: ignore[arg-type]
-                    falsified_if="Response absent in backgrounds predicted to be covered.",
+                    falsified_if=README_FALSIFIED_IF["S6"],
                     status="testable",
                     controls=["transgenic line not expressing the allele", "adjuvant-only and naive animals per line"],
                     note=(
@@ -1418,7 +1441,7 @@ def _falsification_rows(
                 ),
                 upstream_data=s7_data,
                 animal_readout=s7_readout,
-                falsified_if="Sera recognise only the denatured form - the conformational epitope was an artifact.",
+                falsified_if=README_FALSIFIED_IF["S7"],
                 status="testable",
                 controls=["adjuvant-only and naive sera", "native-vs-denatured status of the coating antigen confirmed"],
                 note=vnote + " The immunogen itself must be demonstrably folded (method: needs_human_input)." + (f" {unit_note}" if unit_note else ""),
@@ -1456,7 +1479,7 @@ def _falsification_rows(
                 ),
                 upstream_data={"correlate": corr},
                 animal_readout=f"{corr} (or the species-appropriate equivalent) on immune sera.",
-                falsified_if="Titres rise but functional activity is absent.",
+                falsified_if=README_FALSIFIED_IF["functional"],
                 status="testable",
                 controls=["adjuvant-only and naive sera", "positive control serum where one exists"],
                 note=(
@@ -1465,6 +1488,11 @@ def _falsification_rows(
                 ),
             )
         )
+
+    # EVERY row names the README rule of its readout, testable or not (`falsified_if` stays empty when the row is not testable): the rule
+    # that WOULD apply, not a claim that the row was tested. None only where README_FALSIFIED_IF has no rule for the stage.
+    for r in rows:
+        r.rule_if_testable = README_FALSIFIED_IF.get(r.upstream_stage)
     return rows
 
 
@@ -2127,6 +2155,17 @@ def _c(x: Any) -> str:
     return str(x).replace("|", "\\|").replace("\n", " ")
 
 
+def _rule_line(r: FalsificationRow) -> str:
+    """The labelled 'Rule if testable' bullet of one falsification row: the README rule that WOULD apply to its readout.
+    A row that is not testable still reads as NOT tested; the rule is never a claim that it was."""
+    line = f"- {r.upstream_stage}: Rule if testable: {r.rule_if_testable or 'none (no README rule recorded for this readout).'}"
+    if r.status != "testable":
+        line += f" This row is `{r.status}`: it is NOT tested."
+        if r.rule_if_testable:
+            line += " The rule is what would apply if it were testable, not a claim that it was tested."
+    return line
+
+
 def render_markdown(d: StudyDesign) -> str:
     """Reviewer-readable proposal. A design document: it contains no results."""
     L: list[str] = []
@@ -2290,7 +2329,9 @@ def render_markdown(d: StudyDesign) -> str:
     a("## 11. Falsification map")
     a("")
     a("Each upstream prediction is paired with the readout that can refute it. Rows without an upstream prediction "
-      "are `not_testable_no_upstream_prediction`; nothing is fabricated.")
+      "are `not_testable_no_upstream_prediction`; nothing is fabricated. Under each table, `Rule if testable` is the README's "
+      "fixed 'falsified if' rule for that row's readout, given for every row; for a row that is not testable it is the rule "
+      "that would apply, not a claim that the row was tested.")
     a("")
     for cid in d.candidates_included:
         rows = [r for r in d.falsification_map if r.candidate_id == cid]
@@ -2303,6 +2344,7 @@ def render_markdown(d: StudyDesign) -> str:
               f"{_c(r.falsified_if or '-')} | `{r.status}` |")
         a("")
         for r in rows:
+            a(_rule_line(r))
             if r.note:
                 a(f"- {r.upstream_stage}: {r.note}")
             for pool in r.peptide_pools:

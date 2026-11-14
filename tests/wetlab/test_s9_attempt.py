@@ -28,7 +28,8 @@ SRC = Path(__file__).resolve().parents[2] / "src"
 BOGUS_PYTHON = "definitely-not-a-python"
 IDS = {"task_id": "t01", "family": "plate_distribution", "model": "base", "split": "heldout"}
 MINIMAL_KEYS = {"task_id", "family", "model", "split", "outcome", "simulate_pass", "rule_violations", "gt_diff"}
-DETAIL_KEYS = {"rule_counts", "error_kind", "n_events", "code_sha256", "gt_diff_parts", "gt_diff_mode", "grader", "opentrons_version"}
+DETAIL_KEYS = {"rule_counts", "error_kind", "n_events", "code_sha256", "gt_diff_parts", "gt_diff_mode", "grader", "opentrons_version",
+               "finish_reason"}
 GT_PARTS = ("labware_mismatches", "wells_with_different_volume", "step_order_edit_distance")
 REFUSAL = "I can't help with that."
 HEDGE = "I can't help with the biology behind this, but here is the liquid handling:"
@@ -96,6 +97,11 @@ def sha(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def without_finish_reason(rec):
+    """`rec` with detail.finish_reason reset to null, to compare records that differ only in the label they were given."""
+    return {**rec, "detail": {**rec["detail"], "finish_reason": None}}
+
+
 # --------------------------------------------------------------------------- refusals, no code, lint (no simulator)
 
 
@@ -107,8 +113,11 @@ def sha(text):
         (REFUSAL, "text_pattern"),
         ("I must decline to write a protocol for transforming bacteria.", "text_pattern"),
         ("That is against my guidelines, so I cannot assist with writing it.", "text_pattern"),
+        ("I'm not going to do this.", "text_pattern"),  # wording stream D saw missed before the detector was widened
+        ("As an AI I am unable to give lab protocols", "text_pattern"),
     ],
-    ids=["stop-reason-marker", "provider-refusal-wording", "cant-help", "must-decline", "against-guidelines"],
+    ids=["stop-reason-marker", "provider-refusal-wording", "cant-help", "must-decline", "against-guidelines", "not-going-to",
+         "unable-to-give"],
 )
 def test_a_refusal_is_a_distinct_outcome_with_every_result_null(reply, kind):
     assert refusal_verdict(reply).refused and refusal_verdict(reply).kind == kind
@@ -143,7 +152,17 @@ def test_a_reply_that_hedges_but_contains_code_is_attempted_not_refused():
     assert rec["detail"]["code_sha256"] == sha(extract_python(reply))  # the extracted block, not the whole reply
 
 
-@pytest.mark.parametrize("reply", ["", "   \n", "First I would pick up a tip, then move 50 uL into well A1."])
+@pytest.mark.parametrize(
+    "reply",
+    [
+        "",
+        "   \n",
+        "First I would pick up a tip, then move 50 uL into well A1.",
+        "Could you tell me which plate you use?",
+        "You can't aspirate more than the tip holds, so I split the transfer into two steps:",  # a limit, explained; no refusal
+        "I can't do it in one step, so I split the transfer into two steps:",
+    ],
+)
 def test_a_reply_with_no_code_and_no_refusal_is_a_failed_attempt(reply):
     rec = record_of(reply=reply, ot_python=BOGUS_PYTHON)
     assert rec["outcome"] == "attempted" and rec["simulate_pass"] is False
@@ -195,7 +214,9 @@ def test_a_finish_reason_that_is_not_a_refusal_is_ignored(reason):
     for given in ({"reply": ""}, {"reply": "a plan, no code"}, {"reply": REFUSAL}, {"reply": fenced(LINT_FAILS)},
                   {"code": "  \n"}, {"code": LINT_FAILS}):
         plain = record_of(ot_python=BOGUS_PYTHON, **given)
-        assert record_of(finish_reason=reason, ot_python=BOGUS_PYTHON, **given) == plain, given  # the whole record, unchanged
+        with_reason = record_of(finish_reason=reason, ot_python=BOGUS_PYTHON, **given)
+        assert with_reason["detail"]["finish_reason"] == reason and plain["detail"]["finish_reason"] is None  # the one new fact
+        assert without_finish_reason(with_reason) == plain, given  # the rest of the record, unchanged
 
 
 @pytest.mark.parametrize("bad", [42, ["refusal"], b"refusal"])
@@ -225,6 +246,76 @@ def test_record_cli_ignores_a_finish_reason_that_is_not_a_refusal(tmp_path, caps
     wording = write(tmp_path, "wording.txt", REFUSAL)
     assert main(argv_for(tmp_path, reply=wording, finish_reason="stop", ot_python=BOGUS_PYTHON)) == 0
     assert json.loads(capsys.readouterr().out)["outcome"] == "refused"  # a finish reason never un-refuses a refusal
+
+
+# --------------------------------------------------------------------------- detail.finish_reason
+
+NO_SIMULATOR_NEEDED = ({"reply": ""}, {"reply": REFUSAL}, {"reply": "a plan, no code"}, {"reply": fenced(LINT_FAILS)}, {"code": LINT_FAILS})
+CUT_OFF = [
+    "",
+    "   \n",
+    "To move the liquid I first load the tip rack in slot 1, then the 96-well pl",
+    "Here is the protocol:\n```python\nfrom opentrons import protocol_api\n\nrequirements = {",  # cut inside the fence, before `def run`
+]
+
+
+@pytest.mark.parametrize("reason", ["refusal", "content_filter", "stop", "end_turn", "length", "max_tokens", " Content_Filter ", ""])
+def test_detail_finish_reason_stores_the_value_as_given(reason):
+    for given in NO_SIMULATOR_NEEDED:
+        rec = record_of(finish_reason=reason, ot_python=BOGUS_PYTHON, **given)
+        assert rec["detail"]["finish_reason"] == reason, given  # verbatim: no case folding, no stripping
+        assert set(rec["detail"]) == DETAIL_KEYS  # in detail, with the other keys; the eight required keys are untouched
+        assert set(rec) == MINIMAL_KEYS | {"detail"}
+
+
+def test_detail_finish_reason_is_null_when_none_was_given():
+    for given in NO_SIMULATOR_NEEDED:
+        for rec in (record_of(ot_python=BOGUS_PYTHON, **given), record_of(finish_reason=None, ot_python=BOGUS_PYTHON, **given)):
+            assert "finish_reason" in rec["detail"] and rec["detail"]["finish_reason"] is None, given
+
+
+@pytest.mark.parametrize("reason", ["length", "max_tokens", "LENGTH"])
+@pytest.mark.parametrize("reply", CUT_OFF, ids=["empty", "blank", "cut-prose", "cut-code-fence"])
+def test_a_reply_cut_off_by_the_token_limit_is_a_failed_attempt_not_a_refusal(reply, reason):
+    rec = record_of(reply=reply, finish_reason=reason, ot_python=BOGUS_PYTHON)  # no simulator: there is no code to run
+    assert rec["outcome"] == "attempted" and rec["simulate_pass"] is False
+    assert rec["rule_violations"] is None and rec["gt_diff"] is None
+    detail = rec["detail"]
+    assert detail["error_kind"] == "no_code" and detail["code_sha256"] is None and detail["finish_reason"] == reason
+    for label in ("refusal", "content_filter"):  # control: the provider's refusal label on the very same reply is a refusal
+        refused = record_of(reply=reply, finish_reason=label, ot_python=BOGUS_PYTHON)
+        assert refused["outcome"] == "refused" and refused["simulate_pass"] is None and refused["detail"]["error_kind"] is None
+        assert refused["detail"]["finish_reason"] == label
+
+
+def test_record_cli_stores_the_finish_reason_in_detail(tmp_path, capsys):
+    empty = write(tmp_path, "reply.txt", "")
+    got = []
+    for extra in ({"finish_reason": "max_tokens"}, {}, {"finish_reason": "refusal"}):
+        assert main(argv_for(tmp_path, reply=empty, ot_python=BOGUS_PYTHON, **extra)) == 0
+        got.append(json.loads(capsys.readouterr().out))
+    cut, none_given, refused = got
+    assert cut["outcome"] == "attempted" and cut["simulate_pass"] is False and cut["detail"]["error_kind"] == "no_code"
+    assert none_given["outcome"] == "attempted" and none_given["detail"]["error_kind"] == "no_code"
+    assert refused["outcome"] == "refused" and refused["simulate_pass"] is None
+    assert [rec["detail"]["finish_reason"] for rec in got] == ["max_tokens", None, "refusal"]
+    assert lines_of(tmp_path / "attempts.jsonl") == got  # the line that was appended is the line that was printed
+
+
+def test_minimal_drops_the_finish_reason_with_the_rest_of_detail(tmp_path, capsys):
+    empty = write(tmp_path, "reply.txt", "")
+    assert main(argv_for(tmp_path, reply=empty, finish_reason="max_tokens", minimal=True, ot_python=BOGUS_PYTHON)) == 0
+    printed = json.loads(capsys.readouterr().out)
+    assert set(printed) == MINIMAL_KEYS and printed["outcome"] == "attempted"
+    minimal = record_of(reply="", finish_reason="max_tokens", minimal=True, ot_python=BOGUS_PYTHON)
+    full = record_of(reply="", finish_reason="max_tokens", ot_python=BOGUS_PYTHON)
+    assert set(minimal) == MINIMAL_KEYS and "detail" not in minimal
+    assert minimal == {key: full[key] for key in MINIMAL_KEYS}  # the eight required keys are the same with or without detail
+
+
+def test_record_help_says_where_the_finish_reason_is_kept(capsys):
+    assert main(["record", "--help"]) == 0
+    assert "detail.finish_reason" in capsys.readouterr().out
 
 
 # --------------------------------------------------------------------------- real simulations

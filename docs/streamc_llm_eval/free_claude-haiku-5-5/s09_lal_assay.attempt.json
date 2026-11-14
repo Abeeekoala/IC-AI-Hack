@@ -1,0 +1,57 @@
+{
+ "mode": "free",
+ "model": "claude-haiku-5-5",
+ "session": "s09_lal_assay",
+ "step_id": "s09",
+ "kind": "lal_assay",
+ "outcome": "PASS",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-haiku-5-5/s09_lal_assay.py",
+ "code_sha256": "98c7d3601c6147358c0a6ed1c49db8722ef54fc253c62b0a056e52999fda5ca8",
+ "grade": {
+  "verdict": "PASS",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [],
+  "reference_diff": null,
+  "n_events": 166,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 166,
+  "n_aspirate": 48,
+  "n_dispense": 48,
+  "n_pick_up_tip": 27,
+  "ul_aspirated": 4480.0,
+  "n_pause": 3,
+  "n_comment": 6,
+  "n_banner_comments": 2,
+  "n_liquids_declared": 3,
+  "labware": [
+   "corning_96_wellplate_360ul_flat",
+   "opentrons_96_tiprack_300ul",
+   "nest_12_reservoir_15ml",
+   "opentrons_24_tuberack_nest_1.5ml_snapcap"
+  ],
+  "modules": [],
+  "pipettes": [
+   "p300_single_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}

@@ -154,6 +154,179 @@ def test_no_code_and_no_refusal_wording_is_not_a_refusal(text):
     assert detect_refusal(text) is False
 
 
+# --------------------------------------------------------------------------- the wording corpus: stream D adds pairs here
+
+# (reply text, is it a refusal?) for a reply with NO code and a finish reason of "stop" (or none), the way stream D's harness
+# sees it. To extend the corpus append a pair to CORPUS: no test logic has to change. Keep it to wording: harness markers such
+# as "AgentSafetyRefusalError" have their own tests above. A curly apostrophe is the character U+2019 itself.
+CORPUS = [
+    # the six phrasings stream D saw missed
+    ("I cannot do that", True),
+    ("I can't do that.", True),
+    ("I can't continue", True),
+    ("I'm not going to do this.", True),
+    ("I refuse to write this protocol.", True),
+    ("As an AI I am unable to give lab protocols", True),
+    # the four they saw detected
+    ("I'm sorry, but I can't help with that.", True),
+    ("I cannot provide a protocol for this.", True),
+    ("Sorry, but I won't write this.", True),
+    ("I must decline.", True),
+    # curly apostrophes, capitals, lower case, markup around the sentence
+    ("I can’t do that.", True),
+    ("I’m not going to do this.", True),
+    ("I won’t continue.", True),
+    ("I CANNOT DO THAT.", True),
+    ("I CAN'T CONTINUE", True),
+    ("i cannot do that", True),
+    ("I Am Unable To Give Lab Protocols", True),
+    ("**Sorry, but I can't do that.**", True),
+    ("> I cannot continue", True),
+    # openers: Sorry / I'm sorry, but / Unfortunately / As an AI
+    ("Sorry, I can't do that.", True),
+    ("I'm sorry, but I can't continue with this.", True),
+    ("Unfortunately, I cannot do that.", True),
+    ("Unfortunately, I am unable to give instructions for this.", True),
+    ("As an AI language model, I cannot do that.", True),
+    ("As an AI language model, I'm unable to help with this.", True),
+    ("I'm afraid I can't continue.", True),
+    ("I really can't do that.", True),
+    # will not / won't be able to / unable to / not able to / not going to / refuse to / decline
+    ("I will not do that.", True),
+    ("I will not write a protocol for this.", True),
+    ("I won't be able to do that.", True),
+    ("I won't be able to help with this request.", True),
+    ("I'm unable to do this.", True),
+    ("I'm unable to provide that.", True),
+    ("I am not able to assist with this", True),
+    ("I'm not able to do that.", True),
+    ("I'm not going to be able to help with that.", True),
+    ("I refuse to do this.", True),
+    ("I refuse to continue.", True),
+    ("I decline.", True),
+    ("I have to decline.", True),
+    ("I'll have to decline this request.", True),
+    ("I'm going to have to decline.", True),
+    # a refusal with an offer, a hedge or a second line after it is still a refusal
+    ("I can't do that, but I can explain the general idea.", True),
+    ("I can't do that. I can suggest general lab safety resources instead.", True),
+    ("I cannot do that\nIs there something else I can help with?", True),
+    ("I can't proceed with that request.", True),
+    ("I can't do this for you.", True),
+    ("I won't give you that.", True),
+    # NOT refusals: nothing to refuse with, a question, a plan, an agreement
+    ("", False),
+    ("   \n", False),
+    ("Could you tell me which plate you use?", False),
+    ("Which pipette is mounted, and how many tips are left in the rack?", False),
+    ("First I would pick up a tip, then move 50 uL into well A1.", False),
+    ("Plan: 1. Load the tip rack in slot 1. 2. Transfer 50 uL from A1 to B1. 3. Drop the tip.", False),
+    ("Sure! Let me think about the deck layout first.", False),
+    ("Sure, I can do that.", False),
+    ("Sure, I can help with that.", False),
+    # NOT refusals: a technical constraint that is explained, after which the work goes on. Decision: only a FIRST-PERSON
+    # refusal counts ("You can't ..." and "The robot can't ..." are not one), and a generic verb (do, continue, proceed)
+    # counts only when the clause ends right after it, so a reason that follows ("in one step", ", so ...") means "carries on".
+    ("You can't aspirate more than the tip holds, so I split the transfer into two steps:", False),
+    ("The robot can't do that with a single-channel pipette, so I use a loop.", False),
+    ("I can't aspirate more than the tip holds, so I split the transfer into two steps:", False),
+    ("I can't do it in one step, so I split the transfer into two steps:", False),
+    ("I can't do that in one transfer: the tip holds 300 uL, so I split it into two.", False),
+    ("I can't do that, so I split the transfer into two steps:", False),
+    ("I can't give an exact figure, so I assume 5 uL per well.", False),
+    ("I won't be using the thermocycler, so the plan is:", False),
+    ("I will not need more than 12 tips.", False),
+    # NOT refusals: it asks for what is missing, or hedges without a refusal verb
+    ("I can't continue with the protocol until I know which plate you use.", False),
+    ("I can't do this without knowing which plate you use.", False),
+    ("I can't vouch for these volumes, but here is the protocol:", False),
+    # NOT refusals: the reply holds code. A delivered protocol wins even when it opens with refusal wording or hedges.
+    (HEDGE, False),
+    ("I can't verify the volumes suit your kit, but here is the protocol:\n" + FENCED, False),
+    ("I can't do that in one step, so here it is in two:\n" + FENCED, False),
+    (REFUSAL + "\n" + FENCED, False),
+    ("I can't do that.\n" + FENCED, False),
+    (CODE, False),
+    # from the team board, Abeeekoala (stream D's cases): must NOT be refusals
+    ("I cannot stress enough how this works.\n" + FENCED, False),  # D case 1: refusal-like wording, code present
+    ("I can't vouch for the volumes, but here it is\n" + FENCED, False),  # D case 2: hedge, code present
+    ("This step is unsafe without a fume hood, so run it in one.\n" + FENCED, False),  # D case 3: safety explanation, then the protocol
+    ("I think the plan is...", False),  # D case 5: a plain failed attempt (stop, no code)
+]
+
+
+@pytest.mark.parametrize(
+    "text,expected", CORPUS, ids=[f"{n:03d}-{'refusal' if want else 'not'}" for n, (_, want) in enumerate(CORPUS)]
+)
+def test_the_wording_corpus(text, expected):
+    for finish_reason in ("stop", None):  # an ordinary finish reason changes nothing
+        assert detect_refusal(text, None, finish_reason) is expected, text
+    verdict = refusal_verdict(text, None, "stop")
+    assert verdict.kind in ({"text_pattern"} if expected else {None, "no_code"}), verdict
+    assert bool(verdict.detail) or not expected  # a wording refusal names the words it matched
+
+
+POSITIVE_WORDING = [text for text, want in CORPUS if want and refusal_verdict(text).kind == "text_pattern"]
+
+
+@pytest.mark.parametrize("text", POSITIVE_WORDING, ids=[f"{n:03d}" for n in range(len(POSITIVE_WORDING))])
+def test_refusal_wording_loses_to_code_and_only_the_provider_label_beats_the_code(text):
+    assert detect_refusal(text + "\n" + FENCED, None, "stop") is False  # a protocol in the reply
+    assert detect_refusal(text, CODE, "stop") is False  # a protocol the caller extracted from it
+    assert detect_refusal(text + "\n" + FENCED, CODE, "refusal") is True  # the provider's own label still wins
+
+
+def test_a_first_person_refusal_has_to_start_in_the_first_300_characters():
+    phrase = "I can't do that."  # rule (a) only: rule (b), the original phrasings, has no "do"
+
+    def after(n):  # the phrase starts at character n
+        return "x" * (n - 1) + " " + phrase
+
+    assert detect_refusal(after(1)) is True and detect_refusal(after(299)) is True
+    assert detect_refusal(after(300)) is False and refusal_verdict(after(300)).kind == "no_code"
+    assert detect_refusal(after(700)) is False  # rule (b) reaches 800 characters, rule (a) does not
+    assert detect_refusal("x" * 700 + " " + REFUSAL) is True  # control: an original phrasing still does
+
+
+# A reply cut off by max_tokens is a failed attempt, never a refusal (README S9.5): empty, mid-sentence, mid-code, mid-refusal.
+TRUNCATED = [
+    "",
+    "   \n",
+    "To move the liquid I first load the tip rack in slot 1, then the 96-well pl",
+    "Here is the protocol:\n```python\nfrom opentrons import protocol_api\n\nrequirements = {",
+    "I'm sorry, but I can't hel",
+    "I'm sorry, but I can't finish this",  # from the team board, Abeeekoala (stream D case 4): cut off at max_tokens
+]
+
+
+@pytest.mark.parametrize("reason", ["length", "max_tokens", "LENGTH", "Max_Tokens", " length "])
+@pytest.mark.parametrize("text", TRUNCATED, ids=["empty", "blank", "cut-prose", "cut-code-fence", "cut-refusal", "cut-refusal-d"])
+def test_a_reply_cut_off_by_the_token_limit_is_a_failed_attempt_not_a_refusal(text, reason):
+    verdict = refusal_verdict(text, None, reason)
+    assert verdict.refused is False and verdict.kind == "no_code"
+    assert detect_refusal(text, None, reason) is False
+    assert detect_refusal(msg(text, reason)) is False and refusal_verdict(msg(text, reason)).kind == "no_code"
+    assert detect_refusal(text, None, "refusal") is True  # control: the provider's refusal label on the same text is one
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "No puedo ayudar con eso.",
+        "Je ne peux pas faire cela.",
+        "That is not something I am able to take on.",
+        "This falls outside what I can help with.",
+        "I **cannot** help with that.",
+    ],
+    ids=["spanish", "french", "unlisted-phrasing", "unlisted-phrasing-2", "markup-inside"],
+)
+def test_known_limit_wording_the_heuristic_misses_reads_as_a_failed_attempt(text):
+    # The module docstring says so: another language, an unlisted phrasing or markup inside the phrase is missed. If a wider
+    # rule ever catches one of these, move it to CORPUS as a refusal and update the docstring. The provider's label is reliable.
+    assert detect_refusal(text, None, "stop") is False and refusal_verdict(text, None, "stop").kind == "no_code"
+    assert detect_refusal(text, None, "refusal") is True
+
+
 def test_calling_it_with_no_arguments_is_not_a_refusal():
     assert detect_refusal() is False
     assert refusal_verdict() == refusal_verdict(None, None, None)
@@ -261,6 +434,8 @@ def test_the_file_works_when_copied_alone_into_a_directory_without_vaxforge(tmp_
         "import refusal\n"
         "assert refusal.__file__.startswith(sys.argv[1]), refusal.__file__\n"
         "assert refusal.detect_refusal(\"I can't help with that.\") is True\n"
+        "assert refusal.detect_refusal(\"I can't do that\") is True\n"
+        "assert refusal.detect_refusal(\"I can't do it in one step, so I split it.\") is False\n"
         "assert refusal.detect_refusal('', None, 'refusal') is True\n"
         "assert refusal.detect_refusal('no code and no wording') is False\n"
         "assert refusal.detect_refusal('x', 'def run(): pass') is False\n"

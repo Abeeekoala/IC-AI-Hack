@@ -38,6 +38,8 @@ Output schema (version 1)
                        "max_volume_ul": float}, ...}
     }],
     "modules":   [{"slot": str, "name": str, "model": str}],
+                                 # below apiLevel 2.14 Opentrons does not expose the model: model is "" and name is the
+                                 # module context's class name ("ThermocyclerContext", ...)
     "pipettes":  [{"mount": "left"|"right", "name": str, "channels": int,
                    "min_volume_ul": float, "max_volume_ul": float}],
     "trash":     {"slot": "12"}          # fixed trash; not listed in `labware`
@@ -311,6 +313,24 @@ def _labware_kind(load_name: str, definition_params: dict[str, Any] | None) -> s
     return "other"
 
 
+def _module_model(mod: Any) -> str:
+    """The model string of a loaded module ("thermocyclerModuleV1", ...), or "" when this apiLevel does not expose it.
+
+    `ModuleContext.model` is `@requires_version(2, 14)`: below apiLevel 2.14 Opentrons 7.5.0 raises `APIVersionError`
+    for it. That is a plain `Exception`, not an `AttributeError`, so the default of `getattr(mod, "model", "")` never
+    applies, and the runner used to report `ok: false` for every protocol that loads a module at apiLevel < 2.14 -
+    which Opentrons itself simulates without complaint. "Not available at this API level" means the value is absent
+    (the caller then names the module by its context class), not that the protocol failed. Any other error still
+    propagates, and at apiLevel >= 2.14 the result is exactly what `getattr(mod, "model", "")` gave before.
+    """
+    from opentrons.protocols.api_support.util import APIVersionError
+
+    try:
+        return str(getattr(mod, "model", ""))
+    except APIVersionError:  # the attribute exists but not at this apiLevel: absent, not a failure of the protocol
+        return ""
+
+
 def _deck_snapshot(protocol_path: str, api_level: str) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Execute run() once more against a live context to read deck geometry."""
     from opentrons import simulate
@@ -346,7 +366,7 @@ def _deck_snapshot(protocol_path: str, api_level: str) -> tuple[dict[str, Any], 
     module_by_slot = {}
     modules = []
     for slot, mod in ctx.loaded_modules.items():
-        model = str(getattr(mod, "model", ""))
+        model = _module_model(mod)
         name = _MODULE_NAMES.get(model, model or type(mod).__name__)
         modules.append({"slot": str(slot), "name": name, "model": model})
         module_by_slot[str(slot)] = name

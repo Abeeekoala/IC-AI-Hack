@@ -1,0 +1,183 @@
+{
+ "session_id": "s08_endotoxin_removal",
+ "title": "Endotoxin-removal plate set-up",
+ "covers": [
+  "s08"
+ ],
+ "modules": [],
+ "labware": [
+  {
+   "key": "el",
+   "load_name": "nest_96_wellplate_200ul_flat",
+   "slot": "3",
+   "module": null,
+   "label": "Eluates from purification",
+   "kind": "plate"
+  },
+  {
+   "key": "rem",
+   "load_name": "nest_96_wellplate_2ml_deep",
+   "slot": "4",
+   "module": null,
+   "label": "Endotoxin-removal plate",
+   "kind": "plate"
+  },
+  {
+   "key": "res",
+   "load_name": "nest_12_reservoir_15ml",
+   "slot": "5",
+   "module": null,
+   "label": "Removal reagent",
+   "kind": "reservoir"
+  },
+  {
+   "key": "tips_p300_1",
+   "load_name": "opentrons_96_tiprack_300ul",
+   "slot": "11",
+   "module": null,
+   "label": "p300 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p300",
+   "api_name": "p300_single_gen2",
+   "mount": "right",
+   "channels": 1,
+   "tipracks": [
+    "tips_p300_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "el",
+    "well": "A1"
+   },
+   "reagent": "candidate eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "el",
+    "well": "B1"
+   },
+   "reagent": "empty-vector mock eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "res",
+    "well": "A1"
+   },
+   "reagent": "endotoxin-removal reagent",
+   "volume_ul": 600.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s08",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 80.0,
+   "src": {
+    "labware": "el",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "rem",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s08",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 80.0,
+   "src": {
+    "labware": "el",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "rem",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s08",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "res",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "rem",
+     "well": "A1"
+    },
+    {
+     "labware": "rem",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    5,
+    80.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s08",
+   "op": "pause",
+   "text": "HUMAN [s08]: Incubate / separate per the chosen endotoxin-removal method (phase separation, resin or column), then recover the endotoxin-reduced protein into endotoxin-free tubes. These steps are not automated."
+  }
+ ],
+ "tips_needed": {
+  "p300": 4
+ },
+ "notes": [
+  "S8 does not fix the endotoxin-removal chemistry; choose a method and replace this set-up accordingly."
+ ],
+ "layouts": {
+  "Removal plate": {
+   "candidate eluate": "A1",
+   "empty-vector mock eluate": "B1"
+  }
+ }
+}

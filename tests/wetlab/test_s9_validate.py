@@ -29,6 +29,7 @@ from vaxforge.s9_validate import (
     final_volumes,
     grade_source,
     initial_from_liquids,
+    leaf_events,
     reference_diff,
     simulate,
     static_lint,
@@ -141,6 +142,62 @@ def test_multichannel_aspiration_empties_the_whole_column():
           E(4, "pick_up_tip", ch=8), E(5, "aspirate", "3", "A1", 60, ch=8), E(6, "dispense", "3", "A2", 60, ch=8), E(7, "drop_tip", ch=8)]
     initial = [liq("3", f"{r}1", 100, PLATE) for r in "ABCDEFGH"]
     assert rules(ev, initial)["no_aspirate_from_empty_well"] == 1  # 100 uL cannot give 60 twice
+
+
+# Found by comparing with Text2WetLab's own grader on its reference solutions and broken variants of them
+# (docs/streamc_t2wl_agreement.md, tests/wetlab/test_t2wl_agreement.py).
+
+
+def air_gap(idx, slot, well, vol, labware=PLATE, level=0):
+    """The two log entries of pipette.air_gap(vol): the 'Air gap' command, and the aspirate that is its sub-step."""
+    return [{**E(idx, "comment", level=level), "text": "Air gap"}, E(idx + 1, "aspirate", slot, well, vol, labware, level=level + 1)]
+
+
+def test_an_air_gap_is_air_not_drawn_from_the_well_and_it_can_be_dispensed():
+    ev = [E(0, "pick_up_tip", labware="tiprack"), E(1, "aspirate", "2", "A1", 50, TUBES), *air_gap(2, "2", "A1", 20, TUBES),
+          E(4, "dispense", "3", "A1", 70), E(5, "drop_tip")]
+    rep = check_physical_rules(sim(ev), {("2", "A1"): 60.0})
+    # 10 uL are left in the tube and the 20 uL air gap did not come from it; 70 are in the tip and 70 are dispensed
+    assert rep.counts == dict.fromkeys(RULES, 0)
+    assert rep.aspirations == 1
+
+
+def test_an_air_gap_above_a_destination_does_not_make_the_tip_carry_that_well():
+    ev = [E(0, "pick_up_tip", labware="tiprack"), E(1, "aspirate", "2", "A1", 50, TUBES), E(2, "dispense", "3", "A1", 50),
+          *air_gap(3, "3", "A1", 10), E(5, "aspirate", "2", "A1", 50, TUBES), E(6, "dispense", "3", "B1", 50), E(7, "drop_tip")]
+    assert check_physical_rules(sim(ev), {("2", "A1"): 500.0}).counts["no_cross_contamination"] == 0
+
+
+def test_a_comment_that_says_air_gap_does_not_hide_the_next_aspirate():
+    note = {**E(1, "comment"), "text": "Air gap"}  # a user comment: no sub-step, so no air gap
+    ev = [E(0, "pick_up_tip", labware="tiprack"), note, E(2, "aspirate", "2", "A1", 50, TUBES), E(3, "dispense", "3", "A1", 50), E(4, "drop_tip")]
+    rep = check_physical_rules(sim(ev), {})
+    assert rep.aspirations == 1 and rep.counts["no_aspirate_from_empty_well"] == 1
+
+
+def test_leaf_events_marks_the_air_gap_aspirate_on_a_copy_and_final_volumes_ignore_it():
+    ev = [E(0, "pick_up_tip", labware="tiprack"), E(1, "aspirate", "2", "A1", 50, TUBES), *air_gap(2, "2", "A1", 20, TUBES),
+          E(4, "dispense", "3", "A1", 70), E(5, "drop_tip")]
+    s = sim(ev)
+    assert [e["kind"] for e in leaf_events(s)] == ["pick_up_tip", "aspirate", "air_gap", "dispense", "drop_tip"]
+    assert [e["kind"] for e in s["events"]] == ["pick_up_tip", "aspirate", "comment", "aspirate", "dispense", "drop_tip"]
+    assert final_volumes(s, {("2", "A1"): 60.0}) == {("2", "A1"): 10.0, ("3", "A1"): 70.0}
+
+
+def test_dispensing_into_an_undeclared_reservoir_does_not_start_tracking_it():
+    # mixing a reagent reservoir before drawing from it: 50 uL go in and out, then 200 are drawn from an ample stock
+    ev = [E(0, "pick_up_tip", labware="tiprack"), E(1, "aspirate", "5", "A1", 50, RES), E(2, "dispense", "5", "A1", 50, RES),
+          E(3, "aspirate", "5", "A1", 200, RES), E(4, "dispense", "3", "A1", 200), E(5, "drop_tip")]
+    assert not any(rules(ev).values())
+    assert rules(ev, [liq("5", "A1", 100, RES)])["no_aspirate_from_empty_well"] == 1  # declared: tracked, and 200 > 100
+
+
+@pytest.mark.parametrize("extra,flagged", [(5e-7, 1), (5e-10, 0)])
+def test_the_volume_rules_have_spec_checks_tolerance_of_1e_9_ul(extra, flagged):
+    over = [E(0, "pick_up_tip", labware="tiprack"), E(1, "aspirate", "2", "A1", 100, TUBES), E(2, "dispense", "3", "A1", 100 + extra), E(3, "drop_tip")]
+    dry = [E(0, "pick_up_tip", labware="tiprack"), E(1, "aspirate", "2", "A1", 100 + extra, TUBES), E(2, "dispense", "3", "A1", 100 + extra), E(3, "drop_tip")]
+    assert check_physical_rules(sim(over), {("2", "A1"): 1000.0}).counts["no_overdispense"] == flagged
+    assert check_physical_rules(sim(dry), {("2", "A1"): 100.0}).counts["no_aspirate_from_empty_well"] == flagged
 
 
 def test_initial_from_liquids_reads_declared_contents():
@@ -376,6 +433,62 @@ def test_a_python_error_inside_run_is_graded_by_its_class_with_a_clean_message()
     assert g.sim_error.startswith("TypeError: ") and "TrashBin" in g.sim_error
     assert_clean(g.sim_error)
     assert_clean(s["error"]["message"])
+
+
+# Three modules, loaded by the gen-1 names that every apiLevel from 2.0 on accepts (the apiLevel is put in front by `modules_protocol`).
+MODULES_BODY = '''
+def run(ctx):
+    tips = ctx.load_labware("opentrons_96_tiprack_300ul", 1)
+    src = ctx.load_labware("nest_12_reservoir_15ml", 2)
+    p = ctx.load_instrument("p300_single_gen2", "right", tip_racks=[tips])
+    temp = ctx.load_module("tempdeck", 3)
+    plate = temp.load_labware("nest_96_wellplate_100ul_pcr_full_skirt")
+    mag = ctx.load_module("magdeck", 6)
+    mag.load_labware("nest_96_wellplate_2ml_deep")
+    tc = ctx.load_module("thermocycler")
+    temp.set_temperature(4)
+    p.transfer(20, src["A1"], plate["A1"])
+    temp.deactivate()
+    mag.engage()
+    mag.disengage()
+    tc.open_lid()
+'''
+
+
+def modules_protocol(api_level):
+    return f'metadata = {{"apiLevel": "{api_level}"}}\n' + MODULES_BODY
+
+
+@needs_ot
+@pytest.mark.parametrize("api_level", ["2.0", "2.13"])
+def test_a_protocol_that_loads_modules_simulates_below_api_2_14(api_level):
+    # ModuleContext.model exists only from apiLevel 2.14. Below that Opentrons raises APIVersionError, which is not an
+    # AttributeError, so `getattr(module, "model", "")` did not return its default and the runner reported ok=false for every
+    # protocol that loads a module - one that Opentrons itself simulates without complaint.
+    sim = simulate(modules_protocol(api_level))
+    assert sim["ok"] is True, sim["error"]
+    assert sim["api_level"] == api_level
+    # all three modules are on the deck, in their slots; the model is absent at this level, it is not made up
+    assert sorted((m["slot"], m["model"]) for m in sim["deck"]["modules"]) == [("3", ""), ("6", ""), ("7", "")]
+    assert {lw["slot"] for lw in sim["deck"]["labware"] if lw["module"]} == {"3", "6"}  # the two labware that sit on a module
+    # their events are reported ...
+    assert {"temperature_set", "temperature_deactivate", "magnet_engage", "magnet_disengage"} <= {e["kind"] for e in sim["events"]}
+    assert "Opening Thermocycler lid" in [e["text"] for e in sim["events"]]
+    # ... and pipetting into the plate on the temperature module is placed in that module's slot
+    moves = [(e["kind"], e["target"]["slot"], e["target"]["well"]) for e in sim["events"] if e["kind"] in ("aspirate", "dispense")]
+    assert moves == [("aspirate", "2", "A1"), ("dispense", "3", "A1")]
+
+
+@needs_ot
+def test_modules_keep_their_names_and_models_from_api_2_14():
+    # The other side of the fix above: from apiLevel 2.14 nothing changed, the model is read and names the module.
+    sim = simulate(modules_protocol("2.14"))
+    assert sim["ok"] is True, sim["error"]
+    assert sorted((m["slot"], m["name"], m["model"]) for m in sim["deck"]["modules"]) == [
+        ("3", "temperature module", "temperatureModuleV1"),
+        ("6", "magnetic module", "magneticModuleV1"),
+        ("7", "thermocycler module", "thermocyclerModuleV1"),
+    ]
 
 
 @needs_ot

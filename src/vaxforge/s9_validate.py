@@ -51,6 +51,7 @@ RULES = (
 SIM_SCHEMA = "vaxforge.ot_sim/1"
 _RUNNER = Path(__file__).with_name("_ot_sim_runner.py")
 _EPS = 1e-9
+_VOL_TOL = 1e-9  # uL of slack in the two volume rules: spec_check's own (`vol > held + 1e-9`, `wells < vol - 1e-9`)
 
 
 # --------------------------------------------------------------------------- 1. static lint
@@ -265,8 +266,25 @@ def _cells(event: dict[str, Any]) -> list[tuple[tuple[str, str], int]]:
 
 
 def leaf_events(sim: dict[str, Any]) -> list[dict[str, Any]]:
-    """The atomic pipetting events, in order (group headers removed)."""
-    return [e for e in sim.get("events", []) if e["kind"] in ("pick_up_tip", "drop_tip", "aspirate", "dispense")]
+    """The atomic pipetting events, in order (group headers removed).
+
+    The aspirate that is the sub-step of an `Air gap` command draws air, not liquid. It comes back as a copy with kind
+    "air_gap" (`sim` is not modified): the tip holds that volume afterwards, but no well loses it and the tip has not
+    visited the well it hovers over. Text2WetLab's runlog sets these aside the same way (kind "air").
+    """
+    out: list[dict[str, Any]] = []
+    latest: dict[int, dict[str, Any]] = {}  # level -> the latest event at that level, which is the parent of a deeper next one
+    for e in sim.get("events", []):
+        level = int(e.get("level") or 0)
+        parent = latest.get(level - 1) if level > 0 else None
+        for deeper in [k for k in latest if k >= level]:
+            del latest[deeper]
+        latest[level] = e
+        if e["kind"] == "aspirate" and parent is not None and str(parent.get("text") or "").startswith("Air gap"):
+            out.append({**e, "kind": "air_gap"})
+        elif e["kind"] in ("pick_up_tip", "drop_tip", "aspirate", "dispense"):
+            out.append(e)
+    return out
 
 
 class Violation(BaseModel):
@@ -343,6 +361,7 @@ def check_physical_rules(sim: dict[str, Any], initial: dict[tuple[str, str], flo
     events = leaf_events(sim)
     initial = initial if initial is not None else initial_from_liquids(sim)
     wells: dict[tuple[str, str], float] = dict(initial)
+    declared = frozenset(initial)  # a reservoir well is tracked only if declared; dispensing into one (a mix) does not declare it
     rep = RuleReport()
     tip, held = False, 0.0
     for e in events:
@@ -353,6 +372,9 @@ def check_physical_rules(sim: dict[str, Any], initial: dict[tuple[str, str], flo
             tip, held = True, 0.0
         elif kind == "drop_tip":
             tip, held = False, 0.0
+        elif kind == "air_gap":
+            if tip:
+                held += float(e.get("volume_ul") or 0.0)  # air in the tip: it may be dispensed, and no well loses it
         else:
             vol = float(e.get("volume_ul") or 0.0)
             if not tip:
@@ -362,10 +384,10 @@ def check_physical_rules(sim: dict[str, Any], initial: dict[tuple[str, str], flo
             if kind == "aspirate":
                 rep.aspirations += 1
                 for key, mult in _cells(e):
-                    tracked = (not _is_stock(t.get("labware"))) or key in wells
+                    tracked = (not _is_stock(t.get("labware"))) or key in declared
                     if not tracked:
                         continue
-                    if wells.get(key, 0.0) < vol * mult - 1e-6:
+                    if wells.get(key, 0.0) < vol * mult - _VOL_TOL:
                         rep.violations["no_aspirate_from_empty_well"].append(
                             Violation(rule="no_aspirate_from_empty_well", event_idx=idx,
                                       detail=f"{key[1]} on slot {key[0]} holds {wells.get(key, 0.0):g} uL, asked for {vol * mult:g}"))
@@ -373,7 +395,7 @@ def check_physical_rules(sim: dict[str, Any], initial: dict[tuple[str, str], flo
                     wells[key] = wells.get(key, 0.0) - vol * mult
                 held += vol
             else:
-                if vol > held + 1e-6:
+                if vol > held + _VOL_TOL:
                     rep.violations["no_overdispense"].append(
                         Violation(rule="no_overdispense", event_idx=idx, detail=f"dispensing {vol:g} uL with {held:g} uL in the tip"))
                 for key, mult in _cells(e):

@@ -1,0 +1,93 @@
+{
+ "mode": "free",
+ "model": "claude-haiku-5-5",
+ "session": "s12_elisa",
+ "step_id": "s12",
+ "kind": "elisa",
+ "outcome": "FAIL",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-haiku-5-5/s12_elisa.py",
+ "code_sha256": "8138a976728cbab9f5942df1abc518a7bf27746a05f7240267e45806436d5219",
+ "grade": {
+  "verdict": "FAIL",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 41,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 41,
+  "findings": [
+   {
+    "severity": "error",
+    "rule": "no_aspirate_from_empty_well",
+    "message": "A1 on slot 2 holds 800 uL, asked for 1600",
+    "event_idx": 31
+   },
+   {
+    "severity": "error",
+    "rule": "no_aspirate_from_empty_well",
+    "message": "A1 on slot 2 holds 800 uL, asked for 1600",
+    "event_idx": 35
+   },
+   {
+    "severity": "error",
+    "rule": "no_aspirate_from_empty_well",
+    "message": "A1 on slot 2 holds 800 uL, asked for 1600",
+    "event_idx": 39
+   },
+   {
+    "severity": "error",
+    "rule": "no_aspirate_from_empty_well",
+    "message": "A1 on slot 2 holds 800 uL, asked for 1600",
+    "event_idx": 43
+   },
+   {
+    "severity": "error",
+    "rule": "no_aspirate_from_empty_well",
+    "message": "A1 on slot 2 holds 800 uL, asked for 1600",
+    "event_idx": 47
+   }
+  ],
+  "reference_diff": null,
+  "n_events": 307,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 307,
+  "n_aspirate": 84,
+  "n_dispense": 48,
+  "n_pick_up_tip": 84,
+  "ul_aspirated": 16800.0,
+  "n_pause": 1,
+  "n_comment": 6,
+  "n_banner_comments": 6,
+  "n_liquids_declared": 1,
+  "labware": [
+   "opentrons_96_tiprack_300ul",
+   "opentrons_96_tiprack_300ul",
+   "opentrons_96_tiprack_300ul",
+   "opentrons_96_tiprack_300ul",
+   "opentrons_96_tiprack_300ul",
+   "opentrons_96_tiprack_300ul",
+   "opentrons_96_tiprack_300ul",
+   "nest_12_reservoir_15ml",
+   "corning_96_wellplate_360ul_flat"
+  ],
+  "modules": [],
+  "pipettes": [
+   "p300_multi_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}

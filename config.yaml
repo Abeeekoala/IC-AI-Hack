@@ -110,7 +110,7 @@ tools:
   blast_image: "ncbi/blast:2.16.0"
 
 # ======================================================================== stream C (S8 protocol, S9 robot code, S9+ animation, S10 animal study)
-# Every key is optional and every value below is the built-in default (src/vaxforge/streamc_adapter.py, s8_protocol.py, s9_robot.py, s10_animal.py).
+# Every key is optional and every value below is the built-in default (src/vaxforge/streamc_adapter.py, s8_protocol.py, s8_cost.py, s9_robot.py, s10_animal.py).
 streamc:
   proteins: null                    # S2 stand-in: gene / entry name / accession / protein_id to carry into S8-S10; used ONLY when the run has no S3-S7 artifact
   top_k: 3                          # candidates taken from S7's final order (or from the stand-in list) into S8 and S10
@@ -123,3 +123,16 @@ streamc:
   robot_params: {}                  # S9: overrides of RobotParams (volumes, times: all placeholders); {} keeps the defaults
   ot_python: null                   # S9: python with opentrons 7.5.0 (null: VAXFORGE_OT_PYTHON, else .venv-ot / .venv-wetlab)
   study: {}                         # S10: any StudyConfig field (species, goal, power, hla_transgenic_lines, ...); {} keeps the defaults
+  prices: {}                        # S8 cost: unit prices YOU supply, item key -> {price, currency, unit}. None is built in: {} leaves the cost "not_estimated" (quantities still listed)
+  #   Keys are exact and case-sensitive; the list of every key for a run is `payload.cost.items[].item` in s8_protocol.json. Quote a key that holds ': ' or '#'.
+  #     gene_synthesis              unit: synthesis   one per shortlisted candidate
+  #     robot_session               unit: session     one per S9 robot session
+  #     tip:<tip rack load name>    unit: tip         e.g. tip:opentrons_96_tiprack_300ul (an 8-channel pick-up uses 8 tips)
+  #     labware:<load name>         unit: item        e.g. labware:nest_96_wellplate_200ul_flat (tip racks are counted as tips; price reusable labware 0 or per use)
+  #     reagent:<reagent name>      unit: uL, mL or L the name as the S9 plan writes it; the quantity is what the robot draws plus dead volume (the synthesised insert is gene_synthesis)
+  #     animal                      unit: animal      total animals of the S10 design for the shortlist (only when S10's design can be computed)
+  #   One currency for the whole table, as a 3-letter code (no conversion is done). A price of 0 says "counted elsewhere".
+  #   The status is "estimated" only when EVERY item is priced; "partial" names the unpriced ones and gives no total. protocol.cost_gbp_range is set only for "estimated" in GBP.
+  #   Shape of one entry:   "tip:opentrons_96_tiprack_300ul": {price: <number>, currency: <3-letter code>, unit: tip}
+  s8_backend: template              # S8 step narratives: template (deterministic, offline) or llm (needs the anthropic package and a key; falls back to the template per step)
+  s8_model: null                    # S8 model id for s8_backend llm (null: VAXFORGE_CODEGEN_MODEL, else the built-in default). An llm text may add no number, unit or control the step lacks

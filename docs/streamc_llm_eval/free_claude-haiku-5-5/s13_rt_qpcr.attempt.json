@@ -1,0 +1,202 @@
+{
+ "mode": "free",
+ "model": "claude-haiku-5-5",
+ "session": "s13_rt_qpcr",
+ "step_id": "s13",
+ "kind": "rt_qpcr",
+ "outcome": "PASS",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-haiku-5-5/s13_rt_qpcr.py",
+ "code_sha256": "209f75b158ec0f4dd8019e9d82c16b1d55c643e17ec9cc6250b683b8248e9446",
+ "grade": {
+  "verdict": "PASS",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 4
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 5
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 6
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 7
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 8
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 9
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 10
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 15 uL outside 20-300 uL",
+    "event_idx": 11
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 15
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 16
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 20
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 21
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 25
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 26
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 30
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 31
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 35
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 36
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 40
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 41
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 45
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 46
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "aspirate 5 uL outside 20-300 uL",
+    "event_idx": 50
+   },
+   {
+    "severity": "warning",
+    "rule": "pipette_range",
+    "message": "dispense 5 uL outside 20-300 uL",
+    "event_idx": 51
+   }
+  ],
+  "reference_diff": null,
+  "n_events": 55,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 55,
+  "n_aspirate": 9,
+  "n_dispense": 16,
+  "n_pick_up_tip": 9,
+  "ul_aspirated": 160.0,
+  "n_pause": 1,
+  "n_comment": 11,
+  "n_banner_comments": 11,
+  "n_liquids_declared": 9,
+  "labware": [
+   "opentrons_96_tiprack_300ul",
+   "nest_12_reservoir_15ml",
+   "nest_96_wellplate_200ul_flat",
+   "nest_96_wellplate_100ul_pcr_full_skirt"
+  ],
+  "modules": [],
+  "pipettes": [
+   "p300_single_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}
