@@ -1,2 +1,23 @@
+# Team tooling state and local secrets
 .board/
 .env
+
+# Python and test artefacts
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Run outputs and downloads: never committed (README: Protegen's licence is unstated).
+# Anchored to the repo root on purpose, and the committed fixture lives in fixtures/nmb_fixture/
+# (not under a folder named "runs/"), so no ignore rule - ours or the team repo's - can swallow it.
+/cache/
+/runs/
+/handoff/
+*.part
+*.tmp
+
+# secrets
+*.key

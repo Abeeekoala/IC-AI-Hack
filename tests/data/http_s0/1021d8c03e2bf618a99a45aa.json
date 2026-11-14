@@ -1,0 +1,7 @@
+{
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=525258%2C525259%2C691158%2C691159%2C691160%2C691161%2C699032%2C699033%2C699034%2C699035%2C699036%2C699037%2C930556%2C930730%2C1125976%2C1225722%2C645462%2C645463%2C272563%2C1121308%2C455631%2C479831%2C479832%2C479833%2C479834&retmode=xml",
+  "status": 200,
+  "headers": {
+    "content-type": "text/xml; charset=UTF-8"
+  }
+}

@@ -1,0 +1,5 @@
+# Fixture and recorded test data must stay byte-identical on every OS.
+# The artifacts record the sha256 of the files they reference (`vaxforge verify` re-checks them), so Windows
+# core.autocrlf=true converting LF to CRLF on checkout would make verification fail.
+fixtures/** -text
+tests/data/** -text

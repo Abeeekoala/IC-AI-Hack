@@ -1,0 +1,1807 @@
+<?xml version="1.0" ?>
+<!DOCTYPE TaxaSet PUBLIC "-//NLM//DTD Taxon, 14th January 2002//EN" "https://www.ncbi.nlm.nih.gov/entrez/query/DTD/taxon.dtd">
+<TaxaSet><Taxon>
+    <TaxId>525258</TaxId>
+    <ScientificName>Clostridioides difficile NAP07</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile NAP07</Synonym>
+        <Synonym>Peptoclostridium difficile NAP07</Synonym>
+        <EquivalentName>Clostridium difficile str. NAP07</EquivalentName>
+        <EquivalentName>Clostridium difficile strain NAP07</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2008/04/30 16:35:54</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2008/12/30 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>525259</TaxId>
+    <ScientificName>Clostridioides difficile NAP08</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile NAP08</Synonym>
+        <Synonym>Peptoclostridium difficile NAP08</Synonym>
+        <EquivalentName>Clostridium difficile str. NAP08</EquivalentName>
+        <EquivalentName>Clostridium difficile strain NAP08</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2008/04/30 16:36:42</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2008/12/30 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>691158</TaxId>
+    <ScientificName>Clostridioides difficile 6407</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile 6407</Synonym>
+        <Synonym>Peptoclostridium difficile 6407</Synonym>
+        <EquivalentName>Clostridium difficile str. 6407</EquivalentName>
+        <EquivalentName>Clostridium difficile strain 6407</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/11/09 13:55:50</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/11/10 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>691159</TaxId>
+    <ScientificName>Clostridioides difficile 6466</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile 6466</Synonym>
+        <Synonym>Peptoclostridium difficile 6466</Synonym>
+        <EquivalentName>Clostridium difficile str. 6466</EquivalentName>
+        <EquivalentName>Clostridium difficile strain 6466</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/11/09 14:57:34</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/11/10 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>691160</TaxId>
+    <ScientificName>Clostridioides difficile 6503</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile 6503</Synonym>
+        <Synonym>Peptoclostridium difficile 6503</Synonym>
+        <EquivalentName>Clostridium difficile str. 6503</EquivalentName>
+        <EquivalentName>Clostridium difficile strain 6503</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/11/09 13:59:33</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/11/10 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>691161</TaxId>
+    <ScientificName>Clostridioides difficile 6534</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile 6534</Synonym>
+        <Synonym>Peptoclostridium difficile 6534</Synonym>
+        <EquivalentName>Clostridium difficile str. 6534</EquivalentName>
+        <EquivalentName>Clostridium difficile strain 6534</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/11/09 14:00:41</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/11/10 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>699032</TaxId>
+    <ScientificName>Clostridioides difficile BI9</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile BI9</Synonym>
+        <Synonym>Peptoclostridium difficile BI9</Synonym>
+        <EquivalentName>Clostridium difficile str. BI9</EquivalentName>
+        <EquivalentName>Clostridium difficile strain BI9</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/12/10 11:55:58</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/12/12 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>699033</TaxId>
+    <ScientificName>Clostridioides difficile 2007855</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile 2007855</Synonym>
+        <Synonym>Peptoclostridium difficile 2007855</Synonym>
+        <EquivalentName>Clostridium difficile str. 2007855</EquivalentName>
+        <EquivalentName>Clostridium difficile strain 2007855</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/12/10 11:55:58</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/12/12 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>699034</TaxId>
+    <ScientificName>Clostridioides difficile BI1</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile BI1</Synonym>
+        <Synonym>Peptoclostridium difficile BI1</Synonym>
+        <EquivalentName>Clostridium difficile str. BI1</EquivalentName>
+        <EquivalentName>Clostridium difficile strain BI1</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/12/10 11:55:58</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/12/12 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>699035</TaxId>
+    <ScientificName>Clostridioides difficile M120</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile M120</Synonym>
+        <Synonym>Peptoclostridium difficile M120</Synonym>
+        <EquivalentName>Clostridium difficile str. M120</EquivalentName>
+        <EquivalentName>Clostridium difficile strain M120</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/12/10 11:55:58</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/12/12 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>699036</TaxId>
+    <ScientificName>Clostridioides difficile CF5</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile CF5</Synonym>
+        <Synonym>Peptoclostridium difficile CF5</Synonym>
+        <EquivalentName>Clostridium difficile str. CF5</EquivalentName>
+        <EquivalentName>Clostridium difficile strain CF5</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/12/10 11:55:58</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/12/12 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>699037</TaxId>
+    <ScientificName>Clostridioides difficile M68</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile M68</Synonym>
+        <Synonym>Peptoclostridium difficile M68</Synonym>
+        <EquivalentName>Clostridium difficile str. M68</EquivalentName>
+        <EquivalentName>Clostridium difficile strain M68</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/12/10 11:55:58</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/12/12 18:00:16</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>930556</TaxId>
+    <ScientificName>Clostridioides difficile P5433</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile P5433</Synonym>
+        <Synonym>Peptoclostridium difficile P5433</Synonym>
+        <EquivalentName>Clostridium difficile str. P5433</EquivalentName>
+        <EquivalentName>Clostridium difficile strain P5433</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2010/11/26 10:11:24</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2010/11/27 18:00:26</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>930730</TaxId>
+    <ScientificName>Clostridioides difficile D22</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile D22</Synonym>
+        <Synonym>Peptoclostridium difficile D22</Synonym>
+        <EquivalentName>Clostridium difficile str. D22</EquivalentName>
+        <EquivalentName>Clostridium difficile strain D22</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2010/11/26 10:13:54</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2010/11/27 18:00:26</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>1125976</TaxId>
+    <ScientificName>Clostridioides difficile CD37</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile CD37</Synonym>
+        <Synonym>Peptoclostridium difficile CD37</Synonym>
+        <EquivalentName>Clostridium difficile str. CD37</EquivalentName>
+        <EquivalentName>Clostridium difficile strain CD37</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2011/12/13 08:36:00</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2012/03/12 18:00:26</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>1225722</TaxId>
+    <ScientificName>Clostridioides difficile E1</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile E1</Synonym>
+        <Synonym>Peptoclostridium difficile E1</Synonym>
+        <EquivalentName>Clostridium difficile str. E1</EquivalentName>
+        <EquivalentName>Clostridium difficile strain E1</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2012/08/22 10:18:35</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2013/10/17 13:03:21</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>645462</TaxId>
+    <ScientificName>Clostridioides difficile CD196</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile CD196</Synonym>
+        <Synonym>Peptoclostridium difficile CD196</Synonym>
+        <EquivalentName>Clostridium difficile str. CD196</EquivalentName>
+        <EquivalentName>Clostridium difficile strain CD196</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/05/15 13:28:46</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/05/16 18:00:15</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>645463</TaxId>
+    <ScientificName>Clostridioides difficile R20291</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile R20291</Synonym>
+        <Synonym>Peptoclostridium difficile R20291</Synonym>
+        <EquivalentName>Clostridium difficile str. R20291</EquivalentName>
+        <EquivalentName>Clostridium difficile strain R20291</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2009/05/15 13:33:06</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2009/05/16 18:00:15</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>272563</TaxId>
+    <ScientificName>Clostridioides difficile 630</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile 630</Synonym>
+        <Synonym>Peptoclostridium difficile 630</Synonym>
+        <EquivalentName>Clostridium difficile 630 (epidemic type X)</EquivalentName>
+        <EquivalentName>Clostridium difficile str. 630</EquivalentName>
+        <EquivalentName>Clostridium difficile strain 630</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2004/04/20 13:45:25</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2004/04/25 18:06:15</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>1121308</TaxId>
+    <ScientificName>Clostridioides difficile ATCC 9689 = DSM 1296</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile ATCC 9689</Synonym>
+        <Synonym>Clostridium difficile ATCC 9689 = DSM 1296</Synonym>
+        <Synonym>Clostridium difficile DSM 1296</Synonym>
+        <Synonym>Clostridium difficile JCM 1296</Synonym>
+        <Synonym>Peptoclostridium difficile ATCC 9689 = DSM 1296</Synonym>
+        <EquivalentName>Clostridium difficile DSM 1296 = ATCC 9689</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2011/12/04 17:36:19</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2012/02/28 18:00:24</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>455631</TaxId>
+    <ScientificName>Clostridioides difficile QCD-66c26</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile QCD-66c26</Synonym>
+        <Synonym>Peptoclostridium difficile QCD-66c26</Synonym>
+        <EquivalentName>Clostridium difficile str. QCD-66c26</EquivalentName>
+        <EquivalentName>Clostridium difficile strain QCD-66c26</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2007/07/20 11:43:30</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2007/10/29 18:00:06</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>479831</TaxId>
+    <ScientificName>Clostridioides difficile QCD-63q42</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile QCD-63q42</Synonym>
+        <Synonym>Peptoclostridium difficile QCD-63q42</Synonym>
+        <EquivalentName>Clostridium difficile str. QCD-63q42</EquivalentName>
+        <EquivalentName>Clostridium difficile strain QCD-63q42</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2007/10/24 14:22:07</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2007/11/10 18:00:06</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>479832</TaxId>
+    <ScientificName>Clostridioides difficile QCD-76w55</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile QCD-76w55</Synonym>
+        <Synonym>Peptoclostridium difficile QCD-76w55</Synonym>
+        <EquivalentName>Clostridium difficile str. QCD-76w55</EquivalentName>
+        <EquivalentName>Clostridium difficile strain QCD-76w55</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2007/10/24 14:22:07</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2007/11/01 18:00:09</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>479833</TaxId>
+    <ScientificName>Clostridioides difficile QCD-97b34</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile QCD-97b34</Synonym>
+        <Synonym>Peptoclostridium difficile QCD-97b34</Synonym>
+        <EquivalentName>Clostridium difficile str. QCD-97b34</EquivalentName>
+        <EquivalentName>Clostridium difficile strain QCD-97b34</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2007/10/24 14:22:07</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2007/11/01 18:00:09</PubDate>
+</Taxon>
+<Taxon>
+    <TaxId>479834</TaxId>
+    <ScientificName>Clostridioides difficile QCD-37x79</ScientificName>
+    <OtherNames>
+        <Synonym>Clostridium difficile QCD-37x79</Synonym>
+        <Synonym>Peptoclostridium difficile QCD-37x79</Synonym>
+        <EquivalentName>Clostridium difficile str. QCD-37x79</EquivalentName>
+        <EquivalentName>Clostridium difficile strain QCD-37x79</EquivalentName>
+    </OtherNames>
+    <ParentTaxId>1496</ParentTaxId>
+    <Rank>strain</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Clostridia; Peptostreptococcales; Peptostreptococcaceae; Clostridioides; Clostridioides difficile</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186801</TaxId>
+            <ScientificName>Clostridia</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3082720</TaxId>
+            <ScientificName>Peptostreptococcales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>186804</TaxId>
+            <ScientificName>Peptostreptococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1870884</TaxId>
+            <ScientificName>Clostridioides</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1496</TaxId>
+            <ScientificName>Clostridioides difficile</ScientificName>
+            <Rank>species</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>2007/10/24 14:22:07</CreateDate>
+    <UpdateDate>2022/01/12 18:22:52</UpdateDate>
+    <PubDate>2007/11/01 18:00:09</PubDate>
+</Taxon>
+
+</TaxaSet>
