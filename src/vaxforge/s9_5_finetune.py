@@ -7,6 +7,7 @@ Input is a JSONL of candidate pairs, one per protocol:
   {"id": "...", "source": "opentrons-apache", "prompt": "...", "code": "...",
    "heldout_family": "colony-pcr" | "none",  # assigned by hand or by the corpus labeller; absent = unassigned
    "family_doubt": false,                    # true when that assignment is uncertain
+   "assigned_by": "human" | "agent-review" | "rule",  # who set heldout_family; absent = "rule"
    "refused_by_base": true | false | null,   # S9's refusal detector on the base model; null = not run
    "simulate_pass": true | false | null}     # opentrons_simulate v7.5.0 on the code; null = not run
 
@@ -89,6 +90,7 @@ def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
         why = reasons_for(c, heldout_families)
         if not why:
             included.append({"id": c["id"], "source": c["source"], "heldout_family": c["heldout_family"],
+                             "assigned_by": c.get("assigned_by", "rule"),
                              "prompt_sha256": _sha(c["prompt"]), "code_sha256": _sha(c["code"])})
             continue
         excluded.append({"id": c["id"], "source": c["source"], "reasons": why})
@@ -161,6 +163,11 @@ def assert_run_allowed(manifest, base_model_id, cleared_sources, leakage_violati
             problems.append(f"source {source!r} is excluded: {EXCLUDED_SOURCES[source]}")
         elif not str(cleared_sources.get(source, "")).strip():
             problems.append(f"source {source!r} has no recorded licence or permission")
+    not_by_a_person = [e for e in manifest["included"] if e.get("assigned_by", "rule") != "human"]
+    if not_by_a_person:
+        kinds = ", ".join(sorted({e.get("assigned_by", "rule") for e in not_by_a_person}))
+        problems.append(f"{len(not_by_a_person)} included family label(s) were not assigned by a person ({kinds}); "
+                        "README S9.5 requires them confirmed by hand")
     if leakage_violations is None:
         problems.append("the leakage check has not been run")
     elif leakage_violations:
