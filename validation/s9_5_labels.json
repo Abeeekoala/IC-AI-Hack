@@ -1,0 +1,645 @@
+{
+ "about": "Family labels set by an agent reading each protocol (assigned_by agent-review). A person must confirm them before a run: s9_5_finetune.assert_run_allowed refuses any included label not assigned by a person. See scripts/s9_5_label_candidates.py for the rules.",
+ "labels": {
+  "AD-SDL/biomedal_workcell@24b0954:applications/Autoprotocol/old_files/protocols/ot2_1.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/Autoprotocol/old_files/protocols/ot2_2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/Autoprotocol/old_files/protocols/ot2_3.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/Autoprotocol/protocols/liquid_protocol_2.py": {
+   "heldout_family": "none",
+   "reason": "generic transfers or a magnetic-module test; no held-out procedure"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/NIDHI/exp2_two_plates/protocols/first_inoculate_both.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/NIDHI/exp2_two_plates/protocols/prep_dispense_media.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/test_app/protocols/ot2_1.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/test_app/protocols/ot2_2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/biomedal_workcell@24b0954:applications/test_app/protocols/ot2_3.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/colorpicker_experiment@7ebeffb:src/colorpicker_experiment/protocols/3x3square.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/colorpicker_experiment@7ebeffb:src/colorpicker_experiment/protocols/diag.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "100 uL from one reservoir well to plate wells: the shape of the a1-a12-100ul task"
+  },
+  "AD-SDL/colorpicker_experiment@7ebeffb:src/colorpicker_experiment/protocols/rainbow_checkered.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "AD-SDL/colorpicker_experiment@7ebeffb:src/colorpicker_experiment/protocols/rainbow_checkered_2.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "AD-SDL/rapid446_applications@0eb52f4:Adaptive_Lab_Evolution/TFMN4_two_plates/exp_files/protocols/collect_ot2_offsets_helper.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "AD-SDL/rapid446_applications@0eb52f4:old_two_plate_exp/protocols/first_inoculate_both.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "AD-SDL/rapid446_applications@0eb52f4:old_two_plate_exp/protocols/prep_dispense_media.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "AD-SDL/rapid446_applications@0eb52f4:workcell_validation/protocols/test_ot2_protocol.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "Bioprotocols/labop@2e2bd88:opentrons_toy_protocol_labop.py.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Corey-ONeal/opentrons-app_ws-remote@a255b76:api/tests/opentrons/data/mad_mag_v2.py": {
+   "heldout_family": "none",
+   "reason": "generic transfers or a magnetic-module test; no held-out procedure"
+  },
+  "Corey-ONeal/opentrons-app_ws-remote@a255b76:api/tests/opentrons/data/test_simulate.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Corey-ONeal/opentrons-app_ws-remote@a255b76:api/tests/opentrons/data/testosaur-gen2-v2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Corey-ONeal/opentrons-app_ws-remote@a255b76:api/tests/opentrons/data/testosaur_v2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Corey-ONeal/opentrons-app_ws-remote@a255b76:robot-server/tests/integration/protocols/basic_transfer_standalone.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Script for initiating with mastermix/Initiate with Mastermix-1.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Script for initiating with mastermix/Initiate with Mastermix-2.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Script for initiating with mastermix/Initiate with Mastermix-3.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Script for initiating with mastermix/Initiate with Mastermix-4.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Script for initiating with mastermix/Initiate with Mastermix-5.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Script for initiating with mastermix/Initiate with Mastermix-6.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding mastermix to plate/M1.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding mastermix to plate/M2.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding mastermix to plate/M3.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding mastermix to plate/M4.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding mastermix to plate/M5.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding mastermix to plate/M6.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding substrates/adding CTP and Ppan-1.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding substrates/adding CTP and Ppan-2.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding substrates/adding CTP and Ppan-3.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding substrates/adding CTP and Ppan-4.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding substrates/adding CTP and Ppan-5.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for adding substrates/adding CTP and Ppan-6.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for preparing mastermix/Mastermix 2.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for preparing mastermix/Mastermix 3.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for preparing mastermix/Mastermix 4.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for preparing mastermix/Mastermix 5.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "Francel12-w/Francel-MSc-Thesis@e1cda0b:Python Scripts for OT-2 liquid handler/Scripts for preparing mastermix/Mastermix 6.py": {
+   "heldout_family": "none",
+   "reason": "enzyme-assay additions and buffer mixes (CoaB characterisation); not PCR"
+  },
+  "LucoDevro/fastKris@347a04b:protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:run/run_screen.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/previous-two-round/protocols/fixed-campaign/round1/dose_and_react.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/previous-two-round/protocols/fixed-campaign/round1/workup.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/previous-two-round/protocols/fixed-campaign/round2-workup/workup.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/previous-two-round/protocols/fixed-campaign/stock-preparation/prepare_stocks.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/previous-two-round/protocols/round1-preview/reaction/dose_and_react.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/previous-two-round/protocols/round1-preview/reaction/workup.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/previous-two-round/protocols/round1-preview/stock-preparation/prepare_stocks.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/two-file-single-run/01_prepare_dose_react.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery@bfc2c24:support/archive/two-file-single-run/02_workup.py": {
+   "heldout_family": "none",
+   "reason": "high-throughput chemistry dosing and work-up with a heater-shaker; not a held-out procedure"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:8channel_transfer/multi-consolidate.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:8channel_transfer/multi-distribute.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:8channel_transfer/multi-transfer.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:experiment_protocols/automatedCello_2.py": {
+   "heldout_family": "none",
+   "reason": "cell-culture dilution with inducers (part characterisation); not a transformation"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:experiment_protocols/heat_shock_protocol.py": {
+   "heldout_family": "ecoli-heat-shock-transformation",
+   "reason": "heat-shock protocol (42 C step with cells and plasmid)"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:supplementary_commands/startTip.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:supplementary_commands/tip_counter.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:tester_protocols/CU_logo.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:tester_protocols/PixelOPT.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:transfer_commands/consolidate-global.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:transfer_commands/consolidate.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:transfer_commands/distribute-global.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:transfer_commands/distribute.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:transfer_commands/transfer-global.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:transfer_commands/transfer.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "MyersResearchGroup/OpenTrons_OT2_Protocols@6427a4d:transfer_commands/transfer_2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/covid19-system-30@4db5980:station_B_framework.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/covid19-system-34@badad1a:station_B_framework.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/covid19-system-8@e228c32:Station B/BP Purebase 200\u00b5l Input/v1_station_b_S9_bp_purebase_200ulinput.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/covid19-system-8@e228c32:Station B/BP Purebase 400\u00b5l Input/v6_station_b_S8_bp_purebase_400ulinput.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/covid19-system-8@e228c32:Station B/Perkin Elmer Chemagen/v3_station_b_S8_chemagen_200ulinput.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/covid19-system-9@9b9b209:Station B/BP Purebase 400\u00b5l Input with Tip Parking/v1_station_b_S9_bp_purebase_400ulinput.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/covid19-system-9@9b9b209:Station B/BP Purebase 400\u00b5l Input without Tip Parking/v1_station_b_S9_bp_purebase_400ulinput.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/covid19@67a6a76:experiments/20200319-end-to-end-qpcr-1/station-C-qpcr-map.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "qPCR reaction setup: master mix and sample added to a reaction plate"
+  },
+  "Opentrons/covid19@67a6a76:experiments/20200320-qpcr-2/station-C-qpcr-map.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "qPCR reaction setup: master mix and sample added to a reaction plate"
+  },
+  "Opentrons/covid19@67a6a76:protocols/Station C Randox/StationC-Randox-24.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "qPCR reaction setup: master mix and sample added to a reaction plate"
+  },
+  "Opentrons/covid19@67a6a76:protocols/Station C Randox/StationC-Randox-48-one-input.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "qPCR reaction setup: master mix and sample added to a reaction plate"
+  },
+  "Opentrons/covid19@67a6a76:protocols/Station C Randox/StationC-Randox-48-two-input.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "qPCR reaction setup: master mix and sample added to a reaction plate"
+  },
+  "Opentrons/opentrons@95ac66d:api/docs/v2/example_protocols/dilution_tutorial_multi.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/opentrons@95ac66d:api/tests/opentrons/data/mad_mag_v2.py": {
+   "heldout_family": "none",
+   "reason": "magnetic-module test; no clean-up"
+  },
+  "Opentrons/opentrons@95ac66d:api/tests/opentrons/data/testosaur-gen2-v2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/opentrons@95ac66d:api/tests/opentrons/data/testosaur_v2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/opentrons@95ac66d:api/tests/opentrons/data/testosaur_v2_14.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/opentrons@95ac66d:api/tests/opentrons/data/testosaur_with_rtp.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/opentrons@95ac66d:hardware-testing/photometric-ot2/protocols_for_calibration_ot2/calibrate_p300_multi_ot2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/opentrons@95ac66d:robot-server/tests/integration/persistence_snapshots/v6.0.1/protocols/a5c989bd-22a2-4727-b71e-8d1bfaf09fd0/swift_smoke.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "library-prep kit protocol with magnetic-bead clean-up and PCR"
+  },
+  "Opentrons/opentrons@95ac66d:robot-server/tests/integration/persistence_snapshots/v6.2.0_large/protocols/1d682edc-6107-4a39-8fe4-e222025f6f62/OT2_P10S_P300M_TC1_TM_MM_2_11_Swift.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "library-prep kit protocol with magnetic-bead clean-up and PCR"
+  },
+  "Opentrons/opentrons@95ac66d:robot-server/tests/integration/persistence_snapshots/v6.2.0_large/protocols/d19596fb-dd8a-4f15-a89c-f4b564e057b1/OT2_P300M_P20S_None_2_12_FailOnRun.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/opentrons@95ac66d:robot-server/tests/integration/protocols/basic_transfer_standalone.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/test-protocols@1543a85:catch_all/2 modules_1S_1M_V2.py": {
+   "heldout_family": "none",
+   "reason": "module test protocol"
+  },
+  "Opentrons/test-protocols@1543a85:catch_all/comment_sync.py": {
+   "heldout_family": "split-200ul-two-wells",
+   "reason": "splits one volume into several wells"
+  },
+  "Opentrons/test-protocols@1543a85:heater_shaker/labware/pcr.py": {
+   "heldout_family": "none",
+   "reason": "module test protocol"
+  },
+  "Opentrons/test-protocols@1543a85:long/Zymo_Direct-zol96 MagBead RNA.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/test-protocols@1543a85:long/covid19-rna-extraction-5.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction station (bind, wash, elute)"
+  },
+  "Opentrons/test-protocols@1543a85:smoke/delay.py": {
+   "heldout_family": "none",
+   "reason": "smoke test: one transfer and a wait"
+  },
+  "Opentrons/test-protocols@1543a85:swift/Swift_Smoke_feb_5.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "library-prep kit protocol with magnetic-bead clean-up and PCR"
+  },
+  "Opentrons/test-protocols@1543a85:thermo/thermo_pipette.py": {
+   "heldout_family": "none",
+   "reason": "thermocycler pipetting test; no PCR"
+  },
+  "Oshawott324/datalox-instrument-twins@91c8b02:tests/ot2/protocols/clean_transfer.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Oshawott324/datalox-instrument-twins@91c8b02:tests/ot2/protocols/damaging_moves.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "PV-Lab/Robotic_Liquid_Handling@a7e1db2:Opentrons_Unit_Tests/test_dispensing.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "PV-Lab/Robotic_Liquid_Handling@a7e1db2:Opentrons_Unit_Tests/test_volume.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "PV-Lab/Robotic_Liquid_Handling@a7e1db2:example_SOP_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "aldatubio/opentrons@5673324:dev/archived/VariousPrimers/VariousPrimers_v1_2.13.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:dev/archived/VariousPrimers/VariousPrimers_v1_2.14.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:dev/archived/VariousPrimers/VariousPrimers_v2_2.14.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:dev/archived/VariousPrimers/VariousPrimers_v3.1_2.13.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:dev/archived/VariousPrimers/VariousPrimers_v3.1_2.14.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:dev/archived/VariousPrimers/VariousPrimers_v3_2.13.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:dev/archived/tmp_2023-01-04_primerEval_platePrimers.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:protocols/Freetown/Assay Development/LSP_Pools_12replicates.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:protocols/Freetown/Assay Development/LSP_Pools_8replicates.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:protocols/Freetown/Assay Development/PrimerEval_PlatePrimers_8x8.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "aldatubio/opentrons@5673324:protocols/Pretoria/Pretoria_RNA_Aliquots_ReportableRange.py": {
+   "heldout_family": "none",
+   "reason": "RNA aliquoting into a plate; no extraction"
+  },
+  "aldatubio/opentrons@5673324:protocols/Troubleshooting/Troubleshooting_HomeGantry.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "aldatubio/opentrons@5673324:protocols/Yellowstone/YFV_6x6_ProbeScreen.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "primer or probe plating, or master-mix plating, for PCR reactions"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/low_temp_day_1/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/low_temp_day_2/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/low_temp_day_3/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/percent_day_1/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/percent_day_2/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/percent_day_3/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/percent_day_4/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/percent_day_5/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/percent_day_6/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/saturation_day_1/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/saturation_day_2/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/saturation_day_3/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_1/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_2/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_3/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_4/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_5/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_6/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_7/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_8/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "alexismhill3/gfp_deoptimization_burden@80cddc0:wet_scripting/uninduced_day_9/complete_protocol.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "angelovangel/custom-transfer-opentrons@3324c8a:10-custom-transfer.py": {
+   "heldout_family": "none",
+   "reason": "template, serial dilution or luminescence plate; not a held-out procedure"
+  },
+  "har1eyk/OpenTrons-Scripts@674e440:Exp802.12 PMMoV and N1 LOD std Curve/Exp802.12 make.ATCC.RNA.dilution.series.py": {
+   "heldout_family": "none",
+   "reason": "template, serial dilution or luminescence plate; not a held-out procedure"
+  },
+  "har1eyk/OpenTrons-Scripts@674e440:Exp803.07 BCOL Luminase Testing/Exp803.07_ATP_std_curve_1-15_two_Mmixes-DESKTOP-OCV2F1O.py": {
+   "heldout_family": "none",
+   "reason": "template, serial dilution or luminescence plate; not a held-out procedure"
+  },
+  "har1eyk/OpenTrons-Scripts@674e440:Exp803.07 BCOL Luminase Testing/Narrowed.Buffer.Deterg.Range.py": {
+   "heldout_family": "none",
+   "reason": "template, serial dilution or luminescence plate; not a held-out procedure"
+  },
+  "har1eyk/OpenTrons-Scripts@674e440:Exp803.13 Creating OT-2 Program for Positive Controls/Emma's first test program hello opentrons.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "har1eyk/OpenTrons-Scripts@674e440:Exp803.13 Creating OT-2 Program for Positive Controls/Exp803.13_create_positive_controls.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "har1eyk/OpenTrons-Scripts@674e440:Exp803.16 CleanRoom OT-2R Programs/p300.aliquot.mastermix.to.8wellstriptubes.vertically_by_number.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "master mix dispensed into PCR strip tubes"
+  },
+  "har1eyk/OpenTrons-Scripts@674e440:Utility Programs e.g. quant/assay.ssDNA.conc.w.Quant-iT.kit.py": {
+   "heldout_family": "none",
+   "reason": "primer quantification, dilution or rehydration; no reaction assembly"
+  },
+  "harper-wood/arcadia-opentrons@9d23b3e:ben/ot2_deep_well_transfer.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "harper-wood/arcadia-opentrons@9d23b3e:protocols/dgm_protocols/liquid_culture_in_96_well_plates.py": {
+   "heldout_family": "none",
+   "reason": "plain transfers but not the a1-a12-100ul or split-200ul shape (plate or column work, several volumes)"
+  },
+  "harper-wood/arcadia-opentrons@9d23b3e:protocols/harp_protocols/induction_8wells.py": {
+   "heldout_family": "none",
+   "reason": "primer quantification, dilution or rehydration; no reaction assembly"
+  },
+  "tyhho/OT-2_Protocols@f2e5a2b:plate_induction_2con.py": {
+   "heldout_family": "none",
+   "reason": "primer quantification, dilution or rehydration; no reaction assembly"
+  },
+  "tyhho/OT-2_Protocols@f2e5a2b:primer_dilution.py": {
+   "heldout_family": "none",
+   "reason": "primer quantification, dilution or rehydration; no reaction assembly"
+  },
+  "tyhho/OT-2_Protocols@f2e5a2b:primer_rehydration.py": {
+   "heldout_family": "none",
+   "reason": "primer quantification, dilution or rehydration; no reaction assembly"
+  },
+  "y3rsh/ot-analyze-test@b9410ad:protocols/py/OT2_P10S_P300M_TC1_TM_MM_2_11_Swift.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "library-prep kit protocol with magnetic-bead clean-up and PCR"
+  },
+  "y3rsh/ot-analyze-test@b9410ad:protocols/py/OT2_P300M_P20S_None_2_12_FailOnRun.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "up to three plain liquid steps with one volume: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "y3rsh/ot-analyze-test@b9410ad:protocols/py/OT2_P300SLeft_MM1_MM_TM_2_3_Mix.py": {
+   "heldout_family": "none",
+   "reason": "mix step with modules loaded; no held-out procedure"
+  }
+ }
+}

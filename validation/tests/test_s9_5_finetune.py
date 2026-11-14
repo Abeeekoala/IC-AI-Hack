@@ -134,7 +134,7 @@ def test_cli_writes_the_manifest_and_the_training_file(tmp_path, capsys):
     src.write_text("\n".join(json.dumps(c) for c in [cand("a"), cand("b", heldout_family="golden-gate")]) + "\n")
     out, train = tmp_path / "m.json", tmp_path / "t.jsonl"
     assert ft.main([str(src), "--out", str(out), "--training-out", str(train), "--min-rows", "1"]) == 0
-    assert json.loads(out.read_text())["counts"] == {"candidates": 2, "included": 1, "excluded": 1}
+    assert json.loads(out.read_text())["counts"] == {"candidates": 2, "included": 1, "excluded": 1, "included_synthetic": 0}
     assert [json.loads(l) for l in train.read_text().splitlines()] == [{"prompt": "prompt a", "completion": "code a"}]
     assert "1 of 2 candidates included" in capsys.readouterr().out
     src.write_text("{oops\n")

@@ -1,0 +1,389 @@
+{
+ "about": "Family labels set by an agent reading each library protocol (assigned_by agent-review); a person must confirm them. Rules: scripts/s9_5_label_library.py.",
+ "labels": {
+  "Opentrons/Protocols@2f447c9:00a577/extraction.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:0175a4/0175a4.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:02pnzp/02pnzp.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:04eeb1-part-2/04eeb1-part-2.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:04eeb1-part-3/04eeb1-part-3.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:04eeb1-part-4/04eeb1-part-4.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:04eeb1-part-5/04eeb1-part-5.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:04eeb1-part-6/04eeb1-part-6.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:04eeb1-part-7/04eeb1-part-7.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:04eeb1/04eeb1.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0556be-bmda/0556be-bmda.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0556be-covid-mm-qc/0556be-covid-mm-qc.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0556be-covid-ntc/0556be-covid-ntc.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:0cded6-amplify/amplify.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0cded6-amplify2/amplify2.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0cded6-cleanup/cleanup.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:0cded6-synthesize/synthesize.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0cded6-tagment/tagment.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0cded6/anneal.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:0fdc01/pcr.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:10bf60-station-B/extraction.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-10/111210-part-10.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-2/111210-part-2.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-3/111210-part-3.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-4/111210-part-4.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-5/111210-part-5.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-6/111210-part-6.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-7/111210-part-7.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-8/111210-part-8.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:111210-part-9/111210-part-9.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:111210/111210.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:1ccd23-station-B/extraction.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:1f96ca-part-2/1f96ca-part-2.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:2905a4/2905a4.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:2aee74-48-2/olink.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:2aee74-96-2/olink.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:2c62b7/2c62b7.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:33y0f3/33y0f3.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:37190e/cell_culture.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:37ffa5/37ffa5.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:43163c/43163c.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:441cc8/441cc8.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:4920bc/extraction.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:4b4a80-pcr_enrichment/4b4a80-pcr_enrichment.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:4b4a80-size_selection/4b4a80-size_selection.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:4fa62e/4fa62e.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:4fc750/extraction.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:5689f5/ngs_prep.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:6d3eda/6d3eda.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:6d7fc3-part-2/6d7fc3-part-2.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:6d7fc3-part-3/6d7fc3-part-3.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:6d7fc3-part-4/6d7fc3-part-4.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:6d7fc3-part-5/6d7fc3-part-5.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:6d7fc3-part-6/6d7fc3-part-6.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:6d7fc3-part-7/6d7fc3-part-7.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:6d7fc3/6d7fc3.py": {
+   "heldout_family": "colony-pcr-screening",
+   "reason": "assembles PCR, cDNA or library-prep reactions (master mix, primers or indexes, template) for thermocycling"
+  },
+  "Opentrons/Protocols@2f447c9:74841a-2/extraction.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:74841a/extraction.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:7805de-part-2/7805de-part-2.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:7805de-part-3/7805de-part-3.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:7805de-part-4/7805de-part-4.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:796af8/796af8.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:7e4c3e-2/7e4c3e-2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:7e4c3e-3/7e4c3e-3.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:7e4c3e-4/7e4c3e-4.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:7e4c3e-5/7e4c3e-5.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:batch-test-plating/batch-test-plating.py": {
+   "heldout_family": "ecoli-heat-shock-transformation",
+   "reason": "bacterial plating with a temperature step; treated as the transformation procedure when in doubt"
+  },
+  "Opentrons/Protocols@2f447c9:bc-rnadvance-viral/beckman_viral.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:covid19-rna-extraction/extraction.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:dinosaur/dinosaur.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:dynabeads_plate_prep_1/dynabeads_IP_96well.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:dynabeads_plate_prep_2/dynabeads_IP_96well_2.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:generic_ngs_prep/generic_ngs_prep.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:heater-shaker-beta/heater-shaker-beta.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:onsite_galatea_mag_bind/onsite_galatea_mag_bind.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:promega-maxwell/promega-maxwell.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-bead-based-elisa-for-sars-cov-2-surrogate-virus-neutralization-test/sci-bead-based-elisa-for-sars-cov-2-surrogate-virus-neutralization-test.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-dynabeads-ip-1/sci-dynabeads-ip-1.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-dynabeads-ip-2/sci-dynabeads-ip-2.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-dynabeads-tube-1/Dynabeads_IP_96well.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-dynabeads-tube-2/Dynabeads_IP_96well.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-lucif-assay2-for4/sci-lucif-assay2-for4.py": {
+   "heldout_family": "a1-a12-100ul",
+   "reason": "at most four plain steps: the shape of the a1-a12-100ul / split-200ul tasks"
+  },
+  "Opentrons/Protocols@2f447c9:sci-lucif-assay3-for4/sci-lucif-assay3-for4.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-macherey-nagel-nucleomag/sci-macherey-nagel-nucleomag.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-mag-bind-blood-tissue-kit/sci-mag-bind-blood-tissue-kit.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-mgi-mgieasy-nucleic-acid-extraction-kit/sci-mgi-mgieasy-nucleic-acid-extraction-kit.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-omegabiotek-magbind-temp/sci-omegabiotek-magbind.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-omegabiotek-magbind-total-rna-96/sci-omegabiotek-magbind-total-rna-96.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-omegabiotek-magbind/sci-omegabiotek-magbind.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-pierce-ninta-magnetic-beads-part-2/sci-pierce-ninta-magnetic-beads-part-2.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-pierce-ninta-magnetic-beads/sci-pierce-ninta-magnetic-beads.py": {
+   "heldout_family": "ampure-bead-cleanup",
+   "reason": "magnetic-bead clean-up, size selection or bead capture (NGS clean-up, bead immunoprecipitation)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-promega-magazorb-dna-mini-prep-kit/sci-promega-magazorb-dna-mini-prep-kit.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-thermofisher-magmax/extraction.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-zymo-directzol-magbead/sci-zymo-directzol-magbead.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:sci-zymo-quick-dna-rna-magbead/sci-zymo-quick-dna-rna-magbead.py": {
+   "heldout_family": "opentrons-rna-extraction",
+   "reason": "magnetic-bead nucleic-acid extraction or purification kit (bind, wash, elute)"
+  },
+  "Opentrons/Protocols@2f447c9:user-upload_ZooMS_Protocol/ZooMS_Protocol.py": {
+   "heldout_family": "none",
+   "reason": "does not perform a held-out procedure (an extension assay, culture, toxicity assay, encapsulation, a module test, protein digestion)"
+  }
+ }
+}
