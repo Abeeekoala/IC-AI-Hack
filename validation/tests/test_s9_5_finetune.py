@@ -13,7 +13,8 @@ HELD = {"colony-pcr", "golden-gate"}
 
 def cand(i, **kw):
     c = {"id": i, "source": "opentrons-apache", "prompt": f"prompt {i}", "code": f"code {i}",
-         "heldout_family": "none", "family_doubt": False, "refused_by_base": False, "simulate_pass": True}
+         "heldout_family": "none", "family_doubt": False, "assigned_by": "human", "refused_by_base": False,
+         "simulate_pass": True}
     c.update(kw)
     return c
 
@@ -98,6 +99,26 @@ def test_the_guard_passes_only_when_everything_is_recorded():
         ft.assert_run_allowed(m, "org/model", cleared, ["leak"])
     with pytest.raises(ft.RunNotAllowed, match="no recorded licence"):
         ft.assert_run_allowed(m, "org/model", {"opentrons-apache": "  "}, [])
+
+
+def test_the_manifest_records_who_assigned_each_label_and_defaults_to_the_rule_labeller():
+    absent = cand("b")
+    del absent["assigned_by"]
+    m = ft.build_manifest([cand("a"), cand("c", assigned_by="agent-review"), absent], HELD, min_rows=1)
+    assert {e["id"]: e["assigned_by"] for e in m["included"]} == {"a": "human", "c": "agent-review", "b": "rule"}
+
+
+def test_the_guard_refuses_labels_that_no_person_assigned_and_names_who_did():
+    cleared = {"opentrons-apache": "Apache-2.0, repository LICENSE"}
+    m = ft.build_manifest([cand("a"), cand("b", assigned_by="agent-review"), cand("c", assigned_by="rule")], HELD, min_rows=1)
+    with pytest.raises(ft.RunNotAllowed, match=r"2 included family label\(s\) were not assigned by a person \(agent-review, rule\)"):
+        ft.assert_run_allowed(m, "org/model", cleared, [])
+    for e in m["included"]:
+        e["assigned_by"] = "human"
+    ft.assert_run_allowed(m, "org/model", cleared, [])
+    del m["included"][0]["assigned_by"]  # a manifest from before the field existed does not pass either
+    with pytest.raises(ft.RunNotAllowed, match="1 included family label"):
+        ft.assert_run_allowed(m, "org/model", cleared, [])
 
 
 def test_the_guard_refuses_an_excluded_source_even_if_someone_records_a_clearance():

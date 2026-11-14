@@ -22,7 +22,7 @@ INSTRUCTION = ("Distribute 100 ul of the master mix from well A1 of the reservoi
 def cand(i, prompt=None):
     return {"id": i, "source": "opentrons-apache", "prompt": prompt or f"unrelated prompt number {i} " + "word " * 15,
             "code": f"def run(protocol): pass  # {i} " + "filler " * 15, "heldout_family": "none",
-            "family_doubt": False, "refused_by_base": False, "simulate_pass": True}
+            "family_doubt": False, "assigned_by": "human", "refused_by_base": False, "simulate_pass": True}
 
 
 def fake_transport(sent):
