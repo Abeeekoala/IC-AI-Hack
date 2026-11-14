@@ -171,13 +171,6 @@ def assert_run_allowed(manifest, base_model_id, cleared_sources, leakage_violati
 
 STAGE = "s9_5"
 
-try:  # inside the package: tell the artifact contract which payload key this stage must write
-    from .artifacts import register_payload_keys
-    register_payload_keys(STAGE, ("fine_tune",))
-except ImportError:  # run as a script
-    pass
-
-
 def _not_run_reasons(store, config):
     reasons = []
     missing = [s for s in ("s8", "s9") if not store.has(s)]
