@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE TaxaSet PUBLIC "-//NLM//DTD Taxon, 14th January 2002//EN" "https://www.ncbi.nlm.nih.gov/entrez/query/DTD/taxon.dtd">
+<TaxaSet><Taxon>
+    <TaxId>482</TaxId>
+    <ScientificName>Neisseria</ScientificName>
+    <OtherNames>
+        <Synonym>&quot;Merismopedia&quot; Zopf 1885</Synonym>
+        <Synonym>Gonococcus</Synonym>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>&quot;Gonococcus&quot; Lindau 1898</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>Neisseria Trevisan 1885</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>misspelling</ClassCDE>
+            <DispName>Nesseira</DispName>
+        </Name>
+    </OtherNames>
+    <ParentTaxId>481</ParentTaxId>
+    <Rank>genus</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Pseudomonadati; Pseudomonadota; Betaproteobacteria; Neisseriales; Neisseriaceae</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>3379134</TaxId>
+            <ScientificName>Pseudomonadati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1224</TaxId>
+            <ScientificName>Pseudomonadota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>28216</TaxId>
+            <ScientificName>Betaproteobacteria</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>206351</TaxId>
+            <ScientificName>Neisseriales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>481</TaxId>
+            <ScientificName>Neisseriaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>1995/02/27 09:24:00</CreateDate>
+    <UpdateDate>2018/11/23 14:35:28</UpdateDate>
+    <PubDate>1993/04/26 01:00:00</PubDate>
+</Taxon>
+
+</TaxaSet>

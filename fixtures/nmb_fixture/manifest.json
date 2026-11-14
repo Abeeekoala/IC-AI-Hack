@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-11-14T16:14:13Z",
+  "run_id": "nmb_fixture",
+  "stages": {
+    "s0": {
+      "artifact": "s0_taxonomy.json",
+      "digest": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s1": {
+      "artifact": "s1_acquire.json",
+      "digest": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 0
+    },
+    "s2": {
+      "artifact": "s2_annotate.json",
+      "digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 1
+    }
+  },
+  "vaxforge_version": "0.1.0"
+}

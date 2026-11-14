@@ -1,0 +1,263 @@
+<?xml version="1.0" ?>
+<!DOCTYPE TaxaSet PUBLIC "-//NLM//DTD Taxon, 14th January 2002//EN" "https://www.ncbi.nlm.nih.gov/entrez/query/DTD/taxon.dtd">
+<TaxaSet><Taxon>
+    <TaxId>1280</TaxId>
+    <ScientificName>Staphylococcus aureus</ScientificName>
+    <OtherNames>
+        <Synonym>Micrococcus aureus</Synonym>
+        <Synonym>Micrococcus pyogenes</Synonym>
+        <Synonym>Staphylococcus aureus subsp. anaerobius</Synonym>
+        <Synonym>Staphylococcus pyogenes aureus</Synonym>
+        <Synonym>Staphylococcus pyogenes citreus</Synonym>
+        <Includes>Staphylococcus aureus subsp. aureus</Includes>
+        <Includes>Staphylococcus sp. CCUG 17621</Includes>
+        <Includes>Staphylococcus sp. Fddn_Aq4</Includes>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>&quot;Micrococcus aureus&quot; (Rosenbach 1884) Zopf 1885</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>&quot;Micrococcus pyogenes&quot; Lehmann and Neumann 1896</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>&quot;Staphlococcus (sic) pyogenes citreus&quot; Passet 1885</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>&quot;Staphylococcus pyogenes aureus&quot; Rosenbach 1884</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>&quot;Staphylococcus pyogenes citreus&quot; Passet 1985</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>Staphylococcus aureus Rosenbach 1884 (Approved Lists 1980)</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>Staphylococcus aureus Rosenbach 1884 (Approved Lists 1980) emend. Madhaiyan et al. 2020</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>Staphylococcus aureus subsp. anaerobius De La Fuente et al. 1985</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>authority</ClassCDE>
+            <DispName>Staphylococcus aureus subsp. aureus (Rosenbach 1884) De La Fuente et al. 1985</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>ATCC 12600</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>ATCC 12600-U</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>ATCC 35844</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>ATCC:12600</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>ATCC:12600-U</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>ATCC:35844</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CCM 885</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CCM:885</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CCUG 1800</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CCUG 37246</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CCUG:1800</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CCUG:37246</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CIP 103780</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CIP 65.8</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CIP:103780</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>CIP:65.8</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>DSM 20231</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>DSM 20714</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>DSM:20231</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>DSM:20714</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>HAMBI 66</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>HAMBI:66</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>JCM 20624</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>JCM:20624</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NBRC 100910</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NBRC:100910</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCAIM B.01065</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCCB 72047</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCCB:72047</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCDO 949</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCDO:949</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCTC 08532</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCTC 8532</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>NCTC:8532</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>personal::MVF-7</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>type material</ClassCDE>
+            <DispName>strain MVF-7</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>misspelling</ClassCDE>
+            <DispName>Staphilococcus aureus</DispName>
+        </Name>
+        <Name>
+            <ClassCDE>misspelling</ClassCDE>
+            <DispName>Staphylococus aureus</DispName>
+        </Name>
+    </OtherNames>
+    <ParentTaxId>1279</ParentTaxId>
+    <Rank>species</Rank>
+    <Division>Bacteria</Division>
+    <GeneticCode>
+        <GCId>11</GCId>
+        <GCName>Bacterial, Archaeal and Plant Plastid</GCName>
+    </GeneticCode>
+    <MitoGeneticCode>
+        <MGCId>0</MGCId>
+        <MGCName>Unspecified</MGCName>
+    </MitoGeneticCode>
+    <Lineage>cellular organisms; Bacteria; Bacillati; Bacillota; Bacilli; Caryophanales; Staphylococcaceae; Staphylococcus</Lineage>
+    <LineageEx>
+        <Taxon>
+            <TaxId>131567</TaxId>
+            <ScientificName>cellular organisms</ScientificName>
+            <Rank>cellular root</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>2</TaxId>
+            <ScientificName>Bacteria</ScientificName>
+            <Rank>domain</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1783272</TaxId>
+            <ScientificName>Bacillati</ScientificName>
+            <Rank>kingdom</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1239</TaxId>
+            <ScientificName>Bacillota</ScientificName>
+            <Rank>phylum</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>91061</TaxId>
+            <ScientificName>Bacilli</ScientificName>
+            <Rank>class</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1385</TaxId>
+            <ScientificName>Caryophanales</ScientificName>
+            <Rank>order</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>90964</TaxId>
+            <ScientificName>Staphylococcaceae</ScientificName>
+            <Rank>family</Rank>
+        </Taxon>
+        <Taxon>
+            <TaxId>1279</TaxId>
+            <ScientificName>Staphylococcus</ScientificName>
+            <Rank>genus</Rank>
+        </Taxon>
+    </LineageEx>
+    <CreateDate>1995/02/27 09:24:00</CreateDate>
+    <UpdateDate>2026/05/19 14:26:48</UpdateDate>
+    <PubDate>1993/07/26 01:00:00</PubDate>
+</Taxon>
+
+</TaxaSet>

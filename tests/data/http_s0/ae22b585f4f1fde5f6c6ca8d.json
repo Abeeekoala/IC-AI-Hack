@@ -1,0 +1,7 @@
+{
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=taxonomy&retmax=20&retmode=json&term=%22Neisseria%22%5BAll+Names%5D",
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=UTF-8"
+  }
+}

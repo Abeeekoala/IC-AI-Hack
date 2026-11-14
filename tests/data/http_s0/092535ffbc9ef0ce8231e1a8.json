@@ -1,0 +1,7 @@
+{
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/espell.fcgi?db=taxonomy&term=zzqx+notanorganism",
+  "status": 200,
+  "headers": {
+    "content-type": "text/xml; charset=UTF-8"
+  }
+}

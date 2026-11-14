@@ -1,0 +1,7 @@
+{
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=taxonomy&retmax=0&retmode=json&term=txid1496%5BSubtree%5D",
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=UTF-8"
+  }
+}

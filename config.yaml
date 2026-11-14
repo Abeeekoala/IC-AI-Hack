@@ -1,0 +1,104 @@
+# VaxForge configuration (README section 5).
+# Each stream edits ONLY its own section.  Relative paths resolve against this file's folder.
+# Write floats with a dot (1.0e-5, not 1e-5) so PyYAML and the built-in reader agree.
+
+# ======================================================================== shared (README)
+pipeline:
+  top_k: 20                         # candidates carried into S7 (CLI --top-k overrides)
+
+thresholds:                         # stream B
+  protegenicity: [0.90, 0.85]       # always report both
+  allergenicity: 0.45               # AlgPred 2.0
+  toxicity: 0.80                    # ToxinPred2
+  conservancy_identity: 0.80
+
+epitopes:                           # stream B
+  bcell_tool: bepipred-3.0          # never 2.0
+  mhc_class_ii_weight: 0.3          # down-weighted deliberately
+
+structure:                          # stream B
+  engine: boltz-2                   # MIT; do not switch to AF3 weights
+  refolder: [esmfold, af2-no-msa]
+
+reproducibility:                    # stream D
+  seed: 20261114
+  pin_versions: true
+
+# ======================================================================== stream A
+paths:
+  cache_dir: cache                  # gitignored; shared by every run
+  runs_dir: runs                    # gitignored
+
+cache:
+  max_age_days: null                # null = never expire (reproducible). Set e.g. 90 to refresh quarterly.
+
+network:
+  offline: false                    # true = cache only, never touch the network (or VAXFORGE_OFFLINE=1)
+  user_agent: "vaxforge/0.1 (hackathon research prototype)"
+  timeout_s: 60
+  retries: 3
+  backoff_s: 1.5
+  ncbi:
+    tool: vaxforge
+    email: null                     # NCBI asks for one: export NCBI_EMAIL=... (do not commit it)
+    api_key: null                   # export NCBI_API_KEY=... lifts the limit from 3 to 10 requests/s
+
+taxonomy:                           # S0
+  search_retmax: 20
+  genus_candidates: 15              # species listed when the name is a genus
+  fuzzy: true                       # UniProt word search for old names / abbreviations
+  aliases: {}                       # extra "alias": "Scientific name" pairs
+
+acquire:                            # S1
+  proteome:
+    upid: auto                      # auto = UniProt reference proteome, or pin e.g. UP000000425
+    fasta: null                     # path to your own protein FASTA (skips UniProt)
+  comparison:                       # second strain, used by S4 conservancy
+    enabled: true
+    upid: auto
+  vfdb:
+    enabled: true                   # skipped automatically for non-bacteria
+    set: A                          # A = experimentally verified core set, B = full set
+    url_A: "http://www.mgc.ac.cn/VFs/Down/VFDB_setA_pro.fas.gz"
+    url_B: "http://www.mgc.ac.cn/VFs/Down/VFDB_setB_pro.fas.gz"
+  protegen:                         # experimentally verified protective antigens (needed by stream D)
+    enabled: true
+    category: all                   # all | bacterium | virus | parasite | fungus
+    index_url: "https://violinet.org/protegen/download/index.php"
+  human:                            # S4 autoimmunity screen
+    enabled: true
+    upid: UP000005640
+    reviewed_only: true             # Swiss-Prot entries only (about 20k sequences)
+  iedb:                             # large (hundreds of MB); off by default
+    enabled: false
+    url: "https://www.iedb.org/downloader.php?file_name=doc/mhc_ligand_full_single_file.zip"
+  blastdb: true                     # run makeblastdb on the downloaded FASTA files
+
+annotate:                           # S2
+  vfdb:
+    blast_evalue: 1.0e-3            # report weak hits too; calling a hit "virulence" uses the thresholds below
+    max_hits: 5
+    max_evalue: 1.0e-5              # ASSUMED defaults (README gives none) - tune and report them
+    min_identity: 30.0
+    min_query_coverage: 50.0
+    strong_identity: 50.0
+    strong_query_coverage: 80.0
+    threads: 0                      # 0 = all CPUs
+  psortb:
+    mode: auto                      # auto | docker | native | import | "off"  (quote "off": YAML reads a bare off as false)
+    gram: auto                      # auto (from S0 lineage) | negative | positive | archaea | positive_with_outer_membrane | negative_without_outer_membrane
+    image: "brinkmanlab/psortb_commandline:1.0.2"
+    timeout_s: 7200
+  accessibility:                      # engineering judgement, not a literature claim
+    Extracellular: accessible
+    OuterMembrane: accessible
+    Cellwall: accessible
+    CytoplasmicMembrane: partial
+    Periplasmic: inaccessible
+    Cytoplasmic: inaccessible
+    Unknown: unknown
+
+tools:
+  blast_bin_dir: null               # folder containing blastp / makeblastdb (default: PATH, or BLAST_BIN)
+  docker: docker
+  blast_image: "ncbi/blast:2.16.0"

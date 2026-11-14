@@ -1,0 +1,7 @@
+{
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=562&retmode=xml",
+  "status": 200,
+  "headers": {
+    "content-type": "text/xml; charset=UTF-8"
+  }
+}
