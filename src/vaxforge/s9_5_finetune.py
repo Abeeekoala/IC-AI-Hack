@@ -111,10 +111,23 @@ def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
     }
 
 
+def candidate_task_id(candidate_id):
+    """The task id a candidate goes by in tasks.jsonl and generations.jsonl. A candidate's own id is repo@commit:path,
+    which the generation client refuses: a task id becomes a file name."""
+    return "cand-" + _sha(candidate_id)[:20]
+
+
+def candidate_tasks(candidates):
+    """tasks.jsonl rows for the refusal filter: every candidate's prompt, as split "candidate"."""
+    return [{"task_id": candidate_task_id(c["id"]), "family": None, "split": "candidate", "prompt": c["prompt"]}
+            for c in candidates]
+
+
 def apply_refusals(candidates, generations, refused):
     """Copies of the candidates with refused_by_base filled in from the base arm's generations.
 
-    generations are rows of generations.jsonl; only split "candidate" and arm "base" count. refused(text, code,
+    generations are rows of generations.jsonl made from candidate_tasks (task_id is candidate_task_id of the candidate's
+    id); only split "candidate" and arm "base" count. refused(text, code,
     finish_reason) is S9's refusal detector. A reply cut off by max_tokens is a failed attempt, not a refusal. A
     candidate with no generation keeps refused_by_base as it was (null excludes it from the manifest). A generation
     made for a different prompt is an error: the flag has to describe the prompt that would be trained on."""
@@ -122,7 +135,7 @@ def apply_refusals(candidates, generations, refused):
     out = []
     for c in candidates:
         c = dict(c)
-        g = rows.get(c["id"])
+        g = rows.get(candidate_task_id(c["id"]))
         if g is not None:
             if g["prompt_sha256"] != _sha(c["prompt"]):
                 raise ValueError(f"candidate {c['id']!r}: the base-model reply was generated for a different prompt")
@@ -214,26 +227,76 @@ def _validation_module(name):
     return module
 
 
+def _name_value(text):
+    name, sep, value = text.partition("=")
+    if not sep or not name or not value:
+        raise ValueError(f"{text!r} is not NAME=VALUE")
+    return name, value
+
+
+def _decoding_field(text):
+    name, value = _name_value(text)
+    try:
+        return name, json.loads(value)
+    except ValueError:
+        raise ValueError(f"{text!r}: the value after = must be JSON (a number, true, or an object)") from None
+
+
+def generate_main(argv=None):
+    """`vaxforge finetune generate`: the command line of s9_5_generate.generate, which itself prints nothing."""
+    from . import s9_5_generate
+    ap = argparse.ArgumentParser(prog="vaxforge finetune generate", description="Sample each task once per arm (pass@1)")
+    ap.add_argument("tasks", help="tasks.jsonl, from `vaxforge finetune tasks`")
+    ap.add_argument("--endpoint", required=True, help="OpenAI-compatible base URL ending in /v1, e.g. http://127.0.0.1:8081/v1")
+    ap.add_argument("--arm", action="append", required=True, metavar="ARM=MODEL",
+                    help="an arm (base or finetune) and the model name the endpoint serves for it; repeat for more arms")
+    ap.add_argument("--max-tokens", type=int, required=True)
+    ap.add_argument("--decoding", action="append", default=[], metavar="NAME=JSON",
+                    help='another decoding field, e.g. temperature=0.7 or chat_template_kwargs={"enable_thinking":false}; '
+                         "default temperature 0; repeat for more")
+    ap.add_argument("--workers", type=int, default=1, help="requests in flight at once (default 1)")
+    ap.add_argument("--extra", action="append", default=[], metavar="KEY=VALUE",
+                    help="provenance for the manifest, e.g. adapter_sha256=...; never the endpoint key")
+    ap.add_argument("--out", required=True, help="output directory; calls into the same directory accumulate")
+    args = ap.parse_args(argv)
+    try:
+        decoding = {"max_tokens": args.max_tokens, **dict(map(_decoding_field, args.decoding))}
+        summary = s9_5_generate.generate(
+            s9_5_generate.load_tasks(args.tasks), dict(map(_name_value, args.arm)), args.endpoint, decoding, args.out,
+            extra=dict(map(_name_value, args.extra)), workers=args.workers)
+    except (s9_5_generate.GenerationError, ValueError, OSError) as e:
+        print(f"s9_5_generate: {e}", file=sys.stderr)
+        return 1
+    print(json.dumps(summary))
+    return 0
+
+
 def _command(name):
     def go(args):
         if name == "manifest":
             return main(args.rest)
+        if name == "generate":
+            return generate_main(args.rest)
         try:
-            module = _validation_module({"check": "leakage_check", "winrate": "winrate"}[name])
+            module = _validation_module({"check": "leakage_check", "winrate": "winrate", "tasks": "t2wl_adapter",
+                                         "grade": "t2wl_adapter"}[name])
         except ValueError as e:
             print(f"error: {e}", file=sys.stderr)
             return 1
-        return module.main(args.rest)
+        return module.main([name] + args.rest if name in ("tasks", "grade") else args.rest)
     return go
 
 
 def register_cli(subparsers, common):
-    """`vaxforge finetune manifest|check|winrate ...`: each passes its arguments to that tool's own CLI.
-    Exit codes follow the tool: check returns 2 on violations, winrate 3 on a refusal red flag."""
-    p = subparsers.add_parser("finetune", parents=[common], help="S9.5 tools: training manifest, leakage check, win rate")
+    """`vaxforge finetune manifest|check|tasks|generate|grade|winrate ...`: each passes its arguments to that tool's
+    own CLI. Exit codes follow the tool: check returns 2 on violations, winrate 3 on a refusal red flag."""
+    p = subparsers.add_parser("finetune", parents=[common], help="S9.5 tools: manifest, leakage check, evaluation, win rate")
     sub = p.add_subparsers(dest="finetune_command", required=True)
     for name, text in (("manifest", "build the audited training manifest"),
                        ("check", "adversarial leakage check of a manifest (validation/leakage_check.py)"),
+                       ("tasks", "write tasks.jsonl for the held-out tasks (validation/t2wl_adapter.py)"),
+                       ("generate", "sample each task once per arm from an OpenAI-compatible server (s9_5_generate.py)"),
+                       ("grade", "grade generations with Text2WetLab's layers (validation/t2wl_adapter.py)"),
                        ("winrate", "pairwise win rate, fine-tune vs base (validation/winrate.py)")):
         q = sub.add_parser(name, help=text, add_help=False)  # --help reaches the tool's own parser
         q.add_argument("rest", nargs=argparse.REMAINDER)

@@ -660,6 +660,106 @@ def test_the_adapter_uses_only_python_3_8_syntax_and_the_standard_library():
 
 # ---- real protocols through Text2WetLab's layers (need a clone and opentrons 7.5.0) ---------------------------------
 
+# ---- heldout_tasks and the command line (pure: a made-up checkout) -----------------------------------------------------
+
+def checkout_with(tmp_path, tasks):
+    """tasks: {task_id: (instruction text, paper text or None)} laid out as Text2WetLab does."""
+    for task_id, (instruction, paper) in tasks.items():
+        folder = tmp_path / "tasks" / task_id
+        folder.mkdir(parents=True)
+        (folder / "instruction.md").write_text(instruction, encoding="utf-8")
+        if paper is not None:
+            (folder / "environment" / "data").mkdir(parents=True)
+            (folder / "environment" / "data" / "paper.txt").write_text(paper, encoding="utf-8")
+    return tmp_path
+
+
+def families_file(tmp_path, families):
+    path = tmp_path / "families.json"
+    path.write_text(json.dumps({"source": "test", "families": families}), encoding="utf-8")
+    return path
+
+
+SIMPLE = "# 100 \u00b5L to A1\n\nWrite a protocol.\n"
+CITES = "# From the paper\n\nIts text is at **`/data/paper.txt`** (read-only).\n"
+
+
+def test_the_prompt_is_the_instruction_unchanged_and_the_paper_follows_where_the_instruction_cites_it(tmp_path):
+    clone = checkout_with(tmp_path / "t2wl", {"easy": (SIMPLE, None), "paper-task": (CITES, "PAPER TEXT\nline two\n")})
+    tasks, skipped = ad.heldout_tasks(clone, families_file(tmp_path, {"easy": ["easy"], "paper": ["paper-task"]}))
+    assert skipped == []
+    assert tasks[0] == {"task_id": "easy", "family": "easy", "split": "heldout", "prompt": SIMPLE}
+    assert tasks[1]["prompt"] == CITES + "\n## The text of `/data/paper.txt`\n\nPAPER TEXT\nline two\n"
+    assert tasks[1]["family"] == "paper" and tasks[1]["split"] == "heldout"
+
+
+def test_a_task_whose_paper_is_not_in_the_checkout_is_skipped_and_named_not_run_blind(tmp_path):
+    clone = checkout_with(tmp_path / "t2wl", {"easy": (SIMPLE, None), "hard": (CITES, None)})
+    tasks, skipped = ad.heldout_tasks(clone, families_file(tmp_path, {"fam": ["easy", "hard"]}))
+    assert [t["task_id"] for t in tasks] == ["easy"]
+    assert skipped == [("hard", "its instruction cites /data/paper.txt and the clone does not have it")]
+
+
+def test_tasks_come_out_in_the_families_files_order_and_load_into_the_generation_client(tmp_path):
+    sys.path.insert(0, str(ROOT / "src"))
+    from vaxforge import s9_5_generate
+    clone = checkout_with(tmp_path / "t2wl", {"b": (SIMPLE, None), "a": (SIMPLE, None), "c": (SIMPLE, None)})
+    tasks, _ = ad.heldout_tasks(clone, families_file(tmp_path, {"z": ["b", "a"], "y": ["c"]}))
+    assert [(t["task_id"], t["family"]) for t in tasks] == [("b", "z"), ("a", "z"), ("c", "y")]
+    path = tmp_path / "tasks.jsonl"
+    path.write_text("".join(json.dumps(t) + "\n" for t in tasks), encoding="utf-8")
+    assert s9_5_generate.load_tasks(path) == tasks
+
+
+def test_a_missing_instruction_or_an_unsafe_task_id_is_an_adapter_error(tmp_path):
+    clone = checkout_with(tmp_path / "t2wl", {"easy": (SIMPLE, None)})
+    with pytest.raises(ad.AdapterError, match="Text2WetLab checkout"):
+        ad.heldout_tasks(clone, families_file(tmp_path, {"fam": ["easy", "absent"]}))
+    with pytest.raises(ad.AdapterError, match="unsafe task id"):
+        ad.heldout_tasks(clone, families_file(tmp_path, {"fam": ["../easy"]}))
+
+
+def test_the_real_families_file_names_the_eleven_tasks_the_readme_counts():
+    assert sorted(t for ts in json.loads(ad.FAMILIES_FILE.read_text())["families"].values() for t in ts) == TASKS and len(TASKS) == 11
+
+
+def test_tasks_command_writes_the_file_and_says_what_it_skipped(tmp_path, capsys):
+    clone = checkout_with(tmp_path / "t2wl", {"easy": (SIMPLE, None), "hard": (CITES, None)})
+    fams = families_file(tmp_path, {"fam": ["easy", "hard"]})
+    assert ad.main(["tasks", str(clone), "--families", str(fams), "--out", str(tmp_path / "tasks.jsonl")]) == 0
+    out = capsys.readouterr()
+    assert "1 tasks written" in out.out and "skipped hard" in out.err
+    assert [json.loads(line)["task_id"] for line in (tmp_path / "tasks.jsonl").read_text().splitlines()] == ["easy"]
+
+
+def test_grade_command_writes_records_and_the_full_grades_beside_them(tmp_path, monkeypatch, capsys):
+    generations = tmp_path / "generations.jsonl"
+    rows = [{"task_id": "a1-a12-100ul", "family": "a1-a12-100ul", "split": "heldout", "arm": arm, "code": "x = 1",
+             "text": "x = 1", "finish_reason": "stop"} for arm in ("base", "finetune")]
+    generations.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+    passing = {"task_id": "a1-a12-100ul", "arm": "finetune", "simulate_pass": True, "rule_violations": 0, "gt_diff": 2, "failed_checks": ["end_state:plate"]}
+    failing = {"task_id": "a1-a12-100ul", "arm": "base", "simulate_pass": False, "rule_violations": None, "gt_diff": None, "failed_checks": ["lint"]}
+    seen = {}
+    monkeypatch.setattr(ad, "grade_rows", lambda path, **kw: seen.update(kw) or [failing, passing])
+    out = tmp_path / "records.jsonl"
+    assert ad.main(["grade", str(generations), "--clone", "CLONE", "--out", str(out), "--grader-python", "/py"]) == 0
+    assert seen == {"clone": "CLONE", "grader_python": "/py"}
+    records = {r["model"]: r for r in map(json.loads, out.read_text().splitlines())}
+    assert records["base"]["simulate_pass"] is False and records["finetune"]["gt_diff"] == 2
+    assert json.loads((tmp_path / "records.grades.json").read_text()) == [failing, passing]
+    text = capsys.readouterr().out
+    assert "base" in text and "FAIL" in text and "(lint)" in text and "2 records written" in text
+
+
+def test_grade_command_reports_a_broken_setup_without_a_traceback(tmp_path, capsys, monkeypatch):
+    generations = tmp_path / "generations.jsonl"
+    generations.write_text("", encoding="utf-8")
+    monkeypatch.delenv(ad.OT_PYTHON_ENV, raising=False)
+    assert ad.main(["grade", str(generations), "--clone", str(tmp_path), "--out", str(tmp_path / "r.jsonl")]) == 0  # nothing to grade needs no interpreter
+    assert ad.main(["grade", str(tmp_path / "absent.jsonl"), "--clone", str(tmp_path), "--out", str(tmp_path / "r.jsonl")]) == 1
+    assert "t2wl_adapter:" in capsys.readouterr().err
+
+
 CLONE = os.environ.get("T2WL_CLONE", "")
 needs_t2wl = pytest.mark.skipif(
     not (CLONE and Path(CLONE, "tasks").is_dir() and os.environ.get(ad.OT_PYTHON_ENV)

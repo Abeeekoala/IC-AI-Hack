@@ -7,6 +7,8 @@ import io
 import json
 import ssl
 import sys
+import threading
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -741,3 +743,63 @@ def test_nothing_is_printed_while_a_run_goes(tmp_path, capsys, monkeypatch):
     go(tmp_path / "out", Fake(default=answer()))
     out = capsys.readouterr()
     assert out.out == "" and out.err == ""
+
+
+# ---- workers: requests in flight ------------------------------------------------------------------------------------
+
+def test_workers_put_that_many_requests_in_flight_at_once(tmp_path):
+    gate = threading.Barrier(2, timeout=10)  # passes only when a second request is in flight too
+
+    def both_at_once(request):
+        gate.wait()
+        return answer()
+    fake = Fake(default=both_at_once)
+    summary = go(tmp_path / "out", fake, tasks=TASKS[:1], workers=2)  # one task, two arms: two requests
+    assert summary == {"recorded": 2, "skipped": 0, "rows": 2}
+    assert sorted(r["arm"] for r in rows(tmp_path / "out")) == ["base", "finetune"]
+
+
+def test_no_more_requests_than_workers_are_ever_in_flight_and_every_pair_is_recorded_once(tmp_path):
+    lock, state = threading.Lock(), {"now": 0, "most": 0}
+
+    def slow(request):
+        with lock:
+            state["now"] += 1
+            state["most"] = max(state["most"], state["now"])
+        time.sleep(0.02)
+        with lock:
+            state["now"] -= 1
+        return answer()
+    summary = go(tmp_path / "out", Fake(default=slow), workers=2)
+    assert summary == {"recorded": 6, "skipped": 0, "rows": 6}
+    assert 1 <= state["most"] <= 2
+    assert sorted((r["task_id"], r["arm"]) for r in rows(tmp_path / "out")) == sorted(
+        (t["task_id"], a) for t in TASKS for a in ARMS)
+
+
+def test_a_failed_request_stops_new_ones_but_the_one_in_flight_is_still_recorded(tmp_path):
+    release = threading.Timer(0.3, lambda: None)  # replaced below; the second request waits for this event
+    event = threading.Event()
+    release = threading.Timer(0.3, event.set)
+    release.start()
+
+    def by_pair(request):
+        prompt, model = request["json"]["messages"][0]["content"], request["json"]["model"]
+        if (prompt, model) == PAIRS[0]:
+            return (500, {"error": "boom"})
+        assert event.wait(10)  # held until the first request's failure has been seen
+        return answer()
+    fake = Fake(default=by_pair)
+    with pytest.raises(gen.GenerationError, match="HTTP 500"):
+        go(tmp_path / "out", fake, workers=2)
+    assert len(fake.calls) == 2  # the third pair was never asked for
+    assert [(r["task_id"], r["arm"]) for r in rows(tmp_path / "out")] == [("colony-pcr", "finetune")]
+    resumed = go(tmp_path / "out", Fake(default=answer()), workers=2)  # the failed pair is asked for again, the rest are not repeated
+    assert resumed["recorded"] == 5 and resumed["skipped"] == 1
+
+
+@pytest.mark.parametrize("workers", [0, -1, 1.5, True, "2", None])
+def test_workers_must_be_a_positive_integer(tmp_path, workers):
+    with pytest.raises(ValueError, match="workers"):
+        go(tmp_path / "out", Fake(default=answer()), workers=workers)
+    assert not (tmp_path / "out" / "generations.jsonl").exists()
