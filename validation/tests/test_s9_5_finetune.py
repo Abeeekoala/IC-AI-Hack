@@ -7,6 +7,7 @@ sys.path[:0] = [str(ROOT / "validation"), str(ROOT / "src")]
 
 import pytest  # noqa: E402
 from vaxforge import s9_5_finetune as ft  # noqa: E402
+from vaxforge import s9_5_generate  # noqa: E402
 
 HELD = {"colony-pcr", "golden-gate"}
 
@@ -141,7 +142,7 @@ def test_cli_writes_the_manifest_and_the_training_file(tmp_path, capsys):
 
 
 def gen(c, text="def run(protocol): pass", code="def run(protocol): pass", finish="stop", **kw):
-    row = {"task_id": c["id"], "split": "candidate", "arm": "base", "prompt_sha256": ft._sha(c["prompt"]),
+    row = {"task_id": ft.candidate_task_id(c["id"]), "split": "candidate", "arm": "base", "prompt_sha256": ft._sha(c["prompt"]),
            "text": text, "code": code, "finish_reason": finish}
     row.update(kw)
     return row
@@ -186,3 +187,71 @@ def test_the_refusal_chain_ends_in_the_probe_list():
     flagged = ft.apply_refusals([a, b], [gen(a), gen(b, text="I cannot.", code=None)], says_no)
     m = ft.build_manifest(flagged, HELD, min_rows=1)
     assert [e["id"] for e in m["included"]] == ["a"] and m["dropped_for_refusal"] == ["b"]
+
+
+# ---- vaxforge finetune generate ---------------------------------------------------------------------------------------
+
+ENDPOINT = "http://127.0.0.1:8081/v1"
+TASKS = [{"task_id": "colony-pcr", "family": "colony-pcr", "split": "heldout", "prompt": "Write the colony PCR protocol."},
+         {"task_id": "golden-gate", "family": "golden-gate", "split": "heldout", "prompt": "Write the Golden Gate protocol."}]
+
+
+def _tasks_file(tmp_path):
+    path = tmp_path / "tasks.jsonl"
+    path.write_text("".join(json.dumps(t) + "\n" for t in TASKS), encoding="utf-8")
+    return path
+
+
+def test_generate_builds_the_arms_decoding_and_provenance_from_the_command_line(tmp_path, monkeypatch, capsys):
+    seen = {}
+
+    def fake_generate(tasks, arms, endpoint, decoding, out_dir, **kw):
+        seen.update(tasks=tasks, arms=arms, endpoint=endpoint, decoding=decoding, out=out_dir, **kw)
+        return {"recorded": 1, "skipped": 0, "rows": 1}
+    monkeypatch.setattr(s9_5_generate, "generate", fake_generate)
+    code = ft.generate_main([str(_tasks_file(tmp_path)), "--endpoint", ENDPOINT, "--arm", "base=mlx/Qwen3.5-4B-4bit",
+                             "--arm", "finetune=mlx/Qwen3.5-4B-4bit", "--max-tokens", "8192", "--decoding", "top_p=0.8",
+                             "--decoding", 'chat_template_kwargs={"enable_thinking": false}', "--workers", "4",
+                             "--extra", "adapter_sha256=abc", "--out", str(tmp_path / "out")])
+    assert code == 0 and json.loads(capsys.readouterr().out) == {"recorded": 1, "skipped": 0, "rows": 1}
+    assert [t["task_id"] for t in seen["tasks"]] == ["colony-pcr", "golden-gate"]
+    assert seen["arms"] == {"base": "mlx/Qwen3.5-4B-4bit", "finetune": "mlx/Qwen3.5-4B-4bit"}
+    assert seen["decoding"] == {"max_tokens": 8192, "top_p": 0.8, "chat_template_kwargs": {"enable_thinking": False}}
+    assert seen["extra"] == {"adapter_sha256": "abc"} and seen["workers"] == 4 and seen["endpoint"] == ENDPOINT
+
+
+def test_generate_leaves_unnamed_decoding_fields_to_the_client_and_reports_bad_input_without_a_traceback(tmp_path, monkeypatch, capsys):
+    seen = {}
+    monkeypatch.setattr(s9_5_generate, "generate", lambda tasks, arms, endpoint, decoding, out_dir, **kw: seen.update(decoding=decoding) or {})
+    argv = [str(_tasks_file(tmp_path)), "--endpoint", ENDPOINT, "--arm", "base=m", "--max-tokens", "10", "--out", str(tmp_path / "o")]
+    assert ft.generate_main(argv) == 0 and seen["decoding"] == {"max_tokens": 10}  # temperature is left to its default of 0
+    capsys.readouterr()
+    assert ft.generate_main(argv + ["--decoding", "temperature=warm"]) == 1
+    assert "must be JSON" in capsys.readouterr().err
+    assert ft.generate_main(argv[:3] + ["--arm", "no-equals-sign"] + argv[5:]) == 1
+    assert "NAME=VALUE" in capsys.readouterr().err
+    assert ft.generate_main([str(tmp_path / "missing.jsonl")] + argv[1:]) == 1
+    assert "s9_5_generate:" in capsys.readouterr().err
+
+
+def test_the_finetune_command_lists_every_tool_and_routes_generate_here(monkeypatch):
+    import argparse
+    common = argparse.ArgumentParser(add_help=False)
+    parent = argparse.ArgumentParser()
+    ft.register_cli(parent.add_subparsers(dest="command"), common)
+    routed = []
+    monkeypatch.setattr(ft, "generate_main", lambda argv: routed.append(argv) or 0)
+    args = parent.parse_args(["finetune", "generate", "tasks.jsonl", "--endpoint", ENDPOINT])
+    assert args.func(args) == 0 and routed == [["tasks.jsonl", "--endpoint", ENDPOINT]]
+    for name in ("manifest", "check", "tasks", "generate", "grade", "winrate"):
+        assert parent.parse_args(["finetune", name, "x"]).finetune_command == name
+
+
+def test_candidate_tasks_use_ids_the_generation_client_accepts_even_for_repo_at_commit_path_ids(tmp_path):
+    ids = ["AD-SDL/biomedal_workcell@24b0954:applications/exp1/protocols/plate_prep.py", "b"]
+    tasks = ft.candidate_tasks([cand(i) for i in ids])
+    path = tmp_path / "tasks.jsonl"
+    path.write_text("".join(json.dumps(t) + "\n" for t in tasks), encoding="utf-8")
+    assert [t["prompt"] for t in s9_5_generate.load_tasks(path)] == ["prompt " + i for i in ids]  # none is refused as unsafe
+    assert {t["split"] for t in tasks} == {"candidate"} and len({t["task_id"] for t in tasks}) == 2
+    assert tasks[0]["task_id"] == ft.candidate_task_id(ids[0]) != ids[0]

@@ -34,6 +34,7 @@ import socket
 import ssl
 import time
 import urllib.parse
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -427,7 +428,7 @@ def _write_code(out, arm, task_id, code, *, only_if_missing):
 
 
 def generate(tasks, arms, endpoint, decoding, out_dir, *, extra=None, timeout=1800.0, max_attempts=3, backoff=2.0,
-             transport=None, sleep=time.sleep, now=None):
+             workers=1, transport=None, sleep=time.sleep, now=None):
     """Sample each (task, arm) pair once and record it in out_dir. Returns {"recorded", "skipped", "rows"}.
 
     tasks: dicts or load_tasks(path). arms: {arm name: model name the endpoint serves}, for example
@@ -437,9 +438,13 @@ def generate(tasks, arms, endpoint, decoding, out_dir, *, extra=None, timeout=18
     to the manifest. extra: JSON-able provenance for the manifest (model revision, adapter SHA-256, server version); it may
     gain keys between calls but a recorded value never changes, and it must not hold the endpoint key. timeout is the
     seconds one request may take; max_attempts counts tries at a pair that got no response, with exponential backoff.
+    workers is how many requests may be in flight at once. A server that batches (mlx_lm.server, vLLM) decodes them
+    together, which is much faster than one at a time on memory-bound hardware. Each pair is still sampled once and is
+    recorded as soon as it arrives, so rows land in the order they finish. A request that fails stops new ones from
+    starting; the ones already in flight are still recorded.
 
-    Tasks are walked in order with every arm inside each task, so a stopped run leaves balanced pairs. One process per
-    out_dir: nothing locks the directory."""
+    Tasks are walked in order with every arm inside each task, so a stopped run leaves balanced pairs (to within workers
+    - 1 of them). One process per out_dir: nothing locks the directory."""
     tasks, arms, decoding = _check_tasks(tasks), _arms(arms), _decoding(decoding)
     base_url, label = _endpoint(endpoint)
     if extra is not None and not isinstance(extra, dict):
@@ -452,6 +457,8 @@ def generate(tasks, arms, endpoint, decoding, out_dir, *, extra=None, timeout=18
         raise ValueError("max_attempts must be an integer of at least 1")
     if not _num(timeout) or timeout <= 0 or not _num(backoff) or backoff < 0:
         raise ValueError("timeout must be positive and backoff must not be negative")
+    if type(workers) is not int or workers < 1:
+        raise ValueError("workers must be an integer of at least 1")
     now = now or (lambda: datetime.now(timezone.utc))
     out = Path(out_dir)
     (out / "code").mkdir(parents=True, exist_ok=True)
@@ -460,27 +467,51 @@ def generate(tasks, arms, endpoint, decoding, out_dir, *, extra=None, timeout=18
     done = {(row["task_id"], row["arm"]): row for row in rows}
     url = base_url + "/chat/completions"
     recorded = skipped = 0
-    for task in tasks:
-        prompt_sha256 = hashlib.sha256(task["prompt"].encode("utf-8")).hexdigest()
-        for arm, model in arms.items():
-            prior = done.get((task["task_id"], arm))
-            if prior is not None:
-                if prior["split"] != task["split"] or prior["prompt_sha256"] != prompt_sha256:
-                    raise GenerationError(f"task {task['task_id']!r}, arm {arm!r} is already recorded with another split "
-                                          "or prompt; refusing to treat it as the same pair")
-                _write_code(out, arm, task["task_id"], prior.get("code"), only_if_missing=True)
-                skipped += 1
-                continue
-            started = _stamp(now())
-            text, finish_reason, prompt_tokens, completion_tokens, attempts = _complete(
-                url, model, task["prompt"], decoding, timeout=timeout, max_attempts=max_attempts, backoff=backoff,
-                transport=transport, sleep=sleep)
-            row = {"task_id": task["task_id"], "family": task["family"], "split": task["split"], "arm": arm,
-                   "served_model": model, "prompt_sha256": prompt_sha256, "text": text, "code": extract_code(text),
-                   "finish_reason": finish_reason, "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens,
-                   "attempts": attempts, "started_at_utc": started}
-            _append_row(out / GENERATIONS_FILE, row)  # the record comes first; the code file can always be rebuilt from it
-            _write_code(out, arm, task["task_id"], row["code"], only_if_missing=False)
-            done[(task["task_id"], arm)] = row
-            recorded += 1
+    inflight, failure = {}, None  # future -> what the row needs; the first failure, raised once the rest are recorded
+
+    def sample(task, model):
+        return _complete(url, model, task["prompt"], decoding, timeout=timeout, max_attempts=max_attempts,
+                         backoff=backoff, transport=transport, sleep=sleep)
+
+    def drain(limit):
+        """Record finished requests until at most limit are still in flight."""
+        nonlocal recorded, failure
+        while len(inflight) > limit:
+            finished, _ = wait(inflight, return_when=FIRST_COMPLETED)
+            for future in finished:
+                task, arm, model, prompt_sha256, started = inflight.pop(future)
+                try:
+                    text, finish_reason, prompt_tokens, completion_tokens, attempts = future.result()
+                except Exception as e:  # a pair that failed stays unrecorded; resuming asks for it again
+                    failure = failure or e
+                    continue
+                row = {"task_id": task["task_id"], "family": task["family"], "split": task["split"], "arm": arm,
+                       "served_model": model, "prompt_sha256": prompt_sha256, "text": text, "code": extract_code(text),
+                       "finish_reason": finish_reason, "prompt_tokens": prompt_tokens,
+                       "completion_tokens": completion_tokens, "attempts": attempts, "started_at_utc": started}
+                _append_row(out / GENERATIONS_FILE, row)  # the record comes first; the code file can always be rebuilt from it
+                _write_code(out, arm, task["task_id"], row["code"], only_if_missing=False)
+                done[(task["task_id"], arm)] = row
+                recorded += 1
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for task in tasks:
+            prompt_sha256 = hashlib.sha256(task["prompt"].encode("utf-8")).hexdigest()
+            for arm, model in arms.items():
+                if failure:
+                    break
+                prior = done.get((task["task_id"], arm))
+                if prior is not None:
+                    if prior["split"] != task["split"] or prior["prompt_sha256"] != prompt_sha256:
+                        failure = GenerationError(f"task {task['task_id']!r}, arm {arm!r} is already recorded with another "
+                                                  "split or prompt; refusing to treat it as the same pair")
+                        break
+                    _write_code(out, arm, task["task_id"], prior.get("code"), only_if_missing=True)
+                    skipped += 1
+                    continue
+                inflight[pool.submit(sample, task, model)] = (task, arm, model, prompt_sha256, _stamp(now()))
+                drain(workers - 1)
+        drain(0)
+    if failure:
+        raise failure
     return {"recorded": recorded, "skipped": skipped, "rows": len(done)}

@@ -73,6 +73,7 @@ What is counted
 """
 from __future__ import annotations
 
+import argparse
 import ast
 import collections
 import collections.abc
@@ -82,6 +83,7 @@ import re
 import shutil
 import signal
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -109,6 +111,8 @@ MAX_CODE_CHARS = 100_000  # the largest reference is about 15 000; difflib in th
 WINRATE_SPLITS = ("heldout", "probe")
 ARM_MODELS = {"base": "base", "finetune": "finetune"}
 _TASK_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\Z")
+FAMILIES_FILE = Path(__file__).resolve().with_name("heldout_families.json")
+PAPER_FILE = "/data/paper.txt"  # where a task's instruction tells the agent to read the paper
 
 
 class AdapterError(RuntimeError):
@@ -538,3 +542,79 @@ def build_records(generations_jsonl, grades, refused=stopgap_refusal, splits=WIN
                 record.update(rule_violations=grade["rule_violations"], gt_diff=grade["gt_diff"])
         records.append(record)
     return records
+
+
+# ---- the held-out tasks -> tasks.jsonl ---------------------------------------------------------------------------------
+
+def heldout_tasks(clone, families_file=FAMILIES_FILE):
+    """The held-out tasks as s9_5_generate.load_tasks takes them, and the ones that could not be built: (tasks, skipped).
+
+    The prompt is the task's instruction.md, unchanged, as Text2WetLab gives it to its agents. Where the instruction sends
+    the agent to /data/paper.txt, the paper's text follows under a heading that names the file: a model that cannot open
+    files has no other way to read it. A task whose instruction cites the paper but whose paper is not in the clone (the
+    E. coli hard task fetches it when its image is built) is not run without it: it is returned in skipped as
+    (task_id, reason). The families come from families_file (validation/heldout_families.json), in its order.
+    """
+    clone = Path(clone)
+    families = json.loads(Path(families_file).read_text(encoding="utf-8"))["families"]
+    tasks, skipped = [], []
+    for family, task_ids in families.items():
+        for task_id in task_ids:
+            if not _TASK_ID.match(task_id):
+                raise AdapterError(f"unsafe task id {task_id!r} in {families_file}")
+            folder = clone / "tasks" / task_id
+            try:
+                prompt = (folder / "instruction.md").read_text(encoding="utf-8")
+            except OSError as e:
+                raise AdapterError(f"{folder / 'instruction.md'} is not readable ({e.strerror}): is {clone} a Text2WetLab checkout?") from None
+            if PAPER_FILE in prompt:
+                paper = folder / "environment" / "data" / "paper.txt"
+                if not paper.is_file():
+                    skipped.append((task_id, f"its instruction cites {PAPER_FILE} and the clone does not have it"))
+                    continue
+                prompt = prompt.rstrip("\n") + f"\n\n## The text of `{PAPER_FILE}`\n\n" + paper.read_text(encoding="utf-8").strip("\n") + "\n"
+            tasks.append({"task_id": task_id, "family": family, "split": "heldout", "prompt": prompt})
+    return tasks, skipped
+
+
+# ---- command line ---------------------------------------------------------------------------------------------------
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog="vaxforge finetune", description="Text2WetLab held-out tasks and grading for S9.5")
+    sub = ap.add_subparsers(dest="command", required=True)
+    t = sub.add_parser("tasks", help="write tasks.jsonl for the held-out tasks from a Text2WetLab checkout")
+    t.add_argument("clone", help=f"Text2WetLab checkout at {T2WL_COMMIT[:7]}")
+    t.add_argument("--families", default=str(FAMILIES_FILE), help="held-out families JSON")
+    t.add_argument("--out", required=True, help="tasks.jsonl to write")
+    g = sub.add_parser("grade", help="grade generations.jsonl with Text2WetLab's own layers; write winrate.py's input")
+    g.add_argument("generations", help="generations.jsonl from `vaxforge finetune generate`")
+    g.add_argument("--clone", required=True, help=f"Text2WetLab checkout at {T2WL_COMMIT[:7]}")
+    g.add_argument("--out", required=True, help="records JSONL for `vaxforge finetune winrate`; the full grades go beside it")
+    g.add_argument("--grader-python", help=f"Python 3.10 with opentrons {OPENTRONS_VERSION} (default: ${OT_PYTHON_ENV})")
+    args = ap.parse_args(argv)
+    try:
+        if args.command == "tasks":
+            tasks, skipped = heldout_tasks(args.clone, args.families)
+            Path(args.out).write_text("".join(json.dumps(t, ensure_ascii=False) + "\n" for t in tasks), encoding="utf-8")
+            print(f"{len(tasks)} tasks written to {args.out}")
+            for task_id, why in skipped:
+                print(f"skipped {task_id}: {why}", file=sys.stderr)
+            return 0
+        grades = grade_rows(args.generations, clone=args.clone, grader_python=args.grader_python)
+        records = build_records(args.generations, grades)
+    except (AdapterError, ValueError, OSError) as e:
+        print(f"t2wl_adapter: {e}", file=sys.stderr)
+        return 1
+    out = Path(args.out)
+    out.write_text("".join(json.dumps(r) + "\n" for r in records), encoding="utf-8")
+    out.with_name(out.stem + ".grades.json").write_text(json.dumps(grades, indent=2) + "\n", encoding="utf-8")
+    for g in grades:
+        verdict = "pass" if g["simulate_pass"] else "FAIL"
+        print(f"{g['arm']:9s} {g['task_id']:40s} {verdict}  rule violations {g['rule_violations']}  diff {g['gt_diff']}"
+              + ("" if g["simulate_pass"] else f"  ({', '.join(g['failed_checks'])})"))
+    print(f"{len(records)} records written to {out}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
