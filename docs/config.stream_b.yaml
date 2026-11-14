@@ -1,0 +1,94 @@
+# ---- Stream B (S3-S7, "prediction core") ----------------------------------------------------------------------
+# Paste at the end of config.yaml. Generated from src/vaxforge/prediction/config.py:DEFAULTS (a test keeps the two in sync), so
+# every value is also the built-in default: deleting a key changes nothing.
+# Shared with Stream A and therefore NOT repeated here: thresholds, epitopes, structure, reproducibility (identical keys),
+# paths.cache_dir, network.offline, pipeline.top_k and tools.docker / tools.blast_image (mapped automatically).
+# `refdata:` and `tools:` below only ADD keys - if config.yaml already has a `tools:` section, merge these keys into it.
+refdata:
+  human_proteome: null
+  human_reviewed_only: true
+  conservancy_proteomes: []
+  iedb_human_ligands: null
+  afnd_frequencies: null
+  afnd_sample_sizes: null
+tools:
+  blast_mode: local
+  blast_docker_image: ncbi/blast:latest
+  blast_threads: 4
+  algpred2: null
+  toxinpred2: null
+  netmhcpan: null
+  netmhciipan: null
+  mhcflurry: null
+  bepipred3: null
+  discotope3: null
+  boltz: null
+  colabfold_batch: null
+s3:
+  backend: auto
+  organism_type: auto
+  vaxign_ml:
+    docker_image: e4ong1031/vaxign-ml:latest
+    use_sudo: false
+    processes: null
+    saved_model_dir: null
+    timeout_s: 14400
+    extra_docker_args: []
+  scores_file: null
+  weights: {protegenicity: 1.0, localisation: 0.0, virulence: 0.0}
+  fallback_weights: {localisation: 0.6, virulence: 0.4}
+  localisation_prior: {Extracellular: 1.0, OuterMembrane: 1.0, CellWall: 0.9, Periplasmic: 0.5, CytoplasmicMembrane: 0.4, Multiple: 0.5, Unknown: 0.5, Cytoplasmic: 0.0}
+  virulence: {min_identity: 0.3, min_coverage: 0.5, max_evalue: 1.0e-05}
+  holdout:
+    taxids: []
+    note: null
+  min_candidates: 30
+  max_candidates: 150
+  sanitize: {max_ambiguous_fraction: 0.05}
+s4:
+  on_unavailable: carry
+  rescue: []
+  human_homology: {enabled: true, evalue: 0.001, min_identity: 0.35, min_coverage: 0.5, shared_peptide_length: 9, ligand_recheck: true}
+  allergenicity: {enabled: true, model: 1}
+  toxicity: {enabled: true, model: 1}
+  conservancy: {enabled: true, evalue: 1.0e-05, min_coverage: 0.8, n_strains: 2, min_fraction_strains: 1.0, on_fail: reject}
+s5:
+  class_i:
+    backend: auto
+    panel: reference27
+    lengths: [8, 9, 10, 11]
+    strong_rank: 0.5
+    weak_rank: 2.0
+    alleles_per_call: 6
+  class_ii: {enabled: true, backend: netmhciipan, panel: reference26, length: 15, strong_rank: 1.0, weak_rank: 5.0, alleles_per_call: 4}
+  min_strong_alleles_promiscuous: 3
+  half_score_density: 5.0
+  bcell: {pred: vt_pred, threshold: 0.1512, chunk_size: 1000, chunk_overlap: 100, min_epitope_len: 5, merge_gap: 1, esm_dir: null}
+  conformational: {enabled: true, struc_type: alphafold, score_threshold: 0.9}
+  select: {max_class_i: 8, max_class_ii: 6, min_alleles: 2}
+  sanitize: {max_ambiguous_fraction: 0.05}
+s6:
+  modes: [class_i, class_ii, combined]
+  score_population: World
+  regions: [World, Central Africa, Central America, East Africa, East Asia, Europe, North Africa, North America, Northeast Asia, Oceania, South Africa, South America, South Asia, Southeast Asia, Southwest Asia, West Africa, West Indies]
+  fairness:
+    reference_population: Europe
+    budget_k: 10
+    budgets: [1, 2, 3, 5, 10]
+    mode: combined
+s7:
+  top_k: null
+  boltz:
+    accelerator: auto
+    msa: server
+    recycling_steps: 3
+    sampling_steps: 200
+    diffusion_samples: 1
+    use_potentials: false
+    timeout_s: 7200
+    max_residues: 1500
+    extra_args: []
+  esmfold: {mode: local, api_url: 'https://api.esmatlas.com/foldSequence/v1/pdb/', max_residues_api: 400}
+  conformational_on_boltz: true
+  final_weights: {s3: 0.4, tcell: 0.2, bcell: 0.1, coverage: 0.2, structure: 0.1}
+  plddt_floor_for_epitope_confidence: 70.0
