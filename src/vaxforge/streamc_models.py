@@ -76,6 +76,50 @@ class Candidate(BaseModel):
         return [e for e in self.epitopes if e.kind in kinds]
 
 
+# ---------------------------------------------------------------- S8 additions: reagent quantities, cost estimate
+
+QUANTITY_SOURCE = "S9 placeholder plan"
+
+
+class StepQuantity(BaseModel):
+    """One reagent volume that the S9 plan loads for an S8 step (volume loaded = volume drawn + dead volume).
+
+    A PLACEHOLDER: it follows from `s9_sessions.RobotParams`, whose every number is a coarse default, not from a kit insert or an SOP.
+    """
+
+    name: str
+    microlitres: int | float  # a whole number stays a whole number (the plan loads whole microlitres)
+    source: str = QUANTITY_SOURCE
+
+
+class CostItem(BaseModel):
+    """One line of a cost estimate: a quantity, and a price only where the user supplied one (never a default)."""
+
+    item: str  # key into `streamc.prices`: gene_synthesis, robot_session, tip:<rack>, labware:<load name>, reagent:<name>, animal
+    quantity: int | float
+    unit: str
+    unit_price: float | None = None  # per `unit`
+    currency: str | None = None
+    subtotal: float | None = None  # quantity x unit_price; None while unpriced
+
+
+class CostTotal(BaseModel):
+    currency: str
+    amount: float
+
+
+class CostEstimate(BaseModel):
+    """Quantities x user-supplied prices. `estimated` only when every item is priced; nothing is ever priced from a built-in table."""
+
+    status: Literal["not_estimated", "partial", "estimated"]
+    basis: str
+    items: list[CostItem] = Field(default_factory=list)
+    total: CostTotal | None = None  # only when status == "estimated"
+    priced_subtotal: CostTotal | None = None  # the sum of the priced items alone (None when none is priced); NOT a total while items are unpriced
+    unused_price_keys: list[str] | None = None  # stage-level estimate only: keys of the price table that match no item (usually a typo); None = not computed
+    note: str = ""
+
+
 # ---------------------------------------------------------------- directory names
 
 _WINDOWS_RESERVED = {"con", "prn", "aux", "nul", *(f"com{i}" for i in range(1, 10)), *(f"lpt{i}" for i in range(1, 10))}

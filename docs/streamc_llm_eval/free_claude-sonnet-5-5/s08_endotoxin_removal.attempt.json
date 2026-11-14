@@ -1,0 +1,56 @@
+{
+ "mode": "free",
+ "model": "claude-sonnet-5-5",
+ "session": "s08_endotoxin_removal",
+ "step_id": "s08",
+ "kind": "endotoxin_removal",
+ "outcome": "PASS",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-sonnet-5-5/s08_endotoxin_removal.py",
+ "code_sha256": "051b1c8adf114b1f8412e7f8d8807fb0bc8fcf9360c0b63df75060b73616fa52",
+ "grade": {
+  "verdict": "PASS",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [],
+  "reference_diff": null,
+  "n_events": 18,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 18,
+  "n_aspirate": 3,
+  "n_dispense": 3,
+  "n_pick_up_tip": 3,
+  "ul_aspirated": 150.0,
+  "n_pause": 1,
+  "n_comment": 2,
+  "n_banner_comments": 2,
+  "n_liquids_declared": 3,
+  "labware": [
+   "opentrons_96_tiprack_300ul",
+   "nest_96_wellplate_200ul_flat",
+   "nest_96_wellplate_200ul_flat"
+  ],
+  "modules": [],
+  "pipettes": [
+   "p300_single_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}

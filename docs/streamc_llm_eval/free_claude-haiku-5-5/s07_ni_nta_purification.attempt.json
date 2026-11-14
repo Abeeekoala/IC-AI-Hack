@@ -1,0 +1,60 @@
+{
+ "mode": "free",
+ "model": "claude-haiku-5-5",
+ "session": "s07_ni_nta_purification",
+ "step_id": "s07",
+ "kind": "ni_nta_purification",
+ "outcome": "PASS",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-haiku-5-5/s07_ni_nta_purification.py",
+ "code_sha256": "04261d342097780ba505a496ad70c65df99cf82a4c8fff0671aa2a8d39200807",
+ "grade": {
+  "verdict": "PASS",
+  "lint": [],
+  "sim_ok": true,
+  "sim_error": null,
+  "sim_error_kind": null,
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [],
+  "reference_diff": null,
+  "n_events": 69,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 69,
+  "n_aspirate": 13,
+  "n_dispense": 13,
+  "n_pick_up_tip": 9,
+  "ul_aspirated": 2300.0,
+  "n_pause": 2,
+  "n_comment": 9,
+  "n_banner_comments": 0,
+  "n_liquids_declared": 5,
+  "labware": [
+   "nest_96_wellplate_2ml_deep",
+   "opentrons_96_tiprack_300ul",
+   "opentrons_96_tiprack_300ul",
+   "nest_12_reservoir_15ml",
+   "nest_96_wellplate_100ul_pcr_full_skirt"
+  ],
+  "modules": [
+   "magnetic module gen2"
+  ],
+  "pipettes": [
+   "p300_single_gen2"
+  ],
+  "opentrons_version": "7.5.0"
+ }
+}

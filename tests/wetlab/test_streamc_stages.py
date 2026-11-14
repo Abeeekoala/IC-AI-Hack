@@ -30,7 +30,7 @@ from vaxforge.config import Config, ConfigError, load_config
 from vaxforge.fasta import read_fasta
 from vaxforge.s8_protocol import Candidate, Protocol, build_protocol, to_json, validate_protocol
 from vaxforge.s9_robot import RULES
-from vaxforge.s9_sessions import PLACEHOLDER_BANNER
+from vaxforge.s9_sessions import PLACEHOLDER_BANNER, RobotParams
 from vaxforge.s9_validate import find_ot_python, static_lint
 from vaxforge.s10_animal import ArmRole, StudyDesign, outstanding_human_inputs, validate_design
 from vaxforge.streamc_adapter import (
@@ -279,9 +279,19 @@ def test_s8_writes_one_protocol_per_candidate_on_the_contract(store):
         assert c["sequence_sha256"] == hashlib.sha256(fasta[c["candidate_id"]].encode()).hexdigest()
         assert c["length_aa"] == len(fasta[c["candidate_id"]]) and c["localisation"] == "OuterMembrane"
     first = load_inputs_from_store(store, cfg(proteins=["fhbp"])).candidates[0]
-    assert pl["candidates"][0]["protocol"] == build_protocol(first).model_dump(mode="json")  # the stage adds nothing to the template
+    # The stage adds only OPTIONAL fields to the template (cost, per-step quantities and narratives; tests/wetlab/test_s8_*.py): without them the
+    # protocol is exactly build_protocol's - steps, controls, gates, falsifier and all.
+    staged, template = pl["candidates"][0]["protocol"], build_protocol(first).model_dump(mode="json")
+    for body in (staged, template):
+        for key in ("cost", "cost_gbp_range", "estimate_basis"):
+            body.pop(key)
+        for step in body["steps"]:
+            for key in ("quantities", "narrative", "narrative_source"):
+                step.pop(key)
+    assert staged == template
     assert art.warnings == [STAND_IN_WARNING]
-    assert art.params == dict(proteins=["fhbp", "nada"], top_k=3, readouts=["elisa", "rt_qpcr"], endotoxin_limit_eu_per_ug=None)
+    assert art.params == dict(proteins=["fhbp", "nada"], top_k=3, readouts=["elisa", "rt_qpcr"], endotoxin_limit_eu_per_ug=None,
+                              robot_params=RobotParams().model_dump(mode="json"), prices={}, study={}, s8_backend="template", s8_model=None)  # what the added fields come from
     assert store.verify() == [] and store.read_artifact("s8").digest == art.digest
 
 
@@ -318,7 +328,7 @@ def test_the_streamc_section_of_config_yaml_holds_exactly_the_code_defaults(tmp_
     """config.yaml's `streamc:` section only documents the keys; every value must equal what the code does without it."""
     section = load_config(ROOT / "config.yaml").get("streamc")
     assert section == dict(proteins=None, top_k=3, readouts=["elisa", "rt_qpcr"], endotoxin_limit_eu_per_ug=None, backend="template", model=None,
-                           simulate_runs=True, s12_status="pending", robot_params={}, ot_python=None, study={})
+                           simulate_runs=True, s12_status="pending", robot_params={}, ot_python=None, study={}, prices={}, s8_backend="template", s8_model=None)
     with_section, without = copy_run(tmp_path / "a"), copy_run(tmp_path / "b")
     named = dict(proteins=["fhbp", "nada"])
     for module in (s8_protocol, s9_robot, s10_animal):  # S9 with the simulator switched off in BOTH (this test is not about simulating)

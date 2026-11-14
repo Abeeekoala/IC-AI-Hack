@@ -1,0 +1,50 @@
+{
+ "mode": "free",
+ "model": "claude-sonnet-5-5",
+ "session": "s11_antigen_stimulation",
+ "step_id": "s11",
+ "kind": "antigen_stimulation",
+ "outcome": "FAIL",
+ "refused": false,
+ "refusal_kind": null,
+ "refusal_detail": null,
+ "error": null,
+ "error_class": null,
+ "stop_reason": "end_turn",
+ "code_file": "free_claude-sonnet-5-5/s11_antigen_stimulation.py",
+ "code_sha256": "9c9b4eb85304f3af994b23dcc5378d206d953714ef49b1596b8a179177b39d5b",
+ "grade": {
+  "verdict": "FAIL",
+  "lint": [],
+  "sim_ok": false,
+  "sim_error": "ProtocolCommandFailedError: ProtocolCommandFailedError [line 10]: Error 4000 GENERAL_ERROR (ProtocolCommandFailedError): PythonException: FileNotFoundError: Labware \"opentrons_24_tube_rack_eppendorf_1.5ml_safelock_snapcap\" not found with version 1 in namespace \"opentrons\".",
+  "sim_error_kind": "ProtocolCommandFailedError",
+  "rule_counts": {
+   "tip_before_aspirate": 0,
+   "no_overdispense": 0,
+   "no_aspirate_from_empty_well": 0,
+   "tip_dropped_at_end": 0,
+   "no_cross_contamination": 0
+  },
+  "n_rule_violations": 0,
+  "findings": [],
+  "reference_diff": null,
+  "n_events": 0,
+  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+ },
+ "liquid": {
+  "n_events": 0,
+  "n_aspirate": 0,
+  "n_dispense": 0,
+  "n_pick_up_tip": 0,
+  "ul_aspirated": 0,
+  "n_pause": 0,
+  "n_comment": 0,
+  "n_banner_comments": 0,
+  "n_liquids_declared": 0,
+  "labware": [],
+  "modules": [],
+  "pipettes": [],
+  "opentrons_version": "7.5.0"
+ }
+}

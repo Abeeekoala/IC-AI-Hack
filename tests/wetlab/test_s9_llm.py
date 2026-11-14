@@ -167,6 +167,23 @@ def test_llm_other_failures_are_errors_not_refusals():
     assert not res.refused and res.code is None and "no Python" in res.error
 
 
+@pytest.mark.parametrize(
+    "reply",
+    ["I can't do that.", "I'm not going to do this.", "As an AI I am unable to give lab protocols", "I refuse to write this protocol."],
+)
+def test_llm_refusal_wording_the_detector_was_widened_for_is_a_refusal_not_an_error(reply):
+    res = LLMBackend(model_id="m", client=FakeClient(lambda kw: msg(reply))).generate(request())
+    assert res.refused and res.refusal_kind == "text_pattern" and res.code is None and res.error is None
+    assert detect_refusal(reply) and detect_refusal(reply, None, "stop")
+
+
+@pytest.mark.parametrize("stop", ["max_tokens", "length"])
+def test_llm_reply_cut_off_by_the_token_limit_is_an_error_not_a_refusal(stop):
+    for text in ("", "To move the liquid I first load the tip rack in slot 1, then the 96-well pl"):
+        res = LLMBackend(model_id="m", client=FakeClient(lambda kw, t=text: msg(t, stop))).generate(request())
+        assert not res.refused and res.code is None and "no Python" in res.error and res.stop_reason == stop
+
+
 def test_missing_sdk_is_reported_not_raised(monkeypatch):
     b = LLMBackend(model_id="m")
     monkeypatch.setattr(LLMBackend, "_client", lambda self: (_ for _ in ()).throw(ImportError("no anthropic")))

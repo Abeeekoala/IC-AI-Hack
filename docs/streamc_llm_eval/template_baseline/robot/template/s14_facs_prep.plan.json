@@ -1,0 +1,438 @@
+{
+ "session_id": "s14_facs_prep",
+ "title": "FACS staining-cocktail addition",
+ "covers": [
+  "s14"
+ ],
+ "modules": [],
+ "labware": [
+  {
+   "key": "tubes",
+   "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "slot": "2",
+   "module": null,
+   "label": "Staining cocktail",
+   "kind": "tubes"
+  },
+  {
+   "key": "cells",
+   "load_name": "nest_96_wellplate_200ul_flat",
+   "slot": "5",
+   "module": null,
+   "label": "Cells to stain (human-transferred)",
+   "kind": "plate"
+  },
+  {
+   "key": "tips_p300_1",
+   "load_name": "opentrons_96_tiprack_300ul",
+   "slot": "11",
+   "module": null,
+   "label": "p300 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p300",
+   "api_name": "p300_single_gen2",
+   "mount": "right",
+   "channels": 1,
+   "tipracks": [
+    "tips_p300_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "A1"
+   },
+   "reagent": "cells: vehicle / buffer only",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "A2"
+   },
+   "reagent": "cells: vehicle / buffer only",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "A3"
+   },
+   "reagent": "cells: vehicle / buffer only",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "B1"
+   },
+   "reagent": "cells: LPS positive control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "B2"
+   },
+   "reagent": "cells: LPS positive control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "B3"
+   },
+   "reagent": "cells: LPS positive control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "C1"
+   },
+   "reagent": "cells: endotoxin-matched LPS control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "C2"
+   },
+   "reagent": "cells: endotoxin-matched LPS control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "C3"
+   },
+   "reagent": "cells: endotoxin-matched LPS control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "D1"
+   },
+   "reagent": "cells: antigen low dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "D2"
+   },
+   "reagent": "cells: antigen low dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "D3"
+   },
+   "reagent": "cells: antigen low dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "E1"
+   },
+   "reagent": "cells: antigen mid dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "E2"
+   },
+   "reagent": "cells: antigen mid dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "E3"
+   },
+   "reagent": "cells: antigen mid dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "F1"
+   },
+   "reagent": "cells: antigen high dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "F2"
+   },
+   "reagent": "cells: antigen high dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "F3"
+   },
+   "reagent": "cells: antigen high dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "G1"
+   },
+   "reagent": "cells: antigen mid dose + polymyxin B",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "G2"
+   },
+   "reagent": "cells: antigen mid dose + polymyxin B",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "G3"
+   },
+   "reagent": "cells: antigen mid dose + polymyxin B",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "H1"
+   },
+   "reagent": "cells: mock-purification eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "H2"
+   },
+   "reagent": "cells: mock-purification eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "H3"
+   },
+   "reagent": "cells: mock-purification eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "reagent": "staining antibody cocktail",
+   "volume_ul": 1230.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s14",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "A1"
+    },
+    {
+     "labware": "cells",
+     "well": "A2"
+    },
+    {
+     "labware": "cells",
+     "well": "A3"
+    },
+    {
+     "labware": "cells",
+     "well": "B1"
+    },
+    {
+     "labware": "cells",
+     "well": "B2"
+    },
+    {
+     "labware": "cells",
+     "well": "B3"
+    },
+    {
+     "labware": "cells",
+     "well": "C1"
+    },
+    {
+     "labware": "cells",
+     "well": "C2"
+    },
+    {
+     "labware": "cells",
+     "well": "C3"
+    },
+    {
+     "labware": "cells",
+     "well": "D1"
+    },
+    {
+     "labware": "cells",
+     "well": "D2"
+    },
+    {
+     "labware": "cells",
+     "well": "D3"
+    },
+    {
+     "labware": "cells",
+     "well": "E1"
+    },
+    {
+     "labware": "cells",
+     "well": "E2"
+    },
+    {
+     "labware": "cells",
+     "well": "E3"
+    },
+    {
+     "labware": "cells",
+     "well": "F1"
+    },
+    {
+     "labware": "cells",
+     "well": "F2"
+    },
+    {
+     "labware": "cells",
+     "well": "F3"
+    },
+    {
+     "labware": "cells",
+     "well": "G1"
+    },
+    {
+     "labware": "cells",
+     "well": "G2"
+    },
+    {
+     "labware": "cells",
+     "well": "G3"
+    },
+    {
+     "labware": "cells",
+     "well": "H1"
+    },
+    {
+     "labware": "cells",
+     "well": "H2"
+    },
+    {
+     "labware": "cells",
+     "well": "H3"
+    }
+   ],
+   "new_tip": "once",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "top",
+   "dst_z": -2.0,
+   "reagent": null
+  },
+  {
+   "step": "s14",
+   "op": "pause",
+   "text": "HUMAN [s14]: Incubate protected from light, wash / centrifuge and acquire on the cytometer. None of this is automated."
+  }
+ ],
+ "tips_needed": {
+  "p300": 1
+ },
+ "notes": [
+  "A V-bottom plate is usual for cytometry; the S9 catalogue only has flat-bottom plates, so substitute labware before use."
+ ],
+ "layouts": {
+  "Staining plate": {
+   "vehicle / buffer only": "A1,A2,A3",
+   "LPS positive control": "B1,B2,B3",
+   "endotoxin-matched LPS control": "C1,C2,C3",
+   "antigen low dose": "D1,D2,D3",
+   "antigen mid dose": "E1,E2,E3",
+   "antigen high dose": "F1,F2,F3",
+   "antigen mid dose + polymyxin B": "G1,G2,G3",
+   "mock-purification eluate": "H1,H2,H3"
+  }
+ }
+}

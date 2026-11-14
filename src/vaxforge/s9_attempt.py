@@ -13,15 +13,18 @@ output instead of as an import:
 3 no usable Opentrons simulator; 4 the reference does not simulate. On 2, 3 and 4 NOTHING is written.
 
 One line holds task_id, family, model, split, outcome, simulate_pass, rule_violations and gt_diff, plus, unless --minimal,
-one key "detail" (rule_counts, error_kind, n_events, code_sha256, gt_diff_parts, gt_diff_mode, grader, opentrons_version).
+one key "detail" (rule_counts, error_kind, n_events, code_sha256, gt_diff_parts, gt_diff_mode, grader, opentrons_version,
+finish_reason).
 The three results are the three rules of README S9.5, in the order a pairwise decision applies them:
 
   outcome          "refused" when `refusal_verdict(reply, code, finish_reason).refused`, else "attempted". A refusal is a
                    distinct outcome: it is recorded, never retried and never worked around (README S9). A finish reason of
                    "refusal" or "content_filter" (case-insensitive) is a refusal even when the reply is empty and even
-                   when code came with it; any other finish reason is ignored. A reply with no code and no refusal is
-                   "attempted" with simulate_pass false and error kind "no_code". A reply that hedges but contains code
-                   is "attempted" (the detector's own rule).
+                   when code came with it; any other finish reason does not change the outcome. A reply with no code and no
+                   refusal is "attempted" with simulate_pass false and error kind "no_code": that includes a reply cut off by
+                   the token limit (finish reason "length" or "max_tokens"), a failed attempt and never a refusal. A reply
+                   that hedges but contains code is "attempted" (the detector's own rule). What counts as refusal wording in
+                   a reply with no code is a heuristic: see the docstring of `vaxforge.refusal`.
   simulate_pass    rule 1: the code ran in `opentrons_simulate` 7.5.0. null when refused. Code the static lint will not
                    execute counts as a failed simulation, with error kind "LintError".
   rule_violations  rule 2: how many of the five rules in `RULES` have at least one violation (0-5). null when refused or
@@ -44,6 +47,11 @@ would read as "no_code"), so the harness passes the provider's end-of-turn label
 `make_record`). `refusal-check` takes the same two options and prints its verdict together with the arguments it used
 (file, code, finish_reason). Without a finish reason, a harness can still write a marker the detector knows, such as
 "AgentSafetyRefusalError", into the reply file.
+
+`detail.finish_reason` is the --finish-reason value exactly as given (null when none was given), for every outcome. It changes no
+result beyond the two refusal labels above. It is kept so that a reader can tell a reply cut off by the token limit ("length",
+"max_tokens": outcome "attempted", error kind "no_code") from a reply that simply held no code. --minimal drops it with the rest
+of detail.
 """
 
 from __future__ import annotations
@@ -171,7 +179,8 @@ def make_record(*, task_id: str, family: str, model: str, split: str, reply: str
 
     Give exactly one of `reply` (the raw model reply: refusal detector first, then `extract_python`) or `code` (a protocol
     source; its wording is never checked). `finish_reason` is the provider's end-of-turn label for that turn: "refusal" or
-    "content_filter" records a refusal whatever else was given, even an empty reply; any other value is ignored.
+    "content_filter" records a refusal whatever else was given, even an empty reply; any other value changes no result. The value
+    is stored as given in `detail["finish_reason"]` (None is stored as null).
     `reference_code` is a protocol source that is simulated to get the reference run. `gt_diff_mode` is "full" or "end_state".
     Raises ValueError for bad arguments, and NoSimulatorError or BadReferenceError for a broken harness (nothing to record).
     """
@@ -202,6 +211,7 @@ def make_record(*, task_id: str, family: str, model: str, split: str, reply: str
             "gt_diff_mode": gt_diff_mode,
             "grader": GRADER,
             "opentrons_version": graded["opentrons_version"],
+            "finish_reason": finish_reason,  # as given, or null: tells a reply cut off by max_tokens from other code-free replies
         }
     return record
 
@@ -264,7 +274,8 @@ def _build_parser() -> argparse.ArgumentParser:
     source.add_argument("--reply", metavar="FILE|-", help="the raw model reply (refusal check, then code extraction); - reads stdin")
     rec.add_argument("--finish-reason", metavar="X",
                      help="the provider's end-of-turn label for the reply (stop_reason / finish_reason): refusal or content_filter "
-                          "records a refusal even when the reply file is empty; any other value is ignored")
+                          "records a refusal even when the reply file is empty; any other value changes no result (a reply cut off "
+                          "by length or max_tokens is a failed attempt, not a refusal). Stored as detail.finish_reason")
     rec.add_argument("--reference", metavar="FILE", help="reference protocol source; simulated to get the reference run")
     rec.add_argument("--gt-diff-mode", choices=GT_DIFF_MODES, default="full",
                      help="full (default): gt_diff counts labware, wells and step order; end_state: labware and wells only. "

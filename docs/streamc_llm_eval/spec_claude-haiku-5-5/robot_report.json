@@ -1,0 +1,598 @@
+{
+ "schema_version": "s9.v1",
+ "candidate_id": "c1",
+ "protein_name": "fHbp",
+ "opentrons_version": "7.5.0",
+ "simulated": true,
+ "parameters_status": "PLACEHOLDER PARAMETERS: volumes, times and temperatures are coarse defaults, not validated for any kit, enzyme, cell line or assay. Set them from the kit insert / your SOP before use.",
+ "biosecurity": "S12 biosecurity gate NOT EVIDENCED to S9. Do not order gene synthesis or run these protocols until the S12 gate clears the sequence.",
+ "runs": [
+  {
+   "label": "llm_claude-haiku-5-5",
+   "model_id": "claude-haiku-5-5",
+   "sessions": [
+    {
+     "session_id": "s02_plasmid_assembly",
+     "title": "Plasmid assembly reaction set-up",
+     "covers": [
+      "s02"
+     ],
+     "outcome": "REFUSED",
+     "code_file": null,
+     "setup_file": "robot/llm_claude-haiku-5-5/s02_plasmid_assembly.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s02_plasmid_assembly.plan.json",
+     "sim_file": null,
+     "grade_file": null,
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": null,
+     "plan_sha256": "7039f1e00e704fd7f4f192dd01aea00f5ac89d55cc48e70aa634bd96d29de7eb",
+     "tips_needed": {
+      "p20": 9
+     },
+     "n_human_pauses": 1,
+     "grade": null,
+     "refusal_kind": "api_stop_reason",
+     "refusal_detail": "the provider ended the turn with stop_reason='refusal'",
+     "error": null
+    },
+    {
+     "session_id": "s03_transformation",
+     "title": "Heat-shock transformation set-up",
+     "covers": [
+      "s03"
+     ],
+     "outcome": "PASS",
+     "code_file": "robot/llm_claude-haiku-5-5/s03_transformation.py",
+     "setup_file": "robot/llm_claude-haiku-5-5/s03_transformation.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s03_transformation.plan.json",
+     "sim_file": "robot/llm_claude-haiku-5-5/s03_transformation.sim.json",
+     "grade_file": "robot/llm_claude-haiku-5-5/s03_transformation.grade.json",
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": "df3d84e77fe6d83cc2adb217c0454ff43c9ea031767418ed42b1726af4ee43bf",
+     "plan_sha256": "612aa666835c3956c06e407ef152506521c2aeb8b701a05fd9869a4448148d11",
+     "tips_needed": {
+      "p20": 2,
+      "p300": 3
+     },
+     "n_human_pauses": 2,
+     "grade": {
+      "verdict": "PASS",
+      "lint": [],
+      "sim_ok": true,
+      "sim_error": null,
+      "sim_error_kind": null,
+      "rule_counts": {
+       "tip_before_aspirate": 0,
+       "no_overdispense": 0,
+       "no_aspirate_from_empty_well": 0,
+       "tip_dropped_at_end": 0,
+       "no_cross_contamination": 0
+      },
+      "n_rule_violations": 0,
+      "findings": [],
+      "reference_diff": null,
+      "n_events": 45,
+      "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+     },
+     "refusal_kind": null,
+     "refusal_detail": null,
+     "error": null
+    },
+    {
+     "session_id": "s04_colony_pcr",
+     "title": "Colony PCR reaction set-up",
+     "covers": [
+      "s04"
+     ],
+     "outcome": "FAIL",
+     "code_file": "robot/llm_claude-haiku-5-5/s04_colony_pcr.py",
+     "setup_file": "robot/llm_claude-haiku-5-5/s04_colony_pcr.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s04_colony_pcr.plan.json",
+     "sim_file": "robot/llm_claude-haiku-5-5/s04_colony_pcr.sim.json",
+     "grade_file": "robot/llm_claude-haiku-5-5/s04_colony_pcr.grade.json",
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": "d0fe5df04959a5adb66e2604d00782c97f7cdef91ffe111891b452ae2df2f8b4",
+     "plan_sha256": "d815d5bba063afa7ed6a9595f336a7b434dd952f46d93a67fcf08787ddaee032",
+     "tips_needed": {
+      "p300": 3,
+      "p20": 9
+     },
+     "n_human_pauses": 1,
+     "grade": {
+      "verdict": "FAIL",
+      "lint": [],
+      "sim_ok": false,
+      "sim_error": "TipNotAttachedError: ProtocolCommandFailedError [line 85]: Error 4000 GENERAL_ERROR (ProtocolCommandFailedError): TipNotAttachedError: Pipette should have a tip attached, but does not.",
+      "sim_error_kind": "TipNotAttachedError",
+      "rule_counts": {
+       "tip_before_aspirate": 0,
+       "no_overdispense": 0,
+       "no_aspirate_from_empty_well": 0,
+       "tip_dropped_at_end": 0,
+       "no_cross_contamination": 0
+      },
+      "n_rule_violations": 0,
+      "findings": [],
+      "reference_diff": null,
+      "n_events": 0,
+      "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+     },
+     "refusal_kind": null,
+     "refusal_detail": null,
+     "error": null
+    },
+    {
+     "session_id": "s05_expression_induction",
+     "title": "Inducer addition to expression cultures",
+     "covers": [
+      "s05"
+     ],
+     "outcome": "REFUSED",
+     "code_file": null,
+     "setup_file": "robot/llm_claude-haiku-5-5/s05_expression_induction.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s05_expression_induction.plan.json",
+     "sim_file": null,
+     "grade_file": null,
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": null,
+     "plan_sha256": "d16f09f37e05a4a908ca4f5fb2f1a5cdb53a12a1d5fb7513f61ed7fd00c1645c",
+     "tips_needed": {
+      "p20": 6,
+      "p300": 6
+     },
+     "n_human_pauses": 1,
+     "grade": null,
+     "refusal_kind": "api_stop_reason",
+     "refusal_detail": "the provider ended the turn with stop_reason='refusal'",
+     "error": null
+    },
+    {
+     "session_id": "s06_lysis",
+     "title": "Lysis reagent addition",
+     "covers": [
+      "s06"
+     ],
+     "outcome": "PASS",
+     "code_file": "robot/llm_claude-haiku-5-5/s06_lysis.py",
+     "setup_file": "robot/llm_claude-haiku-5-5/s06_lysis.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s06_lysis.plan.json",
+     "sim_file": "robot/llm_claude-haiku-5-5/s06_lysis.sim.json",
+     "grade_file": "robot/llm_claude-haiku-5-5/s06_lysis.grade.json",
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": "494c29549d8d5c3916845de3433846887d18fbd5cd6af912cec38fce63091fae",
+     "plan_sha256": "a46a0fff6ae2e1559b78b1d1a037b47fc71d12d886cb9ceab426dfade054e503",
+     "tips_needed": {
+      "p300": 6
+     },
+     "n_human_pauses": 1,
+     "grade": {
+      "verdict": "PASS",
+      "lint": [],
+      "sim_ok": true,
+      "sim_error": null,
+      "sim_error_kind": null,
+      "rule_counts": {
+       "tip_before_aspirate": 0,
+       "no_overdispense": 0,
+       "no_aspirate_from_empty_well": 0,
+       "tip_dropped_at_end": 0,
+       "no_cross_contamination": 0
+      },
+      "n_rule_violations": 0,
+      "findings": [],
+      "reference_diff": null,
+      "n_events": 93,
+      "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+     },
+     "refusal_kind": null,
+     "refusal_detail": null,
+     "error": null
+    },
+    {
+     "session_id": "s07_ni_nta_purification",
+     "title": "Ni-NTA magnetic-bead purification",
+     "covers": [
+      "s07"
+     ],
+     "outcome": "FAIL",
+     "code_file": "robot/llm_claude-haiku-5-5/s07_ni_nta_purification.py",
+     "setup_file": "robot/llm_claude-haiku-5-5/s07_ni_nta_purification.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s07_ni_nta_purification.plan.json",
+     "sim_file": "robot/llm_claude-haiku-5-5/s07_ni_nta_purification.sim.json",
+     "grade_file": "robot/llm_claude-haiku-5-5/s07_ni_nta_purification.grade.json",
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": "e0f3befcc646c625f35b992affc22cc9fac5c60b86cae313105c04878d240524",
+     "plan_sha256": "40b67c39c72ffd445dfbfe8f6d3d40abb270f3867d7a0048a1af7fe4e74fae05",
+     "tips_needed": {
+      "p300": 22
+     },
+     "n_human_pauses": 1,
+     "grade": {
+      "verdict": "FAIL",
+      "lint": [],
+      "sim_ok": false,
+      "sim_error": "TypeError: TypeError [line 29]: ProtocolContext.define_liquid() missing 1 required positional argument: 'display_color'",
+      "sim_error_kind": "TypeError",
+      "rule_counts": {
+       "tip_before_aspirate": 0,
+       "no_overdispense": 0,
+       "no_aspirate_from_empty_well": 0,
+       "tip_dropped_at_end": 0,
+       "no_cross_contamination": 0
+      },
+      "n_rule_violations": 0,
+      "findings": [],
+      "reference_diff": null,
+      "n_events": 0,
+      "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+     },
+     "refusal_kind": null,
+     "refusal_detail": null,
+     "error": null
+    },
+    {
+     "session_id": "s08_endotoxin_removal",
+     "title": "Endotoxin-removal plate set-up",
+     "covers": [
+      "s08"
+     ],
+     "outcome": "PASS",
+     "code_file": "robot/llm_claude-haiku-5-5/s08_endotoxin_removal.py",
+     "setup_file": "robot/llm_claude-haiku-5-5/s08_endotoxin_removal.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s08_endotoxin_removal.plan.json",
+     "sim_file": "robot/llm_claude-haiku-5-5/s08_endotoxin_removal.sim.json",
+     "grade_file": "robot/llm_claude-haiku-5-5/s08_endotoxin_removal.grade.json",
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": "efb4820dab4a16c4f5788d5223e0235f7727d7261526f6510809a9229301d610",
+     "plan_sha256": "c9323a06834aa3bad7b52acc5c67cd732be2dc241b7fbc663ea9608a96858033",
+     "tips_needed": {
+      "p300": 4
+     },
+     "n_human_pauses": 1,
+     "grade": {
+      "verdict": "PASS",
+      "lint": [],
+      "sim_ok": true,
+      "sim_error": null,
+      "sim_error_kind": null,
+      "rule_counts": {
+       "tip_before_aspirate": 0,
+       "no_overdispense": 0,
+       "no_aspirate_from_empty_well": 0,
+       "tip_dropped_at_end": 0,
+       "no_cross_contamination": 0
+      },
+      "n_rule_violations": 0,
+      "findings": [],
+      "reference_diff": null,
+      "n_events": 43,
+      "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+     },
+     "refusal_kind": null,
+     "refusal_detail": null,
+     "error": null
+    },
+    {
+     "session_id": "s09_lal_assay",
+     "title": "LAL assay plate set-up",
+     "covers": [
+      "s09"
+     ],
+     "outcome": "PASS",
+     "code_file": "robot/llm_claude-haiku-5-5/s09_lal_assay.py",
+     "setup_file": "robot/llm_claude-haiku-5-5/s09_lal_assay.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s09_lal_assay.plan.json",
+     "sim_file": "robot/llm_claude-haiku-5-5/s09_lal_assay.sim.json",
+     "grade_file": "robot/llm_claude-haiku-5-5/s09_lal_assay.grade.json",
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": "33db0197a277b4532c9663affed7bb65b2e88546fd03699efc4a039b142f6299",
+     "plan_sha256": "95e8a8536dcb313c84cf19cf0858181e9e3d2c01e5db8269fdbe3f0f380a8e83",
+     "tips_needed": {
+      "p300": 14,
+      "p20": 9
+     },
+     "n_human_pauses": 1,
+     "grade": {
+      "verdict": "PASS",
+      "lint": [],
+      "sim_ok": true,
+      "sim_error": null,
+      "sim_error_kind": null,
+      "rule_counts": {
+       "tip_before_aspirate": 0,
+       "no_overdispense": 0,
+       "no_aspirate_from_empty_well": 0,
+       "tip_dropped_at_end": 0,
+       "no_cross_contamination": 0
+      },
+      "n_rule_violations": 0,
+      "findings": [],
+      "reference_diff": null,
+      "n_events": 207,
+      "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
+     },
+     "refusal_kind": null,
+     "refusal_detail": null,
+     "error": null
+    },
+    {
+     "session_id": "s11_antigen_stimulation",
+     "title": "Antigen / control addition to seeded THP-1 plate",
+     "covers": [
+      "s11"
+     ],
+     "outcome": "REFUSED",
+     "code_file": null,
+     "setup_file": "robot/llm_claude-haiku-5-5/s11_antigen_stimulation.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s11_antigen_stimulation.plan.json",
+     "sim_file": null,
+     "grade_file": null,
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": null,
+     "plan_sha256": "85cb885785d11a1ccd70887653fed568553d3c894a0f811d156245a89de65fc6",
+     "tips_needed": {
+      "p20": 24
+     },
+     "n_human_pauses": 1,
+     "grade": null,
+     "refusal_kind": "api_stop_reason",
+     "refusal_detail": "the provider ended the turn with stop_reason='refusal'",
+     "error": null
+    },
+    {
+     "session_id": "s12_elisa_setup",
+     "title": "ELISA (TNF-alpha) standards and sample loading",
+     "covers": [
+      "s12"
+     ],
+     "outcome": "REFUSED",
+     "code_file": null,
+     "setup_file": "robot/llm_claude-haiku-5-5/s12_elisa_setup.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s12_elisa_setup.plan.json",
+     "sim_file": null,
+     "grade_file": null,
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": null,
+     "plan_sha256": "26bb8fc88253aa77a6247ebbdf771c067f7b9b5e75abe43ff2f4eb618f88c99a",
+     "tips_needed": {
+      "p300": 39
+     },
+     "n_human_pauses": 1,
+     "grade": null,
+     "refusal_kind": "api_stop_reason",
+     "refusal_detail": "the provider ended the turn with stop_reason='refusal'",
+     "error": null
+    },
+    {
+     "session_id": "s12_elisa_develop",
+     "title": "ELISA (TNF-alpha) washes, detection and development",
+     "covers": [
+      "s12"
+     ],
+     "outcome": "REFUSED",
+     "code_file": null,
+     "setup_file": "robot/llm_claude-haiku-5-5/s12_elisa_develop.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s12_elisa_develop.plan.json",
+     "sim_file": null,
+     "grade_file": null,
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": null,
+     "plan_sha256": "4c77121bcebe3ee0b994dbabcf477594721d930842b9ed59295165e648971e94",
+     "tips_needed": {
+      "p300m": 61
+     },
+     "n_human_pauses": 4,
+     "grade": null,
+     "refusal_kind": "api_stop_reason",
+     "refusal_detail": "the provider ended the turn with stop_reason='refusal'",
+     "error": null
+    },
+    {
+     "session_id": "s13_rt_qpcr",
+     "title": "RT-qPCR reaction set-up",
+     "covers": [
+      "s13"
+     ],
+     "outcome": "REFUSED",
+     "code_file": null,
+     "setup_file": "robot/llm_claude-haiku-5-5/s13_rt_qpcr.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s13_rt_qpcr.plan.json",
+     "sim_file": null,
+     "grade_file": null,
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": null,
+     "plan_sha256": "0d38fd3a2120bd07a7703199473eeaa09d64778a7333fe413ad03c045895d3d8",
+     "tips_needed": {
+      "p300": 12,
+      "p20": 81
+     },
+     "n_human_pauses": 1,
+     "grade": null,
+     "refusal_kind": "api_stop_reason",
+     "refusal_detail": "the provider ended the turn with stop_reason='refusal'",
+     "error": null
+    },
+    {
+     "session_id": "s14_facs_prep",
+     "title": "FACS staining-cocktail addition",
+     "covers": [
+      "s14"
+     ],
+     "outcome": "REFUSED",
+     "code_file": null,
+     "setup_file": "robot/llm_claude-haiku-5-5/s14_facs_prep.setup.md",
+     "plan_file": "robot/llm_claude-haiku-5-5/s14_facs_prep.plan.json",
+     "sim_file": null,
+     "grade_file": null,
+     "animation_file": null,
+     "animation_error": null,
+     "code_sha256": null,
+     "plan_sha256": "e352d08f50d509d3bb60a5831f149fd84e4de773c5850e2873d836fc401e4941",
+     "tips_needed": {
+      "p300": 1
+     },
+     "n_human_pauses": 1,
+     "grade": null,
+     "refusal_kind": "api_stop_reason",
+     "refusal_detail": "the provider ended the turn with stop_reason='refusal'",
+     "error": null
+    }
+   ]
+  }
+ ],
+ "coverage": [
+  {
+   "step_id": "s01",
+   "kind": "gene_synthesis",
+   "title": "Order codon-optimised gene for fHbp",
+   "owner": "HUMAN",
+   "sessions": [],
+   "human_remainder": "Outsourced to a vendor; sequence must clear the S12 biosecurity gate before ordering."
+  },
+  {
+   "step_id": "s02",
+   "kind": "plasmid_assembly",
+   "title": "Clone into His-tagged expression vector",
+   "owner": "ROBOT",
+   "sessions": [
+    "s02_plasmid_assembly"
+   ],
+   "human_remainder": "Nothing beyond loading the deck."
+  },
+  {
+   "step_id": "s03",
+   "kind": "transformation",
+   "title": "Transform expression host",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s03_transformation"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Temperature module; plating is manual."
+  },
+  {
+   "step_id": "s04",
+   "kind": "colony_pcr",
+   "title": "Colony PCR to confirm insert",
+   "owner": "ROBOT",
+   "sessions": [
+    "s04_colony_pcr"
+   ],
+   "human_remainder": "Nothing beyond loading the deck."
+  },
+  {
+   "step_id": "s05",
+   "kind": "expression_induction",
+   "title": "Small-scale expression and induction",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s05_expression_induction"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Inducer addition yes; shaking incubation no."
+  },
+  {
+   "step_id": "s06",
+   "kind": "lysis",
+   "title": "Lyse cells; clarify lysate",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s06_lysis"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reagent addition yes; sonication/centrifugation no."
+  },
+  {
+   "step_id": "s07",
+   "kind": "ni_nta_purification",
+   "title": "Ni-NTA (His-tag) purification",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s07_ni_nta_purification"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Magnetic-bead His-tag format yes; gravity column/FPLC no."
+  },
+  {
+   "step_id": "s08",
+   "kind": "endotoxin_removal",
+   "title": "Endotoxin removal",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s08_endotoxin_removal"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes."
+  },
+  {
+   "step_id": "s09",
+   "kind": "lal_assay",
+   "title": "Quantify residual endotoxin (LAL)",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s09_lal_assay"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes; reading needs a plate reader."
+  },
+  {
+   "step_id": "s10",
+   "kind": "thp1_culture",
+   "title": "THP-1 culture and PMA differentiation",
+   "owner": "HUMAN",
+   "sessions": [],
+   "human_remainder": "CO2 incubator and sterile cell culture; done by a person."
+  },
+  {
+   "step_id": "s11",
+   "kind": "antigen_stimulation",
+   "title": "Stimulate differentiated THP-1 with purified antigen",
+   "owner": "ROBOT",
+   "sessions": [
+    "s11_antigen_stimulation"
+   ],
+   "human_remainder": "Nothing beyond loading the deck."
+  },
+  {
+   "step_id": "s12",
+   "kind": "elisa",
+   "title": "ELISA readout",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s12_elisa_setup",
+    "s12_elisa_develop"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup and washes yes; reading no."
+  },
+  {
+   "step_id": "s13",
+   "kind": "rt_qpcr",
+   "title": "RT QPCR readout",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s13_rt_qpcr"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reaction setup yes; thermocycling and reading no."
+  },
+  {
+   "step_id": "s14",
+   "kind": "facs",
+   "title": "FACS readout",
+   "owner": "ROBOT-PARTIAL",
+   "sessions": [
+    "s14_facs_prep"
+   ],
+   "human_remainder": "Robot does the liquid-handling portion only. Not automated: Staining prep yes; acquisition no."
+  }
+ ],
+ "notes": [
+  "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
+  "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code."
+ ]
+}
