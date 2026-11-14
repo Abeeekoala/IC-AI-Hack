@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import sys
 from pathlib import Path
@@ -168,8 +169,79 @@ def assert_run_allowed(manifest, base_model_id, cleared_sources, leakage_violati
         raise RunNotAllowed("; ".join(problems))
 
 
+STAGE = "s9_5"
+
+try:  # inside the package: tell the artifact contract which payload key this stage must write
+    from .artifacts import register_payload_keys
+    register_payload_keys(STAGE, ("fine_tune",))
+except ImportError:  # run as a script
+    pass
+
+
+def _not_run_reasons(store, config):
+    reasons = []
+    missing = [s for s in ("s8", "s9") if not store.has(s)]
+    if missing:
+        reasons.append("upstream artifact not present: " + ", ".join(missing))
+    for key in ("base_model_id", "model_id"):
+        if not config.get(f"finetune.{key}"):
+            reasons.append(f"finetune.{key} is not set")
+    reasons.append("this stage does not generate yet: the fine-tune is evaluated offline with "
+                   "s9_5_generate.py and validation/winrate.py")
+    return reasons
+
+
+def run(store, config):
+    """The `vaxforge run` entrypoint for stage s9_5 (README S9.5).
+
+    S9.5 is additive and `vaxforge run` stops on any status but "ok", so this stage writes "ok" and says in the payload
+    that the fine-tune was not run, and why. It never records a result it did not compute."""
+    reasons = _not_run_reasons(store, config)
+    payload = {"fine_tune": {"status": "not_run", "reasons": reasons},
+               "base_model_id": config.get("finetune.base_model_id"), "model_id": config.get("finetune.model_id")}
+    return store.write_artifact(
+        STAGE, payload, params={"eval_tasks": config.get("finetune.eval_tasks"), "seed": config.get("finetune.seed")},
+        inputs=[s for s in ("s8", "s9") if store.has(s)], status="ok", warnings=["S9.5 not run: " + "; ".join(reasons)])
+
+
+def _validation_module(name):
+    path = Path(__file__).resolve().parents[2] / "validation" / f"{name}.py"
+    if not path.is_file():
+        raise ValueError(f"{path} not found: this command needs a source checkout of the repository")
+    spec = importlib.util.spec_from_file_location(f"_vaxforge_validation_{name}", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _command(name):
+    def go(args):
+        if name == "manifest":
+            return main(args.rest)
+        try:
+            module = _validation_module({"check": "leakage_check", "winrate": "winrate"}[name])
+        except ValueError as e:
+            print(f"error: {e}", file=sys.stderr)
+            return 1
+        return module.main(args.rest)
+    return go
+
+
+def register_cli(subparsers, common):
+    """`vaxforge finetune manifest|check|winrate ...`: each passes its arguments to that tool's own CLI.
+    Exit codes follow the tool: check returns 2 on violations, winrate 3 on a refusal red flag."""
+    p = subparsers.add_parser("finetune", parents=[common], help="S9.5 tools: training manifest, leakage check, win rate")
+    sub = p.add_subparsers(dest="finetune_command", required=True)
+    for name, text in (("manifest", "build the audited training manifest"),
+                       ("check", "adversarial leakage check of a manifest (validation/leakage_check.py)"),
+                       ("winrate", "pairwise win rate, fine-tune vs base (validation/winrate.py)")):
+        q = sub.add_parser(name, help=text, add_help=False)  # --help reaches the tool's own parser
+        q.add_argument("rest", nargs=argparse.REMAINDER)
+        q.set_defaults(func=_command(name))
+
+
 def main(argv=None):
-    ap = argparse.ArgumentParser(description="Build the audited S9.5 training manifest")
+    ap = argparse.ArgumentParser(prog="vaxforge finetune manifest", description="Build the audited S9.5 training manifest")
     ap.add_argument("candidates", help="JSONL of candidate pairs")
     ap.add_argument("--families", default=str(FAMILIES_FILE), help="held-out families JSON")
     ap.add_argument("--out", required=True, help="manifest JSON to write")
