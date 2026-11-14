@@ -41,11 +41,13 @@ flowchart TD
     H --> I["S8 · Protocol generation<br/>NL protocol + falsifier"]
     I --> J["S9 · Robot code<br/>Opentrons OT-2 Python"]
     J -.-> J2["S9+ · Protocol animation<br/>optional"]
-    J --> AN["S10 · Animal study proposal<br/>design, not results"]
+    J --> J5["S9.5 · Fine-tuned codegen<br/>Adaption, win rate vs base"]
+    J5 --> AN["S10 · Animal study proposal<br/>design, not results"]
     AN --> K["S11 · Hypothesis pre-registration"]
     K --> L["S12 · Biosecurity gate"]
     L --> M["Ranked candidates + evidence chain<br/>+ protocol + robot code<br/>+ animal study design"]
     V["Retrospective validation<br/>Protegen + LOPOV + Bexsero"] -.->|re-weights| D
+    W["Fine-tune + win-rate harness<br/>AutoScientist, opentrons_simulate"] -.->|replaces codegen model| J
 ```
 
 Every stage is a pure function over the previous stage's artifact. Artifacts are content-addressed JSON written to `runs/<run_id>/`, so any stage can be re-run without recomputing upstream work, and any claim in the final report can be traced to the exact tool version and parameters that produced it.
@@ -66,6 +68,7 @@ Every stage is a pure function over the previous stage's artifact. Artifacts are
 | S7 | top-k candidates | Structures + coarse ranking | Boltz-2 | 2–30 min GPU |
 | S8 | Final candidates | Structured NL protocol | LLM + protocol templates | <1 min |
 | S9 | NL protocol | OT-2 Python + validation report | LLM codegen + `opentrons_simulate` | 1–3 min |
+| S9.5 | NL protocol (S8) + S9 output | Fine-tuned OT-2 Python + win/loss/tie vs S9 + refusal rates | AutoScientist (SFT), `opentrons_simulate` v7.5.0 | Training "hours" per Adaption's docs; not measured here |
 | S10 | Final candidates | Animal study design + ethics pack | Power analysis + ARRIVE 2.0 template | <1 min |
 | S11 | Final ranking | Timestamped prediction manifest | git tag + JSON manifest | <1 s |
 | S12 | Any sequence output | Screening-cleared sequences | Synthesis-provider screening | manual |
@@ -219,6 +222,82 @@ protocol.py → opentrons_simulate → command list → timeline.json → canvas
 
 Why it is worth doing if time allows: it converts "the generated code actually runs" from a number into something a judge can watch. It is strictly additive — cut it without touching the main line if you are short on time.
 
+### S9.5 — Fine-tuned protocol-code generation (Adaption)
+
+**Status: specified, not run.** At the time of writing no fine-tune has been trained and no win rate has been measured. This section fixes the data rules, the metric and the refusal constraint before any run, and they are written to the S11 manifest before training starts, so none of them can be chosen after seeing a result. S9.5 is strictly additive: if it cannot be run to this specification, S9 keeps its base model and nothing downstream changes.
+
+#### Why S9, and only S9
+
+S9 is the only generative-LLM stage with an objective grader attached: `opentrons_simulate`, the physical-rule checks and the ground-truth comparison each return a result without a person or a second model deciding what it means. S8 also generates text, and nothing grades it. S9 is therefore the one place where a fine-tune can be **measured rather than asserted**.
+
+**S3, S5 and S7 are not candidates.** Vaxign-ML, NetMHCpan and Boltz-2 are used as published and are not fine-tuned here. §3 validates the pipeline with those predictors at their published versions. Swapping in a fine-tuned or different model changes what was validated, and every §3 number would stop describing what ships. Fine-tuning on antigen data would also bring back the circularity §3 removes, because the Bexsero antigens are in any protective-antigen training set.
+
+What is fine-tuned is the S9 code generator, the model that turns the S8 protocol into OT-2 Python. What judges it is unchanged: simulation, the physical-rule checks, the automatability matrix and refusal detection. Offline, `validation/winrate.py` runs the base model and the fine-tune on held-out tasks and reports the pairwise result below. In a pipeline run, S9.5 emits the fine-tune's code beside S9's for the same S8 input, with both validation reports. Whether the fine-tune replaces the base model in S9 is a decision for a person reading that evidence; the pipeline never promotes it on its own.
+
+Training uses Adaption's AutoScientist, which its [documentation](https://docs.adaptionlabs.ai/autoscientist/overview/) describes this way: "You choose the outcome; AutoScientist optimizes the data and training recipe, trains a model, evaluates it, and repeats until the run reaches its goal or exhausts its iterations." We use it as a training service only. Nothing it reports counts as evidence here (see the last limit under the evaluation protocol).
+
+#### Training data provenance
+
+| Source | Role | Licence | Status |
+|---|---|---|---|
+| Opentrons protocol library (`Opentrons/Protocols`) | Training | None stated | Not cleared |
+| Text2WetLab task set | Held-out evaluation | MIT | Evaluation only |
+| protocols.io extractions | — | CC BY; training prohibited by site policy | Excluded |
+
+**No source is cleared for training at the time of writing.** What we read:
+
+- **Opentrons library.** 833 protocol directories at commit `2f447c9` of `develop`, all OT-2, each with a Python file and a README. There is no `LICENSE`, `NOTICE` or `COPYING` file, GitHub's licence field is null, and no protocol's metadata has a licence key. The repository README says the protocols "are stored for everyone to use", which is not a licence. Opentrons' EULA (2024-07-10) defines its products to include the Protocol Library and says all copyrights in them "are the exclusive property of Opentrons". Its documentation says the library hosts protocols written "either by Opentrons itself or by members of the Opentrons community", and 46 of the 833 list a non-Opentrons author. We found no clause on reuse, automated downloading or model training in the EULA, the Terms of Sale or the privacy policy. **Contact Opentrons before training on it.** Training uploads the corpus to Adaption, whose privacy policy says input and output are shared with third-party AI service providers; treat that as redistribution.
+- **Text2WetLab.** MIT (`LICENSE`). The dataset card's prose says Apache 2.0, so the repository contradicts itself between two permissive licences. Reference scripts it copied from upstream author repos keep their own licences, and 22 of the 45 in its `PROVENANCE.csv` come from repos that state none. We use its tasks and verifier for evaluation only.
+- **protocols.io.** User content is "licensed under the Creative Commons Attribution License (CC-BY)" (Terms of Service §1.B, effective 2026-01-27). The site's machine-readable policy ([`/llms.txt`](https://www.protocols.io/llms.txt)) says public content "MUST NOT be used for model training or fine-tuning" and that its Creative Commons licences "DO NOT grant permission for machine learning training unless explicitly stated". Terms §4.A(xi) prohibits "systematic or automated downloading". Excluded unless protocols.io grants written permission.
+
+**Size.** The library is the only source in the training role, and it has 833 protocols before any filtering. Adaption documents a minimum of 1,000 effective rows for an SFT run. We were unable to verify what "effective" counts, or whether a smaller dataset is rejected. Every filter below only shrinks the 833. We do not pad the set. AutoScientist can add rows from its own "curated pool" (`augmentation_domain_rows`, `augmentation_general_rows`) and Adaptive Data can rewrite rows, and none of those rows can be checked against the family split or the refusal rule. Both augmentation parameters are omitted, which the docs say skips that addition, and Adaptive Data's improve and invent steps are not run. If the filtered set is under the minimum, the run does not happen.
+
+**Training targets must pass the grader that judges them.** 790 of the 833 library files call `get_values`, which the library site injects when a protocol is downloaded, so they do not run as stored. A pair is kept only if its code passes `opentrons_simulate` v7.5.0 once the library's parameters are injected. All 833 declare `apiLevel` 2.0 to 2.15, inside the 2.19 maximum that opentrons 7.5.0 supports. We have not run this filter, so we do not know how many pairs survive it.
+
+**The split is by task family, not by example.** A family is a procedure, defined by what the robot does, not by its source or its wording. Text2WetLab's 11 tasks are 7 families: seven protocols each have an easy task, and four of them (colony PCR, heat-shock transformation, Golden Gate assembly, RNA extraction) also have a paper-only task over the same procedure. Split by example, one of each pair lands in training and the other in test, and the "held-out" task is a rewording of a training example. All 7 families are held out. Any protocol from any source that performs one of those procedures is removed from the training set. Assignment is by hand, recorded per protocol in the training manifest, and a protocol that is in doubt is removed; the library's own categories (203 category and subcategory pairs) are a starting point, not the key. Text2WetLab's reference solutions and tests are never training data.
+
+This is the §3 failure mode in a different place. There, the Bexsero antigens were in Protegen, so "rediscovering" them with a Protegen-trained predictor was circular. Here, a near-duplicate of a held-out protocol in the training set makes the win rate circular, and the remedy is the same: remove it, then say so. `validation/leakage_check.py` asserts that no entry in the training manifest belongs to a held-out family.
+
+#### Evaluation protocol
+
+**Pairwise win rate against the base model on the held-out tasks.** Each held-out task is run once through each model (pass@1, as in Text2WetLab) and the pair is decided by the first rule below that separates the two outputs:
+
+1. **Simulation.** The fine-tune passes `opentrons_simulate` v7.5.0 and the base model does not: **win**. The reverse: **loss**.
+2. **Physical rules.** Both pass: the one with fewer physical-rule violations wins. The violations are Text2WetLab's five safety rules in `spec_check.py`: a tip before every aspiration, no overdispense, no aspiration from an empty well, no tip left on, no cross-contamination.
+3. **Ground truth.** Equal violations: the one with the smaller diff against the task's reference solution on volumes, wells, labware and step order wins.
+
+If neither passes, or the two are equal at every step, the pair is a **tie**. The LLM judge in Text2WetLab's methodology is not used: a win has to be decidable without a second model.
+
+Report **n** (tasks scored, after the refusal rule below), the **win rate**, **loss rate** and **tie rate** (they sum to 1), and a 95% percentile bootstrap interval on each rate, from 10,000 resamples of the **task families**, not the tasks, because tasks in one family are not independent. Ties are reported in two parts, "neither passes" and "equal at every step", since the first says nothing about either model. `validation/winrate.py` computes all of it.
+
+**What this metric does not tell you:**
+
+- **Simulation passing is not correctness.** §S9 already says so, and the win rate inherits it. A win under rule 1 means the fine-tune's code ran and the base model's did not. It does not mean the protocol is right for the experiment.
+- **n is small.** At most 11 tasks in 7 families. Text2WetLab's own repeat of one model moved single-task scores by up to 0.70, so one attempt per task is a screening result, not a ranking. An interval that includes equal win and loss rates is reported as no measurable difference, whatever the point estimate.
+- **Rule 3 is the weakest.** On Text2WetLab's paper-only tasks the paper does not always fix the reference's exact quantities, and three of the four reuse their easy task's ground truth (a limitation its authors state). A smaller diff there is not always a more correct protocol.
+- **The base model may already have seen these tasks.** Text2WetLab's four paper-based protocols come from papers whose authors published robot code, which its authors say "may be in the models' training data". The same applies to ours.
+- **This is not Adaption's win rate.** AutoScientist reports its own `best_win_rate`: the base model against the adapted model "on evaluations derived from your dataset". The docs do not name the judge or say that data is held out, and the run repeats until that rate reaches `target_win_rate` or the iterations run out. It is an optimisation target, so we do not report it as evidence. AutoScientist returns the checkpoint from its best iteration, "not necessarily the final iteration"; we evaluate that one checkpoint, once.
+
+#### Scope limit on the training objective
+
+**The training set contains no examples that teach compliance with a prompt the base model refused.** §S9 commits to surfacing refusals rather than engineering around them, and fine-tuning is the most direct way to break that commitment: a model trained on compliant answers to refused prompts stops refusing them. Refusal behaviour is excluded from the objective.
+
+- **Filter before training.** Every candidate training prompt is run through the base model and S9's refusal detector. A prompt it refuses is dropped together with its paired code, and listed in the training manifest.
+- **SFT only.** Runs use AutoScientist's `instruction` method. Its `alignment` method (SFT, then DPO) is not used, because preference pairs are the usual way refusal behaviour is changed.
+- **Score only what the base model attempts.** The fine-tune is evaluated only on held-out tasks the base model also attempts. A task the base model refuses is not scored. Text2WetLab makes the same choice for the same reason: "A refusal is the provider's safety policy, not a protocol."
+- **Record both refusal rates side by side**, for the base model and the fine-tune: over all held-out tasks before the attempted-only filter, and over the prompts dropped from training. A refusal by the fine-tune on a task the base model attempted counts as a failed simulation, a loss under rule 1.
+- **A drop in refusal rate is a red flag to investigate, not a result to report.** The run's win rate is not reported until the cause is found.
+
+If the base model refuses nothing here, both rates are 0% and the comparison is empty. It shows that the base model did not refuse these prompts, not that fine-tuning preserved refusal behaviour, and it is reported as "not tested". In Text2WetLab's run its two open-weight models refused none of the 11 tasks, while its Anthropic models refused 5 trials.
+
+> We were unable to verify the following about Adaption. **Do not state any of it on a slide without reading the primary pages.**
+> - **Base models.** The docs page and the live model list (`GET /api/v1/autoscientist/models`, 16 entries on 2026-11-14) differ, and the page says "The runtime model list is authoritative". Neither names a licence for any base model, so `finetune.base_model_id` is unpinned.
+> - **Weights.** The docs describe downloading a checkpoint archive and uploading it to Hugging Face by hand, and a 2026-07-28 post says the weights are "yours to download and deploy anywhere". We found no licence or ownership term for them, and the Terms of Service (last updated 2026-02-24) predate AutoScientist's launch on 2026-05-13. The docs say a LoRA checkpoint "typically" holds adapter files; we could not confirm that a download contains merged weights.
+> - **Reproducibility.** The create request has no seed field, so the fine-tune is not reproducible from `finetune.seed`. We record the run id and the SHA-256 of the downloaded checkpoint instead. We could not observe the form of a trained-model id; the docs show only a run id.
+> - **Win-rate internals.** The judge, the scoring and the size of the evaluation set are not stated.
+> - **Pricing, credits and any leaderboard.** `adaptionlabs.ai/pricing`, `/leaderboard` and `/hackathon` return 404, and no page we read gives credit amounts or what a run costs. A post dated 2026-05-13 offered AutoScientist free for 30 days. We make no statement about leaderboard mechanics.
+> - **Data handling.** The privacy policy says input and output are shared with AI service providers, and does not say whether uploaded datasets are used to train anyone's models.
+
 ### S10 — Animal study proposal
 
 A ranked list is a set of hypotheses. An animal immunogenicity study is the first experiment that can actually refute them. This stage emits a **study design ready for ethics review** — arms, group sizes, schedule, endpoints, statistics, and ethics documentation. As everywhere else in this pipeline, the output is a design, never results.
@@ -358,6 +437,7 @@ Report these; do not let a judge discover them.
 | Expression itself | ProteinGenerator designs *intended* to be soluble monomers passed 32/42; 8/19 when tryptophan-enriched. "It expresses" is itself a high-failure experimental outcome |
 | Trial outcome prediction | HINT reports PR-AUC 0.772/0.607/0.623 (Ph 1/2/3) on its own benchmark; on an independent evaluation of 2,163 trials its balanced accuracy was 0.470–0.594 with overall MCC 0.050. In the same evaluation GPT-4o-mini degenerated to predicting "success" for everything (balanced accuracy 0.500, recall 1.000, specificity 0.000) |
 | Vaccine industry base rate | Phase 1 → approval 39.6% (industry-sponsored), 6.8% (non-industry). The narrowest transition is Phase 2 → 3 at 65.4% — exactly the point where immunogenicity data exists but efficacy data does not, which is the furthest any in-silico immune model can reach |
+| Fine-tuning for protocol code (S9.5) | Improves syntactic and procedural conformance to the Opentrons API and to protocol conventions. Does **not** improve biological validity: a protocol that compiles and passes simulation can still ruin an experiment, and the win rate inherits that limit |
 
 ---
 
@@ -402,6 +482,11 @@ epitopes:
 structure:
   engine: boltz-2               # MIT; do not switch to AF3 weights
   refolder: [esmfold, af2-no-msa]
+finetune:
+  base_model_id: null           # unpinned: set from the live AutoScientist model list before training
+  model_id: null                # unpinned: exists only after a run; record run id + checkpoint SHA-256
+  eval_tasks: 11                # Text2WetLab: 11 tasks, 7 families, before the refusal filter
+  seed: 20261114                # bootstrap + any subsampling; Adaption's create request has no seed
 reproducibility:
   seed: 20261114
   pin_versions: true
@@ -425,13 +510,15 @@ vaxforge/
 │   ├── s8_protocol.py        # NL protocol + falsification condition
 │   ├── s9_robot.py           # OT-2 codegen + simulate + rule checks
 │   ├── s9plus_animate.py     # optional: command list → timeline → canvas
+│   ├── s9_5_finetune.py      # AutoScientist client + family-split manifest
 │   ├── s10_animal.py         # study design, power analysis, ARRIVE pack
 │   ├── s11_prereg.py         # manifest + timestamp
 │   └── s12_biosafety.py      # screening gate
 ├── validation/
 │   ├── lopov.py              # leave-one-pathogen-out
 │   ├── bexsero_case.py       # recall@3 retrieval test
-│   └── leakage_check.py      # asserts holdout actually held out
+│   ├── leakage_check.py      # asserts holdout actually held out
+│   └── winrate.py            # S9.5 pairwise win rate vs base, bootstrap CI
 ├── cache/                    # gitignored
 ├── runs/                     # gitignored
 └── config.yaml
@@ -474,6 +561,7 @@ Sequence screening before synthesis is implemented as a pipeline node (S12), not
 | PyRosetta | Requires a Rosetta licence | Paper signature; international applications can take months. **Avoid entirely at a hackathon** |
 | Vaxign-ML | Open-source Docker build | — |
 | Protegen / VIOLIN | Not stated | Contact corresponding author before redistributing |
+| Fine-tuned S9.5 model, and its base model | Not determined | Bound by the base model's licence, unknown until the base model is pinned; Adaption names no licence for any base model or for the trained weights. The checkpoint is typically a LoRA adapter, which needs the base weights. The training-data licences in §S9.5 also bind. **Read all of them before publishing the weights** |
 
 ---
 
@@ -490,6 +578,9 @@ Numbers quoted in this README trace to the primary sources below. Where we could
 - Lo, Siah & Wong, NBER WP 27176 — vaccine clinical success rates
 - Zumárraga et al., *Front. Immunol.* 17:1730217 (2026-02-05) — reverse-vaccinology output quality analysis
 - Responsible AI × Biodesign community commitments (2024-03-08)
+- Adaption AutoScientist documentation — https://docs.adaptionlabs.ai (read 2026-11-14): model list, create request, win-rate and download pages
+- protocols.io Terms of Service (effective 2026-01-27) and https://www.protocols.io/llms.txt (read 2026-11-14)
+- Opentrons/Protocols — https://github.com/Opentrons/Protocols (`develop` at `2f447c9`; no licence file); Opentrons EULA (2024-07-10)
 
 ---
 
