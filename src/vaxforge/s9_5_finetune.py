@@ -8,6 +8,7 @@ Input is a JSONL of candidate pairs, one per protocol:
    "heldout_family": "colony-pcr" | "none",  # assigned by hand or by the corpus labeller; absent = unassigned
    "family_doubt": false,                    # true when that assignment is uncertain
    "assigned_by": "human" | "agent-review" | "rule",  # who set heldout_family; absent = "rule"
+   "origin": "licensed" | "synthetic",       # a public licensed repository, or s9_5_synth.py; absent = "licensed"
    "refused_by_base": true | false | null,   # S9's refusal detector on the base model; null = not run
    "simulate_pass": true | false | null}     # opentrons_simulate v7.5.0 on the code; null = not run
 
@@ -90,7 +91,7 @@ def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
         why = reasons_for(c, heldout_families)
         if not why:
             included.append({"id": c["id"], "source": c["source"], "heldout_family": c["heldout_family"],
-                             "assigned_by": c.get("assigned_by", "rule"),
+                             "assigned_by": c.get("assigned_by", "rule"), "origin": c.get("origin", "licensed"),
                              "prompt_sha256": _sha(c["prompt"]), "code_sha256": _sha(c["code"])})
             continue
         excluded.append({"id": c["id"], "source": c["source"], "reasons": why})
@@ -103,7 +104,8 @@ def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
         "augmentation": "none",            # no platform-generated rows; Adaptive Data improve/invent not run
         "heldout_families": sorted(heldout_families),
         "min_rows": min_rows,
-        "counts": {"candidates": len(candidates), "included": len(included), "excluded": len(excluded)},
+        "counts": {"candidates": len(candidates), "included": len(included), "excluded": len(excluded),
+                   "included_synthetic": sum(1 for e in included if e["origin"] == "synthetic")},
         "meets_min_rows": len(included) >= min_rows,
         "included": included,
         "excluded": excluded,
@@ -176,11 +178,17 @@ def assert_run_allowed(manifest, base_model_id, cleared_sources, leakage_violati
             problems.append(f"source {source!r} is excluded: {EXCLUDED_SOURCES[source]}")
         elif not str(cleared_sources.get(source, "")).strip():
             problems.append(f"source {source!r} has no recorded licence or permission")
-    not_by_a_person = [e for e in manifest["included"] if e.get("assigned_by", "rule") != "human"]
+    # a synthetic row's label comes from the generator's vocabulary plus the corpus labeller ("rule"), checked by the
+    # leakage check below; a licensed row's label has to be confirmed by a person
+    licensed = [e for e in manifest["included"] if e.get("origin", "licensed") != "synthetic"]
+    not_by_a_person = [e for e in licensed if e.get("assigned_by", "rule") != "human"]
     if not_by_a_person:
         kinds = ", ".join(sorted({e.get("assigned_by", "rule") for e in not_by_a_person}))
         problems.append(f"{len(not_by_a_person)} included family label(s) were not assigned by a person ({kinds}); "
                         "README S9.5 requires them confirmed by hand")
+    odd_synthetic = [e for e in manifest["included"] if e.get("origin") == "synthetic" and e.get("assigned_by") != "rule"]
+    if odd_synthetic:
+        problems.append(f"{len(odd_synthetic)} synthetic row(s) carry a label that is not the generator's rule label")
     if leakage_violations is None:
         problems.append("the leakage check has not been run")
     elif leakage_violations:

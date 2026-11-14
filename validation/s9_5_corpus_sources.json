@@ -1,0 +1,196 @@
+{
+ "about": "Public GitHub repositories whose OT-2 protocols are candidate S9.5 training pairs (README S9.5, Training data provenance). Each licence was read through the GitHub API (repos/<repo>/license) on 2026-11-14 and is permissive with a notice requirement; the commit is the one the candidates were built from. This file records the sources only: no repository content is stored here, and a licence is an input to a person's decision, not the decision.",
+ "licences_cleared": [
+  "MIT",
+  "Apache-2.0",
+  "BSD-3-Clause",
+  "CC0-1.0"
+ ],
+ "sources": [
+  {
+   "repo": "AD-SDL/biomedal_workcell",
+   "commit": "24b0954a9e5ce500baed583abec5f1867c4d4c44",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "AD-SDL/colorpicker_experiment",
+   "commit": "7ebeffb2646ac3d7b579e4dca29f4736784ad932",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "AD-SDL/rapid446_applications",
+   "commit": "0eb52f43528e516cab560e535334617be40a3a9a",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "Bioprotocols/labop",
+   "commit": "2e2bd88150c71a440771fd369f40295dfd622324",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "Corey-ONeal/opentrons-app_ws-remote",
+   "commit": "a255b76c8a07457787d575da12b2d5bdb6220a91",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Francel12-w/Francel-MSc-Thesis",
+   "commit": "e1cda0bb7d37f9a7d1cdab14e7a1df5f6e3721d5",
+   "spdx": "BSD-3-Clause"
+  },
+  {
+   "repo": "LucoDevro/fastKris",
+   "commit": "347a04bf80f3bf42208dc58d0e750421af0a8592",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "MSDLLCpapers/Opentrons-OT2-BioChemical-Assays",
+   "commit": "049682a0fa28be281d8c069dc08e80e2b243a246",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "MiquelAngelPerezPuigdo/Agentic-AI-for-Dual-Ligand-Discovery",
+   "commit": "bfc2c2487a71977c1f9cf250f7507d0da7acd5ea",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "MyersResearchGroup/OpenTrons_OT2_Protocols",
+   "commit": "6427a4dd77d25118becd62b36d27cf5b242edacf",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/actions",
+   "commit": "725b90b8ba6830d4aba61023329df449f5ccc46f",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19",
+   "commit": "67a6a76bffdc2d000a9fe89161152c39f027e490",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19-system-25",
+   "commit": "1abe7ad4c8936e03264c59a0662d095aaf267e02",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19-system-30",
+   "commit": "4db5980a93e87f9f607b727678b7ea6d528109ba",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19-system-34",
+   "commit": "badad1a1ab885756af28fdf2aef49afa21b2c143",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19-system-36",
+   "commit": "b0e7ad83d11497b2236328318eb1040325fc9cdd",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19-system-39",
+   "commit": "00b0bac673e475ffa5513995de19dc702f7663d0",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19-system-8",
+   "commit": "e228c328153c2c100578535e679f89d7b61767cd",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/covid19-system-9",
+   "commit": "9b9b209ddf957c0f12f03ee89458622a63526380",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/flex-testing-agent",
+   "commit": "8dab11d474e1658ffeaa4bc50b833a9533441c84",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/knowledge",
+   "commit": "6954f68bf8c3e1f9d2fea77d58cf099986156d91",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/meta-opentrons",
+   "commit": "c426f04499138b17edc27ea8c82e8195d54faa87",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/opentrons",
+   "commit": "95ac66dea217cd169fbf98ac4573844bd65d01b3",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Opentrons/test-protocols",
+   "commit": "1543a856ca17d95ee8a1090635317057f662993d",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "Oshawott324/datalox-instrument-twins",
+   "commit": "91c8b028999cc7eb84cdcfbce138d9c6ce95a19a",
+   "spdx": "Apache-2.0"
+  },
+  {
+   "repo": "PV-Lab/Robotic_Liquid_Handling",
+   "commit": "a7e1db2bca46c2bf0321481701db3cbc964f109a",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "ZeqingBao/SDL5_Nano",
+   "commit": "f40fcf5588331458bd710dbc27899a9bb5fbec95",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "aldatubio/opentrons",
+   "commit": "56733245dc1e1f0cc7d86db48889f050e1cc6014",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "alexismhill3/gfp_deoptimization_burden",
+   "commit": "80cddc02491db83dd2c682500b9b32a6d97f156c",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "angelovangel/custom-transfer-opentrons",
+   "commit": "3324c8ae695b498e04564d4e72447c61458c0b49",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "blaisemariner17/OpenTronsOT2SMACK",
+   "commit": "55837ecbdd0563b869460d8f10075839545cbece",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "har1eyk/OpenTrons-Scripts",
+   "commit": "674e4405c8628012370445981d862d797cac18c6",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "harper-wood/arcadia-opentrons",
+   "commit": "9d23b3ed886bf25d5e4732902779525628006235",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "parheliabio/ot2-scripts",
+   "commit": "bd1ae40cf61b21dabfde0b91164ab356303efa50",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "tanaes/opentrons_generated_protocols",
+   "commit": "68dceecddc2a2a273779a0a7667c7096e60a6c41",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "tyhho/OT-2_Protocols",
+   "commit": "f2e5a2bd96398a880b9a0bf2d9c4db479021d0fa",
+   "spdx": "MIT"
+  },
+  {
+   "repo": "y3rsh/ot-analyze-test",
+   "commit": "b9410adfe4c2f151aba33e2acf8af53253780304",
+   "spdx": "Apache-2.0"
+  }
+ ]
+}
