@@ -250,7 +250,7 @@ Training uses Adaption's AutoScientist, which its [documentation](https://docs.a
 - **Text2WetLab.** MIT (`LICENSE`). The dataset card's prose says Apache 2.0, so the repository contradicts itself between two permissive licences. Reference scripts it copied from upstream author repos keep their own licences, and 22 of the 45 in its `PROVENANCE.csv` come from repos that state none. We use its tasks and verifier for evaluation only.
 - **protocols.io.** User content is "licensed under the Creative Commons Attribution License (CC-BY)" (Terms of Service §1.B, effective 2026-01-27). The site's machine-readable policy ([`/llms.txt`](https://www.protocols.io/llms.txt)) says public content "MUST NOT be used for model training or fine-tuning" and that its Creative Commons licences "DO NOT grant permission for machine learning training unless explicitly stated". Terms §4.A(xi) prohibits "systematic or automated downloading". Excluded unless protocols.io grants written permission.
 
-**Size.** The library is the only source in the training role, and it has 833 protocols before any filtering. Adaption documents a minimum of 1,000 effective rows for an SFT run. We were unable to verify what "effective" counts, or whether a smaller dataset is rejected. Every filter below only shrinks the 833. We do not pad the set. AutoScientist can add rows from its own "curated pool" (`augmentation_domain_rows`, `augmentation_general_rows`) and Adaptive Data can rewrite rows, and none of those rows can be checked against the family split or the refusal rule. Both augmentation parameters are omitted, which the docs say skips that addition, and Adaptive Data's improve and invent steps are not run. If the filtered set is under the minimum, the run does not happen.
+**Size.** The library is the only source in the training role, and it has 833 protocols before any filtering. Adaption documents a minimum of 1,000 effective rows for an SFT run and defines that as "base rows plus augmentation". We were unable to verify whether a smaller dataset is rejected when the run is created or only when the model is selected. The public leaderboard lists a run on a 1,099-row dataset with no augmentation (observed 2026-11-14), so a set of that size can be ranked. Every filter below only shrinks the 833. We do not pad the set. AutoScientist can add rows from its own "curated pool" (`augmentation_domain_rows`, `augmentation_general_rows`) and Adaptive Data can rewrite rows, and none of those rows can be checked against the family split or the refusal rule. Both augmentation parameters are omitted, which the docs say skips that addition, and Adaptive Data's improve and invent steps are not run. If the filtered set is under the minimum, the run does not happen.
 
 **Training targets must pass the grader that judges them.** 790 of the 833 library files call `get_values`, which the library site injects when a protocol is downloaded, so they do not run as stored. A pair is kept only if its code passes `opentrons_simulate` v7.5.0 once the library's parameters are injected. All 833 declare `apiLevel` 2.0 to 2.15, inside the 2.19 maximum that opentrons 7.5.0 supports. We have not run this filter, so we do not know how many pairs survive it.
 
@@ -276,7 +276,7 @@ Report **n** (tasks scored, after the refusal rule below), the **win rate**, **l
 - **n is small.** At most 11 tasks in 7 families. Text2WetLab's own repeat of one model moved single-task scores by up to 0.70, so one attempt per task is a screening result, not a ranking. An interval that includes equal win and loss rates is reported as no measurable difference, whatever the point estimate.
 - **Rule 3 is the weakest.** On Text2WetLab's paper-only tasks the paper does not always fix the reference's exact quantities, and three of the four reuse their easy task's ground truth (a limitation its authors state). A smaller diff there is not always a more correct protocol.
 - **The base model may already have seen these tasks.** Text2WetLab's four paper-based protocols come from papers whose authors published robot code, which its authors say "may be in the models' training data". The same applies to ours.
-- **This is not Adaption's win rate.** AutoScientist reports its own `best_win_rate`: the base model against the adapted model "on evaluations derived from your dataset". The docs do not name the judge or say that data is held out, and the run repeats until that rate reaches `target_win_rate` or the iterations run out. It is an optimisation target, so we do not report it as evidence. AutoScientist returns the checkpoint from its best iteration, "not necessarily the final iteration"; we evaluate that one checkpoint, once.
+- **This is not Adaption's win rate.** AutoScientist reports its own `best_win_rate`: the base model against the adapted model "on evaluations derived from your dataset". The docs do not name the judge or say that data is held out, and the run repeats until that rate reaches `target_win_rate` or the iterations run out, so it is an optimisation target. Adaption's public [leaderboard](https://adaptionlabs.ai/auto-scientist-leaderboard) shows two other win rates, each judged by Gemini 3.1 pro except for Gemma: a task win rate "on a held-out split of this experiment's training data" and a domain win rate "on a shared held-out test set for this domain". The hackathon's "Best Use of Adaption" track ranks on Adaption's leaderboard by win rate against the base model, so we report Adaption's numbers for that track, labelled as Adaption's and next to ours, never in place of them. None of them is a held-out OT-2 evaluation, so none is evidence that the protocols are better. AutoScientist returns the checkpoint from its best iteration, "not necessarily the final iteration"; we evaluate that one checkpoint, once.
 
 #### Scope limit on the training objective
 
@@ -291,12 +291,23 @@ Report **n** (tasks scored, after the refusal rule below), the **win rate**, **l
 If the base model refuses nothing here, both rates are 0% and the comparison is empty. It shows that the base model did not refuse these prompts, not that fine-tuning preserved refusal behaviour, and it is reported as "not tested". In Text2WetLab's run its two open-weight models refused none of the 11 tasks, while its Anthropic models refused 5 trials.
 
 > We were unable to verify the following about Adaption. **Do not state any of it on a slide without reading the primary pages.**
-> - **Base models.** The docs page and the live model list (`GET /api/v1/autoscientist/models`, 16 entries on 2026-11-14) differ, and the page says "The runtime model list is authoritative". Neither names a licence for any base model, so `finetune.base_model_id` is unpinned.
+> - **Base models.** The docs page and the live model list (`GET /api/v1/autoscientist/models`, 16 entries on 2026-11-14) differ, and the page says "The runtime model list is authoritative". Neither names a licence for any base model. Three candidates carry Apache-2.0 on their own Hugging Face cards, Qwen/Qwen3.5-9B, openai/gpt-oss-20b and Qwen/Qwen3.5-4B; none is chosen, so `finetune.base_model_id` is unpinned.
 > - **Weights.** The docs describe downloading a checkpoint archive and uploading it to Hugging Face by hand, and a 2026-07-28 post says the weights are "yours to download and deploy anywhere". We found no licence or ownership term for them, and the Terms of Service (last updated 2026-02-24) predate AutoScientist's launch on 2026-05-13. The docs say a LoRA checkpoint "typically" holds adapter files; we could not confirm that a download contains merged weights.
-> - **Reproducibility.** The create request has no seed field, so the fine-tune is not reproducible from `finetune.seed`. We record the run id and the SHA-256 of the downloaded checkpoint instead. We could not observe the form of a trained-model id; the docs show only a run id.
+> - **Reproducibility.** The create request has no seed field, so the fine-tune is not reproducible from `finetune.seed`. We record the run id and the SHA-256 of the downloaded checkpoint instead. Run ids are UUIDs (a read-only call with a non-UUID returns HTTP 400), not the `autoscientist_run_abc123` shape in the docs' examples. We could not observe the form of a trained-model id.
 > - **Win-rate internals.** The judge, the scoring and the size of the evaluation set are not stated.
-> - **Pricing, credits and any leaderboard.** `adaptionlabs.ai/pricing`, `/leaderboard` and `/hackathon` return 404, and no page we read gives credit amounts or what a run costs. A post dated 2026-05-13 offered AutoScientist free for 30 days. We make no statement about leaderboard mechanics.
+> - **Pricing, credits and leaderboard entry.** `adaptionlabs.ai/pricing` and `/hackathon` return 404, and no page we read gives credit amounts or what a run costs. A post dated 2026-05-13 offered AutoScientist free for 30 days. The leaderboard page says it ranks "the best AutoScientist runs the community has submitted so far" and shows an adjusted z-score ("Normalised Score"). We found no documentation of how a run is submitted, how its domain is assigned, or how `best_win_rate` relates to the two win rates it shows.
 > - **Data handling.** The privacy policy says input and output are shared with AI service providers, and does not say whether uploaded datasets are used to train anyone's models.
+
+#### Evidence for the Adaption track
+
+The hackathon's "Best Use of Adaption" track asks for a fine-tune made with Adaption, ranked on Adaption's leaderboard by win rate against the base model, and for evidence of how Adaption was used. None of that exists yet. When a run is made, the evidence is:
+
+- `adaption_evidence.json`, written by `s9_5_adaption.record_evidence`: run id, base model id, training method, iterations, Adaption's `best_win_rate` and `target_win_rate`, and the SHA-256 of the downloaded checkpoint.
+- The training manifest, the leakage-check report and the no-augmentation setting, which show what went into the run.
+- Our held-out win, loss and tie rates with their intervals, and both refusal rates (`validation/winrate.py`), labelled separately from Adaption's numbers.
+- Adaption's results page for the run (Training Winrates chart, trained model ID, weights export, AutoScientist config) and, if the run is ranked, its leaderboard row.
+
+Whether a run must be submitted to the leaderboard, and how an entry is identified for the prize, is not in anything we read. It depends on the hackathon's rules.
 
 ### S10 — Animal study proposal
 
@@ -510,7 +521,8 @@ vaxforge/
 │   ├── s8_protocol.py        # NL protocol + falsification condition
 │   ├── s9_robot.py           # OT-2 codegen + simulate + rule checks
 │   ├── s9plus_animate.py     # optional: command list → timeline → canvas
-│   ├── s9_5_finetune.py      # AutoScientist client + family-split manifest
+│   ├── s9_5_finetune.py      # training manifest + run guard (family split, refusal filter)
+│   ├── s9_5_adaption.py      # AutoScientist client: dry run unless confirmed and guarded
 │   ├── s10_animal.py         # study design, power analysis, ARRIVE pack
 │   ├── s11_prereg.py         # manifest + timestamp
 │   └── s12_biosafety.py      # screening gate
@@ -518,7 +530,8 @@ vaxforge/
 │   ├── lopov.py              # leave-one-pathogen-out
 │   ├── bexsero_case.py       # recall@3 retrieval test
 │   ├── leakage_check.py      # asserts holdout actually held out
-│   └── winrate.py            # S9.5 pairwise win rate vs base, bootstrap CI
+│   ├── winrate.py            # S9.5 pairwise win rate vs base, bootstrap CI
+│   └── heldout_families.json # the 7 Text2WetLab families held out of S9.5 training
 ├── cache/                    # gitignored
 ├── runs/                     # gitignored
 └── config.yaml
@@ -561,7 +574,7 @@ Sequence screening before synthesis is implemented as a pipeline node (S12), not
 | PyRosetta | Requires a Rosetta licence | Paper signature; international applications can take months. **Avoid entirely at a hackathon** |
 | Vaxign-ML | Open-source Docker build | — |
 | Protegen / VIOLIN | Not stated | Contact corresponding author before redistributing |
-| Fine-tuned S9.5 model, and its base model | Not determined | Bound by the base model's licence, unknown until the base model is pinned; Adaption names no licence for any base model or for the trained weights. The checkpoint is typically a LoRA adapter, which needs the base weights. The training-data licences in §S9.5 also bind. **Read all of them before publishing the weights** |
+| Fine-tuned S9.5 model, and its base model | Not determined | Bound by the base model's licence, unknown until the base model is pinned (the three candidates are Apache-2.0 on their own cards); Adaption names no licence for any base model or for the trained weights. The checkpoint is typically a LoRA adapter, which needs the base weights. The training-data licences in §S9.5 also bind. **Read all of them before publishing the weights** |
 
 ---
 
@@ -578,7 +591,7 @@ Numbers quoted in this README trace to the primary sources below. Where we could
 - Lo, Siah & Wong, NBER WP 27176 — vaccine clinical success rates
 - Zumárraga et al., *Front. Immunol.* 17:1730217 (2026-02-05) — reverse-vaccinology output quality analysis
 - Responsible AI × Biodesign community commitments (2024-03-08)
-- Adaption AutoScientist documentation — https://docs.adaptionlabs.ai (read 2026-11-14): model list, create request, win-rate and download pages
+- Adaption AutoScientist documentation — https://docs.adaptionlabs.ai (read 2026-11-14): model list, create request, win-rate and download pages; leaderboard — https://adaptionlabs.ai/auto-scientist-leaderboard
 - protocols.io Terms of Service (effective 2026-01-27) and https://www.protocols.io/llms.txt (read 2026-11-14)
 - Opentrons/Protocols — https://github.com/Opentrons/Protocols (`develop` at `2f447c9`; no licence file); Opentrons EULA (2024-07-10)
 
