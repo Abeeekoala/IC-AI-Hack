@@ -22,7 +22,7 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
-testpaths = ["tests"]
+testpaths = ["tests", "validation/tests"]
 addopts = "-q"
 markers = [
     "network: test needs live internet (deselect with -m 'not network')",

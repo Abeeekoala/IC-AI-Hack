@@ -1,0 +1,30 @@
+{
+  "source": "Text2WetLab README, Table 1 (github.com/PhysicalAIBenchmarks/Text2WetLab), read 2026-11-14: seven protocols, four of which also have a paper-only (-hard) task over the same procedure. A family is named after its easy task. All seven are held out of S9.5 training.",
+  "families": {
+    "a1-a12-100ul": [
+      "a1-a12-100ul"
+    ],
+    "split-200ul-two-wells": [
+      "split-200ul-two-wells"
+    ],
+    "ampure-bead-cleanup": [
+      "ampure-bead-cleanup"
+    ],
+    "colony-pcr-screening": [
+      "colony-pcr-screening",
+      "colony-pcr-screening-hard"
+    ],
+    "ecoli-heat-shock-transformation": [
+      "ecoli-heat-shock-transformation",
+      "ecoli-heat-shock-transformation-hard"
+    ],
+    "golden-gate-assembly": [
+      "golden-gate-assembly",
+      "golden-gate-assembly-hard"
+    ],
+    "opentrons-rna-extraction": [
+      "opentrons-rna-extraction",
+      "opentrons-rna-extraction-hard"
+    ]
+  }
+}
