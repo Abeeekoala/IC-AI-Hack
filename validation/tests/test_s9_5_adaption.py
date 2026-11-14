@@ -6,6 +6,7 @@ import http.client
 import inspect
 import io
 import json
+import re
 import ssl
 import sys
 import urllib.parse
@@ -405,6 +406,7 @@ def test_record_evidence_copies_only_the_documented_fields(tmp_path):
     assert path == tmp_path / "out" / "adaption_evidence.json"
     text = path.read_text()
     assert json.loads(text) == {
+        "schema_version": 1,
         "run_id": "run_1", "status": "succeeded", "training_method": "instruction", "base_model_id": "Qwen/Qwen3.5-9B",
         "iterations_completed": 3, "max_iterations": 3, "best_win_rate": 0.74, "target_win_rate": 0.7,
         "target_reached": True, "checkpoint_sha256": "a" * 64,
@@ -422,9 +424,29 @@ def test_record_evidence_says_null_when_nothing_was_downloaded_and_records_faile
     assert record["completed_at_utc"] is None and "boom" not in json.dumps(record)
 
 
-def test_target_reached_compares_best_with_target(tmp_path):
-    below = {**RUN, "best_win_rate": 0.6}
-    assert json.loads(ad.record_evidence(below, tmp_path).read_text())["target_reached"] is False
+def test_the_evidence_file_is_one_flat_object_of_snake_case_keys_with_scalar_values(tmp_path):
+    snake = re.compile(r"[a-z][a-z0-9]*(_[a-z0-9]+)*\Z")
+    for name, run in (("done", RUN), ("running", {"id": "r", "status": "running", "model": "m"})):
+        record = json.loads(ad.record_evidence(run, tmp_path / name, checkpoint_sha256="b" * 64).read_text())
+        assert all(snake.match(k) for k in record), [k for k in record if not snake.match(k)]
+        assert all(v is None or isinstance(v, (str, int, float, bool)) for v in record.values())
+    assert record["schema_version"] == 1
+
+
+def test_target_reached_compares_best_with_target_and_the_boundary_counts_as_reached(tmp_path):
+    def reached(**kw):
+        return json.loads(ad.record_evidence({**RUN, **kw}, tmp_path).read_text())["target_reached"]
+    assert reached(best_win_rate=0.6) is False
+    assert reached(best_win_rate=0.7) is True and reached(best_win_rate=0.74) is True
+
+
+def test_target_reached_is_null_when_a_rate_is_not_on_the_zero_to_one_scale(tmp_path):
+    """The docs do not state best_win_rate's scale. 74 against a target of 0.7 must not read as reached."""
+    def reached(**kw):
+        return json.loads(ad.record_evidence({**RUN, **kw}, tmp_path).read_text())["target_reached"]
+    assert reached(best_win_rate=74.0) is None and reached(best_win_rate=1.2) is None
+    assert reached(best_win_rate=-0.1) is None and reached(best_win_rate="0.74") is None
+    assert reached(best_win_rate=True) is None and reached(target_win_rate=None) is None
 
 
 @pytest.mark.parametrize("run, sha", [(None, None), ({}, None), ({"id": "r"}, None), ({"status": "failed"}, None),

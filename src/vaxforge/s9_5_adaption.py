@@ -34,6 +34,7 @@ API_BASE = "https://api.prod.adaptionlabs.ai"
 KEY_ENV = "ADAPTION_API_KEY"
 TRAINING_METHOD = "instruction"
 EVIDENCE_FILE = "adaption_evidence.json"
+EVIDENCE_SCHEMA_VERSION = 1  # the same convention as validation/winrate.py's report
 RUN_DONE = frozenset({"succeeded", "failed", "cancelled"})
 CAVEAT = ("best_win_rate is Adaption's own optimisation target, measured on evaluations it derives from the uploaded "
           "dataset. It is not evidence of protocol quality; the held-out win rate is validation/winrate.py.")
@@ -389,19 +390,29 @@ def _utc(value):
     return t.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _on_unit_scale(*values):
+    return all(isinstance(v, (int, float)) and not isinstance(v, bool) and 0 <= v <= 1 for v in values)
+
+
 def record_evidence(run, out_dir, *, checkpoint_sha256=None, now=None):
-    """Write out_dir/adaption_evidence.json from a run dict and return its path. Only the fields below are copied, so no
-    dataset, user or organisation id and no secret can reach the file."""
+    """Write out_dir/adaption_evidence.json from a run dict and return its path.
+
+    The file is one flat object of snake_case keys with scalar values, so a UI can bind each key as it is. Only the
+    fields below are copied, so no dataset, user or organisation id and no secret can reach the file. null means "not
+    known yet" (best_win_rate before an iteration finishes, completed_at_utc while running) or "not downloaded"
+    (checkpoint_sha256). target_reached is null unless both rates are on the 0 to 1 scale the docs give for
+    target_win_rate: they do not state best_win_rate's scale, and a percentage would otherwise read as "reached"."""
     if not isinstance(run, dict) or not run.get("id") or not run.get("status"):
         raise ValueError("run must be the dict returned by get_run or wait_for_run")
     if checkpoint_sha256 is not None and not re.fullmatch(r"[0-9a-f]{64}", str(checkpoint_sha256)):
         raise ValueError("checkpoint_sha256 must be 64 lowercase hex characters")
     best, target = run.get("best_win_rate"), run.get("target_win_rate")
     record = {
+        "schema_version": EVIDENCE_SCHEMA_VERSION,
         "run_id": run["id"], "status": run["status"], "training_method": run.get("training_method"),
         "base_model_id": run.get("model"), "iterations_completed": run.get("iterations_completed"),
         "max_iterations": run.get("max_iterations"), "best_win_rate": best, "target_win_rate": target,
-        "target_reached": None if best is None or target is None else best >= target,
+        "target_reached": best >= target if _on_unit_scale(best, target) else None,
         "checkpoint_sha256": checkpoint_sha256,
         "created_at_utc": _utc(run.get("created_at")), "completed_at_utc": _utc(run.get("completed_at")),
         "recorded_at_utc": _utc((now or datetime.now(timezone.utc)).isoformat()),
