@@ -31,8 +31,25 @@ Humans over agents. Only the team lead reassigns work between teammates. If anyo
 
 ## 4. Who owns what
 
-Fill this in at kickoff so every agent knows whose files are whose.
+Four workstreams, split along the pipeline stages in `README.md` §2 so each owner has their own files.
 
 | Area | Owner (GitHub login) | Folders |
 |---|---|---|
-| | | |
+| **A. Backbone & data** (S0–S2) | `@kexinli0403-cell` | `src/vaxforge/s0_taxonomy.py`, `s1_acquire.py`, `s2_annotate.py`, `config.yaml`, `Makefile`, CLI entrypoint |
+| **B. Prediction core** (S3–S7) | `@benjamin-codes-labs` | `src/vaxforge/s3_rank.py`, `s4_filter.py`, `s5_epitopes.py`, `s6_coverage.py`, `s7_structure.py` |
+| **C. Wet-lab outputs** (S8–S10) | `@luk-e158` | `src/vaxforge/s8_protocol.py`, `s9_robot.py`, `s9plus_animate.py`, `s10_animal.py` |
+| **D. Credibility & product** | `@Abeeekoala` | `validation/`, `src/vaxforge/s11_prereg.py`, `s12_biosafety.py`, report/demo UI, Figma design |
+
+### What each stream owes the others
+
+- **A — Backbone & data.** Taxonomy resolution with synonymy and ambiguity surfaced, cache-first acquisition, virulence and localisation annotation. Also owns the run scaffolding everyone else builds on: the `runs/<run_id>/` artifact contract, config, Docker for BLAST+/PSORTb, and `make warm-cache`.
+- **B — Prediction core.** Vaxign-ML ranking, the four safety and conservancy gates, T-cell and B-cell epitope prediction, population coverage with the fairness report, and Boltz-2 structures for the top-k.
+- **C — Wet-lab outputs.** Structured protocol with a falsification condition per candidate, OT-2 codegen validated by `opentrons_simulate`, the automatability matrix, and the animal study design with its ARRIVE 2.0 and 3Rs pack. Optional: the protocol animation.
+- **D — Credibility & product.** LOPOV, the Bexsero recall@3 case, the leakage check, the pre-registration manifest, the biosecurity gate, and the surface that shows a judge the evidence chain and what to trust.
+
+### Cross-stream notes
+
+- **A's artifact contract blocks B, C and D.** Land the `runs/<run_id>/` schema and committed fixture artifacts first, so the other three can work against fixtures instead of waiting for a live pipeline.
+- Every stage is a pure function over the previous stage's artifact. Read and write artifacts; don't import another stream's module.
+- The constraints that bind everyone are in `README.md` §0 (what this does not do), §4 (known limitations), §7 (deliberately absent) and §8 (scope and responsible use). Read them before writing code in your stream — several are tool choices that cause rework if you get them wrong.
+- D's leakage check is adversarial by design: it asserts other streams' holdouts actually held out. Expect it to fail your work and treat that as the point.
