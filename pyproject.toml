@@ -9,7 +9,7 @@ description = "From a pathogen name to ranked candidate vaccine antigens, a fals
 requires-python = ">=3.10"
 # Stream A is stdlib-only except for PyYAML, which has a built-in fallback
 # (config.py) so very new Pythons without wheels still work.
-dependencies = ["PyYAML>=6; python_version < '3.15'"]
+dependencies = ["PyYAML>=6; python_version < '3.15'", "pydantic>=2", "scipy"]
 
 [project.optional-dependencies]
 dev = ["pytest>=7", "numpy>=1.24"]

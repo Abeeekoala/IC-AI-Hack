@@ -1,0 +1,6 @@
+# Python 3.10 ONLY. Install into a separate virtualenv with: bash tools/setup-ot-venv.sh
+# Opentrons 7.5.0 pins pydantic<2 and numpy<2 and only imports on Python 3.10, so it cannot share
+# an environment with the main interpreter; s9_validate.find_ot_python() finds this one and runs it
+# as a subprocess (src/vaxforge/_ot_sim_runner.py).
+# 7.5.0 is the version README S9 names; s9_validate flags apiLevel above 2.19 as beyond its maximum.
+opentrons==7.5.0

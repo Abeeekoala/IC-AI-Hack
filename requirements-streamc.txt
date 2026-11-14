@@ -1,0 +1,19 @@
+# VaxForge stream C (S8-S10): packages for the MAIN interpreter.
+# Checked on Python 3.14.6 with pydantic 2.13.5, scipy 1.17.1, pytest 9.1.1.
+# This file does NOT install the Opentrons simulator, and it must not be installed into the
+# Opentrons environment (opentrons==7.5.0 pins pydantic<2). See requirements-streamc-ot.txt
+# and tools/setup-ot-venv.sh for the second, Python 3.10 environment.
+
+# The S8/S9/S10 models use pydantic 2 APIs (ConfigDict, model_validator, model_validate_json).
+pydantic>=2
+
+# s10_animal.py computes group sizes with scipy.stats (noncentral-t power analysis).
+scipy
+
+# Test runner for tests/wetlab.
+pytest
+
+# OPTIONAL. Only needed for `--backend llm` / `--backend both` (s9_llm.LLMBackend), and that
+# backend also needs ANTHROPIC_API_KEY in the environment. Not installed by default:
+# uncomment the next line or run `pip install anthropic`.
+# anthropic
