@@ -7,7 +7,7 @@
 
 ``tasks`` writes the prompts of every candidate that could otherwise be trained on (it simulates and its family label is
 "none" without doubt); the rest are excluded already and are not sent to a model. ``apply`` fills ``refused_by_base`` from
-the replies with the stop-gap detector in validation/t2wl_adapter.py (to be replaced by stream C's detector, README S9).
+the replies with stream C's detector, vaxforge.refusal.detect_refusal (README S9).
 A reply cut off by max_tokens counts as a failed attempt, not a refusal, so keep max_tokens high enough for a refusal to
 finish (a few dozen tokens). A candidate with no reply keeps ``refused_by_base: null``, which the manifest excludes.
 Standard library only.
@@ -46,8 +46,8 @@ def main(argv=None):
         Path(args.out).write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in tasks), encoding="utf-8")
         print(f"{len(tasks)} prompts to send to the base model, of {len(candidates)} candidates")
         return 0
-    refused = ft._validation_module("t2wl_adapter").stopgap_refusal
-    checked = ft.apply_refusals(candidates, read_jsonl(args.generations), refused)
+    from vaxforge.refusal import detect_refusal
+    checked = ft.apply_refusals(candidates, read_jsonl(args.generations), detect_refusal)
     Path(args.out).write_text("".join(json.dumps(c, ensure_ascii=False) + "\n" for c in checked), encoding="utf-8")
     done = [c for c in checked if c["refused_by_base"] is not None]
     print(f"{len(done)} candidates checked, {sum(1 for c in done if c['refused_by_base'])} refused by the base model, "
