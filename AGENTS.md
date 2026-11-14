@@ -38,14 +38,14 @@ Four workstreams, split along the pipeline stages in `README.md` §2 so each own
 | **A. Backbone & data** (S0–S2) | `@kexinli0403-cell` | `src/vaxforge/s0_taxonomy.py`, `s1_acquire.py`, `s2_annotate.py`, `config.yaml`, `Makefile`, CLI entrypoint |
 | **B. Prediction core** (S3–S7) | `@benjamin-codes-labs` | `src/vaxforge/s3_rank.py`, `s4_filter.py`, `s5_epitopes.py`, `s6_coverage.py`, `s7_structure.py` |
 | **C. Wet-lab outputs** (S8–S10) | `@luk-e158` | `src/vaxforge/s8_protocol.py`, `s9_robot.py`, `s9plus_animate.py`, `s10_animal.py` |
-| **D. Credibility & product** | `@Abeeekoala` | `validation/`, `src/vaxforge/s11_prereg.py`, `s12_biosafety.py`, report/demo UI, Figma design |
+| **D. Credibility & product** | `@Abeeekoala` | `validation/` (including `winrate.py`), `src/vaxforge/s9_5_finetune.py`, `src/vaxforge/s11_prereg.py`, `s12_biosafety.py`, report/demo UI, Figma design |
 
 ### What each stream owes the others
 
 - **A — Backbone & data.** Taxonomy resolution with synonymy and ambiguity surfaced, cache-first acquisition, virulence and localisation annotation. Also owns the run scaffolding everyone else builds on: the `runs/<run_id>/` artifact contract, config, Docker for BLAST+/PSORTb, and `make warm-cache`.
 - **B — Prediction core.** Vaxign-ML ranking, the four safety and conservancy gates, T-cell and B-cell epitope prediction, population coverage with the fairness report, and Boltz-2 structures for the top-k.
 - **C — Wet-lab outputs.** Structured protocol with a falsification condition per candidate, OT-2 codegen validated by `opentrons_simulate`, the automatability matrix, and the animal study design with its ARRIVE 2.0 and 3Rs pack. Optional: the protocol animation.
-- **D — Credibility & product.** LOPOV, the Bexsero recall@3 case, the leakage check, the pre-registration manifest, the biosecurity gate, and the surface that shows a judge the evidence chain and what to trust.
+- **D — Credibility & product.** LOPOV, the Bexsero recall@3 case, the leakage check, the pre-registration manifest, the biosecurity gate, the S9.5 fine-tune and its win-rate harness, and the surface that shows a judge the evidence chain and what to trust.
 
 ### Cross-stream notes
 
