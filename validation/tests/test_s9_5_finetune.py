@@ -117,3 +117,51 @@ def test_cli_writes_the_manifest_and_the_training_file(tmp_path, capsys):
     assert "1 of 2 candidates included" in capsys.readouterr().out
     src.write_text("{oops\n")
     assert ft.main([str(src), "--out", str(out)]) == 1
+
+
+def gen(c, text="def run(protocol): pass", code="def run(protocol): pass", finish="stop", **kw):
+    row = {"task_id": c["id"], "split": "candidate", "arm": "base", "prompt_sha256": ft._sha(c["prompt"]),
+           "text": text, "code": code, "finish_reason": finish}
+    row.update(kw)
+    return row
+
+
+def says_no(text, code, finish_reason):
+    return code is None and "cannot" in text
+
+
+def test_apply_refusals_sets_the_flag_from_the_detector_and_does_not_mutate_the_input():
+    ok, no = cand("ok", refused_by_base=None), cand("no", refused_by_base=None)
+    out = ft.apply_refusals([ok, no], [gen(ok), gen(no, text="I cannot help with that.", code=None)], says_no)
+    assert [c["refused_by_base"] for c in out] == [False, True]
+    assert ok["refused_by_base"] is None  # the input is untouched
+
+
+def test_a_reply_cut_off_by_max_tokens_is_not_a_refusal_even_if_the_detector_would_say_so():
+    c = cand("c", refused_by_base=None)
+    out = ft.apply_refusals([c], [gen(c, text="I cannot", code=None, finish="length")], lambda *a: True)
+    assert out[0]["refused_by_base"] is False
+
+
+def test_a_candidate_with_no_base_generation_stays_unrun_and_is_excluded():
+    c = cand("c", refused_by_base=None)
+    other_arm = gen(c, arm="finetune")
+    other_split = gen(c, split="heldout")
+    out = ft.apply_refusals([c], [other_arm, other_split], says_no)
+    assert out[0]["refused_by_base"] is None
+    m = ft.build_manifest(out, HELD, min_rows=1)
+    assert m["excluded"][0]["reasons"] == ["refusal-filter-not-run"]
+
+
+def test_a_reply_generated_for_a_different_prompt_is_an_error():
+    c = cand("c", refused_by_base=None)
+    stale = gen(c, prompt_sha256=ft._sha("an older prompt"))
+    with pytest.raises(ValueError, match="different prompt"):
+        ft.apply_refusals([c], [stale], says_no)
+
+
+def test_the_refusal_chain_ends_in_the_probe_list():
+    a, b = cand("a", refused_by_base=None), cand("b", refused_by_base=None)
+    flagged = ft.apply_refusals([a, b], [gen(a), gen(b, text="I cannot.", code=None)], says_no)
+    m = ft.build_manifest(flagged, HELD, min_rows=1)
+    assert [e["id"] for e in m["included"]] == ["a"] and m["dropped_for_refusal"] == ["b"]

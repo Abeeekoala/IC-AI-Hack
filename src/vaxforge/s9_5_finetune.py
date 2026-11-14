@@ -108,6 +108,27 @@ def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
     }
 
 
+def apply_refusals(candidates, generations, refused):
+    """Copies of the candidates with refused_by_base filled in from the base arm's generations.
+
+    generations are rows of generations.jsonl; only split "candidate" and arm "base" count. refused(text, code,
+    finish_reason) is S9's refusal detector. A reply cut off by max_tokens is a failed attempt, not a refusal. A
+    candidate with no generation keeps refused_by_base as it was (null excludes it from the manifest). A generation
+    made for a different prompt is an error: the flag has to describe the prompt that would be trained on."""
+    rows = {g["task_id"]: g for g in generations if g.get("split") == "candidate" and g.get("arm") == "base"}
+    out = []
+    for c in candidates:
+        c = dict(c)
+        g = rows.get(c["id"])
+        if g is not None:
+            if g["prompt_sha256"] != _sha(c["prompt"]):
+                raise ValueError(f"candidate {c['id']!r}: the base-model reply was generated for a different prompt")
+            cut_off = g.get("finish_reason") == "length"
+            c["refused_by_base"] = False if cut_off else bool(refused(g.get("text") or "", g.get("code"), g.get("finish_reason")))
+        out.append(c)
+    return out
+
+
 def training_rows(candidates, manifest):
     """The prompt/completion rows to upload: exactly the manifest's included pairs, checked against their hashes."""
     by_id = {c["id"]: c for c in candidates}
