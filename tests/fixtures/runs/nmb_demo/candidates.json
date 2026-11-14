@@ -1,0 +1,283 @@
+{
+ "_fixture": "SYNTHETIC STUB. Not pipeline output. Peptides are random strings (seed 20261114), scores and coverage are invented placeholders. Replace with stream A/B artifacts.",
+ "candidates": [
+  {
+   "candidate_id": "fixture_fHbp",
+   "protein_name": "factor H binding protein (fixture)",
+   "rank": 1,
+   "length_aa": 274,
+   "localisation": "outer membrane",
+   "protegenicity": 0.93,
+   "epitopes": [
+    {
+     "peptide": "DIVWSTFSA",
+     "kind": "T_class_I",
+     "start": 20,
+     "end": 28,
+     "score": 0.438,
+     "hla": [
+      "HLA-A*02:01"
+     ]
+    },
+    {
+     "peptide": "QFAQYVPPK",
+     "kind": "T_class_I",
+     "start": 40,
+     "end": 48,
+     "score": 0.22,
+     "hla": [
+      "HLA-A*24:02"
+     ]
+    },
+    {
+     "peptide": "FTWHNHPSL",
+     "kind": "T_class_I",
+     "start": 60,
+     "end": 68,
+     "score": 0.776,
+     "hla": [
+      "HLA-B*07:02"
+     ]
+    },
+    {
+     "peptide": "EGWNGRQFY",
+     "kind": "T_class_I",
+     "start": 80,
+     "end": 88,
+     "score": 0.074,
+     "hla": [
+      "HLA-A*02:01"
+     ]
+    },
+    {
+     "peptide": "GENTGMFRLGFPKFI",
+     "kind": "T_class_II",
+     "start": 120,
+     "end": 134,
+     "score": 0.18,
+     "hla": [
+      "HLA-DRB1*01:01"
+     ]
+    },
+    {
+     "peptide": "QSTQNPYFMYNYNTH",
+     "kind": "T_class_II",
+     "start": 150,
+     "end": 164,
+     "score": 0.999,
+     "hla": [
+      "HLA-DRB1*15:01"
+     ]
+    },
+    {
+     "peptide": "FMSETRIRTNKH",
+     "kind": "B_linear",
+     "start": 30,
+     "end": 41,
+     "score": 0.608,
+     "hla": []
+    },
+    {
+     "peptide": "SRYHAPMHQQFT",
+     "kind": "B_linear",
+     "start": 70,
+     "end": 81,
+     "score": 0.257,
+     "hla": []
+    }
+   ],
+   "pc90": 0.82,
+   "coverage_by_population": {
+    "Europe": 0.91,
+    "East Asia": 0.78,
+    "Sub-Saharan Africa": 0.69
+   },
+   "structure_confidence": 0.71,
+   "structure_validators": [
+    "esmfold",
+    "af2-no-msa"
+   ],
+   "evidence_refs": [
+    "fixture:s3",
+    "fixture:s5"
+   ]
+  },
+  {
+   "candidate_id": "fixture_NadA",
+   "protein_name": "NadA adhesin (fixture)",
+   "rank": 2,
+   "length_aa": 405,
+   "localisation": "outer membrane",
+   "protegenicity": 0.9,
+   "epitopes": [
+    {
+     "peptide": "NNGAEPGRQ",
+     "kind": "T_class_I",
+     "start": 30,
+     "end": 38,
+     "score": 0.117,
+     "hla": [
+      "HLA-B*07:02"
+     ]
+    },
+    {
+     "peptide": "IRFTHGTYK",
+     "kind": "T_class_I",
+     "start": 50,
+     "end": 58,
+     "score": 0.901,
+     "hla": [
+      "HLA-A*24:02"
+     ]
+    },
+    {
+     "peptide": "RDCALNERM",
+     "kind": "T_class_I",
+     "start": 70,
+     "end": 78,
+     "score": 0.927,
+     "hla": [
+      "HLA-A*02:01"
+     ]
+    },
+    {
+     "peptide": "FKCESRLSL",
+     "kind": "T_class_I",
+     "start": 90,
+     "end": 98,
+     "score": 0.556,
+     "hla": [
+      "HLA-A*02:01"
+     ]
+    },
+    {
+     "peptide": "QHNLNCLVAWTKLGG",
+     "kind": "T_class_II",
+     "start": 130,
+     "end": 144,
+     "score": 0.176,
+     "hla": [
+      "HLA-DRB1*01:01"
+     ]
+    },
+    {
+     "peptide": "YKIEPAAWKHLCKKQ",
+     "kind": "T_class_II",
+     "start": 160,
+     "end": 174,
+     "score": 0.529,
+     "hla": [
+      "HLA-DRB1*01:01"
+     ]
+    },
+    {
+     "peptide": "GWCNNQKLKPWY",
+     "kind": "B_linear",
+     "start": 40,
+     "end": 51,
+     "score": 0.392,
+     "hla": []
+    },
+    {
+     "peptide": "NGLSTTRPWGRQ",
+     "kind": "B_linear",
+     "start": 80,
+     "end": 91,
+     "score": 0.812,
+     "hla": []
+    }
+   ],
+   "pc90": 0.77,
+   "coverage_by_population": {
+    "Europe": 0.88,
+    "East Asia": 0.74
+   },
+   "evidence_refs": [
+    "fixture:s3"
+   ]
+  },
+  {
+   "candidate_id": "fixture_NHBA",
+   "protein_name": "Neisserial heparin binding antigen (fixture)",
+   "rank": 3,
+   "length_aa": 488,
+   "localisation": "unknown",
+   "protegenicity": 0.86,
+   "epitopes": [
+    {
+     "peptide": "EGHWGRPAY",
+     "kind": "T_class_I",
+     "start": 40,
+     "end": 48,
+     "score": 0.046,
+     "hla": [
+      "HLA-A*02:01"
+     ]
+    },
+    {
+     "peptide": "RIRDYMHNA",
+     "kind": "T_class_I",
+     "start": 60,
+     "end": 68,
+     "score": 0.742,
+     "hla": [
+      "HLA-A*02:01"
+     ]
+    },
+    {
+     "peptide": "SEHVLEKKK",
+     "kind": "T_class_I",
+     "start": 80,
+     "end": 88,
+     "score": 0.162,
+     "hla": [
+      "HLA-A*24:02"
+     ]
+    },
+    {
+     "peptide": "DESREAQKM",
+     "kind": "T_class_I",
+     "start": 100,
+     "end": 108,
+     "score": 0.681,
+     "hla": [
+      "HLA-A*02:01"
+     ]
+    },
+    {
+     "peptide": "RNPLYSVRFGKAIED",
+     "kind": "T_class_II",
+     "start": 140,
+     "end": 154,
+     "score": 0.921,
+     "hla": [
+      "HLA-DRB1*01:01"
+     ]
+    },
+    {
+     "peptide": "KDTPFDHQMDVYQTT",
+     "kind": "T_class_II",
+     "start": 170,
+     "end": 184,
+     "score": 0.385,
+     "hla": [
+      "HLA-DRB1*15:01"
+     ]
+    }
+   ],
+   "evidence_refs": [
+    "fixture:s3"
+   ]
+  },
+  {
+   "candidate_id": "fixture_decoy",
+   "protein_name": "putative lipoprotein (fixture decoy)",
+   "rank": 4,
+   "length_aa": 150,
+   "localisation": "unknown",
+   "protegenicity": 0.6,
+   "epitopes": [],
+   "evidence_refs": []
+  }
+ ]
+}
