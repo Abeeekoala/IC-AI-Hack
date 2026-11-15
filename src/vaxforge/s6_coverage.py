@@ -160,7 +160,7 @@ def run(target: Any, cfg: Any = None, *, s5_path: str | Path | None = None,
                                  backend="python", fidelity="alternative",
                                  note="cross-check with the official IEDB tool via the exported epitope-allele file"))
         for c in cands:
-            sel_ids = list(c["tcell"]["class_i"]["selected"]) + list(c["tcell"]["class_ii"]["selected"])
+            sel_ids = list(c["tcell"]["class_i"]["selected"] or []) + list(c["tcell"]["class_ii"]["selected"] or [])   # null = class did not run
             sub = {eid: ep_by_id[eid]["alleles"] for eid in sel_ids if eid in ep_by_id}
             slim = _slim_candidate(c)
             if not sub:
@@ -190,6 +190,7 @@ def run(target: Any, cfg: Any = None, *, s5_path: str | Path | None = None,
     payload = {
         "context": s5["payload"]["context"],
         "analysis": status,
+        "degraded": [] if status.get("status") == "ran" else [f"S6 population coverage did not run: {status.get('reason', 'no reason recorded')}"],
         "set_level": set_level,
         "candidates": out_cands,
         "epitope_set": s5["payload"]["epitope_set"],

@@ -352,8 +352,10 @@ def run(target: Any, cfg: Any = None, *, s4_path: str | Path | None = None,
             continue
         L = len(seqs[pid])
         e1, e2 = ci_epitopes[pid], cii_epitopes[pid]
+        ran1, ran2 = status["class_i"]["status"] == "ran", status["class_ii"]["status"] == "ran"
         side = sidecar_dir / f"{_safe(pid)}_tcell.tsv"
-        _write_tcell_sidecar(side, e1 + e2)
+        if ran1 or ran2:                                   # no header-only file for a prediction that never ran
+            _write_tcell_sidecar(side, e1 + e2)
         prom1, prom2 = sum(1 for e in e1 if e["n_strong_alleles"] >= min_prom), sum(1 for e in e2 if e["n_strong_alleles"] >= min_prom)
         s1 = tcell_score(prom1, L, s5["half_score_density"]) if status["class_i"]["status"] == "ran" else None
         s2 = tcell_score(prom2, L, s5["half_score_density"]) if status["class_ii"]["status"] == "ran" else None
@@ -382,24 +384,32 @@ def run(target: Any, cfg: Any = None, *, s4_path: str | Path | None = None,
                                                     "rescued_despite": c.get("rescued_despite")}},
             "tcell": {
                 "score": combined, "score_basis": basis,
-                "class_i": {"n_epitopes": len(e1), "n_promiscuous": prom1, "promiscuous_per_100aa": round(dens1, 3), "score": s1,
+                # an analysis that did not run reports null (contract rule 4), never 0 or []: 'no binders' and 'not computed' differ
+                "class_i": {"n_epitopes": len(e1) if ran1 else None, "n_promiscuous": prom1 if ran1 else None,
+                            "promiscuous_per_100aa": round(dens1, 3) if ran1 else None, "score": s1,
                             "random_expectation_per_100aa": None if null1 is None else round(null1, 3),
                             "enrichment_vs_random": None if not null1 else round(dens1 / null1, 2),
-                            "top": e1[:50], "selected": [e["epitope_id"] for e in sel1]},
-                "class_ii": {"n_epitopes": len(e2), "n_promiscuous": prom2, "promiscuous_per_100aa": round(dens2, 3), "score": s2,
+                            "top": e1[:50] if ran1 else None, "selected": [e["epitope_id"] for e in sel1] if ran1 else None},
+                "class_ii": {"n_epitopes": len(e2) if ran2 else None, "n_promiscuous": prom2 if ran2 else None,
+                             "promiscuous_per_100aa": round(dens2, 3) if ran2 else None, "score": s2,
                              "random_expectation_per_100aa": None if null2 is None else round(null2, 3),
                              "enrichment_vs_random": None if not null2 else round(dens2 / null2, 2),
-                             "top": e2[:50], "selected": [e["epitope_id"] for e in sel2]},
-                "all_epitopes_file": art.run_file_ref(run_dir, side),
+                             "top": e2[:50] if ran2 else None, "selected": [e["epitope_id"] for e in sel2] if ran2 else None},
+                "all_epitopes_file": art.run_file_ref(run_dir, side) if (ran1 or ran2) else None,
                 "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"},
             "bcell": {"linear": lin or {"status": "unavailable"},
                       "linear_score": None if not lin else lin["top20pct_mean_score"],
                       "conformational": conf.get(pid, {"status": "unavailable"})},
         })
 
+    degraded = [f"S5 {label} did not run" + (f": {status[k]['reason']}" if status[k].get("reason") else "")
+                for k, label in (("class_i", "class I T-cell prediction"), ("class_ii", "class II T-cell prediction"),
+                                 ("bcell_linear", "linear B-cell prediction"), ("conformational", "conformational B-cell prediction"))
+                if status[k].get("status") not in ("ran", "disabled")]
     payload = {
         "context": s4["payload"]["context"],
         "analysis_status": status,
+        "degraded": degraded,
         "skipped_candidates": skipped,
         "upstream": {"s4_incomplete_screening": s4["payload"]["incomplete_screening"],
                      "s4_unavailable_gates": s4["payload"]["unavailable_gates"],

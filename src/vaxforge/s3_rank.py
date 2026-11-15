@@ -505,6 +505,9 @@ def run(target: Any, cfg: Any = None, *, s2_path: str | Path | None = None,
                    "n_selected": len(ordered), "threshold_summary": summary,
                    "fold_enrichment": None,
                    "fold_enrichment_note": "Needs ground-truth positives; computed by the validation harness, not here."},
+        "degraded": ([] if result is not None else
+                      ["S3 used the rule-based fallback ranker, not Vaxign-ML or a scores file: no protegenicity, "
+                       "a composite of localisation and virulence evidence only"]),
         "ties": ties,
         "candidates": candidates,
         "ranking": ranking_entries,
