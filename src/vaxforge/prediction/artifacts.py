@@ -128,6 +128,12 @@ def split_target(target: Any) -> tuple[Any | None, Path]:
     return None, Path(target)
 
 
+# The upstream artifacts each stage really reads, declared explicitly so ``vaxforge verify`` flags a stage (and
+# everything downstream of it) when one of them is re-run. S7 reads only S6 (S5's results reach it through S6);
+# RunStore's own default for s7 is ['s4'], which left S7 un-flagged after S6 changed. S4 also reads S1's proteome files.
+DECLARED_INPUTS = {"s3": ["s2"], "s4": ["s3", "s1"], "s5": ["s4"], "s6": ["s5"], "s7": ["s6"]}
+
+
 def write_stage(target: Any, env: Mapping) -> Path:
     """Write a finished envelope: our own format into a plain directory, or through ``RunStore.write_artifact``
     (their envelope, digest, manifest and upstream chain) when ``target`` is a store."""
@@ -138,7 +144,8 @@ def write_stage(target: Any, env: Mapping) -> Path:
     tools = {}
     for t in env["tools"]:
         tools[str(t["name"])] = str(t.get("version") or t.get("backend") or "unknown")
-    store.write_artifact(sid, env["payload"], params=env["params"], tools=tools, status="ok", warnings=env["warnings"])
+    store.write_artifact(sid, env["payload"], params=env["params"], tools=tools, status="ok", warnings=env["warnings"],
+                         inputs=DECLARED_INPUTS[sid])
     return Path(store.artifact_path(sid))
 
 
