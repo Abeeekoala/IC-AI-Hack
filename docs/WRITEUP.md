@@ -24,7 +24,7 @@ What it is not: it does not predict wet-lab results, simulate trials, or build a
 - Boltz-2 (2.2.1) is wired into S7 for the top-k candidates and its confidence is reported, not hidden: mean pLDDT, the four confidence bands, the run mode (engine, MSA mode, accelerator) and the share of predicted epitope residues below the pLDDT floor of 70.
 - Real sample (`docs/examples/s7_structure.real_mc58_boltz_cpu.json`, three proteins of the MC58 proteome, CPU, offline, no MSA, fast smoke settings): mean pLDDT 58.2, 67.4 and 36.3; epitope residues below the floor 22 of 22, 10 of 21 and 31 of 31. In that mode most predicted epitope residues sit in low-confidence regions, and S7's structure term is weak evidence. We show that rather than a hopeful number.
 - No affinity or design claim: Boltz-2's affinity head covers protein to small-molecule binding only, and VaxForge produces no affinity value.
-- `[FILL if the MSA run exists: the same stage with an alignment, per candidate, side by side with the smoke run.]`
+- Not done: a Boltz-2 run with an alignment (MSA) on a GPU, the obvious upgrade for this stage. Stream B measured nothing for it and advises against starting one on the 16 GB CPU machine we had: the top three candidates of the demo run are 1,815, 708 and 791 residues, the first is over S7's 1,500-residue limit (S7 skips it), and a standard-settings fold of the others on CPU is far beyond the time we had. The CPU smoke run above is the only Boltz run on record.
 
 ### Best-Designed AI Product (Figma)
 
