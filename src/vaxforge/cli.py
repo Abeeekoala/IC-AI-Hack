@@ -287,7 +287,10 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 
 DEMO_STAGES = "s3,s4,s5,s6,s7,s8,s9,s9plus,s9_5,s10,s11,s12"
-DEFAULT_DEMO_SCORES = Path(__file__).resolve().parents[2] / "docs" / "examples" / "vaxign_ml_scores.nmb_fixture.tsv"   # stream B, real Vaxign-ML
+_EXAMPLES = Path(__file__).resolve().parents[2] / "docs" / "examples"
+DEFAULT_DEMO_SCORES = _EXAMPLES / "vaxign_ml_scores.nmb_fixture.tsv"                    # stream B, real Vaxign-ML
+DEMO_EVIDENCE = _EXAMPLES / "s9_5_adaption_evidence.real_4b.json"                        # stream D, a real earlier Adaption run
+DEMO_MANIFEST = _EXAMPLES / "s9_5_manifest.real_4b.trimmed.json"
 
 
 def cmd_demo_offline(args: argparse.Namespace) -> int:
@@ -326,6 +329,19 @@ def cmd_demo_offline(args: argparse.Namespace) -> int:
         argv += ["--set", "s3.backend=subtractive_filter"]
         say("  S3 uses the rule-based fallback ranker (no protegenicity term)")
     argv += ["--set", "s7.boltz.msa=empty"]
+    if not args.no_evidence and DEMO_EVIDENCE.is_file() and DEMO_MANIFEST.is_file():
+        argv += ["--set", f"finetune.evidence={json.dumps(str(DEMO_EVIDENCE))}", "--set", f"finetune.manifest={json.dumps(str(DEMO_MANIFEST))}"]
+        say(f"  S9.5 attaches {DEMO_EVIDENCE.name} and {DEMO_MANIFEST.name}: a real earlier run, NOT produced by this demo")
+        try:
+            evidence = json.loads(DEMO_EVIDENCE.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            evidence = {}
+        what = (evidence.get("_about") or {}).get("what") if isinstance(evidence, dict) else None
+        caveat = evidence.get("caveat") if isinstance(evidence, dict) else None
+        if what:
+            say(f"    {what}")
+        if caveat:
+            say(f"    caveat: {caveat}")
     for item in args.overrides:
         argv += ["--set", item]
     return main(argv)
@@ -605,6 +621,8 @@ def build_parser() -> argparse.ArgumentParser:
     dm.add_argument("--scores-file", help="precomputed protegenicity scores for S3 (sets s3.backend=scores_file and s3.scores_file); "
                                           "default: docs/examples/vaxign_ml_scores.nmb_fixture.tsv when it exists")
     dm.add_argument("--rule-based", action="store_true", help="rank S3 with the rule-based fallback instead of a scores file")
+    dm.add_argument("--no-evidence", action="store_true",
+                    help="do not attach the real earlier Adaption run in docs/examples to S9.5 (it then records that no fine-tune ran)")
     dm.add_argument("--force", action="store_true", help="replace --out when it already has files")
     dm.set_defaults(func=cmd_demo_offline)
 

@@ -273,6 +273,11 @@ def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path,
     default_scores = tmp_path / "default_scores.tsv"                                     # stands in for stream B's file in docs/examples
     default_scores.write_text("protein_id\tscore\nQ1\t90\n", encoding="utf-8")
     monkeypatch.setattr(cli, "DEFAULT_DEMO_SCORES", default_scores)
+    evidence, manifest = tmp_path / "evidence.json", tmp_path / "manifest.json"          # stand in for stream D's real earlier run
+    evidence.write_text(json.dumps({"_about": {"what": "A REAL earlier run."}, "caveat": "best_win_rate is not protocol quality."}), encoding="utf-8")
+    manifest.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(cli, "DEMO_EVIDENCE", evidence)
+    monkeypatch.setattr(cli, "DEMO_MANIFEST", manifest)
     out = tmp_path / "demo"
 
     def go(*extra: str) -> int:
@@ -296,6 +301,11 @@ def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path,
     assert "s7.boltz.msa=empty" in sets(argv)                                             # no MSA server, no container (never backend auto)
     text = capsys.readouterr().out
     assert "holdout_enforced is false" in text and "not a validation" in text             # said plainly, not buried in a warning
+    assert "NOT produced by this demo" in text and "A REAL earlier run." in text and "caveat: best_win_rate is not protocol quality." in text
+    s = sets(argv)
+    ev_key, ev_value = cli.parse_override(next(x for x in s if x.startswith("finetune.evidence=")))
+    mf_key, mf_value = cli.parse_override(next(x for x in s if x.startswith("finetune.manifest=")))
+    assert (ev_key, Path(ev_value)) == ("finetune.evidence", evidence) and (mf_key, Path(mf_value)) == ("finetune.manifest", manifest)
 
     with pytest.raises(ConfigError, match="not empty"):                                  # never overwrite silently
         go()
@@ -307,8 +317,9 @@ def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path,
     assert "s3.backend=scores_file" in sets(calls[-1]) and scores_used(calls[-1]) == own.resolve()
     assert "holdout_enforced is false" not in capsys.readouterr().out                    # the caveat belongs to the default file only
 
-    assert go("--force", "--rule-based") == 0
+    assert go("--force", "--rule-based", "--no-evidence") == 0
     assert "s3.backend=subtractive_filter" in sets(calls[-1]) and not any(x.startswith("s3.scores_file=") for x in sets(calls[-1]))
+    assert not any(x.startswith("finetune.") for x in sets(calls[-1]))                    # --no-evidence: S9.5 records that no fine-tune ran
     with pytest.raises(ConfigError, match="exclude each other"):
         go("--force", "--rule-based", "--scores-file", str(own))
     with pytest.raises(ConfigError, match="scores file not found"):

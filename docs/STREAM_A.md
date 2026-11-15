@@ -21,7 +21,9 @@ python -m pytest                              # 80+ tests, all offline (BLAST te
 backend (which would start the Vaxign-ML Docker image, and pull 4.9 GB the first time): by default it sets `s3.backend=scores_file` with stream B's real Vaxign-ML scores
 `docs/examples/vaxign_ml_scores.nmb_fixture.tsv` (stock model, trained on all of Protegen: `holdout_enforced` is false, S3 prints a LEAKAGE RISK warning, and the Bexsero
 recall on this run is not a validation); `--scores-file FILE` uses your own scores, `--rule-based` sets `s3.backend=subtractive_filter` (the rule-based fallback). It also sets
-`s7.boltz.msa=empty` (the default `server` would send the sequences to an MSA server).
+`s7.boltz.msa=empty` (the default `server` would send the sequences to an MSA server). It also attaches stream D's real earlier Adaption run to S9.5
+(`finetune.evidence` / `finetune.manifest` = the two `docs/examples/s9_5_*real_4b*` files, status `evidence_attached`) and says so before the run: that run was not produced
+by the demo, and its `best_win_rate` is Adaption's own target, not protocol quality; `--no-evidence` leaves S9.5 as "no fine-tune ran". `make` picks `python3` when it runs, else `python`.
 `vaxforge run --out RUN_DIR --stages s7,s8` runs later stages on an existing folder without `--pathogen`; only S0 needs a target.
 `--set KEY=VALUE` (repeatable, any command) overrides one config value for that run; the value is read as JSON when it parses (`true`, `3`, `"text"`), else as text.
 

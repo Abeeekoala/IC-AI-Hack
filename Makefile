@@ -1,7 +1,8 @@
 # VaxForge - stream A Makefile (README section 5).
 # No `make` on Windows?  Every target is a one-liner around `python -m vaxforge ...` - run that directly.
+# PY is python3 when that runs (a Mac often has no `python`), else python; override with `make PY=/path/to/python ...`.
 
-PY        ?= python
+PY        ?= $(shell python3 -c "import sys" >/dev/null 2>&1 && echo python3 || echo python)
 PATHOGENS ?= Neisseria meningitidis,SARS-CoV-2
 PATHOGEN  ?= Neisseria meningitidis
 OUT       ?= runs/nmb
