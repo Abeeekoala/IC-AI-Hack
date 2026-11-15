@@ -30,7 +30,7 @@ Each journey has a stable landing and a meaningful real interaction. Show Figma 
 
 | Screen | Primary content and action | Evidence and states |
 |---|---|---|
-| 01 Request | Pathogen/run selector; explicit fixture source; compact research-request field; “Review candidates”. Separate “Prepare model request” action after selecting a suitable task. | Show 40 of 2,003 fixture proteins; recorded offline stages. Do not imply typing a name fetched or screened a complete proteome. Fields: ready, loading, completed, failed. |
+| 01 Request | Pathogen/run selector with two separate labelled lines: the target “Neisseria meningitidis” (species, NCBI taxid 487, Gram-negative; demonstration case serogroup B) and the sample organism the saved run holds, “Neisseria meningitidis serogroup B, strain MC58 (ATCC BAA-335) · UniProt reference proteome UP000000425”. Explicit fixture source; compact research-request field; “Review candidates”. Separate “Prepare model request” action after selecting a suitable task. | Show 40 of 2,003 fixture proteins; recorded offline stages. Do not imply typing a name fetched or screened a complete proteome, or that the run covers every strain or serogroup: S0 resolves to the species and S1 takes the reference proteome (strain MC58). Take the strings from `demo_data/run_nmb_fixture/s0_taxonomy.json` (`payload.query`, `payload.taxon`) and `s1_acquire.json` (`payload.proteome`); the full label table is “Target and sample organism” in `DEMO_VIDEO_PLAN.md`. Fields: ready, loading, completed, failed. |
 | 02 Candidate review | Ranked list; select one candidate to open evidence drawer. Show score source, missing gates and next review action together. | Read existing stage artifacts; no invented “validated” score. Preserve candidate/run identity through navigation. |
 | 03 Structure evidence | One verified Boltz sample's structure if its original file is available, otherwise confidence chart; run mode and confidence beside the visual. | Explicit “Separate CPU/no-MSA sample”; means 58.2, 67.4, 36.3. Missing structure file gets an honest empty state, not a decorative molecule. |
 | 04 Generate with models | One reviewed, bounded software task, with two output lanes: “Anthropic API” and “Local Adaption fine-tune”. “Generate both” submits the task; the UI shows each lane's actual progress independently. | Exact model IDs, timestamps, duration, output excerpt, completion/refusal/error status. Local lane includes verified adapter identity. “Test generated code” is enabled only for retained, eligible outputs. |
@@ -83,7 +83,7 @@ Product work is stream D. Changes to S8/S9 require stream C handoff; scaffolding
 | Time | Canvas movement and working proof |
 |---|---|
 | 0:00–0:08 | Whole Figma canvas, human cursor movement, headline question “Which candidates deserve lab time?” Ease into Request. |
-| 0:08–0:21 | Match design into working Request/Candidate UI; choose the fixture and inspect a candidate. Keep fixture and missing-check labels. |
+| 0:08–0:21 | Match design into working Request/Candidate UI; choose the fixture and inspect a candidate. Keep the organism (“Neisseria meningitidis · strain MC58”), fixture and missing-check labels. |
 | 0:21–0:27 | Zoom back to Figma overview; pan toward Structure; land and hold. Movement has no tiny text the viewer must read. |
 | 0:27–0:41 | Structure evidence, separate sample label, confidence/run mode. Use an actual original fold only if verified. |
 | 0:41–0:47 | Pull back to canvas; move to Generate with models; transition into real UI. |
