@@ -8,7 +8,12 @@ REAL files hold the real candidate pairs after the refusal filter. The synthetic
 "-s", for example ``vaxforge-synthetic:serial_dilution``) in round-robin order from a seeded shuffle of each kind, so the
 subset is as even across the generator's kinds as the supply allows, and only as many are taken as are needed for
 ``--rows`` rows in the manifest. Only synthetic rows that would pass every manifest rule are drawn. Prints the counts and the
-real share: that ratio goes into the README with the manifest. Nothing here changes a row.
+real share: that ratio goes into the README with the manifest.
+
+A real file may hold the same id twice: the plain simulate run that failed (the file needs its repository's own labware
+definition) and the later re-run that passed. ``merge_duplicates`` keeps one row per id, the passing copy, and never loosens a
+label: a held-out family on either copy sticks, and a family in doubt on either copy sticks, so a merge can only exclude more.
+Two copies of an id with different code or prompt are an error, not a merge.
 """
 import argparse
 import json
@@ -27,8 +32,38 @@ def kind_of(row_id):
     return m.group(1) if m else row_id
 
 
+def merge_duplicates(rows):
+    """-> (rows with unique ids in first-seen order, number merged, number whose label was tightened)."""
+    groups, order = {}, []
+    for c in rows:
+        if c["id"] not in groups:
+            order.append(c["id"])
+        groups.setdefault(c["id"], []).append(c)
+    merged, n_merged, n_tightened = [], 0, 0
+    for i in order:
+        copies = groups[i]
+        if len(copies) == 1:
+            merged.append(copies[0])
+            continue
+        if len({(c["code"], c["prompt"]) for c in copies}) != 1:
+            raise ValueError(f"{i}: two copies with different code or prompt")
+        n_merged += 1
+        passing = [c for c in copies if c.get("simulate_pass") is True]
+        keep = dict((passing or copies)[-1])
+        held = [c for c in copies if c.get("heldout_family") not in ("none", None)]
+        if keep.get("heldout_family") in ("none", None) and held:
+            keep["heldout_family"], keep["assigned_by"] = held[-1]["heldout_family"], held[-1].get("assigned_by", "rule")
+            n_tightened += 1
+        if any(c.get("family_doubt") for c in copies) and not keep.get("family_doubt"):
+            keep["family_doubt"] = True
+            n_tightened += 1
+        merged.append(keep)
+    return merged, n_merged, n_tightened
+
+
 def assemble(real, synthetic, rows, heldout_families, seed):
     """-> (candidates, report). candidates = every real row + the synthetic rows drawn."""
+    real, n_merged, n_tightened = merge_duplicates(real)
     n_real = len(ft.build_manifest(real, heldout_families, 1)["included"])
     need = max(0, rows - n_real)
     eligible = [c for c in synthetic if not ft.reasons_for(c, heldout_families)]
@@ -44,7 +79,7 @@ def assemble(real, synthetic, rows, heldout_families, seed):
             if by_kind[k] and len(chosen) < need:
                 chosen.append(by_kind[k].pop())
     total = n_real + len(chosen)
-    report = {"rows_target": rows, "real_included": n_real, "synthetic_available": len(eligible), "synthetic_chosen": len(chosen),
+    report = {"rows_target": rows, "duplicate_ids_merged": n_merged, "labels_tightened_by_merge": n_tightened, "real_included": n_real, "synthetic_available": len(eligible), "synthetic_chosen": len(chosen),
               "total": total, "real_share": round(n_real / total, 4) if total else None,
               "synthetic_per_kind": {k: sum(1 for c in chosen if kind_of(c["id"]) == k) for k in kinds},
               "meets_rows": total >= rows}
