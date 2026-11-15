@@ -67,7 +67,7 @@ PAYLOAD_KEYS = ("pathogen", "selection", "candidates")  # A's structural check f
 ORDER_FASTA_PARTS = ("s8", "order.fasta")  # -> <run>/data/s8/order.fasta
 ORDER_FASTA_REL = "data/" + "/".join(ORDER_FASTA_PARTS)
 # S12 (stream D) reads exactly this: `check ORDER.fasta --run RUN_DIR [--screening FILE]`, exit 0 cleared | 2 blocked | 3 not screened.
-# `vaxforge biosafety check ...` is the same command once `s12_biosafety` is listed in cli.EXTENSION_MODULES; this form works today.
+# `vaxforge biosafety check ...` is the same command (`s12_biosafety` is registered in cli.EXTENSION_MODULES since PR #39); the `python -m` form below also works.
 S12_COMMAND = f"python -m vaxforge.s12_biosafety check RUN_DIR/{ORDER_FASTA_REL} --run RUN_DIR --screening PROVIDER_RECORD.json"
 GENE_SYNTHESIS_GATE = (
     "Sequence cleared by S12 biosecurity screening before ordering. The S8 stage writes the order list (protein FASTA; the vendor "
