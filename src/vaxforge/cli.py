@@ -289,7 +289,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 DEMO_STAGES = "s3,s4,s5,s6,s7,s8,s9,s9plus,s9_5,s10,s11,s12"
 _EXAMPLES = Path(__file__).resolve().parents[2] / "docs" / "examples"
 DEFAULT_DEMO_SCORES = _EXAMPLES / "vaxign_ml_scores.nmb_fixture.tsv"                    # stream B, real Vaxign-ML
-DEMO_EVIDENCE = _EXAMPLES / "s9_5_adaption_evidence.real_4b.json"                        # stream D, a real earlier Adaption run
+DEMO_EVIDENCE = _EXAMPLES / "s9_5_adaption_evidence.real_9b.json"                        # stream D, a real earlier Adaption run
 DEMO_MANIFEST = _EXAMPLES / "s9_5_manifest.real_4b.trimmed.json"
 
 
