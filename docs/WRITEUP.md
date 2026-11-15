@@ -28,7 +28,7 @@ What it is not: it does not predict wet-lab results, simulate trials, or build a
 
 ### Best-Designed AI Product (Figma)
 
-- The product surface was designed in Figma: 16 screens as editable layers, colours bound to variables (15 bound), a status-pill component set, and an owner card on every screen naming who owns that stage and what to check.
+- The product surface was designed in Figma: 16 screens as editable layers, colours defined as variables (19 colour variables of 29), a status-pill component set, and an owner card on every screen naming who owns that stage and what to check.
 - The process is recorded in `docs/design/FIGMA_EVIDENCE.md` (what was imported, what was fixed by hand, what was checked by an independent re-check).
 - The design is honest by construction: "fixture subset", "not run", "unverified" and "needs review" are first-class states, not footnotes.
 
