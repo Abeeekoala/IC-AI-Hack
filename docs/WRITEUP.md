@@ -15,9 +15,9 @@ What it is not: it does not predict wet-lab results, simulate trials, or build a
 ### AI for Science (main track; sponsors Boltz and Tamarind Bio)
 
 - The pipeline is S0 to S12 over content-addressed JSON artifacts (`runs/<run_id>/`), so every number in the final report traces to a tool, a version and its parameters.
-- Held-out evidence, not self-assessment: LOPOV and the Bexsero recall@3 case (`vaxforge validate lopov|bexsero`), with the leakage check beside the answer. Bexsero recall@3: `[FILL]`.
+- Held-out evidence, not self-assessment: LOPOV and the Bexsero recall@3 case (`vaxforge validate lopov|bexsero`), with the leakage check beside the answer. Bexsero recall@3 on the real Vaxign-ML scores of the 40-protein fixture subset: 0 of 3 (fHbp rank 14, NadA rank 7, NHBA rank 9). The test is circular, because the stock Vaxign-ML model was trained on all of Protegen (`holdout_enforced: false`, `leakage assertion: not checked`), so the result neither validates nor refutes the pipeline; the demo says so.
 - Limits first: README §0, §4, §7 and §8 are written before the results, and the demo shows them.
-- Time saved is measured on our own runs, not claimed for a person: the offline run on the Neisseria meningitidis fixture takes `[FILL]` seconds (40 of 2,003 proteins, a fixture subset, stated on every screen that shows it).
+- Time saved is measured on our own runs, not claimed for a person: the offline run on the Neisseria meningitidis fixture runs stages 3 to 12 in 25 seconds on a quiet laptop and 43 seconds with a fine-tune and a local model running at the same time (40 of 2,003 proteins, a fixture subset, stated on every screen that shows it; Boltz, BLAST+, PSORTb and the T-cell and toxicity predictors are not installed on that machine, so those parts report `not run`).
 
 ### Best use of Boltz
 
@@ -37,7 +37,7 @@ What it is not: it does not predict wet-lab results, simulate trials, or build a
 - S9.5 fine-tunes the OT-2 code generator with Adaption's AutoScientist (SFT), and our own harness compares it with the base model on held-out Text2WetLab tasks.
 - Training set: 1,000 rows, 429 real (42.9%, from 136 pinned public sources: permissively licensed repositories and the Opentrons protocol library, every pair passing `opentrons_simulate` v7.5.0) and 571 synthetic rows from our generator, disclosed and labelled as such. Real rows above 32,000 characters were excluded as a run-time control.
 - Held-out families are removed (7 families, 11 tasks) and `validation/leakage_check.py` checked 1,000 pairs against 223 held-out texts: 0 violations. An agent-run refusal pass removed pairs the base model refuses. The family labels are an agent's reading and no person checked them; the leakage check is the safeguard.
-- Runs: Qwen3.5-4B (run `82c660bc-2c35-4917-b4d1-e7c58039b904`) and Qwen3.5-2B (run `d84a8798-c9ef-441d-872c-0a6c409dcbd3`), each at most 2 iterations, stopped at 0.6 target win rate or a 90-minute cap. Result so far: the 4B run succeeded after 1 of 2 iterations (41 minutes) with `best_win_rate` 0.7832 against the 0.6 target; Adaption's run page shows the adapted model winning 78% against 22% for the base model. LoRA checkpoint downloaded (sha256 `c7b45c54...`). The 2B and 9B runs: `[FILL]`. Leaderboard: not listed on the public page as of 2026-11-15 02:30Z; `[FILL: row, domain]` if it appears.
+- Runs: Qwen3.5-4B (run `82c660bc-2c35-4917-b4d1-e7c58039b904`) and Qwen3.5-2B (run `d84a8798-c9ef-441d-872c-0a6c409dcbd3`), each at most 2 iterations, stopped at 0.6 target win rate or a 90-minute cap. Result so far: the 4B run succeeded after 1 of 2 iterations (41 minutes) with `best_win_rate` 0.7832 against the 0.6 target; Adaption's run page shows the adapted model winning 78% against 22% for the base model. LoRA checkpoint downloaded (sha256 `c7b45c54...`). The 2B run also succeeded after 1 iteration with `best_win_rate` 0.6037 (target 0.6); the 4B adapter is the one we carry forward. A 9B run: `[FILL]`. Leaderboard: not listed on the public page as of 2026-11-15 02:30Z; `[FILL: row, domain]` if it appears.
 - Our own win rate (`vaxforge finetune winrate`): `[FILL]`. It is not Adaption's number: the platform's `best_win_rate` is computed on its own evaluations, which we do not control.
 - Local rehearsal before the run (Qwen3-4B, 7 matched tasks): 1 win, 1 loss, 5 ties, no measurable difference. We report it as that.
 
@@ -57,6 +57,7 @@ What it is not: it does not predict wet-lab results, simulate trials, or build a
 
 - Candidates, not a vaccine; nothing here was tested in a lab. Every prediction is mapped to the assay that would refute it (S10).
 - The Boltz run on record is a CPU smoke run in single-sequence mode: low confidence by design of the settings, not a finding.
+- The offline demo chain is degraded on purpose and says so: the four S4 gates (human homology, allergenicity, toxicity, conservancy) did not run, so S4 reports incomplete screening, and S12 stays `blocked` because no toxicity result and no provider screening record exist.
 - The 98 original real pairs became 429 after a larger data hunt; the family labels on them are an agent's reading. The training set is 57.1% synthetic.
 - The S12 virulence check is a review flag, not a block, by the project owner's decision for an exploratory build; toxin, sequence sanity, selected-candidate and provider-screening checks still block.
 - Adaption does not document run time or credit cost, and which leaderboard domain a run lands in is not under our control.
