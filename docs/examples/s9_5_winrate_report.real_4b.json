@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "seed": 20261114,
+  "resamples": 10000,
+  "refusal": {
+    "heldout": {
+      "n": 10,
+      "base": 0.0,
+      "finetune": 0.0
+    },
+    "probe": {
+      "n": 0,
+      "base": null,
+      "finetune": null
+    }
+  },
+  "refusal_comparison": "not-tested",
+  "red_flag_splits": [],
+  "win_rate_reportable": true,
+  "n": 10,
+  "families": 7,
+  "counts": {
+    "win": 0,
+    "loss": 0,
+    "tie": 10
+  },
+  "tie_breakdown": {
+    "neither-passes": 10,
+    "equal": 0
+  },
+  "decided_by": {
+    "simulation": 0,
+    "physical-rules": 0,
+    "ground-truth": 0
+  },
+  "finetune_refusals_on_scored": 0,
+  "rates": {
+    "win": 0.0,
+    "loss": 0.0,
+    "tie": 1.0
+  },
+  "intervals": {
+    "win": [
+      0.0,
+      0.0
+    ],
+    "loss": [
+      0.0,
+      0.0
+    ],
+    "tie": [
+      1.0,
+      1.0
+    ],
+    "net": [
+      0.0,
+      0.0
+    ]
+  },
+  "verdict": "no measurable difference"
+}
