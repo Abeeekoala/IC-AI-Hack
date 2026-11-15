@@ -1,8 +1,58 @@
 # VaxForge
 
-**From a pathogen name to a ranked set of candidate vaccine antigens, a falsifiable wet-lab protocol, and executable robot code — with a retrospective validation harness that tells you how much to trust any of it.**
+**Type a pathogen name. Get a short, explained list of vaccine antigen candidates, a lab protocol that says what result would prove each one wrong, and robot code that has passed the simulator.**
 
-> Rename the project before pushing. `VaxForge` is a placeholder.
+VaxForge automates the slow first step of vaccine design: going from "a bacterium with thousands of proteins" to "the few proteins worth a lab's time". Every step records which tool made which number, so a judge or a scientist can follow the evidence from the pathogen name to the lab bench. Where a tool could not run, the output says so instead of inventing a value.
+
+## At a glance
+
+```
+name  ->  proteome  ->  rank antigens  ->  safety + conservancy  ->  epitopes  ->  population coverage  ->  structure (top-k)
+ S0         S1-S2           S3                    S4                   S5               S6                     S7
+                                                                                                   |
+   biosecurity <- animal study design <- robot code (simulator-checked) <- lab protocol <-----------+
+       S12              S10                       S9                         S8            (+ pre-registration S11)
+```
+
+| | |
+|---|---|
+| **One input** | A plain pathogen name, for example *Neisseria meningitidis* |
+| **Real tools** | Vaxign-ML, BLAST+, AlgPred2, ToxinPred2, MHCflurry, BepiPred-3.0, Boltz-2, the IEDB population-coverage method |
+| **Outputs** | Ranked shortlist with the evidence behind each rank; wet-lab protocol with a falsification condition per candidate; Opentrons OT-2 code; animal-study design for ethics review |
+| **Traceable** | Every stage writes a hashed artifact; `vaxforge verify` re-checks the whole chain; a stage that did not run is shown as "not run" |
+| **Tested** | More than 2,200 automated tests |
+
+## Pre-demo run: *Neisseria meningitidis*
+
+A full run takes a long time (the annotation stage alone took 48 minutes on the whole 2,003-protein proteome), so the demo shows runs we made beforehand and saved in the repo. Both are real runs of this code, and `vaxforge verify` passes on each.
+
+| Saved run | What it shows |
+|---|---|
+| [`results/nmb_real_run/`](results/nmb_real_run/) | S3 to S12 with the real prediction tools installed, plus a self-contained `report.html` and a one-page `SUMMARY.md` |
+| [`demo_data/run_nmb_fixture/`](demo_data/run_nmb_fixture/) | S3 to S12 end to end, including all 36 robot sessions passing the Opentrons 7.5.0 simulator and the protocol animations |
+
+**What the real-tool run found** (40 *N. meningitidis* proteins, including the three Bexsero vaccine antigens):
+
+| Step | Result |
+|---|---|
+| S3 ranking | Vaxign-ML scores all proteins; 30 go forward |
+| S4 safety and conservancy | BLAST+, AlgPred2, ToxinPred2 and a second-strain check: **27 of 30 kept**; 3 removed (frpA and frpC for toxicity, lldD for similarity to a human protein) |
+| S5 epitopes | T-cell epitopes for 27 HLA alleles (MHCflurry) and antibody epitopes (BepiPred-3.0) |
+| S6 population coverage | 98.5% of the world population covered by the class I epitopes |
+| S7 final shortlist | porA, hmbR, iga, NMB1829, hap, mtrD, **NHBA (7th)**, lbpA, potD-1, **NadA (10th)** ... **fHbp (15th)** |
+| S8 to S12 | Protocol, robot code, animal-study design, pre-registration and a biosecurity gate that holds synthesis orders for human review |
+
+**The Bexsero antigens.** The licensed Bexsero vaccine uses three *N. meningitidis* antigens (fHbp, NadA, NHBA). They differ between strains, so S4 **flags** a strain-variability or allergen-score failure and keeps the protein, instead of discarding it; toxicity and human similarity still remove proteins. All three stay in the shortlist with their flags recorded. We chose that rule after a first strict run removed all three, so this is a demonstration of how the pipeline treats variable antigens, not held-out validation (see below).
+
+## How much to trust it
+
+- **It narrows; it does not prove.** Nothing here shows that any candidate protects anyone. That needs lab and animal work, which is exactly what the protocol and the animal-study design are for.
+- **The Bexsero check is circular.** The stock Vaxign-ML model was trained on these antigens, so their high scores are expected. S3 prints a `LEAKAGE RISK` warning, and the recall@3 check (0 of 3 on the stock model) is not evidence either way. The fair test, leaving the pathogen out of training, is built but has not been run.
+- **Some tools were not run:** class II T-cell prediction (NetMHCIIpan needs a licence), conformational B-cell prediction (DiscoTope-3.0) and Boltz-2 structures in the saved run. Each artifact lists them under `degraded`.
+- **The test set is small:** 40 of 2,003 proteins, chosen to include the Bexsero antigens, with localisation from UniProt text instead of PSORTb.
+- **Pre-registration:** the S11 manifest in the saved runs was frozen after the S4 rule above was chosen, so it records that configuration; it is not a blind prediction.
+
+The sections below give the full scope, the stage reference, the validation protocol and the known limits.
 
 ---
 
@@ -24,29 +74,6 @@ VaxForge is built around the opposite commitment.
 - Simulate wet-lab results. No predicted ELISA readings, no synthetic flow cytometry, no fabricated cytokine values. A prediction is a hypothesis; a measurement is an observation. Presenting the former as the latter is not exaggeration, it is a category error.
 - Simulate Phase 1/2/3 clinical trials. As of late 2026 there is no scientific or regulatory basis for this in vaccines. ICH M15 (CHMP-adopted 2026-01-23, effective 2026-07-23) does not mention vaccines or immunology anywhere in its text. The FDA MIDD Paired Meeting Program explicitly excludes using simulation to determine the operating characteristics of confirmatory trials. The two real cases where in-silico work substituted for trials — the UVA/Padova T1D simulator (FDA Master File #1521, accepted 2008, as a substitute for *animal* trials) and VICTRE — are both outside vaccines and both outside efficacy endpoints.
 - Design, enhance, or characterise anything that increases pathogen virulence, transmissibility, or immune escape. Scope is restricted to protective antigens and therapeutic binders. See §8.
-
----
-
-## 0.1 Pre-run on *N. meningitidis* (what the demo shows)
-
-A full run waits on several tools, so the demo shows a **pre-run** that is saved in [`results/nmb_real_run/`](results/nmb_real_run/) (artifacts for S0 to S12, a self-contained `report.html`, and a one-page `SUMMARY.md`). It was run on 2026-11-15 on the 40-protein *N. meningitidis* fixture with the real tools listed below, and `vaxforge verify results/nmb_real_run` passes.
-
-| Stage | Result on this run |
-|---|---|
-| S3 | Real Vaxign-ML scores (stock model). 30 candidates go to S4. fHbp ranks 14th, NadA 7th, NHBA 9th |
-| S4 | BLAST+, AlgPred2, ToxinPred2 and a second-strain conservancy check ran. 30 in, **27 kept**, 3 rejected (frpA, frpC: toxicity; lldD: human homology). fHbp, NadA and NHBA are kept, with their flags recorded, **because the allergenicity and conservancy defaults were set to flag after an earlier strict run rejected them** (tuned, not found) |
-| S5 | MHCflurry (class I; an open-source alternative to NetMHCpan) and BepiPred-3.0 ran |
-| S6 | World class I population coverage 98.5% |
-| S7 | Boltz-2 was not run on this machine, so the final order is sequence-only (NHBA 7th, NadA 10th, fHbp 15th) |
-| S8 to S12 | Protocol, simulator-checked robot code, animal-study design, pre-registration and biosecurity gate, offline |
-
-**How to read it**
-- The three vaccine antigens (fHbp, NadA, NHBA) pass S4 because allergenicity and conservancy **flag** instead of reject (§2, S4). With strict settings the first real run rejected all three, as they are strain-variable by design. We chose the flag setting after seeing that, so this is a demonstration of how the pipeline works, not independent validation. The fair test, leave-one-pathogen-out with a retrained model, has not been run.
-- The stock Vaxign-ML model was trained on these antigens (S3 prints a `LEAKAGE RISK` warning), so their high scores are expected and are not evidence.
-- Not run, and listed in each artifact's `degraded` field: class II T-cell prediction (NetMHCIIpan needs a DTU licence), conformational B-cell prediction (DiscoTope-3.0), and Boltz-2 structures. S2 localisation is a UniProt-text stand-in, not PSORTb. The set is 40 of 2,003 proteins and deliberately includes the Bexsero antigens.
-- The Bexsero recall@3 (`validation/bexsero_case.py`) reads the S3 ranking only, so this change does not move it: still 0 of 3 (fHbp 14th, NadA 7th, NHBA 9th), and circular (`holdout_enforced: false`).
-- S11 pre-registration is only as good as the order of events: a manifest frozen after this S4 choice registers a configuration picked with knowledge of the outcome, the opposite of what S11 is for.
-- Nothing here measures whether any candidate protects anyone; that needs lab and animal work. What the project shows is the narrowing from a proteome to an explained shortlist and a falsifiable plan for the lab.
 
 ---
 
