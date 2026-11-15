@@ -263,7 +263,7 @@ coverage 0.078 with every panel allele — missing data, not a bad epitope set).
   "candidates": [{                                // ALL candidates; top-k first
       ...S6 candidate fields..., rank, in_top_k, rank_basis: "structure_informed|pre_structure",
       scores: {pre_structure, final, terms_raw, terms_percentile, terms_used, terms_missing, weights, percentile_basis},
-      structure: {status: "ran|failed|skipped|unavailable|not_selected", engine, model_file, model_sha256,
+      structure: {status: "ran|failed|skipped|unavailable|not_selected", engine, model_file {root:"run", path, sha256, bytes},
                   mean_plddt, frac_*, reported_confidence, sequence_matches_input,
                   validators: {"esmfold": {lddt_ca_vs_boltz, tm_score_vs_boltz, ca_rmsd_vs_boltz, mean_plddt, model_file}, "af2-no-msa": {...}},
                   validator_agreement: {value, n_validators, spread, note}, structure_term, structure_term_basis,
