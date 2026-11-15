@@ -101,6 +101,16 @@ flowchart TD
     P --> B["S12: biosecurity gate<br/>before any gene synthesis order"]
 ```
 
+## What the outputs look like
+
+**The evidence report** (`vaxforge report`) is one self-contained page per run. Every value shows the stage and tool version that produced it, and a dash marks anything that was not computed. This is the saved *N. meningitidis* run, labelled as a fixture, not a result.
+
+![VaxForge evidence report: what this run did, what to trust, and where each value came from](docs/images/report_overview.png)
+
+**The product design** (Figma-based) shows the same chain as screens: one per stage group, each with an owner card and an origin badge on every value (fixture, generated, not run).
+
+![VaxForge product design cover: four streams, sixteen screens and origin badges](docs/images/product_design.png)
+
 ## How much to trust it
 
 - **It narrows; it does not prove.** Nothing here shows that any candidate protects anyone. That needs lab and animal work, which is exactly what the protocol and the animal-study design are for.
