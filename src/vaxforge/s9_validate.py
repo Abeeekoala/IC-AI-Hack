@@ -56,6 +56,9 @@ _VOL_TOL = 1e-9  # uL of slack in the two volume rules: spec_check's own (`vol >
 
 # --------------------------------------------------------------------------- 1. static lint
 
+# A filter for model-written code, NOT a sandbox: a name-based check cannot stop a determined program, and code that passes
+# it still runs with this process's file access. The only other protection is that the simulator subprocess runs with a
+# scrubbed environment (`_scrubbed_env`: no API keys or tokens) and a timeout. Do not describe it as more than that.
 ALLOWED_IMPORTS = {"opentrons", "math", "typing", "itertools", "string", "collections", "functools", "dataclasses", "__future__"}
 BANNED_NAMES = {
     "open", "exec", "eval", "compile", "globals", "locals", "vars", "getattr", "setattr", "delattr", "hasattr", "__import__",
@@ -64,6 +67,19 @@ BANNED_NAMES = {
 BANNED_ATTRS = {
     "os", "sys", "subprocess", "builtins", "importlib", "system", "popen", "modules", "environ", "stdout", "stderr", "stdin",
     "write", "writelines", "exit", "getenv", "open", "read_text", "write_text", "unlink", "remove",
+}
+# What may be imported from `opentrons`. Its modules re-export `os`, `Path`, `shutil`, `subprocess` and more (`opentrons.config`
+# and the top-level package both do), so `from opentrons import ...` takes only the two names below and every other
+# `opentrons.*` module is refused whole. A name taken from `opentrons.protocol_api` or `opentrons.types` must be an API class or
+# constant (capitalised): their lower-case names are submodules and helpers, and `protocol_api.labware` re-exports
+# `save_definition`, which writes a file.
+_OPENTRONS_MODULES = {"opentrons", "opentrons.protocol_api", "opentrons.types"}
+_OPENTRONS_SUBMODULES = {"protocol_api", "types"}
+# Modules that give file, process, network, import or introspection access. Refused as an imported NAME whichever module hands
+# them out (`typing` re-exports `sys`, `types` and `operator`). `types` is judged apart: fine from `opentrons`, not from elsewhere.
+_ESCAPE_NAMES = {
+    "os", "sys", "pathlib", "Path", "subprocess", "shutil", "importlib", "io", "builtins", "socket", "ctypes", "pickle", "marshal",
+    "tempfile", "glob", "inspect", "operator",
 }
 # Documented pipette settings that are ordinary protocol code, not patching.
 _PIPETTE_SETTINGS = {"tip_racks", "starting_tip", "default_speed"}
@@ -82,8 +98,34 @@ def _is_pipette_setting(t: ast.Attribute) -> bool:
     )
 
 
+def _module_allowed(name: str) -> bool:
+    """May this module be imported at all? Its root must be in `ALLOWED_IMPORTS`, and of `opentrons` only `_OPENTRONS_MODULES`."""
+    root = name.split(".")[0]
+    return root in ALLOWED_IMPORTS and (root != "opentrons" or name in _OPENTRONS_MODULES)
+
+
+def _name_allowed(module: str, name: str) -> bool:
+    """May `from <module> import <name>` bind this name, `module` itself being allowed?
+
+    `name` is the real imported name: an `as` alias is never looked at, so a harmless alias does not save `os` and a
+    suspicious one does not condemn `Point`.
+    """
+    if name == "*" or name.startswith("_") or name in BANNED_NAMES or name in BANNED_ATTRS or name in _ESCAPE_NAMES:
+        return False
+    if module == "opentrons":
+        return name in _OPENTRONS_SUBMODULES
+    if module in _OPENTRONS_MODULES:
+        return name[0].isupper()
+    return name != "types"  # the stdlib module; the Opentrons one is `from opentrons import types`, decided above
+
+
 def static_lint(source: str) -> list[str]:
-    """Reasons NOT to execute `source`. Empty list = may be simulated."""
+    """Reasons NOT to execute `source`. Empty list = may be simulated.
+
+    Imports are judged by module AND by name: the module root must be in `ALLOWED_IMPORTS`, of `opentrons` only the modules in
+    `_OPENTRONS_MODULES` may be imported, and every name in a `from` import is judged by its real name (`_name_allowed`), so
+    `from opentrons.config import os as o` is refused. A filter, not a sandbox (see the comment above `ALLOWED_IMPORTS`).
+    """
     try:
         tree = ast.parse(source)
     except SyntaxError as exc:
@@ -93,11 +135,14 @@ def static_lint(source: str) -> list[str]:
         line = getattr(node, "lineno", 0)
         if isinstance(node, ast.Import):
             for a in node.names:
-                if a.name.split(".")[0] not in ALLOWED_IMPORTS:
+                if not _module_allowed(a.name):
                     out.add(f"line {line}: import {a.name}")
         elif isinstance(node, ast.ImportFrom):
-            if (node.module or "").split(".")[0] not in ALLOWED_IMPORTS or node.level:
-                out.add(f"line {line}: from {node.module} import ...")
+            module = "." * node.level + (node.module or "")
+            if node.level or not _module_allowed(module):
+                out.add(f"line {line}: from {module} import ...")
+            else:
+                out.update(f"line {line}: from {module} import {a.name}" for a in node.names if not _name_allowed(module, a.name))
         elif isinstance(node, ast.Name) and node.id in BANNED_NAMES:
             out.add(f"line {line}: name {node.id}")
         elif isinstance(node, ast.Attribute):
