@@ -1,12 +1,12 @@
 {
-  "created_at": "2026-11-15T10:11:10Z",
-  "digest": "sha256:0794347512718e9056d25bce6089cafb9469315b89a2074f0868b037fc26d763",
+  "created_at": "2026-11-15T10:35:42Z",
+  "digest": "sha256:093cb8f8fc2f50e38d27eea60ba6804c1ea8f56e4bcef6e801d1f5e1d1cd9db0",
   "environment": {
-    "platform": "Windows-11-10.0.26300-SP0",
-    "python": "3.15.0"
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
   },
   "inputs": {
-    "s8": "sha256:cf4aff4af5e5d2c861c4c1e381739050695c2707b1f82ff99b2da6c287d62c45"
+    "s8": "sha256:367653dbd6090507b857514fbd743d60cb2e8e09f201ec315ef0380c607064f6"
   },
   "params": {
     "backends": [
@@ -117,7 +117,7 @@
       {
         "backends": [
           {
-            "all_pass": false,
+            "all_pass": true,
             "dir_name": "template",
             "label": "template",
             "model_id": null,
@@ -136,10 +136,10 @@
                     "sha256": "b0f2e7f61bf5f197bfc313d596d0be4d510f17d542531c0a226f3e17efd508c2"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "7f6fee7e647a5e10bddc90a6145d9aa6a2a078207efb02503255c3d69d6a6100"
                   },
                   "plan": {
                     "bytes": 5472,
@@ -153,19 +153,17 @@
                     "root": "run",
                     "sha256": "dff91e3869add3d9a7ee2beccaceefbd150d7a387799d89f3ff9824532155812"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 96508,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly.sim.json",
+                    "root": "run",
+                    "sha256": "a218e1f7d6d66443a725d36c270602b5f439351d9e8318df5c9a9a591cb697b3"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 71,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -176,11 +174,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "7039f1e00e704fd7f4f192dd01aea00f5ac89d55cc48e70aa634bd96d29de7eb",
                 "refusal": null,
                 "session_id": "s02_plasmid_assembly",
@@ -204,10 +202,10 @@
                     "sha256": "2b4d2fe672cc141cffa38c924b44f7acacc1f4d6d2c1aa69b4a11a15e33afacb"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "b03b279fc19d94490129f214c55677f1a335e04247591d265c992faef108f269"
                   },
                   "plan": {
                     "bytes": 5316,
@@ -221,19 +219,17 @@
                     "root": "run",
                     "sha256": "98768d9b93328273de704b5447ebb67433dfc24ba6f3d1f5d706632be096c852"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 114429,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation.sim.json",
+                    "root": "run",
+                    "sha256": "51adf28ea2b0d22e5d27c58e02b204fda5d6153597e103fe348acd56740546f5"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 33,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -244,11 +240,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 2,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "612aa666835c3956c06e407ef152506521c2aeb8b701a05fd9869a4448148d11",
                 "refusal": null,
                 "session_id": "s03_transformation",
@@ -273,10 +269,10 @@
                     "sha256": "aa058cd52db3285b17b4fe6a5558189435ac463ba8721c75810df156758b674d"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "f418d61f2ae1de5c693edc5e1e7c5c2f565a824208fc0f9fb6b999ab62019809"
                   },
                   "plan": {
                     "bytes": 8713,
@@ -290,19 +286,17 @@
                     "root": "run",
                     "sha256": "4a5d4daf24112135c192f685ddfeced3354af4357027c3aa84b4d88f90a77175"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 182208,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr.sim.json",
+                    "root": "run",
+                    "sha256": "6ba2ed098cd4de0940665f12fffa4c48d3274e17fe1f665af6772e87b0515628"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 133,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -313,11 +307,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "d815d5bba063afa7ed6a9595f336a7b434dd952f46d93a67fcf08787ddaee032",
                 "refusal": null,
                 "session_id": "s04_colony_pcr",
@@ -342,10 +336,10 @@
                     "sha256": "fb8068a8b05d5563dace0569dd102dca51f53eb82c320a595ab56e74bf93d6a4"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "cd0f9f81184eb77f80dc3a3152a41fa5ef3b7e547e7ded29fb674aad52b18fc2"
                   },
                   "plan": {
                     "bytes": 5128,
@@ -359,19 +353,17 @@
                     "root": "run",
                     "sha256": "8046f7e6dbf4cb15aaa3032d80c2449550a37fd30ed2c5cc5064df2c45fde3ce"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 136635,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction.sim.json",
+                    "root": "run",
+                    "sha256": "f4abf09e7d9797af92decf2ec28b18f8f93dfc30d5dcfda9483343ae629d0e33"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 106,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -382,11 +374,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "d16f09f37e05a4a908ca4f5fb2f1a5cdb53a12a1d5fb7513f61ed7fd00c1645c",
                 "refusal": null,
                 "session_id": "s05_expression_induction",
@@ -411,10 +403,10 @@
                     "sha256": "8aaa4ca2111feb0726388b3e434d8748cfb4250b712b947734b73fad1d2c2714"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "62bf6b50ba049a159006beb2cb99ad23108f0e398d2046dc7d11ccea5035686f"
                   },
                   "plan": {
                     "bytes": 2083,
@@ -428,19 +420,17 @@
                     "root": "run",
                     "sha256": "7f326c1ca2ca8aeb464907e633a389b0d13bd5483669accb47b50a63ca7d5249"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 103711,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis.sim.json",
+                    "root": "run",
+                    "sha256": "f0170f8dc0f86cd758f872532d4c19dba3ee12b1d5d14954cf46b6e72ae17394"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 93,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -451,11 +441,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "a46a0fff6ae2e1559b78b1d1a037b47fc71d12d886cb9ceab426dfade054e503",
                 "refusal": null,
                 "session_id": "s06_lysis",
@@ -479,10 +469,10 @@
                     "sha256": "6372709412da25c64232c2daf5fd9091dac4592ef8b60fb13ae22fc083710a42"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "153680c847813ec0e9a18b61c8270fe634272802887a4d759695310393be6dc9"
                   },
                   "plan": {
                     "bytes": 10630,
@@ -496,19 +486,17 @@
                     "root": "run",
                     "sha256": "c431a823e6a561cb71197d7fbe608145d4cad4fee3d62c40a520119f7c218125"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 249291,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification.sim.json",
+                    "root": "run",
+                    "sha256": "94f4d588b644707c8c8f4f28874ca2033e0de5dc56504e2db5acda72c20c2d18"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 286,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -519,11 +507,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "40b67c39c72ffd445dfbfe8f6d3d40abb270f3867d7a0048a1af7fe4e74fae05",
                 "refusal": null,
                 "session_id": "s07_ni_nta_purification",
@@ -547,10 +535,10 @@
                     "sha256": "014fe149ef3f660fa511f0d9980f448f9b41065b38a4795a36bba1ce29e59d63"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "ff23bd084d7efa463f15c0d4f4c83e2c7fae8754692a84e404cba06225273bce"
                   },
                   "plan": {
                     "bytes": 3282,
@@ -564,19 +552,17 @@
                     "root": "run",
                     "sha256": "a9a395bcfce778815fc179028dd490bc9afb1b87ea63d505d00edef783d1a410"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 95432,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal.sim.json",
+                    "root": "run",
+                    "sha256": "c515761a7afc30f1b49ab13a8e21c3d9db7468d1731a62d9f86bf3ac59451ed3"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 43,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -587,11 +573,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "c9323a06834aa3bad7b52acc5c67cd732be2dc241b7fbc663ea9608a96858033",
                 "refusal": null,
                 "session_id": "s08_endotoxin_removal",
@@ -615,10 +601,10 @@
                     "sha256": "a6beef8af7cc461b8164981ee7e2951c6ab41edb01fe1ed22f915405b5a53a20"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "e1203cdcd35bde3477a265ad65183b388a6da988460c0efff73d4ca764872600"
                   },
                   "plan": {
                     "bytes": 13197,
@@ -632,19 +618,17 @@
                     "root": "run",
                     "sha256": "794de8c3f7ca67fc32e19677668770862cfb08cdd9f2dc4e1d06d40629d97cf6"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 201744,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay.sim.json",
+                    "root": "run",
+                    "sha256": "8c4ba8c7de1bf81bdca4db27eca65c461db47bbc3f34558817cdc7e17d7ccf1c"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 207,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -655,11 +639,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "b8f5fa2dbf0f75fd105635db94378e998a1af6d7b8b43620e7614cd05ebaa846",
                 "refusal": null,
                 "session_id": "s09_lal_assay",
@@ -684,10 +668,10 @@
                     "sha256": "8e88627a5b51ea069666d2e7e62c872086425a995e6ebe98fb3b8f25043f4364"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "cd0f9f81184eb77f80dc3a3152a41fa5ef3b7e547e7ded29fb674aad52b18fc2"
                   },
                   "plan": {
                     "bytes": 12833,
@@ -701,19 +685,17 @@
                     "root": "run",
                     "sha256": "90d701a07429a6bc711af3b7bb95c172368866260e4b14b1efa752ae401fe246"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 121610,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation.sim.json",
+                    "root": "run",
+                    "sha256": "9b48ec2d0eba95f4568ee98a4771398423dd4693b7522453671909227b17eef1"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 106,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -724,11 +706,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "85cb885785d11a1ccd70887653fed568553d3c894a0f811d156245a89de65fc6",
                 "refusal": null,
                 "session_id": "s11_antigen_stimulation",
@@ -752,10 +734,10 @@
                     "sha256": "46f31581ae90dced6a910561c937633e6f37340833cb96e7bb4eee1c3c3f8f64"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "6a3ec4a98bab58ca553392632dd1bc323a00202984abeae17ebe7216a37c3eee"
                   },
                   "plan": {
                     "bytes": 21668,
@@ -769,19 +751,17 @@
                     "root": "run",
                     "sha256": "0260b6a0cf19bf37ebc40995c967fe95246fcb6ebf273980bf63b21dc20f7e16"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 221846,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup.sim.json",
+                    "root": "run",
+                    "sha256": "b582ecbba4039f716f95163743680b5fd513ef7b473cf132cc42160625e90d1d"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 236,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -792,11 +772,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "26bb8fc88253aa77a6247ebbdf771c067f7b9b5e75abe43ff2f4eb618f88c99a",
                 "refusal": null,
                 "session_id": "s12_elisa_setup",
@@ -820,10 +800,10 @@
                     "sha256": "cff1a1533298321ad162904759f2aaf36de7c2b9a2740e3e558b2782790f426c"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "8eb63f20230b63425b104273dac605d53a65886ffd9b505d9afc1ebb6d4edfda"
                   },
                   "plan": {
                     "bytes": 36392,
@@ -837,19 +817,17 @@
                     "root": "run",
                     "sha256": "b404a06bf0c1ed9d540c4b0e63ca23336d29d1388b1a663c37bd4581bf84fb3f"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 409224,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop.sim.json",
+                    "root": "run",
+                    "sha256": "059fe31dc96c3e264ca82eb88320d7490cee98d118152318a402acc41ce35e6f"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 392,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -860,11 +838,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 4,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "4c77121bcebe3ee0b994dbabcf477594721d930842b9ed59295165e648971e94",
                 "refusal": null,
                 "session_id": "s12_elisa_develop",
@@ -888,10 +866,10 @@
                     "sha256": "cf636535146fa7973db265ff06c84faa26b3e4e622b94ba2c10ebac49a7c1ef4"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 484,
                     "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "9f2ea2259dd238bf9f673e81759c272c690951c87988a7fdc6b49b47116ff2fd"
                   },
                   "plan": {
                     "bytes": 48205,
@@ -905,19 +883,17 @@
                     "root": "run",
                     "sha256": "b72a18d901dab101221a827dc61eae1464867ed3cf18abd8dc537e4648b1906e"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 951870,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr.sim.json",
+                    "root": "run",
+                    "sha256": "79dc605c9474d594a9b15989c1186643df8eb2e9b06b22a9e17e6cb8e603f035"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 1273,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -928,11 +904,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "0d38fd3a2120bd07a7703199473eeaa09d64778a7333fe413ad03c045895d3d8",
                 "refusal": null,
                 "session_id": "s13_rt_qpcr",
@@ -945,7 +921,7 @@
               }
             ],
             "tally": {
-              "UNVERIFIED": 12
+              "PASS": 12
             }
           }
         ],
@@ -1082,23 +1058,22 @@
         "dir_name": "tr_q9k0b4_q9k0b4_neimb",
         "notes": [
           "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
-          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.",
-          "No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0."
+          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code."
         ],
         "protein_name": "IgA-specific serine endopeptidase",
         "rank": 1,
         "refused_protocol": null,
         "report": {
-          "bytes": 24026,
+          "bytes": 21814,
           "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/robot_report.json",
           "root": "run",
-          "sha256": "37a5253a0d59645ad70f554852baaf50b2921e9742e67d6eb6f3df3068339321"
+          "sha256": "1fa36202e4be8f4a353b73fe27e68e6a386734b6fd0fcf481430b3b2a1ac609c"
         },
         "report_md": {
-          "bytes": 4987,
+          "bytes": 3787,
           "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/robot_report.md",
           "root": "run",
-          "sha256": "c9cd148cf98b33ada37c7eebbe46f9bf42ce0b51bd3bc185278bfe0a6b881720"
+          "sha256": "e611062f80918a51382f816f1504bd76d75ad90787d94b97444deaa176f504ed"
         },
         "workflow": {
           "bytes": 7248,
@@ -1110,7 +1085,7 @@
       {
         "backends": [
           {
-            "all_pass": false,
+            "all_pass": true,
             "dir_name": "template",
             "label": "template",
             "model_id": null,
@@ -1129,10 +1104,10 @@
                     "sha256": "9cde9fad600ebf6242c92c2e75d5068eb44e16955cc1d64d9f0caa5e4ed5cceb"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s02_plasmid_assembly.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "7f6fee7e647a5e10bddc90a6145d9aa6a2a078207efb02503255c3d69d6a6100"
                   },
                   "plan": {
                     "bytes": 5472,
@@ -1146,19 +1121,17 @@
                     "root": "run",
                     "sha256": "dff91e3869add3d9a7ee2beccaceefbd150d7a387799d89f3ff9824532155812"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 96508,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s02_plasmid_assembly.sim.json",
+                    "root": "run",
+                    "sha256": "a218e1f7d6d66443a725d36c270602b5f439351d9e8318df5c9a9a591cb697b3"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 71,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1169,11 +1142,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "7039f1e00e704fd7f4f192dd01aea00f5ac89d55cc48e70aa634bd96d29de7eb",
                 "refusal": null,
                 "session_id": "s02_plasmid_assembly",
@@ -1197,10 +1170,10 @@
                     "sha256": "55a15f3ae4dfde1cfe37f7c53a3b144afd013074162dcf3dee1d0cb3759a8817"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s03_transformation.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "b03b279fc19d94490129f214c55677f1a335e04247591d265c992faef108f269"
                   },
                   "plan": {
                     "bytes": 5316,
@@ -1214,19 +1187,17 @@
                     "root": "run",
                     "sha256": "98768d9b93328273de704b5447ebb67433dfc24ba6f3d1f5d706632be096c852"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 114429,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s03_transformation.sim.json",
+                    "root": "run",
+                    "sha256": "51adf28ea2b0d22e5d27c58e02b204fda5d6153597e103fe348acd56740546f5"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 33,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1237,11 +1208,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 2,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "612aa666835c3956c06e407ef152506521c2aeb8b701a05fd9869a4448148d11",
                 "refusal": null,
                 "session_id": "s03_transformation",
@@ -1266,10 +1237,10 @@
                     "sha256": "ef41d0bb50d8e9a6cbc27fe624d55dcd197c77a46e85f18b7077501f8452a4b7"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s04_colony_pcr.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "f418d61f2ae1de5c693edc5e1e7c5c2f565a824208fc0f9fb6b999ab62019809"
                   },
                   "plan": {
                     "bytes": 8713,
@@ -1283,19 +1254,17 @@
                     "root": "run",
                     "sha256": "4a5d4daf24112135c192f685ddfeced3354af4357027c3aa84b4d88f90a77175"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 182208,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s04_colony_pcr.sim.json",
+                    "root": "run",
+                    "sha256": "6ba2ed098cd4de0940665f12fffa4c48d3274e17fe1f665af6772e87b0515628"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 133,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1306,11 +1275,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "d815d5bba063afa7ed6a9595f336a7b434dd952f46d93a67fcf08787ddaee032",
                 "refusal": null,
                 "session_id": "s04_colony_pcr",
@@ -1335,10 +1304,10 @@
                     "sha256": "1fed7c8b27c9ade609eb1b7e3c8e90474229b91fd309fdde7b302bfbef492083"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s05_expression_induction.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "cd0f9f81184eb77f80dc3a3152a41fa5ef3b7e547e7ded29fb674aad52b18fc2"
                   },
                   "plan": {
                     "bytes": 5128,
@@ -1352,19 +1321,17 @@
                     "root": "run",
                     "sha256": "8046f7e6dbf4cb15aaa3032d80c2449550a37fd30ed2c5cc5064df2c45fde3ce"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 136635,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s05_expression_induction.sim.json",
+                    "root": "run",
+                    "sha256": "f4abf09e7d9797af92decf2ec28b18f8f93dfc30d5dcfda9483343ae629d0e33"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 106,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1375,11 +1342,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "d16f09f37e05a4a908ca4f5fb2f1a5cdb53a12a1d5fb7513f61ed7fd00c1645c",
                 "refusal": null,
                 "session_id": "s05_expression_induction",
@@ -1404,10 +1371,10 @@
                     "sha256": "775a52625d5a3cf01b2cfb1c8f4a9ed18501ad3adb131bf69ff2377b87d6efab"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s06_lysis.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "62bf6b50ba049a159006beb2cb99ad23108f0e398d2046dc7d11ccea5035686f"
                   },
                   "plan": {
                     "bytes": 2083,
@@ -1421,19 +1388,17 @@
                     "root": "run",
                     "sha256": "7f326c1ca2ca8aeb464907e633a389b0d13bd5483669accb47b50a63ca7d5249"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 103711,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s06_lysis.sim.json",
+                    "root": "run",
+                    "sha256": "f0170f8dc0f86cd758f872532d4c19dba3ee12b1d5d14954cf46b6e72ae17394"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 93,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1444,11 +1409,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "a46a0fff6ae2e1559b78b1d1a037b47fc71d12d886cb9ceab426dfade054e503",
                 "refusal": null,
                 "session_id": "s06_lysis",
@@ -1472,10 +1437,10 @@
                     "sha256": "252df8ee647af3bf1d8c1f6749ac1f3e51eec2e0e356f8ec3e0b77256fa7345a"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s07_ni_nta_purification.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "153680c847813ec0e9a18b61c8270fe634272802887a4d759695310393be6dc9"
                   },
                   "plan": {
                     "bytes": 10630,
@@ -1489,19 +1454,17 @@
                     "root": "run",
                     "sha256": "c431a823e6a561cb71197d7fbe608145d4cad4fee3d62c40a520119f7c218125"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 249291,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s07_ni_nta_purification.sim.json",
+                    "root": "run",
+                    "sha256": "94f4d588b644707c8c8f4f28874ca2033e0de5dc56504e2db5acda72c20c2d18"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 286,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1512,11 +1475,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "40b67c39c72ffd445dfbfe8f6d3d40abb270f3867d7a0048a1af7fe4e74fae05",
                 "refusal": null,
                 "session_id": "s07_ni_nta_purification",
@@ -1540,10 +1503,10 @@
                     "sha256": "84b7f67afa2913b5744cff75960131b8c45e5fc7237de5786fa8d5ab81fcbf8b"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s08_endotoxin_removal.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "ff23bd084d7efa463f15c0d4f4c83e2c7fae8754692a84e404cba06225273bce"
                   },
                   "plan": {
                     "bytes": 3282,
@@ -1557,19 +1520,17 @@
                     "root": "run",
                     "sha256": "a9a395bcfce778815fc179028dd490bc9afb1b87ea63d505d00edef783d1a410"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 95432,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s08_endotoxin_removal.sim.json",
+                    "root": "run",
+                    "sha256": "c515761a7afc30f1b49ab13a8e21c3d9db7468d1731a62d9f86bf3ac59451ed3"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 43,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1580,11 +1541,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "c9323a06834aa3bad7b52acc5c67cd732be2dc241b7fbc663ea9608a96858033",
                 "refusal": null,
                 "session_id": "s08_endotoxin_removal",
@@ -1608,10 +1569,10 @@
                     "sha256": "c6a67d304c22c6b073a7f2479f08e190e9c0d898f64c873f2ad33c32d5100a79"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s09_lal_assay.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "e1203cdcd35bde3477a265ad65183b388a6da988460c0efff73d4ca764872600"
                   },
                   "plan": {
                     "bytes": 13197,
@@ -1625,19 +1586,17 @@
                     "root": "run",
                     "sha256": "794de8c3f7ca67fc32e19677668770862cfb08cdd9f2dc4e1d06d40629d97cf6"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 201744,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s09_lal_assay.sim.json",
+                    "root": "run",
+                    "sha256": "8c4ba8c7de1bf81bdca4db27eca65c461db47bbc3f34558817cdc7e17d7ccf1c"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 207,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1648,11 +1607,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "b8f5fa2dbf0f75fd105635db94378e998a1af6d7b8b43620e7614cd05ebaa846",
                 "refusal": null,
                 "session_id": "s09_lal_assay",
@@ -1677,10 +1636,10 @@
                     "sha256": "ea0eab63251fbc9c621e7803e971b94e4886e7432382d96f935794a26d5a3a95"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s11_antigen_stimulation.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "cd0f9f81184eb77f80dc3a3152a41fa5ef3b7e547e7ded29fb674aad52b18fc2"
                   },
                   "plan": {
                     "bytes": 12833,
@@ -1694,19 +1653,17 @@
                     "root": "run",
                     "sha256": "90d701a07429a6bc711af3b7bb95c172368866260e4b14b1efa752ae401fe246"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 121610,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s11_antigen_stimulation.sim.json",
+                    "root": "run",
+                    "sha256": "9b48ec2d0eba95f4568ee98a4771398423dd4693b7522453671909227b17eef1"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 106,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1717,11 +1674,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "85cb885785d11a1ccd70887653fed568553d3c894a0f811d156245a89de65fc6",
                 "refusal": null,
                 "session_id": "s11_antigen_stimulation",
@@ -1745,10 +1702,10 @@
                     "sha256": "7c890700ff74676388e8431791f41877c2bdea21cbd0f48d8680f903fbab57bd"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_setup.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "6a3ec4a98bab58ca553392632dd1bc323a00202984abeae17ebe7216a37c3eee"
                   },
                   "plan": {
                     "bytes": 21668,
@@ -1762,19 +1719,17 @@
                     "root": "run",
                     "sha256": "0260b6a0cf19bf37ebc40995c967fe95246fcb6ebf273980bf63b21dc20f7e16"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 221846,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_setup.sim.json",
+                    "root": "run",
+                    "sha256": "b582ecbba4039f716f95163743680b5fd513ef7b473cf132cc42160625e90d1d"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 236,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1785,11 +1740,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "26bb8fc88253aa77a6247ebbdf771c067f7b9b5e75abe43ff2f4eb618f88c99a",
                 "refusal": null,
                 "session_id": "s12_elisa_setup",
@@ -1813,10 +1768,10 @@
                     "sha256": "ba3993ec142a8a9e3c2271bde26c4c94453217e5de241b44c797e089c091ec44"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_develop.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "8eb63f20230b63425b104273dac605d53a65886ffd9b505d9afc1ebb6d4edfda"
                   },
                   "plan": {
                     "bytes": 36392,
@@ -1830,19 +1785,17 @@
                     "root": "run",
                     "sha256": "b404a06bf0c1ed9d540c4b0e63ca23336d29d1388b1a663c37bd4581bf84fb3f"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 409224,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_develop.sim.json",
+                    "root": "run",
+                    "sha256": "059fe31dc96c3e264ca82eb88320d7490cee98d118152318a402acc41ce35e6f"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 392,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1853,11 +1806,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 4,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "4c77121bcebe3ee0b994dbabcf477594721d930842b9ed59295165e648971e94",
                 "refusal": null,
                 "session_id": "s12_elisa_develop",
@@ -1881,10 +1834,10 @@
                     "sha256": "ba3c1c73d223f11c59054685938a9e7ab515aff11073c5cb2943ede2458ca15f"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 484,
                     "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s13_rt_qpcr.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "9f2ea2259dd238bf9f673e81759c272c690951c87988a7fdc6b49b47116ff2fd"
                   },
                   "plan": {
                     "bytes": 48205,
@@ -1898,19 +1851,17 @@
                     "root": "run",
                     "sha256": "b72a18d901dab101221a827dc61eae1464867ed3cf18abd8dc537e4648b1906e"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 951870,
+                    "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/template/s13_rt_qpcr.sim.json",
+                    "root": "run",
+                    "sha256": "79dc605c9474d594a9b15989c1186643df8eb2e9b06b22a9e17e6cb8e603f035"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 1273,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -1921,11 +1872,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "0d38fd3a2120bd07a7703199473eeaa09d64778a7333fe413ad03c045895d3d8",
                 "refusal": null,
                 "session_id": "s13_rt_qpcr",
@@ -1938,7 +1889,7 @@
               }
             ],
             "tally": {
-              "UNVERIFIED": 12
+              "PASS": 12
             }
           }
         ],
@@ -2075,23 +2026,22 @@
         "dir_name": "tr_q9jxz0_q9jxz0_neimb",
         "notes": [
           "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
-          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.",
-          "No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0."
+          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code."
         ],
         "protein_name": "TonB-dependent receptor (NMB1829)",
         "rank": 2,
         "refused_protocol": null,
         "report": {
-          "bytes": 24026,
+          "bytes": 21814,
           "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/robot_report.json",
           "root": "run",
-          "sha256": "0c34e5aea2b9ee33381effe9df8dee21a8e01d7c488a06fedf239f2c0518a896"
+          "sha256": "649c8cb3540aaf48bedbbc0f3c40908b5f88157f8b25a5355bef989975af8cd5"
         },
         "report_md": {
-          "bytes": 4987,
+          "bytes": 3787,
           "path": "data/s9/tr_q9jxz0_q9jxz0_neimb/robot_report.md",
           "root": "run",
-          "sha256": "8a15b53fef6471da5f4ca0f657f0564718e7f42b1df9502537d82fd9112b0399"
+          "sha256": "2c93b7f529d32acdc5a1d381b2fa0dc198bd7777d186288f814fc8e2bd7e26f7"
         },
         "workflow": {
           "bytes": 7248,
@@ -2103,7 +2053,7 @@
       {
         "backends": [
           {
-            "all_pass": false,
+            "all_pass": true,
             "dir_name": "template",
             "label": "template",
             "model_id": null,
@@ -2122,10 +2072,10 @@
                     "sha256": "3bf099463ec7b9efcba6dadbae82043b47758789b3e68bd0d94d66fd7d43d3b1"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "7f6fee7e647a5e10bddc90a6145d9aa6a2a078207efb02503255c3d69d6a6100"
                   },
                   "plan": {
                     "bytes": 5472,
@@ -2139,19 +2089,17 @@
                     "root": "run",
                     "sha256": "dff91e3869add3d9a7ee2beccaceefbd150d7a387799d89f3ff9824532155812"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 96508,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly.sim.json",
+                    "root": "run",
+                    "sha256": "a218e1f7d6d66443a725d36c270602b5f439351d9e8318df5c9a9a591cb697b3"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 71,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2162,11 +2110,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "7039f1e00e704fd7f4f192dd01aea00f5ac89d55cc48e70aa634bd96d29de7eb",
                 "refusal": null,
                 "session_id": "s02_plasmid_assembly",
@@ -2190,10 +2138,10 @@
                     "sha256": "5bd695ee969a07a9f0e5c064c40ca25b71a7f2e39e0d566ba572ad941fd19bf4"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s03_transformation.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "b03b279fc19d94490129f214c55677f1a335e04247591d265c992faef108f269"
                   },
                   "plan": {
                     "bytes": 5316,
@@ -2207,19 +2155,17 @@
                     "root": "run",
                     "sha256": "98768d9b93328273de704b5447ebb67433dfc24ba6f3d1f5d706632be096c852"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 114429,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s03_transformation.sim.json",
+                    "root": "run",
+                    "sha256": "51adf28ea2b0d22e5d27c58e02b204fda5d6153597e103fe348acd56740546f5"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 33,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2230,11 +2176,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 2,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "612aa666835c3956c06e407ef152506521c2aeb8b701a05fd9869a4448148d11",
                 "refusal": null,
                 "session_id": "s03_transformation",
@@ -2259,10 +2205,10 @@
                     "sha256": "e7b5d30411c67813f75a187391fdca2bd8ca27dc02744b382f80bcec4e0f390f"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "f418d61f2ae1de5c693edc5e1e7c5c2f565a824208fc0f9fb6b999ab62019809"
                   },
                   "plan": {
                     "bytes": 8713,
@@ -2276,19 +2222,17 @@
                     "root": "run",
                     "sha256": "4a5d4daf24112135c192f685ddfeced3354af4357027c3aa84b4d88f90a77175"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 182208,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr.sim.json",
+                    "root": "run",
+                    "sha256": "6ba2ed098cd4de0940665f12fffa4c48d3274e17fe1f665af6772e87b0515628"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 133,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2299,11 +2243,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "d815d5bba063afa7ed6a9595f336a7b434dd952f46d93a67fcf08787ddaee032",
                 "refusal": null,
                 "session_id": "s04_colony_pcr",
@@ -2328,10 +2272,10 @@
                     "sha256": "0233aae6abc096b98790a0e15f83c7fa6b276bec761c009d64bfd4ddb34b1ad1"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "cd0f9f81184eb77f80dc3a3152a41fa5ef3b7e547e7ded29fb674aad52b18fc2"
                   },
                   "plan": {
                     "bytes": 5128,
@@ -2345,19 +2289,17 @@
                     "root": "run",
                     "sha256": "8046f7e6dbf4cb15aaa3032d80c2449550a37fd30ed2c5cc5064df2c45fde3ce"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 136635,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction.sim.json",
+                    "root": "run",
+                    "sha256": "f4abf09e7d9797af92decf2ec28b18f8f93dfc30d5dcfda9483343ae629d0e33"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 106,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2368,11 +2310,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "d16f09f37e05a4a908ca4f5fb2f1a5cdb53a12a1d5fb7513f61ed7fd00c1645c",
                 "refusal": null,
                 "session_id": "s05_expression_induction",
@@ -2397,10 +2339,10 @@
                     "sha256": "9558366dfc24e9f64520acf4fc09a5a6b105ae38688cbe3aaca2fb47bd687348"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s06_lysis.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "62bf6b50ba049a159006beb2cb99ad23108f0e398d2046dc7d11ccea5035686f"
                   },
                   "plan": {
                     "bytes": 2083,
@@ -2414,19 +2356,17 @@
                     "root": "run",
                     "sha256": "7f326c1ca2ca8aeb464907e633a389b0d13bd5483669accb47b50a63ca7d5249"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 103711,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s06_lysis.sim.json",
+                    "root": "run",
+                    "sha256": "f0170f8dc0f86cd758f872532d4c19dba3ee12b1d5d14954cf46b6e72ae17394"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 93,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2437,11 +2377,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "a46a0fff6ae2e1559b78b1d1a037b47fc71d12d886cb9ceab426dfade054e503",
                 "refusal": null,
                 "session_id": "s06_lysis",
@@ -2465,10 +2405,10 @@
                     "sha256": "96991083032c3e1bc4c014524eb5dc40ad8e1c4e0a93683b5955e32bad62670e"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "153680c847813ec0e9a18b61c8270fe634272802887a4d759695310393be6dc9"
                   },
                   "plan": {
                     "bytes": 10630,
@@ -2482,19 +2422,17 @@
                     "root": "run",
                     "sha256": "c431a823e6a561cb71197d7fbe608145d4cad4fee3d62c40a520119f7c218125"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 249291,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification.sim.json",
+                    "root": "run",
+                    "sha256": "94f4d588b644707c8c8f4f28874ca2033e0de5dc56504e2db5acda72c20c2d18"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 286,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2505,11 +2443,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "40b67c39c72ffd445dfbfe8f6d3d40abb270f3867d7a0048a1af7fe4e74fae05",
                 "refusal": null,
                 "session_id": "s07_ni_nta_purification",
@@ -2533,10 +2471,10 @@
                     "sha256": "9d389a043a4d14b902be7225395b634e9d9644b6a0ad514ad469eed24ea1f671"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 482,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "ff23bd084d7efa463f15c0d4f4c83e2c7fae8754692a84e404cba06225273bce"
                   },
                   "plan": {
                     "bytes": 3282,
@@ -2550,19 +2488,17 @@
                     "root": "run",
                     "sha256": "a9a395bcfce778815fc179028dd490bc9afb1b87ea63d505d00edef783d1a410"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 95432,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal.sim.json",
+                    "root": "run",
+                    "sha256": "c515761a7afc30f1b49ab13a8e21c3d9db7468d1731a62d9f86bf3ac59451ed3"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 43,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2573,11 +2509,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "c9323a06834aa3bad7b52acc5c67cd732be2dc241b7fbc663ea9608a96858033",
                 "refusal": null,
                 "session_id": "s08_endotoxin_removal",
@@ -2601,10 +2537,10 @@
                     "sha256": "3f465ea202bef5b4f1af9b161f9c4266a96111eebf4e6d86ae2d211f7168a98a"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "e1203cdcd35bde3477a265ad65183b388a6da988460c0efff73d4ca764872600"
                   },
                   "plan": {
                     "bytes": 13197,
@@ -2618,19 +2554,17 @@
                     "root": "run",
                     "sha256": "794de8c3f7ca67fc32e19677668770862cfb08cdd9f2dc4e1d06d40629d97cf6"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 201744,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay.sim.json",
+                    "root": "run",
+                    "sha256": "8c4ba8c7de1bf81bdca4db27eca65c461db47bbc3f34558817cdc7e17d7ccf1c"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 207,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2641,11 +2575,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "b8f5fa2dbf0f75fd105635db94378e998a1af6d7b8b43620e7614cd05ebaa846",
                 "refusal": null,
                 "session_id": "s09_lal_assay",
@@ -2670,10 +2604,10 @@
                     "sha256": "9a8c328c50ec04a39b89d665218373375cef95b5b3c4d76e07a8fcd64ea8f2ed"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "cd0f9f81184eb77f80dc3a3152a41fa5ef3b7e547e7ded29fb674aad52b18fc2"
                   },
                   "plan": {
                     "bytes": 12833,
@@ -2687,19 +2621,17 @@
                     "root": "run",
                     "sha256": "90d701a07429a6bc711af3b7bb95c172368866260e4b14b1efa752ae401fe246"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 121610,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation.sim.json",
+                    "root": "run",
+                    "sha256": "9b48ec2d0eba95f4568ee98a4771398423dd4693b7522453671909227b17eef1"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 106,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2710,11 +2642,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "85cb885785d11a1ccd70887653fed568553d3c894a0f811d156245a89de65fc6",
                 "refusal": null,
                 "session_id": "s11_antigen_stimulation",
@@ -2738,10 +2670,10 @@
                     "sha256": "f16040b3b279b5c32b90ff6093e6eb9a8e858c7ab430100ee47ecc7861da5e54"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "6a3ec4a98bab58ca553392632dd1bc323a00202984abeae17ebe7216a37c3eee"
                   },
                   "plan": {
                     "bytes": 21668,
@@ -2755,19 +2687,17 @@
                     "root": "run",
                     "sha256": "0260b6a0cf19bf37ebc40995c967fe95246fcb6ebf273980bf63b21dc20f7e16"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 221846,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup.sim.json",
+                    "root": "run",
+                    "sha256": "b582ecbba4039f716f95163743680b5fd513ef7b473cf132cc42160625e90d1d"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 236,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2778,11 +2708,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "26bb8fc88253aa77a6247ebbdf771c067f7b9b5e75abe43ff2f4eb618f88c99a",
                 "refusal": null,
                 "session_id": "s12_elisa_setup",
@@ -2806,10 +2736,10 @@
                     "sha256": "346848106bcdd9bb9805001a670abfaa190d631954e155a5447c42c4870c4b7b"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 483,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "8eb63f20230b63425b104273dac605d53a65886ffd9b505d9afc1ebb6d4edfda"
                   },
                   "plan": {
                     "bytes": 36392,
@@ -2823,19 +2753,17 @@
                     "root": "run",
                     "sha256": "b404a06bf0c1ed9d540c4b0e63ca23336d29d1388b1a663c37bd4581bf84fb3f"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 409224,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop.sim.json",
+                    "root": "run",
+                    "sha256": "059fe31dc96c3e264ca82eb88320d7490cee98d118152318a402acc41ce35e6f"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 392,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2846,11 +2774,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 4,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "4c77121bcebe3ee0b994dbabcf477594721d930842b9ed59295165e648971e94",
                 "refusal": null,
                 "session_id": "s12_elisa_develop",
@@ -2874,10 +2802,10 @@
                     "sha256": "aacad711331b60a74557ef808c7d768c84002f2114e72180431952e6405d866d"
                   },
                   "grade": {
-                    "bytes": 646,
+                    "bytes": 484,
                     "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr.grade.json",
                     "root": "run",
-                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                    "sha256": "9f2ea2259dd238bf9f673e81759c272c690951c87988a7fdc6b49b47116ff2fd"
                   },
                   "plan": {
                     "bytes": 48205,
@@ -2891,19 +2819,17 @@
                     "root": "run",
                     "sha256": "b72a18d901dab101221a827dc61eae1464867ed3cf18abd8dc537e4648b1906e"
                   },
-                  "sim": null
+                  "sim": {
+                    "bytes": 951870,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr.sim.json",
+                    "root": "run",
+                    "sha256": "79dc605c9474d594a9b15989c1186643df8eb2e9b06b22a9e17e6cb8e603f035"
+                  }
                 },
                 "grade": {
-                  "findings": [
-                    {
-                      "event_idx": null,
-                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-                      "rule": "simulation",
-                      "severity": "warning"
-                    }
-                  ],
+                  "findings": [],
                   "lint": [],
-                  "n_events": 0,
+                  "n_events": 1273,
                   "n_rule_violations": 0,
                   "rule_counts": {
                     "no_aspirate_from_empty_well": 0,
@@ -2914,11 +2840,11 @@
                   },
                   "sim_error": null,
                   "sim_error_kind": null,
-                  "sim_ok": null,
-                  "verdict": "UNVERIFIED"
+                  "sim_ok": true,
+                  "verdict": "PASS"
                 },
                 "n_human_pauses": 1,
-                "outcome": "UNVERIFIED",
+                "outcome": "PASS",
                 "plan_sha256": "0d38fd3a2120bd07a7703199473eeaa09d64778a7333fe413ad03c045895d3d8",
                 "refusal": null,
                 "session_id": "s13_rt_qpcr",
@@ -2931,7 +2857,7 @@
               }
             ],
             "tally": {
-              "UNVERIFIED": 12
+              "PASS": 12
             }
           }
         ],
@@ -3068,23 +2994,22 @@
         "dir_name": "tr_q9jya8_q9jya8_neimb",
         "notes": [
           "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
-          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.",
-          "No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0."
+          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code."
         ],
         "protein_name": "Hemoglobin receptor (hmbR)",
         "rank": 3,
         "refused_protocol": null,
         "report": {
-          "bytes": 24012,
+          "bytes": 21800,
           "path": "data/s9/tr_q9jya8_q9jya8_neimb/robot_report.json",
           "root": "run",
-          "sha256": "55e5e99815769feebb5031fb886e4d5cb6213927dc3531c5d68e684a815887df"
+          "sha256": "ebfa71e160371be6077426b957b7f31d9f47cd7824cad99425d8088cb37e82e2"
         },
         "report_md": {
-          "bytes": 4973,
+          "bytes": 3773,
           "path": "data/s9/tr_q9jya8_q9jya8_neimb/robot_report.md",
           "root": "run",
-          "sha256": "04317b0a6ce6e6da2c7a0908760b0cbf6b7a2f53a82b1eca34c5b10f9011f22e"
+          "sha256": "08d2b5987016435b67740e9513d1a1d3d715cce141fe81e4c7bbaa3c8426c248"
         },
         "workflow": {
           "bytes": 7234,
@@ -3095,27 +3020,23 @@
       }
     ],
     "parameters_status": "PLACEHOLDER PARAMETERS: volumes, times and temperatures are coarse defaults, not validated for any kit, enzyme, cell line or assay. Set them from the kit insert / your SOP before use.",
-    "reasons": [
-      "code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0 (bash tools/setup-ot-venv.sh creates one), then re-run S9"
-    ],
     "simulator": {
-      "opentrons_version": null,
-      "simulated": false
+      "opentrons_version": "7.5.0",
+      "simulated": true
     },
-    "status": "not_run",
     "summary": {
-      "all_pass": false,
+      "all_pass": true,
       "n_candidates": 3,
       "n_sessions": 36,
       "outcomes": {
-        "UNVERIFIED": 36
+        "PASS": 36
       }
     }
   },
   "producer": {
     "module": "vaxforge.s9_robot",
     "tools": {
-      "opentrons": "not_run"
+      "opentrons": "7.5.0"
     },
     "vaxforge_version": "0.1.0"
   },
@@ -3125,7 +3046,6 @@
   "status": "ok",
   "volatile": {},
   "warnings": [
-    "S9 not run: code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0 (bash tools/setup-ot-venv.sh creates one), then re-run S9",
     "PLACEHOLDER PARAMETERS: volumes, times and temperatures are coarse defaults, not validated for any kit, enzyme, cell line or assay. Set them from the kit insert / your SOP before use.",
     "S12 biosecurity gate NOT EVIDENCED to S9. Do not order gene synthesis or run these protocols until the S12 gate clears the sequence."
   ]
