@@ -348,9 +348,21 @@ def run(target: Any, cfg: Any = None, *, s6_path: str | Path | None = None,
         })
         out_cands.append(rec)
 
+    degraded: list[str] = []
+    if folder is None:
+        degraded.append(f"S7 did not fold any structure: the ranking is sequence-only, with no structure term ({fold_status.get('reason', 'Boltz-2 unavailable')})")
+    else:
+        missing = sorted(n for n, v in ref_status.items() if v.get("status") != "ready")
+        if missing:
+            degraded.append(f"S7 validator(s) not available: {', '.join(missing)}; validator agreement "
+                            + ("was not computed" if len(missing) == len(ref_status) else "rests on a single validator"))
+        if dt is None and s7["conformational_on_boltz"]:
+            degraded.append("S7 conformational epitopes were not computed (DiscoTope-3.0 unavailable)")
+
     payload = {
         "context": s6["payload"]["context"],
         "top_k": top_k,
+        "degraded": degraded,
         "selection": {"basis": "pre-structure composite of S3, S5 T-cell, S5 B-cell, S6 coverage terms (percentile-ranked)",
                       "pre_structure_weights": pre_w, "top_k_ids": top_ids},
         "analysis": {

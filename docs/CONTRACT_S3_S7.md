@@ -45,7 +45,14 @@ Envelope (stream A's, same for all five; `payload` is what this document describ
   (`reference` = the tool the README names; `alternative` = open-source stand-in, only MHCflurry for class I and our own
   population-coverage implementation; `fallback` = transparent heuristic, **not** the named tool, S3 only) is NOT stored there.
   Read the fidelity and any "sent to a third-party server" statement from `warnings` and from the payload (`ranker`, `analysis`).
-* Every stage writes status `ok` even when a tool was missing; what could not run is in `payload` and `warnings`.
+* Every stage writes status `ok` even when a tool was missing; what could not run is in `payload` and `warnings`, and
+  `payload.degraded` (S3-S7) summarises it: a list of short reason strings, **always present, empty when nothing is degraded**.
+  S3: the rule-based fallback ranker was used. S4: a gate did not run (same as `unavailable_gates`). S5: a T-cell or B-cell prediction
+  did not run. S6: population coverage could not be computed. S7: no structure was folded (sequence-only ranking), a validator or
+  DiscoTope-3.0 was unavailable. A run can therefore say it is degraded without parsing warnings.
+* **Not computed is `null`, never 0 or `[]`.** An analysis that did not run reports `null` for its counts, lists and score
+  (S5 `tcell.class_i|class_ii`: `n_epitopes`, `n_promiscuous`, `promiscuous_per_100aa`, `score`, `top`, `selected` and
+  `tcell.all_epitopes_file`) and writes no empty result file. A predictor that ran and found nothing reports a real `0` / `[]`.
 * A stage is skipped if its artifact already has the same params and the same upstream digests (`--force` to override);
   the tool versions that were available are not part of that comparison, so a result produced without a tool is reused after
   the tool appears unless `--force` is given (S3 is the exception: a fallback ranking is not reused once Vaxign-ML could run).
