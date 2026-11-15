@@ -284,7 +284,7 @@ Variables bound in the new content: `plddt/low`, `plddt/very-low`, `text/mute`, 
 
 ## Log: seventh session (pass 7: storyboard re-sync to the 257-word plan)
 
-2026-11-15. Chrome and the Figma web editor only, file `pzytlXMGdl8JuSNivTeOOq`, page `Demo video (2:00)`. No Figma MCP tool called, nothing committed, pushed or posted, VaxForge page and old team file untouched. Source: `DEMO_VIDEO_PLAN.md` as modified 03:45 (257 narration words, per shot 29, 39, 41, 38, 31, 45, 19, 15) and the CAPTIONS dict in `/Users/abrahamlin/vaxforge-work/demo/make_storyboard.py`. Method: select the text layer in the Layers panel, Return, select all, type (the row positions stay put while the text grows).
+2026-11-15. Chrome and the Figma web editor only, file `pzytlXMGdl8JuSNivTeOOq`, page `Demo video (2:00)`. No Figma MCP tool called, nothing committed, pushed or posted, VaxForge page and old team file untouched. Source: `DEMO_VIDEO_PLAN.md` as modified 03:45 (257 narration words, per shot 29, 39, 41, 38, 31, 45, 19, 15) and the CAPTIONS dict in `make_storyboard.py` (the demo tooling, outside this repository). Method: select the text layer in the Layers panel, Return, select all, type (the row positions stay put while the text grows).
 
 **Frames changed.** Shot 2 `30:410`, Shot 3 `30:427`, Shot 4 `30:444`, Shot 5 `30:461`, Shot 6 `30:478`, Run of show `30:540`. Shots 1 `30:392`, 7 `30:495` and 8 `30:512` were read against the plan and already match; not edited.
 
