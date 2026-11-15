@@ -10,12 +10,17 @@ What is computed here (local checks, per ordered sequence, each reported on its 
                       so nothing arbitrary leaves through this gate
   sequence_sanity     the 20 standard amino acids only, and 1 to MAX_LENGTH residues (MAX_LENGTH is a sanity
                       bound chosen here, not a provider or regulatory limit)
-  virulence_flag      S2's ``virulence.is_virulence_associated`` for the matched candidate is not true
+  virulence_flag      S2's ``virulence.is_virulence_associated`` for the matched candidate: true is a REVIEW flag, not a
+                      block (virulence-associated proteins include real vaccine antigens such as FHBP and NadA, so this
+                      build records the flag for a person to look at and goes on); not computed still blocks
   toxin_flag          S4's ``gates.toxicity.status`` for the matched candidate is ``pass``
 
 A check that could not be evaluated (flag not computed, protein absent, no matching candidate) is reported as
 ``not_evaluated`` and counts against the sequence. ``not_applicable`` (S2: the virulence database does not apply
-to the organism) does not.
+to the organism) does not. ``review`` (a virulence-associated candidate) does not block either: it is listed in
+``payload.review`` with ``payload.review_required`` true, repeated as a warning on the artifact, and printed by the CLI,
+so the user sees it without the run stopping. The toxin, sequence-sanity, selected-candidate and provider-screening
+checks still block.
 
 THESE LOCAL CHECKS ARE NOT A SYNTHESIS-SCREENING RESULT AND NEVER SUBSTITUTE FOR ONE. They do not look at what a
 sequence is, only at whether the pipeline selected it and recorded no flag for it. Screening is done by a
@@ -34,6 +39,7 @@ Gate state (``payload.state``):
   not_screened  the local checks pass but no provider record covers every ordered sequence (no record at all
                 is this state, never ``cleared``); also the state when no order list was supplied
   cleared       the local checks pass and a provider record covers every ordered sequence with only ``pass``
+                (review flags may still be listed; they do not change the state)
 
 The stage's envelope status is always ``ok``: ``blocked`` is a result, not a failure of the stage. The CLI exits
 non-zero unless the state is ``cleared``.
@@ -55,7 +61,7 @@ STAGE = "s12"
 MAX_LENGTH = 10000
 VERDICTS = ("pass", "flag", "error")
 EXIT = {"cleared": 0, "blocked": 2, "not_screened": 3}  # 1 is an error, as everywhere in vaxforge.cli
-_SEVERITY = {"pass": 0, "not_applicable": 1, "not_evaluated": 2, "fail": 3}
+_SEVERITY = {"pass": 0, "not_applicable": 1, "review": 2, "not_evaluated": 3, "fail": 4}
 LIMITS = [
     "The local checks are not a synthesis-screening result and never substitute for one.",
     "No provider or network was contacted. The provider record is supplied by the user; this module checks that it "
@@ -133,7 +139,7 @@ def _virulence(block: dict | None) -> tuple[str, str]:
         return "not_evaluated", "the protein is absent from the S2 artifact"
     flag = block.get("is_virulence_associated")
     if flag is True:
-        return "fail", f"S2 records it as virulence-associated (evidence {block.get('evidence')})"
+        return "review", f"S2 records it as virulence-associated (evidence {block.get('evidence')}); flagged for human review, not blocked"
     if flag is False:
         return "pass", "S2 compared it with VFDB and found no qualifying hit"
     if block.get("status") == "not_applicable":
@@ -163,12 +169,13 @@ def _flag_checks(matches: list[dict], s2_virulence: dict) -> dict:
 
 
 def evaluate(order: list[dict], candidates: list[dict], s2_proteins: list[dict], record: dict | None) -> dict:
-    """The gate's result as pure data: ``{"state", "reasons", "sequences"}``. ``order`` is empty when none was supplied."""
+    """The gate's result as pure data: ``{"state", "reasons", "review", "sequences"}``. ``review`` lists what a person should look
+    at without blocking anything. ``order`` is empty when none was supplied."""
     by_digest: dict[str, list[dict]] = {}
     for c in candidates:
         by_digest.setdefault(sequence_digest(c["sequence"]), []).append(c)
     s2_virulence = {p["protein_id"]: p.get("virulence") for p in s2_proteins}
-    rows, blockers = [], []
+    rows, blockers, review = [], [], []
     for o in order:
         matches = by_digest.get(o["digest"], [])
         checks = {"selected_candidate": (_check("pass", "matches S4 candidate " + ", ".join(c["protein_id"] for c in matches))
@@ -178,6 +185,7 @@ def evaluate(order: list[dict], candidates: list[dict], s2_proteins: list[dict],
         rows.append({"id": o["id"], "digest": o["digest"], "length": len(o["sequence"]), "local_checks": checks,
                      "provider_verdict": verdict})
         blockers += [f"{o['id']}: {name}: {c['detail']}" for name, c in checks.items() if c["result"] in ("fail", "not_evaluated")]
+        review += [f"{o['id']}: {name}: {c['detail']}" for name, c in checks.items() if c["result"] == "review"]
         if verdict in ("flag", "error"):
             blockers.append(f"{o['id']}: the provider record gives verdict {verdict}")
     uncovered = [r["id"] for r in rows if r["provider_verdict"] == "not_screened"]
@@ -197,7 +205,7 @@ def evaluate(order: list[dict], candidates: list[dict], s2_proteins: list[dict],
                    f"{record['tool_version']} ({record['date']}) lists each as pass; the record is user-supplied and unverified"]
     else:
         state = "not_screened"
-    return {"state": state, "reasons": blockers + reasons if state == "blocked" else reasons, "sequences": rows}
+    return {"state": state, "reasons": blockers + reasons if state == "blocked" else reasons, "review": review, "sequences": rows}
 
 
 def check(store: RunStore, order_path=None, screening_path=None) -> Artifact:
@@ -211,6 +219,8 @@ def check(store: RunStore, order_path=None, screening_path=None) -> Artifact:
     payload = {
         "state": result["state"],
         "reasons": result["reasons"],
+        "review_required": bool(result["review"]),
+        "review": result["review"],
         "order": ({"status": "supplied", "file": {"name": Path(order_path).name, "sha256": sha256_file(order_path),
                                                   "bytes": Path(order_path).stat().st_size}, "n_sequences": len(order)}
                   if order_path else {"status": "not_supplied"}),
@@ -223,6 +233,7 @@ def check(store: RunStore, order_path=None, screening_path=None) -> Artifact:
         "limits": LIMITS,
     }
     warnings = [f"S12 {payload['state']}: {r}" for r in payload["reasons"]] if payload["state"] != "cleared" else []
+    warnings += [f"S12 review (not blocking): {r}" for r in payload["review"]]
     return store.write_artifact(
         STAGE, payload, inputs=["s2", "s4"], status="ok", warnings=warnings,
         params={"selection": "s4 candidates (the survivors)", "alphabet": "".join(sorted(PROTEIN_ALPHABET)),
@@ -248,6 +259,10 @@ def _report(art: Artifact) -> None:
     print(f"S12 biosecurity gate: {art.payload['state']}")
     for r in art.payload["reasons"]:
         print(f"  - {r}")
+    if art.payload["review"]:
+        print(f"  FOR YOUR REVIEW ({len(art.payload['review'])}; nothing is blocked by these):")
+        for r in art.payload["review"]:
+            print(f"  ! {r}")
     print(f"  artifact: {art.path}")
 
 

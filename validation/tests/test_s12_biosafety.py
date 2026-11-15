@@ -151,12 +151,27 @@ def test_a_sequence_the_pipeline_did_not_select_is_blocked_even_with_a_pass_verd
     assert local(art, "stranger", "virulence_flag") == "not_evaluated" and local(art, "stranger", "toxin_flag") == "not_evaluated"
 
 
-def test_a_virulence_associated_candidate_is_blocked(tmp_path):
+def test_a_virulence_associated_candidate_is_flagged_for_review_and_not_blocked(tmp_path):
     art = s12.check(make_store(tmp_path), write_order(tmp_path, {"virulent": seq("virulent")}),
                     write_record(tmp_path, {digest("virulent"): "pass"}))
-    assert art.payload["state"] == "blocked"
-    assert local(art, "virulent", "virulence_flag") == "fail" and local(art, "virulent", "toxin_flag") == "pass"
-    assert "virulence-associated (evidence strong)" in art.payload["reasons"][0]
+    assert art.payload["state"] == "cleared"
+    assert local(art, "virulent", "virulence_flag") == "review" and local(art, "virulent", "toxin_flag") == "pass"
+    assert art.payload["review_required"] is True and len(art.payload["review"]) == 1
+    assert "virulence-associated (evidence strong)" in art.payload["review"][0] and "not blocked" in art.payload["review"][0]
+    assert any(w.startswith("S12 review (not blocking)") for w in art.warnings)
+
+
+def test_a_review_flag_does_not_hide_a_real_blocker_and_is_still_listed(tmp_path):
+    store = make_store(tmp_path)
+    art = s12.check(store, write_order(tmp_path, {"virulent": seq("virulent"), "toxic": seq("toxic")}),
+                    write_record(tmp_path, {digest("virulent"): "pass", digest("toxic"): "pass"}))
+    assert art.payload["state"] == "blocked" and local(art, "toxic", "toxin_flag") == "fail"
+    assert art.payload["review_required"] is True and local(art, "virulent", "virulence_flag") == "review"
+
+
+def test_with_no_review_flag_the_artifact_says_so(tmp_path):
+    art = s12.check(make_store(tmp_path), write_order(tmp_path, {"clean": seq("clean")}), write_record(tmp_path, {digest("clean"): "pass"}))
+    assert art.payload["review_required"] is False and art.payload["review"] == []
 
 
 @pytest.mark.parametrize("name,result", [("toxic", "fail"), ("rescued_toxic", "fail"),
