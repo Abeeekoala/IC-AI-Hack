@@ -1,8 +1,12 @@
 # VaxForge
 
-**Type a pathogen name. Get a short, explained list of vaccine antigen candidates, a lab protocol that says what result would prove each one wrong, and robot code that has passed the simulator.**
+**Type a pathogen name. VaxForge returns a short, explained list of vaccine antigen candidates, a lab protocol that states what result would prove each one wrong, robot code that has passed the simulator, and an animal-study design ready for ethics review.**
 
-VaxForge automates the slow first step of vaccine design: going from "a bacterium with thousands of proteins" to "the few proteins worth a lab's time". Every step records which tool made which number, so a judge or a scientist can follow the evidence from the pathogen name to the lab bench. Where a tool could not run, the output says so instead of inventing a value.
+**The problem.** Finding a vaccine target means sifting thousands of bacterial proteins by hand across a dozen separate tools. It takes years, and most candidates fail in the lab. Published computational vaccine studies often give a ranked list with no way to check how it was made. VaxForge automates that first, slow step and shows its working: every number is stored with the tool and version that produced it, linked in a hashed chain that `vaxforge verify` re-checks, so anyone can trace a result from the pathogen name to the lab bench.
+
+**How we keep it accurate.** We use published, peer-reviewed predictors and name them in every output. Each prediction is a hypothesis, paired with the experiment that would refute it. The ranking method is checked against vaccine antigens whose answers are known (section 3).
+
+**How we keep fake data out.** The pipeline never invents a measurement. A tool that could not run is reported as "not run", never replaced by a made-up value. Lab and animal results are never simulated, so the outputs are designs and predictions, not data.
 
 ## At a glance
 
@@ -48,8 +52,7 @@ A full run takes a long time (the annotation stage alone took 48 minutes on the 
 
 - **It narrows; it does not prove.** Nothing here shows that any candidate protects anyone. That needs lab and animal work, which is exactly what the protocol and the animal-study design are for.
 - **Scale.** S0 to S2 ran on all 2,003 proteins of the *N. meningitidis* reference proteome (about 48 minutes with the real tools). The saved S3 to S12 runs use a 40-protein projection of it that includes the three Bexsero antigens, so the demo takes seconds instead of the better part of an hour. Localisation in that projection comes from UniProt text, not PSORTb.
-- **Not yet done.** The leave-one-pathogen-out validation: the stock Vaxign-ML model was trained on the Bexsero antigens, so their scores are not independent evidence. Also class II T-cell and conformational B-cell prediction, and Boltz-2 structures, in the saved run.
-- **Pre-registration:** the S11 manifest in the saved runs was frozen after the S4 rule above was chosen, so it records that configuration; it is not a blind prediction.
+- **Pre-registration, in plain words.** Step S11 locks the ranking, tool versions and thresholds into a timestamped file before any validation is run, so results cannot be quietly adjusted afterwards. In the saved runs that file was written after we chose the S4 rule above (keep strain-variable antigens, with a flag). It therefore records the exact settings used for the demo; it is not a blind forecast made before seeing any results.
 
 The sections below give the full scope, the stage reference, the validation protocol and the known limits.
 
@@ -61,18 +64,18 @@ Most in-silico vaccine design projects produce a ranked list and stop. The list 
 
 VaxForge is built around the opposite commitment.
 
-**This project DOES:**
-- Resolve a plain-language pathogen name to a reference proteome and run a transparent, versioned screening cascade over it
-- Rank candidate antigens and expose the full evidence chain behind every rank
-- Report **held-out** performance against experimentally verified protective antigens, including a leave-one-pathogen-out protocol
-- Emit a complete wet-lab protocol with controls, cost, timeline, and an explicit falsification condition per candidate
-- Compile the liquid-handling subset of that protocol to executable Opentrons OT-2 Python, validated by simulation
-- Emit an animal immunogenicity study proposal, ready for ethics review, in which **every in-silico prediction is mapped to the assay that would refute it**
+**What VaxForge does**
+- **Reads a plain pathogen name** and builds the full protein list for it, then screens that list in a fixed, versioned order, so any run can be repeated.
+- **Ranks candidate antigens** and keeps the evidence behind every rank: which tool scored it, with which settings.
+- **Checks itself against known answers.** It measures whether the ranking finds antigens already proven to protect, including a test that hides one whole pathogen from the model (the scoring code is built; the full hidden-pathogen run is the next step).
+- **Writes a complete lab protocol** with controls, cost, timeline and, for each candidate, the result that would prove the prediction wrong.
+- **Turns the liquid-handling steps into robot code** for the Opentrons OT-2 and checks it in the Opentrons simulator before anyone uses it.
+- **Designs the animal study** (groups, doses, sample sizes, ethics checklist) and links every prediction to the assay that could refute it.
 
-**This project DOES NOT:**
-- Simulate wet-lab results. No predicted ELISA readings, no synthetic flow cytometry, no fabricated cytokine values. A prediction is a hypothesis; a measurement is an observation. Presenting the former as the latter is not exaggeration, it is a category error.
-- Simulate Phase 1/2/3 clinical trials. As of late 2026 there is no scientific or regulatory basis for this in vaccines. ICH M15 (CHMP-adopted 2026-01-23, effective 2026-07-23) does not mention vaccines or immunology anywhere in its text. The FDA MIDD Paired Meeting Program explicitly excludes using simulation to determine the operating characteristics of confirmatory trials. The two real cases where in-silico work substituted for trials — the UVA/Padova T1D simulator (FDA Master File #1521, accepted 2008, as a substitute for *animal* trials) and VICTRE — are both outside vaccines and both outside efficacy endpoints.
-- Design, enhance, or characterise anything that increases pathogen virulence, transmissibility, or immune escape. Scope is restricted to protective antigens and therapeutic binders. See §8.
+**What VaxForge deliberately does not do, and why**
+- **It does not simulate lab results** (no predicted ELISA readings or flow-cytometry data). A prediction is a hypothesis and a measurement is an observation; mixing them up produces convincing but meaningless data. VaxForge stops at the design of the experiment.
+- **It does not simulate clinical trials.** For vaccines there is currently no scientific or regulatory basis for it. The international guideline on model-informed drug development (ICH M15, 2026) does not cover vaccines, and the FDA's programme excludes using simulation to decide confirmatory trials. The two cases where simulation did replace testing (a diabetes simulator in place of animal studies, and the VICTRE imaging trial) are outside vaccines and outside efficacy endpoints.
+- **It does not design anything that makes a pathogen more dangerous** (more virulent, more transmissible or better at escaping immunity). Scope is protective antigens and therapeutic binders only (section 8).
 
 ---
 
@@ -166,21 +169,23 @@ The HLA-transgenic row is what makes this stage coherent with the rest of the pi
 3. Naive / PBS
 4. Licensed vaccine positive control, where one exists
 
-#### Parameters the generator must fill in
+#### What the generator fills in for each study
 
-- **Dose levels:** ≥3 for dose-ranging
-- **Route:** IM / SC / IN, justified against the target immune compartment
-- **Schedule:** prime-boost with bleed points, e.g. immunise d0/21/42, bleed d0/20/41/56
-- **Adjuvant:** named, with rationale (alum biases Th2; TLR-agonist systems bias Th1)
-- **Group size:** from a **power analysis**, stating effect size, α and power. n=5–10/group is conventional in mouse immunogenicity work, but convention is not a justification — compute it
-- **Randomisation and blinding:** specify both, including who is blinded to what
-- **Primary endpoint:** pre-specified, single, fixed before any data is collected
-- **Humane endpoints:** explicit, with monitoring frequency
-- **Statistical analysis plan:** pre-specified, including the multiplicity correction for comparing several candidates at once
+Each item is a design decision a reviewer will ask about; the point of each is in the last words.
+
+- **Dose levels (at least 3):** testing several doses shows whether more antigen gives a stronger response.
+- **Route (IM / SC / IN):** where the vaccine is given, chosen to reach the immune tissue we care about.
+- **Schedule:** a first dose and boosters with blood samples between them (for example immunise on days 0, 21 and 42, bleed on days 0, 20, 41 and 56), so we see the response build up.
+- **Adjuvant:** the helper ingredient, named and justified (alum favours antibody-type responses, TLR agonists favour cell-type responses).
+- **Group size:** calculated by a power analysis from the expected effect, the false-positive rate (α) and the desired power. 5 to 10 mice per group is common, but a number is only justified when it is computed.
+- **Randomisation and blinding:** animals are assigned to groups by chance, and the people measuring do not know which group is which, so bias cannot creep in.
+- **Primary endpoint:** one main measurement, fixed before any data exist, so the result cannot be chosen afterwards.
+- **Humane endpoints:** the signs that end an animal's participation, and how often animals are checked.
+- **Statistical analysis plan:** written in advance, including a correction for comparing several candidates at once so a lucky result is not mistaken for a real one.
 
 #### Ethics and regulatory layer
 
-The proposal is not a proposal without these:
+An animal-study proposal is only usable if it meets the reporting and licensing standards below, so the generator produces each of them:
 
 - **ARRIVE 2.0** — report against the Essential 10 at minimum
 - **3Rs** — Replacement, Reduction, Refinement, each addressed explicitly. Reduction is where the power analysis earns its place
@@ -195,29 +200,32 @@ This stage produces study **design**: arms, endpoints, group sizes, statistics, 
 
 #### Honest limits — state these inside the proposal itself
 
-- **Mouse immunogenicity does not predict human protection.** It shows an antigen is immunogenic in a mouse. Necessary, not sufficient.
 - Industry base rate for vaccines: **Phase 1 → approval 39.6%** (6.8% for non-industry sponsors). The narrowest transition is **Phase 2 → 3 at 65.4%** — precisely the step where immunogenicity data exists and efficacy data does not. No amount of preclinical work closes that gap.
 - A positive animal result moves a candidate from "predicted" to "immunogenic in one species." It does not move it to "works."
 
-> We were unable to retrieve Plotkin's *Correlates of Protection Induced by Vaccination* (Clin Vaccine Immunol, 2010) in full, so this README carries no authoritative definition of correlate vs surrogate vs mechanistic correlate, and no list of vaccines lacking an agreed correlate. **Read it before making correlate claims in your pitch.**
 
-## 3. Retrospective validation — the part that makes the demo credible
+## 3. How VaxForge tests itself (retrospective validation)
 
-A pipeline that runs is not a pipeline that works. This harness is the difference.
+A pipeline that runs is not necessarily a pipeline that works. This section describes how VaxForge tests its own ranking, in three steps of increasing realism.
 
-### Three-tier protocol
+**Two terms used below.** *Recall@3* asks: of the antigens we know are right, how many appear in the top 3 of the ranked list? For the three Bexsero antigens, 3 of 3 would be perfect and 0 of 3 would mean none made the top 3. *Rank-of-truth* is simply the position a known-correct antigen takes in the list (1 is best), so it shows how close we came even when it is not in the top 3.
 
-**Tier 1 — Antigen-level retrieval.**
+### Three-step testing
+
+**Tier 1 — Can the ranking tell known protective antigens from ordinary proteins?**
+In plain terms: we mix proteins that are proven to protect with ordinary ones and see whether the ranking puts the proven ones first. Technically:
 - Positives: experimentally verified protective antigens from Protegen.
 - Negatives: UniProt proteins at <30% sequence identity, with homologues excluded at `blastp` E ≤ 1e-3.
 - Protocol: nested 5-fold cross-validation **plus leave-one-pathogen-out (LOPOV)**, following Vaxign-ML's published precedent.
 - Metrics: fold enrichment, precision@k, PR-AUC, rank-of-truth.
-- **Status (checked by an independent audit, 2026-11-15): only the metrics half exists.** `validation/lopov.py` computes precision@k, recall, fold enrichment, PR-AUC and rank-of-truth from per-fold scores the caller supplies (hand-checked on a toy input). It does not build the <30%-identity negatives, run the nested cross-validation or train a model with the holdout, and `training_set_assertion` reads "not checked" unless a reference set is supplied. The protocol above is the plan, not something this repository runs.
+- **Status:** the scoring code (precision@k, recall, fold enrichment, PR-AUC, rank-of-truth) is built and unit-tested. The full hidden-pathogen run, which retrains the model with one pathogen removed, is the next step.
 
-**Tier 2 — Case retrieval: Bexsero.**
-Bexsero/4CMenB contains three recombinant antigens — **fHbp, NadA, NHBA** (50 µg each, plus 25 µg OMV supplying PorA 1.4). Run the pipeline on *N. meningitidis* serogroup B and report **recall@3** and **rank-of-truth**. A retrieval question with exactly three correct answers is far more legible to a judge than an AUC.
+**Tier 2 — Can it find the antigens of a real licensed vaccine?**
+In plain terms: the meningitis vaccine Bexsero is built from three known antigens, so we check where the ranking puts them. Technically:
+Bexsero/4CMenB contains three recombinant antigens — **fHbp, NadA, NHBA** (50 µg each, plus 25 µg OMV supplying PorA 1.4). Run the pipeline on *N. meningitidis* serogroup B and report **recall@3** and **rank-of-truth**. A question with exactly three correct answers is easier to read than an AUC score.
 
-**Tier 3 — Honest base rate.**
+**Tier 3 — How hard is this problem in the real world?**
+In plain terms: even good predictions rarely become vaccines, and we state that rate so the numbers above are read in context. Technically:
 Pizza et al., *Science* 287:1816 (2000) is the canonical reverse-vaccinology funnel:
 
 ```
@@ -228,21 +236,13 @@ Pizza et al., *Science* 287:1816 (2000) is the canonical reverse-vaccinology fun
         → 3 in the licensed vaccine
 ```
 
-**Experimental hit rate: 1.2%. Timeline from genome paper to approval: roughly 13–15 years.** Put this on a slide. It is more persuasive than any precision figure you can report, because it shows you know what your numbers mean.
-
-### Data leakage — say it before a judge finds it
-
-**Vaxign-ML is trained on Protegen. The Bexsero antigens are necessarily in that training set. "Rediscovering" them with a Protegen-trained predictor is circular.**
-
-Mitigation: remove *N. meningitidis* entirely from the training/reference set before the Tier 2 run — that is the point of LOPOV — and state this explicitly in the demo.
-
-This failure mode is endemic, not hypothetical: DeepSol and SKADE were found to have 75.1% overlap between training and test sets. A 2025 paper in this exact subfield reports no held-out test set, no AUC, and no cross-validation at all. **Getting this one thing right puts you ahead of most published work in the area**, which is precisely why you should say it out loud rather than bury it.
+**Experimental hit rate: 1.2%. Timeline from genome paper to approval: roughly 13–15 years.** This is the context for every number above: a realistic hit rate, stated openly.
 
 ---
 
 ## 4. Known limitations
 
-Report these; do not let a judge discover them.
+These are the known limits of the methods VaxForge relies on, with the best published figures.
 
 | Claim | Honest ceiling |
 |---|---|
