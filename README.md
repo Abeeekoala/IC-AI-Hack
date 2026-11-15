@@ -61,6 +61,12 @@ A full run takes a long time (the annotation stage alone took 48 minutes on the 
 
 **Learning from past protocols (S9.5).** We also fine-tuned the code-writing model with Adaption's AutoScientist (details in the stage table above). The fine-tune is judged by the same simulator, not by opinion.
 
+**Built for labs that already have these robots.** The programs target the Opentrons OT-2, a benchtop pipetting robot found in many teaching and research labs. The photo shows the iGEM lab at Imperial College London, a lab with a row of OT-2 robots like the ones VaxForge writes code for.
+
+![The iGEM lab at Imperial College London, with a row of Opentrons OT-2 pipetting robots](docs/images/ot2_lab_imperial_igem.jpg)
+
+**Where this is going.** We are extending our solution to slow vaccine discovery into the wet lab with robots as well, so that the testing of the shortlisted antigens can be automated too. So far the generated programs have been checked in the Opentrons simulator; running them on a physical robot is the next step.
+
 **Before real use.** Volumes and times in the generated programs are defaults and must be set from your kit's instructions. Gene synthesis must not be ordered until the S12 biosecurity gate clears the sequence.
 
 ## How it works in more detail
