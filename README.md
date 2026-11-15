@@ -34,7 +34,7 @@ A full run waits on several tools, so the demo shows a **pre-run** that is saved
 | Stage | Result on this run |
 |---|---|
 | S3 | Real Vaxign-ML scores (stock model). 30 candidates go to S4. fHbp ranks 14th, NadA 7th, NHBA 9th |
-| S4 | BLAST+, AlgPred2, ToxinPred2 and a second-strain conservancy check ran. 30 in, **27 kept**, 3 rejected (frpA, frpC: toxicity; lldD: human homology). **fHbp, NadA and NHBA are all kept**, with their flags recorded |
+| S4 | BLAST+, AlgPred2, ToxinPred2 and a second-strain conservancy check ran. 30 in, **27 kept**, 3 rejected (frpA, frpC: toxicity; lldD: human homology). fHbp, NadA and NHBA are kept, with their flags recorded, **because the allergenicity and conservancy defaults were set to flag after an earlier strict run rejected them** (tuned, not found) |
 | S5 | MHCflurry (class I; an open-source alternative to NetMHCpan) and BepiPred-3.0 ran |
 | S6 | World class I population coverage 98.5% |
 | S7 | Boltz-2 was not run on this machine, so the final order is sequence-only (NHBA 7th, NadA 10th, fHbp 15th) |
@@ -44,6 +44,8 @@ A full run waits on several tools, so the demo shows a **pre-run** that is saved
 - The three vaccine antigens (fHbp, NadA, NHBA) pass S4 because allergenicity and conservancy **flag** instead of reject (§2, S4). With strict settings the first real run rejected all three, as they are strain-variable by design. We chose the flag setting after seeing that, so this is a demonstration of how the pipeline works, not independent validation. The fair test, leave-one-pathogen-out with a retrained model, has not been run.
 - The stock Vaxign-ML model was trained on these antigens (S3 prints a `LEAKAGE RISK` warning), so their high scores are expected and are not evidence.
 - Not run, and listed in each artifact's `degraded` field: class II T-cell prediction (NetMHCIIpan needs a DTU licence), conformational B-cell prediction (DiscoTope-3.0), and Boltz-2 structures. S2 localisation is a UniProt-text stand-in, not PSORTb. The set is 40 of 2,003 proteins and deliberately includes the Bexsero antigens.
+- The Bexsero recall@3 (`validation/bexsero_case.py`) reads the S3 ranking only, so this change does not move it: still 0 of 3 (fHbp 14th, NadA 7th, NHBA 9th), and circular (`holdout_enforced: false`).
+- S11 pre-registration is only as good as the order of events: a manifest frozen after this S4 choice registers a configuration picked with knowledge of the outcome, the opposite of what S11 is for.
 - Nothing here measures whether any candidate protects anyone; that needs lab and animal work. What the project shows is the narrowing from a proteome to an explained shortlist and a falsifiable plan for the lab.
 
 ---

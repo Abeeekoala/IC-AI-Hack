@@ -1,5 +1,5 @@
 {
-  "config_digest": "sha256:102238b1389cd4d0b43364b5cc87a1f6045a51746224e6630da3cee0ee6bbf1f",
+  "config_digest": "sha256:692398a935bcf730494a0ac4244dbebc7cde3ef740a6a6757625f803b36d43fa",
   "created_at": "2026-11-14T16:14:13Z",
   "run_id": "real_fixture",
   "stages": {
@@ -19,22 +19,22 @@
     },
     "s10": {
       "artifact": "s10_animal.json",
-      "digest": "sha256:cc0a13937ea887481252089843121807b4ed38bdbc0e5f8387ab407d0e9aad59",
-      "finished_at": "2026-11-15T10:24:45Z",
+      "digest": "sha256:a74e8804ba1c7e5a47d9ddd2eb6f6433bee426f3322eae4fbc382d53ea119131",
+      "finished_at": "2026-11-15T10:39:31Z",
       "status": "ok",
       "warnings": 19
     },
     "s11": {
       "artifact": "s11_prereg.json",
-      "digest": "sha256:1bc59071a6ed23a25aadfcb894541a533b53d9b46f8509754cfc36afda470d4d",
-      "finished_at": "2026-11-15T10:24:45Z",
+      "digest": "sha256:5e306fab76daf5e166d84a68624a8d1f4959b710f428bd3c731490e166753a24",
+      "finished_at": "2026-11-15T10:39:31Z",
       "status": "ok",
       "warnings": 0
     },
     "s12": {
       "artifact": "s12_biosafety.json",
-      "digest": "sha256:ccbafe95ee3853ca9370a5b94c7697249110364eca868fd77539246e7e21bffd",
-      "finished_at": "2026-11-15T10:24:45Z",
+      "digest": "sha256:5806bd4d489114c5961321d084ea87c4262b121b4c689e61b78420a3eb50d390",
+      "finished_at": "2026-11-15T10:39:31Z",
       "status": "ok",
       "warnings": 4
     },
@@ -48,63 +48,63 @@
     "s3": {
       "artifact": "s3_rank.json",
       "digest": "sha256:13d3c4acc714b455f12e6242040c5a4df78b3fc8165e940c98a734fa867eddce",
-      "finished_at": "2026-11-15T10:19:40Z",
+      "finished_at": "2026-11-15T10:34:33Z",
       "status": "ok",
       "warnings": 3
     },
     "s4": {
       "artifact": "s4_filter.json",
       "digest": "sha256:c89da3d01ae4b5f635dc752dce062d734f9dc6bacc8bf859594195c381fe21ae",
-      "finished_at": "2026-11-15T10:19:50Z",
+      "finished_at": "2026-11-15T10:34:43Z",
       "status": "ok",
       "warnings": 1
     },
     "s5": {
       "artifact": "s5_epitopes.json",
-      "digest": "sha256:4e423c84746f96efdd6fd90b8d6f1fca467972bb7eada63b3ed7e10870d17937",
-      "finished_at": "2026-11-15T10:24:38Z",
+      "digest": "sha256:b7ef385e31a83ebcd1be02598e30572b2caad90fa6a67274ecb64a7d2329b96e",
+      "finished_at": "2026-11-15T10:39:23Z",
       "status": "ok",
       "warnings": 3
     },
     "s6": {
       "artifact": "s6_coverage.json",
-      "digest": "sha256:6c247c36d275ad63004e4f6beb684e8abf05d5ade1ce567796098514a3822dc9",
-      "finished_at": "2026-11-15T10:24:44Z",
+      "digest": "sha256:7b118cc995d126d199779c3ba9d92a4669c4d338842a6f679af32cc61e21dc2b",
+      "finished_at": "2026-11-15T10:39:30Z",
       "status": "ok",
-      "warnings": 2
+      "warnings": 1
     },
     "s7": {
       "artifact": "s7_structure.json",
-      "digest": "sha256:2657e206ff039d0b89f6fbff6b202b6ae75c004e87bf8bb3587c541307b1dfae",
-      "finished_at": "2026-11-15T10:24:44Z",
+      "digest": "sha256:f33e718a2d9201429dcab0333388cb82546076df5f2e0a68934f4d09a748e597",
+      "finished_at": "2026-11-15T10:39:30Z",
       "status": "ok",
       "warnings": 2
     },
     "s8": {
       "artifact": "s8_protocol.json",
-      "digest": "sha256:886326f340e4219f9d6ae21b27edf271d822a4be3744ffad5274895ecf81fc3b",
-      "finished_at": "2026-11-15T10:24:44Z",
+      "digest": "sha256:80987e39b721f7867af391aec152cd00e905305213b52df86cef4fa9e3c8a844",
+      "finished_at": "2026-11-15T10:39:30Z",
       "status": "ok",
       "warnings": 14
     },
     "s9": {
       "artifact": "s9_robot.json",
-      "digest": "sha256:3a2efecea73a3be3dcf634a9ca207cd48c14ddd3f17d888281bd333a3308645d",
-      "finished_at": "2026-11-15T10:24:45Z",
+      "digest": "sha256:9415652d18c43fdeebddfc491baf3362c55947b7193a5ceddf436be4f5dc7fe1",
+      "finished_at": "2026-11-15T10:39:30Z",
       "status": "ok",
       "warnings": 3
     },
     "s9_5": {
       "artifact": "s9_5_finetune.json",
-      "digest": "sha256:a5e6906d4fb15a1f0880e9968e64819e8a16eb4d94b5015405f7fb5aefb9089d",
-      "finished_at": "2026-11-15T10:24:45Z",
+      "digest": "sha256:54f63569eac07cb0fc1077a8355211908444ccafe27648c3aed5ffc6341d505f",
+      "finished_at": "2026-11-15T10:39:30Z",
       "status": "ok",
       "warnings": 1
     },
     "s9plus": {
       "artifact": "s9plus_animate.json",
-      "digest": "sha256:2ef25ea9703801bf7ccad97ebd86334957ca3a22065e322e225857988c803ac1",
-      "finished_at": "2026-11-15T10:24:45Z",
+      "digest": "sha256:25e8383d5a62405a885f739eca0999f63f70ace721de50dc7050f912ba85ba9c",
+      "finished_at": "2026-11-15T10:39:30Z",
       "status": "ok",
       "warnings": 2
     }
