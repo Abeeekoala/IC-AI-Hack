@@ -61,12 +61,12 @@ def merge_duplicates(rows):
     return merged, n_merged, n_tightened
 
 
-def assemble(real, synthetic, rows, heldout_families, seed):
+def assemble(real, synthetic, rows, heldout_families, seed, max_chars=None):
     """-> (candidates, report). candidates = every real row + the synthetic rows drawn."""
     real, n_merged, n_tightened = merge_duplicates(real)
-    n_real = len(ft.build_manifest(real, heldout_families, 1)["included"])
+    n_real = len(ft.build_manifest(real, heldout_families, 1, max_chars)["included"])
     need = max(0, rows - n_real)
-    eligible = [c for c in synthetic if not ft.reasons_for(c, heldout_families)]
+    eligible = [c for c in synthetic if not ft.reasons_for(c, heldout_families, max_chars)]
     by_kind = defaultdict(list)
     for c in sorted(eligible, key=lambda c: c["id"]):
         by_kind[kind_of(c["id"])].append(c)
@@ -94,11 +94,12 @@ def main(argv=None):
     ap.add_argument("--rows", type=int, default=ft.MIN_SFT_ROWS)
     ap.add_argument("--seed", default="s9_5-assemble")
     ap.add_argument("--families", default=str(ft.FAMILIES_FILE))
+    ap.add_argument("--max-row-chars", type=int, help="the same cap the manifest will use (prompt plus code, characters)")
     args = ap.parse_args(argv)
     real = [c for p in args.real for c in ft.load_candidates(p)]
     synthetic = ft.load_candidates(args.synthetic)
     families = set(json.loads(Path(args.families).read_text(encoding="utf-8"))["families"])
-    candidates, report = assemble(real, synthetic, args.rows, families, args.seed)
+    candidates, report = assemble(real, synthetic, args.rows, families, args.seed, args.max_row_chars)
     Path(args.out).write_text("".join(json.dumps(c, ensure_ascii=False) + "\n" for c in candidates), encoding="utf-8")
     print(json.dumps(report, indent=1))
     return 0 if report["meets_rows"] else 1

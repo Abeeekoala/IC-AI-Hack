@@ -59,9 +59,12 @@ def load_candidates(path):
     return out
 
 
-def reasons_for(c, heldout_families):
-    """Every rule the candidate fails; an empty list means it may be trained on."""
+def reasons_for(c, heldout_families, max_chars=None):
+    """Every rule the candidate fails; an empty list means it may be trained on. max_chars, when set, caps prompt plus code
+    (a cost and time control: a few huge files can hold a third of the training text)."""
     why = []
+    if max_chars is not None and len(c["prompt"]) + len(c["code"]) > max_chars:
+        why.append(f"too-long: {len(c['prompt']) + len(c['code'])} characters, over the {max_chars} cap")
     if c.get("source") in EXCLUDED_SOURCES:
         why.append(f"source-excluded: {c['source']}: {EXCLUDED_SOURCES[c['source']]}")
     family = c.get("heldout_family")
@@ -84,13 +87,13 @@ def reasons_for(c, heldout_families):
     return why
 
 
-def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
+def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS, max_chars=None):
     ids = [c["id"] for c in candidates]
     if len(ids) != len(set(ids)):
         raise ValueError("candidate ids are not unique")
     included, excluded, refused = [], [], []
     for c in candidates:
-        why = reasons_for(c, heldout_families)
+        why = reasons_for(c, heldout_families, max_chars)
         if not why:
             entry = {"id": c["id"], "source": c["source"], "heldout_family": c["heldout_family"],
                      "assigned_by": c.get("assigned_by", "rule"), "origin": c.get("origin", "licensed"),
@@ -110,6 +113,7 @@ def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
         "augmentation": "none",            # no platform-generated rows; Adaptive Data improve/invent not run
         "heldout_families": sorted(heldout_families),
         "min_rows": min_rows,
+        "max_row_chars": max_chars,
         "counts": {"candidates": len(candidates), "included": len(included), "excluded": len(excluded),
                    "included_synthetic": sum(1 for e in included if e["origin"] == "synthetic")},
         "meets_min_rows": len(included) >= min_rows,
@@ -319,11 +323,12 @@ def main(argv=None):
     ap.add_argument("--out", required=True, help="manifest JSON to write")
     ap.add_argument("--training-out", help="also write the included pairs as prompt/completion JSONL")
     ap.add_argument("--min-rows", type=int, default=MIN_SFT_ROWS)
+    ap.add_argument("--max-row-chars", type=int, help="exclude pairs whose prompt plus code is longer than this many characters")
     args = ap.parse_args(argv)
     try:
         candidates = load_candidates(args.candidates)
         families = set(json.loads(Path(args.families).read_text(encoding="utf-8"))["families"])
-        manifest = build_manifest(candidates, families, args.min_rows)
+        manifest = build_manifest(candidates, families, args.min_rows, args.max_row_chars)
         rows = training_rows(candidates, manifest) if args.training_out else []
     except (ValueError, KeyError, OSError) as e:
         print(f"s9_5_finetune: {e}", file=sys.stderr)

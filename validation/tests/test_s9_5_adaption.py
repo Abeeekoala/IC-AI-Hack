@@ -683,3 +683,24 @@ def test_the_tls_context_keeps_certificate_and_hostname_checks_on():
 def test_a_certificate_failure_is_reported_with_the_fix():
     with pytest.raises(ad.AdaptionError, match="certifi"):
         ad.list_models(transport=Fake(ssl.SSLCertVerificationError(1, "unable to get local issuer certificate")))
+
+
+# ---- cancel ---------------------------------------------------------------------------------------------------------
+
+def test_cancel_run_is_a_dry_run_unless_confirmed_and_never_shows_the_key():
+    dry = ad.cancel_run("run_1")
+    assert isinstance(dry, ad.DryRun) and dry.requests[0]["method"] == "POST"
+    assert dry.requests[0]["url"].endswith("/api/v1/autoscientist/run_1/cancel") and KEY not in json.dumps(dry.to_dict())
+
+
+def test_cancel_run_posts_with_the_key_when_confirmed():
+    fake = Fake((200, {"id": "run_1", "status": "cancelled"}))
+    assert ad.cancel_run("run_1", confirm=True, transport=fake)["status"] == "cancelled"
+    call = fake.calls[0]
+    assert call["method"] == "POST" and call["url"].endswith("/api/v1/autoscientist/run_1/cancel")
+    assert call["headers"]["Authorization"] == f"Bearer {KEY}"
+
+
+def test_cancel_run_refuses_an_unsafe_run_id():
+    with pytest.raises(ValueError):
+        ad.cancel_run("../datasets", confirm=True, transport=Fake((200, {})))

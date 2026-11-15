@@ -259,3 +259,13 @@ def test_candidate_tasks_use_ids_the_generation_client_accepts_even_for_repo_at_
     assert [t["prompt"] for t in s9_5_generate.load_tasks(path)] == ["prompt " + i for i in ids]  # none is refused as unsafe
     assert {t["split"] for t in tasks} == {"candidate"} and len({t["task_id"] for t in tasks}) == 2
     assert tasks[0]["task_id"] == ft.candidate_task_id(ids[0]) != ids[0]
+
+
+def test_a_pair_over_the_length_cap_is_excluded_with_its_reason_and_the_cap_is_recorded():
+    long = cand("long", prompt="p" * 30, code="c" * 71)
+    m = ft.build_manifest([cand("a"), long], HELD, min_rows=1, max_chars=100)
+    assert [e["id"] for e in m["included"]] == ["a"] and m["max_row_chars"] == 100
+    (ex,) = m["excluded"]
+    assert ex["id"] == "long" and ex["reasons"] == ["too-long: 101 characters, over the 100 cap"]
+    assert ft.build_manifest([long], HELD, min_rows=1)["max_row_chars"] is None  # no cap unless asked
+    assert [e["id"] for e in ft.build_manifest([long], HELD, min_rows=1)["included"]] == ["long"]
