@@ -59,5 +59,6 @@ What it is not: it does not predict wet-lab results, simulate trials, or build a
 - The Boltz run on record is a CPU smoke run in single-sequence mode: low confidence by design of the settings, not a finding.
 - The offline demo chain is degraded on purpose and says so: the four S4 gates (human homology, allergenicity, toxicity, conservancy) did not run, so S4 reports incomplete screening, and S12 stays `blocked` because no toxicity result and no provider screening record exist.
 - The 98 original real pairs became 429 after a larger data hunt; the family labels on them are an agent's reading. The training set is 57.1% synthetic.
+- Stages 0 to 2 in the demo are a 40-protein projection of one real earlier run (`fixtures/nmb_fixture`): the taxonomy, the UniProt proteome and the BLAST+ virulence hits are real, the localisation labels are a stand-in taken from UniProt subcellular-location text, not PSORTb, and Protegen data is omitted. The time claim above covers stages 3 to 12 only; a live run of stages 0 to 2 was not part of the demo.
 - The S12 virulence check is a review flag, not a block, by the project owner's decision for an exploratory build; toxin, sequence sanity, selected-candidate and provider-screening checks still block.
 - Adaption does not document run time or credit cost, and which leaderboard domain a run lands in is not under our control.
