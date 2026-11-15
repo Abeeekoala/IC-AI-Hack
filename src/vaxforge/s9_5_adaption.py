@@ -394,6 +394,17 @@ def create_run(dataset_id, *, model, max_iterations, target_win_rate, data_forma
     return _json(req, transport)
 
 
+def cancel_run(run_id, *, confirm=False, transport=None):
+    """POST /api/v1/autoscientist/{id}/cancel (no body): stop a run that is taking too long and so stop its spend. A dry run
+    unless confirm=True; no guard is needed, since cancelling can only reduce what the run costs. Returns the run dict
+    the platform sends back, or a DryRun. The docs do not say what billing or partial results a cancel leaves, nor what
+    cancelling a finished run does; during an SFT to DPO handoff a cancel can be refused (HTTP 409), so retry later."""
+    req = _req("POST", f"/api/v1/autoscientist/{_seg(run_id, 'run id')}/cancel")
+    if confirm is not True:
+        return DryRun([_describe(req)])
+    return _json(req, transport)
+
+
 # ---- evidence ------------------------------------------------------------------------------------------------------
 
 def _utc(value):

@@ -76,3 +76,11 @@ def test_assemble_counts_a_merged_pair_once_and_reports_it():
     cands, rep = asm.assemble(real, [synth("a", i) for i in range(5)], rows=6, heldout_families=HELD, seed="s")
     assert rep["duplicate_ids_merged"] == 1 and rep["real_included"] == 2 and rep["total"] == 6
     assert len({c["id"] for c in cands}) == len(cands)
+
+
+def test_the_length_cap_applies_to_real_and_synthetic_rows_alike():
+    real = [row("r0"), row("rlong", code="c" * 500)]
+    pool = [synth("a", 0), synth("a", 1, code="c" * 500), synth("a", 2)]
+    cands, rep = asm.assemble(real, pool, rows=3, heldout_families=HELD, seed="s", max_chars=100)
+    assert rep["real_included"] == 1 and rep["synthetic_available"] == 2 and rep["synthetic_chosen"] == 2 and rep["total"] == 3
+    assert not any(c["code"] == "c" * 500 for c in cands if c["id"].startswith("vaxforge-synthetic"))

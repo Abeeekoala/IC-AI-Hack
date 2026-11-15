@@ -27,9 +27,10 @@ def test_validate_bexsero_loads_even_though_the_tool_imports_lopov_by_name(tmp_p
     s3 = tmp_path / "s3.json"
     s3.write_text(json.dumps({"stage": "s3", "payload": {"context": {"taxid": 487}, "ranker": {"backend": "test"},
                                                           "leakage_audit": {"holdout_enforced": True}, "ranking": es}}))
+    before = list(sys.path)
     assert cli.main(["validate", "bexsero", str(s3), "--k", "3"]) == 0
     assert "fHbp" in capsys.readouterr().out
-    assert str(validate_cli.VALIDATION) not in sys.path  # the path is only extended while loading
+    assert sys.path == before  # the path is only extended while loading (other tests may already have added it themselves)
 
 
 def test_a_missing_checkout_is_a_clear_error(monkeypatch, capsys, tmp_path):
