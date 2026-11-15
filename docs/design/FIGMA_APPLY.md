@@ -1,10 +1,31 @@
 # Putting the product design into Figma
 
-Status: **not imported yet.** Nothing here was run against Figma. I read the tool schemas (`ToolSearch` only) and the Figma plugin's skill files. Everything marked "unverified" is an inference from those, not an observation.
+Status (updated 2026-11-14): **imported, and edited in the editor afterwards** (first import deleted, frames at page level, page renamed `VaxForge`, 12 components, 25 variables). The text from "Recommended path" down is the original plan, written before any import; where it says "unverified", the notes below say what was then observed. The dated log is in `docs/design/FIGMA_EVIDENCE.md`.
+
+### What was observed when it was run
+
+- `generate_figma_design` works as planned with a served copy of the page plus the capture script. A capture with no `nodeId` **appends a top-level frame to the existing page** (it did not create a new page). A capture with `figmaselector=%23<id>` in the hash captures one element, which is how a single frame can be added later. Each capture id is single use.
+- **Layer names.** A test page showed that the capture names a layer from its tag (`div` Container, `section` Section, `aside` Sidebar, `nav` Navigation, `p` Paragraph, `span` Text, `li` List Item) and from nothing else: `id`, `class`, `title`, `name` and `data-*` are ignored. **`aria-label` is used**, as the name for a `div` and as a suffix for a semantic tag (`<section aria-label="X">` became `Section - X`). So the page uses `div` for every labelled element and puts the intended name in `aria-label`. `<body>` and the capture root keep the names `Body` and `VaxForge product design` (the `<title>`).
+- Result: frames come out named `00 Overview and key`, `07b S9.5 evidence panel`, `Cover`, `Design system`, owner cards `Owner and attention · 06 Wet-lab protocol`, repeated parts `Status pill · ok`, `Evidence badge · FIXTURE`, `Table row`.
+- The capture root is a frame `VaxForge product design`, with one child frame `Body`, which holds the frames at absolute positions. To get the frames onto the page itself, ungroup both (select, Cmd+Shift+G).
+- CSS variables are not turned into Figma variables (the Variables panel was empty after the first import). Later, 25 variables were made by hand in a collection `VaxForge tokens` (15 colours, 6 spacing, 4 radius), not bound to any fill. `docs/design/vaxforge_tokens.json` holds all 43 tokens for an import in the Variables panel (still untested: the import opens a native file picker). The 12 drawn specimens in `Design system` were turned into Figma components by hand (5 variant sets, 7 single).
+- The Figma editor needs WebGL. After zooming onto the Design system frame the editor stopped responding, and a reload then failed with "WebGL isn't supported, or is disabled"; `getContext('webgl')` returned nothing in a fresh tab. The lead later reported the cause as Chrome's GPU process crashing (3 times at 22:33:45) with WebGL staying off until a full quit; a full quit and relaunch at 22:56 fixed it (see `FIGMA_EVIDENCE.md`). Captured text uses Helvetica Neue, which the browser lacks, so the editor shows a "Missing font" dialog when a text layer is opened for editing; change text in the HTML and re-capture `#fHow` instead.
+
+### Recipe as run (current)
+
+```bash
+cd <scratch dir> && python3 -m http.server 8777 --bind 127.0.0.1     # serve a copy of the page
+# add <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script> to the COPY's <head>
+# generate_figma_design(fileKey, promptId)  ->  captureId
+# open  http://127.0.0.1:8777/<copy>.html#figmacapture=<id>&figmaendpoint=<url from the tool>&figmadelay=1000
+# poll generate_figma_design(fileKey, captureId) until completed
+```
+
+The committed HTML stays script-free.
 
 - File: <https://www.figma.com/design/Vvjq4muQIEJeX5IK4JKGcf>, file key `Vvjq4muQIEJeX5IK4JKGcf`.
 - Source: `docs/design/vaxforge_product_design.html`, one self-contained page: 17 fixed-size frames (1440 wide) on one 3120 px wide canvas, in two columns, left to right then down. No scripts, no external fonts or images. 4,853 elements, 215 KB.
-- Goal: one page in the Figma file, one overall product design, the frames named `00 Overview and key`, `01 Run launcher`, and so on.
+- Goal: one page in the Figma file, one overall product design, the frames named `00 Overview and key`, `01 Run launcher`, and so on. (The file used is now the user's own `VaxForge` file, key `pzytlXMGdl8JuSNivTeOOq`; the old team file is not edited.)
 
 ## Recommended path: `generate_figma_design` (3 to 14 calls, no `use_figma` needed)
 
