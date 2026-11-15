@@ -1,0 +1,2830 @@
+{
+  "created_at": "2026-11-15T10:35:18Z",
+  "digest": "sha256:5c3b1e03e73a30a7df2954219075ceca6b20675c67f79764e04ba15168b98b7e",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
+  },
+  "inputs": {
+    "s4": "sha256:f1fcbc51e2721bf6ecad6244afd068a93e34f6c41a386e7992c90cfbed41a0e2"
+  },
+  "params": {
+    "bcell_tool": "bepipred-3.0",
+    "mhc_class_ii_weight": 0.3,
+    "s5": {
+      "bcell": {
+        "chunk_overlap": 100,
+        "chunk_size": 1000,
+        "esm_dir": null,
+        "merge_gap": 1,
+        "min_epitope_len": 5,
+        "pred": "vt_pred",
+        "threshold": 0.1512
+      },
+      "class_i": {
+        "alleles_per_call": 6,
+        "backend": "auto",
+        "lengths": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "panel": "reference27",
+        "strong_rank": 0.5,
+        "weak_rank": 2.0
+      },
+      "class_ii": {
+        "alleles_per_call": 4,
+        "backend": "netmhciipan",
+        "enabled": true,
+        "length": 15,
+        "panel": "reference26",
+        "strong_rank": 1.0,
+        "weak_rank": 5.0
+      },
+      "conformational": {
+        "enabled": true,
+        "score_threshold": 0.9,
+        "struc_type": "alphafold"
+      },
+      "half_score_density": 5.0,
+      "min_strong_alleles_promiscuous": 3,
+      "sanitize": {
+        "max_ambiguous_fraction": 0.05
+      },
+      "select": {
+        "max_class_i": 8,
+        "max_class_ii": 6,
+        "min_alleles": 2
+      }
+    }
+  },
+  "payload": {
+    "analysis_status": {
+      "bcell_linear": {
+        "reason": "BepiPred-3.0 not configured (tools.bepipred3); BepiPred-2.0 is never used as a substitute",
+        "status": "unavailable"
+      },
+      "class_i": {
+        "reason": "no class I predictor available (backend=auto; netMHCpan not found, mhcflurry not installed)",
+        "status": "unavailable"
+      },
+      "class_ii": {
+        "reason": "netMHCIIpan not found (DTU licence; see docs/TOOLS_SETUP.md)",
+        "status": "unavailable"
+      },
+      "conformational": {
+        "reason": "DiscoTope-3.0 not configured (tools.discotope3)",
+        "status": "unavailable"
+      }
+    },
+    "candidates": [
+      {
+        "accession": "Q9K0B4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "iga",
+        "length": 1815,
+        "name": "IgA-specific serine endopeptidase",
+        "protein_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "sequence": "MKTKRFKINAISLSIFLAYALTPYSEAALVRDDVDYQIFRDFAENKGKFFVGATDLSVKNKQGQNIGNALSNVPMIDFSVADVNRRTLTVIDPQYAVSVKHVKGDEISYYGHHNGHLDVSNDENEYRSVAQNDYEPNKNWHHGNQGRLEDYNMARLNKFVTEVAPIAPTSAGGGVETYKDKNRFSEFVRVGAGTQFEYNSRYNMTELSRAYRYAIAGTPYQDVNVTSNLNQEGLIGFGDNSKHHSPEKLKEVLSQNALTNYAVLGDSGSPLFAYDKQEKRWVFLGAYDYWAGYQKNSWQEWNIYKKEFADEIKQRDNAGTIKGNGEHHWKTTGTNSHIGSTAVRLANNERDANNGQNVTFENNGTLVLDQNINQGAGGLFFKGDYTVKGINNDITWLGAGIDVADGKKVVWQVKNPNGDRLAKIGKGTLEINGTGVNQGQLKVGDGTVILNQQADADKKVQAFSQVGIVSGRGTLVLNSSNQINPDNLYFGFRGGRLDANGNDLTFEHIRNVDEGARIVNHNTGHASTITLTGKSLITDPKTISIHYIQNNDDDDAGYYYYRPRKPIPQGKDLYFKNYRYYALKSGGSVNAPMPENGQTENNDWILMGSTQEEAKKNAMNHKNNQRISGFSGFFGEENGKGHNGALNLNFNGKSAQNRFLLTGGTNLNGKISVTQGNVLLSGRPTPHARDFVNKSSARKDAHFSKNNEVVFEDDWINRTFKATEIAVNQSASFSSGRNVSDITANITATDNAKVNLGYKNGDEVCVRSDYTGYVTCNTGNLSDKALNSFGATQINGNVNLNQNAALVLGKAALWGQIQGQGNSRVSLNQHSKWHLTGDSQVHNLSLADSHIHLNNASDAQSANKYHTLKINHLSGNGHFHYLTHLAKNLGDKVLVKESASGHYQLHVQDKTGEPNQEGLNLFDASSVQDRSRLSVSLANNHVDLGALRYTIKTENGITRLYNPYAENRRRVKPAPSPATNTASQAQKATQTDGAQIAKPQNIVVAPPSPQANQAEEAKRQQAKAEQVKRQQAEAERKSAELAKQKAEAEREARELATRQKAEQERSSAELARRHEKEREAAELSAKQKVEAEREAQALAVRRKAEAEEAKRQAAELARRHEKEREAAELSAKQRVGEEERRQTAQSQPQRRKRRAAPQDYMAASQDRPKRRGHRSVQQNNVEIAQAQAELARRQQEERKAAELLAKQRAEAEREAQALAARRKAEAEEAKRQAAELAHRQEAERKAAELSANQKAAAEAQALAARQQKALARQQEEARKAAELAVKQKAETERKTAELAKQRAAAEAAKRQQEARQTAELARRQEAERQAAELSAKQKAETDREAAESAKRKAEEEEHRQAAQSQPQRRKRRAAPQDYMAASQNRPKRRGRRSTLPAPPSPSFDSSAYAAPRALHNPDWYENDYEEIPLDALEDENVSESVDTSDKQPQDNTELHEKYENDYEEIPLDALEDEDVSESVDTSDKQPQDNTELHEKVETVSLQPRAAQPRAQAATQLQAQAAAQADAVSTNTNSALSDAMASTQSILLDTGASLTRHIAQKSRADAEKNSVWMSNTGYGRDYASAQYRRFSSKRTQTQIGIDRSLSENMQIGGVLTYSDSQHTFDQASGKNTFVQANLYGKYYLNDAWYVAGDIGAGSLRSRLQTQQKANFNRASIQTGLTLGNTLKINQFEIVPSAGIRYSRLSSADYKLGNDSVKVSSMSVKTLTAGLDFAYRFKVGNLTVKPLLSAAYFANYGKGGVNVGGNSFVYKADNQQQYSAGAALLYRNVTLNVNGSITKGKQLEKQKSGQIKIQIRF",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.99793909,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000261",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.99793909,
+            "rank": 1,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.99793909,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXZ0",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB1829",
+        "length": 708,
+        "name": "TonB-dependent receptor",
+        "protein_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "sequence": "MGQFMSVFRINMTAATVLAALSSSVFAAQTEGLETVHIKGQRSYNAIATEKNGDYSSFAATVGTKIPASLREIPQSVSIITNQQVKDRNVDTFDQLARKTPGLRVLSNDDGRSSVYARGYEYSEYNIDGLPAQMQSINGTLPNLFAFDRVEVMRGPSGLFDSSGEMGGIVNLVRKRPTKAFQGHAAAGFGTHKQYKAEADVSGSLNSDGSVRGRVMAQTVGASPRPAEKNNRRETFYAAADWDINPDTVLGAGYLYQQRRLAPYNGLPADANNKLPSLPQHVFVGADWNKFKMHSHDVFADLKHYFGNGGYGKVGMRYSDRKADSNYTFAGSKLNNTGQADVAGLGTDIKQKAFAVDASYSRPFALGNTANEFVIGADYNRLRSTNEQGRSTLSKSVALDGFRALPYNGILQNARAGNKGFNHSVTEENLDETGLYAKTVFRPLEGLSLIAGGRVGHHKIESGDGKTLHKASKTKFTSYAGAVYDIDGSNSLYASASQLYTPQTSIGTDGKLLKPREGNQFEIGYKGSYMDDRLNTRVSFYRMKDKNAAAPLDSNNKKTRYAALGKRVMEGVETEISGAMTPKWQIHAGYSYLHSQIKTASNSRDEGIFLLMPKHSANLWTTYQVTSGLTIGGGVNAMSGITSSAGIHAGGYATFDAMAAYRFTPKLKLQINADNIFNRHYYARVGSESTFNIPGSERSLTANLRYSF",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.99656515,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.93,
+                "evalue": 3.62e-86,
+                "hit": "VFG000163",
+                "identity": 0.29059999999999997,
+                "term": 0.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.99656515,
+            "rank": 2,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.99656515,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JYA8",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "hmbR",
+        "length": 791,
+        "name": "Hemoglobin receptor",
+        "protein_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "sequence": "MKPLQMLPIAALVGSIFGNPVLAADEAATETTPVKAEIKAVRVKGQRNAPAAVERVNLNRIKQEMIRDNKDLVRYSTDVGLSDSGRHQKGFAVRGVEGNRVGVSIDGVNLPDSEENSLYARYGNFNSSRLSIDPELVRNIEIVKGADSFNTGSGALGGGVNYQTLQGRDLLLDDRQFGVMMKNGYSTRNREWTNTLGFGVSNDRVDAALLYSQRRGHETESAGNRGYAVEGEGSGANIRGSARGIPDSSKHKYHSFLGKIAYQINDNHRIGASLNGQQGHNYTVEESYNLTASSWREADDVNRRRNANLFYEWMPDSNWLSSLKADFDYQKTKVAAVNNKGSFPMDYSTWTRNYNQKDLDEIYNRSMDTRFKRFTLRLDSHPLQLGGGRHRLSFKTFVSRRDFENLNRDDYYFSGRVVRTTSSIQHPVKTTNYGFSLSDQIQWNDVFSSRAGIRYDHTKMTPQELNAECHACDKTPPAANTYKGWSGFVGLAAQLNQAWRVGYDITSGYRVPNASEVYFTYNHGSGNWLPNPNLKAERSTTHTLSLQGRSEKGMLDANLYQSNYRNFLSEEQKLTTSGTPGCTEENAYYGICSDPYKEKLDWQMKNIDKARIRGIELTGRLNVDKVASFVPEGWKLFGSLGYAKSKLSGDNSLLSTQPLKVIAGIDYESPSEKWGVFSRLTYLGAKKVKDAQYTVYENKGWGTPLQKKVKDYPWLNKSAYVFDMYGFYKPAKNLTLRAGVYNLFNRKYTTWDSLRGLYSYSTTNAVDRDGKGLDRYRAPGRNYAVSLEWKF",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.99404626,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000266",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.99404626,
+            "rank": 3,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.99404626,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXL6",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "hap",
+        "length": 1457,
+        "name": "Adhesion and penetration protein",
+        "protein_id": "tr|Q9JXL6|Q9JXL6_NEIMB",
+        "sequence": "MKTTDKRTTETHRKAPKTGRIRFSPAYLAICLSFGILPQAWAGHTYFGINYQYYRDFAENKGKFAVGAKDIEVYNKKGELVGKSMTKAPMIDFSVVSRNGVAALVGDQYIVSVAHNGGYNNVDFGAEGRNPDQHRFTYKIVKRNNYKAGTKGHPYGGDYHMPRLHKFVTDAEPVEMTSYMDGRKYIDQNNYPDRVRIGAGRQYWRSDEDEPNNRESSYHIASAYSWLVGGNTFAQNGSGGGTVNLGSEKIKHSPYGFLPTGGSFGDSGSPMFIYDAQKQKWLINGVLQTGNPYIGKSNGFQLVRKDWFYDEIFAGDTHSVFYEPRQNGKYSFNDDNNGTGKINAKHEHNSLPNRLKTRTVQLFNVSLSETAREPVYHAAGGVNSYRPRLNNGENISFIDEGKGELILTSNINQGAGGLYFQGDFTVSPENNETWQGAGVHISEDSTVTWKVNGVANDRLSKIGKGTLHVQAKGENQGSISVGDGTVILDQQADDKGKKQAFSEIGLVSGRGTVQLNADNQFNPDKLYFGFRGGRLDLNGHSLSFHRIQNTDEGAMIVNHNQDKESTVTITGNKDIATTGNNNSLDSKKEIAYNGWFGEKDTTKTNGRLNLVYQPAAEDRTLLLSGGTNLNGNITQTNGKLFFSGRPTPHAYNHLNDHWSQKEGIPRGEIVWDNDWINRTFKAENFQIKGGQAVVSRNVAKVKGDWHLSNHAQAVFGVAPHQSHTICTRSDWTGLTNCVEKTITDDKVIASLTKTDISGNVDLADHAHLNLTGLATLNGNLSANGDTRYTVSHNATQNGNLSLVGNAQATFNQATLNGNTSASGNASFNLSDHAVQNGSLTLSGNAKANVSHSALNGNVSLADKAVFHFESSRFTGQISGGKDTALHLKDSEWTLPSGTELGNLNLDNATITLNSAYRHDAAGAQTGSATDAPRRRSRRSRRSLLSVTPPTSVESRFNTLTVNGKLNGQGTFRFMSELFGYRSDKLKLAESSEGTYTLAVNNTGNEPASLEQLTVVEGKDNKPLSENLNFTLQNEHVDAGAWRYQLIRKDGEFRLHNPVKEQELSDKLGKAEAKKQAEKDNAQSLDALIAAGRDAVEKTESVAEPARQAGGENVGIMQAEEEKKRVQADKDTALAKQREAETRPATTAFPRARRARRDLPQLQPQPQPQPQRDLISRYANSGLSEFSATLNSVFAVQDELDRVFAEDRRNAVWTSGIRDTKHYRSQDFRAYRQQTDLRQIGMQKNLGSGRVGILFSHNRTENTFDDGIGNSARLAHGAVFGQYGIDRFYIGISAGAGFSSGSLSDGIGGKIRRRVLHYGIQARYRAGFGGFGIEPHIGATRYFVQKADYRYENVNIATPGLAFNRYRAGIKADYSFKPAQHISITPYLSLSYTDAASGKVRTRVNTAVLAQDFGKTRSAEWGVNAEIKGFTLSLHAAAAKGPQLEAQHSAGIKLGYRW",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9919853399999999,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.98,
+                "evalue": 0.0,
+                "hit": "VFG001149",
+                "identity": 0.5498,
+                "term": 0.538804
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9919853399999999,
+            "rank": 4,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9919853399999999,
+              "virulence": 0.538804
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q06379",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "lbpA",
+        "length": 943,
+        "name": "Lactoferrin-binding protein A",
+        "protein_id": "sp|Q06379|LBPA_NEIMB",
+        "sequence": "MNKKHGFPLTLTALAIATAFPAYAAQAGGATPDAAQTQSLKEITVRAAKVGRRSKEATGLGKIVKTSETLNKEQVLGIRDLTRYDPGVAVVEQGNGASGGYSIRGVDKNRVAVSVDGVAQIQAFTVQGSLSGYGGRGGSGAINEIEYENISTVEIDKGAGSSDHGSGALGGAVAFRTKEAADLISDGKSWGIQAKTAYGSKNRQFMKSLGAGFSKDGWEGLLIRTERQGRETRPHGDIADGVEYGIDRLDAFRQTYDIKRKTREPFFSVEGERESKPVAKLAGYGKYLNNQLNRWVKERIEQNQPLSAEEEAQVREAQARHENLSAQAYTGGGRILPDPMDYRSGSWLAKLGYRFGGRHYVGGVFEDTKQRYDIRDMTEKQYYGTDEAEKFRDKSGVYDGDDFRDGLYFVPNIEEWKGDKNLVRGIGLKYSRTKFIDEHHRRRRMGLLYRYENEAYSDNWADKAVLSFDKQGVATDNNTLKLNCAVYPAVDKSCRASADKPYSYDSSDRFHYREQHNVLNASFEKSLKNKWTKHHLTLGFGYDASKAISRPEQLSHNAARISESTGFDENNQDKYLLGKPEVVEGSVCGYIETLRSRKCVPRKINGSNIHISLNDRFSIGKYFDFSLGGRYDRKNFTTSEELVRSGRYVDRSWNSGILFKPNRHFSVSYRASSGFRTPSFQELFGIDIYHDYPKGWQRPALKSEKAANREIGLQWKGDFGFLEISSFRNRYTDMIAVADHKTKLPNQAGQLTEIDIRDYYNAQNMSLQGVNILGKIDWNGVYGKLPEGLYTTLAYNRIKPKSVSNRPGLSLRSYALDAVQPSRYVLGFGYDQPEGKWGANIMLTYSKGKNPDELAYLAGDQKRYSTKRASSSWSTADVSAYLNLKKRLTLRAAIYNIGNYRYVTWESLRQTAESTANRHGGDSNYGRYAAPGRNFSLALEMKF",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.98809251,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000264",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.98809251,
+            "rank": 5,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.98809251,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "P0DH58",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "porA",
+        "length": 392,
+        "name": "Major outer membrane protein P.IA",
+        "protein_id": "sp|P0DH58|OMPA_NEIMB",
+        "sequence": "MRKKLTALVLSALPLAAVADVSLYGEIKAGVEGRNYQLQLTEAQAANGGASGQVKVTKVTKAKSRIRTKISDFGSFIGFKGSEDLGDGLKAVWQLEQDVSVAGGGATQWGNRESFIGLAGEFGTLRAGRVANQFDDASQAIDPWDSNNDVASQLGIFKRHDDMPVSVRYDSPEFSGFSGSVQFVPIQNSKSAYTPAYYTKNTNNNLTLVPAVVGKPGSDVYYAGLNYKNGGFAGNYAFKYARHANVGRNAFELFLIGSGSDQAKGTDPLKNHQVHRLTGGYEEGGLNLALAAQLDLSENGDKTKNSTTEIAATASYRFGNAVPRISYAHGFDFIERGKKGENTSYDQIIAGVDYDFSKRTSAIVSGAWLKRNTGIGNYTQINAASVGLRHKF",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.98419968,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG006237",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.98419968,
+            "rank": 6,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.98419968,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXK7",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "nadA",
+        "length": 362,
+        "name": "Neisseria adhesin A",
+        "protein_id": "sp|Q9JXK7|NADA1_NEIMB",
+        "sequence": "MKHFPSKVLTTAILATFCSGALAATSDDDVKKAATVAIVAAYNNGQEINGFKAGETIYDIGEDGTITQKDATAADVEADDFKGLGLKKVVTNLTKTVNENKQNVDAKVKAAESEIEKLTTKLADTDAALADTDAALDETTNALNKLGENITTFAEETKTNIVKIDEKLEAVADTVDKHAEAFNDIADSLDETNTKADEAVKTANEAKQTAEETKQNVDAKVKAAETAAGKAEAAAGTANTAADKAEAVAAKVTDIKADIATNKADIAKNSARIDSLDKNVANLRKETRQGLAEQAALSGLFQPYNVGRFNVTAAVGGYKSESAVAIGTGFRFTENFAAKAGVAVGTSSGSSAAYHVGVNYEW",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.97847493,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.6,
+                "evalue": 4.13e-40,
+                "hit": "VFG054578",
+                "identity": 0.4286,
+                "term": 0.25716
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.97847493,
+            "rank": 7,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.97847493,
+              "virulence": 0.25716
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0U9",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "tbp1",
+        "length": 915,
+        "name": "Transferrin-binding protein A",
+        "protein_id": "sp|Q9K0U9|TBPA_NEIMB",
+        "sequence": "MQQQHLFRFNILCLSLMTALPAYAENVQAGQAQEKQLDTIQVKAKKQKTRRDNEVTGLGKLVKSSDTLSKEQVLNIRDLTRYDPGIAVVEQGRGASSGYSIRGMDKNRVSLTVDGVSQIQSYTAQAALGGTRTAGSSGAINEIEYENVKAVEISKGSNSVEQGSGALAGSVAFQTKTADDVIGEGRQWGIQSKTAYSGKNRGLTQSIALAGRIGGAEALLIHTGRRAGEIRAHEDAGRGVQSFNRLVPVEDSSNYAYFIVKEECKNGSYETCKANPKKDVVGKDERQTVSTRDYTGPNRFLADPLSYESRSWLFRPGFRFENKRHYIGGILEHTQQTFDTRDMTVPAFLTKAVFDANKKQAGSLPGNGKYAGNHKYGGLFTNGENGALVGAEYGTGVFYDETHTKSRYGLEYVYTNADKDTWADYARLSYDRQGIGLDNHFQQTHCSADGSDKYCRPSADKPFSYYKSDRVIYGESHRLLQAAFKKSFDTAKIRHNLSVNLGFDRFGSNLRHQDYYYQHANRAYSSNTPPQNNGKKISPNGSETSPYWVTIGRGNVVTGQICRLGNNTYTDCTPRSINGKSYYAAVRDNVRLGRWADVGAGLRYDYRSTHSDDGSVSTGTHRTLSWNAGIVLKPTDWLDLTYRTSTGFRLPSFAEMYGWRAGVQSKAVKIDPEKSFNKEAGIVFKGDFGNLEASWFNNAYRDLIVRGYEAQIKDGKEEAKGDPAYLNAQSARITGINILGKIDWNGVWDKLPEGWYSTFAYNRVRVRDIKKRADRTDIQSHLFDAIQPSRYVVGLGYDQPEGKWGVNGMLTYSKAKEITELLGSRALLNGNSRNTKATARRTRPWYIVDVSGYYTVKKHFTLRAGVYNLLNYRYVTWENVRQTAGGAVNQHKNVGVYNRYAAPGRNYTFSLEMKF",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.97732997,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000262",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.97732997,
+            "rank": 8,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.97732997,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q7DD37",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "nhba",
+        "length": 488,
+        "name": "Neisserial heparin binding antigen",
+        "protein_id": "sp|Q7DD37|NHBA_NEIMB",
+        "sequence": "MFKRSVIAMACIFALSACGGGGGGSPDVKSADTLSKPAAPVVSEKETEAKEDAPQAGSQGQGAPSAQGSQDMAAVSEENTGNGGAVTADNPKNEDEVAQNDMPQNAAGTDSSTPNHTPDPNMLAGNMENQATDAGESSQPANQPDMANAADGMQGDDPSAGGQNAGNTAAQGANQAGNNQAAGSSDPIPASNPAPANGGSNFGRVDLANGVLIDGPSQNITLTHCKGDSCSGNNFLDEEVQLKSEFEKLSDADKISNYKKDGKNDKFVGLVADSVQMKGINQYIIFYKPKPTSFARFRRSARSRRSLPAEMPLIPVNQADTLIVDGEAVSLTGHSGNIFAPEGNYRYLTYGAEKLPGGSYALRVQGEPAKGEMLAGAAVYNGEVLHFHTENGRPYPTRGRFAAKVDFGSKSVDGIIDSGDDLHMGTQKFKAAIDGNGFKGTWTENGSGDVSGKFYGPAGEEVAGKYSYRPTDAEKGGFGVFAGKKEQD",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9761850200000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9761850200000001,
+            "rank": 9,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9761850200000001,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0K9",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "frpA",
+        "length": 1302,
+        "name": "Iron-regulated protein FrpA",
+        "protein_id": "sp|Q9K0K9|FRPA_NEIMB",
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFSQYVDLINENNGRLPNTSEIERSYYKAVTENGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVIMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQFRDLFPNPEGWIDDGHQCFAPWVKETKKRNGKYHVYDPLALDLDGDGIETVAAKGFSGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQSLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9741241100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG006300",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9741241100000001,
+            "rank": 10,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9741241100000001,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0U8",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "potD-1",
+        "length": 459,
+        "name": "Spermidine/putrescine ABC transporter, periplasmic spermidine/putrescine-binding protein",
+        "protein_id": "tr|Q9K0U8|Q9K0U8_NEIMB",
+        "sequence": "MQAFSLYPPVGHPDSAKKRQNRADVFLPFWKQDNFLGKSVQYRFEFAQIYFTMPKPCAGVTMGRGDFFFSNLFHQESARMKKSVLAVLAALSLAACGGSEKNAVQPQADAASAANAEAAATDTLNIYNWSNYVDESTVEDFKKANNLKLTYDLYENNETLEAKMLTGKSGYDLVVPGIAFLPRQIEAGAYQKVNKDLIPNYKNIDPELLKMLETADPGNQYAVPYFSGVNTIAITAKGKELLGGKLPENGWDLLFKPEYTHKLKSCGIALWDTPSEMFPILLNYLGKDPKGSNPEDLKAAAEVLKSIRPDVKRFSPSIIDELARGDICLAAGNGGDLNLAKARSEEVKNNVGIEVLTPKGMGFWIESWLIPADAKNVANAHKYINYTLDPEIAAKNGIAVTFAPASKPAREKMPAELVNTRSIFPNEQDMKDGFVMPQMSTDAKKLSVSLWQKIKVGTN",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.96771239,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "Periplasmic",
+                "prior": 0.5,
+                "raw": "Periplasmic",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.96771239,
+            "rank": 11,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.96771239,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JYV5",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "frpC",
+        "length": 1829,
+        "name": "Iron-regulated protein FrpC",
+        "protein_id": "sp|Q9JYV5|FRPC_NEIMB",
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFRQYARLINQNNGRLPNTSEIERSYYKAVTDNGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVMMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQGNEAFKNEINSLVHDMKAAGKEFGDDLNTQWNNLTQAAEIIYNDIVDNTSQGIEKGVKAIKELSEKMKNAASDLADGSAEKAKQVVEDLAQAAKEAYENAKSTAEKAAQAAREFFKGLPSFKDLAEKFRDLFPNPEGWIDDGHQCLAPWVKETKKRNGKYHVYDPLALDLDGDGIETVATKGFAGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQTLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQYYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLNGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGSTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9656514799999999,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG006303",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9656514799999999,
+            "rank": 12,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9656514799999999,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JS61",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "ilvD1",
+        "length": 619,
+        "name": "Dihydroxy-acid dehydratase",
+        "protein_id": "sp|Q9JS61|ILVD_NEIMB",
+        "sequence": "MPEYRSKTSTHGRNMAGARALWRATGVMETDFGKPIIAVANSFTQFVPGHVHLHNMGQLVAREIEKAGAIAKEFNTIAIDDGIAMGHSGMLYSLPSRDLIADSIEYMVNAHCADALVCISNCDKITPGMLIAAMRLNIPTIFVSGGPMEAGKVIGVANIQPERRLDLIDAMIESADDNVSNRQVEEVEQNACPTCGSCSGMFTANSMNCLTEALGLSLPGNGSYLATHAGRKELFLEAGRMIVEITKRYYEQNDETVLPRSIATKKAFENAMTMDIAMGGSTNTILHLLAVANEAGVDFKMADIDRLSRVVPCICKTAPNNHDYYMEDVHRAGGIFAILKELDKAGKLHTDVHTIHAPTLKDAIEQWDVTNPENTRAIERFKAAPGGVRTTQAFSQNRMWKTLDLDREKGCIRDVAHAYSQDGGLAVLFGNIAERGCVVKTAGVDESILKFTGRARVFESQEDAVEGILGNQIVAGDIVIIRYEGPKGGPGMQEMLYPTSYLKSKGLGKACALLTDGRFSGGTSGLSIGHASPEAAEGGAIGLVHEGDTVEIDIPNRSIHLAISDEELAARRAEMEARGSKAWKPKNRDRYVSAALRAYGAMATSADKGAVRDVAQIER",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.95465995,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.95465995,
+            "rank": 13,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.95465995,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXV4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "fhbP",
+        "length": 274,
+        "name": "Factor H binding protein",
+        "protein_id": "sp|Q9JXV4|FHBP_NEIMB",
+        "sequence": "MNRTAFCCLSLTTALILTACSSGGGGVAADIGAGLADALTAPLDHKDKGLQSLTLDQSVRKNEKLKLAAQGAEKTYGNGDSLNTGKLKNDKVSRFDFIRQIEVDGQLITLESGEFQVYKQSHSALTAFQTEQIQDSEHSGKMVAKRQFRIGDIAGEHTSFDKLPEGGRATYRGTAFGSDDAGGKLTYTIDFAAKQGNGKIEHLKSPELNVDLAAADIKPDGKRHAVISGSVLYNQAEKGSYSLGIFGGKAQEVAGSAEVKTVNGIRHIGLAAKQ",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.953515,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG037136",
+                "identity": 0.9964,
+                "term": 0.9964
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.953515,
+            "rank": 14,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.953515,
+              "virulence": 0.9964
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q7DDC4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "lldD",
+        "length": 390,
+        "name": "L-lactate dehydrogenase",
+        "protein_id": "tr|Q7DDC4|Q7DDC4_NEIMB",
+        "sequence": "MKRDLSKMTCIEDLRRVAKRKMPRMFYDYIDSGSWTETTYRENTSDFKDIRFRQKVLVNMEGRSLETKMIGQDVKMPVAIAPTGFTGMAHADGEILAARAAEKFGIPFTLSTMSICSIEDVAENTSAPFWFQLYVMRDREFMENLIKRAKDAKCSALVLTADLQVLGQRHKDIKNGLSAPPKPTIANLINLATKPEWCMKMLNTERRTFRNIVGHAKNVGDLSSLSSWTSEQFDPRLSWDDVARIKDLWGGKLIIKGIMEPEDAEKAAKSGADALIVSNHGGRQLDDTVSAIKALPDIVSAVGSDIEVWMDSGIRSGQDILKAWALGAKGTMIGRAFLYGLGAYGEEGVTRALEILYKEMDISMAFTGHRDIQDVDASILRGKDWGRETV",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.94092054,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.94092054,
+            "rank": 15,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.94092054,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JY67",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "mtrD",
+        "length": 1067,
+        "name": "Efflux pump membrane transporter",
+        "protein_id": "tr|Q9JY67|Q9JY67_NEIMB",
+        "sequence": "MAKFFIDRPIFAWVISIFIIAAGIFGIKSLPVSQYPSVAAPTITLRATYPGASAQVMEDSVLSVIERNMNGVEGLDYMSTSADSSGSGSVSLTFTPDTDENLAQVEVQNKLSEVLSTLPATVQQYGVTVSKARSNFLMIVMLSSDVQSTEEMNDYAQRNIVPELQRIEGVGQVRLFGAQRAMRIWVDPKKLQNYNLSFADVGSALSAQNVQISAGSIGSLPAVRGQTVTATVTAQGQLGTAEEFGNVILRANTDGSNVYLKDVARVGLGMEDYSSSTRLNGVNTTGMAVMLSNSGNAMATAKAVKERMATLEKYFPQGMSWKTPYDTSKFVEISIEKVIHTLIEAMVLVFVVMYLFLQNIRYTLIPTIVVPISLLGGFAFISYMGMSINVLTMFAMVLVIGIVVDDAIVVVENVERIMAGEGLPPKEATKKAMGQISGAVIGITAVLISVFVPLAMFSGATGNIYKQFALTMASSIAFSAFLALTLTPALCATMLKTIPKGHHEEKKGFFGWFNKKFNSWTHGYEGRVAKVLRKTFRMMVVYIGLAVVGVFLFMRLPTSFLPTEDQGFVMVSVQLPAGATQERTNATLAQVTQLAKSIPEIENIITVSGFSFSGSGQNMAMGFAILKDWNERTAPGSDAVAIAGKLTGMMMGTLKDGFGIAVVPPPILELGNGSGLSINLQDRNNTGHTALLAKRNELIQKMRASGLFDPSTVRAGGLEDSPQLKIDINRAAAAAQGISFADIRTALASALSSSYVSDFPNQGRLQRVMVQADEDARMQPADILNLTVPNKSGVAVPLSTIATVSWENGTEQSVRFNGYPSMKLSASPATGVSTGQAMAAVQKMVDELGGGYSLEWGGQSREEAKGGSQTLILYGLAVAAVFLVLAALYESWSIPLAVILVIPLGLIGAAAGVTGRNLFEGLLGSVPSFANDIYFQVGFVTVMGLSAKNAILIIEFAKDLQAQGKSAVEAALEAARLRFRPIIMTSFAFILGVVPLYIAGGASSASQRAIGTTVFWGMLIGTLLSVFLVPLFYVVVRKFFKETAHEHEMAVKHAAEAGITGSDDSQH",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9276391099999999,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG036992",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9276391099999999,
+            "rank": 16,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.9276391099999999,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K070",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB0749",
+        "length": 312,
+        "name": "Penicillin-binding protein 4",
+        "protein_id": "tr|Q9K070|Q9K070_NEIMB",
+        "sequence": "MSIHTLKRLPSSLLLGLCLSLPSAHLFADNDILGQFLEQNMLTSSDPIEIFAESTIHPTNTQAITGGLILSSQSALVVNNKTGQILYQKNADRIMPIASISKLMSAMVVLDANLDMNETVTITPDEIDRIKGTGSRLAIGTALTRKKLLHLSLMSSENRATHALGRTYPGGMGAFVAAMNRKAQSLGMYGSRFYEPTGLNFQNVSTAKDLSLMVNAAAQYPQIRTNSTSNYASVQTKNGQQNYKNSNALVREGMWNIELQKTGYIREAGRSMVVKANIQNQPVTIVLLNSPTSATRVNDARKIESWMLQQRS",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9200824400000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.76,
+                "evalue": 2.78e-65,
+                "hit": "VFG038249",
+                "identity": 0.4545,
+                "term": 0.34542
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9200824400000001,
+            "rank": 17,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9200824400000001,
+              "virulence": 0.34542
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K1F5",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "lpxB",
+        "length": 384,
+        "name": "Lipid-A-disaccharide synthase",
+        "protein_id": "sp|Q9K1F5|LPXB_NEIMB",
+        "sequence": "MADKKSPLIAVSVGEASGDLLGAHLIRAIRKRCPQARFTGIGGELMKAEGFESLYDQERLAVRGFVEVVRRLPEILRIRRGLVRDLLSLKPDVFVGIDAPDFNLGVAEKLKRSGIPTVHYVSPSVWAWRRERVGKIVHQVNRVLCLFPMEPQLYLDAGGRAEFVGHPMAQLMPLEDDRETARQTLGVDAGIPVFALLPGSRVSEIDYMAPVFFQTALLLLERYPAARFLLPAATEATKRRLAEVLQRPEFAGLPLTVIDRQSETVCRAADAVLVTSGTATLEVALCKRPMVISYKISPLTYAYVKRKIKVPHVGLPNILLGKEAVPELLQSEAKPEKLAAALADWYEHPDKVAALQQDFRALHLLLKKDTADLAARAVLEEAGC",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.98,
+                "evalue": 1.7e-106,
+                "hit": "VFG013384",
+                "identity": 0.4386,
+                "term": 0.429828
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 18,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.429828
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q4W563",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "pilN",
+        "length": 199,
+        "name": "PilN protein",
+        "protein_id": "tr|Q4W563|Q4W563_NEIMB",
+        "sequence": "MNNLIKINLLPYREEMNKRKQQQFKTLMYGAVLTGVAAVAATYLFIDNMINNQSERNTLLETSIAHLDTELSEIQKLKQEKDAFLIKKNKIEELQLKRLQAAKILDSLNEAVPGSTYLTSLDAVTADSYRLSGRTSSDNRVAAMMRAMPNTGIFKQPELLSIKKNNSHQEFTLQATLQPIVKAAESKENPASGNAQEAN",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 3.8e-147,
+                "hit": "VFG006179",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 19,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 1.0
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q7DD77",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "pilP",
+        "length": 181,
+        "name": "PilP protein",
+        "protein_id": "tr|Q7DD77|Q7DD77_NEIMB",
+        "sequence": "MKHYALLISFLALSACSQGSEDLNEWMAQTRREAKAEIIPFQAPTLPVAPVYSPPQLTGPNAFDFRRMETDKKGENAPDTKRIKETLEKFSLENMRYVGILKSGQKVSGFIEAEGYVYTVGVGNYLGQNYGRIESITDDSIVLNELIEDSTGNWVSRKAELLLNSSDKNTEQAAAPAAEQN",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 1.79e-136,
+                "hit": "VFG006187",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 20,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 1.0
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JZD1",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB1107",
+        "length": 200,
+        "name": "Lipoprotein",
+        "protein_id": "tr|Q9JZD1|Q9JZD1_NEIMB",
+        "sequence": "MNMKKLISAICVSIVLSACNQQSKTAQAEEPVQSIQAADCTAPMDITVEQYLINLEQAFKTQNVSTKIHNKNIVKTDCGYDLTLVMDFGAIALKLDEQQKIRAISVGYILKTDGEKGQNLVNNAINGLHSIQAVLSLTTTDKLGESEAGKQLFTALTEVVKESNQTGATAQKDVPADGILYSVVFEKETNTIAIIGRKQP",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 21,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.0
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXM3",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB1975",
+        "length": 511,
+        "name": "Transporter",
+        "protein_id": "tr|Q9JXM3|Q9JXM3_NEIMB",
+        "sequence": "MSDSKTKERATFGTRRAFMIAAIGSAVGLGNIWRFPYIAFENGGGAFILPYLVALLTAGIPLLLLDYAIGHRYRGSAPLAFRRLGRWFEPVGWWNVMTNIVICIYYAVIIGWAASYTYYSVNAAWGADPQGFFFKDFLQMAGPEALGLDFVGKVAGPLAGVWVFTAAIMALGVQKGVARASSFFMPLLLVMFLIMVGISLTLPGAAKGLDALFTPDWSKLADSKVWVAAYGQIFFSLSICFGIMVTYSSYLKKKTDLGGTGLVVGFANSSFELLAGIGVFAALGFMAQAGGKAVNEVASGGIGLAFIAFPTIINQAPMGWLIGILFFGSLVFAGVTSMISILEVIVAAIQDKLNIGRVNATLLVCIPMGIVSTLLFGTATGLPVLDVMDKFVNTYGIVAAGFVYVAAIIISGRLPELRKHLNALSSIRIGGLWTVCVVVTVVMLGYMLFKDTSGLMEKNYEGYPDGFLSIFGWGMSAALVVFGLLLSLLPWKHGQDFNVKDEHEHEQGEEK",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 22,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0K4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "trmD",
+        "length": 249,
+        "name": "tRNA (guanine-N(1)-)-methyltransferase",
+        "protein_id": "sp|Q9K0K4|TRMD_NEIMB",
+        "sequence": "MLIQAVTIFPEMFDSITRYGVTGRANRQGIWQFEAVNPRKFADNRLGYIDDRPFGGGPGMIMMAPPLHAAIEHAKTQSSQAAKVIYLSPQGKPLTHQKAVELAELPHLILLCGRYEGIDERLLQSSVDEEISIGDFVVSGGELPAMMLMDAVLRLVPGVLGDMQSAEQDSFSSGILDCPHYTKPLEFQGMAVPEVLRSGNHGLIAEWRLEQSLRRTLERRPDLLEKRVLIPKESRLLETIRQEQREIQS",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "Cytoplasmic",
+                "prior": 0.0,
+                "raw": "Cytoplasmic",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 23,
+            "terms": {
+              "localisation": 0.0,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0Q7",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB0527",
+        "length": 140,
+        "name": "6-carboxy-5,6,7,8-tetrahydropterin synthase",
+        "protein_id": "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+        "sequence": "MKITKIFTFDSSHMLDGHDGKCQNLHGHTYKLEITVSDGIIKGGAKDGMVMDFTDLKAIVKQHITDPFDHAFIYHGGNSRECQIAALLEGWNMKTLRLPCRTTAENMAVEMYGRLKNAGLNVCRVKLWETPTSCAEYEGE",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.90886192,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.90886192,
+            "rank": 24,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.90886192,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JZY3",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB0850",
+        "length": 138,
+        "name": "MORN repeat protein",
+        "protein_id": "tr|Q9JZY3|Q9JZY3_NEIMB",
+        "sequence": "MLKHLAFLLPAMMFALPTSAAVLTSYQEPGCTYDGNVGKDGKPAGKGTWRCQDGRNYTGSFKNGKFDGQGVYTVAANREIFIEPFNSDSTKFRNMVLSGTFKKGLAHGRFTVSQNGETLFIMKCENGMIKEVKLPKNK",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.89351958,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.89351958,
+            "rank": 25,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.89351958,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JZH8",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB1045",
+        "length": 264,
+        "name": "Serine/threonine protein kinase",
+        "protein_id": "tr|Q9JZH8|Q9JZH8_NEIMB",
+        "sequence": "MTLPMQETRFSILLDELAAKQEAAIAPHLLADGTKVWIRKAGRHNARWRYALLGMVARYLKLGVLKPVPSLGGEPAIATESKRLYELRSAGIAVPELLAVRKNALMFGNLEGIPLDAQIRQEAEAGKSDAWLAGLEAIARVHKKRQFLSQAFARNMMSDGKNISFLDFEDDPSEVLTIAQCQARDWLCYIHSTALILKNGGLLEAAAEKWGGVLSDQPAEIQKLIAATVKPILPIRRLEHPRWGRDALRLAASISLISLADMPP",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.860545,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.860545,
+            "rank": 26,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.860545,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K1D2",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "NMB0230",
+        "length": 215,
+        "name": "Carboxyltransferase domain-containing protein",
+        "protein_id": "tr|Q9K1D2|Q9K1D2_NEIMB",
+        "sequence": "MRIEITPISESALVYRLNAPSELGKQQKLWAFAAALGQHDRIEEVVVGMNNLTVFTRFDTDLATLADELQYVWEHTAVTDHQGKLVEIPVCYGGEYGPDLAEVAAFHQTVISEIVRRHTAQTYTVFMMGFQPGFPYLGGLPEALHTPRRAVPRTSVPAGSVGIGGSQTGVYPFASPGGWQIIGRTELPLFRADLNPPTLLAAGDQVRFVAERIEP",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.85848409,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.85848409,
+            "rank": 27,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.85848409,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXT3",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "dpnC",
+        "length": 267,
+        "name": "Type II restriction enzyme DpnI",
+        "protein_id": "tr|Q9JXT3|Q9JXT3_NEIMB",
+        "sequence": "MNLFFDTELGKQQNKATHKIRVMSEAWLEKNGYCPCCGSKPMQRFANNKPVADLFCPNCHEQYELKSKNQKTIGNSVPDGAYHTMLERIRSDTNPNFFFLAYKKADYSIRQLVLVPKHFITPDMIIPRNKGIKNRPNHIMCSINLAPLPESGKIFLIDNSRIIEPETVLKKWQSNLFLRNQNAERKGWLLAVMKCIDQLPEEFTLSQMYEFENKLSIQFPQNNHIRDKIRQQLQILRDQNTIEFIGRGLYKKSINCAQLPRYFDFKS",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.85665216,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.85665216,
+            "rank": 28,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.85665216,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0M6",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "nqrD",
+        "length": 208,
+        "name": "Na(+)-translocating NADH-quinone reductase subunit D",
+        "protein_id": "sp|Q9K0M6|NQRD_NEIMB",
+        "sequence": "MADMKRLKHLMFSPFIDNNPIALQVLGICSALAVTTKLQTAIVMGISVALVTGFSSFFISLVRNYIPNSIRIIVQMAIIASLVTLVDQLLQAFAYELSKQLSVFVGLIITNCIVMGRAEAFAMKEPPLESLIDGIGNGAGYGIMLLVVATVRELIGSGKLLGYTVFQTVQDGGWYQTNGLFLLAPSAFFIIGFLIWGLRTWKPEQAEE",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.85184337,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.85184337,
+            "rank": 29,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.85184337,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K1H6",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "gene": "zupT",
+        "length": 269,
+        "name": "Zinc transporter ZupT",
+        "protein_id": "sp|Q9K1H6|ZUPT_NEIMB",
+        "sequence": "MPDFSMSNLAVAFSITLAAGLFTVLGSGLVMFSKTPNPRVLSFGLAFAGGAMVYVSLTEIFSKSSEAFAEIYDKDHAFAAATMAFLAGMGGIALIDRLVPNPHETLDAQDPSFQESKRRHIARVGMMAAFAITAHNFPEGLATFFATLENPAVGMPLALAIAIHNIPEGISIAAPVYFATRSRKKTVWACLLSGLAEPLGAALGYLVLQPFLSPAVFGSVFGVIAGVMVFLALDELLPAAKRYSDGHETVYGLTTGMAVIAVSLVLFHF",
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null,
+            "top": null
+          },
+          "score": null,
+          "score_basis": "unavailable",
+          "score_note": "d/(d+half_score_density), d = epitopes strongly bound by >= min_strong_alleles_promiscuous panel alleles per 100 aa; unvalidated heuristic - compare with random_expectation_per_100aa and re-tune with the validation harness"
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.79367987,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.95,
+                "evalue": 4.73e-16,
+                "hit": "VFG052410",
+                "identity": 0.2645,
+                "term": 0.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": false,
+              "0.90": false
+            },
+            "protegenicity": 0.79367987,
+            "rank": 30,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.79367987,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      }
+    ],
+    "context": {
+      "n_proteins": 40,
+      "organism_type": "gram-",
+      "s2_meta": {
+        "lineage": [
+          "cellular organisms",
+          "Bacteria",
+          "Pseudomonadati",
+          "Pseudomonadota",
+          "Betaproteobacteria",
+          "Neisseriales",
+          "Neisseriaceae",
+          "Neisseria"
+        ],
+        "localisation_status_counts": {
+          "fixture_stand_in": 40
+        },
+        "organism": {
+          "domain": "bacteria",
+          "gram_basis": "lineage taxon Pseudomonadota -> Gram-negative",
+          "gram_stain": "negative",
+          "localisation_applicable": true,
+          "psortb_extra_args": [],
+          "psortb_flag": "-n",
+          "virulence_db_applicable": true
+        },
+        "organism_type": "gram-",
+        "proteome_id": "UP000000425",
+        "scientific_name": "Neisseria meningitidis",
+        "species_taxid": 487,
+        "stream_a": {
+          "protegen_target_file": null,
+          "run_id": "nmb_fixture",
+          "s1_resources": {
+            "human_proteome": "ok",
+            "iedb": "disabled",
+            "protegen": "ok",
+            "vfdb": "ok"
+          },
+          "s2_digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3"
+        },
+        "taxid": 487
+      },
+      "taxid": 487
+    },
+    "degraded": [
+      "S5 class I T-cell prediction did not run: no class I predictor available (backend=auto; netMHCpan not found, mhcflurry not installed)",
+      "S5 class II T-cell prediction did not run: netMHCIIpan not found (DTU licence; see docs/TOOLS_SETUP.md)",
+      "S5 linear B-cell prediction did not run: BepiPred-3.0 not configured (tools.bepipred3); BepiPred-2.0 is never used as a substitute",
+      "S5 conformational B-cell prediction did not run: DiscoTope-3.0 not configured (tools.discotope3)"
+    ],
+    "epitope_set": {
+      "b_cell_linear": [],
+      "note": "t_cell entries are the per-candidate selected epitopes (S6 input and S10 ELISpot peptide pools)",
+      "t_cell": []
+    },
+    "limits": [
+      "presentable != recognised != sufficient response != protection",
+      "linear B-cell epitope prediction ceiling is roughly AUC 0.70-0.84 (README section 2, S5)"
+    ],
+    "skipped_candidates": [],
+    "upstream": {
+      "s3_leakage_audit": {
+        "declared_holdout_taxids": [],
+        "holdout_enforced": false,
+        "model": "Vaxign-ML (stock pretrained model, trained on all of Protegen)",
+        "note": "Scores supplied externally; whether the model held out the target pathogen is declared, not verified here.",
+        "requested_holdout": {
+          "note": null,
+          "taxids": []
+        },
+        "target_taxid": 487
+      },
+      "s3_ranker": {
+        "backend": "scores_file",
+        "note": "Default weights reproduce the pure Vaxign-ML ordering; other terms are recorded as evidence only.",
+        "score_semantics": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record)",
+        "thresholds": [
+          0.9,
+          0.85
+        ],
+        "weights_used": {
+          "localisation": 0.0,
+          "protegenicity": 1.0,
+          "virulence": 0.0
+        }
+      },
+      "s4_incomplete_screening": true,
+      "s4_unavailable_gates": [
+        "human_homology",
+        "allergenicity",
+        "toxicity",
+        "conservancy"
+      ]
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s5_epitopes",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "run_nmb_fixture",
+  "schema": "vaxforge/s5_epitopes/v1",
+  "stage": "s5",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "class I T-cell prediction did not run: no class I predictor available (backend=auto; netMHCpan not found, mhcflurry not installed)",
+    "class II T-cell prediction did not run: netMHCIIpan not found (DTU licence; see docs/TOOLS_SETUP.md) (T-cell score falls back to class I only)",
+    "linear B-cell prediction did not run: BepiPred-3.0 not configured (tools.bepipred3); BepiPred-2.0 is never used as a substitute",
+    "conformational B-cell prediction did not run: DiscoTope-3.0 not configured (tools.discotope3)"
+  ]
+}

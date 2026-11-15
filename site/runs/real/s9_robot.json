@@ -1,0 +1,3132 @@
+{
+  "created_at": "2026-11-15T10:39:30Z",
+  "digest": "sha256:9415652d18c43fdeebddfc491baf3362c55947b7193a5ceddf436be4f5dc7fe1",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.2"
+  },
+  "inputs": {
+    "s8": "sha256:80987e39b721f7867af391aec152cd00e905305213b52df86cef4fa9e3c8a844"
+  },
+  "params": {
+    "backends": [
+      {
+        "label": "template",
+        "model_id": null
+      }
+    ],
+    "robot_params": {
+      "analyte": "TNF-alpha",
+      "assembly_buffer_ul": 2.0,
+      "assembly_enzyme_ul": 2.0,
+      "assembly_incubation_c": 37.0,
+      "assembly_incubation_min": 60.0,
+      "assembly_insert_ul": 2.0,
+      "assembly_total_ul": 20.0,
+      "assembly_vector_ul": 2.0,
+      "bead_bind_cycles": 3,
+      "bead_bind_min": 30.0,
+      "bead_slurry_ul": 50.0,
+      "bead_wash_cycles": 2,
+      "bead_wash_ul": 300.0,
+      "cells_ul": 25.0,
+      "colonies": 4,
+      "conditions": [
+        "vehicle / buffer only",
+        "LPS positive control",
+        "endotoxin-matched LPS control",
+        "antigen low dose",
+        "antigen mid dose",
+        "antigen high dose",
+        "antigen mid dose + polymyxin B",
+        "mock-purification eluate"
+      ],
+      "culture_mix_ul": 100.0,
+      "culture_ul": 1000.0,
+      "dead_volume_ul": {
+        "plate": 10.0,
+        "reservoir": 500.0,
+        "tubes": 30.0,
+        "waste": 0.0
+      },
+      "dna_ul": 1.0,
+      "elisa_detect_incubation_min": 60.0,
+      "elisa_detect_ul": 100.0,
+      "elisa_hrp_incubation_min": 30.0,
+      "elisa_hrp_ul": 100.0,
+      "elisa_sample_incubation_min": 120.0,
+      "elisa_sample_ul": 50.0,
+      "elisa_std_columns": 1,
+      "elisa_std_top_ul": 100.0,
+      "elisa_stop_ul": 50.0,
+      "elisa_substrate_incubation_min": 20.0,
+      "elisa_substrate_ul": 100.0,
+      "elisa_wash_cycles": 3,
+      "elisa_wash_ul": 180.0,
+      "elute_min": 10.0,
+      "elution_ul": 100.0,
+      "facs_cells_ul": 100.0,
+      "facs_stain_ul": 50.0,
+      "heatshock_c": 42.0,
+      "heatshock_s": 45.0,
+      "ice_min": 30.0,
+      "induced_wells": 3,
+      "inducer_final_mM": 0.5,
+      "inducer_stock_mM": 100.0,
+      "lal_dilution_factor": 10.0,
+      "lal_points": 6,
+      "lal_reagent_ul": 50.0,
+      "lal_well_ul": 50.0,
+      "lysate_ul": 500.0,
+      "lysis_buffer_ul": 300.0,
+      "lysis_mix_reps": 5,
+      "lysis_mix_ul": 200.0,
+      "magnet_settle_s": 120.0,
+      "pcr_mm2x_ul": 10.0,
+      "pcr_primer_ul": 1.0,
+      "pcr_template_stock_ul": 10.0,
+      "pcr_template_ul": 1.0,
+      "pcr_total_ul": 20.0,
+      "qpcr_cdna_stock_ul": 20.0,
+      "qpcr_cdna_ul": 4.0,
+      "qpcr_mix2x_ul": 10.0,
+      "qpcr_primers_ul": 1.0,
+      "qpcr_targets": [
+        "GAPDH (reference)",
+        "TNF",
+        "IL1B"
+      ],
+      "qpcr_total_ul": 20.0,
+      "recovery_ice_min": 2.0,
+      "removal_reagent_ul": 50.0,
+      "removal_sample_ul": 80.0,
+      "replicates": 3,
+      "residual_ul": 10.0,
+      "soc_ul": 50.0,
+      "stim_ul": 20.0,
+      "supernatant_ul": 100.0,
+      "uninduced_wells": 3,
+      "well_medium_ul": 180.0
+    },
+    "s12_status": "pending",
+    "simulate_runs": true
+  },
+  "payload": {
+    "biosecurity": "S12 biosecurity gate NOT EVIDENCED to S9. Do not order gene synthesis or run these protocols until the S12 gate clears the sequence.",
+    "candidates": [
+      {
+        "backends": [
+          {
+            "all_pass": false,
+            "dir_name": "template",
+            "label": "template",
+            "model_id": null,
+            "sessions": [
+              {
+                "code_sha256": "31e10f15326bea55eecca15c1e620ba0215af3e8c5f8defe6e9db2baf374060a",
+                "covers": [
+                  "s02"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3566,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s02_plasmid_assembly.py",
+                    "root": "run",
+                    "sha256": "31e10f15326bea55eecca15c1e620ba0215af3e8c5f8defe6e9db2baf374060a"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s02_plasmid_assembly.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5472,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s02_plasmid_assembly.plan.json",
+                    "root": "run",
+                    "sha256": "d29d3fb2fe45a66d4ab11eb08224ee7dcdeac84d440f3a5aee358993c290a840"
+                  },
+                  "setup": {
+                    "bytes": 1741,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s02_plasmid_assembly.setup.md",
+                    "root": "run",
+                    "sha256": "dff91e3869add3d9a7ee2beccaceefbd150d7a387799d89f3ff9824532155812"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "7039f1e00e704fd7f4f192dd01aea00f5ac89d55cc48e70aa634bd96d29de7eb",
+                "refusal": null,
+                "session_id": "s02_plasmid_assembly",
+                "tips_needed": {
+                  "p20": 9
+                },
+                "tips_total": 9,
+                "title": "Plasmid assembly reaction set-up"
+              },
+              {
+                "code_sha256": "4ff53f6825583d2ee67a8ef1e3362b265b924f6bfc628000028850bb81b18c23",
+                "covers": [
+                  "s03"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3713,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s03_transformation.py",
+                    "root": "run",
+                    "sha256": "4ff53f6825583d2ee67a8ef1e3362b265b924f6bfc628000028850bb81b18c23"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s03_transformation.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5316,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s03_transformation.plan.json",
+                    "root": "run",
+                    "sha256": "6b42fb4ab63ff76dcddf64b5b6d1829d42ff75d1f010ef066c255b35dccf118b"
+                  },
+                  "setup": {
+                    "bytes": 2202,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s03_transformation.setup.md",
+                    "root": "run",
+                    "sha256": "98768d9b93328273de704b5447ebb67433dfc24ba6f3d1f5d706632be096c852"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 2,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "612aa666835c3956c06e407ef152506521c2aeb8b701a05fd9869a4448148d11",
+                "refusal": null,
+                "session_id": "s03_transformation",
+                "tips_needed": {
+                  "p20": 2,
+                  "p300": 3
+                },
+                "tips_total": 5,
+                "title": "Heat-shock transformation set-up"
+              },
+              {
+                "code_sha256": "0fa85fcd53b1e1e1ab03280aa6c82b3e6b6ed9d3bcfd5caea173dcac9818ec74",
+                "covers": [
+                  "s04"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 4915,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s04_colony_pcr.py",
+                    "root": "run",
+                    "sha256": "0fa85fcd53b1e1e1ab03280aa6c82b3e6b6ed9d3bcfd5caea173dcac9818ec74"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s04_colony_pcr.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 8713,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s04_colony_pcr.plan.json",
+                    "root": "run",
+                    "sha256": "eabf28cb8e4cf765ed70bc84c9ab06bef8c40c8b07e1441c51979b5458fbd46d"
+                  },
+                  "setup": {
+                    "bytes": 2183,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s04_colony_pcr.setup.md",
+                    "root": "run",
+                    "sha256": "4a5d4daf24112135c192f685ddfeced3354af4357027c3aa84b4d88f90a77175"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "d815d5bba063afa7ed6a9595f336a7b434dd952f46d93a67fcf08787ddaee032",
+                "refusal": null,
+                "session_id": "s04_colony_pcr",
+                "tips_needed": {
+                  "p20": 9,
+                  "p300": 3
+                },
+                "tips_total": 12,
+                "title": "Colony PCR reaction set-up"
+              },
+              {
+                "code_sha256": "ff3ca8e84404ee9c8acf24e0fe24df6b5915497abd880f92624015e29bec2e3d",
+                "covers": [
+                  "s05"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3702,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s05_expression_induction.py",
+                    "root": "run",
+                    "sha256": "ff3ca8e84404ee9c8acf24e0fe24df6b5915497abd880f92624015e29bec2e3d"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s05_expression_induction.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5128,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s05_expression_induction.plan.json",
+                    "root": "run",
+                    "sha256": "03bf16e4a543a18b6d61db781c5811da386889ac45997e6073fd671dfddecde3"
+                  },
+                  "setup": {
+                    "bytes": 1942,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s05_expression_induction.setup.md",
+                    "root": "run",
+                    "sha256": "8046f7e6dbf4cb15aaa3032d80c2449550a37fd30ed2c5cc5064df2c45fde3ce"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "d16f09f37e05a4a908ca4f5fb2f1a5cdb53a12a1d5fb7513f61ed7fd00c1645c",
+                "refusal": null,
+                "session_id": "s05_expression_induction",
+                "tips_needed": {
+                  "p20": 6,
+                  "p300": 6
+                },
+                "tips_total": 12,
+                "title": "Inducer addition to expression cultures"
+              },
+              {
+                "code_sha256": "dc7e620c6f4afedc4190158e63a65ef367a262ab138fac5d2551461ac00424d8",
+                "covers": [
+                  "s06"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 2297,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s06_lysis.py",
+                    "root": "run",
+                    "sha256": "dc7e620c6f4afedc4190158e63a65ef367a262ab138fac5d2551461ac00424d8"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s06_lysis.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 2083,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s06_lysis.plan.json",
+                    "root": "run",
+                    "sha256": "668e205a21e5f7008a445febfc4f8c157975ec00b70f398affba1d0c522bcec7"
+                  },
+                  "setup": {
+                    "bytes": 1187,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s06_lysis.setup.md",
+                    "root": "run",
+                    "sha256": "7f326c1ca2ca8aeb464907e633a389b0d13bd5483669accb47b50a63ca7d5249"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "a46a0fff6ae2e1559b78b1d1a037b47fc71d12d886cb9ceab426dfade054e503",
+                "refusal": null,
+                "session_id": "s06_lysis",
+                "tips_needed": {
+                  "p300": 6
+                },
+                "tips_total": 6,
+                "title": "Lysis reagent addition"
+              },
+              {
+                "code_sha256": "fcf2c2b77a17df2925d0e358e892373cf84972168bc39061f8fcc611b1af3b2e",
+                "covers": [
+                  "s07"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5300,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s07_ni_nta_purification.py",
+                    "root": "run",
+                    "sha256": "fcf2c2b77a17df2925d0e358e892373cf84972168bc39061f8fcc611b1af3b2e"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s07_ni_nta_purification.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 10630,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s07_ni_nta_purification.plan.json",
+                    "root": "run",
+                    "sha256": "066eaeeb29a65099a1ca1e249ca43d539eab15f0818b54ca378888836842d2fc"
+                  },
+                  "setup": {
+                    "bytes": 1898,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s07_ni_nta_purification.setup.md",
+                    "root": "run",
+                    "sha256": "c431a823e6a561cb71197d7fbe608145d4cad4fee3d62c40a520119f7c218125"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "40b67c39c72ffd445dfbfe8f6d3d40abb270f3867d7a0048a1af7fe4e74fae05",
+                "refusal": null,
+                "session_id": "s07_ni_nta_purification",
+                "tips_needed": {
+                  "p300": 22
+                },
+                "tips_total": 22,
+                "title": "Ni-NTA magnetic-bead purification"
+              },
+              {
+                "code_sha256": "3a331f9071722b8929f3bcc505b216c892d692bd6c5c436a0d158ba0892b4af0",
+                "covers": [
+                  "s08"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 2741,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s08_endotoxin_removal.py",
+                    "root": "run",
+                    "sha256": "3a331f9071722b8929f3bcc505b216c892d692bd6c5c436a0d158ba0892b4af0"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s08_endotoxin_removal.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 3282,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s08_endotoxin_removal.plan.json",
+                    "root": "run",
+                    "sha256": "179c3dafe1ed911c548a070cf3e1765819db854edac7d9f5cb5cabdce27ee38a"
+                  },
+                  "setup": {
+                    "bytes": 1490,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s08_endotoxin_removal.setup.md",
+                    "root": "run",
+                    "sha256": "a9a395bcfce778815fc179028dd490bc9afb1b87ea63d505d00edef783d1a410"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "c9323a06834aa3bad7b52acc5c67cd732be2dc241b7fbc663ea9608a96858033",
+                "refusal": null,
+                "session_id": "s08_endotoxin_removal",
+                "tips_needed": {
+                  "p300": 4
+                },
+                "tips_total": 4,
+                "title": "Endotoxin-removal plate set-up"
+              },
+              {
+                "code_sha256": "059db5e8621ec0620936439e81db9b5e714cbe44b5af575efc8f05435889d45c",
+                "covers": [
+                  "s09"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5367,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s09_lal_assay.py",
+                    "root": "run",
+                    "sha256": "059db5e8621ec0620936439e81db9b5e714cbe44b5af575efc8f05435889d45c"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s09_lal_assay.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 13197,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s09_lal_assay.plan.json",
+                    "root": "run",
+                    "sha256": "b99be90dab9d54fb9c8717f0027e9a6a27ba405c861abde3ff11481b1a77399f"
+                  },
+                  "setup": {
+                    "bytes": 2074,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s09_lal_assay.setup.md",
+                    "root": "run",
+                    "sha256": "794de8c3f7ca67fc32e19677668770862cfb08cdd9f2dc4e1d06d40629d97cf6"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "b8f5fa2dbf0f75fd105635db94378e998a1af6d7b8b43620e7614cd05ebaa846",
+                "refusal": null,
+                "session_id": "s09_lal_assay",
+                "tips_needed": {
+                  "p20": 9,
+                  "p300": 14
+                },
+                "tips_total": 23,
+                "title": "LAL assay plate set-up"
+              },
+              {
+                "code_sha256": "2e64ec270671f13c88cd72de8d3861563a7654f5bc5b73d7aa303ceec435f904",
+                "covers": [
+                  "s11"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5780,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s11_antigen_stimulation.py",
+                    "root": "run",
+                    "sha256": "2e64ec270671f13c88cd72de8d3861563a7654f5bc5b73d7aa303ceec435f904"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s11_antigen_stimulation.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 12833,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s11_antigen_stimulation.plan.json",
+                    "root": "run",
+                    "sha256": "bdbeb5a4e554b8e5532fc58a57b52f909345e64be053f554036bcf9325b869b6"
+                  },
+                  "setup": {
+                    "bytes": 5328,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s11_antigen_stimulation.setup.md",
+                    "root": "run",
+                    "sha256": "90d701a07429a6bc711af3b7bb95c172368866260e4b14b1efa752ae401fe246"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "85cb885785d11a1ccd70887653fed568553d3c894a0f811d156245a89de65fc6",
+                "refusal": null,
+                "session_id": "s11_antigen_stimulation",
+                "tips_needed": {
+                  "p20": 24
+                },
+                "tips_total": 24,
+                "title": "Antigen / control addition to seeded THP-1 plate"
+              },
+              {
+                "code_sha256": "9e637688cf5fa4a9723c0839066ce1f53a434a74a7eb1acd90a7f8e83dd45fd5",
+                "covers": [
+                  "s12"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 7316,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_setup.py",
+                    "root": "run",
+                    "sha256": "9e637688cf5fa4a9723c0839066ce1f53a434a74a7eb1acd90a7f8e83dd45fd5"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_setup.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 21668,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_setup.plan.json",
+                    "root": "run",
+                    "sha256": "9266a7339425f750716134143252527919317f4cd31642e44bff5b634940e300"
+                  },
+                  "setup": {
+                    "bytes": 4869,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_setup.setup.md",
+                    "root": "run",
+                    "sha256": "0260b6a0cf19bf37ebc40995c967fe95246fcb6ebf273980bf63b21dc20f7e16"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "26bb8fc88253aa77a6247ebbdf771c067f7b9b5e75abe43ff2f4eb618f88c99a",
+                "refusal": null,
+                "session_id": "s12_elisa_setup",
+                "tips_needed": {
+                  "p300": 39
+                },
+                "tips_total": 39,
+                "title": "ELISA (TNF-alpha) standards and sample loading"
+              },
+              {
+                "code_sha256": "e7879412ca33ea1de0873856d513231cf4f519520dda64138fbaaf5bec031818",
+                "covers": [
+                  "s12"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 12077,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_develop.py",
+                    "root": "run",
+                    "sha256": "e7879412ca33ea1de0873856d513231cf4f519520dda64138fbaaf5bec031818"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_develop.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 36392,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_develop.plan.json",
+                    "root": "run",
+                    "sha256": "91f5e1fb6a140fa2b41c89c66a78cc7aca30271938b8ec0534c9849516e10d67"
+                  },
+                  "setup": {
+                    "bytes": 4941,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s12_elisa_develop.setup.md",
+                    "root": "run",
+                    "sha256": "b404a06bf0c1ed9d540c4b0e63ca23336d29d1388b1a663c37bd4581bf84fb3f"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 4,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "4c77121bcebe3ee0b994dbabcf477594721d930842b9ed59295165e648971e94",
+                "refusal": null,
+                "session_id": "s12_elisa_develop",
+                "tips_needed": {
+                  "p300m": 61
+                },
+                "tips_total": 61,
+                "title": "ELISA (TNF-alpha) washes, detection and development"
+              },
+              {
+                "code_sha256": "a085478fb5345ce49844581f6c03c9eae0ecb95fe0a41da176a14c2d5be916f0",
+                "covers": [
+                  "s13"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 14480,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s13_rt_qpcr.py",
+                    "root": "run",
+                    "sha256": "a085478fb5345ce49844581f6c03c9eae0ecb95fe0a41da176a14c2d5be916f0"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s13_rt_qpcr.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 48205,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s13_rt_qpcr.plan.json",
+                    "root": "run",
+                    "sha256": "942c1208f33ad53940ef407b0641d43763cd1a5538bff1cea6bd89de9f1cf425"
+                  },
+                  "setup": {
+                    "bytes": 3987,
+                    "path": "data/s9/sp_p0dh58_ompa_neimb/template/s13_rt_qpcr.setup.md",
+                    "root": "run",
+                    "sha256": "b72a18d901dab101221a827dc61eae1464867ed3cf18abd8dc537e4648b1906e"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "0d38fd3a2120bd07a7703199473eeaa09d64778a7333fe413ad03c045895d3d8",
+                "refusal": null,
+                "session_id": "s13_rt_qpcr",
+                "tips_needed": {
+                  "p20": 81,
+                  "p300": 12
+                },
+                "tips_total": 93,
+                "title": "RT-qPCR reaction set-up"
+              }
+            ],
+            "tally": {
+              "UNVERIFIED": 12
+            }
+          }
+        ],
+        "candidate_id": "sp|P0DH58|OMPA_NEIMB",
+        "coverage": [
+          {
+            "human_remainder": "Outsourced to a vendor; sequence must clear the S12 biosecurity gate before ordering.",
+            "kind": "gene_synthesis",
+            "owner": "HUMAN",
+            "sessions": [],
+            "step_id": "s01",
+            "title": "Order codon-optimised gene for Major outer membrane protein P.IA (porA)"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "plasmid_assembly",
+            "owner": "ROBOT",
+            "sessions": [
+              "s02_plasmid_assembly"
+            ],
+            "step_id": "s02",
+            "title": "Clone into His-tagged expression vector"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Temperature module; plating is manual.",
+            "kind": "transformation",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s03_transformation"
+            ],
+            "step_id": "s03",
+            "title": "Transform expression host"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "colony_pcr",
+            "owner": "ROBOT",
+            "sessions": [
+              "s04_colony_pcr"
+            ],
+            "step_id": "s04",
+            "title": "Colony PCR to confirm insert"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Inducer addition yes; shaking incubation no.",
+            "kind": "expression_induction",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s05_expression_induction"
+            ],
+            "step_id": "s05",
+            "title": "Small-scale expression and induction"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reagent addition yes; sonication/centrifugation no.",
+            "kind": "lysis",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s06_lysis"
+            ],
+            "step_id": "s06",
+            "title": "Lyse cells; clarify lysate"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Magnetic-bead His-tag format yes; gravity column/FPLC no.",
+            "kind": "ni_nta_purification",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s07_ni_nta_purification"
+            ],
+            "step_id": "s07",
+            "title": "Ni-NTA (His-tag) purification"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes.",
+            "kind": "endotoxin_removal",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s08_endotoxin_removal"
+            ],
+            "step_id": "s08",
+            "title": "Endotoxin removal"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes; reading needs a plate reader.",
+            "kind": "lal_assay",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s09_lal_assay"
+            ],
+            "step_id": "s09",
+            "title": "Quantify residual endotoxin (LAL)"
+          },
+          {
+            "human_remainder": "CO2 incubator and sterile cell culture; done by a person.",
+            "kind": "thp1_culture",
+            "owner": "HUMAN",
+            "sessions": [],
+            "step_id": "s10",
+            "title": "THP-1 culture and PMA differentiation"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "antigen_stimulation",
+            "owner": "ROBOT",
+            "sessions": [
+              "s11_antigen_stimulation"
+            ],
+            "step_id": "s11",
+            "title": "Stimulate differentiated THP-1 with purified antigen"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup and washes yes; reading no.",
+            "kind": "elisa",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s12_elisa_setup",
+              "s12_elisa_develop"
+            ],
+            "step_id": "s12",
+            "title": "ELISA readout"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reaction setup yes; thermocycling and reading no.",
+            "kind": "rt_qpcr",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s13_rt_qpcr"
+            ],
+            "step_id": "s13",
+            "title": "RT QPCR readout"
+          }
+        ],
+        "dir_name": "sp_p0dh58_ompa_neimb",
+        "notes": [
+          "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
+          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.",
+          "No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0."
+        ],
+        "protein_name": "Major outer membrane protein P.IA (porA)",
+        "rank": 1,
+        "refused_protocol": null,
+        "report": {
+          "bytes": 24038,
+          "path": "data/s9/sp_p0dh58_ompa_neimb/robot_report.json",
+          "root": "run",
+          "sha256": "54a573fdf82c0a146359fc430cc2966644445417239a71b7d69e7fa3fd474785"
+        },
+        "report_md": {
+          "bytes": 4999,
+          "path": "data/s9/sp_p0dh58_ompa_neimb/robot_report.md",
+          "root": "run",
+          "sha256": "44ad74cca48cd1667784f7989cf0670a93e1dbc6bdf93642f3dcb39b3b735c2a"
+        },
+        "workflow": {
+          "bytes": 7260,
+          "path": "data/s9/sp_p0dh58_ompa_neimb/workflow.md",
+          "root": "run",
+          "sha256": "51c58559956aadd6f5085beec9ec86c38580b04f700855d3535d157557376999"
+        }
+      },
+      {
+        "backends": [
+          {
+            "all_pass": false,
+            "dir_name": "template",
+            "label": "template",
+            "model_id": null,
+            "sessions": [
+              {
+                "code_sha256": "3bf099463ec7b9efcba6dadbae82043b47758789b3e68bd0d94d66fd7d43d3b1",
+                "covers": [
+                  "s02"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3554,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly.py",
+                    "root": "run",
+                    "sha256": "3bf099463ec7b9efcba6dadbae82043b47758789b3e68bd0d94d66fd7d43d3b1"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5472,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly.plan.json",
+                    "root": "run",
+                    "sha256": "d29d3fb2fe45a66d4ab11eb08224ee7dcdeac84d440f3a5aee358993c290a840"
+                  },
+                  "setup": {
+                    "bytes": 1741,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly.setup.md",
+                    "root": "run",
+                    "sha256": "dff91e3869add3d9a7ee2beccaceefbd150d7a387799d89f3ff9824532155812"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "7039f1e00e704fd7f4f192dd01aea00f5ac89d55cc48e70aa634bd96d29de7eb",
+                "refusal": null,
+                "session_id": "s02_plasmid_assembly",
+                "tips_needed": {
+                  "p20": 9
+                },
+                "tips_total": 9,
+                "title": "Plasmid assembly reaction set-up"
+              },
+              {
+                "code_sha256": "5bd695ee969a07a9f0e5c064c40ca25b71a7f2e39e0d566ba572ad941fd19bf4",
+                "covers": [
+                  "s03"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3701,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s03_transformation.py",
+                    "root": "run",
+                    "sha256": "5bd695ee969a07a9f0e5c064c40ca25b71a7f2e39e0d566ba572ad941fd19bf4"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s03_transformation.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5316,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s03_transformation.plan.json",
+                    "root": "run",
+                    "sha256": "6b42fb4ab63ff76dcddf64b5b6d1829d42ff75d1f010ef066c255b35dccf118b"
+                  },
+                  "setup": {
+                    "bytes": 2202,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s03_transformation.setup.md",
+                    "root": "run",
+                    "sha256": "98768d9b93328273de704b5447ebb67433dfc24ba6f3d1f5d706632be096c852"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 2,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "612aa666835c3956c06e407ef152506521c2aeb8b701a05fd9869a4448148d11",
+                "refusal": null,
+                "session_id": "s03_transformation",
+                "tips_needed": {
+                  "p20": 2,
+                  "p300": 3
+                },
+                "tips_total": 5,
+                "title": "Heat-shock transformation set-up"
+              },
+              {
+                "code_sha256": "e7b5d30411c67813f75a187391fdca2bd8ca27dc02744b382f80bcec4e0f390f",
+                "covers": [
+                  "s04"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 4903,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr.py",
+                    "root": "run",
+                    "sha256": "e7b5d30411c67813f75a187391fdca2bd8ca27dc02744b382f80bcec4e0f390f"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 8713,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr.plan.json",
+                    "root": "run",
+                    "sha256": "eabf28cb8e4cf765ed70bc84c9ab06bef8c40c8b07e1441c51979b5458fbd46d"
+                  },
+                  "setup": {
+                    "bytes": 2183,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr.setup.md",
+                    "root": "run",
+                    "sha256": "4a5d4daf24112135c192f685ddfeced3354af4357027c3aa84b4d88f90a77175"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "d815d5bba063afa7ed6a9595f336a7b434dd952f46d93a67fcf08787ddaee032",
+                "refusal": null,
+                "session_id": "s04_colony_pcr",
+                "tips_needed": {
+                  "p20": 9,
+                  "p300": 3
+                },
+                "tips_total": 12,
+                "title": "Colony PCR reaction set-up"
+              },
+              {
+                "code_sha256": "0233aae6abc096b98790a0e15f83c7fa6b276bec761c009d64bfd4ddb34b1ad1",
+                "covers": [
+                  "s05"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3690,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction.py",
+                    "root": "run",
+                    "sha256": "0233aae6abc096b98790a0e15f83c7fa6b276bec761c009d64bfd4ddb34b1ad1"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5128,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction.plan.json",
+                    "root": "run",
+                    "sha256": "03bf16e4a543a18b6d61db781c5811da386889ac45997e6073fd671dfddecde3"
+                  },
+                  "setup": {
+                    "bytes": 1942,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction.setup.md",
+                    "root": "run",
+                    "sha256": "8046f7e6dbf4cb15aaa3032d80c2449550a37fd30ed2c5cc5064df2c45fde3ce"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "d16f09f37e05a4a908ca4f5fb2f1a5cdb53a12a1d5fb7513f61ed7fd00c1645c",
+                "refusal": null,
+                "session_id": "s05_expression_induction",
+                "tips_needed": {
+                  "p20": 6,
+                  "p300": 6
+                },
+                "tips_total": 12,
+                "title": "Inducer addition to expression cultures"
+              },
+              {
+                "code_sha256": "9558366dfc24e9f64520acf4fc09a5a6b105ae38688cbe3aaca2fb47bd687348",
+                "covers": [
+                  "s06"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 2285,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s06_lysis.py",
+                    "root": "run",
+                    "sha256": "9558366dfc24e9f64520acf4fc09a5a6b105ae38688cbe3aaca2fb47bd687348"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s06_lysis.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 2083,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s06_lysis.plan.json",
+                    "root": "run",
+                    "sha256": "668e205a21e5f7008a445febfc4f8c157975ec00b70f398affba1d0c522bcec7"
+                  },
+                  "setup": {
+                    "bytes": 1187,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s06_lysis.setup.md",
+                    "root": "run",
+                    "sha256": "7f326c1ca2ca8aeb464907e633a389b0d13bd5483669accb47b50a63ca7d5249"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "a46a0fff6ae2e1559b78b1d1a037b47fc71d12d886cb9ceab426dfade054e503",
+                "refusal": null,
+                "session_id": "s06_lysis",
+                "tips_needed": {
+                  "p300": 6
+                },
+                "tips_total": 6,
+                "title": "Lysis reagent addition"
+              },
+              {
+                "code_sha256": "96991083032c3e1bc4c014524eb5dc40ad8e1c4e0a93683b5955e32bad62670e",
+                "covers": [
+                  "s07"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5288,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification.py",
+                    "root": "run",
+                    "sha256": "96991083032c3e1bc4c014524eb5dc40ad8e1c4e0a93683b5955e32bad62670e"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 10630,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification.plan.json",
+                    "root": "run",
+                    "sha256": "066eaeeb29a65099a1ca1e249ca43d539eab15f0818b54ca378888836842d2fc"
+                  },
+                  "setup": {
+                    "bytes": 1898,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification.setup.md",
+                    "root": "run",
+                    "sha256": "c431a823e6a561cb71197d7fbe608145d4cad4fee3d62c40a520119f7c218125"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "40b67c39c72ffd445dfbfe8f6d3d40abb270f3867d7a0048a1af7fe4e74fae05",
+                "refusal": null,
+                "session_id": "s07_ni_nta_purification",
+                "tips_needed": {
+                  "p300": 22
+                },
+                "tips_total": 22,
+                "title": "Ni-NTA magnetic-bead purification"
+              },
+              {
+                "code_sha256": "9d389a043a4d14b902be7225395b634e9d9644b6a0ad514ad469eed24ea1f671",
+                "covers": [
+                  "s08"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 2729,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal.py",
+                    "root": "run",
+                    "sha256": "9d389a043a4d14b902be7225395b634e9d9644b6a0ad514ad469eed24ea1f671"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 3282,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal.plan.json",
+                    "root": "run",
+                    "sha256": "179c3dafe1ed911c548a070cf3e1765819db854edac7d9f5cb5cabdce27ee38a"
+                  },
+                  "setup": {
+                    "bytes": 1490,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal.setup.md",
+                    "root": "run",
+                    "sha256": "a9a395bcfce778815fc179028dd490bc9afb1b87ea63d505d00edef783d1a410"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "c9323a06834aa3bad7b52acc5c67cd732be2dc241b7fbc663ea9608a96858033",
+                "refusal": null,
+                "session_id": "s08_endotoxin_removal",
+                "tips_needed": {
+                  "p300": 4
+                },
+                "tips_total": 4,
+                "title": "Endotoxin-removal plate set-up"
+              },
+              {
+                "code_sha256": "3f465ea202bef5b4f1af9b161f9c4266a96111eebf4e6d86ae2d211f7168a98a",
+                "covers": [
+                  "s09"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5355,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay.py",
+                    "root": "run",
+                    "sha256": "3f465ea202bef5b4f1af9b161f9c4266a96111eebf4e6d86ae2d211f7168a98a"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 13197,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay.plan.json",
+                    "root": "run",
+                    "sha256": "b99be90dab9d54fb9c8717f0027e9a6a27ba405c861abde3ff11481b1a77399f"
+                  },
+                  "setup": {
+                    "bytes": 2074,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay.setup.md",
+                    "root": "run",
+                    "sha256": "794de8c3f7ca67fc32e19677668770862cfb08cdd9f2dc4e1d06d40629d97cf6"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "b8f5fa2dbf0f75fd105635db94378e998a1af6d7b8b43620e7614cd05ebaa846",
+                "refusal": null,
+                "session_id": "s09_lal_assay",
+                "tips_needed": {
+                  "p20": 9,
+                  "p300": 14
+                },
+                "tips_total": 23,
+                "title": "LAL assay plate set-up"
+              },
+              {
+                "code_sha256": "9a8c328c50ec04a39b89d665218373375cef95b5b3c4d76e07a8fcd64ea8f2ed",
+                "covers": [
+                  "s11"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5768,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation.py",
+                    "root": "run",
+                    "sha256": "9a8c328c50ec04a39b89d665218373375cef95b5b3c4d76e07a8fcd64ea8f2ed"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 12833,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation.plan.json",
+                    "root": "run",
+                    "sha256": "bdbeb5a4e554b8e5532fc58a57b52f909345e64be053f554036bcf9325b869b6"
+                  },
+                  "setup": {
+                    "bytes": 5328,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation.setup.md",
+                    "root": "run",
+                    "sha256": "90d701a07429a6bc711af3b7bb95c172368866260e4b14b1efa752ae401fe246"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "85cb885785d11a1ccd70887653fed568553d3c894a0f811d156245a89de65fc6",
+                "refusal": null,
+                "session_id": "s11_antigen_stimulation",
+                "tips_needed": {
+                  "p20": 24
+                },
+                "tips_total": 24,
+                "title": "Antigen / control addition to seeded THP-1 plate"
+              },
+              {
+                "code_sha256": "f16040b3b279b5c32b90ff6093e6eb9a8e858c7ab430100ee47ecc7861da5e54",
+                "covers": [
+                  "s12"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 7304,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup.py",
+                    "root": "run",
+                    "sha256": "f16040b3b279b5c32b90ff6093e6eb9a8e858c7ab430100ee47ecc7861da5e54"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 21668,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup.plan.json",
+                    "root": "run",
+                    "sha256": "9266a7339425f750716134143252527919317f4cd31642e44bff5b634940e300"
+                  },
+                  "setup": {
+                    "bytes": 4869,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup.setup.md",
+                    "root": "run",
+                    "sha256": "0260b6a0cf19bf37ebc40995c967fe95246fcb6ebf273980bf63b21dc20f7e16"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "26bb8fc88253aa77a6247ebbdf771c067f7b9b5e75abe43ff2f4eb618f88c99a",
+                "refusal": null,
+                "session_id": "s12_elisa_setup",
+                "tips_needed": {
+                  "p300": 39
+                },
+                "tips_total": 39,
+                "title": "ELISA (TNF-alpha) standards and sample loading"
+              },
+              {
+                "code_sha256": "346848106bcdd9bb9805001a670abfaa190d631954e155a5447c42c4870c4b7b",
+                "covers": [
+                  "s12"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 12065,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop.py",
+                    "root": "run",
+                    "sha256": "346848106bcdd9bb9805001a670abfaa190d631954e155a5447c42c4870c4b7b"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 36392,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop.plan.json",
+                    "root": "run",
+                    "sha256": "91f5e1fb6a140fa2b41c89c66a78cc7aca30271938b8ec0534c9849516e10d67"
+                  },
+                  "setup": {
+                    "bytes": 4941,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop.setup.md",
+                    "root": "run",
+                    "sha256": "b404a06bf0c1ed9d540c4b0e63ca23336d29d1388b1a663c37bd4581bf84fb3f"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 4,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "4c77121bcebe3ee0b994dbabcf477594721d930842b9ed59295165e648971e94",
+                "refusal": null,
+                "session_id": "s12_elisa_develop",
+                "tips_needed": {
+                  "p300m": 61
+                },
+                "tips_total": 61,
+                "title": "ELISA (TNF-alpha) washes, detection and development"
+              },
+              {
+                "code_sha256": "aacad711331b60a74557ef808c7d768c84002f2114e72180431952e6405d866d",
+                "covers": [
+                  "s13"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 14468,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr.py",
+                    "root": "run",
+                    "sha256": "aacad711331b60a74557ef808c7d768c84002f2114e72180431952e6405d866d"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 48205,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr.plan.json",
+                    "root": "run",
+                    "sha256": "942c1208f33ad53940ef407b0641d43763cd1a5538bff1cea6bd89de9f1cf425"
+                  },
+                  "setup": {
+                    "bytes": 3987,
+                    "path": "data/s9/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr.setup.md",
+                    "root": "run",
+                    "sha256": "b72a18d901dab101221a827dc61eae1464867ed3cf18abd8dc537e4648b1906e"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "0d38fd3a2120bd07a7703199473eeaa09d64778a7333fe413ad03c045895d3d8",
+                "refusal": null,
+                "session_id": "s13_rt_qpcr",
+                "tips_needed": {
+                  "p20": 81,
+                  "p300": 12
+                },
+                "tips_total": 93,
+                "title": "RT-qPCR reaction set-up"
+              }
+            ],
+            "tally": {
+              "UNVERIFIED": 12
+            }
+          }
+        ],
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "coverage": [
+          {
+            "human_remainder": "Outsourced to a vendor; sequence must clear the S12 biosecurity gate before ordering.",
+            "kind": "gene_synthesis",
+            "owner": "HUMAN",
+            "sessions": [],
+            "step_id": "s01",
+            "title": "Order codon-optimised gene for Hemoglobin receptor (hmbR)"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "plasmid_assembly",
+            "owner": "ROBOT",
+            "sessions": [
+              "s02_plasmid_assembly"
+            ],
+            "step_id": "s02",
+            "title": "Clone into His-tagged expression vector"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Temperature module; plating is manual.",
+            "kind": "transformation",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s03_transformation"
+            ],
+            "step_id": "s03",
+            "title": "Transform expression host"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "colony_pcr",
+            "owner": "ROBOT",
+            "sessions": [
+              "s04_colony_pcr"
+            ],
+            "step_id": "s04",
+            "title": "Colony PCR to confirm insert"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Inducer addition yes; shaking incubation no.",
+            "kind": "expression_induction",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s05_expression_induction"
+            ],
+            "step_id": "s05",
+            "title": "Small-scale expression and induction"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reagent addition yes; sonication/centrifugation no.",
+            "kind": "lysis",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s06_lysis"
+            ],
+            "step_id": "s06",
+            "title": "Lyse cells; clarify lysate"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Magnetic-bead His-tag format yes; gravity column/FPLC no.",
+            "kind": "ni_nta_purification",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s07_ni_nta_purification"
+            ],
+            "step_id": "s07",
+            "title": "Ni-NTA (His-tag) purification"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes.",
+            "kind": "endotoxin_removal",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s08_endotoxin_removal"
+            ],
+            "step_id": "s08",
+            "title": "Endotoxin removal"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes; reading needs a plate reader.",
+            "kind": "lal_assay",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s09_lal_assay"
+            ],
+            "step_id": "s09",
+            "title": "Quantify residual endotoxin (LAL)"
+          },
+          {
+            "human_remainder": "CO2 incubator and sterile cell culture; done by a person.",
+            "kind": "thp1_culture",
+            "owner": "HUMAN",
+            "sessions": [],
+            "step_id": "s10",
+            "title": "THP-1 culture and PMA differentiation"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "antigen_stimulation",
+            "owner": "ROBOT",
+            "sessions": [
+              "s11_antigen_stimulation"
+            ],
+            "step_id": "s11",
+            "title": "Stimulate differentiated THP-1 with purified antigen"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup and washes yes; reading no.",
+            "kind": "elisa",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s12_elisa_setup",
+              "s12_elisa_develop"
+            ],
+            "step_id": "s12",
+            "title": "ELISA readout"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reaction setup yes; thermocycling and reading no.",
+            "kind": "rt_qpcr",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s13_rt_qpcr"
+            ],
+            "step_id": "s13",
+            "title": "RT QPCR readout"
+          }
+        ],
+        "dir_name": "tr_q9jya8_q9jya8_neimb",
+        "notes": [
+          "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
+          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.",
+          "No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0."
+        ],
+        "protein_name": "Hemoglobin receptor (hmbR)",
+        "rank": 2,
+        "refused_protocol": null,
+        "report": {
+          "bytes": 24012,
+          "path": "data/s9/tr_q9jya8_q9jya8_neimb/robot_report.json",
+          "root": "run",
+          "sha256": "55e5e99815769feebb5031fb886e4d5cb6213927dc3531c5d68e684a815887df"
+        },
+        "report_md": {
+          "bytes": 4973,
+          "path": "data/s9/tr_q9jya8_q9jya8_neimb/robot_report.md",
+          "root": "run",
+          "sha256": "04317b0a6ce6e6da2c7a0908760b0cbf6b7a2f53a82b1eca34c5b10f9011f22e"
+        },
+        "workflow": {
+          "bytes": 7234,
+          "path": "data/s9/tr_q9jya8_q9jya8_neimb/workflow.md",
+          "root": "run",
+          "sha256": "d45bc4bf32a5616d97c0d7c81f8ddd133010881acdcb70c1bcb0ccddd2196101"
+        }
+      },
+      {
+        "backends": [
+          {
+            "all_pass": false,
+            "dir_name": "template",
+            "label": "template",
+            "model_id": null,
+            "sessions": [
+              {
+                "code_sha256": "b0f2e7f61bf5f197bfc313d596d0be4d510f17d542531c0a226f3e17efd508c2",
+                "covers": [
+                  "s02"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3561,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly.py",
+                    "root": "run",
+                    "sha256": "b0f2e7f61bf5f197bfc313d596d0be4d510f17d542531c0a226f3e17efd508c2"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5472,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly.plan.json",
+                    "root": "run",
+                    "sha256": "d29d3fb2fe45a66d4ab11eb08224ee7dcdeac84d440f3a5aee358993c290a840"
+                  },
+                  "setup": {
+                    "bytes": 1741,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly.setup.md",
+                    "root": "run",
+                    "sha256": "dff91e3869add3d9a7ee2beccaceefbd150d7a387799d89f3ff9824532155812"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "7039f1e00e704fd7f4f192dd01aea00f5ac89d55cc48e70aa634bd96d29de7eb",
+                "refusal": null,
+                "session_id": "s02_plasmid_assembly",
+                "tips_needed": {
+                  "p20": 9
+                },
+                "tips_total": 9,
+                "title": "Plasmid assembly reaction set-up"
+              },
+              {
+                "code_sha256": "2b4d2fe672cc141cffa38c924b44f7acacc1f4d6d2c1aa69b4a11a15e33afacb",
+                "covers": [
+                  "s03"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3708,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation.py",
+                    "root": "run",
+                    "sha256": "2b4d2fe672cc141cffa38c924b44f7acacc1f4d6d2c1aa69b4a11a15e33afacb"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5316,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation.plan.json",
+                    "root": "run",
+                    "sha256": "6b42fb4ab63ff76dcddf64b5b6d1829d42ff75d1f010ef066c255b35dccf118b"
+                  },
+                  "setup": {
+                    "bytes": 2202,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation.setup.md",
+                    "root": "run",
+                    "sha256": "98768d9b93328273de704b5447ebb67433dfc24ba6f3d1f5d706632be096c852"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 2,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "612aa666835c3956c06e407ef152506521c2aeb8b701a05fd9869a4448148d11",
+                "refusal": null,
+                "session_id": "s03_transformation",
+                "tips_needed": {
+                  "p20": 2,
+                  "p300": 3
+                },
+                "tips_total": 5,
+                "title": "Heat-shock transformation set-up"
+              },
+              {
+                "code_sha256": "aa058cd52db3285b17b4fe6a5558189435ac463ba8721c75810df156758b674d",
+                "covers": [
+                  "s04"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 4910,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr.py",
+                    "root": "run",
+                    "sha256": "aa058cd52db3285b17b4fe6a5558189435ac463ba8721c75810df156758b674d"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 8713,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr.plan.json",
+                    "root": "run",
+                    "sha256": "eabf28cb8e4cf765ed70bc84c9ab06bef8c40c8b07e1441c51979b5458fbd46d"
+                  },
+                  "setup": {
+                    "bytes": 2183,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr.setup.md",
+                    "root": "run",
+                    "sha256": "4a5d4daf24112135c192f685ddfeced3354af4357027c3aa84b4d88f90a77175"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "d815d5bba063afa7ed6a9595f336a7b434dd952f46d93a67fcf08787ddaee032",
+                "refusal": null,
+                "session_id": "s04_colony_pcr",
+                "tips_needed": {
+                  "p20": 9,
+                  "p300": 3
+                },
+                "tips_total": 12,
+                "title": "Colony PCR reaction set-up"
+              },
+              {
+                "code_sha256": "fb8068a8b05d5563dace0569dd102dca51f53eb82c320a595ab56e74bf93d6a4",
+                "covers": [
+                  "s05"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 3697,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction.py",
+                    "root": "run",
+                    "sha256": "fb8068a8b05d5563dace0569dd102dca51f53eb82c320a595ab56e74bf93d6a4"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 5128,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction.plan.json",
+                    "root": "run",
+                    "sha256": "03bf16e4a543a18b6d61db781c5811da386889ac45997e6073fd671dfddecde3"
+                  },
+                  "setup": {
+                    "bytes": 1942,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction.setup.md",
+                    "root": "run",
+                    "sha256": "8046f7e6dbf4cb15aaa3032d80c2449550a37fd30ed2c5cc5064df2c45fde3ce"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "d16f09f37e05a4a908ca4f5fb2f1a5cdb53a12a1d5fb7513f61ed7fd00c1645c",
+                "refusal": null,
+                "session_id": "s05_expression_induction",
+                "tips_needed": {
+                  "p20": 6,
+                  "p300": 6
+                },
+                "tips_total": 12,
+                "title": "Inducer addition to expression cultures"
+              },
+              {
+                "code_sha256": "8aaa4ca2111feb0726388b3e434d8748cfb4250b712b947734b73fad1d2c2714",
+                "covers": [
+                  "s06"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 2292,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis.py",
+                    "root": "run",
+                    "sha256": "8aaa4ca2111feb0726388b3e434d8748cfb4250b712b947734b73fad1d2c2714"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 2083,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis.plan.json",
+                    "root": "run",
+                    "sha256": "668e205a21e5f7008a445febfc4f8c157975ec00b70f398affba1d0c522bcec7"
+                  },
+                  "setup": {
+                    "bytes": 1187,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis.setup.md",
+                    "root": "run",
+                    "sha256": "7f326c1ca2ca8aeb464907e633a389b0d13bd5483669accb47b50a63ca7d5249"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "a46a0fff6ae2e1559b78b1d1a037b47fc71d12d886cb9ceab426dfade054e503",
+                "refusal": null,
+                "session_id": "s06_lysis",
+                "tips_needed": {
+                  "p300": 6
+                },
+                "tips_total": 6,
+                "title": "Lysis reagent addition"
+              },
+              {
+                "code_sha256": "6372709412da25c64232c2daf5fd9091dac4592ef8b60fb13ae22fc083710a42",
+                "covers": [
+                  "s07"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5295,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification.py",
+                    "root": "run",
+                    "sha256": "6372709412da25c64232c2daf5fd9091dac4592ef8b60fb13ae22fc083710a42"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 10630,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification.plan.json",
+                    "root": "run",
+                    "sha256": "066eaeeb29a65099a1ca1e249ca43d539eab15f0818b54ca378888836842d2fc"
+                  },
+                  "setup": {
+                    "bytes": 1898,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification.setup.md",
+                    "root": "run",
+                    "sha256": "c431a823e6a561cb71197d7fbe608145d4cad4fee3d62c40a520119f7c218125"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "40b67c39c72ffd445dfbfe8f6d3d40abb270f3867d7a0048a1af7fe4e74fae05",
+                "refusal": null,
+                "session_id": "s07_ni_nta_purification",
+                "tips_needed": {
+                  "p300": 22
+                },
+                "tips_total": 22,
+                "title": "Ni-NTA magnetic-bead purification"
+              },
+              {
+                "code_sha256": "014fe149ef3f660fa511f0d9980f448f9b41065b38a4795a36bba1ce29e59d63",
+                "covers": [
+                  "s08"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 2736,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal.py",
+                    "root": "run",
+                    "sha256": "014fe149ef3f660fa511f0d9980f448f9b41065b38a4795a36bba1ce29e59d63"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 3282,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal.plan.json",
+                    "root": "run",
+                    "sha256": "179c3dafe1ed911c548a070cf3e1765819db854edac7d9f5cb5cabdce27ee38a"
+                  },
+                  "setup": {
+                    "bytes": 1490,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal.setup.md",
+                    "root": "run",
+                    "sha256": "a9a395bcfce778815fc179028dd490bc9afb1b87ea63d505d00edef783d1a410"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "c9323a06834aa3bad7b52acc5c67cd732be2dc241b7fbc663ea9608a96858033",
+                "refusal": null,
+                "session_id": "s08_endotoxin_removal",
+                "tips_needed": {
+                  "p300": 4
+                },
+                "tips_total": 4,
+                "title": "Endotoxin-removal plate set-up"
+              },
+              {
+                "code_sha256": "a6beef8af7cc461b8164981ee7e2951c6ab41edb01fe1ed22f915405b5a53a20",
+                "covers": [
+                  "s09"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5362,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay.py",
+                    "root": "run",
+                    "sha256": "a6beef8af7cc461b8164981ee7e2951c6ab41edb01fe1ed22f915405b5a53a20"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 13197,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay.plan.json",
+                    "root": "run",
+                    "sha256": "b99be90dab9d54fb9c8717f0027e9a6a27ba405c861abde3ff11481b1a77399f"
+                  },
+                  "setup": {
+                    "bytes": 2074,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay.setup.md",
+                    "root": "run",
+                    "sha256": "794de8c3f7ca67fc32e19677668770862cfb08cdd9f2dc4e1d06d40629d97cf6"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "b8f5fa2dbf0f75fd105635db94378e998a1af6d7b8b43620e7614cd05ebaa846",
+                "refusal": null,
+                "session_id": "s09_lal_assay",
+                "tips_needed": {
+                  "p20": 9,
+                  "p300": 14
+                },
+                "tips_total": 23,
+                "title": "LAL assay plate set-up"
+              },
+              {
+                "code_sha256": "8e88627a5b51ea069666d2e7e62c872086425a995e6ebe98fb3b8f25043f4364",
+                "covers": [
+                  "s11"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 5775,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation.py",
+                    "root": "run",
+                    "sha256": "8e88627a5b51ea069666d2e7e62c872086425a995e6ebe98fb3b8f25043f4364"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 12833,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation.plan.json",
+                    "root": "run",
+                    "sha256": "bdbeb5a4e554b8e5532fc58a57b52f909345e64be053f554036bcf9325b869b6"
+                  },
+                  "setup": {
+                    "bytes": 5328,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation.setup.md",
+                    "root": "run",
+                    "sha256": "90d701a07429a6bc711af3b7bb95c172368866260e4b14b1efa752ae401fe246"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "85cb885785d11a1ccd70887653fed568553d3c894a0f811d156245a89de65fc6",
+                "refusal": null,
+                "session_id": "s11_antigen_stimulation",
+                "tips_needed": {
+                  "p20": 24
+                },
+                "tips_total": 24,
+                "title": "Antigen / control addition to seeded THP-1 plate"
+              },
+              {
+                "code_sha256": "46f31581ae90dced6a910561c937633e6f37340833cb96e7bb4eee1c3c3f8f64",
+                "covers": [
+                  "s12"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 7311,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup.py",
+                    "root": "run",
+                    "sha256": "46f31581ae90dced6a910561c937633e6f37340833cb96e7bb4eee1c3c3f8f64"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 21668,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup.plan.json",
+                    "root": "run",
+                    "sha256": "9266a7339425f750716134143252527919317f4cd31642e44bff5b634940e300"
+                  },
+                  "setup": {
+                    "bytes": 4869,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup.setup.md",
+                    "root": "run",
+                    "sha256": "0260b6a0cf19bf37ebc40995c967fe95246fcb6ebf273980bf63b21dc20f7e16"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "26bb8fc88253aa77a6247ebbdf771c067f7b9b5e75abe43ff2f4eb618f88c99a",
+                "refusal": null,
+                "session_id": "s12_elisa_setup",
+                "tips_needed": {
+                  "p300": 39
+                },
+                "tips_total": 39,
+                "title": "ELISA (TNF-alpha) standards and sample loading"
+              },
+              {
+                "code_sha256": "cff1a1533298321ad162904759f2aaf36de7c2b9a2740e3e558b2782790f426c",
+                "covers": [
+                  "s12"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 12072,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop.py",
+                    "root": "run",
+                    "sha256": "cff1a1533298321ad162904759f2aaf36de7c2b9a2740e3e558b2782790f426c"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 36392,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop.plan.json",
+                    "root": "run",
+                    "sha256": "91f5e1fb6a140fa2b41c89c66a78cc7aca30271938b8ec0534c9849516e10d67"
+                  },
+                  "setup": {
+                    "bytes": 4941,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop.setup.md",
+                    "root": "run",
+                    "sha256": "b404a06bf0c1ed9d540c4b0e63ca23336d29d1388b1a663c37bd4581bf84fb3f"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 4,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "4c77121bcebe3ee0b994dbabcf477594721d930842b9ed59295165e648971e94",
+                "refusal": null,
+                "session_id": "s12_elisa_develop",
+                "tips_needed": {
+                  "p300m": 61
+                },
+                "tips_total": 61,
+                "title": "ELISA (TNF-alpha) washes, detection and development"
+              },
+              {
+                "code_sha256": "cf636535146fa7973db265ff06c84faa26b3e4e622b94ba2c10ebac49a7c1ef4",
+                "covers": [
+                  "s13"
+                ],
+                "error": null,
+                "files": {
+                  "code": {
+                    "bytes": 14475,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr.py",
+                    "root": "run",
+                    "sha256": "cf636535146fa7973db265ff06c84faa26b3e4e622b94ba2c10ebac49a7c1ef4"
+                  },
+                  "grade": {
+                    "bytes": 646,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr.grade.json",
+                    "root": "run",
+                    "sha256": "e79107f719b0e72e8b88965595e2d607b7eff1df6399e7cec323b186a87bb6c7"
+                  },
+                  "plan": {
+                    "bytes": 48205,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr.plan.json",
+                    "root": "run",
+                    "sha256": "942c1208f33ad53940ef407b0641d43763cd1a5538bff1cea6bd89de9f1cf425"
+                  },
+                  "setup": {
+                    "bytes": 3987,
+                    "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr.setup.md",
+                    "root": "run",
+                    "sha256": "b72a18d901dab101221a827dc61eae1464867ed3cf18abd8dc537e4648b1906e"
+                  },
+                  "sim": null
+                },
+                "grade": {
+                  "findings": [
+                    {
+                      "event_idx": null,
+                      "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
+                      "rule": "simulation",
+                      "severity": "warning"
+                    }
+                  ],
+                  "lint": [],
+                  "n_events": 0,
+                  "n_rule_violations": 0,
+                  "rule_counts": {
+                    "no_aspirate_from_empty_well": 0,
+                    "no_cross_contamination": 0,
+                    "no_overdispense": 0,
+                    "tip_before_aspirate": 0,
+                    "tip_dropped_at_end": 0
+                  },
+                  "sim_error": null,
+                  "sim_error_kind": null,
+                  "sim_ok": null,
+                  "verdict": "UNVERIFIED"
+                },
+                "n_human_pauses": 1,
+                "outcome": "UNVERIFIED",
+                "plan_sha256": "0d38fd3a2120bd07a7703199473eeaa09d64778a7333fe413ad03c045895d3d8",
+                "refusal": null,
+                "session_id": "s13_rt_qpcr",
+                "tips_needed": {
+                  "p20": 81,
+                  "p300": 12
+                },
+                "tips_total": 93,
+                "title": "RT-qPCR reaction set-up"
+              }
+            ],
+            "tally": {
+              "UNVERIFIED": 12
+            }
+          }
+        ],
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "coverage": [
+          {
+            "human_remainder": "Outsourced to a vendor; sequence must clear the S12 biosecurity gate before ordering.",
+            "kind": "gene_synthesis",
+            "owner": "HUMAN",
+            "sessions": [],
+            "step_id": "s01",
+            "title": "Order codon-optimised gene for IgA-specific serine endopeptidase"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "plasmid_assembly",
+            "owner": "ROBOT",
+            "sessions": [
+              "s02_plasmid_assembly"
+            ],
+            "step_id": "s02",
+            "title": "Clone into His-tagged expression vector"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Temperature module; plating is manual.",
+            "kind": "transformation",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s03_transformation"
+            ],
+            "step_id": "s03",
+            "title": "Transform expression host"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "colony_pcr",
+            "owner": "ROBOT",
+            "sessions": [
+              "s04_colony_pcr"
+            ],
+            "step_id": "s04",
+            "title": "Colony PCR to confirm insert"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Inducer addition yes; shaking incubation no.",
+            "kind": "expression_induction",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s05_expression_induction"
+            ],
+            "step_id": "s05",
+            "title": "Small-scale expression and induction"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reagent addition yes; sonication/centrifugation no.",
+            "kind": "lysis",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s06_lysis"
+            ],
+            "step_id": "s06",
+            "title": "Lyse cells; clarify lysate"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Magnetic-bead His-tag format yes; gravity column/FPLC no.",
+            "kind": "ni_nta_purification",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s07_ni_nta_purification"
+            ],
+            "step_id": "s07",
+            "title": "Ni-NTA (His-tag) purification"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes.",
+            "kind": "endotoxin_removal",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s08_endotoxin_removal"
+            ],
+            "step_id": "s08",
+            "title": "Endotoxin removal"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup yes; reading needs a plate reader.",
+            "kind": "lal_assay",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s09_lal_assay"
+            ],
+            "step_id": "s09",
+            "title": "Quantify residual endotoxin (LAL)"
+          },
+          {
+            "human_remainder": "CO2 incubator and sterile cell culture; done by a person.",
+            "kind": "thp1_culture",
+            "owner": "HUMAN",
+            "sessions": [],
+            "step_id": "s10",
+            "title": "THP-1 culture and PMA differentiation"
+          },
+          {
+            "human_remainder": "Nothing beyond loading the deck.",
+            "kind": "antigen_stimulation",
+            "owner": "ROBOT",
+            "sessions": [
+              "s11_antigen_stimulation"
+            ],
+            "step_id": "s11",
+            "title": "Stimulate differentiated THP-1 with purified antigen"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Plate setup and washes yes; reading no.",
+            "kind": "elisa",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s12_elisa_setup",
+              "s12_elisa_develop"
+            ],
+            "step_id": "s12",
+            "title": "ELISA readout"
+          },
+          {
+            "human_remainder": "Robot does the liquid-handling portion only. Not automated: Reaction setup yes; thermocycling and reading no.",
+            "kind": "rt_qpcr",
+            "owner": "ROBOT-PARTIAL",
+            "sessions": [
+              "s13_rt_qpcr"
+            ],
+            "step_id": "s13",
+            "title": "RT QPCR readout"
+          }
+        ],
+        "dir_name": "tr_q9k0b4_q9k0b4_neimb",
+        "notes": [
+          "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
+          "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.",
+          "No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0."
+        ],
+        "protein_name": "IgA-specific serine endopeptidase",
+        "rank": 3,
+        "refused_protocol": null,
+        "report": {
+          "bytes": 24026,
+          "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/robot_report.json",
+          "root": "run",
+          "sha256": "37a5253a0d59645ad70f554852baaf50b2921e9742e67d6eb6f3df3068339321"
+        },
+        "report_md": {
+          "bytes": 4987,
+          "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/robot_report.md",
+          "root": "run",
+          "sha256": "c9cd148cf98b33ada37c7eebbe46f9bf42ce0b51bd3bc185278bfe0a6b881720"
+        },
+        "workflow": {
+          "bytes": 7248,
+          "path": "data/s9/tr_q9k0b4_q9k0b4_neimb/workflow.md",
+          "root": "run",
+          "sha256": "ea8557c265c158d6927f403e9171cfdd3c434d6dfa8fefe0a2be9d6b3e59ccc6"
+        }
+      }
+    ],
+    "parameters_status": "PLACEHOLDER PARAMETERS: volumes, times and temperatures are coarse defaults, not validated for any kit, enzyme, cell line or assay. Set them from the kit insert / your SOP before use.",
+    "reasons": [
+      "code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0 (bash tools/setup-ot-venv.sh creates one), then re-run S9"
+    ],
+    "simulator": {
+      "opentrons_version": null,
+      "simulated": false
+    },
+    "status": "not_run",
+    "summary": {
+      "all_pass": false,
+      "n_candidates": 3,
+      "n_sessions": 36,
+      "outcomes": {
+        "UNVERIFIED": 36
+      }
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s9_robot",
+    "tools": {
+      "opentrons": "not_run"
+    },
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "real_fixture",
+  "schema": "vaxforge/s9_robot/v1",
+  "stage": "s9",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "S9 not run: code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0 (bash tools/setup-ot-venv.sh creates one), then re-run S9",
+    "PLACEHOLDER PARAMETERS: volumes, times and temperatures are coarse defaults, not validated for any kit, enzyme, cell line or assay. Set them from the kit insert / your SOP before use.",
+    "S12 biosecurity gate NOT EVIDENCED to S9. Do not order gene synthesis or run these protocols until the S12 gate clears the sequence."
+  ]
+}

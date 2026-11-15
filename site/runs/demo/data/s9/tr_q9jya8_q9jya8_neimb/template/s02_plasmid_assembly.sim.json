@@ -1,0 +1,4584 @@
+{
+ "schema": "vaxforge.ot_sim/1",
+ "ok": true,
+ "error": null,
+ "opentrons_version": "7.5.0",
+ "protocol_file": "protocol.py",
+ "api_level": "2.19",
+ "deck": {
+  "labware": [
+   {
+    "slot": "3",
+    "load_name": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "display_name": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "uri": "opentrons/opentrons_96_aluminumblock_nest_wellplate_100ul/1",
+    "module": "temperature module gen2",
+    "kind": "plate",
+    "origin_mm": [
+     280.53,
+     74.05,
+     101.29
+    ],
+    "wells": {
+     "A1": {
+      "x": 280.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B1": {
+      "x": 280.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C1": {
+      "x": 280.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D1": {
+      "x": 280.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E1": {
+      "x": 280.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F1": {
+      "x": 280.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G1": {
+      "x": 280.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H1": {
+      "x": 280.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A2": {
+      "x": 289.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B2": {
+      "x": 289.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C2": {
+      "x": 289.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D2": {
+      "x": 289.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E2": {
+      "x": 289.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F2": {
+      "x": 289.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G2": {
+      "x": 289.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H2": {
+      "x": 289.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A3": {
+      "x": 298.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B3": {
+      "x": 298.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C3": {
+      "x": 298.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D3": {
+      "x": 298.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E3": {
+      "x": 298.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F3": {
+      "x": 298.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G3": {
+      "x": 298.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H3": {
+      "x": 298.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A4": {
+      "x": 307.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B4": {
+      "x": 307.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C4": {
+      "x": 307.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D4": {
+      "x": 307.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E4": {
+      "x": 307.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F4": {
+      "x": 307.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G4": {
+      "x": 307.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H4": {
+      "x": 307.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A5": {
+      "x": 316.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B5": {
+      "x": 316.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C5": {
+      "x": 316.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D5": {
+      "x": 316.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E5": {
+      "x": 316.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F5": {
+      "x": 316.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G5": {
+      "x": 316.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H5": {
+      "x": 316.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A6": {
+      "x": 325.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B6": {
+      "x": 325.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C6": {
+      "x": 325.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D6": {
+      "x": 325.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E6": {
+      "x": 325.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F6": {
+      "x": 325.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G6": {
+      "x": 325.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H6": {
+      "x": 325.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A7": {
+      "x": 334.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B7": {
+      "x": 334.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C7": {
+      "x": 334.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D7": {
+      "x": 334.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E7": {
+      "x": 334.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F7": {
+      "x": 334.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G7": {
+      "x": 334.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H7": {
+      "x": 334.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A8": {
+      "x": 343.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B8": {
+      "x": 343.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C8": {
+      "x": 343.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D8": {
+      "x": 343.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E8": {
+      "x": 343.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F8": {
+      "x": 343.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G8": {
+      "x": 343.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H8": {
+      "x": 343.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A9": {
+      "x": 352.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B9": {
+      "x": 352.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C9": {
+      "x": 352.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D9": {
+      "x": 352.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E9": {
+      "x": 352.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F9": {
+      "x": 352.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G9": {
+      "x": 352.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H9": {
+      "x": 352.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A10": {
+      "x": 361.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B10": {
+      "x": 361.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C10": {
+      "x": 361.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D10": {
+      "x": 361.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E10": {
+      "x": 361.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F10": {
+      "x": 361.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G10": {
+      "x": 361.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H10": {
+      "x": 361.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A11": {
+      "x": 370.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B11": {
+      "x": 370.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C11": {
+      "x": 370.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D11": {
+      "x": 370.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E11": {
+      "x": 370.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F11": {
+      "x": 370.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G11": {
+      "x": 370.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H11": {
+      "x": 370.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "A12": {
+      "x": 379.53,
+      "y": 74.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "B12": {
+      "x": 379.53,
+      "y": 65.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "C12": {
+      "x": 379.53,
+      "y": 56.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "D12": {
+      "x": 379.53,
+      "y": 47.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "E12": {
+      "x": 379.53,
+      "y": 38.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "F12": {
+      "x": 379.53,
+      "y": 29.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "G12": {
+      "x": 379.53,
+      "y": 20.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     },
+     "H12": {
+      "x": 379.53,
+      "y": 11.05,
+      "z_top": 101.29,
+      "depth": 14.78,
+      "shape": "circular",
+      "diameter": 5.34,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 100.0
+     }
+    }
+   },
+   {
+    "slot": "2",
+    "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "display_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "uri": "opentrons/opentrons_24_tuberack_nest_1.5ml_snapcap/1",
+    "module": null,
+    "kind": "tubes",
+    "origin_mm": [
+     150.71,
+     75.43,
+     79.55
+    ],
+    "wells": {
+     "A1": {
+      "x": 150.71,
+      "y": 75.43,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "B1": {
+      "x": 150.71,
+      "y": 56.15,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "C1": {
+      "x": 150.71,
+      "y": 36.87,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "D1": {
+      "x": 150.71,
+      "y": 17.59,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "A2": {
+      "x": 170.6,
+      "y": 75.43,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "B2": {
+      "x": 170.6,
+      "y": 56.15,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "C2": {
+      "x": 170.6,
+      "y": 36.87,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "D2": {
+      "x": 170.6,
+      "y": 17.59,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "A3": {
+      "x": 190.49,
+      "y": 75.43,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "B3": {
+      "x": 190.49,
+      "y": 56.15,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "C3": {
+      "x": 190.49,
+      "y": 36.87,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "D3": {
+      "x": 190.49,
+      "y": 17.59,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "A4": {
+      "x": 210.38,
+      "y": 75.43,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "B4": {
+      "x": 210.38,
+      "y": 56.15,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "C4": {
+      "x": 210.38,
+      "y": 36.87,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "D4": {
+      "x": 210.38,
+      "y": 17.59,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "A5": {
+      "x": 230.27,
+      "y": 75.43,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "B5": {
+      "x": 230.27,
+      "y": 56.15,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "C5": {
+      "x": 230.27,
+      "y": 36.87,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "D5": {
+      "x": 230.27,
+      "y": 17.59,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "A6": {
+      "x": 250.16,
+      "y": 75.43,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "B6": {
+      "x": 250.16,
+      "y": 56.15,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "C6": {
+      "x": 250.16,
+      "y": 36.87,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     },
+     "D6": {
+      "x": 250.16,
+      "y": 17.59,
+      "z_top": 79.55,
+      "depth": 37.9,
+      "shape": "circular",
+      "diameter": 10.2,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 1500.0
+     }
+    }
+   },
+   {
+    "slot": "11",
+    "load_name": "opentrons_96_tiprack_20ul",
+    "display_name": "opentrons_96_tiprack_20ul",
+    "uri": "opentrons/opentrons_96_tiprack_20ul/1",
+    "module": null,
+    "kind": "tiprack",
+    "origin_mm": [
+     146.88,
+     345.74,
+     64.69
+    ],
+    "wells": {
+     "A1": {
+      "x": 146.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B1": {
+      "x": 146.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C1": {
+      "x": 146.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D1": {
+      "x": 146.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E1": {
+      "x": 146.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F1": {
+      "x": 146.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G1": {
+      "x": 146.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H1": {
+      "x": 146.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A2": {
+      "x": 155.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B2": {
+      "x": 155.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C2": {
+      "x": 155.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D2": {
+      "x": 155.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E2": {
+      "x": 155.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F2": {
+      "x": 155.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G2": {
+      "x": 155.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H2": {
+      "x": 155.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A3": {
+      "x": 164.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B3": {
+      "x": 164.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C3": {
+      "x": 164.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D3": {
+      "x": 164.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E3": {
+      "x": 164.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F3": {
+      "x": 164.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G3": {
+      "x": 164.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H3": {
+      "x": 164.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A4": {
+      "x": 173.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B4": {
+      "x": 173.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C4": {
+      "x": 173.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D4": {
+      "x": 173.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E4": {
+      "x": 173.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F4": {
+      "x": 173.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G4": {
+      "x": 173.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H4": {
+      "x": 173.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A5": {
+      "x": 182.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B5": {
+      "x": 182.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C5": {
+      "x": 182.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D5": {
+      "x": 182.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E5": {
+      "x": 182.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F5": {
+      "x": 182.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G5": {
+      "x": 182.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H5": {
+      "x": 182.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A6": {
+      "x": 191.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B6": {
+      "x": 191.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C6": {
+      "x": 191.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D6": {
+      "x": 191.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E6": {
+      "x": 191.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F6": {
+      "x": 191.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G6": {
+      "x": 191.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H6": {
+      "x": 191.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A7": {
+      "x": 200.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B7": {
+      "x": 200.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C7": {
+      "x": 200.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D7": {
+      "x": 200.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E7": {
+      "x": 200.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F7": {
+      "x": 200.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G7": {
+      "x": 200.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H7": {
+      "x": 200.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A8": {
+      "x": 209.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B8": {
+      "x": 209.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C8": {
+      "x": 209.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D8": {
+      "x": 209.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E8": {
+      "x": 209.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F8": {
+      "x": 209.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G8": {
+      "x": 209.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H8": {
+      "x": 209.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A9": {
+      "x": 218.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B9": {
+      "x": 218.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C9": {
+      "x": 218.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D9": {
+      "x": 218.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E9": {
+      "x": 218.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F9": {
+      "x": 218.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G9": {
+      "x": 218.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H9": {
+      "x": 218.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A10": {
+      "x": 227.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B10": {
+      "x": 227.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C10": {
+      "x": 227.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D10": {
+      "x": 227.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E10": {
+      "x": 227.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F10": {
+      "x": 227.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G10": {
+      "x": 227.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H10": {
+      "x": 227.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A11": {
+      "x": 236.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B11": {
+      "x": 236.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C11": {
+      "x": 236.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D11": {
+      "x": 236.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E11": {
+      "x": 236.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F11": {
+      "x": 236.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G11": {
+      "x": 236.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H11": {
+      "x": 236.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "A12": {
+      "x": 245.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "B12": {
+      "x": 245.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "C12": {
+      "x": 245.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "D12": {
+      "x": 245.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "E12": {
+      "x": 245.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "F12": {
+      "x": 245.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "G12": {
+      "x": 245.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     },
+     "H12": {
+      "x": 245.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 39.2,
+      "shape": "circular",
+      "diameter": 3.27,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 20.0
+     }
+    }
+   }
+  ],
+  "modules": [
+   {
+    "slot": "3",
+    "name": "temperature module gen2",
+    "model": "temperatureModuleV2"
+   }
+  ],
+  "pipettes": [
+   {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1,
+    "min_volume_ul": 1.0,
+    "max_volume_ul": 20.0
+   }
+  ],
+  "trash": {
+   "slot": "12"
+  }
+ },
+ "liquids": [
+  {
+   "slot": "2",
+   "well": "A1",
+   "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "liquid": "nuclease-free water",
+   "volume_ul": 56.0
+  },
+  {
+   "slot": "2",
+   "well": "A2",
+   "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "liquid": "assembly buffer (10x)",
+   "volume_ul": 34.0
+  },
+  {
+   "slot": "2",
+   "well": "A3",
+   "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "liquid": "linearised expression vector",
+   "volume_ul": 34.0
+  },
+  {
+   "slot": "2",
+   "well": "A4",
+   "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "liquid": "insert (synthesised gene fragment)",
+   "volume_ul": 32.0
+  },
+  {
+   "slot": "2",
+   "well": "A5",
+   "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "liquid": "assembly enzyme mix",
+   "volume_ul": 34.0
+  }
+ ],
+ "events": [
+  {
+   "idx": 0,
+   "level": 0,
+   "kind": "comment",
+   "is_group": false,
+   "text": "[s02] Clone into His-tagged expression vector | ROBOT | Liquid handling + temperature module.",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": "[s02] Clone into His-tagged expression vector | ROBOT | Liquid handling + temperature module."
+  },
+  {
+   "idx": 1,
+   "level": 0,
+   "kind": "temperature_set",
+   "is_group": false,
+   "text": "Setting Temperature Module temperature to 4.0 °C (rounded off to nearest integer)",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": 4.0,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 2,
+   "level": 0,
+   "kind": "transfer",
+   "is_group": true,
+   "text": "Transferring 12.0 from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 12.0,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     150.71,
+     75.43,
+     79.55
+    ]
+   },
+   "dest": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     101.29
+    ]
+   },
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 3,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from A1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "A1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     345.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 4,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 12.0 uL from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 12.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     150.71,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 5,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 12.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 12.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 6,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 7,
+   "level": 0,
+   "kind": "transfer",
+   "is_group": true,
+   "text": "Transferring 14.0 from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 14.0,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     150.71,
+     75.43,
+     79.55
+    ]
+   },
+   "dest": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     101.29
+    ]
+   },
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 8,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from B1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "B1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     336.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 9,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 14.0 uL from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 14.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     150.71,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 10,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 14.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 14.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 11,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 12,
+   "level": 0,
+   "kind": "transfer",
+   "is_group": true,
+   "text": "Transferring 2.0 from A2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": {
+    "slot": "2",
+    "well": "A2",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     170.6,
+     75.43,
+     79.55
+    ]
+   },
+   "dest": [
+    {
+     "slot": "3",
+     "well": "A1",
+     "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+     "point_mm": [
+      280.53,
+      74.05,
+      101.29
+     ]
+    },
+    {
+     "slot": "3",
+     "well": "A2",
+     "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+     "point_mm": [
+      289.53,
+      74.05,
+      101.29
+     ]
+    }
+   ],
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 13,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from C1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "C1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     327.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 14,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 2.0 uL from A2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A2",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     170.6,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 15,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 2.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 16,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 17,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from D1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "D1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     318.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 18,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 2.0 uL from A2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A2",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     170.6,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 19,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 2.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 20,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 21,
+   "level": 0,
+   "kind": "transfer",
+   "is_group": true,
+   "text": "Transferring 2.0 from A3 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": {
+    "slot": "2",
+    "well": "A3",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     190.49,
+     75.43,
+     79.55
+    ]
+   },
+   "dest": [
+    {
+     "slot": "3",
+     "well": "A1",
+     "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+     "point_mm": [
+      280.53,
+      74.05,
+      101.29
+     ]
+    },
+    {
+     "slot": "3",
+     "well": "A2",
+     "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+     "point_mm": [
+      289.53,
+      74.05,
+      101.29
+     ]
+    }
+   ],
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 22,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from E1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "E1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     309.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 23,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 2.0 uL from A3 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A3",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     190.49,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 24,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 2.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 25,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 26,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from F1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "F1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     300.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 27,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 2.0 uL from A3 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A3",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     190.49,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 28,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 2.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 29,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 30,
+   "level": 0,
+   "kind": "transfer",
+   "is_group": true,
+   "text": "Transferring 2.0 from A4 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": {
+    "slot": "2",
+    "well": "A4",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     210.38,
+     75.43,
+     79.55
+    ]
+   },
+   "dest": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     101.29
+    ]
+   },
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 31,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from G1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "G1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     291.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 32,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 2.0 uL from A4 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A4",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     210.38,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 33,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 2.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 34,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 35,
+   "level": 0,
+   "kind": "transfer",
+   "is_group": true,
+   "text": "Transferring 2.0 from A5 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": {
+    "slot": "2",
+    "well": "A5",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     230.27,
+     75.43,
+     79.55
+    ]
+   },
+   "dest": [
+    {
+     "slot": "3",
+     "well": "A1",
+     "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+     "point_mm": [
+      280.53,
+      74.05,
+      101.29
+     ]
+    },
+    {
+     "slot": "3",
+     "well": "A2",
+     "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+     "point_mm": [
+      289.53,
+      74.05,
+      101.29
+     ]
+    }
+   ],
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 36,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from H1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "H1",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     146.88,
+     282.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 37,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 2.0 uL from A5 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A5",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     230.27,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 38,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 2.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 39,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 10.0 ul",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     101.29
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 40,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 41,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 42,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 43,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 44,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 45,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 46,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 47,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 48,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 49,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A1 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A1",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     280.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 50,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 51,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from A2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "A2",
+    "labware": "opentrons_96_tiprack_20ul",
+    "point_mm": [
+     155.88,
+     345.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 52,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 2.0 uL from A5 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "2",
+    "well": "A5",
+    "labware": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "point_mm": [
+     230.27,
+     75.43,
+     42.65
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 53,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 2.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 2.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 54,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 10.0 ul",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     101.29
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 55,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 56,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 57,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 58,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 59,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 60,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 61,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 62,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 63,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 10.0 uL from A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 64,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 10.0 uL into A2 of Opentrons 96 Well Aluminum Block with NEST Well Plate 100 µL on Temperature Module GEN2 on slot 3 at 7.56 uL/sec",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 10.0,
+   "flow_rate_ul_s": 7.56,
+   "target": {
+    "slot": "3",
+    "well": "A2",
+    "labware": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+    "point_mm": [
+     289.53,
+     74.05,
+     87.51
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 65,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 66,
+   "level": 0,
+   "kind": "temperature_set",
+   "is_group": false,
+   "text": "Setting Temperature Module temperature to 37.0 °C (rounded off to nearest integer)",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": 37.0,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 67,
+   "level": 0,
+   "kind": "delay",
+   "is_group": false,
+   "text": "Delaying for 60 minutes and 0.0 seconds. assembly incubation (enzyme-specific; replace with the supplier programme)",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": 3600.0,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 68,
+   "level": 0,
+   "kind": "temperature_set",
+   "is_group": false,
+   "text": "Setting Temperature Module temperature to 4.0 °C (rounded off to nearest integer)",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": 4.0,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 69,
+   "level": 0,
+   "kind": "pause",
+   "is_group": false,
+   "text": "Pausing robot operation: HUMAN [s02]: If the supplier programme needs thermal cycling, run it in a thermocycler (not part of this robot run). Keep the reactions cold, then resume to finish the session.",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": "HUMAN [s02]: If the supplier programme needs thermal cycling, run it in a thermocycler (not part of this robot run). Keep the reactions cold, then resume to finish the session."
+  },
+  {
+   "idx": 70,
+   "level": 0,
+   "kind": "temperature_deactivate",
+   "is_group": false,
+   "text": "Deactivating Temperature Module",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  }
+ ]
+}

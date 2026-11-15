@@ -1,0 +1,4214 @@
+{
+  "created_at": "2026-11-15T10:35:18Z",
+  "digest": "sha256:487e158fd45f6ccb2fb0711eea2f9f483ec24e943eef9e59405b2d0a8ef3a532",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
+  },
+  "inputs": {
+    "s6": "sha256:f94d5b2fb48820f1e38933bf94c4abdad3139558938bd67ba026ae36950ec348"
+  },
+  "params": {
+    "s7": {
+      "boltz": {
+        "accelerator": "auto",
+        "diffusion_samples": 1,
+        "extra_args": [],
+        "max_residues": 1500,
+        "msa": "empty",
+        "recycling_steps": 3,
+        "sampling_steps": 200,
+        "timeout_s": 7200,
+        "use_potentials": false
+      },
+      "conformational_on_boltz": true,
+      "esmfold": {
+        "api_url": "https://api.esmatlas.com/foldSequence/v1/pdb/",
+        "max_residues_api": 400,
+        "mode": "local"
+      },
+      "final_weights": {
+        "bcell": 0.1,
+        "coverage": 0.2,
+        "s3": 0.4,
+        "structure": 0.1,
+        "tcell": 0.2
+      },
+      "plddt_floor_for_epitope_confidence": 70.0,
+      "top_k": null
+    },
+    "structure": {
+      "engine": "boltz-2",
+      "refolder": [
+        "esmfold",
+        "af2-no-msa"
+      ]
+    },
+    "top_k": 20,
+    "weights": {
+      "bcell": 0.1,
+      "coverage": 0.2,
+      "s3": 0.4,
+      "structure": 0.1,
+      "tcell": 0.2
+    }
+  },
+  "payload": {
+    "analysis": {
+      "affinity": {
+        "reason": "Boltz-2's affinity head supports protein-small-molecule binding only; no validated affinity target exists for an antigen monomer",
+        "status": "not_implemented"
+      },
+      "degraded_to_sequence_only": true,
+      "docking": {
+        "reason": "ClusPro-TLR docking is deliberately absent (README sections 4 and 7)",
+        "status": "not_implemented"
+      },
+      "folding": {
+        "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+        "status": "unavailable"
+      },
+      "validator_policy": "report every validator used; spread across validators is part of the result",
+      "validators": {
+        "af2-no-msa": {
+          "reason": "colabfold_batch not found (LocalColabFold)",
+          "status": "unavailable"
+        },
+        "esmfold": {
+          "reason": "ESMFold not available locally (needs transformers + torch + ~8 GB of weights); set s7.esmfold.mode: api to use the public ESM Atlas web service instead (it sends the sequence to a third-party server)",
+          "status": "unavailable"
+        }
+      }
+    },
+    "candidates": [
+      {
+        "accession": "Q9K0B4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "iga",
+        "in_top_k": true,
+        "length": 1815,
+        "name": "IgA-specific serine endopeptidase",
+        "protein_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "rank": 1,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 1.0,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 1.0,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 1.0,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.99793909,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MKTKRFKINAISLSIFLAYALTPYSEAALVRDDVDYQIFRDFAENKGKFFVGATDLSVKNKQGQNIGNALSNVPMIDFSVADVNRRTLTVIDPQYAVSVKHVKGDEISYYGHHNGHLDVSNDENEYRSVAQNDYEPNKNWHHGNQGRLEDYNMARLNKFVTEVAPIAPTSAGGGVETYKDKNRFSEFVRVGAGTQFEYNSRYNMTELSRAYRYAIAGTPYQDVNVTSNLNQEGLIGFGDNSKHHSPEKLKEVLSQNALTNYAVLGDSGSPLFAYDKQEKRWVFLGAYDYWAGYQKNSWQEWNIYKKEFADEIKQRDNAGTIKGNGEHHWKTTGTNSHIGSTAVRLANNERDANNGQNVTFENNGTLVLDQNINQGAGGLFFKGDYTVKGINNDITWLGAGIDVADGKKVVWQVKNPNGDRLAKIGKGTLEINGTGVNQGQLKVGDGTVILNQQADADKKVQAFSQVGIVSGRGTLVLNSSNQINPDNLYFGFRGGRLDANGNDLTFEHIRNVDEGARIVNHNTGHASTITLTGKSLITDPKTISIHYIQNNDDDDAGYYYYRPRKPIPQGKDLYFKNYRYYALKSGGSVNAPMPENGQTENNDWILMGSTQEEAKKNAMNHKNNQRISGFSGFFGEENGKGHNGALNLNFNGKSAQNRFLLTGGTNLNGKISVTQGNVLLSGRPTPHARDFVNKSSARKDAHFSKNNEVVFEDDWINRTFKATEIAVNQSASFSSGRNVSDITANITATDNAKVNLGYKNGDEVCVRSDYTGYVTCNTGNLSDKALNSFGATQINGNVNLNQNAALVLGKAALWGQIQGQGNSRVSLNQHSKWHLTGDSQVHNLSLADSHIHLNNASDAQSANKYHTLKINHLSGNGHFHYLTHLAKNLGDKVLVKESASGHYQLHVQDKTGEPNQEGLNLFDASSVQDRSRLSVSLANNHVDLGALRYTIKTENGITRLYNPYAENRRRVKPAPSPATNTASQAQKATQTDGAQIAKPQNIVVAPPSPQANQAEEAKRQQAKAEQVKRQQAEAERKSAELAKQKAEAEREARELATRQKAEQERSSAELARRHEKEREAAELSAKQKVEAEREAQALAVRRKAEAEEAKRQAAELARRHEKEREAAELSAKQRVGEEERRQTAQSQPQRRKRRAAPQDYMAASQDRPKRRGHRSVQQNNVEIAQAQAELARRQQEERKAAELLAKQRAEAEREAQALAARRKAEAEEAKRQAAELAHRQEAERKAAELSANQKAAAEAQALAARQQKALARQQEEARKAAELAVKQKAETERKTAELAKQRAAAEAAKRQQEARQTAELARRQEAERQAAELSAKQKAETDREAAESAKRKAEEEEHRQAAQSQPQRRKRRAAPQDYMAASQNRPKRRGRRSTLPAPPSPSFDSSAYAAPRALHNPDWYENDYEEIPLDALEDENVSESVDTSDKQPQDNTELHEKYENDYEEIPLDALEDEDVSESVDTSDKQPQDNTELHEKVETVSLQPRAAQPRAQAATQLQAQAAAQADAVSTNTNSALSDAMASTQSILLDTGASLTRHIAQKSRADAEKNSVWMSNTGYGRDYASAQYRRFSSKRTQTQIGIDRSLSENMQIGGVLTYSDSQHTFDQASGKNTFVQANLYGKYYLNDAWYVAGDIGAGSLRSRLQTQQKANFNRASIQTGLTLGNTLKINQFEIVPSAGIRYSRLSSADYKLGNDSVKVSSMSVKTLTAGLDFAYRFKVGNLTVKPLLSAAYFANYGKGGVNVGGNSFVYKADNQQQYSAGAALLYRNVTLNVNGSITKGKQLEKQKSGQIKIQIRF",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.99793909,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000261",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.99793909,
+            "rank": 1,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.99793909,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXZ0",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB1829",
+        "in_top_k": true,
+        "length": 708,
+        "name": "TonB-dependent receptor",
+        "protein_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "rank": 2,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.9473684210526315,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.9655172413793104,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9473684210526315,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.99656515,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MGQFMSVFRINMTAATVLAALSSSVFAAQTEGLETVHIKGQRSYNAIATEKNGDYSSFAATVGTKIPASLREIPQSVSIITNQQVKDRNVDTFDQLARKTPGLRVLSNDDGRSSVYARGYEYSEYNIDGLPAQMQSINGTLPNLFAFDRVEVMRGPSGLFDSSGEMGGIVNLVRKRPTKAFQGHAAAGFGTHKQYKAEADVSGSLNSDGSVRGRVMAQTVGASPRPAEKNNRRETFYAAADWDINPDTVLGAGYLYQQRRLAPYNGLPADANNKLPSLPQHVFVGADWNKFKMHSHDVFADLKHYFGNGGYGKVGMRYSDRKADSNYTFAGSKLNNTGQADVAGLGTDIKQKAFAVDASYSRPFALGNTANEFVIGADYNRLRSTNEQGRSTLSKSVALDGFRALPYNGILQNARAGNKGFNHSVTEENLDETGLYAKTVFRPLEGLSLIAGGRVGHHKIESGDGKTLHKASKTKFTSYAGAVYDIDGSNSLYASASQLYTPQTSIGTDGKLLKPREGNQFEIGYKGSYMDDRLNTRVSFYRMKDKNAAAPLDSNNKKTRYAALGKRVMEGVETEISGAMTPKWQIHAGYSYLHSQIKTASNSRDEGIFLLMPKHSANLWTTYQVTSGLTIGGGVNAMSGITSSAGIHAGGYATFDAMAAYRFTPKLKLQINADNIFNRHYYARVGSESTFNIPGSERSLTANLRYSF",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.99656515,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.93,
+                "evalue": 3.62e-86,
+                "hit": "VFG000163",
+                "identity": 0.29059999999999997,
+                "term": 0.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.99656515,
+            "rank": 2,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.99656515,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JYA8",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "hmbR",
+        "in_top_k": true,
+        "length": 791,
+        "name": "Hemoglobin receptor",
+        "protein_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "rank": 3,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.8947368421052632,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.9310344827586207,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.8947368421052632,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.99404626,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MKPLQMLPIAALVGSIFGNPVLAADEAATETTPVKAEIKAVRVKGQRNAPAAVERVNLNRIKQEMIRDNKDLVRYSTDVGLSDSGRHQKGFAVRGVEGNRVGVSIDGVNLPDSEENSLYARYGNFNSSRLSIDPELVRNIEIVKGADSFNTGSGALGGGVNYQTLQGRDLLLDDRQFGVMMKNGYSTRNREWTNTLGFGVSNDRVDAALLYSQRRGHETESAGNRGYAVEGEGSGANIRGSARGIPDSSKHKYHSFLGKIAYQINDNHRIGASLNGQQGHNYTVEESYNLTASSWREADDVNRRRNANLFYEWMPDSNWLSSLKADFDYQKTKVAAVNNKGSFPMDYSTWTRNYNQKDLDEIYNRSMDTRFKRFTLRLDSHPLQLGGGRHRLSFKTFVSRRDFENLNRDDYYFSGRVVRTTSSIQHPVKTTNYGFSLSDQIQWNDVFSSRAGIRYDHTKMTPQELNAECHACDKTPPAANTYKGWSGFVGLAAQLNQAWRVGYDITSGYRVPNASEVYFTYNHGSGNWLPNPNLKAERSTTHTLSLQGRSEKGMLDANLYQSNYRNFLSEEQKLTTSGTPGCTEENAYYGICSDPYKEKLDWQMKNIDKARIRGIELTGRLNVDKVASFVPEGWKLFGSLGYAKSKLSGDNSLLSTQPLKVIAGIDYESPSEKWGVFSRLTYLGAKKVKDAQYTVYENKGWGTPLQKKVKDYPWLNKSAYVFDMYGFYKPAKNLTLRAGVYNLFNRKYTTWDSLRGLYSYSTTNAVDRDGKGLDRYRAPGRNYAVSLEWKF",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.99404626,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000266",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.99404626,
+            "rank": 3,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.99404626,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXL6",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "hap",
+        "in_top_k": true,
+        "length": 1457,
+        "name": "Adhesion and penetration protein",
+        "protein_id": "tr|Q9JXL6|Q9JXL6_NEIMB",
+        "rank": 4,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.8421052631578947,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.8965517241379312,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.8421052631578947,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9919853399999999,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MKTTDKRTTETHRKAPKTGRIRFSPAYLAICLSFGILPQAWAGHTYFGINYQYYRDFAENKGKFAVGAKDIEVYNKKGELVGKSMTKAPMIDFSVVSRNGVAALVGDQYIVSVAHNGGYNNVDFGAEGRNPDQHRFTYKIVKRNNYKAGTKGHPYGGDYHMPRLHKFVTDAEPVEMTSYMDGRKYIDQNNYPDRVRIGAGRQYWRSDEDEPNNRESSYHIASAYSWLVGGNTFAQNGSGGGTVNLGSEKIKHSPYGFLPTGGSFGDSGSPMFIYDAQKQKWLINGVLQTGNPYIGKSNGFQLVRKDWFYDEIFAGDTHSVFYEPRQNGKYSFNDDNNGTGKINAKHEHNSLPNRLKTRTVQLFNVSLSETAREPVYHAAGGVNSYRPRLNNGENISFIDEGKGELILTSNINQGAGGLYFQGDFTVSPENNETWQGAGVHISEDSTVTWKVNGVANDRLSKIGKGTLHVQAKGENQGSISVGDGTVILDQQADDKGKKQAFSEIGLVSGRGTVQLNADNQFNPDKLYFGFRGGRLDLNGHSLSFHRIQNTDEGAMIVNHNQDKESTVTITGNKDIATTGNNNSLDSKKEIAYNGWFGEKDTTKTNGRLNLVYQPAAEDRTLLLSGGTNLNGNITQTNGKLFFSGRPTPHAYNHLNDHWSQKEGIPRGEIVWDNDWINRTFKAENFQIKGGQAVVSRNVAKVKGDWHLSNHAQAVFGVAPHQSHTICTRSDWTGLTNCVEKTITDDKVIASLTKTDISGNVDLADHAHLNLTGLATLNGNLSANGDTRYTVSHNATQNGNLSLVGNAQATFNQATLNGNTSASGNASFNLSDHAVQNGSLTLSGNAKANVSHSALNGNVSLADKAVFHFESSRFTGQISGGKDTALHLKDSEWTLPSGTELGNLNLDNATITLNSAYRHDAAGAQTGSATDAPRRRSRRSRRSLLSVTPPTSVESRFNTLTVNGKLNGQGTFRFMSELFGYRSDKLKLAESSEGTYTLAVNNTGNEPASLEQLTVVEGKDNKPLSENLNFTLQNEHVDAGAWRYQLIRKDGEFRLHNPVKEQELSDKLGKAEAKKQAEKDNAQSLDALIAAGRDAVEKTESVAEPARQAGGENVGIMQAEEEKKRVQADKDTALAKQREAETRPATTAFPRARRARRDLPQLQPQPQPQPQRDLISRYANSGLSEFSATLNSVFAVQDELDRVFAEDRRNAVWTSGIRDTKHYRSQDFRAYRQQTDLRQIGMQKNLGSGRVGILFSHNRTENTFDDGIGNSARLAHGAVFGQYGIDRFYIGISAGAGFSSGSLSDGIGGKIRRRVLHYGIQARYRAGFGGFGIEPHIGATRYFVQKADYRYENVNIATPGLAFNRYRAGIKADYSFKPAQHISITPYLSLSYTDAASGKVRTRVNTAVLAQDFGKTRSAEWGVNAEIKGFTLSLHAAAAKGPQLEAQHSAGIKLGYRW",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9919853399999999,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.98,
+                "evalue": 0.0,
+                "hit": "VFG001149",
+                "identity": 0.5498,
+                "term": 0.538804
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9919853399999999,
+            "rank": 4,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9919853399999999,
+              "virulence": 0.538804
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q06379",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "lbpA",
+        "in_top_k": true,
+        "length": 943,
+        "name": "Lactoferrin-binding protein A",
+        "protein_id": "sp|Q06379|LBPA_NEIMB",
+        "rank": 5,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.7894736842105263,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.8620689655172414,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.7894736842105263,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.98809251,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MNKKHGFPLTLTALAIATAFPAYAAQAGGATPDAAQTQSLKEITVRAAKVGRRSKEATGLGKIVKTSETLNKEQVLGIRDLTRYDPGVAVVEQGNGASGGYSIRGVDKNRVAVSVDGVAQIQAFTVQGSLSGYGGRGGSGAINEIEYENISTVEIDKGAGSSDHGSGALGGAVAFRTKEAADLISDGKSWGIQAKTAYGSKNRQFMKSLGAGFSKDGWEGLLIRTERQGRETRPHGDIADGVEYGIDRLDAFRQTYDIKRKTREPFFSVEGERESKPVAKLAGYGKYLNNQLNRWVKERIEQNQPLSAEEEAQVREAQARHENLSAQAYTGGGRILPDPMDYRSGSWLAKLGYRFGGRHYVGGVFEDTKQRYDIRDMTEKQYYGTDEAEKFRDKSGVYDGDDFRDGLYFVPNIEEWKGDKNLVRGIGLKYSRTKFIDEHHRRRRMGLLYRYENEAYSDNWADKAVLSFDKQGVATDNNTLKLNCAVYPAVDKSCRASADKPYSYDSSDRFHYREQHNVLNASFEKSLKNKWTKHHLTLGFGYDASKAISRPEQLSHNAARISESTGFDENNQDKYLLGKPEVVEGSVCGYIETLRSRKCVPRKINGSNIHISLNDRFSIGKYFDFSLGGRYDRKNFTTSEELVRSGRYVDRSWNSGILFKPNRHFSVSYRASSGFRTPSFQELFGIDIYHDYPKGWQRPALKSEKAANREIGLQWKGDFGFLEISSFRNRYTDMIAVADHKTKLPNQAGQLTEIDIRDYYNAQNMSLQGVNILGKIDWNGVYGKLPEGLYTTLAYNRIKPKSVSNRPGLSLRSYALDAVQPSRYVLGFGYDQPEGKWGANIMLTYSKGKNPDELAYLAGDQKRYSTKRASSSWSTADVSAYLNLKKRLTLRAAIYNIGNYRYVTWESLRQTAESTANRHGGDSNYGRYAAPGRNFSLALEMKF",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.98809251,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000264",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.98809251,
+            "rank": 5,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.98809251,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "P0DH58",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "porA",
+        "in_top_k": true,
+        "length": 392,
+        "name": "Major outer membrane protein P.IA",
+        "protein_id": "sp|P0DH58|OMPA_NEIMB",
+        "rank": 6,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.7368421052631577,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.8275862068965517,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.7368421052631579,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.98419968,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MRKKLTALVLSALPLAAVADVSLYGEIKAGVEGRNYQLQLTEAQAANGGASGQVKVTKVTKAKSRIRTKISDFGSFIGFKGSEDLGDGLKAVWQLEQDVSVAGGGATQWGNRESFIGLAGEFGTLRAGRVANQFDDASQAIDPWDSNNDVASQLGIFKRHDDMPVSVRYDSPEFSGFSGSVQFVPIQNSKSAYTPAYYTKNTNNNLTLVPAVVGKPGSDVYYAGLNYKNGGFAGNYAFKYARHANVGRNAFELFLIGSGSDQAKGTDPLKNHQVHRLTGGYEEGGLNLALAAQLDLSENGDKTKNSTTEIAATASYRFGNAVPRISYAHGFDFIERGKKGENTSYDQIIAGVDYDFSKRTSAIVSGAWLKRNTGIGNYTQINAASVGLRHKF",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.98419968,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG006237",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.98419968,
+            "rank": 6,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.98419968,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXK7",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "nadA",
+        "in_top_k": true,
+        "length": 362,
+        "name": "Neisseria adhesin A",
+        "protein_id": "sp|Q9JXK7|NADA1_NEIMB",
+        "rank": 7,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.6842105263157895,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.7931034482758621,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.6842105263157895,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.97847493,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MKHFPSKVLTTAILATFCSGALAATSDDDVKKAATVAIVAAYNNGQEINGFKAGETIYDIGEDGTITQKDATAADVEADDFKGLGLKKVVTNLTKTVNENKQNVDAKVKAAESEIEKLTTKLADTDAALADTDAALDETTNALNKLGENITTFAEETKTNIVKIDEKLEAVADTVDKHAEAFNDIADSLDETNTKADEAVKTANEAKQTAEETKQNVDAKVKAAETAAGKAEAAAGTANTAADKAEAVAAKVTDIKADIATNKADIAKNSARIDSLDKNVANLRKETRQGLAEQAALSGLFQPYNVGRFNVTAAVGGYKSESAVAIGTGFRFTENFAAKAGVAVGTSSGSSAAYHVGVNYEW",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.97847493,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.6,
+                "evalue": 4.13e-40,
+                "hit": "VFG054578",
+                "identity": 0.4286,
+                "term": 0.25716
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.97847493,
+            "rank": 7,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.97847493,
+              "virulence": 0.25716
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0U9",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "tbp1",
+        "in_top_k": true,
+        "length": 915,
+        "name": "Transferrin-binding protein A",
+        "protein_id": "sp|Q9K0U9|TBPA_NEIMB",
+        "rank": 8,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.631578947368421,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.7586206896551724,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.631578947368421,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.97732997,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MQQQHLFRFNILCLSLMTALPAYAENVQAGQAQEKQLDTIQVKAKKQKTRRDNEVTGLGKLVKSSDTLSKEQVLNIRDLTRYDPGIAVVEQGRGASSGYSIRGMDKNRVSLTVDGVSQIQSYTAQAALGGTRTAGSSGAINEIEYENVKAVEISKGSNSVEQGSGALAGSVAFQTKTADDVIGEGRQWGIQSKTAYSGKNRGLTQSIALAGRIGGAEALLIHTGRRAGEIRAHEDAGRGVQSFNRLVPVEDSSNYAYFIVKEECKNGSYETCKANPKKDVVGKDERQTVSTRDYTGPNRFLADPLSYESRSWLFRPGFRFENKRHYIGGILEHTQQTFDTRDMTVPAFLTKAVFDANKKQAGSLPGNGKYAGNHKYGGLFTNGENGALVGAEYGTGVFYDETHTKSRYGLEYVYTNADKDTWADYARLSYDRQGIGLDNHFQQTHCSADGSDKYCRPSADKPFSYYKSDRVIYGESHRLLQAAFKKSFDTAKIRHNLSVNLGFDRFGSNLRHQDYYYQHANRAYSSNTPPQNNGKKISPNGSETSPYWVTIGRGNVVTGQICRLGNNTYTDCTPRSINGKSYYAAVRDNVRLGRWADVGAGLRYDYRSTHSDDGSVSTGTHRTLSWNAGIVLKPTDWLDLTYRTSTGFRLPSFAEMYGWRAGVQSKAVKIDPEKSFNKEAGIVFKGDFGNLEASWFNNAYRDLIVRGYEAQIKDGKEEAKGDPAYLNAQSARITGINILGKIDWNGVWDKLPEGWYSTFAYNRVRVRDIKKRADRTDIQSHLFDAIQPSRYVVGLGYDQPEGKWGVNGMLTYSKAKEITELLGSRALLNGNSRNTKATARRTRPWYIVDVSGYYTVKKHFTLRAGVYNLLNYRYVTWENVRQTAGGAVNQHKNVGVYNRYAAPGRNYTFSLEMKF",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.97732997,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG000262",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.97732997,
+            "rank": 8,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.97732997,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q7DD37",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "nhba",
+        "in_top_k": true,
+        "length": 488,
+        "name": "Neisserial heparin binding antigen",
+        "protein_id": "sp|Q7DD37|NHBA_NEIMB",
+        "rank": 9,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.5789473684210527,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.7241379310344828,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.5789473684210527,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9761850200000001,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MFKRSVIAMACIFALSACGGGGGGSPDVKSADTLSKPAAPVVSEKETEAKEDAPQAGSQGQGAPSAQGSQDMAAVSEENTGNGGAVTADNPKNEDEVAQNDMPQNAAGTDSSTPNHTPDPNMLAGNMENQATDAGESSQPANQPDMANAADGMQGDDPSAGGQNAGNTAAQGANQAGNNQAAGSSDPIPASNPAPANGGSNFGRVDLANGVLIDGPSQNITLTHCKGDSCSGNNFLDEEVQLKSEFEKLSDADKISNYKKDGKNDKFVGLVADSVQMKGINQYIIFYKPKPTSFARFRRSARSRRSLPAEMPLIPVNQADTLIVDGEAVSLTGHSGNIFAPEGNYRYLTYGAEKLPGGSYALRVQGEPAKGEMLAGAAVYNGEVLHFHTENGRPYPTRGRFAAKVDFGSKSVDGIIDSGDDLHMGTQKFKAAIDGNGFKGTWTENGSGDVSGKFYGPAGEEVAGKYSYRPTDAEKGGFGVFAGKKEQD",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9761850200000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9761850200000001,
+            "rank": 9,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9761850200000001,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0K9",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "frpA",
+        "in_top_k": true,
+        "length": 1302,
+        "name": "Iron-regulated protein FrpA",
+        "protein_id": "sp|Q9K0K9|FRPA_NEIMB",
+        "rank": 10,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.5263157894736842,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.6896551724137931,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.5263157894736842,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9741241100000001,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFSQYVDLINENNGRLPNTSEIERSYYKAVTENGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVIMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQFRDLFPNPEGWIDDGHQCFAPWVKETKKRNGKYHVYDPLALDLDGDGIETVAAKGFSGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQSLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9741241100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG006300",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9741241100000001,
+            "rank": 10,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9741241100000001,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0U8",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "potD-1",
+        "in_top_k": true,
+        "length": 459,
+        "name": "Spermidine/putrescine ABC transporter, periplasmic spermidine/putrescine-binding protein",
+        "protein_id": "tr|Q9K0U8|Q9K0U8_NEIMB",
+        "rank": 11,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.47368421052631576,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.6551724137931034,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.47368421052631576,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.96771239,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MQAFSLYPPVGHPDSAKKRQNRADVFLPFWKQDNFLGKSVQYRFEFAQIYFTMPKPCAGVTMGRGDFFFSNLFHQESARMKKSVLAVLAALSLAACGGSEKNAVQPQADAASAANAEAAATDTLNIYNWSNYVDESTVEDFKKANNLKLTYDLYENNETLEAKMLTGKSGYDLVVPGIAFLPRQIEAGAYQKVNKDLIPNYKNIDPELLKMLETADPGNQYAVPYFSGVNTIAITAKGKELLGGKLPENGWDLLFKPEYTHKLKSCGIALWDTPSEMFPILLNYLGKDPKGSNPEDLKAAAEVLKSIRPDVKRFSPSIIDELARGDICLAAGNGGDLNLAKARSEEVKNNVGIEVLTPKGMGFWIESWLIPADAKNVANAHKYINYTLDPEIAAKNGIAVTFAPASKPAREKMPAELVNTRSIFPNEQDMKDGFVMPQMSTDAKKLSVSLWQKIKVGTN",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.96771239,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "Periplasmic",
+                "prior": 0.5,
+                "raw": "Periplasmic",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.96771239,
+            "rank": 11,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.96771239,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JYV5",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "frpC",
+        "in_top_k": true,
+        "length": 1829,
+        "name": "Iron-regulated protein FrpC",
+        "protein_id": "sp|Q9JYV5|FRPC_NEIMB",
+        "rank": 12,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.42105263157894735,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.6206896551724138,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.42105263157894735,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9656514799999999,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFRQYARLINQNNGRLPNTSEIERSYYKAVTDNGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVMMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQGNEAFKNEINSLVHDMKAAGKEFGDDLNTQWNNLTQAAEIIYNDIVDNTSQGIEKGVKAIKELSEKMKNAASDLADGSAEKAKQVVEDLAQAAKEAYENAKSTAEKAAQAAREFFKGLPSFKDLAEKFRDLFPNPEGWIDDGHQCLAPWVKETKKRNGKYHVYDPLALDLDGDGIETVATKGFAGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQTLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQYYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLNGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGSTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9656514799999999,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG006303",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9656514799999999,
+            "rank": 12,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.9656514799999999,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JS61",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "ilvD1",
+        "in_top_k": true,
+        "length": 619,
+        "name": "Dihydroxy-acid dehydratase",
+        "protein_id": "sp|Q9JS61|ILVD_NEIMB",
+        "rank": 13,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.36842105263157887,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.5862068965517241,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.3684210526315789,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.95465995,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MPEYRSKTSTHGRNMAGARALWRATGVMETDFGKPIIAVANSFTQFVPGHVHLHNMGQLVAREIEKAGAIAKEFNTIAIDDGIAMGHSGMLYSLPSRDLIADSIEYMVNAHCADALVCISNCDKITPGMLIAAMRLNIPTIFVSGGPMEAGKVIGVANIQPERRLDLIDAMIESADDNVSNRQVEEVEQNACPTCGSCSGMFTANSMNCLTEALGLSLPGNGSYLATHAGRKELFLEAGRMIVEITKRYYEQNDETVLPRSIATKKAFENAMTMDIAMGGSTNTILHLLAVANEAGVDFKMADIDRLSRVVPCICKTAPNNHDYYMEDVHRAGGIFAILKELDKAGKLHTDVHTIHAPTLKDAIEQWDVTNPENTRAIERFKAAPGGVRTTQAFSQNRMWKTLDLDREKGCIRDVAHAYSQDGGLAVLFGNIAERGCVVKTAGVDESILKFTGRARVFESQEDAVEGILGNQIVAGDIVIIRYEGPKGGPGMQEMLYPTSYLKSKGLGKACALLTDGRFSGGTSGLSIGHASPEAAEGGAIGLVHEGDTVEIDIPNRSIHLAISDEELAARRAEMEARGSKAWKPKNRDRYVSAALRAYGAMATSADKGAVRDVAQIER",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.95465995,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.95465995,
+            "rank": 13,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.95465995,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXV4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "fhbP",
+        "in_top_k": true,
+        "length": 274,
+        "name": "Factor H binding protein",
+        "protein_id": "sp|Q9JXV4|FHBP_NEIMB",
+        "rank": 14,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.3157894736842105,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.5517241379310345,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.3157894736842105,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.953515,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MNRTAFCCLSLTTALILTACSSGGGGVAADIGAGLADALTAPLDHKDKGLQSLTLDQSVRKNEKLKLAAQGAEKTYGNGDSLNTGKLKNDKVSRFDFIRQIEVDGQLITLESGEFQVYKQSHSALTAFQTEQIQDSEHSGKMVAKRQFRIGDIAGEHTSFDKLPEGGRATYRGTAFGSDDAGGKLTYTIDFAAKQGNGKIEHLKSPELNVDLAAADIKPDGKRHAVISGSVLYNQAEKGSYSLGIFGGKAQEVAGSAEVKTVNGIRHIGLAAKQ",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.953515,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "OuterMembrane",
+                "prior": 1.0,
+                "raw": "OuterMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG037136",
+                "identity": 0.9964,
+                "term": 0.9964
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.953515,
+            "rank": 14,
+            "terms": {
+              "localisation": 1.0,
+              "protegenicity": 0.953515,
+              "virulence": 0.9964
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q7DDC4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "lldD",
+        "in_top_k": true,
+        "length": 390,
+        "name": "L-lactate dehydrogenase",
+        "protein_id": "tr|Q7DDC4|Q7DDC4_NEIMB",
+        "rank": 15,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.2631578947368421,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.5172413793103449,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.2631578947368421,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.94092054,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MKRDLSKMTCIEDLRRVAKRKMPRMFYDYIDSGSWTETTYRENTSDFKDIRFRQKVLVNMEGRSLETKMIGQDVKMPVAIAPTGFTGMAHADGEILAARAAEKFGIPFTLSTMSICSIEDVAENTSAPFWFQLYVMRDREFMENLIKRAKDAKCSALVLTADLQVLGQRHKDIKNGLSAPPKPTIANLINLATKPEWCMKMLNTERRTFRNIVGHAKNVGDLSSLSSWTSEQFDPRLSWDDVARIKDLWGGKLIIKGIMEPEDAEKAAKSGADALIVSNHGGRQLDDTVSAIKALPDIVSAVGSDIEVWMDSGIRSGQDILKAWALGAKGTMIGRAFLYGLGAYGEEGVTRALEILYKEMDISMAFTGHRDIQDVDASILRGKDWGRETV",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.94092054,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.94092054,
+            "rank": 15,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.94092054,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JY67",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "mtrD",
+        "in_top_k": true,
+        "length": 1067,
+        "name": "Efflux pump membrane transporter",
+        "protein_id": "tr|Q9JY67|Q9JY67_NEIMB",
+        "rank": 16,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.21052631578947367,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.4827586206896552,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.21052631578947367,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9276391099999999,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MAKFFIDRPIFAWVISIFIIAAGIFGIKSLPVSQYPSVAAPTITLRATYPGASAQVMEDSVLSVIERNMNGVEGLDYMSTSADSSGSGSVSLTFTPDTDENLAQVEVQNKLSEVLSTLPATVQQYGVTVSKARSNFLMIVMLSSDVQSTEEMNDYAQRNIVPELQRIEGVGQVRLFGAQRAMRIWVDPKKLQNYNLSFADVGSALSAQNVQISAGSIGSLPAVRGQTVTATVTAQGQLGTAEEFGNVILRANTDGSNVYLKDVARVGLGMEDYSSSTRLNGVNTTGMAVMLSNSGNAMATAKAVKERMATLEKYFPQGMSWKTPYDTSKFVEISIEKVIHTLIEAMVLVFVVMYLFLQNIRYTLIPTIVVPISLLGGFAFISYMGMSINVLTMFAMVLVIGIVVDDAIVVVENVERIMAGEGLPPKEATKKAMGQISGAVIGITAVLISVFVPLAMFSGATGNIYKQFALTMASSIAFSAFLALTLTPALCATMLKTIPKGHHEEKKGFFGWFNKKFNSWTHGYEGRVAKVLRKTFRMMVVYIGLAVVGVFLFMRLPTSFLPTEDQGFVMVSVQLPAGATQERTNATLAQVTQLAKSIPEIENIITVSGFSFSGSGQNMAMGFAILKDWNERTAPGSDAVAIAGKLTGMMMGTLKDGFGIAVVPPPILELGNGSGLSINLQDRNNTGHTALLAKRNELIQKMRASGLFDPSTVRAGGLEDSPQLKIDINRAAAAAQGISFADIRTALASALSSSYVSDFPNQGRLQRVMVQADEDARMQPADILNLTVPNKSGVAVPLSTIATVSWENGTEQSVRFNGYPSMKLSASPATGVSTGQAMAAVQKMVDELGGGYSLEWGGQSREEAKGGSQTLILYGLAVAAVFLVLAALYESWSIPLAVILVIPLGLIGAAAGVTGRNLFEGLLGSVPSFANDIYFQVGFVTVMGLSAKNAILIIEFAKDLQAQGKSAVEAALEAARLRFRPIIMTSFAFILGVVPLYIAGGASSASQRAIGTTVFWGMLIGTLLSVFLVPLFYVVVRKFFKETAHEHEMAVKHAAEAGITGSDDSQH",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9276391099999999,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 0.0,
+                "hit": "VFG036992",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9276391099999999,
+            "rank": 16,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.9276391099999999,
+              "virulence": 1.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K070",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB0749",
+        "in_top_k": true,
+        "length": 312,
+        "name": "Penicillin-binding protein 4",
+        "protein_id": "tr|Q9K070|Q9K070_NEIMB",
+        "rank": 17,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.15789473684210525,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.4482758620689656,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.15789473684210525,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9200824400000001,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MSIHTLKRLPSSLLLGLCLSLPSAHLFADNDILGQFLEQNMLTSSDPIEIFAESTIHPTNTQAITGGLILSSQSALVVNNKTGQILYQKNADRIMPIASISKLMSAMVVLDANLDMNETVTITPDEIDRIKGTGSRLAIGTALTRKKLLHLSLMSSENRATHALGRTYPGGMGAFVAAMNRKAQSLGMYGSRFYEPTGLNFQNVSTAKDLSLMVNAAAQYPQIRTNSTSNYASVQTKNGQQNYKNSNALVREGMWNIELQKTGYIREAGRSMVVKANIQNQPVTIVLLNSPTSATRVNDARKIESWMLQQRS",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9200824400000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.76,
+                "evalue": 2.78e-65,
+                "hit": "VFG038249",
+                "identity": 0.4545,
+                "term": 0.34542
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9200824400000001,
+            "rank": 17,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9200824400000001,
+              "virulence": 0.34542
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K1F5",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "lpxB",
+        "in_top_k": true,
+        "length": 384,
+        "name": "Lipid-A-disaccharide synthase",
+        "protein_id": "sp|Q9K1F5|LPXB_NEIMB",
+        "rank": 18,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.05263157894736842,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.3275862068965517,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.05263157894736842,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9090909100000001,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MADKKSPLIAVSVGEASGDLLGAHLIRAIRKRCPQARFTGIGGELMKAEGFESLYDQERLAVRGFVEVVRRLPEILRIRRGLVRDLLSLKPDVFVGIDAPDFNLGVAEKLKRSGIPTVHYVSPSVWAWRRERVGKIVHQVNRVLCLFPMEPQLYLDAGGRAEFVGHPMAQLMPLEDDRETARQTLGVDAGIPVFALLPGSRVSEIDYMAPVFFQTALLLLERYPAARFLLPAATEATKRRLAEVLQRPEFAGLPLTVIDRQSETVCRAADAVLVTSGTATLEVALCKRPMVISYKISPLTYAYVKRKIKVPHVGLPNILLGKEAVPELLQSEAKPEKLAAALADWYEHPDKVAALQQDFRALHLLLKKDTADLAARAVLEEAGC",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 3
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.98,
+                "evalue": 1.7e-106,
+                "hit": "VFG013384",
+                "identity": 0.4386,
+                "term": 0.429828
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 18,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.429828
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q4W563",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "pilN",
+        "in_top_k": true,
+        "length": 199,
+        "name": "PilN protein",
+        "protein_id": "tr|Q4W563|Q4W563_NEIMB",
+        "rank": 19,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.05263157894736842,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.3275862068965517,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.05263157894736842,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9090909100000001,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MNNLIKINLLPYREEMNKRKQQQFKTLMYGAVLTGVAAVAATYLFIDNMINNQSERNTLLETSIAHLDTELSEIQKLKQEKDAFLIKKNKIEELQLKRLQAAKILDSLNEAVPGSTYLTSLDAVTADSYRLSGRTSSDNRVAAMMRAMPNTGIFKQPELLSIKKNNSHQEFTLQATLQPIVKAAESKENPASGNAQEAN",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 3
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 3.8e-147,
+                "hit": "VFG006179",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 19,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 1.0
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q7DD77",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "pilP",
+        "in_top_k": true,
+        "length": 181,
+        "name": "PilP protein",
+        "protein_id": "tr|Q7DD77|Q7DD77_NEIMB",
+        "rank": 20,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": 0.05263157894736842,
+          "percentile_basis": "within the 20 top-k candidates",
+          "pre_structure": 0.3275862068965517,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "structure",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.05263157894736842,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9090909100000001,
+            "structure": null,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "structure": 0.1,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MKHYALLISFLALSACSQGSEDLNEWMAQTRREAKAEIIPFQAPTLPVAPVYSPPQLTGPNAFDFRRMETDKKGENAPDTKRIKETLEKFSLENMRYVGILKSGQKVSGFIEAEGYVYTVGVGNYLGQNYGRIESITDDSIVLNELIEDSTGNWVSRKAELLLNSSDKNTEQAAAPAAEQN",
+        "structure": {
+          "reason": "boltz not found on PATH (pip install boltz; MIT licence)",
+          "status": "unavailable"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 3
+        },
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 1.0,
+                "evalue": 1.79e-136,
+                "hit": "VFG006187",
+                "identity": 1.0,
+                "term": 1.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 20,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 1.0
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JZD1",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB1107",
+        "in_top_k": false,
+        "length": 200,
+        "name": "Lipoprotein",
+        "protein_id": "tr|Q9JZD1|Q9JZD1_NEIMB",
+        "rank": 21,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.3275862068965517,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.3275862068965517,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9090909100000001,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MNMKKLISAICVSIVLSACNQQSKTAQAEEPVQSIQAADCTAPMDITVEQYLINLEQAFKTQNVSTKIHNKNIVKTDCGYDLTLVMDFGAIALKLDEQQKIRAISVGYILKTDGEKGQNLVNNAINGLHSIQAVLSLTTTDKLGESEAGKQLFTALTEVVKESNQTGATAQKDVPADGILYSVVFEKETNTIAIIGRKQP",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 21,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.0
+            },
+            "tie_group": {
+              "competition_rank": 18,
+              "size": 4
+            }
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXM3",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB1975",
+        "in_top_k": false,
+        "length": 511,
+        "name": "Transporter",
+        "protein_id": "tr|Q9JXM3|Q9JXM3_NEIMB",
+        "rank": 22,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.3275862068965517,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.3275862068965517,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9090909100000001,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MSDSKTKERATFGTRRAFMIAAIGSAVGLGNIWRFPYIAFENGGGAFILPYLVALLTAGIPLLLLDYAIGHRYRGSAPLAFRRLGRWFEPVGWWNVMTNIVICIYYAVIIGWAASYTYYSVNAAWGADPQGFFFKDFLQMAGPEALGLDFVGKVAGPLAGVWVFTAAIMALGVQKGVARASSFFMPLLLVMFLIMVGISLTLPGAAKGLDALFTPDWSKLADSKVWVAAYGQIFFSLSICFGIMVTYSSYLKKKTDLGGTGLVVGFANSSFELLAGIGVFAALGFMAQAGGKAVNEVASGGIGLAFIAFPTIINQAPMGWLIGILFFGSLVFAGVTSMISILEVIVAAIQDKLNIGRVNATLLVCIPMGIVSTLLFGTATGLPVLDVMDKFVNTYGIVAAGFVYVAAIIISGRLPELRKHLNALSSIRIGGLWTVCVVVTVVMLGYMLFKDTSGLMEKNYEGYPDGFLSIFGWGMSAALVVFGLLLSLLPWKHGQDFNVKDEHEHEQGEEK",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 22,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0K4",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "trmD",
+        "in_top_k": false,
+        "length": 249,
+        "name": "tRNA (guanine-N(1)-)-methyltransferase",
+        "protein_id": "sp|Q9K0K4|TRMD_NEIMB",
+        "rank": 23,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.3275862068965517,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.3275862068965517,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.9090909100000001,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MLIQAVTIFPEMFDSITRYGVTGRANRQGIWQFEAVNPRKFADNRLGYIDDRPFGGGPGMIMMAPPLHAAIEHAKTQSSQAAKVIYLSPQGKPLTHQKAVELAELPHLILLCGRYEGIDERLLQSSVDEEISIGDFVVSGGELPAMMLMDAVLRLVPGVLGDMQSAEQDSFSSGILDCPHYTKPLEFQGMAVPEVLRSGNHGLIAEWRLEQSLRRTLERRPDLLEKRVLIPKESRLLETIRQEQREIQS",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.9090909100000001,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "Cytoplasmic",
+                "prior": 0.0,
+                "raw": "Cytoplasmic",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.9090909100000001,
+            "rank": 23,
+            "terms": {
+              "localisation": 0.0,
+              "protegenicity": 0.9090909100000001,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0Q7",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB0527",
+        "in_top_k": false,
+        "length": 140,
+        "name": "6-carboxy-5,6,7,8-tetrahydropterin synthase",
+        "protein_id": "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+        "rank": 24,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.20689655172413793,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.20689655172413793,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.90886192,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MKITKIFTFDSSHMLDGHDGKCQNLHGHTYKLEITVSDGIIKGGAKDGMVMDFTDLKAIVKQHITDPFDHAFIYHGGNSRECQIAALLEGWNMKTLRLPCRTTAENMAVEMYGRLKNAGLNVCRVKLWETPTSCAEYEGE",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.90886192,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": true
+            },
+            "protegenicity": 0.90886192,
+            "rank": 24,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.90886192,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JZY3",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB0850",
+        "in_top_k": false,
+        "length": 138,
+        "name": "MORN repeat protein",
+        "protein_id": "tr|Q9JZY3|Q9JZY3_NEIMB",
+        "rank": 25,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.1724137931034483,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.1724137931034483,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.89351958,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MLKHLAFLLPAMMFALPTSAAVLTSYQEPGCTYDGNVGKDGKPAGKGTWRCQDGRNYTGSFKNGKFDGQGVYTVAANREIFIEPFNSDSTKFRNMVLSGTFKKGLAHGRFTVSQNGETLFIMKCENGMIKEVKLPKNK",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.89351958,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.89351958,
+            "rank": 25,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.89351958,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JZH8",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB1045",
+        "in_top_k": false,
+        "length": 264,
+        "name": "Serine/threonine protein kinase",
+        "protein_id": "tr|Q9JZH8|Q9JZH8_NEIMB",
+        "rank": 26,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.13793103448275862,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.13793103448275862,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.860545,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MTLPMQETRFSILLDELAAKQEAAIAPHLLADGTKVWIRKAGRHNARWRYALLGMVARYLKLGVLKPVPSLGGEPAIATESKRLYELRSAGIAVPELLAVRKNALMFGNLEGIPLDAQIRQEAEAGKSDAWLAGLEAIARVHKKRQFLSQAFARNMMSDGKNISFLDFEDDPSEVLTIAQCQARDWLCYIHSTALILKNGGLLEAAAEKWGGVLSDQPAEIQKLIAATVKPILPIRRLEHPRWGRDALRLAASISLISLADMPP",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.860545,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.860545,
+            "rank": 26,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.860545,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K1D2",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "NMB0230",
+        "in_top_k": false,
+        "length": 215,
+        "name": "Carboxyltransferase domain-containing protein",
+        "protein_id": "tr|Q9K1D2|Q9K1D2_NEIMB",
+        "rank": 27,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.10344827586206896,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.10344827586206896,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.85848409,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MRIEITPISESALVYRLNAPSELGKQQKLWAFAAALGQHDRIEEVVVGMNNLTVFTRFDTDLATLADELQYVWEHTAVTDHQGKLVEIPVCYGGEYGPDLAEVAAFHQTVISEIVRRHTAQTYTVFMMGFQPGFPYLGGLPEALHTPRRAVPRTSVPAGSVGIGGSQTGVYPFASPGGWQIIGRTELPLFRADLNPPTLLAAGDQVRFVAERIEP",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.85848409,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.85848409,
+            "rank": 27,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.85848409,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9JXT3",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "dpnC",
+        "in_top_k": false,
+        "length": 267,
+        "name": "Type II restriction enzyme DpnI",
+        "protein_id": "tr|Q9JXT3|Q9JXT3_NEIMB",
+        "rank": 28,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.06896551724137931,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.06896551724137931,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.85665216,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MNLFFDTELGKQQNKATHKIRVMSEAWLEKNGYCPCCGSKPMQRFANNKPVADLFCPNCHEQYELKSKNQKTIGNSVPDGAYHTMLERIRSDTNPNFFFLAYKKADYSIRQLVLVPKHFITPDMIIPRNKGIKNRPNHIMCSINLAPLPESGKIFLIDNSRIIEPETVLKKWQSNLFLRNQNAERKGWLLAVMKCIDQLPEEFTLSQMYEFENKLSIQFPQNNHIRDKIRQQLQILRDQNTIEFIGRGLYKKSINCAQLPRYFDFKS",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.85665216,
+            "evidence": {
+              "localisation": {
+                "is_unknown": true,
+                "label": "Unknown",
+                "prior": 0.5,
+                "raw": "Unknown",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.85665216,
+            "rank": 28,
+            "terms": {
+              "localisation": 0.5,
+              "protegenicity": 0.85665216,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K0M6",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "nqrD",
+        "in_top_k": false,
+        "length": 208,
+        "name": "Na(+)-translocating NADH-quinone reductase subunit D",
+        "protein_id": "sp|Q9K0M6|NQRD_NEIMB",
+        "rank": 29,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.034482758620689655,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.034482758620689655,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.85184337,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MADMKRLKHLMFSPFIDNNPIALQVLGICSALAVTTKLQTAIVMGISVALVTGFSSFFISLVRNYIPNSIRIIVQMAIIASLVTLVDQLLQAFAYELSKQLSVFVGLIITNCIVMGRAEAFAMKEPPLESLIDGIGNGAGYGIMLLVVATVRELIGSGKLLGYTVFQTVQDGGWYQTNGLFLLAPSAFFIIGFLIWGLRTWKPEQAEE",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.85184337,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": null
+            },
+            "passes_thresholds": {
+              "0.85": true,
+              "0.90": false
+            },
+            "protegenicity": 0.85184337,
+            "rank": 29,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.85184337,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      },
+      {
+        "accession": "Q9K1H6",
+        "bcell": {
+          "conformational": {
+            "status": "unavailable"
+          },
+          "linear": {
+            "status": "unavailable"
+          },
+          "linear_score": null
+        },
+        "coverage": {
+          "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+          "score": null
+        },
+        "gene": "zupT",
+        "in_top_k": false,
+        "length": 269,
+        "name": "Zinc transporter ZupT",
+        "protein_id": "sp|Q9K1H6|ZUPT_NEIMB",
+        "rank": 30,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "final": null,
+          "percentile_basis": "within all 30 candidates",
+          "pre_structure": 0.0,
+          "terms_missing": [
+            "bcell",
+            "coverage",
+            "tcell"
+          ],
+          "terms_percentile": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.0,
+            "tcell": null
+          },
+          "terms_raw": {
+            "bcell": null,
+            "coverage": null,
+            "s3": 0.79367987,
+            "tcell": null
+          },
+          "terms_used": [
+            "s3"
+          ],
+          "weights": {
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "s3": 0.4,
+            "tcell": 0.2
+          }
+        },
+        "sequence": "MPDFSMSNLAVAFSITLAAGLFTVLGSGLVMFSKTPNPRVLSFGLAFAGGAMVYVSLTEIFSKSSEAFAEIYDKDHAFAAATMAFLAGMGGIALIDRLVPNPHETLDAQDPSFQESKRRHIARVGMMAAFAITAHNFPEGLATFFATLENPAVGMPLALAIAIHNIPEGISIAAPVYFATRSRKKTVWACLLSGLAEPLGAALGYLVLQPFLSPAVFGSVFGVIAGVMVFLALDELLPAAKRYSDGHETVYGLTTGMAVIAVSLVLFHF",
+        "structure": {
+          "reason": "outside the top 20",
+          "status": "not_selected"
+        },
+        "taxid": 487,
+        "tcell": {
+          "all_epitopes_file": null,
+          "class_i": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "class_ii": {
+            "enrichment_vs_random": null,
+            "n_epitopes": null,
+            "n_promiscuous": null,
+            "promiscuous_per_100aa": null,
+            "random_expectation_per_100aa": null,
+            "score": null,
+            "selected": null
+          },
+          "score": null,
+          "score_basis": "unavailable"
+        },
+        "tie_group": null,
+        "upstream": {
+          "s3": {
+            "composite_score": 0.79367987,
+            "evidence": {
+              "localisation": {
+                "is_unknown": false,
+                "label": "CytoplasmicMembrane",
+                "prior": 0.4,
+                "raw": "CytoplasmicMembrane",
+                "score": null,
+                "source": "fixture_stand_in:uniprot_subcellular_location",
+                "status": "fixture_stand_in"
+              },
+              "virulence": {
+                "coverage": 0.95,
+                "evalue": 4.73e-16,
+                "hit": "VFG052410",
+                "identity": 0.2645,
+                "term": 0.0
+              }
+            },
+            "passes_thresholds": {
+              "0.85": false,
+              "0.90": false
+            },
+            "protegenicity": 0.79367987,
+            "rank": 30,
+            "terms": {
+              "localisation": 0.4,
+              "protegenicity": 0.79367987,
+              "virulence": 0.0
+            },
+            "tie_group": null
+          },
+          "s4": {
+            "flags": [],
+            "gates": {},
+            "gates_unavailable": [
+              "human_homology",
+              "allergenicity",
+              "toxicity",
+              "conservancy"
+            ],
+            "rescued_despite": null
+          }
+        }
+      }
+    ],
+    "context": {
+      "n_proteins": 40,
+      "organism_type": "gram-",
+      "s2_meta": {
+        "lineage": [
+          "cellular organisms",
+          "Bacteria",
+          "Pseudomonadati",
+          "Pseudomonadota",
+          "Betaproteobacteria",
+          "Neisseriales",
+          "Neisseriaceae",
+          "Neisseria"
+        ],
+        "localisation_status_counts": {
+          "fixture_stand_in": 40
+        },
+        "organism": {
+          "domain": "bacteria",
+          "gram_basis": "lineage taxon Pseudomonadota -> Gram-negative",
+          "gram_stain": "negative",
+          "localisation_applicable": true,
+          "psortb_extra_args": [],
+          "psortb_flag": "-n",
+          "virulence_db_applicable": true
+        },
+        "organism_type": "gram-",
+        "proteome_id": "UP000000425",
+        "scientific_name": "Neisseria meningitidis",
+        "species_taxid": 487,
+        "stream_a": {
+          "protegen_target_file": null,
+          "run_id": "nmb_fixture",
+          "s1_resources": {
+            "human_proteome": "ok",
+            "iedb": "disabled",
+            "protegen": "ok",
+            "vfdb": "ok"
+          },
+          "s2_digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3"
+        },
+        "taxid": 487
+      },
+      "taxid": 487
+    },
+    "degraded": [
+      "S7 did not fold any structure: the ranking is sequence-only, with no structure term (boltz not found on PATH (pip install boltz; MIT licence))"
+    ],
+    "epitope_set": {
+      "b_cell_linear": [],
+      "note": "t_cell entries are the per-candidate selected epitopes (S6 input and S10 ELISpot peptide pools)",
+      "t_cell": []
+    },
+    "final_candidates": [
+      "tr|Q9K0B4|Q9K0B4_NEIMB",
+      "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+      "tr|Q9JYA8|Q9JYA8_NEIMB",
+      "tr|Q9JXL6|Q9JXL6_NEIMB",
+      "sp|Q06379|LBPA_NEIMB",
+      "sp|P0DH58|OMPA_NEIMB",
+      "sp|Q9JXK7|NADA1_NEIMB",
+      "sp|Q9K0U9|TBPA_NEIMB",
+      "sp|Q7DD37|NHBA_NEIMB",
+      "sp|Q9K0K9|FRPA_NEIMB",
+      "tr|Q9K0U8|Q9K0U8_NEIMB",
+      "sp|Q9JYV5|FRPC_NEIMB",
+      "sp|Q9JS61|ILVD_NEIMB",
+      "sp|Q9JXV4|FHBP_NEIMB",
+      "tr|Q7DDC4|Q7DDC4_NEIMB",
+      "tr|Q9JY67|Q9JY67_NEIMB",
+      "tr|Q9K070|Q9K070_NEIMB",
+      "sp|Q9K1F5|LPXB_NEIMB",
+      "tr|Q4W563|Q4W563_NEIMB",
+      "tr|Q7DD77|Q7DD77_NEIMB"
+    ],
+    "limits": [
+      "pLDDT and validator agreement describe the quality of the structural MODEL, not the antigen's immunogenicity or protective potential",
+      "the same sequence can score differently under different refolders (MotifBench: 28.05 with ESMFold vs 22.5 with AF2-no-MSA) - always read the validator spread",
+      "no docking score, TLR docking or affinity is produced: ClusPro blind docking is 13.7% top-1 / 45.1% top-10 and a docking score is neither affinity nor immunogenicity; Boltz-2's affinity head supports protein-small-molecule binding only",
+      "final_score weights are unvalidated priors intended to be re-tuned by the retrospective validation harness",
+      "structure-informed ranking exists only for the top-k; the remaining candidates keep their pre-structure order below them"
+    ],
+    "selection": {
+      "basis": "pre-structure composite of S3, S5 T-cell, S5 B-cell, S6 coverage terms (percentile-ranked)",
+      "pre_structure_weights": {
+        "bcell": 0.1,
+        "coverage": 0.2,
+        "s3": 0.4,
+        "tcell": 0.2
+      },
+      "top_k_ids": [
+        "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "tr|Q9JXL6|Q9JXL6_NEIMB",
+        "sp|Q06379|LBPA_NEIMB",
+        "sp|P0DH58|OMPA_NEIMB",
+        "sp|Q9JXK7|NADA1_NEIMB",
+        "sp|Q9K0U9|TBPA_NEIMB",
+        "sp|Q7DD37|NHBA_NEIMB",
+        "sp|Q9K0K9|FRPA_NEIMB",
+        "tr|Q9K0U8|Q9K0U8_NEIMB",
+        "sp|Q9JYV5|FRPC_NEIMB",
+        "sp|Q9JS61|ILVD_NEIMB",
+        "sp|Q9JXV4|FHBP_NEIMB",
+        "tr|Q7DDC4|Q7DDC4_NEIMB",
+        "tr|Q9JY67|Q9JY67_NEIMB",
+        "tr|Q9K070|Q9K070_NEIMB",
+        "sp|Q9K1F5|LPXB_NEIMB",
+        "tr|Q4W563|Q4W563_NEIMB",
+        "tr|Q7DD77|Q7DD77_NEIMB"
+      ]
+    },
+    "set_level_coverage": {
+      "n_epitopes": 0
+    },
+    "ties": {
+      "basis": "top-k: equal final score and pre-structure score; rest: equal pre-structure score and S3 position. `rank` is the ordinal position; inside a tie the order is by protein_id only, not by evidence",
+      "rest": {
+        "largest_group": null,
+        "n_groups": 0,
+        "n_tied_candidates": 0
+      },
+      "top_k": {
+        "largest_group": {
+          "competition_rank": 18,
+          "size": 3
+        },
+        "n_groups": 1,
+        "n_tied_candidates": 3
+      }
+    },
+    "top_k": 20,
+    "upstream": {
+      "s3_leakage_audit": {
+        "declared_holdout_taxids": [],
+        "holdout_enforced": false,
+        "model": "Vaxign-ML (stock pretrained model, trained on all of Protegen)",
+        "note": "Scores supplied externally; whether the model held out the target pathogen is declared, not verified here.",
+        "requested_holdout": {
+          "note": null,
+          "taxids": []
+        },
+        "target_taxid": 487
+      },
+      "s3_ranker": {
+        "backend": "scores_file",
+        "note": "Default weights reproduce the pure Vaxign-ML ordering; other terms are recorded as evidence only.",
+        "score_semantics": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record)",
+        "thresholds": [
+          0.9,
+          0.85
+        ],
+        "weights_used": {
+          "localisation": 0.0,
+          "protegenicity": 1.0,
+          "virulence": 0.0
+        }
+      },
+      "s4_incomplete_screening": true,
+      "s4_unavailable_gates": [
+        "human_homology",
+        "allergenicity",
+        "toxicity",
+        "conservancy"
+      ],
+      "s5_status": {
+        "bcell_linear": {
+          "reason": "BepiPred-3.0 not configured (tools.bepipred3); BepiPred-2.0 is never used as a substitute",
+          "status": "unavailable"
+        },
+        "class_i": {
+          "reason": "no class I predictor available (backend=auto; netMHCpan not found, mhcflurry not installed)",
+          "status": "unavailable"
+        },
+        "class_ii": {
+          "reason": "netMHCIIpan not found (DTU licence; see docs/TOOLS_SETUP.md)",
+          "status": "unavailable"
+        },
+        "conformational": {
+          "reason": "DiscoTope-3.0 not configured (tools.discotope3)",
+          "status": "unavailable"
+        }
+      },
+      "s6_analysis": {
+        "reason": "S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)",
+        "status": "unavailable"
+      }
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s7_structure",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "run_nmb_fixture",
+  "schema": "vaxforge/s7_structure/v1",
+  "stage": "s7",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "only the top 20 of 30 candidates are folded and structure-ranked",
+    "the top-20 cut falls inside a tie: 3 of 4 candidates tied on the pre-structure score (and the S3 position) at pre-structure rank 18 were kept, chosen by S3 order and protein_id, not by evidence",
+    "DEGRADED: Boltz-2 did not run (boltz not found on PATH (pip install boltz; MIT licence)); ranking is sequence-only (README section 5)",
+    "3 of the top 20 candidates are tied on the final score and the pre-structure score (largest tie: 3 at rank 18); inside a tie the order is by protein_id only, not by evidence (see tie_group)"
+  ]
+}

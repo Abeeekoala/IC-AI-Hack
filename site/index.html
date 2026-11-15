@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VaxForge: from a pathogen name to a shortlist worth a lab&#x27;s time</title><meta name="description" content="VaxForge screens a proteome, ranks protective antigens, writes the protocol that would prove each one wrong, and compiles the liquid handling to robot code. It also shows how far to trust it."><meta name="theme-color" content="#08171a"><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"><link rel="stylesheet" href="assets/css/site.css"><link rel="stylesheet" href="assets/css/walk.css"></head><body><a class="skip" href="#main">Skip to content</a><header class="site-nav on-plate"><div class="wrap nav-row"><a class="brand" href="index.html" aria-label="VaxForge, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5c6.6 0 12 4.3 12.6 10.6.7 6.8-4.6 15.4-12.9 16.4C8 30.4 3 24.9 3.4 17.7 3.8 9.2 9 2.5 16 2.5z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 8c4 0 7.5 2.7 7.8 6.6.3 4.4-3 9-7.7 9.5-4.5.5-7.7-3-7.5-7.3C8.8 12 11.7 8 16 8z" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".75"/><path d="M16 13.2c2 0 3.6 1.3 3.6 3.1 0 2-1.8 3.8-3.8 3.7-1.7-.1-3-1.3-3-2.9 0-2 1.4-3.9 3.2-3.9z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><circle cx="21.8" cy="9.6" r="2.3" fill="#f0a63a"/></svg>VaxForge</a><button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button><ul class="nav-links" id="nav-links"><li><a href="index.html" aria-current="page">Home</a></li><li><a href="pipeline.html">Pipeline</a></li><li><a href="workspace.html">Workspace</a></li><li><a href="evidence.html">Evidence and limits</a></li><li><a class="btn btn-primary" href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Read the write-up</a></li></ul></div></header><main id="main"><section class="hero plate" aria-labelledby="hero-title">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-poster" aria-hidden="true"></div>
+  <div class="hero-3d" id="hero-3d" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1 id="hero-title">Name a pathogen. See which candidates deserve lab time.</h1>
+      <p class="lede">VaxForge screens a proteome, ranks protective antigens, writes the protocol that would prove each one wrong, and turns the liquid handling into robot code. Every result shows where it came from and what could not be checked.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="pipeline.html">Walk through the pipeline</a>
+        <a class="btn btn-ghost" href="workspace.html">Open the workspace</a>
+        <a class="btn btn-ghost" href="evidence.html">Evidence and limits</a>
+      </div>
+      <ul class="hero-facts" aria-label="Where this stands">
+        <li><span class="pill pill-info">Candidates, not a vaccine</span></li>
+        <li><span class="pill pill-fixture">Demo run: 40 of 2,003 proteins</span></li>
+        <li><span class="pill pill-ok">36 of 36 template-built robot programs pass the simulator</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div class="wrap">
+      <p class="hero-caption">Illustration: a contour map wrapped around an invented protein. Amber patches mark where an epitope could sit. It is not a prediction.</p>
+      <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
+    </div>
+  </div>
+</section>
+
+<section class="section has-contours" aria-labelledby="triage-title">
+  <div class="wrap split">
+    <div>
+      <h2 id="triage-title">Reverse vaccinology makes long lists. Labs need short ones.</h2>
+      <p style="margin-top:20px;color:var(--ink-2);max-width:46ch">Screening a genome for vaccine antigens is fast. Finding out which hits survive an assay is slow, and most published tools never say how often they are right.</p>
+      <div class="cols-2" style="margin-top:36px;gap:28px">
+        <div class="stat"><b>1.2%</b><span>experimental hit rate in the canonical meningococcus B study</span></div>
+        <div class="stat"><b>13 to 15 yr</b><span>from that genome paper to an approved vaccine</span></div>
+      </div>
+    </div>
+    <figure style="margin:0">
+      <ol class="funnel" aria-label="Meningococcus B reverse vaccinology funnel, 570 candidates to 3 in the vaccine"><li><span class="f-num">570</span><div><div class="f-bar" style="width:100.0%"></div><span class="f-lab">candidate ORFs screened</span></div></li><li><span class="f-num">350</span><div><div class="f-bar" style="width:61.4%"></div><span class="f-lab">expressed (61%)</span></div></li><li><span class="f-num">85</span><div><div class="f-bar" style="width:14.9%"></div><span class="f-lab">strongly positive in at least one assay</span></div></li><li><span class="f-num">7</span><div><div class="f-bar" style="width:1.2%"></div><span class="f-lab">positive in all three assays, across 31 strains</span></div></li><li><span class="f-num">3</span><div><div class="f-bar" style="width:1.2%"></div><span class="f-lab">in the licensed vaccine</span></div></li></ol>
+      <figcaption class="fig-note">Meningococcus B, Pizza et al., <i>Science</i> 287:1816 (2000): from 570 candidate ORFs to the 3 antigens in the licensed Bexsero vaccine. VaxForge is built to survive that funnel, not to hide it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="did-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="did-h">What it did on a real run</h2>
+      <p>One recorded run on a stored subset of <i>Neisseria meningitidis</i>. Every figure is read from the saved output of that run.</p>
+    </div>
+    <div class="wk-result"><ul class="wk-tiles"><li><b>40 of 2,003</b><span>proteins screened (stored fixture subset of strain MC58)</span></li><li><b>27 of 30</b><span>survive the four safety gates, with real tools</span></li><li><b>98.5%</b><span>projected world class I coverage of the epitope set</span></li><li><b>36 of 36</b><span>template-built robot programs pass the Opentrons simulator</span></li><li><b>blocked</b><span>S12 biosecurity gate: not cleared for synthesis</span></li></ul><p class="wk-more"><a href="pipeline.html">See every step, with the real output</a></p></div>
+    <p class="honest" style="margin-top:20px"><b>Candidates, not a vaccine.</b> Nothing here is a measured assay result. The antigen ranking is a hypothesis, and on the one retrieval test we ran, the three antigens of the licensed Bexsero vaccine ranked 7th, 9th and 14th (recall@3 of 0 of 3, and circular). The page says so on purpose.</p>
+  </div>
+</section>
+
+<section class="section alt has-contours" aria-labelledby="cta-title">
+  <div class="wrap cta-band">
+    <h2 id="cta-title">See the work, not a summary of it</h2>
+    <p style="margin-top:18px;max-width:54ch;color:var(--ink-2)">The pipeline page follows one protein through every step with the real charts and tables. The workspace lets you open the same run and check its hashes yourself.</p>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="pipeline.html">Walk through the pipeline</a>
+      <a class="btn btn-ghost" href="workspace.html">Open the workspace</a>
+      <a class="btn btn-ghost" href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Read the write-up</a>
+    </div>
+  </div>
+</section>
+</main><footer class="site-foot"><div class="wrap"><div class="foot-grid"><div><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5c6.6 0 12 4.3 12.6 10.6.7 6.8-4.6 15.4-12.9 16.4C8 30.4 3 24.9 3.4 17.7 3.8 9.2 9 2.5 16 2.5z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 8c4 0 7.5 2.7 7.8 6.6.3 4.4-3 9-7.7 9.5-4.5.5-7.7-3-7.5-7.3C8.8 12 11.7 8 16 8z" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".75"/><path d="M16 13.2c2 0 3.6 1.3 3.6 3.1 0 2-1.8 3.8-3.8 3.7-1.7-.1-3-1.3-3-2.9 0-2 1.4-3.9 3.2-3.9z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><circle cx="21.8" cy="9.6" r="2.3" fill="#f0a63a"/></svg>VaxForge</a><p style="max-width:44ch">From a pathogen name to ranked candidate antigens, a protocol that says how it could be wrong, and robot code, with the evidence for how far to trust any of it.</p></div><div><h2>Explore</h2><ul><li><a href="pipeline.html">Pipeline, step by step</a></li><li><a href="workspace.html">Workspace</a></li><li><a href="evidence.html">Evidence and limits</a></li></ul></div><div><h2>Source</h2><ul><li><a href="https://github.com/Abeeekoala/IC-AI-Hack" rel="noopener" target="_blank">Repository on GitHub</a></li><li><a href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Submission write-up</a></li><li><a href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/README.md" rel="noopener" target="_blank">README and full spec</a></li></ul></div></div><div class="fine"><p><b>Candidates, not a vaccine.</b> Nothing on this site is a measured assay result. VaxForge is restricted to protective-antigen identification and will not be extended to work that raises virulence, transmissibility or immune escape.</p><p>Built for the IC AI Hack 2026. Figures come from the repository’s committed demo run (commit 494f85b). VaxForge is a placeholder name.</p></div></div></footer><script src="assets/js/site.js"></script><script src="assets/js/vendor/three.r128.min.js"></script><script src="assets/js/hero3d.js"></script></body></html>

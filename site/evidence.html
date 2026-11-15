@@ -1,0 +1,213 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Evidence and limits: how far to trust VaxForge</title><meta name="description" content="The recorded model test, the Adaption runs, the failed Bexsero retrieval test, the data-leakage problem, honest ceilings for every predictor, and who built what."><meta name="theme-color" content="#08171a"><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"><link rel="stylesheet" href="assets/css/site.css"><link rel="stylesheet" href="assets/css/evidence.css"></head><body><a class="skip" href="#main">Skip to content</a><header class="site-nav on-plate"><div class="wrap nav-row"><a class="brand" href="index.html" aria-label="VaxForge, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5c6.6 0 12 4.3 12.6 10.6.7 6.8-4.6 15.4-12.9 16.4C8 30.4 3 24.9 3.4 17.7 3.8 9.2 9 2.5 16 2.5z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 8c4 0 7.5 2.7 7.8 6.6.3 4.4-3 9-7.7 9.5-4.5.5-7.7-3-7.5-7.3C8.8 12 11.7 8 16 8z" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".75"/><path d="M16 13.2c2 0 3.6 1.3 3.6 3.1 0 2-1.8 3.8-3.8 3.7-1.7-.1-3-1.3-3-2.9 0-2 1.4-3.9 3.2-3.9z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><circle cx="21.8" cy="9.6" r="2.3" fill="#f0a63a"/></svg>VaxForge</a><button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button><ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="pipeline.html">Pipeline</a></li><li><a href="workspace.html">Workspace</a></li><li><a href="evidence.html" aria-current="page">Evidence and limits</a></li><li><a class="btn btn-primary" href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Read the write-up</a></li></ul></div></header><main id="main"><section class="page-head ev-head plate has-contours" aria-labelledby="pg-title">
+  <div class="wrap">
+    <h1 id="pg-title">Evidence and limits: how far to trust any of this</h1>
+    <p class="lede">These are recorded results from earlier runs, labelled by where each one came from. None of it is a validation, and every result sits next to what it does not show.</p>
+    <nav class="ev-jump" aria-label="On this page">
+      <ul>
+        <li><a href="#model-test">Model test</a></li>
+        <li><a href="#adaption">Adaption runs</a></li>
+        <li><a href="#boltz">Boltz sample</a></li>
+        <li><a href="#run-time">Run time</a></li>
+        <li><a href="#design">Design process</a></li>
+      </ul>
+    </nav>
+    <div id="ev-live" class="sr-only" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section plate has-contours" aria-labelledby="bex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="bex">The Bexsero test scored 0 of 3</h2>
+      <p>On the stored 40-protein subset, with real Vaxign-ML scores, the top three are an IgA protease, the TonB-dependent receptor NMB1829 and the hemoglobin receptor HmbR. The three Bexsero antigens land at NadA 7th, NHBA 9th and fHbp 14th of 40.</p>
+    </div>
+    <div class="strip" role="img" aria-label="Ranks 1 to 40. Top three highlighted. NadA is 7th, NHBA 9th, fHbp 14th."><i class="top"></i><i class="top"></i><i class="top"></i><i></i><i></i><i></i><i class="hit" data-l="NadA"></i><i></i><i class="hit" data-l="NHBA"></i><i></i><i></i><i></i><i></i><i class="hit" data-l="fHbp"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="strip-key" aria-hidden="true">
+      <span><i style="background:var(--lagoon)"></i>Top three by score</span>
+      <span><i style="background:var(--amber)"></i>The three Bexsero antigens</span>
+      <span><i style="background:rgba(150,225,214,.22)"></i>Every other protein</span>
+    </div>
+    <div class="cols-2" style="margin-top:48px">
+      <div class="callout plate-c">
+        <h3>Why the miss does not settle anything</h3>
+        <ul class="dots" style="margin-top:14px;color:var(--on-plate-2)">
+          <li>It is 40 proteins, a stored subset of 2,003.</li>
+          <li>The stock Vaxign-ML model was trained on all of Protegen, which contains these antigens, so retrieving them is circular.</li>
+          <li>The leakage assertion reads <code>not checked</code>, and VaxForge raises a leakage-risk warning with <code>holdout_enforced: false</code>.</li>
+          <li>In the real-tools run the three antigens survive S4 only because allergenicity and conservancy were set to flag instead of reject, after an earlier strict run rejected all three. The recall@3 result reads the S3 ranking only.</li>
+        </ul>
+      </div>
+      <div class="callout plate-c">
+        <h3>Three possible outcomes of the leakage check</h3>
+        <dl class="legend" style="grid-template-columns:1fr;margin-top:8px">
+          <div><dt><span class="pill pill-notrun">not checked</span></dt><dd>No reference ID set was supplied. The report says so and shows no pass.</dd></div>
+          <div><dt><span class="pill pill-ok">ok</span></dt><dd>No ranked protein or listed homologue is in the training set. Meaningful only when both use one ID namespace.</dd></div>
+          <div><dt><span class="pill pill-refused">violated</span></dt><dd>A protein is in the training set. The report is written without any recall figure, and the command exits with status 2.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="leak">
+  <div class="wrap split">
+    <div>
+      <h2 id="leak">Leakage is common. Say it first.</h2>
+      <p style="margin-top:18px;color:var(--ink-2)">Vaxign-ML is trained on Protegen, so rediscovering Bexsero’s antigens with it proves little. The fix is to remove <i>N. meningitidis</i> from the training set before the Tier 2 run, which is what leave-one-pathogen-out does, and to state it.</p>
+      <p style="margin-top:14px;color:var(--ink-2)">The failure is widespread, not hypothetical: DeepSol and SKADE were found to have 75.1% overlap between training and test sets, and a 2025 paper in this subfield reports no held-out test set, no AUC and no cross-validation at all.</p>
+    </div>
+    <div class="callout amber">
+      <h3>Not done yet</h3>
+      <p style="margin-top:10px">A model trained on a leakage-audited split, reported next to the stock one, is the first item on the roadmap. Until then the Bexsero figure is shown only with this warning, and it is never described as validation or as refutation.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="ceilings">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="ceilings">Honest ceilings, predictor by predictor</h2>
+      <p>The accuracy of each method VaxForge relies on, quoted so a judge does not have to find it.</p>
+    </div>
+    <div class="table-wrap"><table><caption class="sr-only">Honest ceilings</caption><thead><tr><th scope="col">Claim</th><th scope="col">Honest ceiling</th></tr></thead><tbody><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">B-cell epitope prediction</th><td>BepiPred-2.0 scores AUC 0.574, close to random. The field’s realistic ceiling is about 0.70 to 0.84.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Antigenicity (VaxiJen)</th><td>AUC 0.56 and MCC 0.08, and it flags about 64% of a proteome. Not used as a ranker here.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Blind docking (ClusPro)</th><td>13.7% top-1 and 45.1% top-10 across 51 targets. Dropped from the pipeline.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Affinity prediction (Boltz-2)</th><td>Pearson 0.62 against FEP+. VaxForge produces no affinity value.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Solubility prediction</th><td>Best of 12 predictors reaches 58.4% accuracy. Useful for enrichment, not a replacement for the experiment.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Expression itself</th><td>Designs meant to be soluble monomers passed 32 of 42 in one study. “It expresses” is a high-failure outcome.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Mouse immunogenicity to human protection</th><td>No reliable predictive relationship. Most vaccines lack an agreed correlate of protection.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Trial outcome prediction</th><td>On an independent evaluation of 2,163 trials, one leading model’s balanced accuracy was 0.470 to 0.594. VaxForge does not simulate trials.</td></tr><tr><th scope="row" style="background:none;position:static;white-space:normal;font-weight:600">Fine-tuning for protocol code (S9.5)</th><td>Improves conformance to the Opentrons API and conventions. It does not improve biological validity.</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section class="section plate has-contours" aria-labelledby="absent">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="absent">What we chose not to build</h2>
+      <p>Listing what was refused is itself a result.</p>
+    </div>
+    <div class="cols-2">
+      <ul class="crosses" style="color:var(--on-plate-2)">
+        <li><strong style="color:var(--on-plate)">Phase 1, 2 or 3 trial simulation.</strong> No scientific or regulatory basis for vaccines. ICH M15 does not mention vaccines, and the FDA’s paired-meeting programme excludes simulation as a substitute for confirmatory trials.</li>
+        <li><strong style="color:var(--on-plate)">C-ImmSim immune simulation.</strong> Only partially described in the literature, with no complete manual and a binary-only derivative, so third parties cannot test it.</li>
+        <li><strong style="color:var(--on-plate)">MD and MM-PBSA “validation”.</strong> Computational validation that does not demonstrate immunological efficacy.</li>
+        <li><strong style="color:var(--on-plate)">ClusPro–TLR docking and predicted assay readouts.</strong> A prediction is a hypothesis. A measurement is an observation.</li>
+      </ul>
+      <div class="callout plate-c">
+        <h3>Scope and responsible use</h3>
+        <p style="margin-top:10px;color:var(--on-plate-2)">VaxForge is restricted to protective-antigen identification and therapeutic binder design. It does not support, and will not be extended to support, work that increases pathogen virulence, transmissibility or immune escape.</p>
+        <p style="margin-top:10px;color:var(--on-plate-2)">Sequence screening before synthesis is a node in the pipeline (S12), not an afterthought.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="model-test" aria-labelledby="mt-h">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="ev-source"><span class="ev-badge">Recorded model test</span></p>
+      <h2 id="mt-h">Recorded model test, 14 November</h2>
+      <p>One reviewed fHbp protocol was compiled into <span data-ev="mt_sessions">13</span> OT-2 sessions by two Claude models, Sonnet 5.5 and Haiku 5.5, with one attempt per model and session. Each program was graded by lint, the Opentrons 7.5.0 simulator and five physical rules, and a refusal is an outcome, not a crash.</p>
+    </div>
+    <dl class="legend ev-legend">
+      <div><dt><span class="pill pill-ok">PASS</span></dt><dd>The program passed lint, ran in the simulator and broke none of the five rules.</dd></div>
+      <div><dt><span class="pill ev-pill-failed">FAIL</span></dt><dd>The model wrote a program, and it failed lint, the simulator or a rule check.</dd></div>
+      <div><dt><span class="pill pill-refused ev-pill-dashed">REFUSED</span></dt><dd>The model declined to write code, so there is no program to check.</dd></div>
+    </dl>
+    <p class="ev-hint">Select any cell to see the recorded call behind it: what happened, its checks, its raw log and its digest.</p>
+    <div class="ev-slot ev-slot-grid" id="ev-grid-slot"><noscript><p class="ev-error">This grid is drawn from data/workspace.json and needs JavaScript.</p></noscript></div>
+    <div class="ev-detail" id="ev-detail" role="region" aria-label="Details of the selected attempt" hidden></div>
+    <div class="ev-slot ev-slot-tally" id="ev-tally-slot"><noscript><p class="ev-error">The tallies are drawn from data/workspace.json and need JavaScript.</p></noscript></div>
+    <div class="honest ev-caveat">
+      <b>A record, not a benchmark.</b> Each model made one attempt per task, so these are recorded outcomes. The 95% Wilson intervals in the test report are wide: Sonnet 13 of 13 gives 0.77 to 1.00, and Haiku 4 of 13 gives 0.13 to 0.58. Sonnet’s passes do not say the protocols are right for an experiment. A PASS means the code ran and broke none of the checked rules.
+    </div>
+  </div>
+</section>
+
+<section class="section alt has-contours" id="adaption" aria-labelledby="ad-h">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="ev-source"><span class="ev-badge">Earlier Adaption run</span></p>
+      <h2 id="ad-h">Code-generator training (Adaption), earlier runs</h2>
+      <p>Stage S9.5 adapts a base model to write OT-2 code, using Adaption’s training service. Three runs used the same training rows. Each number below says what it was measured on, and what it was not.</p>
+    </div>
+    <div class="ev-stats">
+      <div class="stat"><b>1,000</b><span>training rows</span></div>
+      <div class="stat"><b>429</b><span>real rows</span></div>
+      <div class="stat"><b>571</b><span>synthetic rows, labelled as synthetic</span></div>
+      <div class="stat"><b>0</b><span>leakage violations found, after 7 held-out families were removed from the rows</span></div>
+    </div>
+    <div class="ev-cards">
+      <article class="ev-card" aria-labelledby="ev9-h">
+        <h3 id="ev9-h">9B run: Adaption’s own evaluation</h3>
+        <div class="ev-duel">
+          <div><b>94%</b><span><i class="ev-sw ev-seg-a" aria-hidden="true"></i>adapted</span></div>
+          <div><b>6%</b><span><i class="ev-sw ev-seg-b" aria-hidden="true"></i>base</span></div>
+        </div>
+        <div class="ev-split" role="img" aria-label="Run page values: adapted 94 percent, base 6 percent"><i class="ev-seg-a" style="flex-grow:94"></i><i class="ev-seg-b" style="flex-grow:6"></i></div>
+        <p class="ev-line">The win-rate split between the adapted and the base model, as shown on the run page.</p>
+        <div class="ev-slot ev-slot-card" id="ev-9b-slot"><noscript><p class="ev-error">This part is drawn from data/workspace.json and needs JavaScript.</p></noscript></div>
+        <p class="ev-caveat-line">Measured on evaluations Adaption derives from our data; not protocol quality.</p>
+      </article>
+      <article class="ev-card" aria-labelledby="ev4-h">
+        <h3 id="ev4-h">4B adapter: our held-out simulator test</h3>
+        <div class="ev-slot ev-slot-card" id="ev-4b-slot"><noscript><p class="ev-error">This part is drawn from data/workspace.json and needs JavaScript.</p></noscript></div>
+        <p class="ev-caveat-line">A floor effect: most replies hit the token cap; one sample per task.</p>
+      </article>
+    </div>
+    <p class="ev-between"><b>Different models and different evaluations.</b> This is not a demonstrated quality improvement.</p>
+
+    <div class="ev-block">
+      <h3>Public leaderboard</h3>
+      <p>Only the 2B run (best win rate 0.6037) is listed on Adaption’s public leaderboard. It sits in the Code domain, a domain we did not choose, at rank 26 of 33 with a Domain Win Rate of 35.5%, which reads as no improvement on Adaption’s own code test. The 9B and 4B runs are not listed, and we claim no rank for either.</p>
+    </div>
+
+    <div class="ev-block">
+      <h3>Run facts</h3>
+      <div class="ev-slot ev-slot-table" id="ev-runs-slot"><noscript><p class="ev-error">This table is drawn from data/workspace.json and needs JavaScript.</p></noscript></div>
+      <p class="ev-after">A checkpoint digest proves a file exists, not that it was loaded.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section alt has-contours" id="run-time" aria-labelledby="rt-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="rt-h">Run time</h2>
+      <p>How long the offline run of stages 3 to 12 took on the 40-protein fixture, on our own machines.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="ev-table ev-time">
+        <caption class="sr-only">Run times of the offline run of stages 3 to 12 on the 40-protein fixture</caption>
+        <thead><tr><th scope="col">Run</th><th scope="col">Conditions</th><th scope="col" class="num">Seconds</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Final main branch, three repeats</th><td>2026-11-15, a quiet laptop, with the Opentrons simulator environment set so that S9 simulates all 36 sessions.</td><td class="num">15.8, 16.7 and 17.0</td></tr>
+          <tr><th scope="row">Run captured for the demo video</th><td>An earlier version of the main branch.</td><td class="num">26.5</td></tr>
+          <tr><th scope="row">Two earlier runs</th><td>A fine-tune and a local model were running at the same time.</td><td class="num">35 and 52</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ev-note">These are software run times on a fixture subset. They are not a claim about researcher hours saved.</p>
+  </div>
+</section>
+
+
+
+<section class="section" id="team" aria-labelledby="streams">
+  <div class="wrap">
+    <h2 id="streams">Who built what</h2>
+    <div class="cols-4">
+      <article class="stream"><span class="letter" aria-hidden="true">A</span><h3>Backbone and data</h3><p class="muted">S0 to S2 and the run scaffolding: taxonomy, data acquisition, annotation.</p><span class="handle">@kexinli0403-cell</span></article>
+      <article class="stream"><span class="letter" aria-hidden="true">B</span><h3>Prediction core</h3><p class="muted">S3 to S7: ranking, safety gates, epitopes, coverage, structure.</p><span class="handle">@benjamin-codes-labs</span></article>
+      <article class="stream"><span class="letter" aria-hidden="true">C</span><h3>Wet-lab outputs</h3><p class="muted">S8 to S10: protocol, robot code and the animal study design.</p><span class="handle">@luk-e158</span></article>
+      <article class="stream"><span class="letter" aria-hidden="true">D</span><h3>Credibility and product</h3><p class="muted">S9.5, S11, S12, the validation harness, the report and the product design.</p><span class="handle">@Abeeekoala</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt has-contours" aria-labelledby="cta-h">
+  <div class="wrap cta-band">
+    <h2 id="cta-h">Check it yourself</h2>
+    <p class="ev-cta-text">The workspace replays the recorded runs, and the write-up lists the file or command behind each claim.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="workspace.html">Open the workspace</a>
+      <a class="btn btn-ghost" href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Read the write-up<span class="sr-only"> (opens in a new tab)</span></a>
+    </div>
+  </div>
+</section>
+</main><footer class="site-foot"><div class="wrap"><div class="foot-grid"><div><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5c6.6 0 12 4.3 12.6 10.6.7 6.8-4.6 15.4-12.9 16.4C8 30.4 3 24.9 3.4 17.7 3.8 9.2 9 2.5 16 2.5z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 8c4 0 7.5 2.7 7.8 6.6.3 4.4-3 9-7.7 9.5-4.5.5-7.7-3-7.5-7.3C8.8 12 11.7 8 16 8z" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".75"/><path d="M16 13.2c2 0 3.6 1.3 3.6 3.1 0 2-1.8 3.8-3.8 3.7-1.7-.1-3-1.3-3-2.9 0-2 1.4-3.9 3.2-3.9z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><circle cx="21.8" cy="9.6" r="2.3" fill="#f0a63a"/></svg>VaxForge</a><p style="max-width:44ch">From a pathogen name to ranked candidate antigens, a protocol that says how it could be wrong, and robot code, with the evidence for how far to trust any of it.</p></div><div><h2>Explore</h2><ul><li><a href="pipeline.html">Pipeline, step by step</a></li><li><a href="workspace.html">Workspace</a></li><li><a href="evidence.html">Evidence and limits</a></li></ul></div><div><h2>Source</h2><ul><li><a href="https://github.com/Abeeekoala/IC-AI-Hack" rel="noopener" target="_blank">Repository on GitHub</a></li><li><a href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Submission write-up</a></li><li><a href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/README.md" rel="noopener" target="_blank">README and full spec</a></li></ul></div></div><div class="fine"><p><b>Candidates, not a vaccine.</b> Nothing on this site is a measured assay result. VaxForge is restricted to protective-antigen identification and will not be extended to work that raises virulence, transmissibility or immune escape.</p><p>Built for the IC AI Hack 2026. Figures come from the repository’s committed demo run (commit 494f85b). VaxForge is a placeholder name.</p></div></div></footer><script src="assets/js/site.js"></script><script src="assets/js/evidence.js" defer></script></body></html>
