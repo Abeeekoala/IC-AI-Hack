@@ -1,6 +1,6 @@
 """Tests for the S9.5 Text2WetLab grading adapter (validation/t2wl_adapter.py).
 
-The pure parts (result parsing, per-rule results, the refusal stopgap, record building, interpreter and clone plumbing,
+The pure parts (result parsing, per-rule results, the refusal detector, record building, interpreter and clone plumbing,
 the subprocess scrub) need only the standard library. The tests that grade real protocols need a Text2WetLab clone at the
 adapter's verified commit and Python 3.10 with opentrons 7.5.0; without both they skip, with the reason:
     T2WL_CLONE=/path/to/Text2WetLab VAXFORGE_OT_PYTHON=/path/to/venv/bin/python pytest validation/tests/test_t2wl_adapter.py
@@ -222,13 +222,18 @@ def test_an_unknown_rna_check_is_noted_never_counted():
     assert g["gt_diff"] == 0 and "a_new_rna_check" in g["notes"][0]
 
 
-# ---- the refusal stopgap --------------------------------------------------------------------------------------------
+# ---- the refusal detector (stream C's, copied into validation/) ----------------------------------------------------
+
+def test_the_adapter_uses_a_byte_identical_copy_of_the_s9_detector():
+    src = Path(__file__).resolve().parents[2] / "src" / "vaxforge" / "refusal.py"
+    assert (Path(ad.__file__).with_name("refusal_detector.py")).read_bytes() == src.read_bytes()
+
 
 @pytest.mark.parametrize("text", [
     "I'm sorry, but I can't help with that.", "I cannot provide a protocol for this.", "I’m unable to assist with this request.",
     "Sorry, but I won't write this.", "I must decline.", "I will not generate this protocol.", "  I   CAN'T\n do that "])
-def test_stopgap_marks_a_first_person_refusal_with_no_code(text):
-    assert ad.stopgap_refusal(text, None, "stop") and ad.stopgap_refusal(text, "  \n", "stop")
+def test_a_first_person_refusal_with_no_code_is_a_refusal(text):
+    assert ad.s9_refusal(text, None, "stop") and ad.s9_refusal(text, "  \n", "stop")
 
 
 @pytest.mark.parametrize("text, code, finish", [
@@ -238,12 +243,18 @@ def test_stopgap_marks_a_first_person_refusal_with_no_code(text):
     ("The pipette cannot aspirate more than its volume.", None, "stop"),                      # third person
     ("Ice cannot be used here.", None, "stop"),                                              # 'i' must start a word
     (None, None, "stop"), ("", None, None)])
-def test_stopgap_is_conservative(text, code, finish):
-    assert ad.stopgap_refusal(text, code, finish) is False
+def test_other_replies_are_not_refusals(text, code, finish):
+    assert ad.s9_refusal(text, code, finish) is False
 
 
-def test_the_stopgap_says_it_is_a_stopgap():
-    assert "STOPGAP" in ad.stopgap_refusal.__doc__ and "stream C" in ad.stopgap_refusal.__doc__
+def test_a_provider_refusal_counts_even_with_an_empty_body():
+    assert ad.s9_refusal("", None, "content_filter") is True
+
+
+def test_the_record_builders_default_to_the_s9_detector():
+    import inspect
+    for fn in (ad.grade_rows, ad.build_records):
+        assert inspect.signature(fn).parameters["refused"].default is ad.s9_refusal
 
 
 # ---- generations.jsonl rows into winrate.py records -----------------------------------------------------------------
