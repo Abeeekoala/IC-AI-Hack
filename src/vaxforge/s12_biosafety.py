@@ -208,9 +208,11 @@ def evaluate(order: list[dict], candidates: list[dict], s2_proteins: list[dict],
     return {"state": state, "reasons": blockers + reasons if state == "blocked" else reasons, "review": review, "sequences": rows}
 
 
-def check(store: RunStore, order_path=None, screening_path=None) -> Artifact:
+def check(store: RunStore, order_path=None, screening_path=None, *, order_source: str = "user") -> Artifact:
     """Read S2 and S4, evaluate the order list and write ``s12_biosafety.json``. Raises ContractError if S2 or S4
-    is missing or not ``ok``, ValueError (or FastaError) if the order list or the provider record is unusable."""
+    is missing or not ``ok``, ValueError (or FastaError) if the order list or the provider record is unusable.
+    ``order_source`` is "s8" when the order list is the one S8 wrote (then S8 is also an input of this artifact, so
+    ``vaxforge verify`` flags it stale when S8 is re-run) and "user" when a person supplied the file."""
     s2 = store.read_artifact("s2").require_ok()
     s4 = store.read_artifact("s4").require_ok()
     order = read_order(order_path) if order_path else []
@@ -221,8 +223,9 @@ def check(store: RunStore, order_path=None, screening_path=None) -> Artifact:
         "reasons": result["reasons"],
         "review_required": bool(result["review"]),
         "review": result["review"],
-        "order": ({"status": "supplied", "file": {"name": Path(order_path).name, "sha256": sha256_file(order_path),
-                                                  "bytes": Path(order_path).stat().st_size}, "n_sequences": len(order)}
+        "order": ({"status": "supplied", "source": order_source,
+                   "file": {"name": Path(order_path).name, "sha256": sha256_file(order_path),
+                            "bytes": Path(order_path).stat().st_size}, "n_sequences": len(order)}
                   if order_path else {"status": "not_supplied"}),
         "provider_record": ({"status": "not_supplied"} if record is None else
                             {"status": "supplied", **{k: record[k] for k in ("provider", "tool", "tool_version", "date", "file")},
@@ -235,7 +238,7 @@ def check(store: RunStore, order_path=None, screening_path=None) -> Artifact:
     warnings = [f"S12 {payload['state']}: {r}" for r in payload["reasons"]] if payload["state"] != "cleared" else []
     warnings += [f"S12 review (not blocking): {r}" for r in payload["review"]]
     return store.write_artifact(
-        STAGE, payload, inputs=["s2", "s4"], status="ok", warnings=warnings,
+        STAGE, payload, inputs=["s2", "s4"] + (["s8"] if order_source == "s8" else []), status="ok", warnings=warnings,
         params={"selection": "s4 candidates (the survivors)", "alphabet": "".join(sorted(PROTEIN_ALPHABET)),
                 "max_length": MAX_LENGTH, "digest": "sha256 of the sequence, upper-case, whitespace removed"},
         volatile={"order_path": str(order_path) if order_path else None,
@@ -244,13 +247,23 @@ def check(store: RunStore, order_path=None, screening_path=None) -> Artifact:
 
 def run(store: RunStore, config) -> Artifact:
     """The `vaxforge run` entrypoint. The order list and the provider record come from the config keys
-    ``biosafety.order`` and ``biosafety.screening``; with no order list the artifact says so and the state is
+    ``biosafety.order`` and ``biosafety.screening``. With no ``biosafety.order`` the list S8 wrote
+    (``payload.order_fasta`` of the S8 artifact, ``data/s8/order.fasta``) is used when S8 ran in this run, so the gate
+    looks at what the protocol would actually order; with neither, the artifact says so and the state is
     ``not_screened``."""
     order, screening = config.get("biosafety.order"), config.get("biosafety.screening")
+    source = "user"
+    if not order and store.has("s8"):
+        try:
+            ref = store.read_artifact("s8").payload.get("order_fasta")
+            if ref:
+                order, source = str(store.resolve(ref)), "s8"
+        except ContractError as e:
+            raise ConfigError(f"S12: cannot read the order list from S8: {e}") from None
     if screening and not order:
-        raise ConfigError("biosafety.screening is set but biosafety.order is not")
+        raise ConfigError("biosafety.screening is set but there is no order list (biosafety.order, or S8's order.fasta)")
     try:
-        return check(store, order, screening)
+        return check(store, order, screening, order_source=source)
     except (FastaError, ValueError, OSError) as e:
         raise ConfigError(f"S12: {e}") from None
 
