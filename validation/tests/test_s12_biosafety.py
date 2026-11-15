@@ -341,7 +341,7 @@ def test_the_run_entrypoint_reads_the_order_and_record_from_config(tmp_path):
 def test_the_run_entrypoint_turns_unusable_input_into_a_config_error(tmp_path):
     store = make_store(tmp_path)
     order, record = cleared_inputs(tmp_path)
-    with pytest.raises(ConfigError, match="biosafety.order is not"):
+    with pytest.raises(ConfigError, match="no order list"):
         s12.run(store, cfg(tmp_path, screening=str(record)))
     with pytest.raises(ConfigError, match="S12"):
         s12.run(store, cfg(tmp_path, order=str(tmp_path / "missing.fasta")))
@@ -395,3 +395,51 @@ def test_the_module_runs_on_its_own_before_cli_lists_it(tmp_path, capsys):
     assert s12.main(["check", str(order), "--run", run_dir(store), "--screening", str(record)]) == 0
     assert s12.main(["check", str(order), "--run", run_dir(store)]) == 3
     capsys.readouterr()
+
+
+# ---------------------------------------------------------------- S8's order list inside `vaxforge run`
+
+def add_s8_order(store, records):
+    """Write S8's artifact with an order_fasta file ref, as the real stage does (data/s8/order.fasta)."""
+    from vaxforge import s8_protocol  # noqa: F401  (registers the s8 payload keys)
+    path = store.data_path("s8", "order.fasta")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("".join(f">{i}\n{s}\n" for i, s in records.items()), encoding="utf-8")
+    ref = store.run_ref(path, records=len(records))
+    return store.write_artifact("s8", {"candidates": [], "order_fasta": ref, "order_fasta_missing": [], "cost": None,
+                                       "narratives": None}, inputs=[], status="ok")
+
+
+def test_run_uses_the_order_list_s8_wrote_when_none_is_configured(tmp_path):
+    store = make_store(tmp_path)
+    add_s8_order(store, {"virulent": seq("virulent"), "clean1": seq("clean1")})
+    art = s12.run(store, cfg(tmp_path))
+    assert art.payload["order"]["status"] == "supplied" and art.payload["order"]["source"] == "s8"
+    assert art.payload["order"]["n_sequences"] == 2 and art.payload["state"] == "not_screened"
+    assert art.payload["review_required"] is True and len(art.payload["review"]) == 1  # the virulence flag now fires inside a run
+    assert "s8" in art.inputs and store.verify() == []
+
+
+def test_a_configured_order_list_wins_over_the_one_from_s8(tmp_path):
+    store = make_store(tmp_path)
+    add_s8_order(store, {"clean1": seq("clean1")})
+    order = write_order(tmp_path, {"clean2": seq("clean2")})
+    art = s12.run(store, cfg(tmp_path, order=str(order)))
+    assert art.payload["order"]["source"] == "user" and art.payload["order"]["file"]["name"] == "order.fasta"
+    assert "s8" not in art.inputs
+
+
+def test_rerunning_s8_makes_an_s12_that_used_its_list_stale(tmp_path):
+    store = make_store(tmp_path)
+    add_s8_order(store, {"clean1": seq("clean1")})
+    s12.run(store, cfg(tmp_path))
+    assert store.verify() == []
+    add_s8_order(store, {"clean1": seq("clean1"), "clean2": seq("clean2")})   # S8 produced a different list
+    assert any("s12" in p and "STALE" in p for p in store.verify())
+
+
+def test_a_screening_record_with_no_order_anywhere_is_still_a_config_error(tmp_path):
+    store = make_store(tmp_path)
+    _, record = cleared_inputs(tmp_path)
+    with pytest.raises(ConfigError, match="no order list"):
+        s12.run(store, cfg(tmp_path, screening=str(record)))
