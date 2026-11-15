@@ -195,10 +195,12 @@ def build_protocol(candidate: Candidate, config: ProtocolConfig | None = None) -
     """Build the recombinant-antigen -> THP-1 innate-activation protocol for one candidate."""
     config = config or ProtocolConfig()
     K = StepKind
+    # Each form must read on its own inside "Residual endotoxin {limit} before ANY THP-1 work.": the number carries its own comparison
+    # ("<="), the placeholder carries the word ("below"), so neither can double the other's.
     limit = (
         f"<= {config.endotoxin_limit_eu_per_ug} EU/ug"
         if config.endotoxin_limit_eu_per_ug is not None
-        else "the release limit (NOT YET SET - decide before running)"
+        else "below the release limit (NOT YET SET - decide before running)"
     )
 
     steps = [

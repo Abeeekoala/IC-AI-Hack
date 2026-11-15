@@ -72,6 +72,23 @@ def test_unset_endotoxin_limit_is_flagged_not_defaulted():
     assert "0.5" in next(s for s in p2.steps if s.kind is StepKind.LAL_ASSAY).gate
 
 
+def _lal_gate(limit: float | None = None) -> str:
+    p = build_protocol(CAND, ProtocolConfig(endotoxin_limit_eu_per_ug=limit))
+    return next(s for s in p.steps if s.kind is StepKind.LAL_ASSAY).gate
+
+
+def test_the_lal_gate_reads_as_a_sentence_with_a_numeric_limit_and_with_the_placeholder():
+    # The placeholder form used to read "Residual endotoxin the release limit (NOT YET SET ...)": a word was missing.
+    assert _lal_gate() == "Residual endotoxin below the release limit (NOT YET SET - decide before running) before ANY THP-1 work."
+    assert _lal_gate(0.5) == "Residual endotoxin <= 0.5 EU/ug before ANY THP-1 work."
+    numeric = _lal_gate(0.5)
+    assert "NOT YET SET" not in numeric and "release limit" not in numeric
+    assert "below" not in numeric  # the number carries its own comparison; "below" in front of "<=" would double it
+    for gate in (_lal_gate(), numeric):
+        assert "below below" not in gate and "below <=" not in gate and "endotoxin the" not in gate
+        assert gate.startswith("Residual endotoxin ") and gate.endswith(" before ANY THP-1 work.")
+
+
 def test_json_roundtrip():
     data = json.loads(to_json(build_protocol(CAND)))
     assert data["candidate_id"] == "c1" and data["steps"][0]["step_id"] == "s01"

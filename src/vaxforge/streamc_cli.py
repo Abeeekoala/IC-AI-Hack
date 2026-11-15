@@ -219,6 +219,24 @@ def _backends(choice: str, model: str | None) -> list[CodegenBackend]:
     return backends_from_choice(choice, model)
 
 
+ARMS_REFUSAL = (
+    "--arms is not supported (it used to be accepted and ignored): the number of arms is not a setting. S10 makes one arm per dose level "
+    "for the top candidate and one per further candidate, plus adjuvant only, naive/PBS and, with --licensed-vaccine yes, a licensed-vaccine "
+    "positive control. To change the count use --top-k, --licensed-vaccine, or dose_levels_ug / dose_ranging in --study-config."
+)
+
+
+class _ArmsRefused(argparse.Action):
+    """`--arms N` used to be parsed and thrown away, so a README example that used it looked like a setting that worked.
+
+    StudyConfig has no arm-count field and `design_study` derives the arms (`_build_arms`), so there is nothing to set; the flag is hidden
+    from --help and refused with the reason (a plain "unrecognized arguments" would not say what to use instead).
+    """
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        parser.error(ARMS_REFUSAL)
+
+
 def add_study_flags(p: argparse.ArgumentParser) -> None:
     p.add_argument("--species", choices=sorted(SPECIES_FLAGS))
     p.add_argument("--goal", choices=[g.value for g in StudyGoal])
@@ -228,7 +246,7 @@ def add_study_flags(p: argparse.ArgumentParser) -> None:
     p.add_argument("--hla-lines", help="comma-separated HLA-transgenic line names")
     p.add_argument("--licensed-vaccine", choices=["yes", "no", "unknown"], default="unknown")
     p.add_argument("--study-config", help="JSON file with any StudyConfig fields")
-    p.add_argument("--arms", help="accepted for README compatibility; arm count is derived from the candidates (ignored)")
+    p.add_argument("--arms", nargs="?", action=_ArmsRefused, help=argparse.SUPPRESS)
 
 
 def add_input_args(p: argparse.ArgumentParser) -> None:
