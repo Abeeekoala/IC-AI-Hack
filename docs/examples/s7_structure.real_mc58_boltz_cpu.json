@@ -1,0 +1,670 @@
+{
+  "_about": {
+    "what": "Trimmed copy of a REAL stage-S7 payload (Boltz-2 2.2.1 on CPU with msa_mode 'empty', so no sequence left the machine; DiscoTope-3.0 on the Boltz models), for designing the structure screen.",
+    "how_made": "On 2026-11-15 I re-ran S7 with the code on main (d3b5f5b) over a copy of my real 2026-11-14 run folder. The Boltz-2 models came from the content cache and are identical to the 2026-11-14 folds (same model sha256). Run in a plain run folder, so the outer envelope of the file was stream B's own; on main a RunStore run wraps this same payload in stream A's envelope (digest, producer, inputs as a dict).",
+    "inputs": "a sample of the real N. meningitidis MC58 proteome (UniProt), not the 40-protein fixture. None of the three folded proteins is a Bexsero antigen.",
+    "run_settings": {
+      "s7.top_k": 3,
+      "s7.boltz": {
+        "msa": "empty",
+        "accelerator": "cpu",
+        "recycling_steps": 1,
+        "sampling_steps": 50,
+        "max_residues": 400
+      },
+      "refdata.offline": true,
+      "note": "recycling_steps 1 / sampling_steps 50 are fast smoke settings, not the defaults (3 / 200); pLDDT may be lower than a default run would give. These settings are not recorded inside analysis.folding."
+    },
+    "validators": "esmfold and af2-no-msa were unavailable on this machine, so validator_agreement.value is null (n_validators 0).",
+    "removed_to_keep_it_small": [
+      "per-candidate: sequence, tcell, bcell, coverage, upstream",
+      "payload: epitope_set, set_level_coverage, upstream",
+      "candidates other than the 3 folded ones and 2 of the not_selected ones"
+    ],
+    "not_in_the_artifact": "per-residue pLDDT. Only mean_plddt, the frac_* bands and n_residues_modelled are stored; the per-residue values are in the B-factor column of the PDB that structure.model_file points to (a run-folder file reference with sha256 and bytes; the PDB files are not committed).",
+    "not_validation": "Confidence of a structural model says nothing about immunogenicity or protection (see payload.limits)."
+  },
+  "payload": {
+    "context": {
+      "taxid": 122586,
+      "organism_type": "gram-",
+      "s2_meta": {
+        "schema": "vaxforge.s2_annotate/1",
+        "stage": "s2_annotate",
+        "artifact_id": "sha256:real-smoke-s2",
+        "taxid": 122586,
+        "species_taxid": 487,
+        "organism": "Neisseria meningitidis MC58",
+        "lineage": [
+          "Bacteria",
+          "Pseudomonadota",
+          "Betaproteobacteria"
+        ],
+        "note": "synthesised from UniProt UP000000425; localisation Unknown; no VFDB"
+      },
+      "n_proteins": 14
+    },
+    "top_k": 3,
+    "selection": {
+      "basis": "pre-structure composite of S3, S5 T-cell, S5 B-cell, S6 coverage terms (percentile-ranked)",
+      "pre_structure_weights": {
+        "s3": 0.4,
+        "tcell": 0.2,
+        "bcell": 0.1,
+        "coverage": 0.2
+      },
+      "top_k_ids": [
+        "Q7DDG6",
+        "Q9JXZ9",
+        "Q9K0Q8"
+      ]
+    },
+    "analysis": {
+      "folding": {
+        "status": "ran",
+        "tool": "Boltz-2",
+        "version": "2.2.1",
+        "msa_mode": "empty",
+        "accelerator": "cpu",
+        "seed_controlled": false,
+        "seed_note": "Boltz CLI exposes no documented seed option; outputs are cached by content instead"
+      },
+      "validators": {
+        "esmfold": {
+          "status": "unavailable",
+          "reason": "ESMFold not available locally (needs transformers + torch + ~8 GB of weights); set s7.esmfold.mode: api to use the public ESM Atlas web service instead (it sends the sequence to a third-party server)"
+        },
+        "af2-no-msa": {
+          "status": "unavailable",
+          "reason": "colabfold_batch not found (LocalColabFold)"
+        }
+      },
+      "degraded_to_sequence_only": false,
+      "affinity": {
+        "status": "not_implemented",
+        "reason": "Boltz-2's affinity head supports protein-small-molecule binding only; no validated affinity target exists for an antigen monomer"
+      },
+      "docking": {
+        "status": "not_implemented",
+        "reason": "ClusPro-TLR docking is deliberately absent (README sections 4 and 7)"
+      },
+      "validator_policy": "report every validator used; spread across validators is part of the result"
+    },
+    "final_candidates": [
+      "Q7DDG6",
+      "Q9JXZ9",
+      "Q9K0Q8"
+    ],
+    "limits": [
+      "pLDDT and validator agreement describe the quality of the structural MODEL, not the antigen's immunogenicity or protective potential",
+      "the same sequence can score differently under different refolders (MotifBench: 28.05 with ESMFold vs 22.5 with AF2-no-MSA) - always read the validator spread",
+      "no docking score, TLR docking or affinity is produced: ClusPro blind docking is 13.7% top-1 / 45.1% top-10 and a docking score is neither affinity nor immunogenicity; Boltz-2's affinity head supports protein-small-molecule binding only",
+      "final_score weights are unvalidated priors intended to be re-tuned by the retrospective validation harness",
+      "structure-informed ranking exists only for the top-k; the remaining candidates keep their pre-structure order below them"
+    ],
+    "candidates": [
+      {
+        "protein_id": "Q7DDG6",
+        "name": "Believed to be involved in assembly of Fe-S clusters",
+        "gene": "",
+        "length": 65,
+        "taxid": 122586,
+        "rank": 1,
+        "in_top_k": true,
+        "rank_basis": "structure_informed",
+        "scores": {
+          "pre_structure": 0.707070707070707,
+          "final": 0.6499999999999999,
+          "terms_raw": {
+            "s3": 0.3,
+            "tcell": 0.7111111111111112,
+            "bcell": 0.26321,
+            "coverage": 0.9854768851922376,
+            "structure": 0.5825
+          },
+          "terms_percentile": {
+            "bcell": 1.0,
+            "coverage": 0.5,
+            "s3": 0.5,
+            "structure": 0.5,
+            "tcell": 1.0
+          },
+          "terms_used": [
+            "bcell",
+            "coverage",
+            "s3",
+            "structure",
+            "tcell"
+          ],
+          "terms_missing": [],
+          "weights": {
+            "s3": 0.4,
+            "tcell": 0.2,
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "structure": 0.1
+          },
+          "percentile_basis": "within the 3 top-k candidates"
+        },
+        "structure": {
+          "status": "ran",
+          "engine": "Boltz-2",
+          "model_file": {
+            "root": "run",
+            "path": "data/s7/Q7DDG6/boltz2.pdb",
+            "sha256": "e0f6c51d2f6231ae381f80f4f91302b10aeeb548674dcc54e279cbe3b6178234",
+            "bytes": 43658
+          },
+          "reported_confidence": {
+            "confidence_score": 0.5479902029037476,
+            "ptm": 0.4101138710975647,
+            "complex_plddt": 0.5824593305587769
+          },
+          "mean_plddt": 58.2454,
+          "frac_very_high_gt90": 0.0,
+          "frac_confident_70_90": 0.0,
+          "frac_low_50_70": 0.8923,
+          "frac_very_low_le50": 0.1077,
+          "scale_detected": "0-100",
+          "sequence_matches_input": true,
+          "n_residues_modelled": 65,
+          "validators": {
+            "esmfold": {
+              "status": "unavailable",
+              "reason": "ESMFold not available locally (needs transformers + torch + ~8 GB of weights); set s7.esmfold.mode: api to use the public ESM Atlas web service instead (it sends the sequence to a third-party server)"
+            },
+            "af2-no-msa": {
+              "status": "unavailable",
+              "reason": "colabfold_batch not found (LocalColabFold)"
+            }
+          },
+          "validator_agreement": {
+            "metric": "mean lDDT-C-alpha of each refolder vs the Boltz-2 model",
+            "value": null,
+            "n_validators": 0,
+            "spread": null,
+            "note": "no validator ran"
+          },
+          "structure_term": 0.5825,
+          "structure_term_basis": "mean_pLDDT/100 (no validator agreement)",
+          "conformational_epitopes": {
+            "status": "ran",
+            "tool": "DiscoTope-3.0",
+            "n_residues": 65,
+            "n_epitope_residues": 18,
+            "epitope_fraction": 0.27692307692307694,
+            "mean_score": 0.376976,
+            "epitope_segments": [
+              [
+                3,
+                3
+              ],
+              [
+                14,
+                14
+              ],
+              [
+                17,
+                17
+              ],
+              [
+                19,
+                21
+              ],
+              [
+                24,
+                25
+              ],
+              [
+                27,
+                30
+              ],
+              [
+                32,
+                32
+              ],
+              [
+                43,
+                47
+              ]
+            ],
+            "threshold_source": "tool_boolean",
+            "mean_plddt_input": 5824.538461538462,
+            "plddt_floor": 70.0,
+            "n_epitope_residues_below_floor": 0,
+            "fraction_epitope_residues_below_floor": 0.0
+          }
+        }
+      },
+      {
+        "protein_id": "Q9JXZ9",
+        "name": "Transcriptional repressor NrdR",
+        "gene": "",
+        "length": 154,
+        "taxid": 122586,
+        "rank": 2,
+        "in_top_k": true,
+        "rank_basis": "structure_informed",
+        "scores": {
+          "pre_structure": 0.5959595959595959,
+          "final": 0.4999999999999999,
+          "terms_raw": {
+            "s3": 0.3,
+            "tcell": 0.6882591093117408,
+            "bcell": 0.20267,
+            "coverage": 0.9854768851922376,
+            "structure": 0.6744
+          },
+          "terms_percentile": {
+            "bcell": 0.0,
+            "coverage": 0.5,
+            "s3": 0.5,
+            "structure": 1.0,
+            "tcell": 0.5
+          },
+          "terms_used": [
+            "bcell",
+            "coverage",
+            "s3",
+            "structure",
+            "tcell"
+          ],
+          "terms_missing": [],
+          "weights": {
+            "s3": 0.4,
+            "tcell": 0.2,
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "structure": 0.1
+          },
+          "percentile_basis": "within the 3 top-k candidates"
+        },
+        "structure": {
+          "status": "ran",
+          "engine": "Boltz-2",
+          "model_file": {
+            "root": "run",
+            "path": "data/s7/Q9JXZ9/boltz2.pdb",
+            "sha256": "05f9e3254efd52d3ef215a5a488ce518fb1f1e6ae6ed6d34f7988b4b0b16ae45",
+            "bytes": 98171
+          },
+          "reported_confidence": {
+            "confidence_score": 0.6353648900985718,
+            "ptm": 0.4791518449783325,
+            "complex_plddt": 0.6744182109832764
+          },
+          "mean_plddt": 67.4415,
+          "frac_very_high_gt90": 0.013,
+          "frac_confident_70_90": 0.4805,
+          "frac_low_50_70": 0.3442,
+          "frac_very_low_le50": 0.1623,
+          "scale_detected": "0-100",
+          "sequence_matches_input": true,
+          "n_residues_modelled": 154,
+          "validators": {
+            "esmfold": {
+              "status": "unavailable",
+              "reason": "ESMFold not available locally (needs transformers + torch + ~8 GB of weights); set s7.esmfold.mode: api to use the public ESM Atlas web service instead (it sends the sequence to a third-party server)"
+            },
+            "af2-no-msa": {
+              "status": "unavailable",
+              "reason": "colabfold_batch not found (LocalColabFold)"
+            }
+          },
+          "validator_agreement": {
+            "metric": "mean lDDT-C-alpha of each refolder vs the Boltz-2 model",
+            "value": null,
+            "n_validators": 0,
+            "spread": null,
+            "note": "no validator ran"
+          },
+          "structure_term": 0.6744,
+          "structure_term_basis": "mean_pLDDT/100 (no validator agreement)",
+          "conformational_epitopes": {
+            "status": "ran",
+            "tool": "DiscoTope-3.0",
+            "n_residues": 154,
+            "n_epitope_residues": 23,
+            "epitope_fraction": 0.14935064935064934,
+            "mean_score": 0.21101110389610386,
+            "epitope_segments": [
+              [
+                4,
+                5
+              ],
+              [
+                7,
+                8
+              ],
+              [
+                21,
+                21
+              ],
+              [
+                26,
+                26
+              ],
+              [
+                28,
+                28
+              ],
+              [
+                30,
+                30
+              ],
+              [
+                32,
+                32
+              ],
+              [
+                35,
+                40
+              ],
+              [
+                54,
+                54
+              ],
+              [
+                56,
+                56
+              ],
+              [
+                75,
+                75
+              ],
+              [
+                81,
+                81
+              ],
+              [
+                132,
+                132
+              ],
+              [
+                135,
+                135
+              ],
+              [
+                139,
+                139
+              ],
+              [
+                149,
+                149
+              ]
+            ],
+            "threshold_source": "tool_boolean",
+            "mean_plddt_input": 6744.149350649351,
+            "plddt_floor": 70.0,
+            "n_epitope_residues_below_floor": 0,
+            "fraction_epitope_residues_below_floor": 0.0
+          }
+        }
+      },
+      {
+        "protein_id": "Q9K0Q8",
+        "name": "DUF1543 domain-containing protein",
+        "gene": "",
+        "length": 172,
+        "taxid": 122586,
+        "rank": 3,
+        "in_top_k": true,
+        "rank_basis": "structure_informed",
+        "scores": {
+          "pre_structure": 0.5959595959595959,
+          "final": 0.3499999999999999,
+          "terms_raw": {
+            "s3": 0.3,
+            "tcell": 0.6640625,
+            "bcell": 0.23564,
+            "coverage": 0.9854768851922376,
+            "structure": 0.3626
+          },
+          "terms_percentile": {
+            "bcell": 0.5,
+            "coverage": 0.5,
+            "s3": 0.5,
+            "structure": 0.0,
+            "tcell": 0.0
+          },
+          "terms_used": [
+            "bcell",
+            "coverage",
+            "s3",
+            "structure",
+            "tcell"
+          ],
+          "terms_missing": [],
+          "weights": {
+            "s3": 0.4,
+            "tcell": 0.2,
+            "bcell": 0.1,
+            "coverage": 0.2,
+            "structure": 0.1
+          },
+          "percentile_basis": "within the 3 top-k candidates"
+        },
+        "structure": {
+          "status": "ran",
+          "engine": "Boltz-2",
+          "model_file": {
+            "root": "run",
+            "path": "data/s7/Q9K0Q8/boltz2.pdb",
+            "sha256": "9cd74aa42407df41d1c95a36a002632ae10184d8d56f8baa947da18860d26f38",
+            "bytes": 109268
+          },
+          "reported_confidence": {
+            "confidence_score": 0.34808963537216187,
+            "ptm": 0.29023754596710205,
+            "complex_plddt": 0.3625526428222656
+          },
+          "mean_plddt": 36.2553,
+          "frac_very_high_gt90": 0.0,
+          "frac_confident_70_90": 0.0,
+          "frac_low_50_70": 0.1105,
+          "frac_very_low_le50": 0.8895,
+          "scale_detected": "0-100",
+          "sequence_matches_input": true,
+          "n_residues_modelled": 172,
+          "validators": {
+            "esmfold": {
+              "status": "unavailable",
+              "reason": "ESMFold not available locally (needs transformers + torch + ~8 GB of weights); set s7.esmfold.mode: api to use the public ESM Atlas web service instead (it sends the sequence to a third-party server)"
+            },
+            "af2-no-msa": {
+              "status": "unavailable",
+              "reason": "colabfold_batch not found (LocalColabFold)"
+            }
+          },
+          "validator_agreement": {
+            "metric": "mean lDDT-C-alpha of each refolder vs the Boltz-2 model",
+            "value": null,
+            "n_validators": 0,
+            "spread": null,
+            "note": "no validator ran"
+          },
+          "structure_term": 0.3626,
+          "structure_term_basis": "mean_pLDDT/100 (no validator agreement)",
+          "conformational_epitopes": {
+            "status": "ran",
+            "tool": "DiscoTope-3.0",
+            "n_residues": 172,
+            "n_epitope_residues": 28,
+            "epitope_fraction": 0.16279069767441862,
+            "mean_score": 0.19418610465116293,
+            "epitope_segments": [
+              [
+                12,
+                12
+              ],
+              [
+                15,
+                15
+              ],
+              [
+                17,
+                19
+              ],
+              [
+                21,
+                21
+              ],
+              [
+                32,
+                32
+              ],
+              [
+                45,
+                45
+              ],
+              [
+                48,
+                48
+              ],
+              [
+                53,
+                53
+              ],
+              [
+                69,
+                70
+              ],
+              [
+                92,
+                95
+              ],
+              [
+                98,
+                98
+              ],
+              [
+                100,
+                100
+              ],
+              [
+                125,
+                125
+              ],
+              [
+                129,
+                130
+              ],
+              [
+                132,
+                132
+              ],
+              [
+                154,
+                154
+              ],
+              [
+                156,
+                160
+              ]
+            ],
+            "threshold_source": "tool_boolean",
+            "mean_plddt_input": 3625.5348837209303,
+            "plddt_floor": 70.0,
+            "n_epitope_residues_below_floor": 0,
+            "fraction_epitope_residues_below_floor": 0.0
+          }
+        }
+      },
+      {
+        "protein_id": "Q9K178",
+        "name": "Nitroreductase domain-containing protein",
+        "gene": "",
+        "length": 201,
+        "taxid": 122586,
+        "rank": 4,
+        "in_top_k": false,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "pre_structure": 0.5959595959595959,
+          "final": null,
+          "terms_raw": {
+            "s3": 0.3,
+            "tcell": 0.6864274570982839,
+            "bcell": 0.23091,
+            "coverage": 0.9854768851922376
+          },
+          "terms_percentile": {
+            "bcell": 0.5454545454545454,
+            "coverage": 0.7727272727272727,
+            "s3": 0.5,
+            "tcell": 0.6363636363636364
+          },
+          "terms_used": [
+            "bcell",
+            "coverage",
+            "s3",
+            "tcell"
+          ],
+          "terms_missing": [],
+          "weights": {
+            "s3": 0.4,
+            "tcell": 0.2,
+            "bcell": 0.1,
+            "coverage": 0.2
+          },
+          "percentile_basis": "within all 12 candidates"
+        },
+        "structure": {
+          "status": "not_selected",
+          "reason": "outside the top 3"
+        }
+      },
+      {
+        "protein_id": "Q9K123",
+        "name": "MafB alternative C terminus",
+        "gene": "",
+        "length": 135,
+        "taxid": 122586,
+        "rank": 5,
+        "in_top_k": false,
+        "rank_basis": "pre_structure",
+        "scores": {
+          "pre_structure": 0.5656565656565656,
+          "final": null,
+          "terms_raw": {
+            "s3": 0.3,
+            "tcell": 0.7378640776699028,
+            "bcell": 0.26163,
+            "coverage": 0.9782927969866106
+          },
+          "terms_percentile": {
+            "bcell": 0.9090909090909091,
+            "coverage": 0.09090909090909091,
+            "s3": 0.5,
+            "tcell": 1.0
+          },
+          "terms_used": [
+            "bcell",
+            "coverage",
+            "s3",
+            "tcell"
+          ],
+          "terms_missing": [],
+          "weights": {
+            "s3": 0.4,
+            "tcell": 0.2,
+            "bcell": 0.1,
+            "coverage": 0.2
+          },
+          "percentile_basis": "within all 12 candidates"
+        },
+        "structure": {
+          "status": "not_selected",
+          "reason": "outside the top 3"
+        }
+      }
+    ],
+    "candidates_note": "5 of 12 candidates shown"
+  },
+  "warnings": [
+    "only the top 3 of 12 candidates are folded and structure-ranked",
+    "refolder 'esmfold' unavailable: ESMFold not available locally (needs transformers + torch + ~8 GB of weights); set s7.esmfold.mode: api to use the public ESM Atlas web service instead (it sends the sequence to a third-party server)",
+    "refolder 'af2-no-msa' unavailable: colabfold_batch not found (LocalColabFold)",
+    "fewer than two independent refolders available: validator agreement rests on a single validator (README: ideally report two)"
+  ]
+}
