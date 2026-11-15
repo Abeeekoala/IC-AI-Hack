@@ -1,7 +1,7 @@
 {
   "_about": {
     "what": "Trimmed copy of a REAL stage-S7 payload (Boltz-2 2.2.1 on CPU with msa_mode 'empty', so no sequence left the machine; DiscoTope-3.0 on the Boltz models), for designing the structure screen.",
-    "how_made": "On 2026-11-15 I re-ran S7 with the code on main (d3b5f5b) over a copy of my real 2026-11-14 run folder. The Boltz-2 models came from the content cache and are identical to the 2026-11-14 folds (same model sha256). Run in a plain run folder, so the outer envelope of the file was stream B's own; on main a RunStore run wraps this same payload in stream A's envelope (digest, producer, inputs as a dict).",
+    "how_made": "On 2026-11-15 I re-ran S7 with the code on main plus the fix for issue #45 over a copy of my real 2026-11-14 run folder. The Boltz-2 models came from the content cache and are identical to the 2026-11-14 folds (same model sha256). Run in a plain run folder, so the outer envelope of the file was stream B's own; on main a RunStore run wraps this same payload in stream A's envelope (digest, producer, inputs as a dict).",
     "inputs": "a sample of the real N. meningitidis MC58 proteome (UniProt), not the 40-protein fixture. None of the three folded proteins is a Bexsero antigen.",
     "run_settings": {
       "s7.top_k": 3,
@@ -22,7 +22,8 @@
       "candidates other than the 3 folded ones and 2 of the not_selected ones"
     ],
     "not_in_the_artifact": "per-residue pLDDT. Only mean_plddt, the frac_* bands and n_residues_modelled are stored; the per-residue values are in the B-factor column of the PDB that structure.model_file points to (a run-folder file reference with sha256 and bytes; the PDB files are not committed).",
-    "not_validation": "Confidence of a structural model says nothing about immunogenicity or protection (see payload.limits)."
+    "not_validation": "Confidence of a structural model says nothing about immunogenicity or protection (see payload.limits).",
+    "correction": "This file replaces the first version (PR #44). Its structure.conformational_epitopes blocks were wrong: S7 had given DiscoTope pLDDT values 100 times too high (mean_plddt_input was 100 x mean_plddt and every below-floor count was 0). Fixed in issue #45; mean_plddt, the band fractions and structure_term were never affected."
   },
   "payload": {
     "context": {
@@ -191,13 +192,17 @@
             "status": "ran",
             "tool": "DiscoTope-3.0",
             "n_residues": 65,
-            "n_epitope_residues": 18,
-            "epitope_fraction": 0.27692307692307694,
-            "mean_score": 0.376976,
+            "n_epitope_residues": 22,
+            "epitope_fraction": 0.3384615384615385,
+            "mean_score": 0.42177923076923074,
             "epitope_segments": [
               [
-                3,
+                2,
                 3
+              ],
+              [
+                11,
+                11
               ],
               [
                 14,
@@ -209,7 +214,7 @@
               ],
               [
                 19,
-                21
+                22
               ],
               [
                 24,
@@ -226,13 +231,17 @@
               [
                 43,
                 47
+              ],
+              [
+                50,
+                50
               ]
             ],
             "threshold_source": "tool_boolean",
-            "mean_plddt_input": 5824.538461538462,
+            "mean_plddt_input": 58.24538461538464,
             "plddt_floor": 70.0,
-            "n_epitope_residues_below_floor": 0,
-            "fraction_epitope_residues_below_floor": 0.0
+            "n_epitope_residues_below_floor": 22,
+            "fraction_epitope_residues_below_floor": 1.0
           }
         }
       },
@@ -324,16 +333,16 @@
             "status": "ran",
             "tool": "DiscoTope-3.0",
             "n_residues": 154,
-            "n_epitope_residues": 23,
-            "epitope_fraction": 0.14935064935064934,
-            "mean_score": 0.21101110389610386,
+            "n_epitope_residues": 21,
+            "epitope_fraction": 0.13636363636363635,
+            "mean_score": 0.23406240259740263,
             "epitope_segments": [
               [
                 4,
                 5
               ],
               [
-                7,
+                8,
                 8
               ],
               [
@@ -373,10 +382,6 @@
                 75
               ],
               [
-                81,
-                81
-              ],
-              [
                 132,
                 132
               ],
@@ -394,10 +399,10 @@
               ]
             ],
             "threshold_source": "tool_boolean",
-            "mean_plddt_input": 6744.149350649351,
+            "mean_plddt_input": 67.44149350649352,
             "plddt_floor": 70.0,
-            "n_epitope_residues_below_floor": 0,
-            "fraction_epitope_residues_below_floor": 0.0
+            "n_epitope_residues_below_floor": 10,
+            "fraction_epitope_residues_below_floor": 0.47619047619047616
           }
         }
       },
@@ -489,9 +494,9 @@
             "status": "ran",
             "tool": "DiscoTope-3.0",
             "n_residues": 172,
-            "n_epitope_residues": 28,
-            "epitope_fraction": 0.16279069767441862,
-            "mean_score": 0.19418610465116293,
+            "n_epitope_residues": 31,
+            "epitope_fraction": 0.18023255813953487,
+            "mean_score": 0.22284930232558134,
             "epitope_segments": [
               [
                 12,
@@ -499,10 +504,6 @@
               ],
               [
                 15,
-                15
-              ],
-              [
-                17,
                 19
               ],
               [
@@ -512,6 +513,10 @@
               [
                 32,
                 32
+              ],
+              [
+                36,
+                36
               ],
               [
                 45,
@@ -554,6 +559,10 @@
                 132
               ],
               [
+                141,
+                141
+              ],
+              [
                 154,
                 154
               ],
@@ -563,10 +572,10 @@
               ]
             ],
             "threshold_source": "tool_boolean",
-            "mean_plddt_input": 3625.5348837209303,
+            "mean_plddt_input": 36.25534883720929,
             "plddt_floor": 70.0,
-            "n_epitope_residues_below_floor": 0,
-            "fraction_epitope_residues_below_floor": 0.0
+            "n_epitope_residues_below_floor": 31,
+            "fraction_epitope_residues_below_floor": 1.0
           }
         }
       },
