@@ -134,6 +134,18 @@ def report_s1(art: Artifact) -> None:
     print_warnings(art)
 
 
+def closing_line(stages: list[str], s2_art: Artifact | None) -> str:
+    """Last line of `run`: names what ran, and says so when S2 virulence or localisation was not_run."""
+    degraded = []
+    if s2_art is not None:
+        summary = s2_art.payload.get("summary", {})
+        for label in ("virulence", "localisation"):
+            if summary.get(label, {}).get("run_status") == "not_run":
+                degraded.append(label)
+    note = f"degraded: S2 {' and '.join(degraded)} not_run; " if degraded else ""
+    return f"done. artifacts: {', '.join(stages)}  ({note}verify: ok)"
+
+
 def report_s2(art: Artifact) -> None:
     s = art.payload["summary"]
     v, loc = s["virulence"], s["localisation"]
@@ -159,7 +171,9 @@ def run_extra_stage(stage: str, store: RunStore, cfg: Config) -> tuple[str, Arti
     fn = getattr(mod, "run", None)
     if not callable(fn):
         return "module has no run(store, config)", None
-    return "ran", fn(store, cfg)
+    res = fn(store, cfg)
+    # some stages return the artifact's Path rather than the Artifact: read it back
+    return "ran", res if isinstance(res, Artifact) else store.read_artifact(stage)
 
 
 def cmd_run(args: argparse.Namespace) -> int:
@@ -196,6 +210,8 @@ def cmd_run(args: argparse.Namespace) -> int:
             say(f"{stage:<8}{outcome} - skipped")
             continue
         say(f"{stage:<8}{art.status}" + (f"  ({len(art.warnings)} warning(s))" if art.warnings else ""))
+        if art.status != "ok" and art.warnings:
+            say(f"        reason: {art.warnings[0]}")
         if art.status != "ok":
             return EXIT_ERROR
     problems = store.verify()
@@ -204,7 +220,8 @@ def cmd_run(args: argparse.Namespace) -> int:
         for p in problems:
             say(f"  - {p}")
         return EXIT_ERROR
-    say(f"\ndone. artifacts: {', '.join(store.stages_present())}  (verify: ok)")
+    say()
+    say(closing_line(store.stages_present(), a2 if "s2" in wanted else None))
     return EXIT_OK
 
 

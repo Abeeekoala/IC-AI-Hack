@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import sys
 import types
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from vaxforge import cli, s0_taxonomy as S0, s1_acquire as S1
+from vaxforge import artifacts as A, cli, s0_taxonomy as S0, s1_acquire as S1, s2_annotate as S2
 from vaxforge.artifacts import RunStore
 from vaxforge.http import client_from_config as real_client_from_config
 from vaxforge.testing import FakeTransport, ReplayTransport
@@ -53,16 +54,19 @@ def run_cli(*argv: str) -> int:
 
 
 @needs_blast
-def test_run_end_to_end_then_verify_show_and_offline_rerun(project, capsys):
+def test_run_end_to_end_then_verify_show_and_offline_rerun(project, capsys, monkeypatch):
+    # No PSORTb on purpose: with Docker installed but idle the online run would record "PSORTb failed: <docker error>" and the
+    # offline re-run a different reason, so the two S2 digests could never match. Absent PSORTb gives one stable reason.
+    monkeypatch.setattr(S2, "find_executable", lambda *a, **k: None)
     out = project / "runs" / "nmb"
     code = run_cli("run", "--pathogen", "Neisseria meningitidis", "--out", str(out), "--non-interactive", "--top-k", "7")
     text = capsys.readouterr().out
     assert code == 0, text
     assert "S0  resolved: Neisseria meningitidis" in text and "S1  proteome UP000000001" in text and "S2  annotated 3 proteins" in text
     assert "s3  not installed - skipped" in text.lower() or "s3  " in text.lower()
-    assert "'Unknown' kept explicit" in text and "(verify: ok)" in text
+    assert "'Unknown' kept explicit" in text and "verify: ok)" in text            # "(degraded: ...; verify: ok)" when PSORTb is absent
     store = RunStore(out)
-    assert store.stages_present() == ["s0", "s1", "s2"]
+    assert {"s0", "s1", "s2"} <= set(store.stages_present())          # a plain run also walks any later stage that is installed
     assert json.loads((out / "config.resolved.json").read_text(encoding="utf-8"))["pipeline"]["top_k"] == 7
 
     assert run_cli("verify", str(out)) == 0
@@ -173,3 +177,38 @@ def test_ascii_safe_dir_and_runner_discovery(tmp_path):
     with pytest.raises(Exception):
         BlastRunner(make_config(tmp_path, tools={"blast_mode": "docker", "docker": "definitely-not-docker"}), odd).require() \
             if shutil.which("docker") is None else (_ for _ in ()).throw(Exception("docker present"))
+
+
+def test_closing_line_reports_degraded_s2():
+    from types import SimpleNamespace
+    from vaxforge.cli import closing_line
+
+    def art(v, loc):
+        return SimpleNamespace(payload={"summary": {"virulence": {"run_status": v}, "localisation": {"run_status": loc}}})
+
+    assert closing_line(["s0", "s1", "s2"], art("ok", "ok")).endswith("(verify: ok)")
+    assert "(degraded: S2 virulence and localisation not_run; verify: ok)" in closing_line(["s2"], art("not_run", "not_run"))
+    assert "degraded: S2 localisation not_run;" in closing_line(["s2"], art("ok", "not_run"))
+    assert closing_line(["s0"], None).endswith("(verify: ok)")
+
+
+def test_stage_returning_a_path_and_a_failed_stage_reason(project, capsys, monkeypatch):
+    def path_run(store, config):                       # like stream B: returns the artifact's Path, not an Artifact
+        store.write_artifact("s3", {"ranking": []}, inputs=["s2"])
+        return store.artifact_path("s3")
+
+    def failing_run(store, config):
+        return store.write_artifact("s4", {"gates": []}, inputs=["s3"], status="failed", warnings=["gate tool crashed: boom"])
+
+    for stage in ("s3", "s4"):                         # another test may have imported the real stage and registered its keys
+        monkeypatch.delitem(A.REQUIRED_PAYLOAD_KEYS, stage, raising=False)
+    for name, fn in (("s3_rank", path_run), ("s4_filter", failing_run)):
+        mod = types.ModuleType(f"vaxforge.{name}")
+        mod.run = fn
+        monkeypatch.setitem(sys.modules, f"vaxforge.{name}", mod)
+    out = project / "runs" / "pathrun"
+    code = run_cli("run", "--pathogen", "Neisseria meningitidis", "--out", str(out), "--non-interactive", "--stages", "s0,s1,s2,s3,s4")
+    text = capsys.readouterr().out
+    assert re.search(r"^s3\s+ok\s*$", text, re.M), text        # the returned Path was turned back into the artifact
+    assert RunStore(out).read_artifact("s3").status == "ok"
+    assert code == cli.EXIT_ERROR and "reason: gate tool crashed: boom" in text

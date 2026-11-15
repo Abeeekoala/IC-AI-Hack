@@ -133,6 +133,17 @@ def test_no_psortb_is_not_run_not_unknown(store, cfg, tmp_path, monkeypatch):
     assert loc["status"] != "psortb_unknown"
 
 
+def test_offline_run_without_cached_psortb_is_not_run_not_a_crash(store, cfg, tmp_path, monkeypatch):
+    """Docker installed but PSORTb never run (a normal laptop): --offline must record not_run, not abort with CacheMiss."""
+    prepare(store, cfg, tmp_path)
+    cfg.set("network.offline", True)
+    monkeypatch.setattr(S2, "find_executable", lambda *a, **k: "docker")        # a docker executable exists
+    art = S2.run(store, cfg, runner=NoBlastRunner())
+    loc = art.payload["proteins"][0]["localisation"]
+    assert loc["status"] == "not_run" and loc["label"] == "Unknown" and "offline mode" in loc["reason"]
+    assert art.payload["summary"]["localisation"]["run_status"] == "not_run"
+
+
 def test_virulence_not_run_when_blast_missing(store, cfg, tmp_path, monkeypatch):
     prepare(store, cfg, tmp_path)
 
