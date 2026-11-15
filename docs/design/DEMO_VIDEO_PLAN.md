@@ -52,7 +52,7 @@ Speaking pace is about 2.3 words a second, so 2:00 is roughly 275 words. The nar
 |---|---|---|
 | Adaption | Manifest (included rows, real share, tags), generation manifest, win-rate report, Adaption job id and dashboard, leaderboard row, spend | `runs/.../s9_5`, `validation/`, Adaption dashboard |
 | Figma | Import from code to editable layers, variables panel, owner cards, version history, the plain process log | Figma file `pzytlXMGdl8JuSNivTeOOq`, `docs/design/FIGMA_EVIDENCE.md` |
-| AI for Science | LOPOV and Bexsero numbers, leakage report, simulator output, biosecurity gate, limits | `validation/`, `README.md` §3 §7 §8 |
+| AI for Science | Bexsero numbers (0 of 3, circular), leakage report, simulator output, biosecurity gate, limits; LOPOV is metrics code only and has no result, so it is not claimed | `validation/`, `README.md` §3 §7 §8 |
 | Best use of Boltz (bounty) | Boltz-2 structures of the top-k candidates, their confidence, the refolder cross-check and the epitope-residue confidence | `runs/.../s7_structure.json`, `s7/<id>/*.pdb` (stream B) |
 
 ## Boltz in the video
