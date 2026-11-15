@@ -184,8 +184,11 @@ def evaluate(order: list[dict], candidates: list[dict], s2_proteins: list[dict],
         verdict = record["verdicts"].get(o["digest"], "not_screened") if record else "not_screened"
         rows.append({"id": o["id"], "digest": o["digest"], "length": len(o["sequence"]), "local_checks": checks,
                      "provider_verdict": verdict})
-        blockers += [f"{o['id']}: {name}: {c['detail']}" for name, c in checks.items() if c["result"] in ("fail", "not_evaluated")]
-        review += [f"{o['id']}: {name}: {c['detail']}" for name, c in checks.items() if c["result"] == "review"]
+        def line(name, c):   # the flag checks already name the candidate; do not print the same id twice
+            detail = c["detail"][len(o["id"]) + 2:] if c["detail"].startswith(o["id"] + ": ") else c["detail"]
+            return f"{o['id']}: {name}: {detail}"
+        blockers += [line(name, c) for name, c in checks.items() if c["result"] in ("fail", "not_evaluated")]
+        review += [line(name, c) for name, c in checks.items() if c["result"] == "review"]
         if verdict in ("flag", "error"):
             blockers.append(f"{o['id']}: the provider record gives verdict {verdict}")
     uncovered = [r["id"] for r in rows if r["provider_verdict"] == "not_screened"]

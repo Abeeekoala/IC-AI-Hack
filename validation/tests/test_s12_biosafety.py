@@ -443,3 +443,11 @@ def test_a_screening_record_with_no_order_anywhere_is_still_a_config_error(tmp_p
     _, record = cleared_inputs(tmp_path)
     with pytest.raises(ConfigError, match="no order list"):
         s12.run(store, cfg(tmp_path, screening=str(record)))
+
+
+def test_a_reason_names_the_sequence_once(tmp_path):
+    art = s12.check(make_store(tmp_path), write_order(tmp_path, {"virulent": seq("virulent"), "no_toxin_result": seq("no_toxin_result")}), None)
+    lines = art.payload["review"] + art.payload["reasons"]
+    assert lines and not any("virulent: virulence_flag: virulent:" in x or "no_toxin_result: toxin_flag: no_toxin_result:" in x for x in lines)
+    assert any(x.startswith("virulent: virulence_flag: S2 records") for x in art.payload["review"])
+    assert any(x.startswith("no_toxin_result: toxin_flag: S4 recorded no toxicity result") for x in art.payload["reasons"])
