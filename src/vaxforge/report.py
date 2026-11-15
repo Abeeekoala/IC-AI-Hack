@@ -1,4 +1,5 @@
-"""``vaxforge report RUN_DIR [--out report.html]``: one self-contained HTML page of a run's evidence chain (stream D).
+"""``vaxforge report RUN_DIR [--out FILE]``: one self-contained HTML page of a run's evidence chain (stream D).  Without
+``--out`` the page is written to ``RUN_DIR/report.html``, next to the artifacts it describes.
 
 It reads the run only through ``RunStore`` and writes inline CSS, no script, no external font or image, so the file works
 offline and prints.  Sections follow the team's Figma shell (top bar, title block, cards, "Honest ceiling" card, source
@@ -9,8 +10,9 @@ Honesty rules, enforced here and tested:
 * A fixture run carries "Fixture, not a result" on the top bar and on every section.
 * Every number sits next to its source stage and that stage's recorded tool versions.
 * Every string that comes from an artifact is HTML-escaped; artifacts are data, never markup.
-* Nothing is predicted or derived here.  S8-S10 and S12 are shown as status and digest only, because their payload
-  schemas are not fixed; this report does not guess at them.
+* Nothing is predicted or derived here.  S8, S9, S9+, S9.5, S10 and S12 show only the fields named in
+  docs/design/screen_fields.md, as the artifact states them (counts and one percentage are the only arithmetic); a field
+  this report does not name is not shown, and a stage with nothing in it says "not run".
 
 The sub-command is registered through ``register_cli`` (cli.py must list ``report`` in EXTENSION_MODULES);
 ``python -m vaxforge.report RUN_DIR`` works without that.
@@ -20,6 +22,7 @@ from __future__ import annotations
 import argparse
 import html
 import sys
+from collections import Counter
 from pathlib import Path
 
 from .artifacts import STAGE_ORDER, ContractError, RunStore
@@ -31,7 +34,8 @@ TITLES = {"s0": "S0 · Taxonomy resolution", "s1": "S1 · Data acquisition", "s2
           "s9": "S9 · Robot code", "s9plus": "S9+ · Protocol animation (optional)", "s9_5": "S9.5 · Fine-tuned protocol code",
           "s10": "S10 · Animal study design", "s11": "S11 · Pre-registration", "s12": "S12 · Biosecurity gate"}
 BASIS = ("s7", "s6", "s5", "s4", "s3")          # the latest stage that lists candidates is the one ranked on the page
-PAYLOAD_STATES = (("not_run", "not run"), ("blocked", "blocked"), ("refus", "refused"))
+PAYLOAD_STATES = (("not_run", "not run"), ("not_screened", "not run"), ("blocked", "blocked"), ("refus", "refused"))
+AUTOMATION = {"full": "ROBOT (full)", "partial": "ROBOT-PARTIAL (partial)", "manual": "HUMAN (manual)"}
 FIXTURE = '<span class="fixture">Fixture, not a result</span>'
 
 # Fixed text, copied from README sections 4 and 7 (tests/test_report.py fails if the README changes and this does not).
@@ -93,7 +97,7 @@ section>header{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margi
 .chip-done{color:var(--done);background:var(--done-bg)}.chip-not-run{color:var(--nr);background:var(--nr-bg)}
 .chip-needs-user-input,.chip-fixture{color:var(--warn);background:var(--warn-bg)}.chip-failed{color:var(--bad);background:var(--bad-bg)}
 .chip-refused{color:var(--bad);background:var(--bad-bg);border-style:dashed}.chip-blocked{color:var(--block);background:var(--block-bg)}
-.chip-cached{color:var(--info);background:var(--info-bg)}
+.chip-cached,.chip-review{color:var(--info);background:var(--info-bg)}
 .nr{color:var(--mute);font-style:italic}.meta,.src,small{color:var(--mute);font-size:.8rem}
 nav ol{columns:2 14rem;margin:.5rem 0;padding-left:1.4rem}
 .cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:10px}
@@ -103,8 +107,10 @@ th,td{text-align:left;vertical-align:top;padding:4px 8px;border-bottom:1px solid
 .cand{border-top:1px solid var(--line);margin-top:12px}
 .ceiling{background:var(--ceil-bg);border-left:4px solid var(--ceil-line);border-radius:4px;padding:6px 12px;margin-top:12px}
 .ceiling h3{margin:.2rem 0}.ceiling p{margin:.2rem 0 .4rem}
+.review{background:var(--info-bg);border-left:4px solid var(--info);border-radius:4px;padding:6px 12px;margin:12px 0}
+.review h3{margin:.2rem 0}.review ul{margin:.2rem 0 .4rem}td ul{margin:0;padding-left:1.1rem}
 footer{padding-bottom:32px}footer h2{margin:1rem 0 .5rem}
-@media print{nav{display:none}body{background:#fff;color:#000;font-size:10pt}section,.card,.cand{break-inside:avoid}a{color:inherit}}
+@media print{nav{display:none}body{background:#fff;color:#000;font-size:10pt}section,.card,.cand,.review{break-inside:avoid}a{color:inherit}}
 """
 
 
@@ -221,7 +227,7 @@ class Run:
             return "failed"
         if a.status == "needs_user_input":
             return "needs user input"
-        for path in (("status",), ("fine_tune", "status"), ("decision",)):
+        for path in (("status",), ("fine_tune", "status"), ("decision",), ("state",)):
             word = str(dig(a.payload, *path)).lower()
             for prefix, label in PAYLOAD_STATES:
                 if word.startswith(prefix):
@@ -237,7 +243,7 @@ class Run:
         a = self.arts.get(s)
         if a is None:
             return "No artifact in this run."
-        for path in (("resolution", "message"), ("fine_tune", "reasons"), ("reason",)):
+        for path in (("resolution", "message"), ("fine_tune", "reasons"), ("reason",), ("reasons",)):
             v = dig(a.payload, *path)
             if v:
                 return "; ".join(map(str, v)) if isinstance(v, list) else str(v)
@@ -434,7 +440,240 @@ def prereg(r: Run) -> str:
         up = [(e(k), fmt(dd(v).get("status")), fmt(dd(v).get("digest")), e(tools_text(dd(v).get("tools")))) for k, v in dd(f.get("upstream")).items()]
         extra = (ev(r, rows) + (f"<p>{e(p['note'])}</p>" if p.get("note") else "") + "<h3>Upstream artifacts frozen</h3>"
                  + tbl(("Stage", "Status when frozen", "Artifact digest", "Tools"), up))
-    return stage_block(r, "s11", extra) + stage_block(r, "s12")
+    return stage_block(r, "s11", extra) + stage_block(r, "s12", gate(r))
+
+
+# ---- S8, S9, S9+, S9.5, S10, S12: the fields docs/design/screen_fields.md names, as each artifact states them ----------------
+def listed(xs) -> object:
+    """A list of strings as a bullet list; an empty or missing list is a dash, not "none"."""
+    items = [x for x in xs if x not in (None, "")] if isinstance(xs, list) else []
+    return H("<ul>" + "".join(f"<li>{fmt(x)}</li>" for x in items) + "</ul>") if items else dash()
+
+
+def counts_text(counts) -> object:
+    """``{"PASS": 12, "FAIL": 1}`` as "PASS 12, FAIL 1"; a missing or empty mapping is a dash."""
+    pairs = [(k, v) for k, v in counts.items()] if isinstance(counts, dict) else []
+    return H(", ".join(f"{e(k)} {fmt(v)}" for k, v in pairs)) if pairs else dash()
+
+
+def real_count(r: Run, s: str, n):
+    """A stage that did not run writes 0 for its counts; that 0 is "nothing was done", not a result, so it shows as a dash."""
+    return None if n == 0 and r.state(s) == "not run" else n
+
+
+def no_content(r: Run, s: str, what: str) -> str:
+    return f"<p>{missing(r, s)} {e(what)}</p>"
+
+
+def cost_text(cost) -> object:
+    """The S8 cost as the artifact states it.  No price is ever invented: a missing total is "not estimated"."""
+    c = dd(cost)
+    status = c.get("status")
+    # an amount is shown exactly as the artifact states it: fmt() would round money to four significant digits
+    money = lambda t: H(f"{e(dd(t).get('currency'))} {dash() if dd(t).get('amount') is None else e(dd(t).get('amount'))}")  # noqa: E731
+    if not c:
+        return None
+    if status == "estimated" and c.get("total"):
+        return H(f"estimated total {money(c['total'])} (only the listed items are counted)")
+    if status == "partial":
+        priced = f"; priced so far {money(c['priced_subtotal'])}" if c.get("priced_subtotal") else ""
+        return H(f"{dash('partial, no total')}{priced}")
+    return dash("not estimated")
+
+
+def protocol(r: Run) -> str:
+    p = r.payload("s8")
+    cands = rows_of(p.get("candidates"))
+    if not cands:
+        return no_content(r, "s8", "no protocol: this run has no S8 candidates.")
+    fasta = p.get("order_fasta")
+    order = (H(f"{fmt(dd(fasta).get('records'))} record(s) in <code>{e(dd(fasta).get('path'))}</code>; each sequence must clear S12 "
+               f"before anything is ordered") if isinstance(fasta, dict) else None)
+    out = [ev(r, [("Candidates with a protocol", len(cands), "s8"), ("Candidates chosen from", dig(p, "selection", "source"), "s8"),
+                  ("Cost (all shortlisted protocols)", cost_text(p.get("cost")), "s8"), ("Order list for gene synthesis", order, "s8")])]
+    if dig(p, "cost", "note"):
+        out.append(f"<p>{e(dig(p, 'cost', 'note'))}</p>")
+    for n, c in enumerate(cands, 1):
+        pr = dd(c.get("protocol"))
+        steps = Counter(str(s.get("automation")) for s in rows_of(pr.get("steps")))
+        step_text = (H(f"{sum(steps.values())} steps: " + ", ".join(f"{AUTOMATION.get(k) or e(k)} {v}" for k, v in steps.items()))
+                     if steps else None)
+        limit = dig(pr, "config", "endotoxin_limit_eu_per_ug")
+        rows = [("Rank", c.get("rank"), "s8"), ("Rank source", c.get("rank_source"), "s8"),
+                ("Falsification condition", pr.get("falsifier"), "s8"), ("What this does NOT measure", listed(pr.get("does_not_measure")), "s8"),
+                ("Steps and who does them", step_text, "s8"), ("Readouts", listed(dig(pr, "config", "readouts")), "s8"),
+                ("Endotoxin limit (EU/ug)", dash("not set") if limit is None else limit, "s8"),
+                ("Cost range (GBP)", dash("not estimated") if pr.get("cost_gbp_range") is None else pr.get("cost_gbp_range"), "s8"),
+                ("Estimate basis", pr.get("estimate_basis"), "s8")]
+        out.append(f'<article class="cand"><h3>{n}. {e(c.get("protein_name") or c.get("candidate_id"))} '
+                   f'<small>{e(c.get("candidate_id"))}</small></h3>{ev(r, rows)}</article>')
+    return "".join(out)
+
+
+def robot(r: Run) -> str:
+    p = r.payload("s9")
+    cands = rows_of(p.get("candidates"))
+    sim = dd(p.get("simulator"))
+    version = sim.get("opentrons_version")
+    simulator = (H(f"Opentrons {e(version)}, simulated") if sim.get("simulated") is True and version
+                 else H("simulated, version not recorded") if sim.get("simulated") is True else dash("not simulated"))
+    out = [ev(r, [("Simulator", simulator, "s9"), ("Sessions (one robot-code file each)", real_count(r, "s9", dig(p, "summary", "n_sessions")), "s9"),
+                  ("Outcomes of all sessions", counts_text(dig(p, "summary", "outcomes")), "s9"),
+                  ("Parameters", p.get("parameters_status"), "s9"), ("Biosecurity", p.get("biosecurity"), "s9")])]
+    rows, failing = [], []
+    for c in cands:
+        for b in rows_of(c.get("backends")) or [{}]:
+            sessions = rows_of(b.get("sessions"))
+            tally = Counter(str(s.get("outcome")) for s in sessions)
+            other = {k: v for k, v in tally.items() if k not in ("PASS", "FAIL", "UNVERIFIED")}
+            # a stage that did not run has no PASS to show, whatever a session says
+            passed = None if r.state("s9") == "not run" else tally["PASS"]
+            cells = ([len(sessions), passed, tally["FAIL"], tally["UNVERIFIED"], counts_text(other) if other else "none"]
+                     if sessions else [None] * 5)
+            rows.append((f'{e(c.get("protein_name") or c.get("candidate_id"))}<br><small>{e(c.get("candidate_id"))}</small>',
+                         fmt(b.get("label")), *map(fmt, cells), f'<span class="src">{e(r.src("s9"))}</span>'))
+            failing += [(c, b, s) for s in sessions if s.get("outcome") != "PASS"]
+    if rows:
+        out.append("<h3>Simulator verdicts per candidate and code backend</h3>" + tbl(
+            ("Candidate", "Backend", "Sessions", "PASS", "FAIL", "UNVERIFIED", "Other", "Source"), rows))
+    else:
+        out.append(no_content(r, "s9", "no robot code in this run."))
+    if failing:
+        why = lambda s: dd(s.get("refusal")).get("detail") or s.get("error") or dd(s.get("grade")).get("sim_error")  # noqa: E731
+        out.append("<h3>Sessions that did not pass</h3>" + tbl(
+            ("Candidate", "Backend", "Session", "Outcome", "Reason"),
+            [(e(c.get("candidate_id")), fmt(b.get("label")), e(s.get("session_id")), fmt(s.get("outcome")), fmt(why(s) or dash("not recorded"))) for c, b, s in failing]))
+    return "".join(out)
+
+
+def animation(r: Run) -> str:
+    s = dd(r.payload("s9plus").get("summary"))
+    rows = [("Animations written", real_count(r, "s9plus", s.get("n_animated")), "s9plus"),
+            ("Sessions considered", real_count(r, "s9plus", s.get("n_sessions")), "s9plus"),
+            ("Sessions skipped", real_count(r, "s9plus", s.get("n_skipped")), "s9plus")]
+    note = ("<p>The animations are separate HTML files in the run folder (<code>data/s9plus/</code>); this report does not embed them. "
+            "Their times are estimates, not measurements.</p>")
+    return ev(r, rows) + (note if r.state("s9plus") != "not run" else "")
+
+
+def ref_text(ref) -> str:
+    """Where a sidecar file is and its recorded hash, from a contract file reference."""
+    ref = dd(ref)
+    if not ref.get("path"):
+        return "file reference not recorded"
+    return f"{ref['path']} · sha256 {str(ref.get('sha256'))[:16]}…"
+
+
+def adaption(r: Run, ft: dict) -> str:
+    """The Adaption run facts and the training-manifest counts that the S9.5 stage copied into its artifact."""
+    out = ["<h3>Adaption run (Adaption's own numbers about its own training run)</h3>"]
+    a = ft.get("adaption")
+    if not isinstance(a, dict):
+        return out[0] + f"<p>{dash()} no Adaption evidence is attached to this run (set <code>finetune.evidence</code> and re-run S9.5).</p>"
+    where = f"{r.src('s9_5')}; file {ref_text(ft.get('evidence'))}"
+    best = H(f"{fmt(a.get('best_win_rate'))}<br><small>Adaption's own optimisation target. "
+             + (e(a.get("caveat")) if a.get("caveat") else "The artifact carries no caveat; read this number as an optimisation target, not as protocol quality.")
+             + "</small>")
+    rows = [("Adaption run id", a.get("run_id")), ("Base model (pinned)", a.get("base_model_id")),
+            ("Trained model name", a.get("trained_model_name")), ("Run status (as Adaption reports it)", a.get("status")),
+            ("Training method", a.get("training_method")), ("Training type", a.get("training_type")),
+            ("Iterations completed (of the cap)", H(f"{fmt(a.get('iterations_completed'))} of {fmt(a.get('max_iterations'))}")),
+            ("best_win_rate, Adaption's own number", best), ("Target win rate set for the run", a.get("target_win_rate")),
+            ("Target reached (Adaption's own comparison)", dash("not computed") if a.get("target_reached") is None else a.get("target_reached")),
+            ("Checkpoint sha256", dash("not downloaded") if a.get("checkpoint_sha256") is None else a.get("checkpoint_sha256")),
+            ("Completed at (UTC)", a.get("completed_at_utc"))]
+    out.append(tbl(("Evidence", "Value", "Source"), [(e(k), fmt(v), e(where)) for k, v in rows]))
+    out.append("<h3>Held-out win rate (this project's own evaluation, <code>validation/winrate.py</code>)</h3>")
+    out.append(ev(r, [("Held-out win rate", ft.get("held_out_win_rate"), "s9_5")]))
+    c = ft.get("manifest_counts")
+    out.append("<h3>Training manifest</h3>")
+    if not isinstance(c, dict):
+        return "".join(out) + f"<p>{dash()} no training manifest is attached (set <code>finetune.manifest</code> and re-run S9.5).</p>"
+    n, syn = c.get("included"), c.get("included_synthetic")
+    ints = all(isinstance(x, int) and not isinstance(x, bool) for x in (n, syn)) and n > 0
+    share = H(f"{syn} of {n} ({100 * syn / n:.1f}%), computed here from the two counts") if ints else dash("not computed")
+    where = f"{r.src('s9_5')}; file {ref_text(ft.get('manifest'))}"
+    rows = [("Rows included in the training file", n), ("Candidate rows considered", c.get("candidates")),
+            ("Synthetic rows among those included", share), ("Meets the row minimum", c.get("meets_min_rows")),
+            ("Longest row allowed (characters)", c.get("max_row_chars"))]
+    return "".join(out) + tbl(("Evidence", "Value", "Source"), [(e(k), fmt(v), e(where)) for k, v in rows])
+
+
+def finetune(r: Run) -> str:
+    p = r.payload("s9_5")
+    ft = dd(p.get("fine_tune"))
+    status = str(ft.get("status"))
+    shown = (dash("not run") if status.startswith("not_run") else "evidence attached (this stage trained and evaluated nothing itself)"
+             if status == "evidence_attached" else ft.get("status"))
+    rows = [("Fine-tune status", shown, "s9_5"), ("Base model id", p.get("base_model_id"), "s9_5"),
+            ("Trained model id", p.get("model_id"), "s9_5")]
+    return stage_block(r, "s9_5", ev(r, rows) + (adaption(r, ft) if status == "evidence_attached" else ""))
+
+
+def animal(r: Run) -> str:
+    p = r.payload("s10")
+    d = dd(p.get("design"))
+    if not d:
+        return no_content(r, "s10", "no study design in this run.")
+    pa, sp = dd(d.get("power_analysis")), dd(d.get("species_selection"))
+    fr = dd(p.get("falsification_rows"))
+    states = H(f"{fmt(fr.get('total'))} rows: " + str(counts_text(fr.get("by_status")))) if fr else None
+    rows = [("Species", sp.get("species"), "s10"), ("Strain", H(f"{fmt(sp.get('strain'))} ({fmt(sp.get('strain_status'))})"), "s10"),
+            ("Adjuvant", dig(d, "adjuvant", "name"), "s10"), ("Route", dig(d, "route", "route"), "s10"),
+            ("Primary endpoint", dig(d, "primary_endpoint", "name"), "s10"), ("Arms", len(rows_of(d.get("arms"))) or None, "s10"),
+            ("Animals per group (allocated)", pa.get("n_per_group_allocated"), "s10"), ("Total animals", pa.get("total_animals"), "s10"),
+            ("Assumed effect size d", H(f"{fmt(pa.get('effect_size_d'))} ({fmt(pa.get('effect_size_status'))})"), "s10"),
+            ("Family-wise alpha, multiplicity method", H(f"{fmt(pa.get('alpha_familywise'))}, {fmt(pa.get('multiplicity_method'))}"), "s10"),
+            ("Target power, achieved power", H(f"{fmt(pa.get('target_power'))}, {fmt(pa.get('achieved_power'))}"), "s10"),
+            ("Challenge model", dig(d, "challenge_model", "status"), "s10"), ("Positive control", dig(d, "positive_control", "status"), "s10"),
+            ("Falsification rows and their states", states, "s10"), ("Human inputs still outstanding", p.get("outstanding_human_inputs"), "s10")]
+    out = [ev(r, rows)]
+    arms = rows_of(d.get("arms"))
+    if arms:
+        out.append("<h3>Arms</h3>" + tbl(("Arm", "Role", "Dose (ug)", "Animals per group", "Primary comparison", "Source"),
+                                          [(e(a.get("arm_id")), fmt(a.get("role")), fmt(a.get("dose_ug") if a.get("dose_ug") is not None or
+                                                                           str(a.get("role")).startswith("candidate") else NA),
+                                            fmt(a.get("n_per_group")),
+                                            fmt(a.get("primary_comparison")), f'<span class="src">{e(r.src("s10"))}</span>') for a in arms]))
+    tests = [f for f in rows_of(d.get("falsification_map")) if f.get("falsified_if")]
+    if tests:
+        out.append("<h3>Falsification rows that can be tested</h3>" + tbl(
+            ("Candidate", "Upstream stage", "Animal readout", "Falsified if", "State"),
+            [(e(f.get("candidate_id")), fmt(f.get("upstream_stage")), fmt(f.get("animal_readout")), fmt(f.get("falsified_if")),
+              fmt(f.get("status"))) for f in tests]))
+    return "".join(out)
+
+
+def gate(r: Run) -> str:
+    p = r.payload("s12")
+    if not p:
+        return ""
+    rec, order = dd(p.get("provider_record")), dd(p.get("order"))
+    sources = {"s8": "the order list S8 wrote", "user": "an order list supplied by a person"}
+    order_text = (H(f"{fmt(order.get('status'))}, {fmt(order.get('n_sequences'))} sequence(s); source: "
+                    f"{fmt(sources.get(str(order.get('source'))) or order.get('source'))}") if order.get("n_sequences") is not None
+                  else order.get("status"))
+    rec_text = (H(f"{fmt(rec.get('status'))}: {fmt(rec.get('provider'))} {fmt(rec.get('tool'))} {fmt(rec.get('tool_version'))}, covers every "
+                  f"ordered sequence: {fmt(rec.get('covers_every_ordered_sequence'))}; {fmt(rec.get('authenticity'))}")
+                if rec.get("status") == "supplied" else rec.get("status"))
+    rows = [("Gate state", p.get("state"), "s12"), ("Reasons", listed(p.get("reasons")), "s12"),
+            ("Order list", order_text, "s12"), ("Provider screening record", rec_text, "s12")]
+    out = [ev(r, rows)]
+    review = [x for x in p.get("review", []) if x not in (None, "")] if isinstance(p.get("review"), list) else []
+    if review or p.get("review_required"):
+        out.append(f'<div class="review"><h3><span class="chip chip-review">for review</span> {len(review)} candidate flag(s) for a person '
+                   f'to look at; nothing is blocked by these</h3>'
+                   + ("<ul>" + "".join(f"<li>{fmt(x)}</li>" for x in review) + "</ul>" if review
+                      else f"<p>{dash()} the artifact says review is required but lists no flag.</p>") + "</div>")
+    seqs = rows_of(p.get("sequences"))
+    if seqs:
+        checks = ("selected_candidate", "sequence_sanity", "virulence_flag", "toxin_flag")
+        out.append("<h3>Ordered sequences</h3>" + tbl(
+            ("Sequence", "Length", "Provider verdict", *checks),
+            [(e(s.get("id")), fmt(s.get("length")), fmt(s.get("provider_verdict")),
+              *(fmt(dig(s, "local_checks", c, "result")) for c in checks)) for s in seqs]))
+    out.append("<h3>Limits of this gate</h3>" + str(listed(p.get("limits"))))
+    return "".join(out)
 
 
 def warnings_section(r: Run) -> str:
@@ -474,9 +713,10 @@ def render(run_dir, now: str | None = None) -> str:
         ("candidates", "Ranked candidates", ranked(r), "A rank is a hypothesis from predictors this project has not validated. It says nothing about expression, immunogenicity or protection."),
         ("detail", "Candidate detail", detail(r), "Scores marked heuristic are unvalidated summaries; the epitope and structure outputs behind them are the evidence."),
         ("validation", "Validation", validation(r), "A retrospective result counts only if the holdout actually held out (README §3)."),
-        ("protocol", "Wet-lab protocol", stage_block(r, "s8"), "A protocol is a design. Nothing in this report is a measured assay result."),
-        ("robot", "Robot code", "".join(stage_block(r, s) for s in ("s9", "s9plus", "s9_5")), "Passing simulation is not correctness (README S9)."),
-        ("animal", "Animal study", stage_block(r, "s10"), "A study design for ethics review, not results. Mouse immunogenicity does not predict human protection."),
+        ("protocol", "Wet-lab protocol", stage_block(r, "s8", protocol(r)), "A protocol is a design. Nothing in this report is a measured assay result."),
+        ("robot", "Robot code", stage_block(r, "s9", robot(r)) + stage_block(r, "s9plus", animation(r)) + finetune(r),
+         "Passing simulation is not correctness (README S9)."),
+        ("animal", "Animal study", stage_block(r, "s10", animal(r)), "A study design for ethics review, not results. Mouse immunogenicity does not predict human protection."),
         ("prereg", "Pre-registration and gate", prereg(r), "A timestamp from this machine's clock is evidence only once its digest is published somewhere else."),
         ("warnings", "Warnings", warnings_section(r), "Only warnings a stage wrote down appear here. A stage that did not run could not warn."),
         ("limits", "Limits and absent", limits(), ""),
@@ -496,24 +736,25 @@ def render(run_dir, now: str | None = None) -> str:
 
 
 def cmd_report(args) -> int:
+    out = Path(args.out) if args.out else Path(args.run_dir) / "report.html"
     try:
-        page = render(args.run_dir)
-        Path(args.out).write_text(page, encoding="utf-8")
+        page = render(args.run_dir)         # raises for a missing folder before anything is written
+        out.write_text(page, encoding="utf-8")
     except (ContractError, OSError) as exc:
         print(f"report: {exc}", file=sys.stderr)
         return 1
-    print(f"wrote {args.out}")
+    print(f"wrote {out}")
     return 0
 
 
 def _add_arguments(p) -> None:
     p.add_argument("run_dir")
-    p.add_argument("--out", default="report.html", help="file to write (default: report.html)")
+    p.add_argument("--out", default=None, help="file to write (default: RUN_DIR/report.html, inside the run folder)")
     p.set_defaults(func=cmd_report)
 
 
 def register_cli(subparsers, common):
-    """`vaxforge report RUN_DIR [--out report.html]`."""
+    """`vaxforge report RUN_DIR [--out FILE]`."""
     _add_arguments(subparsers.add_parser("report", parents=[common], help="write a self-contained HTML evidence report for a run"))
 
 
