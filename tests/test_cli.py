@@ -236,7 +236,8 @@ def test_later_stages_run_without_pathogen_but_s0_and_a_missing_out_still_need_i
     fake_stage(monkeypatch, "s3_rank", "s3", {"ranking": [], "degraded": ["fallback ranker"]}, ["s2"])
     assert run_cli("run", "--out", str(run), "--stages", "s3", "--offline") == 0
     out = capsys.readouterr().out
-    assert re.search(r"^s3\s+ok\s*$", out, re.M) and "degraded: S3: fallback ranker; verify: ok)" in out
+    assert re.search(r"^s3\s+ok\s*$", out, re.M) and "  S3: fallback ranker" in out          # the reason, printed above the closing line
+    assert "(degraded: S3 (1 reason); verify: ok)" in out
     assert run_cli("run", "--stages", "s0,s1") != 0 and "give --pathogen" in capsys.readouterr().err      # S0 needs a target
     assert run_cli("run", "--stages", "s3") != 0 and "give --out RUN_DIR" in capsys.readouterr().err       # no name to derive a folder
 
@@ -248,8 +249,8 @@ def test_closing_line_names_every_kind_of_degradation():
         return SimpleNamespace(payload={"summary": {"virulence": {"run_status": v}, "localisation": {"run_status": loc}}})
 
     line = cli.closing_line(["s2", "s3"], art("ok", "fixture_stand_in"), {"s3": ["fallback ranker"], "s4": ["0 of 4 gates ran", "no AlgPred2"]})
-    assert "S2 localisation fixture_stand_in" in line and "S3: fallback ranker" in line
-    assert "S4: 0 of 4 gates ran, no AlgPred2" in line and line.endswith("; verify: ok)")
+    assert "S2 localisation fixture_stand_in" in line and "S3 (1 reason)" in line
+    assert "S4 (2 reasons)" in line and line.endswith("; verify: ok)") and "fallback ranker" not in line   # sentences go above the line
     assert cli.closing_line(["s2"], art("ok", "not_applicable")).endswith("(verify: ok)")          # a virus is not a degradation
     assert cli.closing_line(["s2"], art("ok", "ok"), {}).endswith("(verify: ok)")
 

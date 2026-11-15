@@ -174,7 +174,8 @@ def closing_line(stages: list[str], s2_art: Artifact | None, degraded: dict[str,
     """Last line of `run`: names what ran and says so when the run was degraded.
 
     Degraded means: S2 virulence or localisation did not run (any status other than ok / not_applicable), or a later
-    stage wrote a non-empty ``payload.degraded`` (``degraded`` maps stage -> reasons).
+    stage wrote a non-empty ``payload.degraded`` (``degraded`` maps stage -> reasons). The reasons are sentences, so the
+    line only counts them per stage; ``cmd_run`` prints the sentences themselves above it.
     """
     parts: list[str] = []
     if s2_art is not None:
@@ -187,7 +188,7 @@ def closing_line(stages: list[str], s2_art: Artifact | None, degraded: dict[str,
         for status, labels in by_status.items():
             parts.append(f"S2 {' and '.join(labels)} {status}")
     for stage, reasons in (degraded or {}).items():
-        parts.append(f"{stage.upper()}: {', '.join(reasons)}")
+        parts.append(f"{stage.upper()} ({len(reasons)} reason{'s' if len(reasons) != 1 else ''})")
     note = f"degraded: {'; '.join(parts)}; " if parts else ""
     return f"done. artifacts: {', '.join(stages)}  ({note}verify: ok)"
 
@@ -274,8 +275,14 @@ def cmd_run(args: argparse.Namespace) -> int:
             say(f"  - {p}")
         return EXIT_ERROR
     s2_art = a2 if "s2" in wanted else (store.read_artifact("s2") if store.has("s2") else None)
+    degraded = degraded_by_stage(store)
+    if degraded:
+        say("\ndegraded (why):")
+        for stage, reasons in degraded.items():
+            for reason in reasons:
+                say(f"  {stage.upper()}: {reason}")
     say()
-    say(closing_line(store.stages_present(), s2_art, degraded_by_stage(store)))
+    say(closing_line(store.stages_present(), s2_art, degraded))
     return EXIT_OK
 
 

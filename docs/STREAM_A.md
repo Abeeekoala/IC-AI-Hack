@@ -24,7 +24,8 @@ python -m pytest                              # 80+ tests, all offline (BLAST te
 `--set KEY=VALUE` (repeatable, any command) overrides one config value for that run; the value is read as JSON when it parses (`true`, `3`, `"text"`), else as text.
 
 **The closing line of `run`** says `(verify: ok)` only for a clean run. It says `(degraded: ...; verify: ok)` when S2 virulence or localisation has any status other than
-`ok` / `not_applicable`, or when a later stage wrote a non-empty `payload.degraded` (a list of short reason strings; stream B writes it for S3-S7). `vaxforge doctor` also lists the
+`ok` / `not_applicable`, or when a later stage wrote a non-empty `payload.degraded` (a list of reason strings; stream B writes it for S3-S7): the reasons are printed
+above the line under `degraded (why):`, and the line itself counts them per stage. `vaxforge doctor` also lists the
 S3-S12 tools (Opentrons interpreter, Vaxign-ML image, AlgPred2, ToxinPred2, NetMHCpan, NetMHCIIpan, MHCflurry, BepiPred3, DiscoTope3, Boltz) as found / not found; it runs none of them.
 
 ## What each stage does
