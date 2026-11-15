@@ -1,0 +1,653 @@
+{
+ "session_id": "s07_ni_nta_purification",
+ "title": "Ni-NTA magnetic-bead purification",
+ "covers": [
+  "s07"
+ ],
+ "modules": [
+  {
+   "key": "mag",
+   "name": "magnetic module gen2",
+   "slot": "6"
+  }
+ ],
+ "labware": [
+  {
+   "key": "waste",
+   "load_name": "nest_1_reservoir_195ml",
+   "slot": "1",
+   "module": null,
+   "label": "Liquid waste",
+   "kind": "waste"
+  },
+  {
+   "key": "tubes",
+   "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "slot": "2",
+   "module": null,
+   "label": "Bead slurry",
+   "kind": "tubes"
+  },
+  {
+   "key": "eluate",
+   "load_name": "nest_96_wellplate_200ul_flat",
+   "slot": "3",
+   "module": null,
+   "label": "Eluate collection plate",
+   "kind": "plate"
+  },
+  {
+   "key": "res",
+   "load_name": "nest_12_reservoir_15ml",
+   "slot": "5",
+   "module": null,
+   "label": "Wash and elution buffers",
+   "kind": "reservoir"
+  },
+  {
+   "key": "mp",
+   "load_name": "nest_96_wellplate_2ml_deep",
+   "slot": "6",
+   "module": "mag",
+   "label": "Clarified lysates on the magnetic module",
+   "kind": "plate"
+  },
+  {
+   "key": "tips_p300_1",
+   "load_name": "opentrons_96_tiprack_300ul",
+   "slot": "11",
+   "module": null,
+   "label": "p300 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p300",
+   "api_name": "p300_single_gen2",
+   "mount": "right",
+   "channels": 1,
+   "tipracks": [
+    "tips_p300_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "reagent": "candidate lysate",
+   "volume_ul": 500.0,
+   "source": "human_prepared",
+   "note": "clarified lysate placed by the human"
+  },
+  {
+   "ref": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "reagent": "empty-vector lysate (mock purification control)",
+   "volume_ul": 500.0,
+   "source": "human_prepared",
+   "note": "clarified lysate placed by the human"
+  },
+  {
+   "ref": {
+    "labware": "res",
+    "well": "A1"
+   },
+   "reagent": "wash buffer",
+   "volume_ul": 1700.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "res",
+    "well": "A2"
+   },
+   "reagent": "elution buffer",
+   "volume_ul": 700.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "reagent": "Ni-NTA magnetic bead slurry",
+   "volume_ul": 130.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s07",
+   "op": "comment",
+   "text": "bind: add beads, mix periodically (robot mixing stands in for a rotator)"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "mp",
+     "well": "A1"
+    },
+    {
+     "labware": "mp",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": [
+    3,
+    40.0
+   ],
+   "mix_after": [
+    5,
+    100.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 600.0,
+   "text": "bead binding"
+  },
+  {
+   "step": "s07",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s07",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 600.0,
+   "text": "bead binding"
+  },
+  {
+   "step": "s07",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s07",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 600.0,
+   "text": "bead binding"
+  },
+  {
+   "step": "s07",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s07",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": true
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 120.0,
+   "text": "beads settle"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 540.0,
+   "src": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "waste",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 540.0,
+   "src": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "waste",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": false
+  },
+  {
+   "step": "s07",
+   "op": "comment",
+   "text": "wash 1 of 2"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 300.0,
+   "src": {
+    "labware": "res",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "mp",
+     "well": "A1"
+    },
+    {
+     "labware": "mp",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    5,
+    150.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": true
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 120.0,
+   "text": "beads settle"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 300.0,
+   "src": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "waste",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 300.0,
+   "src": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "waste",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": false
+  },
+  {
+   "step": "s07",
+   "op": "comment",
+   "text": "wash 2 of 2"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 300.0,
+   "src": {
+    "labware": "res",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "mp",
+     "well": "A1"
+    },
+    {
+     "labware": "mp",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    5,
+    150.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": true
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 120.0,
+   "text": "beads settle"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 300.0,
+   "src": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "waste",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 300.0,
+   "src": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "waste",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": false
+  },
+  {
+   "step": "s07",
+   "op": "comment",
+   "text": "elute"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 100.0,
+   "src": {
+    "labware": "res",
+    "well": "A2"
+   },
+   "dst": [
+    {
+     "labware": "mp",
+     "well": "A1"
+    },
+    {
+     "labware": "mp",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    5,
+    60.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 600.0,
+   "text": "elution"
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": true
+  },
+  {
+   "step": "s07",
+   "op": "delay",
+   "seconds": 120.0,
+   "text": "beads settle"
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 100.0,
+   "src": {
+    "labware": "mp",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "eluate",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 100.0,
+   "src": {
+    "labware": "mp",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "eluate",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": 2.0,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s07",
+   "op": "magnet",
+   "module": "mag",
+   "engage": false
+  },
+  {
+   "step": "s07",
+   "op": "pause",
+   "text": "HUMAN [s07]: Seal and store the eluates; take any gel / protein-assay aliquots by hand (not automated). Continue to endotoxin removal."
+  }
+ ],
+ "tips_needed": {
+  "p300": 22
+ },
+ "notes": [
+  "Gravity-column and FPLC formats are NOT supported; this is the magnetic-bead His-tag format only."
+ ],
+ "layouts": {
+  "Magnetic plate": {
+   "candidate lysate": "A1",
+   "empty-vector lysate (mock purification control)": "B1"
+  }
+ }
+}

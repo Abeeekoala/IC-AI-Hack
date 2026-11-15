@@ -1,0 +1,3535 @@
+{
+  "created_at": "2026-11-15T10:24:44Z",
+  "digest": "sha256:886326f340e4219f9d6ae21b27edf271d822a4be3744ffad5274895ecf81fc3b",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.2"
+  },
+  "inputs": {
+    "s0": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+    "s2": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+    "s7": "sha256:2657e206ff039d0b89f6fbff6b202b6ae75c004e87bf8bb3587c541307b1dfae"
+  },
+  "params": {
+    "endotoxin_limit_eu_per_ug": null,
+    "prices": {},
+    "proteins": null,
+    "readouts": [
+      "elisa",
+      "rt_qpcr"
+    ],
+    "robot_params": {
+      "analyte": "TNF-alpha",
+      "assembly_buffer_ul": 2.0,
+      "assembly_enzyme_ul": 2.0,
+      "assembly_incubation_c": 37.0,
+      "assembly_incubation_min": 60.0,
+      "assembly_insert_ul": 2.0,
+      "assembly_total_ul": 20.0,
+      "assembly_vector_ul": 2.0,
+      "bead_bind_cycles": 3,
+      "bead_bind_min": 30.0,
+      "bead_slurry_ul": 50.0,
+      "bead_wash_cycles": 2,
+      "bead_wash_ul": 300.0,
+      "cells_ul": 25.0,
+      "colonies": 4,
+      "conditions": [
+        "vehicle / buffer only",
+        "LPS positive control",
+        "endotoxin-matched LPS control",
+        "antigen low dose",
+        "antigen mid dose",
+        "antigen high dose",
+        "antigen mid dose + polymyxin B",
+        "mock-purification eluate"
+      ],
+      "culture_mix_ul": 100.0,
+      "culture_ul": 1000.0,
+      "dead_volume_ul": {
+        "plate": 10.0,
+        "reservoir": 500.0,
+        "tubes": 30.0,
+        "waste": 0.0
+      },
+      "dna_ul": 1.0,
+      "elisa_detect_incubation_min": 60.0,
+      "elisa_detect_ul": 100.0,
+      "elisa_hrp_incubation_min": 30.0,
+      "elisa_hrp_ul": 100.0,
+      "elisa_sample_incubation_min": 120.0,
+      "elisa_sample_ul": 50.0,
+      "elisa_std_columns": 1,
+      "elisa_std_top_ul": 100.0,
+      "elisa_stop_ul": 50.0,
+      "elisa_substrate_incubation_min": 20.0,
+      "elisa_substrate_ul": 100.0,
+      "elisa_wash_cycles": 3,
+      "elisa_wash_ul": 180.0,
+      "elute_min": 10.0,
+      "elution_ul": 100.0,
+      "facs_cells_ul": 100.0,
+      "facs_stain_ul": 50.0,
+      "heatshock_c": 42.0,
+      "heatshock_s": 45.0,
+      "ice_min": 30.0,
+      "induced_wells": 3,
+      "inducer_final_mM": 0.5,
+      "inducer_stock_mM": 100.0,
+      "lal_dilution_factor": 10.0,
+      "lal_points": 6,
+      "lal_reagent_ul": 50.0,
+      "lal_well_ul": 50.0,
+      "lysate_ul": 500.0,
+      "lysis_buffer_ul": 300.0,
+      "lysis_mix_reps": 5,
+      "lysis_mix_ul": 200.0,
+      "magnet_settle_s": 120.0,
+      "pcr_mm2x_ul": 10.0,
+      "pcr_primer_ul": 1.0,
+      "pcr_template_stock_ul": 10.0,
+      "pcr_template_ul": 1.0,
+      "pcr_total_ul": 20.0,
+      "qpcr_cdna_stock_ul": 20.0,
+      "qpcr_cdna_ul": 4.0,
+      "qpcr_mix2x_ul": 10.0,
+      "qpcr_primers_ul": 1.0,
+      "qpcr_targets": [
+        "GAPDH (reference)",
+        "TNF",
+        "IL1B"
+      ],
+      "qpcr_total_ul": 20.0,
+      "recovery_ice_min": 2.0,
+      "removal_reagent_ul": 50.0,
+      "removal_sample_ul": 80.0,
+      "replicates": 3,
+      "residual_ul": 10.0,
+      "soc_ul": 50.0,
+      "stim_ul": 20.0,
+      "supernatant_ul": 100.0,
+      "uninduced_wells": 3,
+      "well_medium_ul": 180.0
+    },
+    "s8_backend": "template",
+    "s8_model": null,
+    "study": {},
+    "top_k": 3
+  },
+  "payload": {
+    "candidates": [
+      {
+        "candidate_id": "sp|P0DH58|OMPA_NEIMB",
+        "length_aa": 392,
+        "localisation": "OuterMembrane",
+        "protein_name": "Major outer membrane protein P.IA (porA)",
+        "protocol": {
+          "candidate_id": "sp|P0DH58|OMPA_NEIMB",
+          "config": {
+            "endotoxin_limit_eu_per_ug": null,
+            "readouts": [
+              "elisa",
+              "rt_qpcr"
+            ]
+          },
+          "cost": {
+            "basis": "Quantities: the S9 placeholder plans (s9_sessions.RobotParams: coarse defaults, not validated for any kit, cell line or assay) for 3 shortlisted protocol(s). Prices: only those in config streamc.prices, as supplied by the user; none is built in.",
+            "items": [
+              {
+                "currency": null,
+                "item": "gene_synthesis",
+                "quantity": 1,
+                "subtotal": null,
+                "unit": "synthesis",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "robot_session",
+                "quantity": 12,
+                "subtotal": null,
+                "unit": "session",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "tip:opentrons_96_tiprack_20ul",
+                "quantity": 140,
+                "subtotal": null,
+                "unit": "tip",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "tip:opentrons_96_tiprack_300ul",
+                "quantity": 597,
+                "subtotal": null,
+                "unit": "tip",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:biorad_96_wellplate_200ul_pcr",
+                "quantity": 3,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:corning_96_wellplate_360ul_flat",
+                "quantity": 1,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_12_reservoir_15ml",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_1_reservoir_195ml",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_96_wellplate_200ul_flat",
+                "quantity": 6,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_96_wellplate_2ml_deep",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:opentrons_24_tuberack_nest_1.5ml_snapcap",
+                "quantity": 9,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:opentrons_96_aluminumblock_nest_wellplate_100ul",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:2x PCR master mix",
+                "quantity": 110,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:2x qPCR master mix",
+                "quantity": 870,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:GAPDH (reference) primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:IL1B primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LAL reagent",
+                "quantity": 680,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LAL reagent water (diluent)",
+                "quantity": 415,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LPS positive control",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:Ni-NTA magnetic bead slurry",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:SOC / recovery medium",
+                "quantity": 180,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:TNF primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:TNF-alpha top standard",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen high dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen low dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen mid dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen mid dose + polymyxin B",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assay diluent",
+                "quantity": 380,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembled plasmid (candidate)",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembled plasmid (no-insert control)",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembly buffer (10x)",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembly enzyme mix",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:candidate sample (endotoxin-reduced)",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:detection antibody",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:elution buffer",
+                "quantity": 700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin standard (top concentration)",
+                "quantity": 96,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin-matched LPS control",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin-removal reagent",
+                "quantity": 600,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:forward primer",
+                "quantity": 38,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:inducer stock",
+                "quantity": 45,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:linearised expression vector",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:lysis buffer",
+                "quantity": 2300,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:mock eluate sample (endotoxin-reduced)",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:mock-purification eluate",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:nuclease-free water",
+                "quantity": 605,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:reverse primer",
+                "quantity": 38,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:stop solution",
+                "quantity": 2100,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:streptavidin-HRP",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:substrate",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:vehicle (same solvent, no inducer)",
+                "quantity": 45,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:vehicle / buffer only",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:wash buffer",
+                "quantity": 55540,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              }
+            ],
+            "note": "No item is priced, so there is no estimate: set streamc.prices (item key -> {price, currency, unit}); the keys are the `item` values listed here. No price is built in. Only the listed items are counted: no equipment, no kit or consumable that a person (not the robot) uses, no vector or cells, no labour, shipping or tax.",
+            "priced_subtotal": null,
+            "status": "not_estimated",
+            "total": null,
+            "unused_price_keys": null
+          },
+          "cost_gbp_range": null,
+          "does_not_measure": [
+            "adaptive immunity",
+            "antibody titre",
+            "neutralisation",
+            "T-cell memory",
+            "protection",
+            "population HLA diversity (THP-1 is a single-genotype cell line)"
+          ],
+          "estimate_basis": "Durations are coarse engineering estimates, not measured; cost is unsourced.",
+          "falsifier": "At the in-vitro stage this candidate is falsified if EITHER (a) it cannot be expressed soluble and purified to the endotoxin limit, OR (b) the cytokine/transcript response does not exceed the endotoxin-matched LPS control and the polymyxin B-treated arm. A response explained by residual endotoxin is not evidence for the antigen.",
+          "protein_name": "Major outer membrane protein P.IA (porA)",
+          "steps": [
+            {
+              "automation": "manual",
+              "automation_note": "Outsourced to vendor.",
+              "controls": [],
+              "depends_on": [],
+              "est_duration_days": [
+                7.0,
+                21.0
+              ],
+              "gate": "Sequence cleared by S12 biosecurity screening before ordering. The S8 stage writes the order list (protein FASTA; the vendor back-translates it) to RUN_DIR/data/s8/order.fasta; check it with `python -m vaxforge.s12_biosafety check RUN_DIR/data/s8/order.fasta --run RUN_DIR --screening PROVIDER_RECORD.json` (PROVIDER_RECORD.json is the screening record from the synthesis provider). Order only on exit code 0 (cleared); 2 = blocked, 3 = not screened.",
+              "kind": "gene_synthesis",
+              "narrative": "Order codon-optimised gene for Major outer membrane protein P.IA (porA). A person does this step; the robot does not. Outsourced to vendor. A gate must hold before the next step; its full text is in the gate field of this step. Coarse duration estimate: 7-21 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [],
+              "reagents": [],
+              "step_id": "s01",
+              "title": "Order codon-optimised gene for Major outer membrane protein P.IA (porA)"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Liquid handling + temperature module.",
+              "controls": [
+                "no-insert assembly"
+              ],
+              "depends_on": [
+                "s01"
+              ],
+              "est_duration_days": [
+                1.0,
+                3.0
+              ],
+              "gate": null,
+              "kind": "plasmid_assembly",
+              "narrative": "Clone into His-tagged expression vector. The robot can do this step. Liquid handling + temperature module. It follows s01. Reagents: expression vector, assembly mix. Controls: no-insert assembly. Coarse duration estimate: 1-3 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 56,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "assembly buffer (10x)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "linearised expression vector",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 32,
+                  "name": "insert (synthesised gene fragment)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "assembly enzyme mix",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [
+                "expression vector",
+                "assembly mix"
+              ],
+              "step_id": "s02",
+              "title": "Clone into His-tagged expression vector"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Temperature module; plating is manual.",
+              "controls": [
+                "untransformed host on selection plate"
+              ],
+              "depends_on": [
+                "s02"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "transformation",
+              "narrative": "Transform expression host. The robot does part of this step and a person does the rest. Temperature module; plating is manual. It follows s02. Controls: untransformed host on selection plate. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 4,
+                  "name": "assembled plasmid (candidate)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 4,
+                  "name": "assembled plasmid (no-insert control)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 180,
+                  "name": "SOC / recovery medium",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s03",
+              "title": "Transform expression host"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Reaction assembly only.",
+              "controls": [
+                "empty-vector colony",
+                "no-template"
+              ],
+              "depends_on": [
+                "s03"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "colony_pcr",
+              "narrative": "Colony PCR to confirm insert. The robot can do this step. Reaction assembly only. It follows s03. Controls: empty-vector colony; no-template. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 87,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 110,
+                  "name": "2x PCR master mix",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 38,
+                  "name": "forward primer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 38,
+                  "name": "reverse primer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s04",
+              "title": "Colony PCR to confirm insert"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Inducer addition yes; shaking incubation no.",
+              "controls": [
+                "uninduced culture"
+              ],
+              "depends_on": [
+                "s04"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "expression_induction",
+              "narrative": "Small-scale expression and induction. The robot does part of this step and a person does the rest. Inducer addition yes; shaking incubation no. It follows s04. Controls: uninduced culture. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 45,
+                  "name": "inducer stock",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 45,
+                  "name": "vehicle (same solvent, no inducer)",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s05",
+              "title": "Small-scale expression and induction"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Reagent addition yes; sonication/centrifugation no.",
+              "controls": [],
+              "depends_on": [
+                "s05"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "lysis",
+              "narrative": "Lyse cells; clarify lysate. The robot does part of this step and a person does the rest. Reagent addition yes; sonication/centrifugation no. It follows s05. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 2300,
+                  "name": "lysis buffer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s06",
+              "title": "Lyse cells; clarify lysate"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Magnetic-bead His-tag format yes; gravity column/FPLC no.",
+              "controls": [
+                "empty-vector lysate mock purification"
+              ],
+              "depends_on": [
+                "s06"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": "Soluble protein recovered; if not, candidate falsified at expression (see falsifier).",
+              "kind": "ni_nta_purification",
+              "narrative": "Ni-NTA (His-tag) purification. The robot does part of this step and a person does the rest. Magnetic-bead His-tag format yes; gravity column/FPLC no. It follows s06. Controls: empty-vector lysate mock purification. Gate before the next step: Soluble protein recovered; if not, candidate falsified at expression (see falsifier). Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 1700,
+                  "name": "wash buffer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 700,
+                  "name": "elution buffer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "Ni-NTA magnetic bead slurry",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s07",
+              "title": "Ni-NTA (His-tag) purification"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup yes.",
+              "controls": [],
+              "depends_on": [
+                "s07"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "endotoxin_removal",
+              "narrative": "Endotoxin removal. The robot does part of this step and a person does the rest. Plate setup yes. It follows s07. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 600,
+                  "name": "endotoxin-removal reagent",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s08",
+              "title": "Endotoxin removal"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup yes; reading needs a plate reader.",
+              "controls": [
+                "LAL standard curve",
+                "buffer blank"
+              ],
+              "depends_on": [
+                "s08"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": "Residual endotoxin below the release limit (NOT YET SET - decide before running) before ANY THP-1 work.",
+              "kind": "lal_assay",
+              "narrative": "Quantify residual endotoxin (LAL). The robot does part of this step and a person does the rest. Plate setup yes; reading needs a plate reader. It follows s08. Controls: LAL standard curve; buffer blank. Gate before the next step: Residual endotoxin below the release limit (NOT YET SET - decide before running) before ANY THP-1 work. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 415,
+                  "name": "LAL reagent water (diluent)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 96,
+                  "name": "endotoxin standard (top concentration)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "candidate sample (endotoxin-reduced)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "mock eluate sample (endotoxin-reduced)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 680,
+                  "name": "LAL reagent",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s09",
+              "title": "Quantify residual endotoxin (LAL)"
+            },
+            {
+              "automation": "manual",
+              "automation_note": "CO2 incubator, sterile handling.",
+              "controls": [],
+              "depends_on": [
+                "s09"
+              ],
+              "est_duration_days": [
+                3.0,
+                5.0
+              ],
+              "gate": null,
+              "kind": "thp1_culture",
+              "narrative": "THP-1 culture and PMA differentiation. A person does this step; the robot does not. CO2 incubator, sterile handling. It follows s09. Coarse duration estimate: 3-5 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [],
+              "reagents": [],
+              "step_id": "s10",
+              "title": "THP-1 culture and PMA differentiation"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Addition to seeded plate.",
+              "controls": [
+                "vehicle/buffer only",
+                "LPS positive control",
+                "endotoxin-matched LPS control (at the measured residual level)",
+                "polymyxin B-treated antigen",
+                "empty-vector mock-purification eluate"
+              ],
+              "depends_on": [
+                "s09",
+                "s10"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "antigen_stimulation",
+              "narrative": "Stimulate differentiated THP-1 with purified antigen. The robot can do this step. Addition to seeded plate. It follows s09, s10. Controls: vehicle/buffer only; LPS positive control; endotoxin-matched LPS control (at the measured residual level); polymyxin B-treated antigen; empty-vector mock-purification eluate. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 90,
+                  "name": "vehicle / buffer only",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen mid dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "LPS positive control",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen high dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "endotoxin-matched LPS control",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen mid dose + polymyxin B",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen low dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "mock-purification eluate",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s11",
+              "title": "Stimulate differentiated THP-1 with purified antigen"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup and washes yes; reading no.",
+              "controls": [],
+              "depends_on": [
+                "s11"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "elisa",
+              "narrative": "ELISA readout. The robot does part of this step and a person does the rest. Plate setup and washes yes; reading no. It follows s11. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 380,
+                  "name": "assay diluent",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "TNF-alpha top standard",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "detection antibody",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "streptavidin-HRP",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "substrate",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 2100,
+                  "name": "stop solution",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 53840,
+                  "name": "wash buffer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s12",
+              "title": "ELISA readout"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Reaction setup yes; thermocycling and reading no.",
+              "controls": [],
+              "depends_on": [
+                "s11"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "rt_qpcr",
+              "narrative": "RT QPCR readout. The robot does part of this step and a person does the rest. Reaction setup yes; thermocycling and reading no. It follows s11. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 462,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 870,
+                  "name": "2x qPCR master mix",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "GAPDH (reference) primer pair",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "TNF primer pair",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "IL1B primer pair",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s13",
+              "title": "RT QPCR readout"
+            }
+          ]
+        },
+        "rank": 1,
+        "rank_source": "s7_final_order",
+        "sequence_sha256": "a3e66fb9e7515d138b32f4b7dfa14bc0832d7e87bbdf4208fb7da5b99b07de96"
+      },
+      {
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "length_aa": 791,
+        "localisation": "OuterMembrane",
+        "protein_name": "Hemoglobin receptor (hmbR)",
+        "protocol": {
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "config": {
+            "endotoxin_limit_eu_per_ug": null,
+            "readouts": [
+              "elisa",
+              "rt_qpcr"
+            ]
+          },
+          "cost": {
+            "basis": "Quantities: the S9 placeholder plans (s9_sessions.RobotParams: coarse defaults, not validated for any kit, cell line or assay) for 3 shortlisted protocol(s). Prices: only those in config streamc.prices, as supplied by the user; none is built in.",
+            "items": [
+              {
+                "currency": null,
+                "item": "gene_synthesis",
+                "quantity": 1,
+                "subtotal": null,
+                "unit": "synthesis",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "robot_session",
+                "quantity": 12,
+                "subtotal": null,
+                "unit": "session",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "tip:opentrons_96_tiprack_20ul",
+                "quantity": 140,
+                "subtotal": null,
+                "unit": "tip",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "tip:opentrons_96_tiprack_300ul",
+                "quantity": 597,
+                "subtotal": null,
+                "unit": "tip",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:biorad_96_wellplate_200ul_pcr",
+                "quantity": 3,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:corning_96_wellplate_360ul_flat",
+                "quantity": 1,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_12_reservoir_15ml",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_1_reservoir_195ml",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_96_wellplate_200ul_flat",
+                "quantity": 6,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_96_wellplate_2ml_deep",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:opentrons_24_tuberack_nest_1.5ml_snapcap",
+                "quantity": 9,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:opentrons_96_aluminumblock_nest_wellplate_100ul",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:2x PCR master mix",
+                "quantity": 110,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:2x qPCR master mix",
+                "quantity": 870,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:GAPDH (reference) primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:IL1B primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LAL reagent",
+                "quantity": 680,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LAL reagent water (diluent)",
+                "quantity": 415,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LPS positive control",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:Ni-NTA magnetic bead slurry",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:SOC / recovery medium",
+                "quantity": 180,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:TNF primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:TNF-alpha top standard",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen high dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen low dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen mid dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen mid dose + polymyxin B",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assay diluent",
+                "quantity": 380,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembled plasmid (candidate)",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembled plasmid (no-insert control)",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembly buffer (10x)",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembly enzyme mix",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:candidate sample (endotoxin-reduced)",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:detection antibody",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:elution buffer",
+                "quantity": 700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin standard (top concentration)",
+                "quantity": 96,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin-matched LPS control",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin-removal reagent",
+                "quantity": 600,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:forward primer",
+                "quantity": 38,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:inducer stock",
+                "quantity": 45,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:linearised expression vector",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:lysis buffer",
+                "quantity": 2300,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:mock eluate sample (endotoxin-reduced)",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:mock-purification eluate",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:nuclease-free water",
+                "quantity": 605,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:reverse primer",
+                "quantity": 38,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:stop solution",
+                "quantity": 2100,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:streptavidin-HRP",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:substrate",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:vehicle (same solvent, no inducer)",
+                "quantity": 45,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:vehicle / buffer only",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:wash buffer",
+                "quantity": 55540,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              }
+            ],
+            "note": "No item is priced, so there is no estimate: set streamc.prices (item key -> {price, currency, unit}); the keys are the `item` values listed here. No price is built in. Only the listed items are counted: no equipment, no kit or consumable that a person (not the robot) uses, no vector or cells, no labour, shipping or tax.",
+            "priced_subtotal": null,
+            "status": "not_estimated",
+            "total": null,
+            "unused_price_keys": null
+          },
+          "cost_gbp_range": null,
+          "does_not_measure": [
+            "adaptive immunity",
+            "antibody titre",
+            "neutralisation",
+            "T-cell memory",
+            "protection",
+            "population HLA diversity (THP-1 is a single-genotype cell line)"
+          ],
+          "estimate_basis": "Durations are coarse engineering estimates, not measured; cost is unsourced.",
+          "falsifier": "At the in-vitro stage this candidate is falsified if EITHER (a) it cannot be expressed soluble and purified to the endotoxin limit, OR (b) the cytokine/transcript response does not exceed the endotoxin-matched LPS control and the polymyxin B-treated arm. A response explained by residual endotoxin is not evidence for the antigen.",
+          "protein_name": "Hemoglobin receptor (hmbR)",
+          "steps": [
+            {
+              "automation": "manual",
+              "automation_note": "Outsourced to vendor.",
+              "controls": [],
+              "depends_on": [],
+              "est_duration_days": [
+                7.0,
+                21.0
+              ],
+              "gate": "Sequence cleared by S12 biosecurity screening before ordering. The S8 stage writes the order list (protein FASTA; the vendor back-translates it) to RUN_DIR/data/s8/order.fasta; check it with `python -m vaxforge.s12_biosafety check RUN_DIR/data/s8/order.fasta --run RUN_DIR --screening PROVIDER_RECORD.json` (PROVIDER_RECORD.json is the screening record from the synthesis provider). Order only on exit code 0 (cleared); 2 = blocked, 3 = not screened.",
+              "kind": "gene_synthesis",
+              "narrative": "Order codon-optimised gene for Hemoglobin receptor (hmbR). A person does this step; the robot does not. Outsourced to vendor. A gate must hold before the next step; its full text is in the gate field of this step. Coarse duration estimate: 7-21 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [],
+              "reagents": [],
+              "step_id": "s01",
+              "title": "Order codon-optimised gene for Hemoglobin receptor (hmbR)"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Liquid handling + temperature module.",
+              "controls": [
+                "no-insert assembly"
+              ],
+              "depends_on": [
+                "s01"
+              ],
+              "est_duration_days": [
+                1.0,
+                3.0
+              ],
+              "gate": null,
+              "kind": "plasmid_assembly",
+              "narrative": "Clone into His-tagged expression vector. The robot can do this step. Liquid handling + temperature module. It follows s01. Reagents: expression vector, assembly mix. Controls: no-insert assembly. Coarse duration estimate: 1-3 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 56,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "assembly buffer (10x)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "linearised expression vector",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 32,
+                  "name": "insert (synthesised gene fragment)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "assembly enzyme mix",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [
+                "expression vector",
+                "assembly mix"
+              ],
+              "step_id": "s02",
+              "title": "Clone into His-tagged expression vector"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Temperature module; plating is manual.",
+              "controls": [
+                "untransformed host on selection plate"
+              ],
+              "depends_on": [
+                "s02"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "transformation",
+              "narrative": "Transform expression host. The robot does part of this step and a person does the rest. Temperature module; plating is manual. It follows s02. Controls: untransformed host on selection plate. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 4,
+                  "name": "assembled plasmid (candidate)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 4,
+                  "name": "assembled plasmid (no-insert control)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 180,
+                  "name": "SOC / recovery medium",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s03",
+              "title": "Transform expression host"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Reaction assembly only.",
+              "controls": [
+                "empty-vector colony",
+                "no-template"
+              ],
+              "depends_on": [
+                "s03"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "colony_pcr",
+              "narrative": "Colony PCR to confirm insert. The robot can do this step. Reaction assembly only. It follows s03. Controls: empty-vector colony; no-template. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 87,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 110,
+                  "name": "2x PCR master mix",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 38,
+                  "name": "forward primer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 38,
+                  "name": "reverse primer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s04",
+              "title": "Colony PCR to confirm insert"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Inducer addition yes; shaking incubation no.",
+              "controls": [
+                "uninduced culture"
+              ],
+              "depends_on": [
+                "s04"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "expression_induction",
+              "narrative": "Small-scale expression and induction. The robot does part of this step and a person does the rest. Inducer addition yes; shaking incubation no. It follows s04. Controls: uninduced culture. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 45,
+                  "name": "inducer stock",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 45,
+                  "name": "vehicle (same solvent, no inducer)",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s05",
+              "title": "Small-scale expression and induction"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Reagent addition yes; sonication/centrifugation no.",
+              "controls": [],
+              "depends_on": [
+                "s05"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "lysis",
+              "narrative": "Lyse cells; clarify lysate. The robot does part of this step and a person does the rest. Reagent addition yes; sonication/centrifugation no. It follows s05. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 2300,
+                  "name": "lysis buffer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s06",
+              "title": "Lyse cells; clarify lysate"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Magnetic-bead His-tag format yes; gravity column/FPLC no.",
+              "controls": [
+                "empty-vector lysate mock purification"
+              ],
+              "depends_on": [
+                "s06"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": "Soluble protein recovered; if not, candidate falsified at expression (see falsifier).",
+              "kind": "ni_nta_purification",
+              "narrative": "Ni-NTA (His-tag) purification. The robot does part of this step and a person does the rest. Magnetic-bead His-tag format yes; gravity column/FPLC no. It follows s06. Controls: empty-vector lysate mock purification. Gate before the next step: Soluble protein recovered; if not, candidate falsified at expression (see falsifier). Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 1700,
+                  "name": "wash buffer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 700,
+                  "name": "elution buffer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "Ni-NTA magnetic bead slurry",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s07",
+              "title": "Ni-NTA (His-tag) purification"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup yes.",
+              "controls": [],
+              "depends_on": [
+                "s07"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "endotoxin_removal",
+              "narrative": "Endotoxin removal. The robot does part of this step and a person does the rest. Plate setup yes. It follows s07. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 600,
+                  "name": "endotoxin-removal reagent",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s08",
+              "title": "Endotoxin removal"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup yes; reading needs a plate reader.",
+              "controls": [
+                "LAL standard curve",
+                "buffer blank"
+              ],
+              "depends_on": [
+                "s08"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": "Residual endotoxin below the release limit (NOT YET SET - decide before running) before ANY THP-1 work.",
+              "kind": "lal_assay",
+              "narrative": "Quantify residual endotoxin (LAL). The robot does part of this step and a person does the rest. Plate setup yes; reading needs a plate reader. It follows s08. Controls: LAL standard curve; buffer blank. Gate before the next step: Residual endotoxin below the release limit (NOT YET SET - decide before running) before ANY THP-1 work. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 415,
+                  "name": "LAL reagent water (diluent)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 96,
+                  "name": "endotoxin standard (top concentration)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "candidate sample (endotoxin-reduced)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "mock eluate sample (endotoxin-reduced)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 680,
+                  "name": "LAL reagent",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s09",
+              "title": "Quantify residual endotoxin (LAL)"
+            },
+            {
+              "automation": "manual",
+              "automation_note": "CO2 incubator, sterile handling.",
+              "controls": [],
+              "depends_on": [
+                "s09"
+              ],
+              "est_duration_days": [
+                3.0,
+                5.0
+              ],
+              "gate": null,
+              "kind": "thp1_culture",
+              "narrative": "THP-1 culture and PMA differentiation. A person does this step; the robot does not. CO2 incubator, sterile handling. It follows s09. Coarse duration estimate: 3-5 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [],
+              "reagents": [],
+              "step_id": "s10",
+              "title": "THP-1 culture and PMA differentiation"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Addition to seeded plate.",
+              "controls": [
+                "vehicle/buffer only",
+                "LPS positive control",
+                "endotoxin-matched LPS control (at the measured residual level)",
+                "polymyxin B-treated antigen",
+                "empty-vector mock-purification eluate"
+              ],
+              "depends_on": [
+                "s09",
+                "s10"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "antigen_stimulation",
+              "narrative": "Stimulate differentiated THP-1 with purified antigen. The robot can do this step. Addition to seeded plate. It follows s09, s10. Controls: vehicle/buffer only; LPS positive control; endotoxin-matched LPS control (at the measured residual level); polymyxin B-treated antigen; empty-vector mock-purification eluate. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 90,
+                  "name": "vehicle / buffer only",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen mid dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "LPS positive control",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen high dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "endotoxin-matched LPS control",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen mid dose + polymyxin B",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen low dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "mock-purification eluate",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s11",
+              "title": "Stimulate differentiated THP-1 with purified antigen"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup and washes yes; reading no.",
+              "controls": [],
+              "depends_on": [
+                "s11"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "elisa",
+              "narrative": "ELISA readout. The robot does part of this step and a person does the rest. Plate setup and washes yes; reading no. It follows s11. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 380,
+                  "name": "assay diluent",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "TNF-alpha top standard",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "detection antibody",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "streptavidin-HRP",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "substrate",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 2100,
+                  "name": "stop solution",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 53840,
+                  "name": "wash buffer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s12",
+              "title": "ELISA readout"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Reaction setup yes; thermocycling and reading no.",
+              "controls": [],
+              "depends_on": [
+                "s11"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "rt_qpcr",
+              "narrative": "RT QPCR readout. The robot does part of this step and a person does the rest. Reaction setup yes; thermocycling and reading no. It follows s11. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 462,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 870,
+                  "name": "2x qPCR master mix",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "GAPDH (reference) primer pair",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "TNF primer pair",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "IL1B primer pair",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s13",
+              "title": "RT QPCR readout"
+            }
+          ]
+        },
+        "rank": 2,
+        "rank_source": "s7_final_order",
+        "sequence_sha256": "e43732428aac10876f1f2dfbacf75b2430f372f66862fbb496f8c253031103a6"
+      },
+      {
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "length_aa": 1815,
+        "localisation": "OuterMembrane",
+        "protein_name": "IgA-specific serine endopeptidase",
+        "protocol": {
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "config": {
+            "endotoxin_limit_eu_per_ug": null,
+            "readouts": [
+              "elisa",
+              "rt_qpcr"
+            ]
+          },
+          "cost": {
+            "basis": "Quantities: the S9 placeholder plans (s9_sessions.RobotParams: coarse defaults, not validated for any kit, cell line or assay) for 3 shortlisted protocol(s). Prices: only those in config streamc.prices, as supplied by the user; none is built in.",
+            "items": [
+              {
+                "currency": null,
+                "item": "gene_synthesis",
+                "quantity": 1,
+                "subtotal": null,
+                "unit": "synthesis",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "robot_session",
+                "quantity": 12,
+                "subtotal": null,
+                "unit": "session",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "tip:opentrons_96_tiprack_20ul",
+                "quantity": 140,
+                "subtotal": null,
+                "unit": "tip",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "tip:opentrons_96_tiprack_300ul",
+                "quantity": 597,
+                "subtotal": null,
+                "unit": "tip",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:biorad_96_wellplate_200ul_pcr",
+                "quantity": 3,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:corning_96_wellplate_360ul_flat",
+                "quantity": 1,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_12_reservoir_15ml",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_1_reservoir_195ml",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_96_wellplate_200ul_flat",
+                "quantity": 6,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:nest_96_wellplate_2ml_deep",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:opentrons_24_tuberack_nest_1.5ml_snapcap",
+                "quantity": 9,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "labware:opentrons_96_aluminumblock_nest_wellplate_100ul",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "item",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:2x PCR master mix",
+                "quantity": 110,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:2x qPCR master mix",
+                "quantity": 870,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:GAPDH (reference) primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:IL1B primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LAL reagent",
+                "quantity": 680,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LAL reagent water (diluent)",
+                "quantity": 415,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:LPS positive control",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:Ni-NTA magnetic bead slurry",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:SOC / recovery medium",
+                "quantity": 180,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:TNF primer pair",
+                "quantity": 58,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:TNF-alpha top standard",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen high dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen low dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen mid dose",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:antigen mid dose + polymyxin B",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assay diluent",
+                "quantity": 380,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembled plasmid (candidate)",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembled plasmid (no-insert control)",
+                "quantity": 4,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembly buffer (10x)",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:assembly enzyme mix",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:candidate sample (endotoxin-reduced)",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:detection antibody",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:elution buffer",
+                "quantity": 700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin standard (top concentration)",
+                "quantity": 96,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin-matched LPS control",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:endotoxin-removal reagent",
+                "quantity": 600,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:forward primer",
+                "quantity": 38,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:inducer stock",
+                "quantity": 45,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:linearised expression vector",
+                "quantity": 34,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:lysis buffer",
+                "quantity": 2300,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:mock eluate sample (endotoxin-reduced)",
+                "quantity": 130,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:mock-purification eluate",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:nuclease-free water",
+                "quantity": 605,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:reverse primer",
+                "quantity": 38,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:stop solution",
+                "quantity": 2100,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:streptavidin-HRP",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:substrate",
+                "quantity": 3700,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:vehicle (same solvent, no inducer)",
+                "quantity": 45,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:vehicle / buffer only",
+                "quantity": 90,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              },
+              {
+                "currency": null,
+                "item": "reagent:wash buffer",
+                "quantity": 55540,
+                "subtotal": null,
+                "unit": "uL",
+                "unit_price": null
+              }
+            ],
+            "note": "No item is priced, so there is no estimate: set streamc.prices (item key -> {price, currency, unit}); the keys are the `item` values listed here. No price is built in. Only the listed items are counted: no equipment, no kit or consumable that a person (not the robot) uses, no vector or cells, no labour, shipping or tax.",
+            "priced_subtotal": null,
+            "status": "not_estimated",
+            "total": null,
+            "unused_price_keys": null
+          },
+          "cost_gbp_range": null,
+          "does_not_measure": [
+            "adaptive immunity",
+            "antibody titre",
+            "neutralisation",
+            "T-cell memory",
+            "protection",
+            "population HLA diversity (THP-1 is a single-genotype cell line)"
+          ],
+          "estimate_basis": "Durations are coarse engineering estimates, not measured; cost is unsourced.",
+          "falsifier": "At the in-vitro stage this candidate is falsified if EITHER (a) it cannot be expressed soluble and purified to the endotoxin limit, OR (b) the cytokine/transcript response does not exceed the endotoxin-matched LPS control and the polymyxin B-treated arm. A response explained by residual endotoxin is not evidence for the antigen.",
+          "protein_name": "IgA-specific serine endopeptidase",
+          "steps": [
+            {
+              "automation": "manual",
+              "automation_note": "Outsourced to vendor.",
+              "controls": [],
+              "depends_on": [],
+              "est_duration_days": [
+                7.0,
+                21.0
+              ],
+              "gate": "Sequence cleared by S12 biosecurity screening before ordering. The S8 stage writes the order list (protein FASTA; the vendor back-translates it) to RUN_DIR/data/s8/order.fasta; check it with `python -m vaxforge.s12_biosafety check RUN_DIR/data/s8/order.fasta --run RUN_DIR --screening PROVIDER_RECORD.json` (PROVIDER_RECORD.json is the screening record from the synthesis provider). Order only on exit code 0 (cleared); 2 = blocked, 3 = not screened.",
+              "kind": "gene_synthesis",
+              "narrative": "Order codon-optimised gene for IgA-specific serine endopeptidase. A person does this step; the robot does not. Outsourced to vendor. A gate must hold before the next step; its full text is in the gate field of this step. Coarse duration estimate: 7-21 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [],
+              "reagents": [],
+              "step_id": "s01",
+              "title": "Order codon-optimised gene for IgA-specific serine endopeptidase"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Liquid handling + temperature module.",
+              "controls": [
+                "no-insert assembly"
+              ],
+              "depends_on": [
+                "s01"
+              ],
+              "est_duration_days": [
+                1.0,
+                3.0
+              ],
+              "gate": null,
+              "kind": "plasmid_assembly",
+              "narrative": "Clone into His-tagged expression vector. The robot can do this step. Liquid handling + temperature module. It follows s01. Reagents: expression vector, assembly mix. Controls: no-insert assembly. Coarse duration estimate: 1-3 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 56,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "assembly buffer (10x)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "linearised expression vector",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 32,
+                  "name": "insert (synthesised gene fragment)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 34,
+                  "name": "assembly enzyme mix",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [
+                "expression vector",
+                "assembly mix"
+              ],
+              "step_id": "s02",
+              "title": "Clone into His-tagged expression vector"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Temperature module; plating is manual.",
+              "controls": [
+                "untransformed host on selection plate"
+              ],
+              "depends_on": [
+                "s02"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "transformation",
+              "narrative": "Transform expression host. The robot does part of this step and a person does the rest. Temperature module; plating is manual. It follows s02. Controls: untransformed host on selection plate. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 4,
+                  "name": "assembled plasmid (candidate)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 4,
+                  "name": "assembled plasmid (no-insert control)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 180,
+                  "name": "SOC / recovery medium",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s03",
+              "title": "Transform expression host"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Reaction assembly only.",
+              "controls": [
+                "empty-vector colony",
+                "no-template"
+              ],
+              "depends_on": [
+                "s03"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "colony_pcr",
+              "narrative": "Colony PCR to confirm insert. The robot can do this step. Reaction assembly only. It follows s03. Controls: empty-vector colony; no-template. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 87,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 110,
+                  "name": "2x PCR master mix",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 38,
+                  "name": "forward primer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 38,
+                  "name": "reverse primer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s04",
+              "title": "Colony PCR to confirm insert"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Inducer addition yes; shaking incubation no.",
+              "controls": [
+                "uninduced culture"
+              ],
+              "depends_on": [
+                "s04"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "expression_induction",
+              "narrative": "Small-scale expression and induction. The robot does part of this step and a person does the rest. Inducer addition yes; shaking incubation no. It follows s04. Controls: uninduced culture. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 45,
+                  "name": "inducer stock",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 45,
+                  "name": "vehicle (same solvent, no inducer)",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s05",
+              "title": "Small-scale expression and induction"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Reagent addition yes; sonication/centrifugation no.",
+              "controls": [],
+              "depends_on": [
+                "s05"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "lysis",
+              "narrative": "Lyse cells; clarify lysate. The robot does part of this step and a person does the rest. Reagent addition yes; sonication/centrifugation no. It follows s05. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 2300,
+                  "name": "lysis buffer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s06",
+              "title": "Lyse cells; clarify lysate"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Magnetic-bead His-tag format yes; gravity column/FPLC no.",
+              "controls": [
+                "empty-vector lysate mock purification"
+              ],
+              "depends_on": [
+                "s06"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": "Soluble protein recovered; if not, candidate falsified at expression (see falsifier).",
+              "kind": "ni_nta_purification",
+              "narrative": "Ni-NTA (His-tag) purification. The robot does part of this step and a person does the rest. Magnetic-bead His-tag format yes; gravity column/FPLC no. It follows s06. Controls: empty-vector lysate mock purification. Gate before the next step: Soluble protein recovered; if not, candidate falsified at expression (see falsifier). Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 1700,
+                  "name": "wash buffer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 700,
+                  "name": "elution buffer",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "Ni-NTA magnetic bead slurry",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s07",
+              "title": "Ni-NTA (His-tag) purification"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup yes.",
+              "controls": [],
+              "depends_on": [
+                "s07"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": null,
+              "kind": "endotoxin_removal",
+              "narrative": "Endotoxin removal. The robot does part of this step and a person does the rest. Plate setup yes. It follows s07. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 600,
+                  "name": "endotoxin-removal reagent",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s08",
+              "title": "Endotoxin removal"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup yes; reading needs a plate reader.",
+              "controls": [
+                "LAL standard curve",
+                "buffer blank"
+              ],
+              "depends_on": [
+                "s08"
+              ],
+              "est_duration_days": [
+                0.5,
+                1.0
+              ],
+              "gate": "Residual endotoxin below the release limit (NOT YET SET - decide before running) before ANY THP-1 work.",
+              "kind": "lal_assay",
+              "narrative": "Quantify residual endotoxin (LAL). The robot does part of this step and a person does the rest. Plate setup yes; reading needs a plate reader. It follows s08. Controls: LAL standard curve; buffer blank. Gate before the next step: Residual endotoxin below the release limit (NOT YET SET - decide before running) before ANY THP-1 work. Coarse duration estimate: 0.5-1 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 415,
+                  "name": "LAL reagent water (diluent)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 96,
+                  "name": "endotoxin standard (top concentration)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "candidate sample (endotoxin-reduced)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "mock eluate sample (endotoxin-reduced)",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 680,
+                  "name": "LAL reagent",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s09",
+              "title": "Quantify residual endotoxin (LAL)"
+            },
+            {
+              "automation": "manual",
+              "automation_note": "CO2 incubator, sterile handling.",
+              "controls": [],
+              "depends_on": [
+                "s09"
+              ],
+              "est_duration_days": [
+                3.0,
+                5.0
+              ],
+              "gate": null,
+              "kind": "thp1_culture",
+              "narrative": "THP-1 culture and PMA differentiation. A person does this step; the robot does not. CO2 incubator, sterile handling. It follows s09. Coarse duration estimate: 3-5 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [],
+              "reagents": [],
+              "step_id": "s10",
+              "title": "THP-1 culture and PMA differentiation"
+            },
+            {
+              "automation": "full",
+              "automation_note": "Addition to seeded plate.",
+              "controls": [
+                "vehicle/buffer only",
+                "LPS positive control",
+                "endotoxin-matched LPS control (at the measured residual level)",
+                "polymyxin B-treated antigen",
+                "empty-vector mock-purification eluate"
+              ],
+              "depends_on": [
+                "s09",
+                "s10"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "antigen_stimulation",
+              "narrative": "Stimulate differentiated THP-1 with purified antigen. The robot can do this step. Addition to seeded plate. It follows s09, s10. Controls: vehicle/buffer only; LPS positive control; endotoxin-matched LPS control (at the measured residual level); polymyxin B-treated antigen; empty-vector mock-purification eluate. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 90,
+                  "name": "vehicle / buffer only",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen mid dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "LPS positive control",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen high dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "endotoxin-matched LPS control",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen mid dose + polymyxin B",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "antigen low dose",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 90,
+                  "name": "mock-purification eluate",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s11",
+              "title": "Stimulate differentiated THP-1 with purified antigen"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Plate setup and washes yes; reading no.",
+              "controls": [],
+              "depends_on": [
+                "s11"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "elisa",
+              "narrative": "ELISA readout. The robot does part of this step and a person does the rest. Plate setup and washes yes; reading no. It follows s11. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 380,
+                  "name": "assay diluent",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 130,
+                  "name": "TNF-alpha top standard",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "detection antibody",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "streptavidin-HRP",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 3700,
+                  "name": "substrate",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 2100,
+                  "name": "stop solution",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 53840,
+                  "name": "wash buffer",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s12",
+              "title": "ELISA readout"
+            },
+            {
+              "automation": "partial",
+              "automation_note": "Reaction setup yes; thermocycling and reading no.",
+              "controls": [],
+              "depends_on": [
+                "s11"
+              ],
+              "est_duration_days": [
+                1.0,
+                2.0
+              ],
+              "gate": null,
+              "kind": "rt_qpcr",
+              "narrative": "RT QPCR readout. The robot does part of this step and a person does the rest. Reaction setup yes; thermocycling and reading no. It follows s11. Coarse duration estimate: 1-2 days (not measured).",
+              "narrative_source": "template",
+              "quantities": [
+                {
+                  "microlitres": 462,
+                  "name": "nuclease-free water",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 870,
+                  "name": "2x qPCR master mix",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "GAPDH (reference) primer pair",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "TNF primer pair",
+                  "source": "S9 placeholder plan"
+                },
+                {
+                  "microlitres": 58,
+                  "name": "IL1B primer pair",
+                  "source": "S9 placeholder plan"
+                }
+              ],
+              "reagents": [],
+              "step_id": "s13",
+              "title": "RT QPCR readout"
+            }
+          ]
+        },
+        "rank": 3,
+        "rank_source": "s7_final_order",
+        "sequence_sha256": "61fdd1b7c652ac3465159af4fedfd7f7891fdb5758a64945bdcd8195aba5b7cc"
+      }
+    ],
+    "cost": {
+      "basis": "Quantities: the S9 placeholder plans (s9_sessions.RobotParams: coarse defaults, not validated for any kit, cell line or assay) for 3 shortlisted protocol(s). Prices: only those in config streamc.prices, as supplied by the user; none is built in.",
+      "items": [
+        {
+          "currency": null,
+          "item": "gene_synthesis",
+          "quantity": 3,
+          "subtotal": null,
+          "unit": "synthesis",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "robot_session",
+          "quantity": 36,
+          "subtotal": null,
+          "unit": "session",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "tip:opentrons_96_tiprack_20ul",
+          "quantity": 420,
+          "subtotal": null,
+          "unit": "tip",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "tip:opentrons_96_tiprack_300ul",
+          "quantity": 1791,
+          "subtotal": null,
+          "unit": "tip",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:biorad_96_wellplate_200ul_pcr",
+          "quantity": 9,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:corning_96_wellplate_360ul_flat",
+          "quantity": 3,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:nest_12_reservoir_15ml",
+          "quantity": 12,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:nest_1_reservoir_195ml",
+          "quantity": 12,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:nest_96_wellplate_200ul_flat",
+          "quantity": 18,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:nest_96_wellplate_2ml_deep",
+          "quantity": 12,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:opentrons_24_tuberack_nest_1.5ml_snapcap",
+          "quantity": 27,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "labware:opentrons_96_aluminumblock_nest_wellplate_100ul",
+          "quantity": 12,
+          "subtotal": null,
+          "unit": "item",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:2x PCR master mix",
+          "quantity": 330,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:2x qPCR master mix",
+          "quantity": 2610,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:GAPDH (reference) primer pair",
+          "quantity": 174,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:IL1B primer pair",
+          "quantity": 174,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:LAL reagent",
+          "quantity": 2040,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:LAL reagent water (diluent)",
+          "quantity": 1245,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:LPS positive control",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:Ni-NTA magnetic bead slurry",
+          "quantity": 390,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:SOC / recovery medium",
+          "quantity": 540,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:TNF primer pair",
+          "quantity": 174,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:TNF-alpha top standard",
+          "quantity": 390,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:antigen high dose",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:antigen low dose",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:antigen mid dose",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:antigen mid dose + polymyxin B",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:assay diluent",
+          "quantity": 1140,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:assembled plasmid (candidate)",
+          "quantity": 12,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:assembled plasmid (no-insert control)",
+          "quantity": 12,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:assembly buffer (10x)",
+          "quantity": 102,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:assembly enzyme mix",
+          "quantity": 102,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:candidate sample (endotoxin-reduced)",
+          "quantity": 390,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:detection antibody",
+          "quantity": 11100,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:elution buffer",
+          "quantity": 2100,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:endotoxin standard (top concentration)",
+          "quantity": 288,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:endotoxin-matched LPS control",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:endotoxin-removal reagent",
+          "quantity": 1800,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:forward primer",
+          "quantity": 114,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:inducer stock",
+          "quantity": 135,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:linearised expression vector",
+          "quantity": 102,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:lysis buffer",
+          "quantity": 6900,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:mock eluate sample (endotoxin-reduced)",
+          "quantity": 390,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:mock-purification eluate",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:nuclease-free water",
+          "quantity": 1815,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:reverse primer",
+          "quantity": 114,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:stop solution",
+          "quantity": 6300,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:streptavidin-HRP",
+          "quantity": 11100,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:substrate",
+          "quantity": 11100,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:vehicle (same solvent, no inducer)",
+          "quantity": 135,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:vehicle / buffer only",
+          "quantity": 270,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "reagent:wash buffer",
+          "quantity": 166620,
+          "subtotal": null,
+          "unit": "uL",
+          "unit_price": null
+        },
+        {
+          "currency": null,
+          "item": "animal",
+          "quantity": 91,
+          "subtotal": null,
+          "unit": "animal",
+          "unit_price": null
+        }
+      ],
+      "note": "No item is priced, so there is no estimate: set streamc.prices (item key -> {price, currency, unit}); the keys are the `item` values listed here. No price is built in. The animal item is `total_animals` of the S10 design for these candidates and streamc.study, with that design's assumptions. Only the listed items are counted: no equipment, no kit or consumable that a person (not the robot) uses, no vector or cells, no labour, shipping or tax.",
+      "priced_subtotal": null,
+      "status": "not_estimated",
+      "total": null,
+      "unused_price_keys": []
+    },
+    "narratives": {
+      "backend": "template",
+      "model": null,
+      "n_llm": 0,
+      "n_steps": 39,
+      "n_template": 39
+    },
+    "order_fasta": {
+      "bytes": 3120,
+      "path": "data/s8/order.fasta",
+      "records": 3,
+      "root": "run",
+      "sha256": "9203c3db3f7966523431253142807e988318b1ae715375d549454422d3469cf6"
+    },
+    "order_fasta_missing": [],
+    "pathogen": {
+      "scientific_name": "Neisseria meningitidis",
+      "taxid": 487
+    },
+    "selection": {
+      "degraded_to_sequence_only": true,
+      "n_final_candidates": 20,
+      "rank_source": "s7_final_order",
+      "s7_top_k": 20,
+      "source": "s7_final_ranking",
+      "stages": [
+        "s2",
+        "s7"
+      ],
+      "top_k": 3,
+      "used": [
+        "sp|P0DH58|OMPA_NEIMB",
+        "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "tr|Q9K0B4|Q9K0B4_NEIMB"
+      ]
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s8_protocol",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "real_fixture",
+  "schema": "vaxforge/s8_protocol/v1",
+  "stage": "s8",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "S3 LEAKAGE RISK (stream B's banner): the pretrained Vaxign-ML model was trained on all Protegen entries, so recovering known antigens is not validation",
+    "S5 analyses that did not run: class_ii (unavailable: netMHCIIpan not found (DTU licence; see docs/TOOLS_SETUP.md)); conformational (unavailable: DiscoTope-3.0 not configured (tools.discotope3)). The epitopes they would have produced do not exist",
+    "S7 DEGRADED to sequence-only ranking (boltz not found on PATH (pip install boltz; MIT licence)): every structure field is empty and the final order rests on the S3, T-cell, B-cell and coverage terms that exist",
+    "tr|Q9JY67|Q9JY67_NEIMB: S2 localisation is CytoplasmicMembrane (accessibility partial); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9K0U8|Q9K0U8_NEIMB: S2 localisation is Periplasmic (accessibility inaccessible); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "sp|Q9JS61|ILVD_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9JZY3|Q9JZY3_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9K0Q7|Q9K0Q7_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9K1D2|Q9K1D2_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9JZD1|Q9JZD1_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9JXM3|Q9JXM3_NEIMB: S2 localisation is CytoplasmicMembrane (accessibility partial); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q4W563|Q4W563_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "sp|Q9K0K4|TRMD_NEIMB: S2 localisation is Cytoplasmic (accessibility inaccessible); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "S7 ranked 20 candidates but top_k is 3: only the first 3 are used (not used: tr|Q9JXZ0|Q9JXZ0_NEIMB, tr|Q9JXL6|Q9JXL6_NEIMB, tr|Q9JY67|Q9JY67_NEIMB, sp|Q7DD37|NHBA_NEIMB, sp|Q06379|LBPA_NEIMB, tr|Q9K0U8|Q9K0U8_NEIMB, sp|Q9JXK7|NADA1_NEIMB, sp|Q9K0U9|TBPA_NEIMB, sp|Q9JS61|ILVD_NEIMB, tr|Q9JZY3|Q9JZY3_NEIMB, tr|Q9K0Q7|Q9K0Q7_NEIMB, sp|Q9JXV4|FHBP_NEIMB, tr|Q9K1D2|Q9K1D2_NEIMB, tr|Q9JZD1|Q9JZD1_NEIMB, tr|Q9JXM3|Q9JXM3_NEIMB, tr|Q4W563|Q4W563_NEIMB, sp|Q9K0K4|TRMD_NEIMB)"
+  ]
+}

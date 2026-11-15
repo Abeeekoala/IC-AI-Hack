@@ -1,0 +1,522 @@
+{
+ "session_id": "s04_colony_pcr",
+ "title": "Colony PCR reaction set-up",
+ "covers": [
+  "s04"
+ ],
+ "modules": [
+  {
+   "key": "temp",
+   "name": "temperature module gen2",
+   "slot": "3"
+  }
+ ],
+ "labware": [
+  {
+   "key": "rxn",
+   "load_name": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+   "slot": "3",
+   "module": "temp",
+   "label": "PCR reactions on the 4 C block",
+   "kind": "plate"
+  },
+  {
+   "key": "tubes",
+   "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "slot": "2",
+   "module": null,
+   "label": "PCR reagents + master-mix tube",
+   "kind": "tubes"
+  },
+  {
+   "key": "tmpl",
+   "load_name": "biorad_96_wellplate_200ul_pcr",
+   "slot": "5",
+   "module": null,
+   "label": "Colony resuspensions (human-prepared)",
+   "kind": "plate"
+  },
+  {
+   "key": "tips_p20_1",
+   "load_name": "opentrons_96_tiprack_20ul",
+   "slot": "11",
+   "module": null,
+   "label": "p20 tips",
+   "kind": "tiprack"
+  },
+  {
+   "key": "tips_p300_1",
+   "load_name": "opentrons_96_tiprack_300ul",
+   "slot": "10",
+   "module": null,
+   "label": "p300 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p20",
+   "api_name": "p20_single_gen2",
+   "mount": "left",
+   "channels": 1,
+   "tipracks": [
+    "tips_p20_1"
+   ]
+  },
+  {
+   "key": "p300",
+   "api_name": "p300_single_gen2",
+   "mount": "right",
+   "channels": 1,
+   "tipracks": [
+    "tips_p300_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "tmpl",
+    "well": "A1"
+   },
+   "reagent": "candidate colony 1 resuspension",
+   "volume_ul": 10.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tmpl",
+    "well": "B1"
+   },
+   "reagent": "candidate colony 2 resuspension",
+   "volume_ul": 10.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tmpl",
+    "well": "C1"
+   },
+   "reagent": "candidate colony 3 resuspension",
+   "volume_ul": 10.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tmpl",
+    "well": "D1"
+   },
+   "reagent": "candidate colony 4 resuspension",
+   "volume_ul": 10.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tmpl",
+    "well": "E1"
+   },
+   "reagent": "empty-vector colony control resuspension",
+   "volume_ul": 10.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "reagent": "nuclease-free water",
+   "volume_ul": 87.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "reagent": "2x PCR master mix",
+   "volume_ul": 110.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A3"
+   },
+   "reagent": "forward primer",
+   "volume_ul": 38.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A4"
+   },
+   "reagent": "reverse primer",
+   "volume_ul": 38.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s04",
+   "op": "set_temp",
+   "module": "temp",
+   "celsius": 4.0,
+   "wait": true
+  },
+  {
+   "step": "s04",
+   "op": "comment",
+   "text": "assemble the master mix in tube B1"
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 56.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "tubes",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 80.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "dst": [
+    {
+     "labware": "tubes",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 8.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A3"
+   },
+   "dst": [
+    {
+     "labware": "tubes",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 8.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A4"
+   },
+   "dst": [
+    {
+     "labware": "tubes",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 50.0,
+   "at": {
+    "labware": "tubes",
+    "well": "B1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s04",
+   "op": "comment",
+   "text": "distribute master mix, then add template"
+  },
+  {
+   "step": "s04",
+   "op": "distribute",
+   "pipette": "p20",
+   "volume": 19.0,
+   "src": {
+    "labware": "tubes",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A1"
+    },
+    {
+     "labware": "rxn",
+     "well": "B1"
+    },
+    {
+     "labware": "rxn",
+     "well": "C1"
+    },
+    {
+     "labware": "rxn",
+     "well": "D1"
+    },
+    {
+     "labware": "rxn",
+     "well": "E1"
+    },
+    {
+     "labware": "rxn",
+     "well": "F1"
+    }
+   ],
+   "disposal_ul": 1.0,
+   "reagent": "master mix"
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 1.0,
+   "src": {
+    "labware": "tmpl",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    10.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 1.0,
+   "src": {
+    "labware": "tmpl",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    10.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 1.0,
+   "src": {
+    "labware": "tmpl",
+    "well": "C1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "C1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    10.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 1.0,
+   "src": {
+    "labware": "tmpl",
+    "well": "D1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "D1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    10.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 1.0,
+   "src": {
+    "labware": "tmpl",
+    "well": "E1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "E1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    10.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 1.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "F1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    10.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s04",
+   "op": "pause",
+   "text": "HUMAN [s04]: Seal the plate and run the PCR programme and gel/readout OFF the robot (thermocycling and reading are not automated)."
+  },
+  {
+   "step": "s04",
+   "op": "deactivate_temp",
+   "module": "temp"
+  }
+ ],
+ "tips_needed": {
+  "p300": 3,
+  "p20": 9
+ },
+ "notes": [
+  "Master mix is assembled for two spare reactions; the leftover stays in tube B1."
+ ],
+ "layouts": {
+  "Reaction block": {
+   "candidate colony 1": "A1",
+   "candidate colony 2": "B1",
+   "candidate colony 3": "C1",
+   "candidate colony 4": "D1",
+   "empty-vector colony control": "E1",
+   "no-template control": "F1"
+  }
+ }
+}

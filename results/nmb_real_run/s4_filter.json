@@ -1,0 +1,3160 @@
+{
+  "created_at": "2026-11-15T10:19:50Z",
+  "digest": "sha256:c89da3d01ae4b5f635dc752dce062d734f9dc6bacc8bf859594195c381fe21ae",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.2"
+  },
+  "inputs": {
+    "s1": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+    "s3": "sha256:13d3c4acc714b455f12e6242040c5a4df78b3fc8165e940c98a734fa867eddce"
+  },
+  "params": {
+    "refdata": {
+      "conservancy_proteomes": [],
+      "human_proteome": null,
+      "human_reviewed_only": true,
+      "iedb_human_ligands": null
+    },
+    "s4": {
+      "allergenicity": {
+        "enabled": true,
+        "model": 1,
+        "on_fail": "flag"
+      },
+      "conservancy": {
+        "enabled": true,
+        "evalue": 1e-05,
+        "min_coverage": 0.8,
+        "min_fraction_strains": 1.0,
+        "n_strains": 2,
+        "on_fail": "flag"
+      },
+      "human_homology": {
+        "enabled": true,
+        "evalue": 0.001,
+        "ligand_recheck": true,
+        "min_coverage": 0.5,
+        "min_identity": 0.35,
+        "shared_peptide_length": 9
+      },
+      "on_unavailable": "carry",
+      "rescue": [],
+      "toxicity": {
+        "enabled": true,
+        "model": 1,
+        "on_fail": "reject"
+      }
+    },
+    "thresholds": {
+      "allergenicity": 0.45,
+      "conservancy_identity": 0.8,
+      "protegenicity": [
+        0.9,
+        0.85
+      ],
+      "toxicity": 0.8
+    },
+    "tools": {
+      "blast_docker_image": "ncbi/blast:2.16.0",
+      "blast_mode": "local"
+    }
+  },
+  "payload": {
+    "candidates": [
+      {
+        "accession": "Q9K0B4",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.342
+            },
+            "reason": "AlgPred 2.0 score 0.342 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 3220.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9048,
+                    "subject": "UPI00027C89EC"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 3227.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9102,
+                    "subject": "UPI0001E0CAFB"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.336
+            },
+            "reason": "ToxinPred2 score 0.336 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "iga",
+        "length": 1815,
+        "name": "IgA-specific serine endopeptidase",
+        "protein_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "s3": {
+          "composite_score": 0.99793909,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000261",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.99793909,
+          "rank": 1,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.99793909,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKTKRFKINAISLSIFLAYALTPYSEAALVRDDVDYQIFRDFAENKGKFFVGATDLSVKNKQGQNIGNALSNVPMIDFSVADVNRRTLTVIDPQYAVSVKHVKGDEISYYGHHNGHLDVSNDENEYRSVAQNDYEPNKNWHHGNQGRLEDYNMARLNKFVTEVAPIAPTSAGGGVETYKDKNRFSEFVRVGAGTQFEYNSRYNMTELSRAYRYAIAGTPYQDVNVTSNLNQEGLIGFGDNSKHHSPEKLKEVLSQNALTNYAVLGDSGSPLFAYDKQEKRWVFLGAYDYWAGYQKNSWQEWNIYKKEFADEIKQRDNAGTIKGNGEHHWKTTGTNSHIGSTAVRLANNERDANNGQNVTFENNGTLVLDQNINQGAGGLFFKGDYTVKGINNDITWLGAGIDVADGKKVVWQVKNPNGDRLAKIGKGTLEINGTGVNQGQLKVGDGTVILNQQADADKKVQAFSQVGIVSGRGTLVLNSSNQINPDNLYFGFRGGRLDANGNDLTFEHIRNVDEGARIVNHNTGHASTITLTGKSLITDPKTISIHYIQNNDDDDAGYYYYRPRKPIPQGKDLYFKNYRYYALKSGGSVNAPMPENGQTENNDWILMGSTQEEAKKNAMNHKNNQRISGFSGFFGEENGKGHNGALNLNFNGKSAQNRFLLTGGTNLNGKISVTQGNVLLSGRPTPHARDFVNKSSARKDAHFSKNNEVVFEDDWINRTFKATEIAVNQSASFSSGRNVSDITANITATDNAKVNLGYKNGDEVCVRSDYTGYVTCNTGNLSDKALNSFGATQINGNVNLNQNAALVLGKAALWGQIQGQGNSRVSLNQHSKWHLTGDSQVHNLSLADSHIHLNNASDAQSANKYHTLKINHLSGNGHFHYLTHLAKNLGDKVLVKESASGHYQLHVQDKTGEPNQEGLNLFDASSVQDRSRLSVSLANNHVDLGALRYTIKTENGITRLYNPYAENRRRVKPAPSPATNTASQAQKATQTDGAQIAKPQNIVVAPPSPQANQAEEAKRQQAKAEQVKRQQAEAERKSAELAKQKAEAEREARELATRQKAEQERSSAELARRHEKEREAAELSAKQKVEAEREAQALAVRRKAEAEEAKRQAAELARRHEKEREAAELSAKQRVGEEERRQTAQSQPQRRKRRAAPQDYMAASQDRPKRRGHRSVQQNNVEIAQAQAELARRQQEERKAAELLAKQRAEAEREAQALAARRKAEAEEAKRQAAELAHRQEAERKAAELSANQKAAAEAQALAARQQKALARQQEEARKAAELAVKQKAETERKTAELAKQRAAAEAAKRQQEARQTAELARRQEAERQAAELSAKQKAETDREAAESAKRKAEEEEHRQAAQSQPQRRKRRAAPQDYMAASQNRPKRRGRRSTLPAPPSPSFDSSAYAAPRALHNPDWYENDYEEIPLDALEDENVSESVDTSDKQPQDNTELHEKYENDYEEIPLDALEDEDVSESVDTSDKQPQDNTELHEKVETVSLQPRAAQPRAQAATQLQAQAAAQADAVSTNTNSALSDAMASTQSILLDTGASLTRHIAQKSRADAEKNSVWMSNTGYGRDYASAQYRRFSSKRTQTQIGIDRSLSENMQIGGVLTYSDSQHTFDQASGKNTFVQANLYGKYYLNDAWYVAGDIGAGSLRSRLQTQQKANFNRASIQTGLTLGNTLKINQFEIVPSAGIRYSRLSSADYKLGNDSVKVSSMSVKTLTAGLDFAYRFKVGNLTVKPLLSAAYFANYGKGGVNVGGNSFVYKADNQQQYSAGAALLYRNVTLNVNGSITKGKQLEKQKSGQIKIQIRF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXZ0",
+        "flags": [
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.222
+            },
+            "reason": "AlgPred 2.0 score 0.222 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.5,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 1270.0,
+                    "coverage": 0.9944,
+                    "evalue": 0.0,
+                    "identity": 0.8663,
+                    "subject": "UPI00027C8505"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 270.0,
+                    "coverage": 0.9944,
+                    "evalue": 1.22e-81,
+                    "identity": 0.2976,
+                    "subject": "UPI0001E08D5B"
+                  },
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 50% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.387
+            },
+            "reason": "ToxinPred2 score 0.387 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB1829",
+        "length": 708,
+        "name": "TonB-dependent receptor",
+        "protein_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "s3": {
+          "composite_score": 0.99656515,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.93,
+              "evalue": 3.62e-86,
+              "hit": "VFG000163",
+              "identity": 0.29059999999999997,
+              "term": 0.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.99656515,
+          "rank": 2,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.99656515,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MGQFMSVFRINMTAATVLAALSSSVFAAQTEGLETVHIKGQRSYNAIATEKNGDYSSFAATVGTKIPASLREIPQSVSIITNQQVKDRNVDTFDQLARKTPGLRVLSNDDGRSSVYARGYEYSEYNIDGLPAQMQSINGTLPNLFAFDRVEVMRGPSGLFDSSGEMGGIVNLVRKRPTKAFQGHAAAGFGTHKQYKAEADVSGSLNSDGSVRGRVMAQTVGASPRPAEKNNRRETFYAAADWDINPDTVLGAGYLYQQRRLAPYNGLPADANNKLPSLPQHVFVGADWNKFKMHSHDVFADLKHYFGNGGYGKVGMRYSDRKADSNYTFAGSKLNNTGQADVAGLGTDIKQKAFAVDASYSRPFALGNTANEFVIGADYNRLRSTNEQGRSTLSKSVALDGFRALPYNGILQNARAGNKGFNHSVTEENLDETGLYAKTVFRPLEGLSLIAGGRVGHHKIESGDGKTLHKASKTKFTSYAGAVYDIDGSNSLYASASQLYTPQTSIGTDGKLLKPREGNQFEIGYKGSYMDDRLNTRVSFYRMKDKNAAAPLDSNNKKTRYAALGKRVMEGVETEISGAMTPKWQIHAGYSYLHSQIKTASNSRDEGIFLLMPKHSANLWTTYQVTSGLTIGGGVNAMSGITSSAGIHAGGYATFDAMAAYRFTPKLKLQINADNIFNRHYYARVGSESTFNIPGSERSLTANLRYSF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JYA8",
+        "flags": [
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.178
+            },
+            "reason": "AlgPred 2.0 score 0.178 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 842.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.5449,
+                    "subject": "UPI00027C7DB6"
+                  },
+                  "conserved": false
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 750.0,
+                    "coverage": 0.4905,
+                    "evalue": 0.0,
+                    "identity": 0.9356,
+                    "subject": "UPI0001E084C3"
+                  },
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 0% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.638
+            },
+            "reason": "ToxinPred2 score 0.638 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "hmbR",
+        "length": 791,
+        "name": "Hemoglobin receptor",
+        "protein_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "s3": {
+          "composite_score": 0.99404626,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000266",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.99404626,
+          "rank": 3,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.99404626,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKPLQMLPIAALVGSIFGNPVLAADEAATETTPVKAEIKAVRVKGQRNAPAAVERVNLNRIKQEMIRDNKDLVRYSTDVGLSDSGRHQKGFAVRGVEGNRVGVSIDGVNLPDSEENSLYARYGNFNSSRLSIDPELVRNIEIVKGADSFNTGSGALGGGVNYQTLQGRDLLLDDRQFGVMMKNGYSTRNREWTNTLGFGVSNDRVDAALLYSQRRGHETESAGNRGYAVEGEGSGANIRGSARGIPDSSKHKYHSFLGKIAYQINDNHRIGASLNGQQGHNYTVEESYNLTASSWREADDVNRRRNANLFYEWMPDSNWLSSLKADFDYQKTKVAAVNNKGSFPMDYSTWTRNYNQKDLDEIYNRSMDTRFKRFTLRLDSHPLQLGGGRHRLSFKTFVSRRDFENLNRDDYYFSGRVVRTTSSIQHPVKTTNYGFSLSDQIQWNDVFSSRAGIRYDHTKMTPQELNAECHACDKTPPAANTYKGWSGFVGLAAQLNQAWRVGYDITSGYRVPNASEVYFTYNHGSGNWLPNPNLKAERSTTHTLSLQGRSEKGMLDANLYQSNYRNFLSEEQKLTTSGTPGCTEENAYYGICSDPYKEKLDWQMKNIDKARIRGIELTGRLNVDKVASFVPEGWKLFGSLGYAKSKLSGDNSLLSTQPLKVIAGIDYESPSEKWGVFSRLTYLGAKKVKDAQYTVYENKGWGTPLQKKVKDYPWLNKSAYVFDMYGFYKPAKNLTLRAGVYNLFNRKYTTWDSLRGLYSYSTTNAVDRDGKGLDRYRAPGRNYAVSLEWKF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXL6",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.284
+            },
+            "reason": "AlgPred 2.0 score 0.284 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 2906.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.965,
+                    "subject": "UPI00027C8BCB"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 2472.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.8664,
+                    "subject": "UPI0001E0A59C"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.462
+            },
+            "reason": "ToxinPred2 score 0.462 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "hap",
+        "length": 1457,
+        "name": "Adhesion and penetration protein",
+        "protein_id": "tr|Q9JXL6|Q9JXL6_NEIMB",
+        "s3": {
+          "composite_score": 0.9919853399999999,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.98,
+              "evalue": 0.0,
+              "hit": "VFG001149",
+              "identity": 0.5498,
+              "term": 0.538804
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9919853399999999,
+          "rank": 4,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9919853399999999,
+            "virulence": 0.538804
+          },
+          "tie_group": null
+        },
+        "sequence": "MKTTDKRTTETHRKAPKTGRIRFSPAYLAICLSFGILPQAWAGHTYFGINYQYYRDFAENKGKFAVGAKDIEVYNKKGELVGKSMTKAPMIDFSVVSRNGVAALVGDQYIVSVAHNGGYNNVDFGAEGRNPDQHRFTYKIVKRNNYKAGTKGHPYGGDYHMPRLHKFVTDAEPVEMTSYMDGRKYIDQNNYPDRVRIGAGRQYWRSDEDEPNNRESSYHIASAYSWLVGGNTFAQNGSGGGTVNLGSEKIKHSPYGFLPTGGSFGDSGSPMFIYDAQKQKWLINGVLQTGNPYIGKSNGFQLVRKDWFYDEIFAGDTHSVFYEPRQNGKYSFNDDNNGTGKINAKHEHNSLPNRLKTRTVQLFNVSLSETAREPVYHAAGGVNSYRPRLNNGENISFIDEGKGELILTSNINQGAGGLYFQGDFTVSPENNETWQGAGVHISEDSTVTWKVNGVANDRLSKIGKGTLHVQAKGENQGSISVGDGTVILDQQADDKGKKQAFSEIGLVSGRGTVQLNADNQFNPDKLYFGFRGGRLDLNGHSLSFHRIQNTDEGAMIVNHNQDKESTVTITGNKDIATTGNNNSLDSKKEIAYNGWFGEKDTTKTNGRLNLVYQPAAEDRTLLLSGGTNLNGNITQTNGKLFFSGRPTPHAYNHLNDHWSQKEGIPRGEIVWDNDWINRTFKAENFQIKGGQAVVSRNVAKVKGDWHLSNHAQAVFGVAPHQSHTICTRSDWTGLTNCVEKTITDDKVIASLTKTDISGNVDLADHAHLNLTGLATLNGNLSANGDTRYTVSHNATQNGNLSLVGNAQATFNQATLNGNTSASGNASFNLSDHAVQNGSLTLSGNAKANVSHSALNGNVSLADKAVFHFESSRFTGQISGGKDTALHLKDSEWTLPSGTELGNLNLDNATITLNSAYRHDAAGAQTGSATDAPRRRSRRSRRSLLSVTPPTSVESRFNTLTVNGKLNGQGTFRFMSELFGYRSDKLKLAESSEGTYTLAVNNTGNEPASLEQLTVVEGKDNKPLSENLNFTLQNEHVDAGAWRYQLIRKDGEFRLHNPVKEQELSDKLGKAEAKKQAEKDNAQSLDALIAAGRDAVEKTESVAEPARQAGGENVGIMQAEEEKKRVQADKDTALAKQREAETRPATTAFPRARRARRDLPQLQPQPQPQPQRDLISRYANSGLSEFSATLNSVFAVQDELDRVFAEDRRNAVWTSGIRDTKHYRSQDFRAYRQQTDLRQIGMQKNLGSGRVGILFSHNRTENTFDDGIGNSARLAHGAVFGQYGIDRFYIGISAGAGFSSGSLSDGIGGKIRRRVLHYGIQARYRAGFGGFGIEPHIGATRYFVQKADYRYENVNIATPGLAFNRYRAGIKADYSFKPAQHISITPYLSLSYTDAASGKVRTRVNTAVLAQDFGKTRSAEWGVNAEIKGFTLSLHAAAAKGPQLEAQHSAGIKLGYRW",
+        "taxid": 487
+      },
+      {
+        "accession": "Q06379",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.145
+            },
+            "reason": "AlgPred 2.0 score 0.145 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 1799.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9523,
+                    "subject": "UPI00027C9428"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 1850.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9534,
+                    "subject": "UPI0001E0A567"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.593
+            },
+            "reason": "ToxinPred2 score 0.593 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "lbpA",
+        "length": 943,
+        "name": "Lactoferrin-binding protein A",
+        "protein_id": "sp|Q06379|LBPA_NEIMB",
+        "s3": {
+          "composite_score": 0.98809251,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000264",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.98809251,
+          "rank": 5,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.98809251,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNKKHGFPLTLTALAIATAFPAYAAQAGGATPDAAQTQSLKEITVRAAKVGRRSKEATGLGKIVKTSETLNKEQVLGIRDLTRYDPGVAVVEQGNGASGGYSIRGVDKNRVAVSVDGVAQIQAFTVQGSLSGYGGRGGSGAINEIEYENISTVEIDKGAGSSDHGSGALGGAVAFRTKEAADLISDGKSWGIQAKTAYGSKNRQFMKSLGAGFSKDGWEGLLIRTERQGRETRPHGDIADGVEYGIDRLDAFRQTYDIKRKTREPFFSVEGERESKPVAKLAGYGKYLNNQLNRWVKERIEQNQPLSAEEEAQVREAQARHENLSAQAYTGGGRILPDPMDYRSGSWLAKLGYRFGGRHYVGGVFEDTKQRYDIRDMTEKQYYGTDEAEKFRDKSGVYDGDDFRDGLYFVPNIEEWKGDKNLVRGIGLKYSRTKFIDEHHRRRRMGLLYRYENEAYSDNWADKAVLSFDKQGVATDNNTLKLNCAVYPAVDKSCRASADKPYSYDSSDRFHYREQHNVLNASFEKSLKNKWTKHHLTLGFGYDASKAISRPEQLSHNAARISESTGFDENNQDKYLLGKPEVVEGSVCGYIETLRSRKCVPRKINGSNIHISLNDRFSIGKYFDFSLGGRYDRKNFTTSEELVRSGRYVDRSWNSGILFKPNRHFSVSYRASSGFRTPSFQELFGIDIYHDYPKGWQRPALKSEKAANREIGLQWKGDFGFLEISSFRNRYTDMIAVADHKTKLPNQAGQLTEIDIRDYYNAQNMSLQGVNILGKIDWNGVYGKLPEGLYTTLAYNRIKPKSVSNRPGLSLRSYALDAVQPSRYVLGFGYDQPEGKWGANIMLTYSKGKNPDELAYLAGDQKRYSTKRASSSWSTADVSAYLNLKKRLTLRAAIYNIGNYRYVTWESLRQTAESTANRHGGDSNYGRYAAPGRNFSLALEMKF",
+        "taxid": 487
+      },
+      {
+        "accession": "P0DH58",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.422
+            },
+            "reason": "AlgPred 2.0 score 0.422 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 726.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9235,
+                    "subject": "UPI00027C8EFE"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 640.0,
+                    "coverage": 0.8801,
+                    "evalue": 0.0,
+                    "identity": 0.9278,
+                    "subject": "UPI0001E0C420"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.564
+            },
+            "reason": "ToxinPred2 score 0.564 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "porA",
+        "length": 392,
+        "name": "Major outer membrane protein P.IA",
+        "protein_id": "sp|P0DH58|OMPA_NEIMB",
+        "s3": {
+          "composite_score": 0.98419968,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG006237",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.98419968,
+          "rank": 6,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.98419968,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MRKKLTALVLSALPLAAVADVSLYGEIKAGVEGRNYQLQLTEAQAANGGASGQVKVTKVTKAKSRIRTKISDFGSFIGFKGSEDLGDGLKAVWQLEQDVSVAGGGATQWGNRESFIGLAGEFGTLRAGRVANQFDDASQAIDPWDSNNDVASQLGIFKRHDDMPVSVRYDSPEFSGFSGSVQFVPIQNSKSAYTPAYYTKNTNNNLTLVPAVVGKPGSDVYYAGLNYKNGGFAGNYAFKYARHANVGRNAFELFLIGSGSDQAKGTDPLKNHQVHRLTGGYEEGGLNLALAAQLDLSENGDKTKNSTTEIAATASYRFGNAVPRISYAHGFDFIERGKKGENTSYDQIIAGVDYDFSKRTSAIVSGAWLKRNTGIGNYTQINAASVGLRHKF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXK7",
+        "flags": [
+          "allergenicity",
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.596
+            },
+            "reason": "AlgPred 2.0 score 0.596 >= 0.45",
+            "status": "flag"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": null,
+                  "conserved": false
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": null,
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 0% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": {
+                "bitscore": 43.9,
+                "coverage": 0.5746,
+                "evalue": 0.000119,
+                "identity": 0.1923,
+                "subject": "sp|Q0VF96|CGNL1_HUMAN"
+              },
+              "homologous": false,
+              "known_human_mhc_ligand_overlap": [],
+              "ligand_recheck": "unavailable",
+              "n_ligand_overlap": 0,
+              "n_shared_peptides": 0,
+              "shared_peptide_examples": []
+            },
+            "reason": "weak human similarity only",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.385
+            },
+            "reason": "ToxinPred2 score 0.385 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "nadA",
+        "length": 362,
+        "name": "Neisseria adhesin A",
+        "protein_id": "sp|Q9JXK7|NADA1_NEIMB",
+        "s3": {
+          "composite_score": 0.97847493,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.6,
+              "evalue": 4.13e-40,
+              "hit": "VFG054578",
+              "identity": 0.4286,
+              "term": 0.25716
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.97847493,
+          "rank": 7,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.97847493,
+            "virulence": 0.25716
+          },
+          "tie_group": null
+        },
+        "sequence": "MKHFPSKVLTTAILATFCSGALAATSDDDVKKAATVAIVAAYNNGQEINGFKAGETIYDIGEDGTITQKDATAADVEADDFKGLGLKKVVTNLTKTVNENKQNVDAKVKAAESEIEKLTTKLADTDAALADTDAALDETTNALNKLGENITTFAEETKTNIVKIDEKLEAVADTVDKHAEAFNDIADSLDETNTKADEAVKTANEAKQTAEETKQNVDAKVKAAETAAGKAEAAAGTANTAADKAEAVAAKVTDIKADIATNKADIAKNSARIDSLDKNVANLRKETRQGLAEQAALSGLFQPYNVGRFNVTAAVGGYKSESAVAIGTGFRFTENFAAKAGVAVGTSSGSSAAYHVGVNYEW",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0U9",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.301
+            },
+            "reason": "AlgPred 2.0 score 0.301 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 1829.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9596,
+                    "subject": "UPI00027C7FAA"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 1822.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9607,
+                    "subject": "UPI0001E0F182"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.6
+            },
+            "reason": "ToxinPred2 score 0.600 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "tbp1",
+        "length": 915,
+        "name": "Transferrin-binding protein A",
+        "protein_id": "sp|Q9K0U9|TBPA_NEIMB",
+        "s3": {
+          "composite_score": 0.97732997,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000262",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.97732997,
+          "rank": 8,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.97732997,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MQQQHLFRFNILCLSLMTALPAYAENVQAGQAQEKQLDTIQVKAKKQKTRRDNEVTGLGKLVKSSDTLSKEQVLNIRDLTRYDPGIAVVEQGRGASSGYSIRGMDKNRVSLTVDGVSQIQSYTAQAALGGTRTAGSSGAINEIEYENVKAVEISKGSNSVEQGSGALAGSVAFQTKTADDVIGEGRQWGIQSKTAYSGKNRGLTQSIALAGRIGGAEALLIHTGRRAGEIRAHEDAGRGVQSFNRLVPVEDSSNYAYFIVKEECKNGSYETCKANPKKDVVGKDERQTVSTRDYTGPNRFLADPLSYESRSWLFRPGFRFENKRHYIGGILEHTQQTFDTRDMTVPAFLTKAVFDANKKQAGSLPGNGKYAGNHKYGGLFTNGENGALVGAEYGTGVFYDETHTKSRYGLEYVYTNADKDTWADYARLSYDRQGIGLDNHFQQTHCSADGSDKYCRPSADKPFSYYKSDRVIYGESHRLLQAAFKKSFDTAKIRHNLSVNLGFDRFGSNLRHQDYYYQHANRAYSSNTPPQNNGKKISPNGSETSPYWVTIGRGNVVTGQICRLGNNTYTDCTPRSINGKSYYAAVRDNVRLGRWADVGAGLRYDYRSTHSDDGSVSTGTHRTLSWNAGIVLKPTDWLDLTYRTSTGFRLPSFAEMYGWRAGVQSKAVKIDPEKSFNKEAGIVFKGDFGNLEASWFNNAYRDLIVRGYEAQIKDGKEEAKGDPAYLNAQSARITGINILGKIDWNGVWDKLPEGWYSTFAYNRVRVRDIKKRADRTDIQSHLFDAIQPSRYVVGLGYDQPEGKWGVNGMLTYSKAKEITELLGSRALLNGNSRNTKATARRTRPWYIVDVSGYYTVKKHFTLRAGVYNLLNYRYVTWENVRQTAGGAVNQHKNVGVYNRYAAPGRNYTFSLEMKF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q7DD37",
+        "flags": [
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.384
+            },
+            "reason": "AlgPred 2.0 score 0.384 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.5,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 618.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.7008,
+                    "subject": "UPI00027C92AC"
+                  },
+                  "conserved": false
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 785.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.8361,
+                    "subject": "UPI0001E0C468"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 50% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.159
+            },
+            "reason": "ToxinPred2 score 0.159 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "nhba",
+        "length": 488,
+        "name": "Neisserial heparin binding antigen",
+        "protein_id": "sp|Q7DD37|NHBA_NEIMB",
+        "s3": {
+          "composite_score": 0.9761850200000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9761850200000001,
+          "rank": 9,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9761850200000001,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MFKRSVIAMACIFALSACGGGGGGSPDVKSADTLSKPAAPVVSEKETEAKEDAPQAGSQGQGAPSAQGSQDMAAVSEENTGNGGAVTADNPKNEDEVAQNDMPQNAAGTDSSTPNHTPDPNMLAGNMENQATDAGESSQPANQPDMANAADGMQGDDPSAGGQNAGNTAAQGANQAGNNQAAGSSDPIPASNPAPANGGSNFGRVDLANGVLIDGPSQNITLTHCKGDSCSGNNFLDEEVQLKSEFEKLSDADKISNYKKDGKNDKFVGLVADSVQMKGINQYIIFYKPKPTSFARFRRSARSRRSLPAEMPLIPVNQADTLIVDGEAVSLTGHSGNIFAPEGNYRYLTYGAEKLPGGSYALRVQGEPAKGEMLAGAAVYNGEVLHFHTENGRPYPTRGRFAAKVDFGSKSVDGIIDSGDDLHMGTQKFKAAIDGNGFKGTWTENGSGDVSGKFYGPAGEEVAGKYSYRPTDAEKGGFGVFAGKKEQD",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0U8",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.346
+            },
+            "reason": "AlgPred 2.0 score 0.346 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 772.0,
+                    "coverage": 0.8279,
+                    "evalue": 0.0,
+                    "identity": 1.0,
+                    "subject": "UPI0000ECF9A7"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 807.0,
+                    "coverage": 0.8671,
+                    "evalue": 0.0,
+                    "identity": 0.995,
+                    "subject": "UPI0001B02E58"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.282
+            },
+            "reason": "ToxinPred2 score 0.282 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "potD-1",
+        "length": 459,
+        "name": "Spermidine/putrescine ABC transporter, periplasmic spermidine/putrescine-binding protein",
+        "protein_id": "tr|Q9K0U8|Q9K0U8_NEIMB",
+        "s3": {
+          "composite_score": 0.96771239,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "Periplasmic",
+              "prior": 0.5,
+              "raw": "Periplasmic",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.96771239,
+          "rank": 11,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.96771239,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MQAFSLYPPVGHPDSAKKRQNRADVFLPFWKQDNFLGKSVQYRFEFAQIYFTMPKPCAGVTMGRGDFFFSNLFHQESARMKKSVLAVLAALSLAACGGSEKNAVQPQADAASAANAEAAATDTLNIYNWSNYVDESTVEDFKKANNLKLTYDLYENNETLEAKMLTGKSGYDLVVPGIAFLPRQIEAGAYQKVNKDLIPNYKNIDPELLKMLETADPGNQYAVPYFSGVNTIAITAKGKELLGGKLPENGWDLLFKPEYTHKLKSCGIALWDTPSEMFPILLNYLGKDPKGSNPEDLKAAAEVLKSIRPDVKRFSPSIIDELARGDICLAAGNGGDLNLAKARSEEVKNNVGIEVLTPKGMGFWIESWLIPADAKNVANAHKYINYTLDPEIAAKNGIAVTFAPASKPAREKMPAELVNTRSIFPNEQDMKDGFVMPQMSTDAKKLSVSLWQKIKVGTN",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JS61",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.084
+            },
+            "reason": "AlgPred 2.0 score 0.084 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 1261.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.979,
+                    "subject": "UPI00027C7FBC"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 1278.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9984,
+                    "subject": "UPI0001E07CBC"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.181
+            },
+            "reason": "ToxinPred2 score 0.181 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "ilvD1",
+        "length": 619,
+        "name": "Dihydroxy-acid dehydratase",
+        "protein_id": "sp|Q9JS61|ILVD_NEIMB",
+        "s3": {
+          "composite_score": 0.95465995,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.95465995,
+          "rank": 13,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.95465995,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MPEYRSKTSTHGRNMAGARALWRATGVMETDFGKPIIAVANSFTQFVPGHVHLHNMGQLVAREIEKAGAIAKEFNTIAIDDGIAMGHSGMLYSLPSRDLIADSIEYMVNAHCADALVCISNCDKITPGMLIAAMRLNIPTIFVSGGPMEAGKVIGVANIQPERRLDLIDAMIESADDNVSNRQVEEVEQNACPTCGSCSGMFTANSMNCLTEALGLSLPGNGSYLATHAGRKELFLEAGRMIVEITKRYYEQNDETVLPRSIATKKAFENAMTMDIAMGGSTNTILHLLAVANEAGVDFKMADIDRLSRVVPCICKTAPNNHDYYMEDVHRAGGIFAILKELDKAGKLHTDVHTIHAPTLKDAIEQWDVTNPENTRAIERFKAAPGGVRTTQAFSQNRMWKTLDLDREKGCIRDVAHAYSQDGGLAVLFGNIAERGCVVKTAGVDESILKFTGRARVFESQEDAVEGILGNQIVAGDIVIIRYEGPKGGPGMQEMLYPTSYLKSKGLGKACALLTDGRFSGGTSGLSIGHASPEAAEGGAIGLVHEGDTVEIDIPNRSIHLAISDEELAARRAEMEARGSKAWKPKNRDRYVSAALRAYGAMATSADKGAVRDVAQIER",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXV4",
+        "flags": [
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.334
+            },
+            "reason": "AlgPred 2.0 score 0.334 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 396.0,
+                    "coverage": 1.0,
+                    "evalue": 4.22e-142,
+                    "identity": 0.7117,
+                    "subject": "UPI00027C8872"
+                  },
+                  "conserved": false
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 410.0,
+                    "coverage": 1.0,
+                    "evalue": 1.27e-146,
+                    "identity": 0.7409,
+                    "subject": "UPI0001E08D50"
+                  },
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 0% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.357
+            },
+            "reason": "ToxinPred2 score 0.357 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "fhbP",
+        "length": 274,
+        "name": "Factor H binding protein",
+        "protein_id": "sp|Q9JXV4|FHBP_NEIMB",
+        "s3": {
+          "composite_score": 0.953515,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG037136",
+              "identity": 0.9964,
+              "term": 0.9964
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.953515,
+          "rank": 14,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.953515,
+            "virulence": 0.9964
+          },
+          "tie_group": null
+        },
+        "sequence": "MNRTAFCCLSLTTALILTACSSGGGGVAADIGAGLADALTAPLDHKDKGLQSLTLDQSVRKNEKLKLAAQGAEKTYGNGDSLNTGKLKNDKVSRFDFIRQIEVDGQLITLESGEFQVYKQSHSALTAFQTEQIQDSEHSGKMVAKRQFRIGDIAGEHTSFDKLPEGGRATYRGTAFGSDDAGGKLTYTIDFAAKQGNGKIEHLKSPELNVDLAAADIKPDGKRHAVISGSVLYNQAEKGSYSLGIFGGKAQEVAGSAEVKTVNGIRHIGLAAKQ",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JY67",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.076
+            },
+            "reason": "AlgPred 2.0 score 0.076 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 2157.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9972,
+                    "subject": "UPI00027C7FD5"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 2155.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9953,
+                    "subject": "UPI0001E07C9D"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.207
+            },
+            "reason": "ToxinPred2 score 0.207 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "mtrD",
+        "length": 1067,
+        "name": "Efflux pump membrane transporter",
+        "protein_id": "tr|Q9JY67|Q9JY67_NEIMB",
+        "s3": {
+          "composite_score": 0.9276391099999999,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG036992",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9276391099999999,
+          "rank": 16,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.9276391099999999,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MAKFFIDRPIFAWVISIFIIAAGIFGIKSLPVSQYPSVAAPTITLRATYPGASAQVMEDSVLSVIERNMNGVEGLDYMSTSADSSGSGSVSLTFTPDTDENLAQVEVQNKLSEVLSTLPATVQQYGVTVSKARSNFLMIVMLSSDVQSTEEMNDYAQRNIVPELQRIEGVGQVRLFGAQRAMRIWVDPKKLQNYNLSFADVGSALSAQNVQISAGSIGSLPAVRGQTVTATVTAQGQLGTAEEFGNVILRANTDGSNVYLKDVARVGLGMEDYSSSTRLNGVNTTGMAVMLSNSGNAMATAKAVKERMATLEKYFPQGMSWKTPYDTSKFVEISIEKVIHTLIEAMVLVFVVMYLFLQNIRYTLIPTIVVPISLLGGFAFISYMGMSINVLTMFAMVLVIGIVVDDAIVVVENVERIMAGEGLPPKEATKKAMGQISGAVIGITAVLISVFVPLAMFSGATGNIYKQFALTMASSIAFSAFLALTLTPALCATMLKTIPKGHHEEKKGFFGWFNKKFNSWTHGYEGRVAKVLRKTFRMMVVYIGLAVVGVFLFMRLPTSFLPTEDQGFVMVSVQLPAGATQERTNATLAQVTQLAKSIPEIENIITVSGFSFSGSGQNMAMGFAILKDWNERTAPGSDAVAIAGKLTGMMMGTLKDGFGIAVVPPPILELGNGSGLSINLQDRNNTGHTALLAKRNELIQKMRASGLFDPSTVRAGGLEDSPQLKIDINRAAAAAQGISFADIRTALASALSSSYVSDFPNQGRLQRVMVQADEDARMQPADILNLTVPNKSGVAVPLSTIATVSWENGTEQSVRFNGYPSMKLSASPATGVSTGQAMAAVQKMVDELGGGYSLEWGGQSREEAKGGSQTLILYGLAVAAVFLVLAALYESWSIPLAVILVIPLGLIGAAAGVTGRNLFEGLLGSVPSFANDIYFQVGFVTVMGLSAKNAILIIEFAKDLQAQGKSAVEAALEAARLRFRPIIMTSFAFILGVVPLYIAGGASSASQRAIGTTVFWGMLIGTLLSVFLVPLFYVVVRKFFKETAHEHEMAVKHAAEAGITGSDDSQH",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K070",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.109
+            },
+            "reason": "AlgPred 2.0 score 0.109 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 637.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9936,
+                    "subject": "UPI00027C8D55"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 639.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9936,
+                    "subject": "UPI0001E0C441"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.237
+            },
+            "reason": "ToxinPred2 score 0.237 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB0749",
+        "length": 312,
+        "name": "Penicillin-binding protein 4",
+        "protein_id": "tr|Q9K070|Q9K070_NEIMB",
+        "s3": {
+          "composite_score": 0.9200824400000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.76,
+              "evalue": 2.78e-65,
+              "hit": "VFG038249",
+              "identity": 0.4545,
+              "term": 0.34542
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9200824400000001,
+          "rank": 17,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9200824400000001,
+            "virulence": 0.34542
+          },
+          "tie_group": null
+        },
+        "sequence": "MSIHTLKRLPSSLLLGLCLSLPSAHLFADNDILGQFLEQNMLTSSDPIEIFAESTIHPTNTQAITGGLILSSQSALVVNNKTGQILYQKNADRIMPIASISKLMSAMVVLDANLDMNETVTITPDEIDRIKGTGSRLAIGTALTRKKLLHLSLMSSENRATHALGRTYPGGMGAFVAAMNRKAQSLGMYGSRFYEPTGLNFQNVSTAKDLSLMVNAAAQYPQIRTNSTSNYASVQTKNGQQNYKNSNALVREGMWNIELQKTGYIREAGRSMVVKANIQNQPVTIVLLNSPTSATRVNDARKIESWMLQQRS",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K1F5",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.015
+            },
+            "reason": "AlgPred 2.0 score 0.015 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 765.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9948,
+                    "subject": "UPI00025E1F09"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 751.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9714,
+                    "subject": "UPI0001E0E9CF"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.146
+            },
+            "reason": "ToxinPred2 score 0.146 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "lpxB",
+        "length": 384,
+        "name": "Lipid-A-disaccharide synthase",
+        "protein_id": "sp|Q9K1F5|LPXB_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.98,
+              "evalue": 1.7e-106,
+              "hit": "VFG013384",
+              "identity": 0.4386,
+              "term": 0.429828
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 18,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.429828
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MADKKSPLIAVSVGEASGDLLGAHLIRAIRKRCPQARFTGIGGELMKAEGFESLYDQERLAVRGFVEVVRRLPEILRIRRGLVRDLLSLKPDVFVGIDAPDFNLGVAEKLKRSGIPTVHYVSPSVWAWRRERVGKIVHQVNRVLCLFPMEPQLYLDAGGRAEFVGHPMAQLMPLEDDRETARQTLGVDAGIPVFALLPGSRVSEIDYMAPVFFQTALLLLERYPAARFLLPAATEATKRRLAEVLQRPEFAGLPLTVIDRQSETVCRAADAVLVTSGTATLEVALCKRPMVISYKISPLTYAYVKRKIKVPHVGLPNILLGKEAVPELLQSEAKPEKLAAALADWYEHPDKVAALQQDFRALHLLLKKDTADLAARAVLEEAGC",
+        "taxid": 487
+      },
+      {
+        "accession": "Q4W563",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.065
+            },
+            "reason": "AlgPred 2.0 score 0.065 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 402.0,
+                    "coverage": 1.0,
+                    "evalue": 5.53e-147,
+                    "identity": 0.995,
+                    "subject": "UPI00027C84F7"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 404.0,
+                    "coverage": 1.0,
+                    "evalue": 1.2e-147,
+                    "identity": 1.0,
+                    "subject": "UPI0000044D1F"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.172
+            },
+            "reason": "ToxinPred2 score 0.172 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "pilN",
+        "length": 199,
+        "name": "PilN protein",
+        "protein_id": "tr|Q4W563|Q4W563_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 3.8e-147,
+              "hit": "VFG006179",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 19,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 1.0
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MNNLIKINLLPYREEMNKRKQQQFKTLMYGAVLTGVAAVAATYLFIDNMINNQSERNTLLETSIAHLDTELSEIQKLKQEKDAFLIKKNKIEELQLKRLQAAKILDSLNEAVPGSTYLTSLDAVTADSYRLSGRTSSDNRVAAMMRAMPNTGIFKQPELLSIKKNNSHQEFTLQATLQPIVKAAESKENPASGNAQEAN",
+        "taxid": 487
+      },
+      {
+        "accession": "Q7DD77",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.134
+            },
+            "reason": "AlgPred 2.0 score 0.134 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 376.0,
+                    "coverage": 1.0,
+                    "evalue": 5.6e-137,
+                    "identity": 1.0,
+                    "subject": "UPI00000C4E86"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 376.0,
+                    "coverage": 1.0,
+                    "evalue": 5.67e-137,
+                    "identity": 1.0,
+                    "subject": "UPI00000C4E86"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.276
+            },
+            "reason": "ToxinPred2 score 0.276 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "pilP",
+        "length": 181,
+        "name": "PilP protein",
+        "protein_id": "tr|Q7DD77|Q7DD77_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 1.79e-136,
+              "hit": "VFG006187",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 20,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 1.0
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MKHYALLISFLALSACSQGSEDLNEWMAQTRREAKAEIIPFQAPTLPVAPVYSPPQLTGPNAFDFRRMETDKKGENAPDTKRIKETLEKFSLENMRYVGILKSGQKVSGFIEAEGYVYTVGVGNYLGQNYGRIESITDDSIVLNELIEDSTGNWVSRKAELLLNSSDKNTEQAAAPAAEQN",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JZD1",
+        "flags": [
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.205
+            },
+            "reason": "AlgPred 2.0 score 0.205 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.5,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 406.0,
+                    "coverage": 1.0,
+                    "evalue": 2.29e-148,
+                    "identity": 1.0,
+                    "subject": "UPI00000C4651"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 310.0,
+                    "coverage": 0.76,
+                    "evalue": 5.88e-111,
+                    "identity": 1.0,
+                    "subject": "UPI0001E084DB"
+                  },
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 50% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.238
+            },
+            "reason": "ToxinPred2 score 0.238 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB1107",
+        "length": 200,
+        "name": "Lipoprotein",
+        "protein_id": "tr|Q9JZD1|Q9JZD1_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 21,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.0
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MNMKKLISAICVSIVLSACNQQSKTAQAEEPVQSIQAADCTAPMDITVEQYLINLEQAFKTQNVSTKIHNKNIVKTDCGYDLTLVMDFGAIALKLDEQQKIRAISVGYILKTDGEKGQNLVNNAINGLHSIQAVLSLTTTDKLGESEAGKQLFTALTEVVKESNQTGATAQKDVPADGILYSVVFEKETNTIAIIGRKQP",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXM3",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.016
+            },
+            "reason": "AlgPred 2.0 score 0.016 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 1013.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9922,
+                    "subject": "UPI00027C8BC6"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 1015.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9941,
+                    "subject": "UPI0001E0A592"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": {
+                "bitscore": 192.0,
+                "coverage": 0.6849,
+                "evalue": 2.27e-54,
+                "identity": 0.3089,
+                "subject": "sp|Q9NSD5|S6A13_HUMAN"
+              },
+              "homologous": false,
+              "known_human_mhc_ligand_overlap": [],
+              "ligand_recheck": "unavailable",
+              "n_ligand_overlap": 0,
+              "n_shared_peptides": 0,
+              "shared_peptide_examples": []
+            },
+            "reason": "weak human similarity only",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.121
+            },
+            "reason": "ToxinPred2 score 0.121 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB1975",
+        "length": 511,
+        "name": "Transporter",
+        "protein_id": "tr|Q9JXM3|Q9JXM3_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 22,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MSDSKTKERATFGTRRAFMIAAIGSAVGLGNIWRFPYIAFENGGGAFILPYLVALLTAGIPLLLLDYAIGHRYRGSAPLAFRRLGRWFEPVGWWNVMTNIVICIYYAVIIGWAASYTYYSVNAAWGADPQGFFFKDFLQMAGPEALGLDFVGKVAGPLAGVWVFTAAIMALGVQKGVARASSFFMPLLLVMFLIMVGISLTLPGAAKGLDALFTPDWSKLADSKVWVAAYGQIFFSLSICFGIMVTYSSYLKKKTDLGGTGLVVGFANSSFELLAGIGVFAALGFMAQAGGKAVNEVASGGIGLAFIAFPTIINQAPMGWLIGILFFGSLVFAGVTSMISILEVIVAAIQDKLNIGRVNATLLVCIPMGIVSTLLFGTATGLPVLDVMDKFVNTYGIVAAGFVYVAAIIISGRLPELRKHLNALSSIRIGGLWTVCVVVTVVMLGYMLFKDTSGLMEKNYEGYPDGFLSIFGWGMSAALVVFGLLLSLLPWKHGQDFNVKDEHEHEQGEEK",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0K4",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.031
+            },
+            "reason": "AlgPred 2.0 score 0.031 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 497.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9759,
+                    "subject": "UPI0000ECF741"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 498.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9799,
+                    "subject": "UPI0001E0E19B"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.208
+            },
+            "reason": "ToxinPred2 score 0.208 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "trmD",
+        "length": 249,
+        "name": "tRNA (guanine-N(1)-)-methyltransferase",
+        "protein_id": "sp|Q9K0K4|TRMD_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "Cytoplasmic",
+              "prior": 0.0,
+              "raw": "Cytoplasmic",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 23,
+          "terms": {
+            "localisation": 0.0,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MLIQAVTIFPEMFDSITRYGVTGRANRQGIWQFEAVNPRKFADNRLGYIDDRPFGGGPGMIMMAPPLHAAIEHAKTQSSQAAKVIYLSPQGKPLTHQKAVELAELPHLILLCGRYEGIDERLLQSSVDEEISIGDFVVSGGELPAMMLMDAVLRLVPGVLGDMQSAEQDSFSSGILDCPHYTKPLEFQGMAVPEVLRSGNHGLIAEWRLEQSLRRTLERRPDLLEKRVLIPKESRLLETIRQEQREIQS",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0Q7",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.4
+            },
+            "reason": "AlgPred 2.0 score 0.400 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 282.0,
+                    "coverage": 0.9929,
+                    "evalue": 3.44e-101,
+                    "identity": 0.964,
+                    "subject": "UPI00027C818B"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 278.0,
+                    "coverage": 0.9929,
+                    "evalue": 1.41e-99,
+                    "identity": 0.9425,
+                    "subject": "UPI000161047C"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": {
+                "bitscore": 47.0,
+                "coverage": 0.9929,
+                "evalue": 2.09e-07,
+                "identity": 0.2727,
+                "subject": "sp|Q03393|PTPS_HUMAN"
+              },
+              "homologous": false,
+              "known_human_mhc_ligand_overlap": [],
+              "ligand_recheck": "unavailable",
+              "n_ligand_overlap": 0,
+              "n_shared_peptides": 0,
+              "shared_peptide_examples": []
+            },
+            "reason": "weak human similarity only",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.356
+            },
+            "reason": "ToxinPred2 score 0.356 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB0527",
+        "length": 140,
+        "name": "6-carboxy-5,6,7,8-tetrahydropterin synthase",
+        "protein_id": "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+        "s3": {
+          "composite_score": 0.90886192,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.90886192,
+          "rank": 24,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.90886192,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKITKIFTFDSSHMLDGHDGKCQNLHGHTYKLEITVSDGIIKGGAKDGMVMDFTDLKAIVKQHITDPFDHAFIYHGGNSRECQIAALLEGWNMKTLRLPCRTTAENMAVEMYGRLKNAGLNVCRVKLWETPTSCAEYEGE",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JZY3",
+        "flags": [
+          "allergenicity",
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.49
+            },
+            "reason": "AlgPred 2.0 score 0.490 >= 0.45",
+            "status": "flag"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 186.0,
+                    "coverage": 0.6449,
+                    "evalue": 8.48e-64,
+                    "identity": 1.0,
+                    "subject": "UPI0001B02D02"
+                  },
+                  "conserved": false
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 186.0,
+                    "coverage": 0.6449,
+                    "evalue": 8.58e-64,
+                    "identity": 1.0,
+                    "subject": "UPI0001B02D02"
+                  },
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 0% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": {
+                "bitscore": 45.8,
+                "coverage": 0.4493,
+                "evalue": 1.49e-06,
+                "identity": 0.3971,
+                "subject": "sp|Q96Q42|ALS2_HUMAN"
+              },
+              "homologous": false,
+              "known_human_mhc_ligand_overlap": [],
+              "ligand_recheck": "unavailable",
+              "n_ligand_overlap": 0,
+              "n_shared_peptides": 0,
+              "shared_peptide_examples": []
+            },
+            "reason": "weak human similarity only",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.247
+            },
+            "reason": "ToxinPred2 score 0.247 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB0850",
+        "length": 138,
+        "name": "MORN repeat protein",
+        "protein_id": "tr|Q9JZY3|Q9JZY3_NEIMB",
+        "s3": {
+          "composite_score": 0.89351958,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.89351958,
+          "rank": 25,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.89351958,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MLKHLAFLLPAMMFALPTSAAVLTSYQEPGCTYDGNVGKDGKPAGKGTWRCQDGRNYTGSFKNGKFDGQGVYTVAANREIFIEPFNSDSTKFRNMVLSGTFKKGLAHGRFTVSQNGETLFIMKCENGMIKEVKLPKNK",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JZH8",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.023
+            },
+            "reason": "AlgPred 2.0 score 0.023 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 525.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9811,
+                    "subject": "UPI00027C84F0"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 524.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9773,
+                    "subject": "UPI00000C4BC9"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.306
+            },
+            "reason": "ToxinPred2 score 0.306 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB1045",
+        "length": 264,
+        "name": "Serine/threonine protein kinase",
+        "protein_id": "tr|Q9JZH8|Q9JZH8_NEIMB",
+        "s3": {
+          "composite_score": 0.860545,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.860545,
+          "rank": 26,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.860545,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MTLPMQETRFSILLDELAAKQEAAIAPHLLADGTKVWIRKAGRHNARWRYALLGMVARYLKLGVLKPVPSLGGEPAIATESKRLYELRSAGIAVPELLAVRKNALMFGNLEGIPLDAQIRQEAEAGKSDAWLAGLEAIARVHKKRQFLSQAFARNMMSDGKNISFLDFEDDPSEVLTIAQCQARDWLCYIHSTALILKNGGLLEAAAEKWGGVLSDQPAEIQKLIAATVKPILPIRRLEHPRWGRDALRLAASISLISLADMPP",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K1D2",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.061
+            },
+            "reason": "AlgPred 2.0 score 0.061 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 437.0,
+                    "coverage": 1.0,
+                    "evalue": 3.49e-160,
+                    "identity": 0.9953,
+                    "subject": "UPI00000332B8"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 437.0,
+                    "coverage": 1.0,
+                    "evalue": 3.53e-160,
+                    "identity": 0.9953,
+                    "subject": "UPI00000332B8"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.226
+            },
+            "reason": "ToxinPred2 score 0.226 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "NMB0230",
+        "length": 215,
+        "name": "Carboxyltransferase domain-containing protein",
+        "protein_id": "tr|Q9K1D2|Q9K1D2_NEIMB",
+        "s3": {
+          "composite_score": 0.85848409,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.85848409,
+          "rank": 27,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.85848409,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MRIEITPISESALVYRLNAPSELGKQQKLWAFAAALGQHDRIEEVVVGMNNLTVFTRFDTDLATLADELQYVWEHTAVTDHQGKLVEIPVCYGGEYGPDLAEVAAFHQTVISEIVRRHTAQTYTVFMMGFQPGFPYLGGLPEALHTPRRAVPRTSVPAGSVGIGGSQTGVYPFASPGGWQIIGRTELPLFRADLNPPTLLAAGDQVRFVAERIEP",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXT3",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.103
+            },
+            "reason": "AlgPred 2.0 score 0.103 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 518.0,
+                    "coverage": 0.9438,
+                    "evalue": 0.0,
+                    "identity": 0.9841,
+                    "subject": "UPI00027C887F"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 519.0,
+                    "coverage": 0.9438,
+                    "evalue": 0.0,
+                    "identity": 0.9881,
+                    "subject": "UPI0001E09560"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.116
+            },
+            "reason": "ToxinPred2 score 0.116 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "dpnC",
+        "length": 267,
+        "name": "Type II restriction enzyme DpnI",
+        "protein_id": "tr|Q9JXT3|Q9JXT3_NEIMB",
+        "s3": {
+          "composite_score": 0.85665216,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.85665216,
+          "rank": 28,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.85665216,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNLFFDTELGKQQNKATHKIRVMSEAWLEKNGYCPCCGSKPMQRFANNKPVADLFCPNCHEQYELKSKNQKTIGNSVPDGAYHTMLERIRSDTNPNFFFLAYKKADYSIRQLVLVPKHFITPDMIIPRNKGIKNRPNHIMCSINLAPLPESGKIFLIDNSRIIEPETVLKKWQSNLFLRNQNAERKGWLLAVMKCIDQLPEEFTLSQMYEFENKLSIQFPQNNHIRDKIRQQLQILRDQNTIEFIGRGLYKKSINCAQLPRYFDFKS",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0M6",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.015
+            },
+            "reason": "AlgPred 2.0 score 0.015 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 418.0,
+                    "coverage": 1.0,
+                    "evalue": 9.79e-153,
+                    "identity": 0.9952,
+                    "subject": "UPI0000051077"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 418.0,
+                    "coverage": 1.0,
+                    "evalue": 9.91e-153,
+                    "identity": 0.9952,
+                    "subject": "UPI0000051077"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.258
+            },
+            "reason": "ToxinPred2 score 0.258 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "nqrD",
+        "length": 208,
+        "name": "Na(+)-translocating NADH-quinone reductase subunit D",
+        "protein_id": "sp|Q9K0M6|NQRD_NEIMB",
+        "s3": {
+          "composite_score": 0.85184337,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.85184337,
+          "rank": 29,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.85184337,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MADMKRLKHLMFSPFIDNNPIALQVLGICSALAVTTKLQTAIVMGISVALVTGFSSFFISLVRNYIPNSIRIIVQMAIIASLVTLVDQLLQAFAYELSKQLSVFVGLIITNCIVMGRAEAFAMKEPPLESLIDGIGNGAGYGIMLLVVATVRELIGSGKLLGYTVFQTVQDGGWYQTNGLFLLAPSAFFIIGFLIWGLRTWKPEQAEE",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K1H6",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.101
+            },
+            "reason": "AlgPred 2.0 score 0.101 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 534.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9963,
+                    "subject": "UPI0000046C53"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 534.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9963,
+                    "subject": "UPI0000046C53"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": {
+                "bitscore": 64.3,
+                "coverage": 0.6022,
+                "evalue": 7.98e-12,
+                "identity": 0.3077,
+                "subject": "sp|Q8N1S5|S39AB_HUMAN"
+              },
+              "homologous": false,
+              "known_human_mhc_ligand_overlap": [],
+              "ligand_recheck": "unavailable",
+              "n_ligand_overlap": 0,
+              "n_shared_peptides": 0,
+              "shared_peptide_examples": []
+            },
+            "reason": "weak human similarity only",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.157
+            },
+            "reason": "ToxinPred2 score 0.157 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "zupT",
+        "length": 269,
+        "name": "Zinc transporter ZupT",
+        "protein_id": "sp|Q9K1H6|ZUPT_NEIMB",
+        "s3": {
+          "composite_score": 0.79367987,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.95,
+              "evalue": 4.73e-16,
+              "hit": "VFG052410",
+              "identity": 0.2645,
+              "term": 0.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": false,
+            "0.90": false
+          },
+          "protegenicity": 0.79367987,
+          "rank": 30,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.79367987,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MPDFSMSNLAVAFSITLAAGLFTVLGSGLVMFSKTPNPRVLSFGLAFAGGAMVYVSLTEIFSKSSEAFAEIYDKDHAFAAATMAFLAGMGGIALIDRLVPNPHETLDAQDPSFQESKRRHIARVGMMAAFAITAHNFPEGLATFFATLENPAVGMPLALAIAIHNIPEGISIAAPVYFATRSRKKTVWACLLSGLAEPLGAALGYLVLQPFLSPAVFGSVFGVIAGVMVFLALDELLPAAKRYSDGHETVYGLTTGMAVIAVSLVLFHF",
+        "taxid": 487
+      }
+    ],
+    "context": {
+      "n_proteins": 40,
+      "organism_type": "gram-",
+      "s2_meta": {
+        "lineage": [
+          "cellular organisms",
+          "Bacteria",
+          "Pseudomonadati",
+          "Pseudomonadota",
+          "Betaproteobacteria",
+          "Neisseriales",
+          "Neisseriaceae",
+          "Neisseria"
+        ],
+        "localisation_status_counts": {
+          "fixture_stand_in": 40
+        },
+        "organism": {
+          "domain": "bacteria",
+          "gram_basis": "lineage taxon Pseudomonadota -> Gram-negative",
+          "gram_stain": "negative",
+          "localisation_applicable": true,
+          "psortb_extra_args": [],
+          "psortb_flag": "-n",
+          "virulence_db_applicable": true
+        },
+        "organism_type": "gram-",
+        "proteome_id": "UP000000425",
+        "scientific_name": "Neisseria meningitidis",
+        "species_taxid": 487,
+        "stream_a": {
+          "protegen_target_file": null,
+          "run_id": "nmb_fixture",
+          "s1_resources": {
+            "human_proteome": "ok",
+            "iedb": "disabled",
+            "protegen": "ok",
+            "vfdb": "ok"
+          },
+          "s2_digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3"
+        },
+        "taxid": 487
+      },
+      "taxid": 487
+    },
+    "counts": {
+      "n_input": 30,
+      "n_rejected": 3,
+      "n_rescued": 0,
+      "n_survivors": 27
+    },
+    "degraded": [],
+    "funnel": [
+      {
+        "gate": "input",
+        "n": 30
+      },
+      {
+        "gate": "human_homology",
+        "n_flag": 0,
+        "n_pass": 29,
+        "n_reject": 1,
+        "n_unavailable": 0,
+        "remaining_after_gate": 29
+      },
+      {
+        "gate": "allergenicity",
+        "n_flag": 2,
+        "n_pass": 28,
+        "n_reject": 0,
+        "n_unavailable": 0,
+        "remaining_after_gate": 29
+      },
+      {
+        "gate": "toxicity",
+        "n_flag": 0,
+        "n_pass": 28,
+        "n_reject": 2,
+        "n_unavailable": 0,
+        "remaining_after_gate": 27
+      },
+      {
+        "gate": "conservancy",
+        "n_flag": 9,
+        "n_pass": 21,
+        "n_reject": 0,
+        "n_unavailable": 0,
+        "remaining_after_gate": 27
+      }
+    ],
+    "gates": {
+      "allergenicity": {
+        "status": "ran",
+        "thresholds": {
+          "model": 1,
+          "on_fail": "flag",
+          "score_threshold": 0.45
+        }
+      },
+      "conservancy": {
+        "status": "ran",
+        "thresholds": {
+          "evalue": 1e-05,
+          "min_coverage": 0.8,
+          "min_fraction_strains": 1.0,
+          "min_identity": 0.8,
+          "on_fail": "flag",
+          "strains": [
+            "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)",
+            "UP000005241 Neisseria meningitidis NM3081"
+          ]
+        }
+      },
+      "human_homology": {
+        "status": "ran",
+        "thresholds": {
+          "evalue": 0.001,
+          "ligand_recheck": false,
+          "min_coverage": 0.5,
+          "min_identity": 0.35,
+          "shared_peptide_length": 9
+        }
+      },
+      "toxicity": {
+        "status": "ran",
+        "thresholds": {
+          "model": 1,
+          "on_fail": "reject",
+          "score_threshold": 0.8
+        }
+      }
+    },
+    "incomplete_screening": false,
+    "recovery": "Every rejected entry keeps its full gate evidence. To recover one, add its protein_id to config s4.rescue and re-run S4; it is then kept with 'rescued_despite' recorded.",
+    "refdata_provenance": [],
+    "rejected": [
+      {
+        "accession": "Q9K0K9",
+        "flags": [
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.271
+            },
+            "reason": "AlgPred 2.0 score 0.271 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.5,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 1957.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9301,
+                    "subject": "UPI00027C84DE"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 590.0,
+                    "coverage": 0.2243,
+                    "evalue": 0.0,
+                    "identity": 0.9931,
+                    "subject": "UPI0001E08D7D"
+                  },
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 50% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.939
+            },
+            "reason": "ToxinPred2 score 0.939 >= 0.8",
+            "status": "reject"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "frpA",
+        "length": 1302,
+        "name": "Iron-regulated protein FrpA",
+        "protein_id": "sp|Q9K0K9|FRPA_NEIMB",
+        "recoverable": true,
+        "rejected_by": [
+          "toxicity"
+        ],
+        "s3": {
+          "composite_score": 0.9741241100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG006300",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9741241100000001,
+          "rank": 10,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9741241100000001,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFSQYVDLINENNGRLPNTSEIERSYYKAVTENGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVIMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQFRDLFPNPEGWIDDGHQCFAPWVKETKKRNGKYHVYDPLALDLDGDGIETVAAKGFSGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQSLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JYV5",
+        "flags": [
+          "conservancy"
+        ],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.152
+            },
+            "reason": "AlgPred 2.0 score 0.152 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 0.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 1684.0,
+                    "coverage": 0.7545,
+                    "evalue": 0.0,
+                    "identity": 0.9295,
+                    "subject": "UPI00027C84DF"
+                  },
+                  "conserved": false
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 592.0,
+                    "coverage": 0.1597,
+                    "evalue": 0.0,
+                    "identity": 0.9931,
+                    "subject": "UPI0001E08D7D"
+                  },
+                  "conserved": false
+                }
+              }
+            },
+            "reason": "conserved in 0% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "flag"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": null
+            },
+            "reason": "no human homolog above the E-value cutoff",
+            "status": "pass"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.963
+            },
+            "reason": "ToxinPred2 score 0.963 >= 0.8",
+            "status": "reject"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "frpC",
+        "length": 1829,
+        "name": "Iron-regulated protein FrpC",
+        "protein_id": "sp|Q9JYV5|FRPC_NEIMB",
+        "recoverable": true,
+        "rejected_by": [
+          "toxicity"
+        ],
+        "s3": {
+          "composite_score": 0.9656514799999999,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG006303",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9656514799999999,
+          "rank": 12,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9656514799999999,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFRQYARLINQNNGRLPNTSEIERSYYKAVTDNGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVMMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQGNEAFKNEINSLVHDMKAAGKEFGDDLNTQWNNLTQAAEIIYNDIVDNTSQGIEKGVKAIKELSEKMKNAASDLADGSAEKAKQVVEDLAQAAKEAYENAKSTAEKAAQAAREFFKGLPSFKDLAEKFRDLFPNPEGWIDDGHQCLAPWVKETKKRNGKYHVYDPLALDLDGDGIETVATKGFAGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQTLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQYYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLNGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGSTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487
+      },
+      {
+        "accession": "Q7DDC4",
+        "flags": [],
+        "gates": {
+          "allergenicity": {
+            "metrics": {
+              "score": 0.082
+            },
+            "reason": "AlgPred 2.0 score 0.082 < 0.45",
+            "status": "pass"
+          },
+          "conservancy": {
+            "metrics": {
+              "fraction_strains_conserved": 1.0,
+              "strains": {
+                "UP000005241 Neisseria meningitidis NM3081": {
+                  "best_hit": {
+                    "bitscore": 794.0,
+                    "coverage": 0.9897,
+                    "evalue": 0.0,
+                    "identity": 0.9974,
+                    "subject": "UPI0001FC0ADA"
+                  },
+                  "conserved": true
+                },
+                "UP000005526 Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)": {
+                  "best_hit": {
+                    "bitscore": 803.0,
+                    "coverage": 1.0,
+                    "evalue": 0.0,
+                    "identity": 0.9974,
+                    "subject": "UPI00000C4C20"
+                  },
+                  "conserved": true
+                }
+              }
+            },
+            "reason": "conserved in 100% of 2 comparison strain(s) (identity>=0.8, coverage>=0.8)",
+            "status": "pass"
+          },
+          "human_homology": {
+            "metrics": {
+              "best_hit": {
+                "bitscore": 258.0,
+                "coverage": 0.9667,
+                "evalue": 4.78e-83,
+                "identity": 0.3571,
+                "subject": "sp|Q9UJM8|HAOX1_HUMAN"
+              },
+              "homologous": true,
+              "known_human_mhc_ligand_overlap": [],
+              "ligand_recheck": "unavailable",
+              "n_ligand_overlap": 0,
+              "n_shared_peptides": 3,
+              "shared_peptide_examples": [
+                "IVSNHGGRQ",
+                "SNHGGRQLD",
+                "VSNHGGRQL"
+              ]
+            },
+            "reason": "human homolog (identity 0.36, coverage 0.97); IEDB ligand re-check unavailable so this may be over-aggressive - recoverable",
+            "status": "reject"
+          },
+          "toxicity": {
+            "metrics": {
+              "score": 0.323
+            },
+            "reason": "ToxinPred2 score 0.323 < 0.8",
+            "status": "pass"
+          }
+        },
+        "gates_unavailable": [],
+        "gene": "lldD",
+        "length": 390,
+        "name": "L-lactate dehydrogenase",
+        "protein_id": "tr|Q7DDC4|Q7DDC4_NEIMB",
+        "recoverable": true,
+        "rejected_by": [
+          "human_homology"
+        ],
+        "s3": {
+          "composite_score": 0.94092054,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.94092054,
+          "rank": 15,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.94092054,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKRDLSKMTCIEDLRRVAKRKMPRMFYDYIDSGSWTETTYRENTSDFKDIRFRQKVLVNMEGRSLETKMIGQDVKMPVAIAPTGFTGMAHADGEILAARAAEKFGIPFTLSTMSICSIEDVAENTSAPFWFQLYVMRDREFMENLIKRAKDAKCSALVLTADLQVLGQRHKDIKNGLSAPPKPTIANLINLATKPEWCMKMLNTERRTFRNIVGHAKNVGDLSSLSSWTSEQFDPRLSWDDVARIKDLWGGKLIIKGIMEPEDAEKAAKSGADALIVSNHGGRQLDDTVSAIKALPDIVSAVGSDIEVWMDSGIRSGQDILKAWALGAKGTMIGRAFLYGLGAYGEEGVTRALEILYKEMDISMAFTGHRDIQDVDASILRGKDWGRETV",
+        "taxid": 487
+      }
+    ],
+    "unavailable_gates": [],
+    "upstream": {
+      "s3_leakage_audit": {
+        "declared_holdout_taxids": [],
+        "holdout_enforced": false,
+        "model": "Vaxign-ML (stock pretrained model, trained on all of Protegen)",
+        "note": "Scores supplied externally; whether the model held out the target pathogen is declared, not verified here.",
+        "requested_holdout": {
+          "note": null,
+          "taxids": []
+        },
+        "target_taxid": 487
+      },
+      "s3_ranker": {
+        "backend": "scores_file",
+        "note": "Default weights reproduce the pure Vaxign-ML ordering; other terms are recorded as evidence only.",
+        "score_semantics": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record)",
+        "thresholds": [
+          0.9,
+          0.85
+        ],
+        "weights_used": {
+          "localisation": 0.0,
+          "protegenicity": 1.0,
+          "virulence": 0.0
+        }
+      }
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s4_filter",
+    "tools": {
+      "AlgPred 2.0": "cli",
+      "BLAST+ blastp vs human proteome": "2.17.0+",
+      "BLAST+ blastp vs second-strain proteome(s)": "2.17.0+",
+      "ToxinPred2": "cli"
+    },
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "real_fixture",
+  "schema": "vaxforge/s4_filter/v1",
+  "stage": "s4",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "human_homology: refdata.iedb_human_ligands not set; IEDB MHC-ligand re-check skipped (rejections are by homology only and may be over-aggressive)"
+  ]
+}

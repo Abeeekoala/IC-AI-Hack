@@ -1,0 +1,148 @@
+{
+  "created_at": "2026-11-14T16:14:13Z",
+  "digest": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.15.0"
+  },
+  "inputs": {},
+  "params": {
+    "aliases_extra": [],
+    "fuzzy": true,
+    "pathogen": "Neisseria meningitidis",
+    "taxid": null
+  },
+  "payload": {
+    "candidates": [
+      {
+        "at_or_below_species": true,
+        "division": "Bacteria",
+        "match_score": 1.0,
+        "matched_name": "Neisseria meningitidis",
+        "matched_name_class": "scientific name",
+        "rank": "species",
+        "scientific_name": "Neisseria meningitidis",
+        "source": "ncbi_exact",
+        "species_name": "Neisseria meningitidis",
+        "species_taxid": 487,
+        "taxid": 487
+      }
+    ],
+    "organism": {
+      "domain": "bacteria",
+      "gram_basis": "lineage taxon Pseudomonadota -> Gram-negative",
+      "gram_stain": "negative",
+      "localisation_applicable": true,
+      "psortb_extra_args": [],
+      "psortb_flag": "-n",
+      "virulence_db_applicable": true
+    },
+    "query": "Neisseria meningitidis",
+    "resolution": {
+      "match_score": 1.0,
+      "matched_name": "Neisseria meningitidis",
+      "matched_name_class": "scientific name",
+      "message": "Resolved 'Neisseria meningitidis' to Neisseria meningitidis (taxid 487, species).",
+      "method": "exact",
+      "notes": [
+        "Neisseria meningitidis has 231 taxa below species level (strains etc.); S1 uses the UniProt reference proteome as the representative. Pass --taxid to pin a specific strain."
+      ],
+      "reason": null,
+      "status": "resolved",
+      "synonym_matched": false,
+      "user_confirmed": false
+    },
+    "taxon": {
+      "division": "Bacteria",
+      "lineage": [
+        {
+          "name": "cellular organisms",
+          "rank": "cellular root",
+          "taxid": 131567
+        },
+        {
+          "name": "Bacteria",
+          "rank": "domain",
+          "taxid": 2
+        },
+        {
+          "name": "Pseudomonadati",
+          "rank": "kingdom",
+          "taxid": 3379134
+        },
+        {
+          "name": "Pseudomonadota",
+          "rank": "phylum",
+          "taxid": 1224
+        },
+        {
+          "name": "Betaproteobacteria",
+          "rank": "class",
+          "taxid": 28216
+        },
+        {
+          "name": "Neisseriales",
+          "rank": "order",
+          "taxid": 206351
+        },
+        {
+          "name": "Neisseriaceae",
+          "rank": "family",
+          "taxid": 481
+        },
+        {
+          "name": "Neisseria",
+          "rank": "genus",
+          "taxid": 482
+        }
+      ],
+      "other_names": [
+        {
+          "class": "synonym",
+          "name": "Diplokokkus intracellularis meningitidis"
+        },
+        {
+          "class": "synonym",
+          "name": "Micrococcus intracellularis"
+        },
+        {
+          "class": "synonym",
+          "name": "Micrococcus meningitidis"
+        },
+        {
+          "class": "synonym",
+          "name": "Micrococcus meningitidis cerebrospinalis"
+        },
+        {
+          "class": "synonym",
+          "name": "Neisseria weichselbaumii"
+        },
+        {
+          "class": "misspelling",
+          "name": "Neisseria meningitidis."
+        }
+      ],
+      "rank": "species",
+      "scientific_name": "Neisseria meningitidis",
+      "species_name": "Neisseria meningitidis",
+      "species_taxid": 487,
+      "taxid": 487
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s0_taxonomy",
+    "tools": {
+      "ncbi-eutils": "taxonomy",
+      "uniprot-rest": "taxonomy+proteomes"
+    },
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "nmb_fixture",
+  "schema": "vaxforge/s0_taxonomy/v1",
+  "stage": "s0",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "Neisseria meningitidis has 231 taxa below species level (strains etc.); S1 uses the UniProt reference proteome as the representative. Pass --taxid to pin a specific strain."
+  ]
+}

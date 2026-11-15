@@ -1,0 +1,1213 @@
+{
+ "session_id": "s12_elisa_setup",
+ "title": "ELISA (TNF-alpha) standards and sample loading",
+ "covers": [
+  "s12"
+ ],
+ "modules": [],
+ "labware": [
+  {
+   "key": "waste",
+   "load_name": "nest_1_reservoir_195ml",
+   "slot": "1",
+   "module": null,
+   "label": "Liquid waste",
+   "kind": "waste"
+  },
+  {
+   "key": "tubes",
+   "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "slot": "2",
+   "module": null,
+   "label": "Assay diluent + top standard",
+   "kind": "tubes"
+  },
+  {
+   "key": "assay",
+   "load_name": "nest_96_wellplate_200ul_flat",
+   "slot": "3",
+   "module": null,
+   "label": "ELISA plate (pre-coated and blocked)",
+   "kind": "plate"
+  },
+  {
+   "key": "sup",
+   "load_name": "nest_96_wellplate_200ul_flat",
+   "slot": "5",
+   "module": null,
+   "label": "Collected supernatants (human-prepared)",
+   "kind": "plate"
+  },
+  {
+   "key": "tips_p300_1",
+   "load_name": "opentrons_96_tiprack_300ul",
+   "slot": "11",
+   "module": null,
+   "label": "p300 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p300",
+   "api_name": "p300_single_gen2",
+   "mount": "right",
+   "channels": 1,
+   "tipracks": [
+    "tips_p300_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "A1"
+   },
+   "reagent": "supernatant: vehicle / buffer only",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "A2"
+   },
+   "reagent": "supernatant: vehicle / buffer only",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "A3"
+   },
+   "reagent": "supernatant: vehicle / buffer only",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "B1"
+   },
+   "reagent": "supernatant: LPS positive control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "B2"
+   },
+   "reagent": "supernatant: LPS positive control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "B3"
+   },
+   "reagent": "supernatant: LPS positive control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "C1"
+   },
+   "reagent": "supernatant: endotoxin-matched LPS control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "C2"
+   },
+   "reagent": "supernatant: endotoxin-matched LPS control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "C3"
+   },
+   "reagent": "supernatant: endotoxin-matched LPS control",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "D1"
+   },
+   "reagent": "supernatant: antigen low dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "D2"
+   },
+   "reagent": "supernatant: antigen low dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "D3"
+   },
+   "reagent": "supernatant: antigen low dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "E1"
+   },
+   "reagent": "supernatant: antigen mid dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "E2"
+   },
+   "reagent": "supernatant: antigen mid dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "E3"
+   },
+   "reagent": "supernatant: antigen mid dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "F1"
+   },
+   "reagent": "supernatant: antigen high dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "F2"
+   },
+   "reagent": "supernatant: antigen high dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "F3"
+   },
+   "reagent": "supernatant: antigen high dose",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "G1"
+   },
+   "reagent": "supernatant: antigen mid dose + polymyxin B",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "G2"
+   },
+   "reagent": "supernatant: antigen mid dose + polymyxin B",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "G3"
+   },
+   "reagent": "supernatant: antigen mid dose + polymyxin B",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "H1"
+   },
+   "reagent": "supernatant: mock-purification eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "H2"
+   },
+   "reagent": "supernatant: mock-purification eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "sup",
+    "well": "H3"
+   },
+   "reagent": "supernatant: mock-purification eluate",
+   "volume_ul": 100.0,
+   "source": "human_prepared",
+   "note": "collected from the stimulation plate"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "reagent": "assay diluent",
+   "volume_ul": 380.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "reagent": "TNF-alpha top standard",
+   "volume_ul": 130.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s12",
+   "op": "comment",
+   "text": "standard curve in column 1: 2-fold serial dilution (top standard in A1)"
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 100.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "B1"
+    },
+    {
+     "labware": "assay",
+     "well": "C1"
+    },
+    {
+     "labware": "assay",
+     "well": "D1"
+    },
+    {
+     "labware": "assay",
+     "well": "E1"
+    },
+    {
+     "labware": "assay",
+     "well": "F1"
+    },
+    {
+     "labware": "assay",
+     "well": "G1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "assay",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "B1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    60.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "assay",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "C1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    60.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "assay",
+    "well": "C1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "D1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    60.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "assay",
+    "well": "D1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "E1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    60.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "assay",
+    "well": "E1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "F1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    60.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "assay",
+    "well": "F1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "G1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    3,
+    60.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "assay",
+    "well": "G1"
+   },
+   "dst": [
+    {
+     "labware": "waste",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "H1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "comment",
+   "text": "samples"
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "A2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "A2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "A3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "A3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "A4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "B2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "B2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "B3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "B3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "B4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "C1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "C2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "C2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "C3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "C3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "C4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "D1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "D2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "D2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "D3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "D3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "D4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "E1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "E2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "E2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "E3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "E3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "E4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "F1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "F2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "F2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "F3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "F3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "F4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "G1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "G2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "G2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "G3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "G3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "G4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "H1"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "H2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "H2"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "H3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 50.0,
+   "src": {
+    "labware": "sup",
+    "well": "H3"
+   },
+   "dst": [
+    {
+     "labware": "assay",
+     "well": "H4"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s12",
+   "op": "pause",
+   "text": "HUMAN [s12]: Seal the plate and incubate 120 min (room temperature, shaking if the kit says so). Then put the plate back on the deck for the develop session. Sealing and incubation are not automated."
+  }
+ ],
+ "tips_needed": {
+  "p300": 39
+ },
+ "notes": [
+  "One analyte per plate. A single standard column is used by default; set elisa_std_columns=2 for duplicates (costs more tips)."
+ ],
+ "layouts": {
+  "ELISA plate": {
+   "standard column 1 (A=top ... G=lowest, H=blank)": "A1-H1",
+   "vehicle / buffer only": "A2,A3,A4",
+   "LPS positive control": "B2,B3,B4",
+   "endotoxin-matched LPS control": "C2,C3,C4",
+   "antigen low dose": "D2,D3,D4",
+   "antigen mid dose": "E2,E3,E4",
+   "antigen high dose": "F2,F3,F4",
+   "antigen mid dose + polymyxin B": "G2,G3,G4",
+   "mock-purification eluate": "H2,H3,H4"
+  }
+ }
+}

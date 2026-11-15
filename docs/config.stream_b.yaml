@@ -49,9 +49,9 @@ s4:
   on_unavailable: carry
   rescue: []
   human_homology: {enabled: true, evalue: 0.001, min_identity: 0.35, min_coverage: 0.5, shared_peptide_length: 9, ligand_recheck: true}
-  allergenicity: {enabled: true, model: 1}
-  toxicity: {enabled: true, model: 1}
-  conservancy: {enabled: true, evalue: 1.0e-05, min_coverage: 0.8, n_strains: 2, min_fraction_strains: 1.0, on_fail: reject}
+  allergenicity: {enabled: true, model: 1, on_fail: flag}
+  toxicity: {enabled: true, model: 1, on_fail: reject}
+  conservancy: {enabled: true, evalue: 1.0e-05, min_coverage: 0.8, n_strains: 2, min_fraction_strains: 1.0, on_fail: flag}
 s5:
   class_i:
     backend: auto

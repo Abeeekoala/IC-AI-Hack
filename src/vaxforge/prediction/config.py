@@ -107,14 +107,17 @@ DEFAULTS: dict[str, Any] = {
             "enabled": True, "evalue": 1e-3, "min_identity": 0.35, "min_coverage": 0.50,
             "shared_peptide_length": 9, "ligand_recheck": True,
         },
-        "allergenicity": {"enabled": True, "model": 1},
-        "toxicity": {"enabled": True, "model": 1},
+        # reject | flag. "flag" keeps the protein and records the score. Default flag: on real N. meningitidis data AlgPred2 (model 1)
+        # scores the Bexsero antigen NadA at 0.596 (>= 0.45); a hard reject removes a licensed-vaccine antigen, a flag leaves the call to the lab.
+        "allergenicity": {"enabled": True, "model": 1, "on_fail": "flag"},
+        "toxicity": {"enabled": True, "model": 1, "on_fail": "reject"},
         "conservancy": {
             "enabled": True, "evalue": 1e-5, "min_coverage": 0.80,
             "n_strains": 2, "min_fraction_strains": 1.0,
-            # reject (README default) | flag. On real N. meningitidis data "reject" removes fHbp, NHBA and NadA (the Bexsero
-            # antigens), which are strain-variable by design; use "flag" to keep them and decide downstream.
-            "on_fail": "reject",
+            # reject | flag. On real N. meningitidis data "reject" removes fHbp, NHBA and NadA (the Bexsero antigens), which are
+            # strain-variable by design. Default is now "flag": keep them, record the failure, decide downstream. This default was chosen
+            # AFTER seeing those rejections, so Bexsero recall is a demonstration, not an independent test (see README section 4).
+            "on_fail": "flag",
         },
     },
     # ---- S5 --------------------------------------------------------------------------
@@ -267,6 +270,9 @@ def validate(cfg: Mapping) -> None:
         raise ConfigError("epitopes.mhc_class_ii_weight must be in [0, 1]")
     if cfg["s4"]["on_unavailable"] not in ("carry", "fail"):
         raise ConfigError("s4.on_unavailable must be 'carry' or 'fail'")
+    for _g in ("allergenicity", "toxicity"):
+        if cfg["s4"][_g]["on_fail"] not in ("reject", "flag"):
+            raise ConfigError(f"s4.{_g}.on_fail must be 'reject' or 'flag'")
     if cfg["s4"]["conservancy"]["on_fail"] not in ("reject", "flag"):
         raise ConfigError("s4.conservancy.on_fail must be 'reject' or 'flag'")
     if cfg["s7"]["boltz"]["msa"] not in ("server", "empty"):
