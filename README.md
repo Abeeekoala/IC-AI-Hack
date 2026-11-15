@@ -60,7 +60,7 @@ Every stage is a pure function over the previous stage's artifact. Artifacts are
 |---|---|---|---|---|
 | S0 | Pathogen name (free text) | `taxid`, resolved lineage | NCBI Taxonomy via E-utilities | <2 s |
 | S1 | `taxid` | Reference proteome + reference DBs | UniProt, VFDB, Protegen, IEDB | 5–120 s cold, <1 s cached |
-| S2 | Proteome FASTA | Annotation table | BLAST+ vs VFDB, PSORTb 3.0 | 1–5 min |
+| S2 | Proteome FASTA | Annotation table | BLAST+ vs VFDB, PSORTb 3.0 | about 48 min for all 2,003 proteins of the *N. meningitidis* reference proteome (measured by the lead's agent with Docker BLAST+ and PSORTb on a Mac; PSORTb is the slow part), 37 s for the 40-protein fixture (measured on Windows) |
 | S3 | Annotation table | Ranked candidates | Vaxign-ML (Docker) | 1–3 min |
 | S4 | Ranked candidates | Filtered candidates | BLASTp vs human proteome, AlgPred 2.0, ToxinPred2 | 2–5 min |
 | S5 | Filtered candidates | T-cell + B-cell epitopes | NetMHCpan, NetMHCIIpan, BepiPred-3.0, DiscoTope-3.0 | 2–10 min |

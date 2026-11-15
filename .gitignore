@@ -9,8 +9,9 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
-.venv-ot/
-.venv-wetlab/
+# no trailing slash on purpose: a slash matches only a real directory, not a symlink to an existing Opentrons environment
+.venv-ot
+.venv-wetlab
 
 # Run outputs and downloads: never committed (README: Protegen's licence is unstated).
 # Anchored to the repo root on purpose, and the committed fixture lives in fixtures/nmb_fixture/

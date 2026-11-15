@@ -10,7 +10,10 @@ TOP_K     ?= 20
 DEMO_OUT  ?= runs/demo
 DEMO_FLAGS ?=
 
-.PHONY: setup warm-cache run offline-run demo-offline test verify doctor fixture docker-pull
+.PHONY: setup check-install warm-cache run offline-run demo-offline test verify doctor fixture docker-pull
+
+check-install:    ## stop with a clear message when vaxforge is not installed for $(PY) (run `make setup` first)
+	@$(PY) -c "import vaxforge" >/dev/null 2>&1 || { echo "vaxforge is not installed for $(PY): run 'make setup' (pip install -e .) first"; exit 1; }
 
 setup:            ## python deps (+ Docker images when Docker is installed)
 	$(PY) -m pip install -e ".[dev]"
@@ -21,22 +24,22 @@ docker-pull:      ## only the images
 	docker pull ncbi/blast:2.16.0
 	docker pull brinkmanlab/psortb_commandline:1.0.2
 
-warm-cache:       ## prefetch S0+S1 data for the demo pathogens - run it the night before
+warm-cache: check-install   ## prefetch S0+S1 data for the demo pathogens - run it the night before
 	$(PY) -m vaxforge warm-cache --pathogens "$(PATHOGENS)"
 
-run:              ## S0-S2 (and any later stage that is installed)
+run: check-install   ## S0-S2 (and any later stage that is installed)
 	$(PY) -m vaxforge run --pathogen "$(PATHOGEN)" --top-k $(TOP_K) --out $(OUT)
 
-offline-run:      ## same, but never touch the network (cache only)
+offline-run: check-install   ## same, but never touch the network (cache only)
 	$(PY) -m vaxforge run --pathogen "$(PATHOGEN)" --top-k $(TOP_K) --out $(OUT) --offline
 
-demo-offline:     ## offline demo: copy fixtures/nmb_fixture to $(DEMO_OUT), run S3-S12 on it (no network, no container); DEMO_FLAGS="--rule-based" or "--scores-file F"
+demo-offline: check-install   ## offline demo: copy fixtures/nmb_fixture to $(DEMO_OUT), run S3-S12 on it (no network, no container); DEMO_FLAGS="--rule-based" or "--scores-file F"
 	$(PY) -m vaxforge demo-offline --out $(DEMO_OUT) --force $(DEMO_FLAGS)
 
-verify:           ## check a run folder's digests, upstream chain and file hashes
+verify: check-install   ## check a run folder's digests, upstream chain and file hashes
 	$(PY) -m vaxforge verify $(OUT)
 
-doctor:           ## tools, cache and (with --online) network access
+doctor: check-install   ## tools, cache and (with --online) network access
 	$(PY) -m vaxforge doctor --online
 
 test:
