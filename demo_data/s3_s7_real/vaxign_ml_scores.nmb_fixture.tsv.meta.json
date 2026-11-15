@@ -1,0 +1,10 @@
+{
+  "model": "Vaxign-ML (stock pretrained model, trained on all of Protegen)",
+  "version": "e4ong1031/vaxign-ml@sha256:7a647d55bb6a5154d8ee11ad78ef5fb18cc63cd2e98e23e04b172fbcb63fb4ec",
+  "scale": 100,
+  "holdout_taxids": [],
+  "holdout_enforced": false,
+  "about": "Real Vaxign-ML output for the 40 proteins of fixtures/nmb_fixture (Gram-negative mode), made on 2026-11-14 with the Docker image above, CPU, on an Apple-silicon Mac. The score is Vaxign-ML's protegenicity PERCENTILE (0-100), hence scale 100; it is not a probability. Columns are the raw 'sample' and 'protegenicity' of the tool's result file, unchanged.",
+  "warning": "The stock model was trained on all of Protegen, which contains N. meningitidis antigens (fHbp, NadA, NHBA among them). Do not present their high scores as validation; holdout_enforced is false so S3 raises its LEAKAGE RISK warning.",
+  "use": "s3.backend: scores_file and s3.scores_file: docs/examples/vaxign_ml_scores.nmb_fixture.tsv (the .meta.json next to it is read automatically)"
+}

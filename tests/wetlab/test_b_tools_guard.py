@@ -79,6 +79,8 @@ def test_a_native_tool_on_path_is_usable_whatever_docker_does(tmp_path, monkeypa
 def test_an_importable_python_tool_is_usable(tmp_path, monkeypatch, only_docker):
     package = "b_tools_guard_stand_in_package"  # stands for mhcflurry: a package that can be found on sys.path
     monkeypatch.setattr(b_tools_guard, "PYTHON_TOOLS", (package,))
+    (tmp_path / "no_tools_here").mkdir()
+    monkeypatch.setenv("PATH", str(tmp_path / "no_tools_here"))  # a real `docker` with a running daemon further down PATH must not decide this test
     assert usable_b_tools() == []
     (tmp_path / package).mkdir()
     (tmp_path / package / "__init__.py").write_text("", encoding="ascii")
