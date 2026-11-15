@@ -26,6 +26,7 @@ from . import __version__
 from . import s0_taxonomy as s0
 from . import s1_acquire as s1
 from . import s2_annotate as s2
+from . import tools
 from .artifacts import STAGE_ORDER, STAGES, Artifact, ContractError, RunStore
 from .cache import CacheMiss
 from .config import Config, ConfigError, load_config
@@ -34,7 +35,8 @@ from .tools import BlastRunner, ToolError
 
 EXIT_OK, EXIT_ERROR, EXIT_INPUT, EXIT_DATA = 0, 1, 2, 3
 CORE_STAGES = ("s0", "s1", "s2")
-EXTENSION_MODULES = ["s8_protocol", "s9_robot", "s9plus_animate", "s9_5_finetune", "s10_animal", "validate_cli"]
+EXTENSION_MODULES = ["s8_protocol", "s9_robot", "s9plus_animate", "s9_5_finetune", "s10_animal", "validate_cli",
+                     "s11_prereg", "s12_biosafety", "report"]
 
 
 def say(msg: str = "") -> None:
@@ -132,6 +134,18 @@ def report_s1(art: Artifact) -> None:
     print_warnings(art)
 
 
+def closing_line(stages: list[str], s2_art: Artifact | None) -> str:
+    """Last line of `run`: names what ran, and says so when S2 virulence or localisation was not_run."""
+    degraded = []
+    if s2_art is not None:
+        summary = s2_art.payload.get("summary", {})
+        for label in ("virulence", "localisation"):
+            if summary.get(label, {}).get("run_status") == "not_run":
+                degraded.append(label)
+    note = f"degraded: S2 {' and '.join(degraded)} not_run; " if degraded else ""
+    return f"done. artifacts: {', '.join(stages)}  ({note}verify: ok)"
+
+
 def report_s2(art: Artifact) -> None:
     s = art.payload["summary"]
     v, loc = s["virulence"], s["localisation"]
@@ -157,7 +171,9 @@ def run_extra_stage(stage: str, store: RunStore, cfg: Config) -> tuple[str, Arti
     fn = getattr(mod, "run", None)
     if not callable(fn):
         return "module has no run(store, config)", None
-    return "ran", fn(store, cfg)
+    res = fn(store, cfg)
+    # some stages return the artifact's Path rather than the Artifact: read it back
+    return "ran", res if isinstance(res, Artifact) else store.read_artifact(stage)
 
 
 def cmd_run(args: argparse.Namespace) -> int:
@@ -194,6 +210,8 @@ def cmd_run(args: argparse.Namespace) -> int:
             say(f"{stage:<8}{outcome} - skipped")
             continue
         say(f"{stage:<8}{art.status}" + (f"  ({len(art.warnings)} warning(s))" if art.warnings else ""))
+        if art.status != "ok" and art.warnings:
+            say(f"        reason: {art.warnings[0]}")
         if art.status != "ok":
             return EXIT_ERROR
     problems = store.verify()
@@ -202,7 +220,8 @@ def cmd_run(args: argparse.Namespace) -> int:
         for p in problems:
             say(f"  - {p}")
         return EXIT_ERROR
-    say(f"\ndone. artifacts: {', '.join(store.stages_present())}  (verify: ok)")
+    say()
+    say(closing_line(store.stages_present(), a2 if "s2" in wanted else None))
     return EXIT_OK
 
 
@@ -324,12 +343,19 @@ def cmd_doctor(args: argparse.Namespace) -> int:
         line("non-ASCII path", "BLAST+ cannot open these; BLAST databases go to an ASCII-only folder automatically")
     runner = BlastRunner(cfg, cache)
     d = runner.describe()
-    if runner.available:
+    if runner.available and d["mode"] == "docker":
+        st, detail = tools.docker_state(runner.docker, runner.image)
+        line("BLAST+", f"docker {d.get('version') or ''} {runner.image}: {detail}".replace("  ", " "),
+             "ok" if st == "ok" else "warn")
+    elif runner.available:
         line("BLAST+", f"{d['mode']} {d.get('version') or ''} {d.get('blastp') or d.get('image') or ''}".strip())
     else:
         line("BLAST+", "not found: S2 virulence annotation will be 'not_run' (install BLAST+ or Docker)", "warn")
     psort = s2.PsortbRunner(cfg, cache)
-    if psort.available:
+    if psort.available and psort.mode == "docker":
+        st, detail = tools.docker_state(psort.docker, psort.image)
+        line("PSORTb", f"docker ({psort.image}): {detail}", "ok" if st == "ok" else "warn")
+    elif psort.available:
         line("PSORTb", f"{psort.mode} ({psort.image})")
     else:
         line("PSORTb", "not found: localisation will be 'not_run' (never silently 'unknown') until Docker + the PSORTb "
@@ -428,7 +454,7 @@ def build_parser() -> argparse.ArgumentParser:
     d.set_defaults(func=cmd_doctor)
 
     # sub-commands contributed by other streams
-    for name in EXTENSION_MODULES:
+    for name in dict.fromkeys(EXTENSION_MODULES):  # a module listed twice must register once
         modname = f"vaxforge.{name}"
         try:
             mod = importlib.import_module(modname)

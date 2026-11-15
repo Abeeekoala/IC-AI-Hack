@@ -318,7 +318,9 @@ def run_virulence(config: Config, store: RunStore, cache: Cache, s1: dict, runne
         return not_run(f"VFDB unavailable from S1 ({vf.get('status')}: {vf.get('reason', 'no detail')})")
     if not runner.available:
         return not_run("BLAST+ not found (native or Docker)")
-    ref = vf["cache_file"]
+    ref = vf.get("cache_file")
+    if not ref:
+        return not_run("S1 artifact has no VFDB cache file")
     vfdb_fasta = store.resolve(ref, cache.root)
     if not vfdb_fasta.is_file():
         return not_run(f"VFDB FASTA missing from cache: {vfdb_fasta}")
@@ -427,8 +429,11 @@ def run_localisation(config: Config, store: RunStore, cache: Cache, records: lis
         elif psortb_fn is None and not runner.available:
             return uniform("not_run", "PSORTb is not installed and Docker is unavailable. Install Docker and run "
                            "`docker pull " + runner.image + "`, or run PSORTb elsewhere and pass --psortb-results FILE", True)
+        elif cache.offline:
+            # offline never starts a container (an image pull would touch the network): record why instead of aborting the run
+            return uniform("not_run", "offline mode: PSORTb results are not cached; run once online with Docker, "
+                           "or pass --psortb-results FILE", True)
         else:
-            cache.require(cached, "PSORTb results")
             with tempfile.TemporaryDirectory(prefix="vaxforge_p_") as tmp:
                 q = Path(tmp) / "input.fasta"
                 mapping = _sanitise_queries(records, q)
