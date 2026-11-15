@@ -1,0 +1,417 @@
+{
+  "created_at": "2026-11-15T10:05:04Z",
+  "digest": "sha256:5e4c68c5fa02f45a45fddcf176ec6e76487c77fc0c6210d47ef0f22103e8e8ba",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
+  },
+  "inputs": {
+    "s0": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+    "s1": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+    "s10": "sha256:063357b6db778e2bd8b49ae7600679d03ff52244d9332fe3f63e116eac396d49",
+    "s2": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+    "s3": "sha256:006c42801f03b16e2dd62c5ac18e33828f248b4ccf5cf0f490089752933577e9",
+    "s4": "sha256:a86fd59fe3434696e328920f492b019dfcaa1d737511d122abeb56a58449e76c",
+    "s5": "sha256:4c76f7e8e81fdbeab6d26b837271c6d9c6296407eecac64edeb63c380b8528ae",
+    "s6": "sha256:4e91aaea0fb9baf382d7cc966faf19b2620290c68994bea8ad51bd80229be874",
+    "s7": "sha256:85c3c09e1215afe1880459a23fd1e9d8850b407f142da3c781cbba9cd545a4c4",
+    "s8": "sha256:8bddb681ee3660b112368bcba3d2e2a186e57861741c71de85d95eae32b3bfbe",
+    "s9": "sha256:a4a7bfd5b7b24bc5630dbb8a851522c9ba0f0143aa6b065a7f6740d9ab6a14c7",
+    "s9_5": "sha256:4652ae8ad01394996be3573f182f68ed021b70c5fe300ac3ee9401d9c8a77c26",
+    "s9plus": "sha256:9615209835a2e972165859e75b7715684f5bb3154672459120ea646c5ff906fd"
+  },
+  "params": {
+    "validation_dir": "validation"
+  },
+  "payload": {
+    "frozen": {
+      "config": {
+        "epitopes": {
+          "bcell_tool": "bepipred-3.0",
+          "mhc_class_ii_weight": 0.3
+        },
+        "finetune.seed": 20261114,
+        "pipeline.top_k": 20,
+        "reproducibility.pin_versions": true,
+        "reproducibility.seed": 20261114,
+        "structure": {
+          "engine": "boltz-2",
+          "refolder": [
+            "esmfold",
+            "af2-no-msa"
+          ]
+        },
+        "thresholds": {
+          "allergenicity": 0.45,
+          "conservancy_identity": 0.8,
+          "protegenicity": [
+            0.9,
+            0.85
+          ],
+          "toxicity": 0.8
+        }
+      },
+      "config_digest": "sha256:81e6c076e8f626305650cf203ce1efff4ecefc8ef2c59e31be1d161f92ffb28f",
+      "predictions": {
+        "s3": {
+          "ranking": [
+            {
+              "composite_score": 0.99793909,
+              "protein_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+              "rank": 1
+            },
+            {
+              "composite_score": 0.99656515,
+              "protein_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+              "rank": 2
+            },
+            {
+              "composite_score": 0.99404626,
+              "protein_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+              "rank": 3
+            },
+            {
+              "composite_score": 0.9919853399999999,
+              "protein_id": "tr|Q9JXL6|Q9JXL6_NEIMB",
+              "rank": 4
+            },
+            {
+              "composite_score": 0.98809251,
+              "protein_id": "sp|Q06379|LBPA_NEIMB",
+              "rank": 5
+            },
+            {
+              "composite_score": 0.98419968,
+              "protein_id": "sp|P0DH58|OMPA_NEIMB",
+              "rank": 6
+            },
+            {
+              "composite_score": 0.97847493,
+              "protein_id": "sp|Q9JXK7|NADA1_NEIMB",
+              "rank": 7
+            },
+            {
+              "composite_score": 0.97732997,
+              "protein_id": "sp|Q9K0U9|TBPA_NEIMB",
+              "rank": 8
+            },
+            {
+              "composite_score": 0.9761850200000001,
+              "protein_id": "sp|Q7DD37|NHBA_NEIMB",
+              "rank": 9
+            },
+            {
+              "composite_score": 0.9741241100000001,
+              "protein_id": "sp|Q9K0K9|FRPA_NEIMB",
+              "rank": 10
+            },
+            {
+              "composite_score": 0.96771239,
+              "protein_id": "tr|Q9K0U8|Q9K0U8_NEIMB",
+              "rank": 11
+            },
+            {
+              "composite_score": 0.9656514799999999,
+              "protein_id": "sp|Q9JYV5|FRPC_NEIMB",
+              "rank": 12
+            },
+            {
+              "composite_score": 0.95465995,
+              "protein_id": "sp|Q9JS61|ILVD_NEIMB",
+              "rank": 13
+            },
+            {
+              "composite_score": 0.953515,
+              "protein_id": "sp|Q9JXV4|FHBP_NEIMB",
+              "rank": 14
+            },
+            {
+              "composite_score": 0.94092054,
+              "protein_id": "tr|Q7DDC4|Q7DDC4_NEIMB",
+              "rank": 15
+            },
+            {
+              "composite_score": 0.9276391099999999,
+              "protein_id": "tr|Q9JY67|Q9JY67_NEIMB",
+              "rank": 16
+            },
+            {
+              "composite_score": 0.9200824400000001,
+              "protein_id": "tr|Q9K070|Q9K070_NEIMB",
+              "rank": 17
+            },
+            {
+              "composite_score": 0.9090909100000001,
+              "protein_id": "sp|Q9K1F5|LPXB_NEIMB",
+              "rank": 18
+            },
+            {
+              "composite_score": 0.9090909100000001,
+              "protein_id": "tr|Q4W563|Q4W563_NEIMB",
+              "rank": 19
+            },
+            {
+              "composite_score": 0.9090909100000001,
+              "protein_id": "tr|Q7DD77|Q7DD77_NEIMB",
+              "rank": 20
+            },
+            {
+              "composite_score": 0.9090909100000001,
+              "protein_id": "tr|Q9JZD1|Q9JZD1_NEIMB",
+              "rank": 21
+            },
+            {
+              "composite_score": 0.9090909100000001,
+              "protein_id": "tr|Q9JXM3|Q9JXM3_NEIMB",
+              "rank": 22
+            },
+            {
+              "composite_score": 0.9090909100000001,
+              "protein_id": "sp|Q9K0K4|TRMD_NEIMB",
+              "rank": 23
+            },
+            {
+              "composite_score": 0.90886192,
+              "protein_id": "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+              "rank": 24
+            },
+            {
+              "composite_score": 0.89351958,
+              "protein_id": "tr|Q9JZY3|Q9JZY3_NEIMB",
+              "rank": 25
+            },
+            {
+              "composite_score": 0.860545,
+              "protein_id": "tr|Q9JZH8|Q9JZH8_NEIMB",
+              "rank": 26
+            },
+            {
+              "composite_score": 0.85848409,
+              "protein_id": "tr|Q9K1D2|Q9K1D2_NEIMB",
+              "rank": 27
+            },
+            {
+              "composite_score": 0.85665216,
+              "protein_id": "tr|Q9JXT3|Q9JXT3_NEIMB",
+              "rank": 28
+            },
+            {
+              "composite_score": 0.85184337,
+              "protein_id": "sp|Q9K0M6|NQRD_NEIMB",
+              "rank": 29
+            },
+            {
+              "composite_score": 0.79367987,
+              "protein_id": "sp|Q9K1H6|ZUPT_NEIMB",
+              "rank": 30
+            },
+            {
+              "composite_score": 0.7781085400000001,
+              "protein_id": "tr|Q9JXR7|Q9JXR7_NEIMB",
+              "rank": 31
+            },
+            {
+              "composite_score": 0.76414014,
+              "protein_id": "tr|Q4W570|Q4W570_NEIMB",
+              "rank": 32
+            },
+            {
+              "composite_score": 0.70506068,
+              "protein_id": "tr|Q9JZU4|Q9JZU4_NEIMB",
+              "rank": 33
+            },
+            {
+              "composite_score": 0.6592626500000001,
+              "protein_id": "sp|P64131|FISL_NEIMB",
+              "rank": 34
+            },
+            {
+              "composite_score": 0.58323792,
+              "protein_id": "sp|P67616|FETP_NEIMB",
+              "rank": 35
+            },
+            {
+              "composite_score": 0.5713304300000001,
+              "protein_id": "tr|Q9K0C3|Q9K0C3_NEIMB",
+              "rank": 36
+            },
+            {
+              "composite_score": 0.48706206,
+              "protein_id": "tr|Q9JYD5|Q9JYD5_NEIMB",
+              "rank": 37
+            },
+            {
+              "composite_score": 0.4465308,
+              "protein_id": "tr|Q9JZ33|Q9JZ33_NEIMB",
+              "rank": 38
+            },
+            {
+              "composite_score": 0.25509503,
+              "protein_id": "tr|Q9K1C6|Q9K1C6_NEIMB",
+              "rank": 39
+            },
+            {
+              "composite_score": 0.21914358,
+              "protein_id": "tr|Q9JZL0|Q9JZL0_NEIMB",
+              "rank": 40
+            }
+          ],
+          "status": "ok"
+        },
+        "s4": {
+          "incomplete_screening": true,
+          "rejected": [],
+          "status": "ok",
+          "survivors": [
+            "tr|Q9K0B4|Q9K0B4_NEIMB",
+            "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+            "tr|Q9JYA8|Q9JYA8_NEIMB",
+            "tr|Q9JXL6|Q9JXL6_NEIMB",
+            "sp|Q06379|LBPA_NEIMB",
+            "sp|P0DH58|OMPA_NEIMB",
+            "sp|Q9JXK7|NADA1_NEIMB",
+            "sp|Q9K0U9|TBPA_NEIMB",
+            "sp|Q7DD37|NHBA_NEIMB",
+            "sp|Q9K0K9|FRPA_NEIMB",
+            "tr|Q9K0U8|Q9K0U8_NEIMB",
+            "sp|Q9JYV5|FRPC_NEIMB",
+            "sp|Q9JS61|ILVD_NEIMB",
+            "sp|Q9JXV4|FHBP_NEIMB",
+            "tr|Q7DDC4|Q7DDC4_NEIMB",
+            "tr|Q9JY67|Q9JY67_NEIMB",
+            "tr|Q9K070|Q9K070_NEIMB",
+            "sp|Q9K1F5|LPXB_NEIMB",
+            "tr|Q4W563|Q4W563_NEIMB",
+            "tr|Q7DD77|Q7DD77_NEIMB",
+            "tr|Q9JZD1|Q9JZD1_NEIMB",
+            "tr|Q9JXM3|Q9JXM3_NEIMB",
+            "sp|Q9K0K4|TRMD_NEIMB",
+            "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+            "tr|Q9JZY3|Q9JZY3_NEIMB",
+            "tr|Q9JZH8|Q9JZH8_NEIMB",
+            "tr|Q9K1D2|Q9K1D2_NEIMB",
+            "tr|Q9JXT3|Q9JXT3_NEIMB",
+            "sp|Q9K0M6|NQRD_NEIMB",
+            "sp|Q9K1H6|ZUPT_NEIMB"
+          ],
+          "unavailable_gates": [
+            "human_homology",
+            "allergenicity",
+            "toxicity",
+            "conservancy"
+          ]
+        }
+      },
+      "registered_at": "2026-11-15T10:05:04Z",
+      "upstream": {
+        "s0": {
+          "digest": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+          "status": "ok",
+          "tools": {
+            "ncbi-eutils": "taxonomy",
+            "uniprot-rest": "taxonomy+proteomes"
+          },
+          "vaxforge_version": "0.1.0"
+        },
+        "s1": {
+          "digest": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+          "status": "ok",
+          "tools": {
+            "blast": "2.17.0+",
+            "uniprot_release": "2026_04"
+          },
+          "vaxforge_version": "0.1.0"
+        },
+        "s10": {
+          "digest": "sha256:063357b6db778e2bd8b49ae7600679d03ff52244d9332fe3f63e116eac396d49",
+          "status": "ok",
+          "tools": {
+            "scipy": "1.17.1"
+          },
+          "vaxforge_version": "0.1.0"
+        },
+        "s2": {
+          "digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+          "status": "ok",
+          "tools": {
+            "blastp": "2.17.0+",
+            "psortb": "not_run"
+          },
+          "vaxforge_version": "0.1.0"
+        },
+        "s3": {
+          "digest": "sha256:006c42801f03b16e2dd62c5ac18e33828f248b4ccf5cf0f490089752933577e9",
+          "status": "ok",
+          "tools": {
+            "precomputed-protegenicity": "e4ong1031/vaxign-ml@sha256:7a647d55bb6a5154d8ee11ad78ef5fb18cc63cd2e98e23e04b172fbcb63fb4ec"
+          },
+          "vaxforge_version": "0.1.0"
+        },
+        "s4": {
+          "digest": "sha256:a86fd59fe3434696e328920f492b019dfcaa1d737511d122abeb56a58449e76c",
+          "status": "ok",
+          "tools": {},
+          "vaxforge_version": "0.1.0"
+        },
+        "s5": {
+          "digest": "sha256:4c76f7e8e81fdbeab6d26b837271c6d9c6296407eecac64edeb63c380b8528ae",
+          "status": "ok",
+          "tools": {},
+          "vaxforge_version": "0.1.0"
+        },
+        "s6": {
+          "digest": "sha256:4e91aaea0fb9baf382d7cc966faf19b2620290c68994bea8ad51bd80229be874",
+          "status": "ok",
+          "tools": {},
+          "vaxforge_version": "0.1.0"
+        },
+        "s7": {
+          "digest": "sha256:85c3c09e1215afe1880459a23fd1e9d8850b407f142da3c781cbba9cd545a4c4",
+          "status": "ok",
+          "tools": {},
+          "vaxforge_version": "0.1.0"
+        },
+        "s8": {
+          "digest": "sha256:8bddb681ee3660b112368bcba3d2e2a186e57861741c71de85d95eae32b3bfbe",
+          "status": "ok",
+          "tools": {},
+          "vaxforge_version": "0.1.0"
+        },
+        "s9": {
+          "digest": "sha256:a4a7bfd5b7b24bc5630dbb8a851522c9ba0f0143aa6b065a7f6740d9ab6a14c7",
+          "status": "ok",
+          "tools": {
+            "opentrons": "7.5.0"
+          },
+          "vaxforge_version": "0.1.0"
+        },
+        "s9_5": {
+          "digest": "sha256:4652ae8ad01394996be3573f182f68ed021b70c5fe300ac3ee9401d9c8a77c26",
+          "status": "ok",
+          "tools": {},
+          "vaxforge_version": "0.1.0"
+        },
+        "s9plus": {
+          "digest": "sha256:9615209835a2e972165859e75b7715684f5bb3154672459120ea646c5ff906fd",
+          "status": "ok",
+          "tools": {},
+          "vaxforge_version": "0.1.0"
+        }
+      },
+      "validation_dir": "validation"
+    },
+    "frozen_digest": "sha256:8967b6b7566f64978ca3bb95687eba17812b99863e4edb92ffd10895ed8567f1",
+    "note": "registered_at is this machine's clock. It is evidence of when this was frozen only once frozen_digest is published somewhere the team does not control (a git tag, a public post). Nothing here publishes it."
+  },
+  "producer": {
+    "module": "vaxforge.s11_prereg",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "run_nmb_fixture",
+  "schema": "vaxforge/s11_prereg/v1",
+  "stage": "s11",
+  "status": "ok",
+  "volatile": {},
+  "warnings": []
+}

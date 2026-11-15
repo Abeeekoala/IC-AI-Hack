@@ -1,0 +1,1637 @@
+{
+  "created_at": "2026-11-15T10:04:40Z",
+  "digest": "sha256:a86fd59fe3434696e328920f492b019dfcaa1d737511d122abeb56a58449e76c",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
+  },
+  "inputs": {
+    "s1": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+    "s3": "sha256:006c42801f03b16e2dd62c5ac18e33828f248b4ccf5cf0f490089752933577e9"
+  },
+  "params": {
+    "refdata": {
+      "conservancy_proteomes": [],
+      "human_proteome": null,
+      "human_reviewed_only": true,
+      "iedb_human_ligands": null
+    },
+    "s4": {
+      "allergenicity": {
+        "enabled": true,
+        "model": 1
+      },
+      "conservancy": {
+        "enabled": true,
+        "evalue": 1e-05,
+        "min_coverage": 0.8,
+        "min_fraction_strains": 1.0,
+        "n_strains": 2,
+        "on_fail": "reject"
+      },
+      "human_homology": {
+        "enabled": true,
+        "evalue": 0.001,
+        "ligand_recheck": true,
+        "min_coverage": 0.5,
+        "min_identity": 0.35,
+        "shared_peptide_length": 9
+      },
+      "on_unavailable": "carry",
+      "rescue": [],
+      "toxicity": {
+        "enabled": true,
+        "model": 1
+      }
+    },
+    "thresholds": {
+      "allergenicity": 0.45,
+      "conservancy_identity": 0.8,
+      "protegenicity": [
+        0.9,
+        0.85
+      ],
+      "toxicity": 0.8
+    },
+    "tools": {
+      "blast_docker_image": "ncbi/blast:2.16.0",
+      "blast_mode": "local"
+    }
+  },
+  "payload": {
+    "candidates": [
+      {
+        "accession": "Q9K0B4",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "iga",
+        "length": 1815,
+        "name": "IgA-specific serine endopeptidase",
+        "protein_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "s3": {
+          "composite_score": 0.99793909,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000261",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.99793909,
+          "rank": 1,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.99793909,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKTKRFKINAISLSIFLAYALTPYSEAALVRDDVDYQIFRDFAENKGKFFVGATDLSVKNKQGQNIGNALSNVPMIDFSVADVNRRTLTVIDPQYAVSVKHVKGDEISYYGHHNGHLDVSNDENEYRSVAQNDYEPNKNWHHGNQGRLEDYNMARLNKFVTEVAPIAPTSAGGGVETYKDKNRFSEFVRVGAGTQFEYNSRYNMTELSRAYRYAIAGTPYQDVNVTSNLNQEGLIGFGDNSKHHSPEKLKEVLSQNALTNYAVLGDSGSPLFAYDKQEKRWVFLGAYDYWAGYQKNSWQEWNIYKKEFADEIKQRDNAGTIKGNGEHHWKTTGTNSHIGSTAVRLANNERDANNGQNVTFENNGTLVLDQNINQGAGGLFFKGDYTVKGINNDITWLGAGIDVADGKKVVWQVKNPNGDRLAKIGKGTLEINGTGVNQGQLKVGDGTVILNQQADADKKVQAFSQVGIVSGRGTLVLNSSNQINPDNLYFGFRGGRLDANGNDLTFEHIRNVDEGARIVNHNTGHASTITLTGKSLITDPKTISIHYIQNNDDDDAGYYYYRPRKPIPQGKDLYFKNYRYYALKSGGSVNAPMPENGQTENNDWILMGSTQEEAKKNAMNHKNNQRISGFSGFFGEENGKGHNGALNLNFNGKSAQNRFLLTGGTNLNGKISVTQGNVLLSGRPTPHARDFVNKSSARKDAHFSKNNEVVFEDDWINRTFKATEIAVNQSASFSSGRNVSDITANITATDNAKVNLGYKNGDEVCVRSDYTGYVTCNTGNLSDKALNSFGATQINGNVNLNQNAALVLGKAALWGQIQGQGNSRVSLNQHSKWHLTGDSQVHNLSLADSHIHLNNASDAQSANKYHTLKINHLSGNGHFHYLTHLAKNLGDKVLVKESASGHYQLHVQDKTGEPNQEGLNLFDASSVQDRSRLSVSLANNHVDLGALRYTIKTENGITRLYNPYAENRRRVKPAPSPATNTASQAQKATQTDGAQIAKPQNIVVAPPSPQANQAEEAKRQQAKAEQVKRQQAEAERKSAELAKQKAEAEREARELATRQKAEQERSSAELARRHEKEREAAELSAKQKVEAEREAQALAVRRKAEAEEAKRQAAELARRHEKEREAAELSAKQRVGEEERRQTAQSQPQRRKRRAAPQDYMAASQDRPKRRGHRSVQQNNVEIAQAQAELARRQQEERKAAELLAKQRAEAEREAQALAARRKAEAEEAKRQAAELAHRQEAERKAAELSANQKAAAEAQALAARQQKALARQQEEARKAAELAVKQKAETERKTAELAKQRAAAEAAKRQQEARQTAELARRQEAERQAAELSAKQKAETDREAAESAKRKAEEEEHRQAAQSQPQRRKRRAAPQDYMAASQNRPKRRGRRSTLPAPPSPSFDSSAYAAPRALHNPDWYENDYEEIPLDALEDENVSESVDTSDKQPQDNTELHEKYENDYEEIPLDALEDEDVSESVDTSDKQPQDNTELHEKVETVSLQPRAAQPRAQAATQLQAQAAAQADAVSTNTNSALSDAMASTQSILLDTGASLTRHIAQKSRADAEKNSVWMSNTGYGRDYASAQYRRFSSKRTQTQIGIDRSLSENMQIGGVLTYSDSQHTFDQASGKNTFVQANLYGKYYLNDAWYVAGDIGAGSLRSRLQTQQKANFNRASIQTGLTLGNTLKINQFEIVPSAGIRYSRLSSADYKLGNDSVKVSSMSVKTLTAGLDFAYRFKVGNLTVKPLLSAAYFANYGKGGVNVGGNSFVYKADNQQQYSAGAALLYRNVTLNVNGSITKGKQLEKQKSGQIKIQIRF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXZ0",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB1829",
+        "length": 708,
+        "name": "TonB-dependent receptor",
+        "protein_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "s3": {
+          "composite_score": 0.99656515,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.93,
+              "evalue": 3.62e-86,
+              "hit": "VFG000163",
+              "identity": 0.29059999999999997,
+              "term": 0.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.99656515,
+          "rank": 2,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.99656515,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MGQFMSVFRINMTAATVLAALSSSVFAAQTEGLETVHIKGQRSYNAIATEKNGDYSSFAATVGTKIPASLREIPQSVSIITNQQVKDRNVDTFDQLARKTPGLRVLSNDDGRSSVYARGYEYSEYNIDGLPAQMQSINGTLPNLFAFDRVEVMRGPSGLFDSSGEMGGIVNLVRKRPTKAFQGHAAAGFGTHKQYKAEADVSGSLNSDGSVRGRVMAQTVGASPRPAEKNNRRETFYAAADWDINPDTVLGAGYLYQQRRLAPYNGLPADANNKLPSLPQHVFVGADWNKFKMHSHDVFADLKHYFGNGGYGKVGMRYSDRKADSNYTFAGSKLNNTGQADVAGLGTDIKQKAFAVDASYSRPFALGNTANEFVIGADYNRLRSTNEQGRSTLSKSVALDGFRALPYNGILQNARAGNKGFNHSVTEENLDETGLYAKTVFRPLEGLSLIAGGRVGHHKIESGDGKTLHKASKTKFTSYAGAVYDIDGSNSLYASASQLYTPQTSIGTDGKLLKPREGNQFEIGYKGSYMDDRLNTRVSFYRMKDKNAAAPLDSNNKKTRYAALGKRVMEGVETEISGAMTPKWQIHAGYSYLHSQIKTASNSRDEGIFLLMPKHSANLWTTYQVTSGLTIGGGVNAMSGITSSAGIHAGGYATFDAMAAYRFTPKLKLQINADNIFNRHYYARVGSESTFNIPGSERSLTANLRYSF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JYA8",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "hmbR",
+        "length": 791,
+        "name": "Hemoglobin receptor",
+        "protein_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "s3": {
+          "composite_score": 0.99404626,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000266",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.99404626,
+          "rank": 3,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.99404626,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKPLQMLPIAALVGSIFGNPVLAADEAATETTPVKAEIKAVRVKGQRNAPAAVERVNLNRIKQEMIRDNKDLVRYSTDVGLSDSGRHQKGFAVRGVEGNRVGVSIDGVNLPDSEENSLYARYGNFNSSRLSIDPELVRNIEIVKGADSFNTGSGALGGGVNYQTLQGRDLLLDDRQFGVMMKNGYSTRNREWTNTLGFGVSNDRVDAALLYSQRRGHETESAGNRGYAVEGEGSGANIRGSARGIPDSSKHKYHSFLGKIAYQINDNHRIGASLNGQQGHNYTVEESYNLTASSWREADDVNRRRNANLFYEWMPDSNWLSSLKADFDYQKTKVAAVNNKGSFPMDYSTWTRNYNQKDLDEIYNRSMDTRFKRFTLRLDSHPLQLGGGRHRLSFKTFVSRRDFENLNRDDYYFSGRVVRTTSSIQHPVKTTNYGFSLSDQIQWNDVFSSRAGIRYDHTKMTPQELNAECHACDKTPPAANTYKGWSGFVGLAAQLNQAWRVGYDITSGYRVPNASEVYFTYNHGSGNWLPNPNLKAERSTTHTLSLQGRSEKGMLDANLYQSNYRNFLSEEQKLTTSGTPGCTEENAYYGICSDPYKEKLDWQMKNIDKARIRGIELTGRLNVDKVASFVPEGWKLFGSLGYAKSKLSGDNSLLSTQPLKVIAGIDYESPSEKWGVFSRLTYLGAKKVKDAQYTVYENKGWGTPLQKKVKDYPWLNKSAYVFDMYGFYKPAKNLTLRAGVYNLFNRKYTTWDSLRGLYSYSTTNAVDRDGKGLDRYRAPGRNYAVSLEWKF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXL6",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "hap",
+        "length": 1457,
+        "name": "Adhesion and penetration protein",
+        "protein_id": "tr|Q9JXL6|Q9JXL6_NEIMB",
+        "s3": {
+          "composite_score": 0.9919853399999999,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.98,
+              "evalue": 0.0,
+              "hit": "VFG001149",
+              "identity": 0.5498,
+              "term": 0.538804
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9919853399999999,
+          "rank": 4,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9919853399999999,
+            "virulence": 0.538804
+          },
+          "tie_group": null
+        },
+        "sequence": "MKTTDKRTTETHRKAPKTGRIRFSPAYLAICLSFGILPQAWAGHTYFGINYQYYRDFAENKGKFAVGAKDIEVYNKKGELVGKSMTKAPMIDFSVVSRNGVAALVGDQYIVSVAHNGGYNNVDFGAEGRNPDQHRFTYKIVKRNNYKAGTKGHPYGGDYHMPRLHKFVTDAEPVEMTSYMDGRKYIDQNNYPDRVRIGAGRQYWRSDEDEPNNRESSYHIASAYSWLVGGNTFAQNGSGGGTVNLGSEKIKHSPYGFLPTGGSFGDSGSPMFIYDAQKQKWLINGVLQTGNPYIGKSNGFQLVRKDWFYDEIFAGDTHSVFYEPRQNGKYSFNDDNNGTGKINAKHEHNSLPNRLKTRTVQLFNVSLSETAREPVYHAAGGVNSYRPRLNNGENISFIDEGKGELILTSNINQGAGGLYFQGDFTVSPENNETWQGAGVHISEDSTVTWKVNGVANDRLSKIGKGTLHVQAKGENQGSISVGDGTVILDQQADDKGKKQAFSEIGLVSGRGTVQLNADNQFNPDKLYFGFRGGRLDLNGHSLSFHRIQNTDEGAMIVNHNQDKESTVTITGNKDIATTGNNNSLDSKKEIAYNGWFGEKDTTKTNGRLNLVYQPAAEDRTLLLSGGTNLNGNITQTNGKLFFSGRPTPHAYNHLNDHWSQKEGIPRGEIVWDNDWINRTFKAENFQIKGGQAVVSRNVAKVKGDWHLSNHAQAVFGVAPHQSHTICTRSDWTGLTNCVEKTITDDKVIASLTKTDISGNVDLADHAHLNLTGLATLNGNLSANGDTRYTVSHNATQNGNLSLVGNAQATFNQATLNGNTSASGNASFNLSDHAVQNGSLTLSGNAKANVSHSALNGNVSLADKAVFHFESSRFTGQISGGKDTALHLKDSEWTLPSGTELGNLNLDNATITLNSAYRHDAAGAQTGSATDAPRRRSRRSRRSLLSVTPPTSVESRFNTLTVNGKLNGQGTFRFMSELFGYRSDKLKLAESSEGTYTLAVNNTGNEPASLEQLTVVEGKDNKPLSENLNFTLQNEHVDAGAWRYQLIRKDGEFRLHNPVKEQELSDKLGKAEAKKQAEKDNAQSLDALIAAGRDAVEKTESVAEPARQAGGENVGIMQAEEEKKRVQADKDTALAKQREAETRPATTAFPRARRARRDLPQLQPQPQPQPQRDLISRYANSGLSEFSATLNSVFAVQDELDRVFAEDRRNAVWTSGIRDTKHYRSQDFRAYRQQTDLRQIGMQKNLGSGRVGILFSHNRTENTFDDGIGNSARLAHGAVFGQYGIDRFYIGISAGAGFSSGSLSDGIGGKIRRRVLHYGIQARYRAGFGGFGIEPHIGATRYFVQKADYRYENVNIATPGLAFNRYRAGIKADYSFKPAQHISITPYLSLSYTDAASGKVRTRVNTAVLAQDFGKTRSAEWGVNAEIKGFTLSLHAAAAKGPQLEAQHSAGIKLGYRW",
+        "taxid": 487
+      },
+      {
+        "accession": "Q06379",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "lbpA",
+        "length": 943,
+        "name": "Lactoferrin-binding protein A",
+        "protein_id": "sp|Q06379|LBPA_NEIMB",
+        "s3": {
+          "composite_score": 0.98809251,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000264",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.98809251,
+          "rank": 5,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.98809251,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNKKHGFPLTLTALAIATAFPAYAAQAGGATPDAAQTQSLKEITVRAAKVGRRSKEATGLGKIVKTSETLNKEQVLGIRDLTRYDPGVAVVEQGNGASGGYSIRGVDKNRVAVSVDGVAQIQAFTVQGSLSGYGGRGGSGAINEIEYENISTVEIDKGAGSSDHGSGALGGAVAFRTKEAADLISDGKSWGIQAKTAYGSKNRQFMKSLGAGFSKDGWEGLLIRTERQGRETRPHGDIADGVEYGIDRLDAFRQTYDIKRKTREPFFSVEGERESKPVAKLAGYGKYLNNQLNRWVKERIEQNQPLSAEEEAQVREAQARHENLSAQAYTGGGRILPDPMDYRSGSWLAKLGYRFGGRHYVGGVFEDTKQRYDIRDMTEKQYYGTDEAEKFRDKSGVYDGDDFRDGLYFVPNIEEWKGDKNLVRGIGLKYSRTKFIDEHHRRRRMGLLYRYENEAYSDNWADKAVLSFDKQGVATDNNTLKLNCAVYPAVDKSCRASADKPYSYDSSDRFHYREQHNVLNASFEKSLKNKWTKHHLTLGFGYDASKAISRPEQLSHNAARISESTGFDENNQDKYLLGKPEVVEGSVCGYIETLRSRKCVPRKINGSNIHISLNDRFSIGKYFDFSLGGRYDRKNFTTSEELVRSGRYVDRSWNSGILFKPNRHFSVSYRASSGFRTPSFQELFGIDIYHDYPKGWQRPALKSEKAANREIGLQWKGDFGFLEISSFRNRYTDMIAVADHKTKLPNQAGQLTEIDIRDYYNAQNMSLQGVNILGKIDWNGVYGKLPEGLYTTLAYNRIKPKSVSNRPGLSLRSYALDAVQPSRYVLGFGYDQPEGKWGANIMLTYSKGKNPDELAYLAGDQKRYSTKRASSSWSTADVSAYLNLKKRLTLRAAIYNIGNYRYVTWESLRQTAESTANRHGGDSNYGRYAAPGRNFSLALEMKF",
+        "taxid": 487
+      },
+      {
+        "accession": "P0DH58",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "porA",
+        "length": 392,
+        "name": "Major outer membrane protein P.IA",
+        "protein_id": "sp|P0DH58|OMPA_NEIMB",
+        "s3": {
+          "composite_score": 0.98419968,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG006237",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.98419968,
+          "rank": 6,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.98419968,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MRKKLTALVLSALPLAAVADVSLYGEIKAGVEGRNYQLQLTEAQAANGGASGQVKVTKVTKAKSRIRTKISDFGSFIGFKGSEDLGDGLKAVWQLEQDVSVAGGGATQWGNRESFIGLAGEFGTLRAGRVANQFDDASQAIDPWDSNNDVASQLGIFKRHDDMPVSVRYDSPEFSGFSGSVQFVPIQNSKSAYTPAYYTKNTNNNLTLVPAVVGKPGSDVYYAGLNYKNGGFAGNYAFKYARHANVGRNAFELFLIGSGSDQAKGTDPLKNHQVHRLTGGYEEGGLNLALAAQLDLSENGDKTKNSTTEIAATASYRFGNAVPRISYAHGFDFIERGKKGENTSYDQIIAGVDYDFSKRTSAIVSGAWLKRNTGIGNYTQINAASVGLRHKF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXK7",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "nadA",
+        "length": 362,
+        "name": "Neisseria adhesin A",
+        "protein_id": "sp|Q9JXK7|NADA1_NEIMB",
+        "s3": {
+          "composite_score": 0.97847493,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.6,
+              "evalue": 4.13e-40,
+              "hit": "VFG054578",
+              "identity": 0.4286,
+              "term": 0.25716
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.97847493,
+          "rank": 7,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.97847493,
+            "virulence": 0.25716
+          },
+          "tie_group": null
+        },
+        "sequence": "MKHFPSKVLTTAILATFCSGALAATSDDDVKKAATVAIVAAYNNGQEINGFKAGETIYDIGEDGTITQKDATAADVEADDFKGLGLKKVVTNLTKTVNENKQNVDAKVKAAESEIEKLTTKLADTDAALADTDAALDETTNALNKLGENITTFAEETKTNIVKIDEKLEAVADTVDKHAEAFNDIADSLDETNTKADEAVKTANEAKQTAEETKQNVDAKVKAAETAAGKAEAAAGTANTAADKAEAVAAKVTDIKADIATNKADIAKNSARIDSLDKNVANLRKETRQGLAEQAALSGLFQPYNVGRFNVTAAVGGYKSESAVAIGTGFRFTENFAAKAGVAVGTSSGSSAAYHVGVNYEW",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0U9",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "tbp1",
+        "length": 915,
+        "name": "Transferrin-binding protein A",
+        "protein_id": "sp|Q9K0U9|TBPA_NEIMB",
+        "s3": {
+          "composite_score": 0.97732997,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG000262",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.97732997,
+          "rank": 8,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.97732997,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MQQQHLFRFNILCLSLMTALPAYAENVQAGQAQEKQLDTIQVKAKKQKTRRDNEVTGLGKLVKSSDTLSKEQVLNIRDLTRYDPGIAVVEQGRGASSGYSIRGMDKNRVSLTVDGVSQIQSYTAQAALGGTRTAGSSGAINEIEYENVKAVEISKGSNSVEQGSGALAGSVAFQTKTADDVIGEGRQWGIQSKTAYSGKNRGLTQSIALAGRIGGAEALLIHTGRRAGEIRAHEDAGRGVQSFNRLVPVEDSSNYAYFIVKEECKNGSYETCKANPKKDVVGKDERQTVSTRDYTGPNRFLADPLSYESRSWLFRPGFRFENKRHYIGGILEHTQQTFDTRDMTVPAFLTKAVFDANKKQAGSLPGNGKYAGNHKYGGLFTNGENGALVGAEYGTGVFYDETHTKSRYGLEYVYTNADKDTWADYARLSYDRQGIGLDNHFQQTHCSADGSDKYCRPSADKPFSYYKSDRVIYGESHRLLQAAFKKSFDTAKIRHNLSVNLGFDRFGSNLRHQDYYYQHANRAYSSNTPPQNNGKKISPNGSETSPYWVTIGRGNVVTGQICRLGNNTYTDCTPRSINGKSYYAAVRDNVRLGRWADVGAGLRYDYRSTHSDDGSVSTGTHRTLSWNAGIVLKPTDWLDLTYRTSTGFRLPSFAEMYGWRAGVQSKAVKIDPEKSFNKEAGIVFKGDFGNLEASWFNNAYRDLIVRGYEAQIKDGKEEAKGDPAYLNAQSARITGINILGKIDWNGVWDKLPEGWYSTFAYNRVRVRDIKKRADRTDIQSHLFDAIQPSRYVVGLGYDQPEGKWGVNGMLTYSKAKEITELLGSRALLNGNSRNTKATARRTRPWYIVDVSGYYTVKKHFTLRAGVYNLLNYRYVTWENVRQTAGGAVNQHKNVGVYNRYAAPGRNYTFSLEMKF",
+        "taxid": 487
+      },
+      {
+        "accession": "Q7DD37",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "nhba",
+        "length": 488,
+        "name": "Neisserial heparin binding antigen",
+        "protein_id": "sp|Q7DD37|NHBA_NEIMB",
+        "s3": {
+          "composite_score": 0.9761850200000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9761850200000001,
+          "rank": 9,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9761850200000001,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MFKRSVIAMACIFALSACGGGGGGSPDVKSADTLSKPAAPVVSEKETEAKEDAPQAGSQGQGAPSAQGSQDMAAVSEENTGNGGAVTADNPKNEDEVAQNDMPQNAAGTDSSTPNHTPDPNMLAGNMENQATDAGESSQPANQPDMANAADGMQGDDPSAGGQNAGNTAAQGANQAGNNQAAGSSDPIPASNPAPANGGSNFGRVDLANGVLIDGPSQNITLTHCKGDSCSGNNFLDEEVQLKSEFEKLSDADKISNYKKDGKNDKFVGLVADSVQMKGINQYIIFYKPKPTSFARFRRSARSRRSLPAEMPLIPVNQADTLIVDGEAVSLTGHSGNIFAPEGNYRYLTYGAEKLPGGSYALRVQGEPAKGEMLAGAAVYNGEVLHFHTENGRPYPTRGRFAAKVDFGSKSVDGIIDSGDDLHMGTQKFKAAIDGNGFKGTWTENGSGDVSGKFYGPAGEEVAGKYSYRPTDAEKGGFGVFAGKKEQD",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0K9",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "frpA",
+        "length": 1302,
+        "name": "Iron-regulated protein FrpA",
+        "protein_id": "sp|Q9K0K9|FRPA_NEIMB",
+        "s3": {
+          "composite_score": 0.9741241100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG006300",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9741241100000001,
+          "rank": 10,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9741241100000001,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFSQYVDLINENNGRLPNTSEIERSYYKAVTENGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVIMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQFRDLFPNPEGWIDDGHQCFAPWVKETKKRNGKYHVYDPLALDLDGDGIETVAAKGFSGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQSLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0U8",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "potD-1",
+        "length": 459,
+        "name": "Spermidine/putrescine ABC transporter, periplasmic spermidine/putrescine-binding protein",
+        "protein_id": "tr|Q9K0U8|Q9K0U8_NEIMB",
+        "s3": {
+          "composite_score": 0.96771239,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "Periplasmic",
+              "prior": 0.5,
+              "raw": "Periplasmic",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.96771239,
+          "rank": 11,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.96771239,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MQAFSLYPPVGHPDSAKKRQNRADVFLPFWKQDNFLGKSVQYRFEFAQIYFTMPKPCAGVTMGRGDFFFSNLFHQESARMKKSVLAVLAALSLAACGGSEKNAVQPQADAASAANAEAAATDTLNIYNWSNYVDESTVEDFKKANNLKLTYDLYENNETLEAKMLTGKSGYDLVVPGIAFLPRQIEAGAYQKVNKDLIPNYKNIDPELLKMLETADPGNQYAVPYFSGVNTIAITAKGKELLGGKLPENGWDLLFKPEYTHKLKSCGIALWDTPSEMFPILLNYLGKDPKGSNPEDLKAAAEVLKSIRPDVKRFSPSIIDELARGDICLAAGNGGDLNLAKARSEEVKNNVGIEVLTPKGMGFWIESWLIPADAKNVANAHKYINYTLDPEIAAKNGIAVTFAPASKPAREKMPAELVNTRSIFPNEQDMKDGFVMPQMSTDAKKLSVSLWQKIKVGTN",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JYV5",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "frpC",
+        "length": 1829,
+        "name": "Iron-regulated protein FrpC",
+        "protein_id": "sp|Q9JYV5|FRPC_NEIMB",
+        "s3": {
+          "composite_score": 0.9656514799999999,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG006303",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9656514799999999,
+          "rank": 12,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.9656514799999999,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFRQYARLINQNNGRLPNTSEIERSYYKAVTDNGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVMMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQGNEAFKNEINSLVHDMKAAGKEFGDDLNTQWNNLTQAAEIIYNDIVDNTSQGIEKGVKAIKELSEKMKNAASDLADGSAEKAKQVVEDLAQAAKEAYENAKSTAEKAAQAAREFFKGLPSFKDLAEKFRDLFPNPEGWIDDGHQCLAPWVKETKKRNGKYHVYDPLALDLDGDGIETVATKGFAGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQTLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQYYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLNGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGSTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JS61",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "ilvD1",
+        "length": 619,
+        "name": "Dihydroxy-acid dehydratase",
+        "protein_id": "sp|Q9JS61|ILVD_NEIMB",
+        "s3": {
+          "composite_score": 0.95465995,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.95465995,
+          "rank": 13,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.95465995,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MPEYRSKTSTHGRNMAGARALWRATGVMETDFGKPIIAVANSFTQFVPGHVHLHNMGQLVAREIEKAGAIAKEFNTIAIDDGIAMGHSGMLYSLPSRDLIADSIEYMVNAHCADALVCISNCDKITPGMLIAAMRLNIPTIFVSGGPMEAGKVIGVANIQPERRLDLIDAMIESADDNVSNRQVEEVEQNACPTCGSCSGMFTANSMNCLTEALGLSLPGNGSYLATHAGRKELFLEAGRMIVEITKRYYEQNDETVLPRSIATKKAFENAMTMDIAMGGSTNTILHLLAVANEAGVDFKMADIDRLSRVVPCICKTAPNNHDYYMEDVHRAGGIFAILKELDKAGKLHTDVHTIHAPTLKDAIEQWDVTNPENTRAIERFKAAPGGVRTTQAFSQNRMWKTLDLDREKGCIRDVAHAYSQDGGLAVLFGNIAERGCVVKTAGVDESILKFTGRARVFESQEDAVEGILGNQIVAGDIVIIRYEGPKGGPGMQEMLYPTSYLKSKGLGKACALLTDGRFSGGTSGLSIGHASPEAAEGGAIGLVHEGDTVEIDIPNRSIHLAISDEELAARRAEMEARGSKAWKPKNRDRYVSAALRAYGAMATSADKGAVRDVAQIER",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXV4",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "fhbP",
+        "length": 274,
+        "name": "Factor H binding protein",
+        "protein_id": "sp|Q9JXV4|FHBP_NEIMB",
+        "s3": {
+          "composite_score": 0.953515,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "OuterMembrane",
+              "prior": 1.0,
+              "raw": "OuterMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG037136",
+              "identity": 0.9964,
+              "term": 0.9964
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.953515,
+          "rank": 14,
+          "terms": {
+            "localisation": 1.0,
+            "protegenicity": 0.953515,
+            "virulence": 0.9964
+          },
+          "tie_group": null
+        },
+        "sequence": "MNRTAFCCLSLTTALILTACSSGGGGVAADIGAGLADALTAPLDHKDKGLQSLTLDQSVRKNEKLKLAAQGAEKTYGNGDSLNTGKLKNDKVSRFDFIRQIEVDGQLITLESGEFQVYKQSHSALTAFQTEQIQDSEHSGKMVAKRQFRIGDIAGEHTSFDKLPEGGRATYRGTAFGSDDAGGKLTYTIDFAAKQGNGKIEHLKSPELNVDLAAADIKPDGKRHAVISGSVLYNQAEKGSYSLGIFGGKAQEVAGSAEVKTVNGIRHIGLAAKQ",
+        "taxid": 487
+      },
+      {
+        "accession": "Q7DDC4",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "lldD",
+        "length": 390,
+        "name": "L-lactate dehydrogenase",
+        "protein_id": "tr|Q7DDC4|Q7DDC4_NEIMB",
+        "s3": {
+          "composite_score": 0.94092054,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.94092054,
+          "rank": 15,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.94092054,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKRDLSKMTCIEDLRRVAKRKMPRMFYDYIDSGSWTETTYRENTSDFKDIRFRQKVLVNMEGRSLETKMIGQDVKMPVAIAPTGFTGMAHADGEILAARAAEKFGIPFTLSTMSICSIEDVAENTSAPFWFQLYVMRDREFMENLIKRAKDAKCSALVLTADLQVLGQRHKDIKNGLSAPPKPTIANLINLATKPEWCMKMLNTERRTFRNIVGHAKNVGDLSSLSSWTSEQFDPRLSWDDVARIKDLWGGKLIIKGIMEPEDAEKAAKSGADALIVSNHGGRQLDDTVSAIKALPDIVSAVGSDIEVWMDSGIRSGQDILKAWALGAKGTMIGRAFLYGLGAYGEEGVTRALEILYKEMDISMAFTGHRDIQDVDASILRGKDWGRETV",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JY67",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "mtrD",
+        "length": 1067,
+        "name": "Efflux pump membrane transporter",
+        "protein_id": "tr|Q9JY67|Q9JY67_NEIMB",
+        "s3": {
+          "composite_score": 0.9276391099999999,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 0.0,
+              "hit": "VFG036992",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9276391099999999,
+          "rank": 16,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.9276391099999999,
+            "virulence": 1.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MAKFFIDRPIFAWVISIFIIAAGIFGIKSLPVSQYPSVAAPTITLRATYPGASAQVMEDSVLSVIERNMNGVEGLDYMSTSADSSGSGSVSLTFTPDTDENLAQVEVQNKLSEVLSTLPATVQQYGVTVSKARSNFLMIVMLSSDVQSTEEMNDYAQRNIVPELQRIEGVGQVRLFGAQRAMRIWVDPKKLQNYNLSFADVGSALSAQNVQISAGSIGSLPAVRGQTVTATVTAQGQLGTAEEFGNVILRANTDGSNVYLKDVARVGLGMEDYSSSTRLNGVNTTGMAVMLSNSGNAMATAKAVKERMATLEKYFPQGMSWKTPYDTSKFVEISIEKVIHTLIEAMVLVFVVMYLFLQNIRYTLIPTIVVPISLLGGFAFISYMGMSINVLTMFAMVLVIGIVVDDAIVVVENVERIMAGEGLPPKEATKKAMGQISGAVIGITAVLISVFVPLAMFSGATGNIYKQFALTMASSIAFSAFLALTLTPALCATMLKTIPKGHHEEKKGFFGWFNKKFNSWTHGYEGRVAKVLRKTFRMMVVYIGLAVVGVFLFMRLPTSFLPTEDQGFVMVSVQLPAGATQERTNATLAQVTQLAKSIPEIENIITVSGFSFSGSGQNMAMGFAILKDWNERTAPGSDAVAIAGKLTGMMMGTLKDGFGIAVVPPPILELGNGSGLSINLQDRNNTGHTALLAKRNELIQKMRASGLFDPSTVRAGGLEDSPQLKIDINRAAAAAQGISFADIRTALASALSSSYVSDFPNQGRLQRVMVQADEDARMQPADILNLTVPNKSGVAVPLSTIATVSWENGTEQSVRFNGYPSMKLSASPATGVSTGQAMAAVQKMVDELGGGYSLEWGGQSREEAKGGSQTLILYGLAVAAVFLVLAALYESWSIPLAVILVIPLGLIGAAAGVTGRNLFEGLLGSVPSFANDIYFQVGFVTVMGLSAKNAILIIEFAKDLQAQGKSAVEAALEAARLRFRPIIMTSFAFILGVVPLYIAGGASSASQRAIGTTVFWGMLIGTLLSVFLVPLFYVVVRKFFKETAHEHEMAVKHAAEAGITGSDDSQH",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K070",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB0749",
+        "length": 312,
+        "name": "Penicillin-binding protein 4",
+        "protein_id": "tr|Q9K070|Q9K070_NEIMB",
+        "s3": {
+          "composite_score": 0.9200824400000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.76,
+              "evalue": 2.78e-65,
+              "hit": "VFG038249",
+              "identity": 0.4545,
+              "term": 0.34542
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9200824400000001,
+          "rank": 17,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9200824400000001,
+            "virulence": 0.34542
+          },
+          "tie_group": null
+        },
+        "sequence": "MSIHTLKRLPSSLLLGLCLSLPSAHLFADNDILGQFLEQNMLTSSDPIEIFAESTIHPTNTQAITGGLILSSQSALVVNNKTGQILYQKNADRIMPIASISKLMSAMVVLDANLDMNETVTITPDEIDRIKGTGSRLAIGTALTRKKLLHLSLMSSENRATHALGRTYPGGMGAFVAAMNRKAQSLGMYGSRFYEPTGLNFQNVSTAKDLSLMVNAAAQYPQIRTNSTSNYASVQTKNGQQNYKNSNALVREGMWNIELQKTGYIREAGRSMVVKANIQNQPVTIVLLNSPTSATRVNDARKIESWMLQQRS",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K1F5",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "lpxB",
+        "length": 384,
+        "name": "Lipid-A-disaccharide synthase",
+        "protein_id": "sp|Q9K1F5|LPXB_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.98,
+              "evalue": 1.7e-106,
+              "hit": "VFG013384",
+              "identity": 0.4386,
+              "term": 0.429828
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 18,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.429828
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MADKKSPLIAVSVGEASGDLLGAHLIRAIRKRCPQARFTGIGGELMKAEGFESLYDQERLAVRGFVEVVRRLPEILRIRRGLVRDLLSLKPDVFVGIDAPDFNLGVAEKLKRSGIPTVHYVSPSVWAWRRERVGKIVHQVNRVLCLFPMEPQLYLDAGGRAEFVGHPMAQLMPLEDDRETARQTLGVDAGIPVFALLPGSRVSEIDYMAPVFFQTALLLLERYPAARFLLPAATEATKRRLAEVLQRPEFAGLPLTVIDRQSETVCRAADAVLVTSGTATLEVALCKRPMVISYKISPLTYAYVKRKIKVPHVGLPNILLGKEAVPELLQSEAKPEKLAAALADWYEHPDKVAALQQDFRALHLLLKKDTADLAARAVLEEAGC",
+        "taxid": 487
+      },
+      {
+        "accession": "Q4W563",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "pilN",
+        "length": 199,
+        "name": "PilN protein",
+        "protein_id": "tr|Q4W563|Q4W563_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 3.8e-147,
+              "hit": "VFG006179",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 19,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 1.0
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MNNLIKINLLPYREEMNKRKQQQFKTLMYGAVLTGVAAVAATYLFIDNMINNQSERNTLLETSIAHLDTELSEIQKLKQEKDAFLIKKNKIEELQLKRLQAAKILDSLNEAVPGSTYLTSLDAVTADSYRLSGRTSSDNRVAAMMRAMPNTGIFKQPELLSIKKNNSHQEFTLQATLQPIVKAAESKENPASGNAQEAN",
+        "taxid": 487
+      },
+      {
+        "accession": "Q7DD77",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "pilP",
+        "length": 181,
+        "name": "PilP protein",
+        "protein_id": "tr|Q7DD77|Q7DD77_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 1.0,
+              "evalue": 1.79e-136,
+              "hit": "VFG006187",
+              "identity": 1.0,
+              "term": 1.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 20,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 1.0
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MKHYALLISFLALSACSQGSEDLNEWMAQTRREAKAEIIPFQAPTLPVAPVYSPPQLTGPNAFDFRRMETDKKGENAPDTKRIKETLEKFSLENMRYVGILKSGQKVSGFIEAEGYVYTVGVGNYLGQNYGRIESITDDSIVLNELIEDSTGNWVSRKAELLLNSSDKNTEQAAAPAAEQN",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JZD1",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB1107",
+        "length": 200,
+        "name": "Lipoprotein",
+        "protein_id": "tr|Q9JZD1|Q9JZD1_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 21,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.0
+          },
+          "tie_group": {
+            "competition_rank": 18,
+            "size": 4
+          }
+        },
+        "sequence": "MNMKKLISAICVSIVLSACNQQSKTAQAEEPVQSIQAADCTAPMDITVEQYLINLEQAFKTQNVSTKIHNKNIVKTDCGYDLTLVMDFGAIALKLDEQQKIRAISVGYILKTDGEKGQNLVNNAINGLHSIQAVLSLTTTDKLGESEAGKQLFTALTEVVKESNQTGATAQKDVPADGILYSVVFEKETNTIAIIGRKQP",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXM3",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB1975",
+        "length": 511,
+        "name": "Transporter",
+        "protein_id": "tr|Q9JXM3|Q9JXM3_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 22,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MSDSKTKERATFGTRRAFMIAAIGSAVGLGNIWRFPYIAFENGGGAFILPYLVALLTAGIPLLLLDYAIGHRYRGSAPLAFRRLGRWFEPVGWWNVMTNIVICIYYAVIIGWAASYTYYSVNAAWGADPQGFFFKDFLQMAGPEALGLDFVGKVAGPLAGVWVFTAAIMALGVQKGVARASSFFMPLLLVMFLIMVGISLTLPGAAKGLDALFTPDWSKLADSKVWVAAYGQIFFSLSICFGIMVTYSSYLKKKTDLGGTGLVVGFANSSFELLAGIGVFAALGFMAQAGGKAVNEVASGGIGLAFIAFPTIINQAPMGWLIGILFFGSLVFAGVTSMISILEVIVAAIQDKLNIGRVNATLLVCIPMGIVSTLLFGTATGLPVLDVMDKFVNTYGIVAAGFVYVAAIIISGRLPELRKHLNALSSIRIGGLWTVCVVVTVVMLGYMLFKDTSGLMEKNYEGYPDGFLSIFGWGMSAALVVFGLLLSLLPWKHGQDFNVKDEHEHEQGEEK",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0K4",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "trmD",
+        "length": 249,
+        "name": "tRNA (guanine-N(1)-)-methyltransferase",
+        "protein_id": "sp|Q9K0K4|TRMD_NEIMB",
+        "s3": {
+          "composite_score": 0.9090909100000001,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "Cytoplasmic",
+              "prior": 0.0,
+              "raw": "Cytoplasmic",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.9090909100000001,
+          "rank": 23,
+          "terms": {
+            "localisation": 0.0,
+            "protegenicity": 0.9090909100000001,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MLIQAVTIFPEMFDSITRYGVTGRANRQGIWQFEAVNPRKFADNRLGYIDDRPFGGGPGMIMMAPPLHAAIEHAKTQSSQAAKVIYLSPQGKPLTHQKAVELAELPHLILLCGRYEGIDERLLQSSVDEEISIGDFVVSGGELPAMMLMDAVLRLVPGVLGDMQSAEQDSFSSGILDCPHYTKPLEFQGMAVPEVLRSGNHGLIAEWRLEQSLRRTLERRPDLLEKRVLIPKESRLLETIRQEQREIQS",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0Q7",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB0527",
+        "length": 140,
+        "name": "6-carboxy-5,6,7,8-tetrahydropterin synthase",
+        "protein_id": "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+        "s3": {
+          "composite_score": 0.90886192,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": true
+          },
+          "protegenicity": 0.90886192,
+          "rank": 24,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.90886192,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MKITKIFTFDSSHMLDGHDGKCQNLHGHTYKLEITVSDGIIKGGAKDGMVMDFTDLKAIVKQHITDPFDHAFIYHGGNSRECQIAALLEGWNMKTLRLPCRTTAENMAVEMYGRLKNAGLNVCRVKLWETPTSCAEYEGE",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JZY3",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB0850",
+        "length": 138,
+        "name": "MORN repeat protein",
+        "protein_id": "tr|Q9JZY3|Q9JZY3_NEIMB",
+        "s3": {
+          "composite_score": 0.89351958,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.89351958,
+          "rank": 25,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.89351958,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MLKHLAFLLPAMMFALPTSAAVLTSYQEPGCTYDGNVGKDGKPAGKGTWRCQDGRNYTGSFKNGKFDGQGVYTVAANREIFIEPFNSDSTKFRNMVLSGTFKKGLAHGRFTVSQNGETLFIMKCENGMIKEVKLPKNK",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JZH8",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB1045",
+        "length": 264,
+        "name": "Serine/threonine protein kinase",
+        "protein_id": "tr|Q9JZH8|Q9JZH8_NEIMB",
+        "s3": {
+          "composite_score": 0.860545,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.860545,
+          "rank": 26,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.860545,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MTLPMQETRFSILLDELAAKQEAAIAPHLLADGTKVWIRKAGRHNARWRYALLGMVARYLKLGVLKPVPSLGGEPAIATESKRLYELRSAGIAVPELLAVRKNALMFGNLEGIPLDAQIRQEAEAGKSDAWLAGLEAIARVHKKRQFLSQAFARNMMSDGKNISFLDFEDDPSEVLTIAQCQARDWLCYIHSTALILKNGGLLEAAAEKWGGVLSDQPAEIQKLIAATVKPILPIRRLEHPRWGRDALRLAASISLISLADMPP",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K1D2",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "NMB0230",
+        "length": 215,
+        "name": "Carboxyltransferase domain-containing protein",
+        "protein_id": "tr|Q9K1D2|Q9K1D2_NEIMB",
+        "s3": {
+          "composite_score": 0.85848409,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.85848409,
+          "rank": 27,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.85848409,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MRIEITPISESALVYRLNAPSELGKQQKLWAFAAALGQHDRIEEVVVGMNNLTVFTRFDTDLATLADELQYVWEHTAVTDHQGKLVEIPVCYGGEYGPDLAEVAAFHQTVISEIVRRHTAQTYTVFMMGFQPGFPYLGGLPEALHTPRRAVPRTSVPAGSVGIGGSQTGVYPFASPGGWQIIGRTELPLFRADLNPPTLLAAGDQVRFVAERIEP",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9JXT3",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "dpnC",
+        "length": 267,
+        "name": "Type II restriction enzyme DpnI",
+        "protein_id": "tr|Q9JXT3|Q9JXT3_NEIMB",
+        "s3": {
+          "composite_score": 0.85665216,
+          "evidence": {
+            "localisation": {
+              "is_unknown": true,
+              "label": "Unknown",
+              "prior": 0.5,
+              "raw": "Unknown",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.85665216,
+          "rank": 28,
+          "terms": {
+            "localisation": 0.5,
+            "protegenicity": 0.85665216,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MNLFFDTELGKQQNKATHKIRVMSEAWLEKNGYCPCCGSKPMQRFANNKPVADLFCPNCHEQYELKSKNQKTIGNSVPDGAYHTMLERIRSDTNPNFFFLAYKKADYSIRQLVLVPKHFITPDMIIPRNKGIKNRPNHIMCSINLAPLPESGKIFLIDNSRIIEPETVLKKWQSNLFLRNQNAERKGWLLAVMKCIDQLPEEFTLSQMYEFENKLSIQFPQNNHIRDKIRQQLQILRDQNTIEFIGRGLYKKSINCAQLPRYFDFKS",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K0M6",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "nqrD",
+        "length": 208,
+        "name": "Na(+)-translocating NADH-quinone reductase subunit D",
+        "protein_id": "sp|Q9K0M6|NQRD_NEIMB",
+        "s3": {
+          "composite_score": 0.85184337,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": null
+          },
+          "passes_thresholds": {
+            "0.85": true,
+            "0.90": false
+          },
+          "protegenicity": 0.85184337,
+          "rank": 29,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.85184337,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MADMKRLKHLMFSPFIDNNPIALQVLGICSALAVTTKLQTAIVMGISVALVTGFSSFFISLVRNYIPNSIRIIVQMAIIASLVTLVDQLLQAFAYELSKQLSVFVGLIITNCIVMGRAEAFAMKEPPLESLIDGIGNGAGYGIMLLVVATVRELIGSGKLLGYTVFQTVQDGGWYQTNGLFLLAPSAFFIIGFLIWGLRTWKPEQAEE",
+        "taxid": 487
+      },
+      {
+        "accession": "Q9K1H6",
+        "flags": [],
+        "gates": {},
+        "gates_unavailable": [
+          "human_homology",
+          "allergenicity",
+          "toxicity",
+          "conservancy"
+        ],
+        "gene": "zupT",
+        "length": 269,
+        "name": "Zinc transporter ZupT",
+        "protein_id": "sp|Q9K1H6|ZUPT_NEIMB",
+        "s3": {
+          "composite_score": 0.79367987,
+          "evidence": {
+            "localisation": {
+              "is_unknown": false,
+              "label": "CytoplasmicMembrane",
+              "prior": 0.4,
+              "raw": "CytoplasmicMembrane",
+              "score": null,
+              "source": "fixture_stand_in:uniprot_subcellular_location",
+              "status": "fixture_stand_in"
+            },
+            "virulence": {
+              "coverage": 0.95,
+              "evalue": 4.73e-16,
+              "hit": "VFG052410",
+              "identity": 0.2645,
+              "term": 0.0
+            }
+          },
+          "passes_thresholds": {
+            "0.85": false,
+            "0.90": false
+          },
+          "protegenicity": 0.79367987,
+          "rank": 30,
+          "terms": {
+            "localisation": 0.4,
+            "protegenicity": 0.79367987,
+            "virulence": 0.0
+          },
+          "tie_group": null
+        },
+        "sequence": "MPDFSMSNLAVAFSITLAAGLFTVLGSGLVMFSKTPNPRVLSFGLAFAGGAMVYVSLTEIFSKSSEAFAEIYDKDHAFAAATMAFLAGMGGIALIDRLVPNPHETLDAQDPSFQESKRRHIARVGMMAAFAITAHNFPEGLATFFATLENPAVGMPLALAIAIHNIPEGISIAAPVYFATRSRKKTVWACLLSGLAEPLGAALGYLVLQPFLSPAVFGSVFGVIAGVMVFLALDELLPAAKRYSDGHETVYGLTTGMAVIAVSLVLFHF",
+        "taxid": 487
+      }
+    ],
+    "context": {
+      "n_proteins": 40,
+      "organism_type": "gram-",
+      "s2_meta": {
+        "lineage": [
+          "cellular organisms",
+          "Bacteria",
+          "Pseudomonadati",
+          "Pseudomonadota",
+          "Betaproteobacteria",
+          "Neisseriales",
+          "Neisseriaceae",
+          "Neisseria"
+        ],
+        "localisation_status_counts": {
+          "fixture_stand_in": 40
+        },
+        "organism": {
+          "domain": "bacteria",
+          "gram_basis": "lineage taxon Pseudomonadota -> Gram-negative",
+          "gram_stain": "negative",
+          "localisation_applicable": true,
+          "psortb_extra_args": [],
+          "psortb_flag": "-n",
+          "virulence_db_applicable": true
+        },
+        "organism_type": "gram-",
+        "proteome_id": "UP000000425",
+        "scientific_name": "Neisseria meningitidis",
+        "species_taxid": 487,
+        "stream_a": {
+          "protegen_target_file": null,
+          "run_id": "nmb_fixture",
+          "s1_resources": {
+            "human_proteome": "ok",
+            "iedb": "disabled",
+            "protegen": "ok",
+            "vfdb": "ok"
+          },
+          "s2_digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3"
+        },
+        "taxid": 487
+      },
+      "taxid": 487
+    },
+    "counts": {
+      "n_input": 30,
+      "n_rejected": 0,
+      "n_rescued": 0,
+      "n_survivors": 30
+    },
+    "degraded": [
+      "S4 gate 'human_homology' did not run (candidates are not screened by it, not passed by it)",
+      "S4 gate 'allergenicity' did not run (candidates are not screened by it, not passed by it)",
+      "S4 gate 'toxicity' did not run (candidates are not screened by it, not passed by it)",
+      "S4 gate 'conservancy' did not run (candidates are not screened by it, not passed by it)"
+    ],
+    "funnel": [
+      {
+        "gate": "input",
+        "n": 30
+      }
+    ],
+    "gates": {
+      "allergenicity": {
+        "reason": "unavailable: 'algpred2' not found (pip install algpred2)",
+        "status": "unavailable"
+      },
+      "conservancy": {
+        "reason": "unavailable: BLAST+ not available",
+        "status": "unavailable"
+      },
+      "human_homology": {
+        "reason": "unavailable: BLAST+ not available",
+        "status": "unavailable"
+      },
+      "toxicity": {
+        "reason": "unavailable: 'toxinpred2' not found (pip install toxinpred2)",
+        "status": "unavailable"
+      }
+    },
+    "incomplete_screening": true,
+    "recovery": "Every rejected entry keeps its full gate evidence. To recover one, add its protein_id to config s4.rescue and re-run S4; it is then kept with 'rescued_despite' recorded.",
+    "refdata_provenance": [],
+    "rejected": [],
+    "unavailable_gates": [
+      "human_homology",
+      "allergenicity",
+      "toxicity",
+      "conservancy"
+    ],
+    "upstream": {
+      "s3_leakage_audit": {
+        "declared_holdout_taxids": [],
+        "holdout_enforced": false,
+        "model": "Vaxign-ML (stock pretrained model, trained on all of Protegen)",
+        "note": "Scores supplied externally; whether the model held out the target pathogen is declared, not verified here.",
+        "requested_holdout": {
+          "note": null,
+          "taxids": []
+        },
+        "target_taxid": 487
+      },
+      "s3_ranker": {
+        "backend": "scores_file",
+        "note": "Default weights reproduce the pure Vaxign-ML ordering; other terms are recorded as evidence only.",
+        "score_semantics": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record)",
+        "thresholds": [
+          0.9,
+          0.85
+        ],
+        "weights_used": {
+          "localisation": 0.0,
+          "protegenicity": 1.0,
+          "virulence": 0.0
+        }
+      }
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s4_filter",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "run_nmb_fixture",
+  "schema": "vaxforge/s4_filter/v1",
+  "stage": "s4",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "gate 'human_homology' did not run: unavailable: BLAST+ not available",
+    "gate 'allergenicity' did not run: unavailable: 'algpred2' not found (pip install algpred2)",
+    "gate 'toxicity' did not run: unavailable: 'toxinpred2' not found (pip install toxinpred2)",
+    "gate 'conservancy' did not run: unavailable: BLAST+ not available",
+    "INCOMPLETE SCREENING: 'human_homology' was not applied; its candidates were carried forward unscreened for that gate",
+    "INCOMPLETE SCREENING: 'allergenicity' was not applied; its candidates were carried forward unscreened for that gate",
+    "INCOMPLETE SCREENING: 'toxicity' was not applied; its candidates were carried forward unscreened for that gate",
+    "INCOMPLETE SCREENING: 'conservancy' was not applied; its candidates were carried forward unscreened for that gate"
+  ]
+}

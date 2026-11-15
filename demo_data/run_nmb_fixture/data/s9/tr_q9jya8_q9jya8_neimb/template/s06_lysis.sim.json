@@ -1,0 +1,5126 @@
+{
+ "schema": "vaxforge.ot_sim/1",
+ "ok": true,
+ "error": null,
+ "opentrons_version": "7.5.0",
+ "protocol_file": "protocol.py",
+ "api_level": "2.19",
+ "deck": {
+  "labware": [
+   {
+    "slot": "5",
+    "load_name": "nest_96_wellplate_2ml_deep",
+    "display_name": "nest_96_wellplate_2ml_deep",
+    "uri": "opentrons/nest_96_wellplate_2ml_deep/2",
+    "module": null,
+    "kind": "plate",
+    "origin_mm": [
+     146.8,
+     164.65,
+     41.0
+    ],
+    "wells": {
+     "A1": {
+      "x": 146.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B1": {
+      "x": 146.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C1": {
+      "x": 146.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D1": {
+      "x": 146.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E1": {
+      "x": 146.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F1": {
+      "x": 146.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G1": {
+      "x": 146.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H1": {
+      "x": 146.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A2": {
+      "x": 155.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B2": {
+      "x": 155.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C2": {
+      "x": 155.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D2": {
+      "x": 155.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E2": {
+      "x": 155.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F2": {
+      "x": 155.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G2": {
+      "x": 155.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H2": {
+      "x": 155.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A3": {
+      "x": 164.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B3": {
+      "x": 164.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C3": {
+      "x": 164.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D3": {
+      "x": 164.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E3": {
+      "x": 164.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F3": {
+      "x": 164.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G3": {
+      "x": 164.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H3": {
+      "x": 164.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A4": {
+      "x": 173.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B4": {
+      "x": 173.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C4": {
+      "x": 173.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D4": {
+      "x": 173.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E4": {
+      "x": 173.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F4": {
+      "x": 173.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G4": {
+      "x": 173.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H4": {
+      "x": 173.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A5": {
+      "x": 182.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B5": {
+      "x": 182.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C5": {
+      "x": 182.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D5": {
+      "x": 182.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E5": {
+      "x": 182.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F5": {
+      "x": 182.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G5": {
+      "x": 182.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H5": {
+      "x": 182.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A6": {
+      "x": 191.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B6": {
+      "x": 191.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C6": {
+      "x": 191.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D6": {
+      "x": 191.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E6": {
+      "x": 191.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F6": {
+      "x": 191.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G6": {
+      "x": 191.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H6": {
+      "x": 191.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A7": {
+      "x": 200.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B7": {
+      "x": 200.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C7": {
+      "x": 200.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D7": {
+      "x": 200.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E7": {
+      "x": 200.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F7": {
+      "x": 200.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G7": {
+      "x": 200.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H7": {
+      "x": 200.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A8": {
+      "x": 209.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B8": {
+      "x": 209.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C8": {
+      "x": 209.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D8": {
+      "x": 209.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E8": {
+      "x": 209.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F8": {
+      "x": 209.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G8": {
+      "x": 209.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H8": {
+      "x": 209.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A9": {
+      "x": 218.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B9": {
+      "x": 218.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C9": {
+      "x": 218.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D9": {
+      "x": 218.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E9": {
+      "x": 218.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F9": {
+      "x": 218.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G9": {
+      "x": 218.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H9": {
+      "x": 218.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A10": {
+      "x": 227.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B10": {
+      "x": 227.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C10": {
+      "x": 227.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D10": {
+      "x": 227.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E10": {
+      "x": 227.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F10": {
+      "x": 227.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G10": {
+      "x": 227.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H10": {
+      "x": 227.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A11": {
+      "x": 236.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B11": {
+      "x": 236.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C11": {
+      "x": 236.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D11": {
+      "x": 236.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E11": {
+      "x": 236.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F11": {
+      "x": 236.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G11": {
+      "x": 236.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H11": {
+      "x": 236.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "A12": {
+      "x": 245.8,
+      "y": 164.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "B12": {
+      "x": 245.8,
+      "y": 155.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "C12": {
+      "x": 245.8,
+      "y": 146.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "D12": {
+      "x": 245.8,
+      "y": 137.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "E12": {
+      "x": 245.8,
+      "y": 128.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "F12": {
+      "x": 245.8,
+      "y": 119.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "G12": {
+      "x": 245.8,
+      "y": 110.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     },
+     "H12": {
+      "x": 245.8,
+      "y": 101.65,
+      "z_top": 41.0,
+      "depth": 38.0,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 8.2,
+      "max_volume_ul": 2000.0
+     }
+    }
+   },
+   {
+    "slot": "2",
+    "load_name": "nest_12_reservoir_15ml",
+    "display_name": "nest_12_reservoir_15ml",
+    "uri": "opentrons/nest_12_reservoir_15ml/1",
+    "module": null,
+    "kind": "reservoir",
+    "origin_mm": [
+     146.88,
+     42.78,
+     31.4
+    ],
+    "wells": {
+     "A1": {
+      "x": 146.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A2": {
+      "x": 155.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A3": {
+      "x": 164.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A4": {
+      "x": 173.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A5": {
+      "x": 182.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A6": {
+      "x": 191.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A7": {
+      "x": 200.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A8": {
+      "x": 209.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A9": {
+      "x": 218.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A10": {
+      "x": 227.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A11": {
+      "x": 236.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     },
+     "A12": {
+      "x": 245.88,
+      "y": 42.78,
+      "z_top": 31.4,
+      "depth": 26.85,
+      "shape": "rectangular",
+      "diameter": null,
+      "length": 8.2,
+      "width": 71.2,
+      "max_volume_ul": 15000.0
+     }
+    }
+   },
+   {
+    "slot": "11",
+    "load_name": "opentrons_96_tiprack_300ul",
+    "display_name": "opentrons_96_tiprack_300ul",
+    "uri": "opentrons/opentrons_96_tiprack_300ul/1",
+    "module": null,
+    "kind": "tiprack",
+    "origin_mm": [
+     146.88,
+     345.74,
+     64.69
+    ],
+    "wells": {
+     "A1": {
+      "x": 146.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B1": {
+      "x": 146.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C1": {
+      "x": 146.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D1": {
+      "x": 146.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E1": {
+      "x": 146.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F1": {
+      "x": 146.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G1": {
+      "x": 146.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H1": {
+      "x": 146.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A2": {
+      "x": 155.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B2": {
+      "x": 155.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C2": {
+      "x": 155.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D2": {
+      "x": 155.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E2": {
+      "x": 155.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F2": {
+      "x": 155.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G2": {
+      "x": 155.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H2": {
+      "x": 155.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A3": {
+      "x": 164.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B3": {
+      "x": 164.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C3": {
+      "x": 164.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D3": {
+      "x": 164.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E3": {
+      "x": 164.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F3": {
+      "x": 164.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G3": {
+      "x": 164.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H3": {
+      "x": 164.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A4": {
+      "x": 173.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B4": {
+      "x": 173.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C4": {
+      "x": 173.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D4": {
+      "x": 173.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E4": {
+      "x": 173.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F4": {
+      "x": 173.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G4": {
+      "x": 173.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H4": {
+      "x": 173.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A5": {
+      "x": 182.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B5": {
+      "x": 182.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C5": {
+      "x": 182.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D5": {
+      "x": 182.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E5": {
+      "x": 182.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F5": {
+      "x": 182.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G5": {
+      "x": 182.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H5": {
+      "x": 182.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A6": {
+      "x": 191.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B6": {
+      "x": 191.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C6": {
+      "x": 191.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D6": {
+      "x": 191.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E6": {
+      "x": 191.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F6": {
+      "x": 191.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G6": {
+      "x": 191.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H6": {
+      "x": 191.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A7": {
+      "x": 200.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B7": {
+      "x": 200.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C7": {
+      "x": 200.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D7": {
+      "x": 200.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E7": {
+      "x": 200.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F7": {
+      "x": 200.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G7": {
+      "x": 200.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H7": {
+      "x": 200.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A8": {
+      "x": 209.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B8": {
+      "x": 209.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C8": {
+      "x": 209.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D8": {
+      "x": 209.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E8": {
+      "x": 209.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F8": {
+      "x": 209.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G8": {
+      "x": 209.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H8": {
+      "x": 209.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A9": {
+      "x": 218.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B9": {
+      "x": 218.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C9": {
+      "x": 218.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D9": {
+      "x": 218.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E9": {
+      "x": 218.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F9": {
+      "x": 218.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G9": {
+      "x": 218.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H9": {
+      "x": 218.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A10": {
+      "x": 227.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B10": {
+      "x": 227.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C10": {
+      "x": 227.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D10": {
+      "x": 227.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E10": {
+      "x": 227.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F10": {
+      "x": 227.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G10": {
+      "x": 227.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H10": {
+      "x": 227.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A11": {
+      "x": 236.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B11": {
+      "x": 236.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C11": {
+      "x": 236.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D11": {
+      "x": 236.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E11": {
+      "x": 236.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F11": {
+      "x": 236.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G11": {
+      "x": 236.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H11": {
+      "x": 236.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "A12": {
+      "x": 245.88,
+      "y": 345.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "B12": {
+      "x": 245.88,
+      "y": 336.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "C12": {
+      "x": 245.88,
+      "y": 327.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "D12": {
+      "x": 245.88,
+      "y": 318.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "E12": {
+      "x": 245.88,
+      "y": 309.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "F12": {
+      "x": 245.88,
+      "y": 300.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "G12": {
+      "x": 245.88,
+      "y": 291.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     },
+     "H12": {
+      "x": 245.88,
+      "y": 282.74,
+      "z_top": 64.69,
+      "depth": 59.3,
+      "shape": "circular",
+      "diameter": 5.23,
+      "length": null,
+      "width": null,
+      "max_volume_ul": 300.0
+     }
+    }
+   }
+  ],
+  "modules": [],
+  "pipettes": [
+   {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1,
+    "min_volume_ul": 20.0,
+    "max_volume_ul": 300.0
+   }
+  ],
+  "trash": {
+   "slot": "12"
+  }
+ },
+ "liquids": [
+  {
+   "slot": "2",
+   "well": "A1",
+   "labware": "nest_12_reservoir_15ml",
+   "liquid": "lysis buffer",
+   "volume_ul": 2300.0
+  }
+ ],
+ "events": [
+  {
+   "idx": 0,
+   "level": 0,
+   "kind": "comment",
+   "is_group": false,
+   "text": "[s06] Lyse cells; clarify lysate | ROBOT-PARTIAL | Reagent addition yes; sonication/centrifugation no.",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": "[s06] Lyse cells; clarify lysate | ROBOT-PARTIAL | Reagent addition yes; sonication/centrifugation no."
+  },
+  {
+   "idx": 1,
+   "level": 0,
+   "kind": "transfer",
+   "is_group": true,
+   "text": "Transferring 300.0 from A1 of NEST 12 Well Reservoir 15 mL on slot 2 to A1 of NEST 96 Deep Well Plate 2mL on slot 5",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "nest_12_reservoir_15ml",
+    "point_mm": [
+     146.88,
+     42.78,
+     31.4
+    ]
+   },
+   "dest": [
+    {
+     "slot": "5",
+     "well": "A1",
+     "labware": "nest_96_wellplate_2ml_deep",
+     "point_mm": [
+      146.8,
+      164.65,
+      41.0
+     ]
+    },
+    {
+     "slot": "5",
+     "well": "B1",
+     "labware": "nest_96_wellplate_2ml_deep",
+     "point_mm": [
+      146.8,
+      155.65,
+      41.0
+     ]
+    },
+    {
+     "slot": "5",
+     "well": "C1",
+     "labware": "nest_96_wellplate_2ml_deep",
+     "point_mm": [
+      146.8,
+      146.65,
+      41.0
+     ]
+    },
+    {
+     "slot": "5",
+     "well": "D1",
+     "labware": "nest_96_wellplate_2ml_deep",
+     "point_mm": [
+      146.8,
+      137.65,
+      41.0
+     ]
+    },
+    {
+     "slot": "5",
+     "well": "E1",
+     "labware": "nest_96_wellplate_2ml_deep",
+     "point_mm": [
+      146.8,
+      128.65,
+      41.0
+     ]
+    },
+    {
+     "slot": "5",
+     "well": "F1",
+     "labware": "nest_96_wellplate_2ml_deep",
+     "point_mm": [
+      146.8,
+      119.65,
+      41.0
+     ]
+    }
+   ],
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 2,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from A1 of Opentrons OT-2 96 Tip Rack 300 µL on slot 11",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "A1",
+    "labware": "opentrons_96_tiprack_300ul",
+    "point_mm": [
+     146.88,
+     345.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 3,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "nest_12_reservoir_15ml",
+    "point_mm": [
+     146.88,
+     42.78,
+     5.55
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 4,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 300.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 5,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 200.0 ul",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     41.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 6,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 7,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 8,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 9,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 10,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 11,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 12,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 13,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 14,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 15,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "A1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     164.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 16,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 17,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from B1 of Opentrons OT-2 96 Tip Rack 300 µL on slot 11",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "B1",
+    "labware": "opentrons_96_tiprack_300ul",
+    "point_mm": [
+     146.88,
+     336.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 18,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "nest_12_reservoir_15ml",
+    "point_mm": [
+     146.88,
+     42.78,
+     5.55
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 19,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 300.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 20,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 200.0 ul",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     41.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 21,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 22,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 23,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 24,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 25,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 26,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 27,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 28,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 29,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 30,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "B1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     155.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 31,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 32,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from C1 of Opentrons OT-2 96 Tip Rack 300 µL on slot 11",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "C1",
+    "labware": "opentrons_96_tiprack_300ul",
+    "point_mm": [
+     146.88,
+     327.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 33,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "nest_12_reservoir_15ml",
+    "point_mm": [
+     146.88,
+     42.78,
+     5.55
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 34,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 300.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 35,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 200.0 ul",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     41.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 36,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 37,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 38,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 39,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 40,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 41,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 42,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 43,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 44,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 45,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "C1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     146.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 46,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 47,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from D1 of Opentrons OT-2 96 Tip Rack 300 µL on slot 11",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "D1",
+    "labware": "opentrons_96_tiprack_300ul",
+    "point_mm": [
+     146.88,
+     318.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 48,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "nest_12_reservoir_15ml",
+    "point_mm": [
+     146.88,
+     42.78,
+     5.55
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 49,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 300.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 50,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 200.0 ul",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     41.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 51,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 52,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 53,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 54,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 55,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 56,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 57,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 58,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 59,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 60,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "D1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     137.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 61,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 62,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from E1 of Opentrons OT-2 96 Tip Rack 300 µL on slot 11",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "E1",
+    "labware": "opentrons_96_tiprack_300ul",
+    "point_mm": [
+     146.88,
+     309.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 63,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "nest_12_reservoir_15ml",
+    "point_mm": [
+     146.88,
+     42.78,
+     5.55
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 64,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 300.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 65,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 200.0 ul",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     41.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 66,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 67,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 68,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 69,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 70,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 71,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 72,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 73,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 74,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 75,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "E1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     128.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 76,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 77,
+   "level": 1,
+   "kind": "pick_up_tip",
+   "is_group": false,
+   "text": "Picking up tip from F1 of Opentrons OT-2 96 Tip Rack 300 µL on slot 11",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "11",
+    "well": "F1",
+    "labware": "opentrons_96_tiprack_300ul",
+    "point_mm": [
+     146.88,
+     300.74,
+     64.69
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 78,
+   "level": 1,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "2",
+    "well": "A1",
+    "labware": "nest_12_reservoir_15ml",
+    "point_mm": [
+     146.88,
+     42.78,
+     5.55
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 79,
+   "level": 1,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 300.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 300.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 80,
+   "level": 1,
+   "kind": "mix",
+   "is_group": true,
+   "text": "Mixing 5 times with a volume of 200.0 ul",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     41.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": 5,
+   "message": null
+  },
+  {
+   "idx": 81,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 82,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 83,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 84,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 85,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 86,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 87,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 88,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 89,
+   "level": 2,
+   "kind": "aspirate",
+   "is_group": false,
+   "text": "Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 90,
+   "level": 2,
+   "kind": "dispense",
+   "is_group": false,
+   "text": "Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": 200.0,
+   "flow_rate_ul_s": 92.86,
+   "target": {
+    "slot": "5",
+    "well": "F1",
+    "labware": "nest_96_wellplate_2ml_deep",
+    "point_mm": [
+     146.8,
+     119.65,
+     4.0
+    ]
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 91,
+   "level": 1,
+   "kind": "drop_tip",
+   "is_group": false,
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "pipette": {
+    "mount": "right",
+    "name": "p300_single_gen2",
+    "channels": 1
+   },
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": {
+    "slot": "12",
+    "well": null,
+    "labware": "trash",
+    "point_mm": null
+   },
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": null
+  },
+  {
+   "idx": 92,
+   "level": 0,
+   "kind": "pause",
+   "is_group": false,
+   "text": "Pausing robot operation: HUMAN [s06]: Incubate / sonicate as the lysis method requires, then centrifuge to clarify. Sonication and centrifugation are not automated. Transfer clarified lysate to the purification plate (next session).",
+   "pipette": null,
+   "volume_ul": null,
+   "flow_rate_ul_s": null,
+   "target": null,
+   "source": null,
+   "dest": null,
+   "celsius": null,
+   "seconds": null,
+   "repetitions": null,
+   "message": "HUMAN [s06]: Incubate / sonicate as the lysis method requires, then centrifuge to clarify. Sonication and centrifugation are not automated. Transfer clarified lysate to the purification plate (next session)."
+  }
+ ]
+}

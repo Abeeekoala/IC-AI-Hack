@@ -1,0 +1,113 @@
+{
+  "config_digest": "sha256:81e6c076e8f626305650cf203ce1efff4ecefc8ef2c59e31be1d161f92ffb28f",
+  "created_at": "2026-11-14T16:14:13Z",
+  "run_id": "run_nmb_fixture",
+  "stages": {
+    "s0": {
+      "artifact": "s0_taxonomy.json",
+      "digest": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s1": {
+      "artifact": "s1_acquire.json",
+      "digest": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 0
+    },
+    "s10": {
+      "artifact": "s10_animal.json",
+      "digest": "sha256:063357b6db778e2bd8b49ae7600679d03ff52244d9332fe3f63e116eac396d49",
+      "finished_at": "2026-11-15T10:05:04Z",
+      "status": "ok",
+      "warnings": 18
+    },
+    "s11": {
+      "artifact": "s11_prereg.json",
+      "digest": "sha256:5e4c68c5fa02f45a45fddcf176ec6e76487c77fc0c6210d47ef0f22103e8e8ba",
+      "finished_at": "2026-11-15T10:05:04Z",
+      "status": "ok",
+      "warnings": 0
+    },
+    "s12": {
+      "artifact": "s12_biosafety.json",
+      "digest": "sha256:0a0680e52f9e200bc67a3be39fc5af595ac1bdd32a27fff0281e953ed9df701b",
+      "finished_at": "2026-11-15T10:05:04Z",
+      "status": "ok",
+      "warnings": 6
+    },
+    "s2": {
+      "artifact": "s2_annotate.json",
+      "digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s3": {
+      "artifact": "s3_rank.json",
+      "digest": "sha256:006c42801f03b16e2dd62c5ac18e33828f248b4ccf5cf0f490089752933577e9",
+      "finished_at": "2026-11-15T10:04:40Z",
+      "status": "ok",
+      "warnings": 3
+    },
+    "s4": {
+      "artifact": "s4_filter.json",
+      "digest": "sha256:a86fd59fe3434696e328920f492b019dfcaa1d737511d122abeb56a58449e76c",
+      "finished_at": "2026-11-15T10:04:40Z",
+      "status": "ok",
+      "warnings": 8
+    },
+    "s5": {
+      "artifact": "s5_epitopes.json",
+      "digest": "sha256:4c76f7e8e81fdbeab6d26b837271c6d9c6296407eecac64edeb63c380b8528ae",
+      "finished_at": "2026-11-15T10:04:41Z",
+      "status": "ok",
+      "warnings": 4
+    },
+    "s6": {
+      "artifact": "s6_coverage.json",
+      "digest": "sha256:4e91aaea0fb9baf382d7cc966faf19b2620290c68994bea8ad51bd80229be874",
+      "finished_at": "2026-11-15T10:04:41Z",
+      "status": "ok",
+      "warnings": 2
+    },
+    "s7": {
+      "artifact": "s7_structure.json",
+      "digest": "sha256:85c3c09e1215afe1880459a23fd1e9d8850b407f142da3c781cbba9cd545a4c4",
+      "finished_at": "2026-11-15T10:04:41Z",
+      "status": "ok",
+      "warnings": 4
+    },
+    "s8": {
+      "artifact": "s8_protocol.json",
+      "digest": "sha256:8bddb681ee3660b112368bcba3d2e2a186e57861741c71de85d95eae32b3bfbe",
+      "finished_at": "2026-11-15T10:04:42Z",
+      "status": "ok",
+      "warnings": 14
+    },
+    "s9": {
+      "artifact": "s9_robot.json",
+      "digest": "sha256:a4a7bfd5b7b24bc5630dbb8a851522c9ba0f0143aa6b065a7f6740d9ab6a14c7",
+      "finished_at": "2026-11-15T10:05:03Z",
+      "status": "ok",
+      "warnings": 2
+    },
+    "s9_5": {
+      "artifact": "s9_5_finetune.json",
+      "digest": "sha256:4652ae8ad01394996be3573f182f68ed021b70c5fe300ac3ee9401d9c8a77c26",
+      "finished_at": "2026-11-15T10:05:04Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s9plus": {
+      "artifact": "s9plus_animate.json",
+      "digest": "sha256:9615209835a2e972165859e75b7715684f5bb3154672459120ea646c5ff906fd",
+      "finished_at": "2026-11-15T10:05:04Z",
+      "status": "ok",
+      "warnings": 1
+    }
+  },
+  "vaxforge_version": "0.1.0"
+}

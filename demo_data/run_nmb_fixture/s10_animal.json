@@ -1,0 +1,1034 @@
+{
+  "created_at": "2026-11-15T10:05:04Z",
+  "digest": "sha256:063357b6db778e2bd8b49ae7600679d03ff52244d9332fe3f63e116eac396d49",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
+  },
+  "inputs": {
+    "s0": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+    "s2": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+    "s7": "sha256:85c3c09e1215afe1880459a23fd1e9d8850b407f142da3c781cbba9cd545a4c4"
+  },
+  "params": {
+    "proteins": null,
+    "study_config": {
+      "adjuvant": "alum",
+      "adjuvant_rationale": null,
+      "age_weeks_range": null,
+      "alpha": 0.05,
+      "assumed_effect_log10": 0.7,
+      "assumed_sd_log10": 0.5,
+      "attrition_fraction": 0.0,
+      "bleed_days": [
+        0,
+        20,
+        41,
+        56
+      ],
+      "dose_levels_ug": null,
+      "dose_ranging": "top_ranked_only",
+      "effect_size_source": null,
+      "goal": "basic_immunogenicity",
+      "hla_transgenic_lines": [],
+      "immunisation_days": [
+        0,
+        21,
+        42
+      ],
+      "licensed_vaccine_exists": null,
+      "licensed_vaccine_name": null,
+      "mouse_strain": null,
+      "multiplicity_method": "holm",
+      "n_candidates_compared": null,
+      "peptides_per_pool_max": 20,
+      "power": 0.8,
+      "primary_dose_ug": null,
+      "primary_timepoint_day": null,
+      "rabbit_breed": null,
+      "route": "IM",
+      "sex": "female",
+      "species": null,
+      "weight_loss_humane_endpoint_pct": 15.0
+    },
+    "top_k": 3
+  },
+  "payload": {
+    "candidates_included": [
+      "tr|Q9K0B4|Q9K0B4_NEIMB",
+      "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+      "tr|Q9JYA8|Q9JYA8_NEIMB"
+    ],
+    "design": {
+      "adjuvant": {
+        "name": "alum",
+        "rationale": "Aluminium-salt adjuvant: biases the response towards Th2 / IgG1 (README S10). Long clinical use makes it a defensible default for a first antibody-focused study; it is a weak inducer of IFN-gamma / Th1 responses, so it is a poor match for T-cell epitope readouts.",
+        "rationale_source": "built_in_table",
+        "th_bias": "Th2"
+      },
+      "analysis_plan": {
+        "analysis_population": "All randomised animals with a valid sample at the primary timepoint, analysed in the arm allocated; numbers analysed per arm are reported",
+        "analysis_scale": "log10 endpoint titre",
+        "below_lloq_rule": "Values below the assay lower limit of quantification are assigned half the LLOQ, by one rule pre-specified for all arms",
+        "confirmatory_family": [
+          "A03 (IgA-specific serine endopeptidase (tr|Q9K0B4|Q9K0B4_NEIMB, S7 final rank 1) 20 ug + alum) vs A06 (adjuvant only)",
+          "A04 (TonB-dependent receptor (NMB1829) (tr|Q9JXZ0|Q9JXZ0_NEIMB, S7 final rank 2) 20 ug + alum) vs A06 (adjuvant only)",
+          "A05 (Hemoglobin receptor (hmbR) (tr|Q9JYA8|Q9JYA8_NEIMB, S7 final rank 3) 20 ug + alum) vs A06 (adjuvant only)"
+        ],
+        "exclusion_rules": [
+          "Technical failure of dosing (documented leak or mis-injection), recorded before unblinding",
+          "Failed or insufficient sample at the primary timepoint (no imputation)",
+          "No exclusion of data points as 'outliers' after unblinding"
+        ],
+        "exploratory_analyses": [
+          "Dose-response, IgG subclass, kinetics and the falsification-map readouts: descriptive, with estimates and CIs, no confirmatory claims",
+          "Positive control vs naive: assay/model sensitivity check, outside the confirmatory family"
+        ],
+        "familywise_alpha": 0.05,
+        "locked_before_data_collection": true,
+        "multiplicity_detail": "Holm step-down across the 3 candidate-vs-adjuvant-only comparison(s), family-wise alpha 0.05 (two-sided); controls the family-wise error rate and is uniformly at least as powerful as Bonferroni. Sample size was planned at the Bonferroni level alpha/k = 0.01667.",
+        "multiplicity_method": "holm",
+        "n_hypotheses_in_family": 3,
+        "outlier_rule": "No post-hoc outlier removal; any exclusion must be one of the pre-specified rules above",
+        "primary_test": "Welch two-sample t-test on log10 titres, each candidate arm (primary dose) vs adjuvant-only",
+        "sensitivity_analyses": [
+          "Mann-Whitney U on the same comparisons with the same multiplicity correction (censored titres)",
+          "Cage as a cluster / random effect",
+          "Analysis including animals that reached a humane endpoint, where data exist"
+        ]
+      },
+      "arms": [
+        {
+          "adjuvant": "alum",
+          "antigen": "IgA-specific serine endopeptidase",
+          "arm_id": "A01",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "dose_ug": 1.0,
+          "label": "IgA-specific serine endopeptidase (tr|Q9K0B4|Q9K0B4_NEIMB, S7 final rank 1) 1 ug + alum",
+          "n_per_group": 13,
+          "primary_comparison": false,
+          "purpose": "Exploratory dose-response arm (not in the confirmatory family).",
+          "role": "candidate_antigen_plus_adjuvant",
+          "route": "IM"
+        },
+        {
+          "adjuvant": "alum",
+          "antigen": "IgA-specific serine endopeptidase",
+          "arm_id": "A02",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "dose_ug": 5.0,
+          "label": "IgA-specific serine endopeptidase (tr|Q9K0B4|Q9K0B4_NEIMB, S7 final rank 1) 5 ug + alum",
+          "n_per_group": 13,
+          "primary_comparison": false,
+          "purpose": "Exploratory dose-response arm (not in the confirmatory family).",
+          "role": "candidate_antigen_plus_adjuvant",
+          "route": "IM"
+        },
+        {
+          "adjuvant": "alum",
+          "antigen": "IgA-specific serine endopeptidase",
+          "arm_id": "A03",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "dose_ug": 20.0,
+          "label": "IgA-specific serine endopeptidase (tr|Q9K0B4|Q9K0B4_NEIMB, S7 final rank 1) 20 ug + alum",
+          "n_per_group": 13,
+          "primary_comparison": true,
+          "purpose": "Confirmatory arm: candidate vs adjuvant-only on the primary endpoint.",
+          "role": "candidate_antigen_plus_adjuvant",
+          "route": "IM"
+        },
+        {
+          "adjuvant": "alum",
+          "antigen": "TonB-dependent receptor (NMB1829)",
+          "arm_id": "A04",
+          "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+          "dose_ug": 20.0,
+          "label": "TonB-dependent receptor (NMB1829) (tr|Q9JXZ0|Q9JXZ0_NEIMB, S7 final rank 2) 20 ug + alum",
+          "n_per_group": 13,
+          "primary_comparison": true,
+          "purpose": "Confirmatory arm: candidate vs adjuvant-only on the primary endpoint.",
+          "role": "candidate_antigen_plus_adjuvant",
+          "route": "IM"
+        },
+        {
+          "adjuvant": "alum",
+          "antigen": "Hemoglobin receptor (hmbR)",
+          "arm_id": "A05",
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "dose_ug": 20.0,
+          "label": "Hemoglobin receptor (hmbR) (tr|Q9JYA8|Q9JYA8_NEIMB, S7 final rank 3) 20 ug + alum",
+          "n_per_group": 13,
+          "primary_comparison": true,
+          "purpose": "Confirmatory arm: candidate vs adjuvant-only on the primary endpoint.",
+          "role": "candidate_antigen_plus_adjuvant",
+          "route": "IM"
+        },
+        {
+          "adjuvant": "alum",
+          "antigen": null,
+          "arm_id": "A06",
+          "candidate_id": null,
+          "dose_ug": null,
+          "label": "Adjuvant only (alum) + antigen vehicle/buffer",
+          "n_per_group": 13,
+          "primary_comparison": false,
+          "purpose": "Comparator for the primary endpoint: the adjuvant alone can raise non-specific responses. Same adjuvant dose, buffer composition, route and schedule as the candidate arms. One shared arm serves every candidate comparison (Reduction).",
+          "role": "adjuvant_only",
+          "route": "IM"
+        },
+        {
+          "adjuvant": null,
+          "antigen": null,
+          "arm_id": "A07",
+          "candidate_id": null,
+          "dose_ug": null,
+          "label": "Naive / PBS (no antigen, no adjuvant)",
+          "n_per_group": 13,
+          "primary_comparison": false,
+          "purpose": "Baseline for assay background and handling effects; same route, schedule and bleeds.",
+          "role": "naive_pbs",
+          "route": "IM"
+        }
+      ],
+      "blinding": [
+        {
+          "blinded_to_arm_allocation": false,
+          "how": "Holds the allocation key and prepares coded syringes; takes no part in outcome assessment",
+          "limitation": null,
+          "role": "Allocation custodian / dose preparer"
+        },
+        {
+          "blinded_to_arm_allocation": true,
+          "how": "Works from coded syringes and cage cards",
+          "limitation": "Partial: adjuvant formulations can look different from PBS (e.g. turbidity)",
+          "role": "Animal technician administering immunisations and taking bleeds"
+        },
+        {
+          "blinded_to_arm_allocation": true,
+          "how": "Scores from coded cage cards",
+          "limitation": "Welfare decisions are never delayed to preserve blinding: unblind immediately if needed",
+          "role": "Welfare / humane-endpoint assessor"
+        },
+        {
+          "blinded_to_arm_allocation": true,
+          "how": "Coded sample IDs; arm labels withheld until the raw data are locked",
+          "limitation": null,
+          "role": "Assay operators (ELISA, ELISpot, functional assays)"
+        },
+        {
+          "blinded_to_arm_allocation": true,
+          "how": "Analyses coded arm labels; labels revealed only after the analysis plan and dataset are locked",
+          "limitation": null,
+          "role": "Statistician"
+        }
+      ],
+      "candidates_included": [
+        "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "tr|Q9JYA8|Q9JYA8_NEIMB"
+      ],
+      "challenge_model": {
+        "challenge_phase_included": false,
+        "curator_input": null,
+        "scope_note": "No challenge phase is designed here. Challenge dose, route and any pathogen handling belong with the containment facility and its biosafety committee and are out of scope for this tool.",
+        "statement": "Whether a susceptible small-animal challenge model exists for Neisseria meningitidis is UNKNOWN in the supplied pathogen context - CHECK the literature. No challenge model is established in this proposal and none is proposed or invented. The study measures immunogenicity only and cannot test protection in vivo.",
+        "status": "unknown_check"
+      },
+      "config": {
+        "adjuvant": "alum",
+        "adjuvant_rationale": null,
+        "age_weeks_range": null,
+        "alpha": 0.05,
+        "assumed_effect_log10": 0.7,
+        "assumed_sd_log10": 0.5,
+        "attrition_fraction": 0.0,
+        "bleed_days": [
+          0,
+          20,
+          41,
+          56
+        ],
+        "dose_levels_ug": null,
+        "dose_ranging": "top_ranked_only",
+        "effect_size_source": null,
+        "goal": "basic_immunogenicity",
+        "hla_transgenic_lines": [],
+        "immunisation_days": [
+          0,
+          21,
+          42
+        ],
+        "licensed_vaccine_exists": null,
+        "licensed_vaccine_name": null,
+        "mouse_strain": null,
+        "multiplicity_method": "holm",
+        "n_candidates_compared": null,
+        "peptides_per_pool_max": 20,
+        "power": 0.8,
+        "primary_dose_ug": null,
+        "primary_timepoint_day": null,
+        "rabbit_breed": null,
+        "route": "IM",
+        "sex": "female",
+        "species": null,
+        "weight_loss_humane_endpoint_pct": 15.0
+      },
+      "correlate": {
+        "correlate": null,
+        "igg_titre_is_evidence_of_protection": false,
+        "statement": "No correlate of protection is known or agreed for Neisseria meningitidis in the supplied pathogen context. Antibody titres from this study are therefore NOT evidence of protection. Most vaccines lack an agreed correlate (README S10); do not assume one - check, and read Plotkin (Clin Vaccine Immunol, 2010) before making correlate claims."
+      },
+      "dosing": {
+        "dose_levels_ug": [
+          1.0,
+          5.0,
+          20.0
+        ],
+        "dose_ranging": "top_ranked_only",
+        "dose_ranging_note": "All dose levels are run for the rank-1 candidate only; other candidates are run at the primary dose (Reduction). Dose-response is an exploratory, not confirmatory, comparison.",
+        "levels_status": "ASSUMPTION - placeholder levels for the species; set from pilot data or literature",
+        "primary_dose_rationale": "Highest dose level, so that a null result cannot be explained simply by under-dosing - the falsification claim ('no titre rise over adjuvant-only') is only informative at a dose given a fair chance. Reactogenicity at this level must be checked against the humane endpoints.",
+        "primary_dose_ug": 20.0
+      },
+      "ethics_checklist": [
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Study design",
+          "note": "Groups, controls, experimental unit (individual animal) and the single primary endpoint are specified.",
+          "status": "addressed",
+          "where": "arms; randomisation.unit_of_randomisation; primary_endpoint"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Sample size",
+          "note": "n=13 per group computed (noncentral t); the effect size is: ASSUMPTION - replace with pilot data.",
+          "status": "addressed",
+          "where": "power_analysis"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Inclusion and exclusion criteria",
+          "note": "Exclusions are pre-specified; inclusion by species, strain, sex and age range.",
+          "status": "addressed",
+          "where": "analysis_plan.exclusion_rules; species_selection (sex, age)"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Randomisation",
+          "note": "",
+          "status": "addressed",
+          "where": "randomisation"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Blinding",
+          "note": "",
+          "status": "addressed",
+          "where": "blinding"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Outcome measures",
+          "note": "",
+          "status": "addressed",
+          "where": "primary_endpoint; secondary_endpoints"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Statistical methods",
+          "note": "",
+          "status": "addressed",
+          "where": "analysis_plan"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Experimental animals",
+          "note": "Supplier, health status, body weight and housing conditions must be supplied; strain status: addressed.",
+          "status": "needs_human_input",
+          "where": "species_selection (species/strain/sex/age set); supplier field"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Experimental procedures",
+          "note": "Injection volumes, anaesthesia/analgesia, personnel and location must be supplied.",
+          "status": "needs_human_input",
+          "where": "schedule; dosing; route"
+        },
+        {
+          "framework": "ARRIVE 2.0 Essential 10",
+          "item": "Results",
+          "note": "Completed after the study; this tool produces no results.",
+          "status": "needs_human_input",
+          "where": "post-study reporting"
+        },
+        {
+          "framework": "3Rs",
+          "item": "Replacement",
+          "note": "The S8 in-vitro cascade cannot measure adaptive immunity, antibody titre, neutralisation, T-cell memory or protection, so a whole-animal study is the first experiment able to refute the S3/S5 predictions.",
+          "status": "addressed",
+          "where": "species_selection.rationale; honest_limits"
+        },
+        {
+          "framework": "3Rs",
+          "item": "Reduction",
+          "note": "Group size is computed, not conventional (n=13 analysed per group, 3 comparison(s), holm correction); one shared adjuvant-only and naive arm serves all candidates; dose-ranging is top_ranked_only; padding only via the stated attrition allowance (0).",
+          "status": "addressed",
+          "where": "power_analysis; arms"
+        },
+        {
+          "framework": "3Rs",
+          "item": "Refinement",
+          "note": "Explicit humane endpoints with monitoring frequency; bleed schedule minimised; welfare decisions never delayed for blinding.",
+          "status": "addressed",
+          "where": "humane_endpoints; schedule; blinding"
+        },
+        {
+          "framework": "3Rs",
+          "item": "Documented search for non-animal alternatives and prior data (incl. pilot data for the effect size)",
+          "note": "A literature/database search record is required by the licensing bodies.",
+          "status": "needs_human_input",
+          "where": "applicant"
+        },
+        {
+          "framework": "3Rs",
+          "item": "Housing, enrichment and anaesthesia/analgesia for bleeds and dosing",
+          "note": "Refinement detail.",
+          "status": "needs_human_input",
+          "where": "facility"
+        },
+        {
+          "framework": "UK ASPA 1986",
+          "item": "Project licence (PPL): number, holder, authorisation covering these procedures and severity",
+          "note": "Licence numbers are never invented by this tool.",
+          "status": "needs_human_input",
+          "where": "applicant"
+        },
+        {
+          "framework": "UK ASPA 1986",
+          "item": "Personal licence (PIL): named holders for immunisation and blood sampling",
+          "note": "",
+          "status": "needs_human_input",
+          "where": "applicant"
+        },
+        {
+          "framework": "UK ASPA 1986",
+          "item": "AWERB review: reference and date",
+          "note": "",
+          "status": "needs_human_input",
+          "where": "applicant / institution"
+        },
+        {
+          "framework": "UK ASPA 1986",
+          "item": "Establishment licence (facility)",
+          "note": "",
+          "status": "needs_human_input",
+          "where": "institution"
+        },
+        {
+          "framework": "UK ASPA 1986",
+          "item": "Named persons (NACWO, NVS)",
+          "note": "",
+          "status": "needs_human_input",
+          "where": "institution"
+        },
+        {
+          "framework": "UK ASPA 1986",
+          "item": "Harm-benefit assessment",
+          "note": "Proposed severity is in humane_endpoints; the benefit side is a human judgement.",
+          "status": "needs_human_input",
+          "where": "applicant"
+        },
+        {
+          "framework": "US IACUC",
+          "item": "IACUC protocol approval: number and date",
+          "note": "",
+          "status": "needs_human_input",
+          "where": "applicant / institution"
+        },
+        {
+          "framework": "US IACUC",
+          "item": "Attending veterinarian consultation (pain/distress category)",
+          "note": "",
+          "status": "needs_human_input",
+          "where": "institution"
+        },
+        {
+          "framework": "US IACUC",
+          "item": "Personnel training and occupational-health enrolment",
+          "note": "",
+          "status": "needs_human_input",
+          "where": "institution"
+        },
+        {
+          "framework": "Biosafety / containment",
+          "item": "Containment level and biosafety committee review (mandatory for any challenge phase)",
+          "note": "No containment note supplied for this pathogen.",
+          "status": "needs_human_input",
+          "where": "challenge_model.scope_note; facility"
+        },
+        {
+          "framework": "Study-specific checks",
+          "item": "Strain / HLA-transgenic line availability and allele match",
+          "note": "Wild-type/rabbit design: no allele matching needed (S5/S6 are then not under test).",
+          "status": "addressed",
+          "where": "species_selection"
+        },
+        {
+          "framework": "Study-specific checks",
+          "item": "Licensed-vaccine positive control: existence checked",
+          "note": "CHECK: whether a licensed vaccine exists for this pathogen was not supplied, so no positive control arm is added. If one exists, add the licensed-vaccine positive control arm before ethics submission (README S10 minimum arms).",
+          "status": "needs_human_input",
+          "where": "positive_control"
+        },
+        {
+          "framework": "Study-specific checks",
+          "item": "Challenge model existence verified",
+          "note": "Whether a susceptible small-animal challenge model exists for Neisseria meningitidis is UNKNOWN in the supplied pathogen context - CHECK the literature. No challenge model is established in this proposal and none is proposed or invented. The study measures immunogenicity only and cannot test protection in vivo.",
+          "status": "needs_human_input",
+          "where": "challenge_model"
+        }
+      ],
+      "falsification_map": [
+        {
+          "animal_readout": "Antigen-specific serum IgG ELISA titre (endpoint titre, log10) at the primary timepoint.",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "controls": [
+            "adjuvant-only arm",
+            "naive/PBS arm",
+            "pre-immunisation (day 0) serum from each animal"
+          ],
+          "falsified_if": "No titre rise over the adjuvant-only arm.",
+          "note": "",
+          "peptide_pools": [],
+          "protein_name": "IgA-specific serine endopeptidase",
+          "rule_if_testable": "No titre rise over the adjuvant-only arm.",
+          "status": "testable",
+          "upstream_data": {
+            "localisation": "OuterMembrane",
+            "protegenicity": 0.99793909,
+            "s7_final_rank": 1,
+            "units": {
+              "protegenicity": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record) [S3 ranker: scores_file]"
+            }
+          },
+          "upstream_prediction": "S3 scores IgA-specific serine endopeptidase (protegenicity 0.997939); S7's final order, which also weighs T-cell, B-cell, coverage and structure terms, puts it at position 1, i.e. predicts it is immunogenic.",
+          "upstream_stage": "S3"
+        },
+        {
+          "animal_readout": "IFN-gamma ELISpot on splenocytes stimulated with (a) the predicted class I pool(s), (b) the predicted class II pool(s), (c) whole recombinant antigen.",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No T-cell epitopes (T_class_I / T_class_II) in the upstream S5 output for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "IgA-specific serine endopeptidase",
+          "rule_if_testable": "Response to whole antigen but NOT to the predicted pools - antigen right, epitope prediction wrong.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S5_T_cell"
+        },
+        {
+          "animal_readout": "Competition ELISA (immune sera pre-incubated with the predicted epitope peptide vs an irrelevant peptide) or peptide-array mapping (overlapping peptides spanning the predicted regions).",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No B-cell epitopes (B_linear / B_conformational) in the upstream S5 output for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "IgA-specific serine endopeptidase",
+          "rule_if_testable": "Sera bind the antigen but not the predicted epitopes.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S5_B_cell"
+        },
+        {
+          "animal_readout": "IFN-gamma ELISpot to the predicted T-cell pools in a panel of HLA-transgenic lines, one line per restricting allele predicted to cover the populations of interest.",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No S6 population-coverage data (pc90 / coverage_by_population) for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "IgA-specific serine endopeptidase",
+          "rule_if_testable": "Response absent in backgrounds predicted to be covered.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S6"
+        },
+        {
+          "animal_readout": "ELISA binding of immune sera to the folded (native) vs denatured (heat or chemically denatured) antigen.",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No S7 structure model for this candidate: S7 is top-k only, or its structure step did not run (see the artifact warnings).",
+          "peptide_pools": [],
+          "protein_name": "IgA-specific serine endopeptidase",
+          "rule_if_testable": "Sera recognise only the denatured form - the conformational epitope was an artifact.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S7"
+        },
+        {
+          "animal_readout": "Species-appropriate functional assay on immune sera.",
+          "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No correlate of protection is known or agreed for this pathogen, so no functional assay can be named as the test of protection and titres are not protection. An investigator may add a mechanism-based functional assay (e.g. neutralisation or opsonophagocytosis) as an exploratory readout; that is not a correlate.",
+          "peptide_pools": [],
+          "protein_name": "IgA-specific serine endopeptidase",
+          "rule_if_testable": "Titres rise but functional activity is absent.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "functional"
+        },
+        {
+          "animal_readout": "Antigen-specific serum IgG ELISA titre (endpoint titre, log10) at the primary timepoint.",
+          "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+          "controls": [
+            "adjuvant-only arm",
+            "naive/PBS arm",
+            "pre-immunisation (day 0) serum from each animal"
+          ],
+          "falsified_if": "No titre rise over the adjuvant-only arm.",
+          "note": "",
+          "peptide_pools": [],
+          "protein_name": "TonB-dependent receptor (NMB1829)",
+          "rule_if_testable": "No titre rise over the adjuvant-only arm.",
+          "status": "testable",
+          "upstream_data": {
+            "localisation": "OuterMembrane",
+            "protegenicity": 0.99656515,
+            "s7_final_rank": 2,
+            "units": {
+              "protegenicity": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record) [S3 ranker: scores_file]"
+            }
+          },
+          "upstream_prediction": "S3 scores TonB-dependent receptor (NMB1829) (protegenicity 0.996565); S7's final order, which also weighs T-cell, B-cell, coverage and structure terms, puts it at position 2, i.e. predicts it is immunogenic.",
+          "upstream_stage": "S3"
+        },
+        {
+          "animal_readout": "IFN-gamma ELISpot on splenocytes stimulated with (a) the predicted class I pool(s), (b) the predicted class II pool(s), (c) whole recombinant antigen.",
+          "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No T-cell epitopes (T_class_I / T_class_II) in the upstream S5 output for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "TonB-dependent receptor (NMB1829)",
+          "rule_if_testable": "Response to whole antigen but NOT to the predicted pools - antigen right, epitope prediction wrong.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S5_T_cell"
+        },
+        {
+          "animal_readout": "Competition ELISA (immune sera pre-incubated with the predicted epitope peptide vs an irrelevant peptide) or peptide-array mapping (overlapping peptides spanning the predicted regions).",
+          "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No B-cell epitopes (B_linear / B_conformational) in the upstream S5 output for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "TonB-dependent receptor (NMB1829)",
+          "rule_if_testable": "Sera bind the antigen but not the predicted epitopes.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S5_B_cell"
+        },
+        {
+          "animal_readout": "IFN-gamma ELISpot to the predicted T-cell pools in a panel of HLA-transgenic lines, one line per restricting allele predicted to cover the populations of interest.",
+          "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No S6 population-coverage data (pc90 / coverage_by_population) for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "TonB-dependent receptor (NMB1829)",
+          "rule_if_testable": "Response absent in backgrounds predicted to be covered.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S6"
+        },
+        {
+          "animal_readout": "ELISA binding of immune sera to the folded (native) vs denatured (heat or chemically denatured) antigen.",
+          "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No S7 structure model for this candidate: S7 is top-k only, or its structure step did not run (see the artifact warnings).",
+          "peptide_pools": [],
+          "protein_name": "TonB-dependent receptor (NMB1829)",
+          "rule_if_testable": "Sera recognise only the denatured form - the conformational epitope was an artifact.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S7"
+        },
+        {
+          "animal_readout": "Species-appropriate functional assay on immune sera.",
+          "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No correlate of protection is known or agreed for this pathogen, so no functional assay can be named as the test of protection and titres are not protection. An investigator may add a mechanism-based functional assay (e.g. neutralisation or opsonophagocytosis) as an exploratory readout; that is not a correlate.",
+          "peptide_pools": [],
+          "protein_name": "TonB-dependent receptor (NMB1829)",
+          "rule_if_testable": "Titres rise but functional activity is absent.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "functional"
+        },
+        {
+          "animal_readout": "Antigen-specific serum IgG ELISA titre (endpoint titre, log10) at the primary timepoint.",
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "controls": [
+            "adjuvant-only arm",
+            "naive/PBS arm",
+            "pre-immunisation (day 0) serum from each animal"
+          ],
+          "falsified_if": "No titre rise over the adjuvant-only arm.",
+          "note": "",
+          "peptide_pools": [],
+          "protein_name": "Hemoglobin receptor (hmbR)",
+          "rule_if_testable": "No titre rise over the adjuvant-only arm.",
+          "status": "testable",
+          "upstream_data": {
+            "localisation": "OuterMembrane",
+            "protegenicity": 0.99404626,
+            "s7_final_rank": 3,
+            "units": {
+              "protegenicity": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record) [S3 ranker: scores_file]"
+            }
+          },
+          "upstream_prediction": "S3 scores Hemoglobin receptor (hmbR) (protegenicity 0.994046); S7's final order, which also weighs T-cell, B-cell, coverage and structure terms, puts it at position 3, i.e. predicts it is immunogenic.",
+          "upstream_stage": "S3"
+        },
+        {
+          "animal_readout": "IFN-gamma ELISpot on splenocytes stimulated with (a) the predicted class I pool(s), (b) the predicted class II pool(s), (c) whole recombinant antigen.",
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No T-cell epitopes (T_class_I / T_class_II) in the upstream S5 output for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "Hemoglobin receptor (hmbR)",
+          "rule_if_testable": "Response to whole antigen but NOT to the predicted pools - antigen right, epitope prediction wrong.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S5_T_cell"
+        },
+        {
+          "animal_readout": "Competition ELISA (immune sera pre-incubated with the predicted epitope peptide vs an irrelevant peptide) or peptide-array mapping (overlapping peptides spanning the predicted regions).",
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No B-cell epitopes (B_linear / B_conformational) in the upstream S5 output for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "Hemoglobin receptor (hmbR)",
+          "rule_if_testable": "Sera bind the antigen but not the predicted epitopes.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S5_B_cell"
+        },
+        {
+          "animal_readout": "IFN-gamma ELISpot to the predicted T-cell pools in a panel of HLA-transgenic lines, one line per restricting allele predicted to cover the populations of interest.",
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No S6 population-coverage data (pc90 / coverage_by_population) for this candidate.",
+          "peptide_pools": [],
+          "protein_name": "Hemoglobin receptor (hmbR)",
+          "rule_if_testable": "Response absent in backgrounds predicted to be covered.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S6"
+        },
+        {
+          "animal_readout": "ELISA binding of immune sera to the folded (native) vs denatured (heat or chemically denatured) antigen.",
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No S7 structure model for this candidate: S7 is top-k only, or its structure step did not run (see the artifact warnings).",
+          "peptide_pools": [],
+          "protein_name": "Hemoglobin receptor (hmbR)",
+          "rule_if_testable": "Sera recognise only the denatured form - the conformational epitope was an artifact.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "S7"
+        },
+        {
+          "animal_readout": "Species-appropriate functional assay on immune sera.",
+          "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+          "controls": [],
+          "falsified_if": null,
+          "note": "No correlate of protection is known or agreed for this pathogen, so no functional assay can be named as the test of protection and titres are not protection. An investigator may add a mechanism-based functional assay (e.g. neutralisation or opsonophagocytosis) as an exploratory readout; that is not a correlate.",
+          "peptide_pools": [],
+          "protein_name": "Hemoglobin receptor (hmbR)",
+          "rule_if_testable": "Titres rise but functional activity is absent.",
+          "status": "not_testable_no_upstream_prediction",
+          "upstream_data": {},
+          "upstream_prediction": null,
+          "upstream_stage": "functional"
+        }
+      ],
+      "honest_limits": {
+        "evidence_ladder": "predicted -> immunogenic in one species. A positive result does not move a candidate to 'works'.",
+        "phase1_to_approval_industry_pct": 39.6,
+        "phase1_to_approval_non_industry_pct": 6.8,
+        "phase2_to_3_pct": 65.4,
+        "source": "README.md, section S10 'Honest limits' (README-sourced; not independently verified by this module)",
+        "statements": [
+          "Mouse immunogenicity does not predict human protection. It shows an antigen is immunogenic in a mouse: necessary, not sufficient. (README S10)",
+          "Industry base rate for vaccines: Phase 1 to approval 39.6% (6.8% for non-industry sponsors). The narrowest transition is Phase 2 to 3 at 65.4% - precisely the step where immunogenicity data exists and efficacy data does not. No amount of preclinical work closes that gap. (README S10)",
+          "A positive animal result moves a candidate from 'predicted' to 'immunogenic in one species'. It does not move it to 'works'. (README S10)",
+          "This proposal reports no results of any kind and does not simulate assay readouts or clinical trials (README section 0)."
+        ]
+      },
+      "humane_endpoints": {
+        "anticipated_severity": "mild (proposal only; AWERB / IACUC to confirm)",
+        "criteria": [
+          {
+            "action": "Humane killing (design default threshold; confirm against the licence/protocol severity limit)",
+            "criterion": "Body-weight loss >= 15% of baseline"
+          },
+          {
+            "action": "Same-day consultation with the named animal-care / veterinary person; humane killing if not rapidly resolving",
+            "criterion": "Persistent hunched posture, piloerection or markedly reduced activity"
+          },
+          {
+            "action": "Humane killing without delay",
+            "criterion": "Laboured breathing"
+          },
+          {
+            "action": "Veterinary consultation; humane killing if normal function is impaired",
+            "criterion": "Injection-site ulceration, abscess or swelling impairing normal movement"
+          },
+          {
+            "action": "Immediate humane killing",
+            "criterion": "Unable to reach food or water, or unresponsive to gentle stimulation"
+          },
+          {
+            "action": "Stop sampling; veterinary consultation",
+            "criterion": "Excessive bleeding or failure to recover after blood sampling"
+          }
+        ],
+        "monitoring": [
+          {
+            "max_interval_hours": 8,
+            "window": "Day of each immunisation, after recovery and again at end of the working day"
+          },
+          {
+            "max_interval_hours": 24,
+            "window": "Days 1-3 after each immunisation"
+          },
+          {
+            "max_interval_hours": 24,
+            "window": "All remaining days of the schedule"
+          }
+        ],
+        "note": "Humane killing by a method approved for the project (UK: Schedule 1 / licence-specified; US: per the IACUC protocol and AVMA guidance). Animals reaching a humane endpoint are reported, not silently excluded.",
+        "weighing_frequency": "On every immunisation and bleed day, and at least twice weekly otherwise"
+      },
+      "pathogen": "Neisseria meningitidis",
+      "pathogen_taxid": 487,
+      "positive_control": {
+        "note": "CHECK: whether a licensed vaccine exists for this pathogen was not supplied, so no positive control arm is added. If one exists, add the licensed-vaccine positive control arm before ethics submission (README S10 minimum arms).",
+        "status": "check",
+        "vaccine_name": null
+      },
+      "power_analysis": {
+        "achieved_power": 0.831232394612556,
+        "alpha_familywise": 0.05,
+        "alpha_per_comparison": 0.016666666666666666,
+        "assumed_log10_difference": 0.7,
+        "assumed_sd_log10": 0.5,
+        "attrition_fraction": 0.0,
+        "comparator": "adjuvant-only arm",
+        "effect_size_d": 1.4,
+        "effect_size_status": "ASSUMPTION - replace with pilot data",
+        "endpoint_scale": "log10 antigen-specific serum IgG endpoint titre",
+        "multiplicity_method": "holm",
+        "n_arms": 7,
+        "n_comparisons": 3,
+        "n_floor_applied": false,
+        "n_per_group_allocated": 13,
+        "n_per_group_analysed": 13,
+        "notes": [
+          "Sample size is PLANNED at the Bonferroni level alpha/k for either method; Holm's step-down procedure is uniformly at least as powerful, so the plan is conservative for Holm.",
+          "The adjuvant-only arm is shared by all k candidate comparisons, so the comparisons are positively correlated and Bonferroni is conservative; Dunnett's many-to-one test is a pre-specifiable alternative.",
+          "Group size is floored at 3 per group (variance estimation); floor applied: False.",
+          "Titres at or below the assay limit of detection violate the normality assumption; see the non-parametric sensitivity analysis in the analysis plan.",
+          "The result is only as good as the assumed effect size and SD. If the true effect is smaller, the study is under-powered (see sensitivity table)."
+        ],
+        "sensitivity": [
+          {
+            "effect_size_d": 1.4,
+            "label": "as assumed",
+            "n_per_group_analysed": 13
+          },
+          {
+            "effect_size_d": 1.05,
+            "label": "effect 25% smaller",
+            "n_per_group_analysed": 21
+          },
+          {
+            "effect_size_d": 0.7,
+            "label": "effect 50% smaller",
+            "n_per_group_analysed": 45
+          }
+        ],
+        "target_power": 0.8,
+        "test": "Two-sided two-sample t-test (Welch in analysis; equal-n/equal-SD for planning), noncentral t",
+        "total_animals": 91
+      },
+      "primary_endpoint": {
+        "assay": "Antigen-specific IgG ELISA with a pre-specified endpoint definition and lower limit of quantification",
+        "comparison": "Each candidate + adjuvant arm at the primary dose vs the adjuvant-only arm (3 comparison(s))",
+        "definition": "Log10 of the reciprocal endpoint dilution of serum IgG binding the immunising antigen, one value per animal, from the primary-timepoint bleed",
+        "lock_mechanism": "Frozen, with the analysis plan, in the S11 pre-registration manifest (timestamped) and/or a public registry chosen by the investigators, before the first animal is dosed",
+        "locked_before_data_collection": true,
+        "name": "Antigen-specific serum IgG endpoint titre (log10) at the primary timepoint",
+        "pre_specified": true,
+        "summary_measure": "Difference in mean log10 titre (equivalently the geometric-mean titre ratio) with a 95% CI",
+        "timepoint_day": 56
+      },
+      "randomisation": {
+        "allocation_concealment": "The allocation key is held by a named custodian (needs_human_input); other staff see only coded syringe and cage labels",
+        "assay_plate_layout": "Samples are coded and arms are interleaved and randomised across assay plates so that plate and batch effects are not confounded with arm",
+        "cage_effects": "Animals of one arm may need to be co-housed for welfare; cage is then recorded and used as a cluster in a sensitivity analysis",
+        "method": "Stratified randomisation to arms using a computer-generated sequence",
+        "seed_recording": "The random seed and generated allocation are recorded in the S11 pre-registration manifest",
+        "sequence_generation": "Seeded pseudo-random permutation, generated by someone who does not run the experiment",
+        "stratification": [
+          "baseline body weight",
+          "cage/litter of origin",
+          "sex (if both sexes are used)"
+        ],
+        "unit_of_randomisation": "individual animal (the experimental unit); cage ID is recorded for every animal"
+      },
+      "route": {
+        "justification": "Intramuscular: depot in muscle, the usual route for injectable and alum-adjuvanted vaccines. Targets the systemic compartment, which is what the primary endpoint (serum IgG) measures. Mouse muscle volume is small: injection volume per site must respect licence limits.",
+        "route": "IM",
+        "target_compartment": "systemic (serum IgG)"
+      },
+      "schedule": {
+        "bleed_days": [
+          0,
+          20,
+          41,
+          56
+        ],
+        "immunisation_days": [
+          0,
+          21,
+          42
+        ],
+        "primary_timepoint_day": 56,
+        "rationale": "Prime-boost: immunise on days [0, 21, 42]; bleed on days [0, 20, 41, 56]. Bleeds on or before an immunisation day give baseline / pre-boost samples; the primary timepoint is day 56, 14 days after the final immunisation. Total bleed volume per animal must stay within the limits of the project licence / institutional guidance (needs_human_input).",
+        "terminal_day": 56,
+        "terminal_procedures": [
+          "Terminal exsanguination and serum collection at day 56."
+        ]
+      },
+      "schema_version": "s10.v1",
+      "scope_statement": "This document is a study DESIGN. It specifies arms, group sizes, schedule, endpoints, statistics and ethics documentation. It contains no results, no simulated data and no assay values. It does not contain pathogen handling, culture or challenge-inoculum procedures: those belong with the containment facility and its biosafety committee and are deliberately out of scope for this tool.",
+      "secondary_endpoints": [
+        "IgG titre at every scheduled bleed (kinetics) - exploratory.",
+        "IgG subclass profile (IgG1 vs IgG2a/c) at the primary timepoint - exploratory; reports the Th bias that the alum rationale (Th2) suggests.",
+        "Dose-response across levels 1, 5, 20 ug - exploratory."
+      ],
+      "species_selection": {
+        "age_weeks_range": [
+          6,
+          8
+        ],
+        "goal": "basic_immunogenicity",
+        "hla_alleles_to_match": [],
+        "human_mhc_predictions_under_test": false,
+        "non_human_primates": "Non-human primates are OUT OF SCOPE for this proposal (last resort; ethically and financially constrained, README S10). No NHP design is provided.",
+        "rationale": "Basic immunogenicity: cheap and fast (README S10). Wild-type mouse MHC (H-2) does NOT present the epitopes NetMHCpan predicted for human HLA, so the S5 T-cell and S6 population-coverage predictions are NOT under test in this design; only S3 (antibody titre), S5 B-cell epitopes and S7 (folded vs denatured) are.",
+        "sex": "female",
+        "species": "mouse_wild_type",
+        "strain": "BALB/c",
+        "strain_rationale": "BALB/c: Th2-leaning, IgG1-prone background with robust antibody responses - chosen as the default because the primary endpoint is a serum IgG titre. A poor choice if IFN-gamma / Th1 readouts are primary. IgG subclass detection must include IgG2a.",
+        "strain_status": "addressed"
+      },
+      "warnings": [
+        "Licensed-vaccine availability not supplied: CHECK and add the positive control arm if one exists.",
+        "No established challenge model: the study can show immunogenicity only, not protection.",
+        "Effect size and SD are ASSUMPTIONS (no pilot data cited); the sample size is only as good as they are."
+      ]
+    },
+    "falsification_rows": {
+      "by_status": {
+        "not_testable_no_upstream_prediction": 15,
+        "testable": 3
+      },
+      "total": 18
+    },
+    "outstanding_human_inputs": 17,
+    "pathogen": {
+      "scientific_name": "Neisseria meningitidis",
+      "taxid": 487
+    },
+    "selection": {
+      "degraded_to_sequence_only": true,
+      "n_final_candidates": 20,
+      "rank_source": "s7_final_order",
+      "s7_top_k": 20,
+      "source": "s7_final_ranking",
+      "stages": [
+        "s2",
+        "s7"
+      ],
+      "top_k": 3,
+      "used": [
+        "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "tr|Q9JYA8|Q9JYA8_NEIMB"
+      ]
+    },
+    "study_file": {
+      "bytes": 29836,
+      "path": "data/s10/animal_study.md",
+      "root": "run",
+      "sha256": "575bcea557500bbee99b66b2ad5d53017168ddd157dcd4b2aca54c4b14ef4e06"
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s10_animal",
+    "tools": {
+      "scipy": "1.17.1"
+    },
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "run_nmb_fixture",
+  "schema": "vaxforge/s10_animal/v1",
+  "stage": "s10",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "S3 LEAKAGE RISK (stream B's banner): the pretrained Vaxign-ML model was trained on all Protegen entries, so recovering known antigens is not validation",
+    "S4 screening was INCOMPLETE: gate(s) human_homology, allergenicity, toxicity, conservancy did not run, so these candidates were carried forward unscreened for them",
+    "S5 analyses that did not run: bcell_linear (unavailable: BepiPred-3.0 not configured (tools.bepipred3); BepiPred-2.0 is never used as a substitute); class_i (unavailable: no class I predictor available (backend=auto; netMHCpan not found, mhcflurry not installed)); class_ii (unavailable: netMHCIIpan not found (DTU licence; see docs/TOOLS_SETUP.md)); conformational (unavailable: DiscoTope-3.0 not configured (tools.discotope3)). The epitopes they would have produced do not exist",
+    "S6 population coverage did not run (S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)): there is no coverage data",
+    "S7 DEGRADED to sequence-only ranking (boltz not found on PATH (pip install boltz; MIT licence)): every structure field is empty and the final order rests on the S3, T-cell, B-cell and coverage terms that exist",
+    "tr|Q9K0U8|Q9K0U8_NEIMB: S2 localisation is Periplasmic (accessibility inaccessible); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "sp|Q9JS61|ILVD_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q7DDC4|Q7DDC4_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9JY67|Q9JY67_NEIMB: S2 localisation is CytoplasmicMembrane (accessibility partial); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q9K070|Q9K070_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "sp|Q9K1F5|LPXB_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q4W563|Q4W563_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "tr|Q7DD77|Q7DD77_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",
+    "S7 ranked 20 candidates but top_k is 3: only the first 3 are used (not used: tr|Q9JXL6|Q9JXL6_NEIMB, sp|Q06379|LBPA_NEIMB, sp|P0DH58|OMPA_NEIMB, sp|Q9JXK7|NADA1_NEIMB, sp|Q9K0U9|TBPA_NEIMB, sp|Q7DD37|NHBA_NEIMB, sp|Q9K0K9|FRPA_NEIMB, tr|Q9K0U8|Q9K0U8_NEIMB, sp|Q9JYV5|FRPC_NEIMB, sp|Q9JS61|ILVD_NEIMB, sp|Q9JXV4|FHBP_NEIMB, tr|Q7DDC4|Q7DDC4_NEIMB, tr|Q9JY67|Q9JY67_NEIMB, tr|Q9K070|Q9K070_NEIMB, sp|Q9K1F5|LPXB_NEIMB, tr|Q4W563|Q4W563_NEIMB, tr|Q7DD77|Q7DD77_NEIMB)",
+    "Licensed-vaccine availability not supplied: CHECK and add the positive control arm if one exists.",
+    "No established challenge model: the study can show immunogenicity only, not protection.",
+    "Effect size and SD are ASSUMPTIONS (no pilot data cited); the sample size is only as good as they are.",
+    "15 of 18 falsification rows are not_testable_no_upstream_prediction: no upstream S3-S7 data exists for them, so no upstream prediction is under test in those rows"
+  ]
+}
