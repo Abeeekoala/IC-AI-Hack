@@ -77,6 +77,7 @@ import argparse
 import ast
 import collections
 import collections.abc
+import importlib.util
 import json
 import os
 import re
@@ -451,24 +452,21 @@ def grade_protocol(task_id, code, *, clone, grader_python=None, ot_python=None, 
 
 # ---- generations.jsonl -> winrate.py records ------------------------------------------------------------------------
 
-_REFUSAL_PHRASES = (
-    "i can't", "i cannot", "i can not", "i won't", "i will not", "i'm unable to", "i am unable to", "i'm not able to",
-    "i am not able to", "i'm not going to", "i am not going to", "i must decline", "i have to decline", "i refuse to",
-    "i decline to", "i don't feel comfortable", "i do not feel comfortable", "sorry, but i can", "sorry, but i won't",
-    "apologize, but i can")
+def _load_detector():
+    """S9's refusal detector (stream C, src/vaxforge/refusal.py) from validation/refusal_detector.py, a byte-identical copy.
 
-
-def stopgap_refusal(text, code, finish_reason):
-    """STOPGAP until S9's refusal detector (stream C) exists. Not a measurement of refusal.
-
-    A refusal is: no extractable code AND a first-person refusal phrase in the text. A truncated answer
-    (finish_reason "length") is never a refusal. Deliberately conservative: a refusal this misses is scored as a failed
-    attempt, which favours the arm that did not refuse, so replace it before reporting any win rate.
+    The adapter runs from a path under any Python and imports no other stream's package; stream C wrote that one file to be
+    copied unchanged, and validation/tests/test_t2wl_adapter.py fails if the two copies differ.
     """
-    if finish_reason == "length" or (isinstance(code, str) and code.strip()):
-        return False
-    norm = re.sub(r"\s+", " ", str(text or "").lower().replace("’", "'").replace("‘", "'"))
-    return any(re.search(r"\b" + re.escape(p), norm) for p in _REFUSAL_PHRASES)
+    path = Path(__file__).resolve().with_name("refusal_detector.py")
+    spec = importlib.util.spec_from_file_location("_vaxforge_refusal_detector", path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module  # the detector defines a dataclass, which looks its module up in sys.modules
+    spec.loader.exec_module(module)
+    return module.detect_refusal
+
+
+s9_refusal = _load_detector()  # (text, code, finish_reason) -> bool: the detector the S9 win rate is quoted with
 
 
 def _rows(source):
@@ -490,7 +488,7 @@ def _needs_grade(row, refused):
             and row.get("finish_reason") != "length" and not refused(row.get("text"), code, row.get("finish_reason")))
 
 
-def grade_rows(generations_jsonl, *, clone, refused=stopgap_refusal, **grader):
+def grade_rows(generations_jsonl, *, clone, refused=s9_refusal, **grader):
     """Grade exactly the held-out rows build_records will need a grade for. Returns grades tagged with task_id and arm.
 
     grader takes grade_protocol's other keyword arguments (grader_python, ot_python, sim_timeout, ...).
@@ -503,7 +501,7 @@ def grade_rows(generations_jsonl, *, clone, refused=stopgap_refusal, **grader):
     return grades
 
 
-def build_records(generations_jsonl, grades, refused=stopgap_refusal, splits=WINRATE_SPLITS):
+def build_records(generations_jsonl, grades, refused=s9_refusal, splits=WINRATE_SPLITS):
     """winrate.py records from generations.jsonl rows (a path, or an iterable of rows) plus their grades.
 
     grades: grade_rows' list, or any mapping {(task_id, arm): grade}. Arm "base" is model "base" and arm "finetune" is
