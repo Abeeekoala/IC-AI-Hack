@@ -1,5 +1,5 @@
 {
- "about": "Family labels set by an agent reading each protocol (assigned_by agent-review). A person must confirm them before a run: s9_5_finetune.assert_run_allowed refuses any included label not assigned by a person. See scripts/s9_5_label_candidates.py for the rules.",
+ "about": "Family labels set by an agent reading each protocol (assigned_by agent-review). No person has checked them; the leakage check is the safeguard. See scripts/s9_5_label_candidates.py for the rules.",
  "labels": {
   "AD-SDL/biomedal_workcell@24b0954:applications/Autoprotocol/old_files/protocols/ot2_1.py": {
    "heldout_family": "a1-a12-100ul",

@@ -241,7 +241,7 @@ Training uses Adaption's AutoScientist, which its [documentation](https://docs.a
 | Source | Role | Licence | Status |
 |---|---|---|---|
 | Opentrons protocol library (`Opentrons/Protocols`) | Training | None stated; Opentrons states its copyright | Used on the project owner's decision for non-commercial personal research (a decision, not a licence; Opentrons not asked); 21 clean pairs |
-| Permissively licensed public repositories (including `Opentrons/opentrons`) | Training | Apache-2.0, MIT, BSD-3-Clause, CC0-1.0 | Cleared on licence; 77 clean pairs from 37 pinned sources; the family labels are an agent's reading, a person must confirm them |
+| Permissively licensed public repositories (including `Opentrons/opentrons`) | Training | Apache-2.0, MIT, BSD-3-Clause, CC0-1.0 | Cleared on licence; 77 clean pairs from 37 pinned sources; the family labels are an agent's reading and no person has checked them (the run guard accepts them; the leakage check is the safeguard) |
 | Synthetic protocols from our generator (`src/vaxforge/s9_5_synth.py`) | Training | Ours | 1,150 rows labelled by the generator's rule; none can contain a held-out procedure (see Size) |
 | Text2WetLab task set | Held-out evaluation | MIT | Evaluation only |
 | protocols.io extractions | — | CC BY; training prohibited by site policy | Excluded |

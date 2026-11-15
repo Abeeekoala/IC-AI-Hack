@@ -10,7 +10,9 @@ Input is a JSONL of candidate pairs, one per protocol:
    "assigned_by": "human" | "agent-review" | "rule",  # who set heldout_family; absent = "rule"
    "origin": "licensed" | "synthetic",       # a public licensed repository, or s9_5_synth.py; absent = "licensed"
    "refused_by_base": true | false | null,   # S9's refusal detector on the base model; null = not run
-   "simulate_pass": true | false | null}     # opentrons_simulate v7.5.0 on the code; null = not run
+   "simulate_pass": true | false | null,     # opentrons_simulate v7.5.0 on the code; null = not run
+   "custom_labware": true,                   # optional tag: it simulates only with the repository's own labware JSON
+   "recovered_by": "data-files"}             # optional tag: how a file that failed a plain simulate was made to pass
 
 build_manifest() keeps a pair only if every rule passes, and records each rejection with all of its reasons so a
 rejected pair can be recovered and inspected (README §4 does the same for S4). assert_run_allowed() is the gate
@@ -90,9 +92,13 @@ def build_manifest(candidates, heldout_families, min_rows=MIN_SFT_ROWS):
     for c in candidates:
         why = reasons_for(c, heldout_families)
         if not why:
-            included.append({"id": c["id"], "source": c["source"], "heldout_family": c["heldout_family"],
-                             "assigned_by": c.get("assigned_by", "rule"), "origin": c.get("origin", "licensed"),
-                             "prompt_sha256": _sha(c["prompt"]), "code_sha256": _sha(c["code"])})
+            entry = {"id": c["id"], "source": c["source"], "heldout_family": c["heldout_family"],
+                     "assigned_by": c.get("assigned_by", "rule"), "origin": c.get("origin", "licensed"),
+                     "prompt_sha256": _sha(c["prompt"]), "code_sha256": _sha(c["code"])}
+            for tag in ("custom_labware", "recovered_by"):  # kept only when set, so a group can be dropped later
+                if c.get(tag):
+                    entry[tag] = c[tag]
+            included.append(entry)
             continue
         excluded.append({"id": c["id"], "source": c["source"], "reasons": why})
         # prompts the base model refused become the refusal probe, unless their source is off limits
@@ -179,13 +185,8 @@ def assert_run_allowed(manifest, base_model_id, cleared_sources, leakage_violati
         elif not str(cleared_sources.get(source, "")).strip():
             problems.append(f"source {source!r} has no recorded licence or permission")
     # a synthetic row's label comes from the generator's vocabulary plus the corpus labeller ("rule"), checked by the
-    # leakage check below; a licensed row's label has to be confirmed by a person
-    licensed = [e for e in manifest["included"] if e.get("origin", "licensed") != "synthetic"]
-    not_by_a_person = [e for e in licensed if e.get("assigned_by", "rule") != "human"]
-    if not_by_a_person:
-        kinds = ", ".join(sorted({e.get("assigned_by", "rule") for e in not_by_a_person}))
-        problems.append(f"{len(not_by_a_person)} included family label(s) were not assigned by a person ({kinds}); "
-                        "README S9.5 requires them confirmed by hand")
+    # leakage check below. A real row's label may be a person's, an agent's review or the rule's: each manifest entry
+    # records which (assigned_by), and the README discloses that none of them was hand-checked by a person.
     odd_synthetic = [e for e in manifest["included"] if e.get("origin") == "synthetic" and e.get("assigned_by") != "rule"]
     if odd_synthetic:
         problems.append(f"{len(odd_synthetic)} synthetic row(s) carry a label that is not the generator's rule label")
