@@ -86,6 +86,25 @@ def run_command(cmd: Sequence[str], cwd: str | os.PathLike | None = None, timeou
     return proc
 
 
+def docker_state(docker: str | None, image: str | None = None, timeout: float = 10.0) -> tuple[str, str]:
+    """Probe Docker for real: ``("ok"|"no_daemon"|"no_image"|"missing", detail)``.
+
+    Finding a ``docker`` executable proves nothing: the daemon may be stopped and the image not pulled.
+    """
+    if not docker:
+        return "missing", "docker executable not found"
+    try:
+        run_command([docker, "info"], timeout=timeout)
+    except ToolError as exc:
+        return "no_daemon", f"docker found, daemon not running ({str(exc)[-120:]})"
+    if image:
+        try:
+            run_command([docker, "image", "inspect", image], timeout=timeout)
+        except ToolError:
+            return "no_image", f"image not pulled: {image} (docker pull {image})"
+    return "ok", "docker daemon running" + (f", image {image} present" if image else "")
+
+
 _PROTEIN_DB_SUFFIXES = (".pin", ".phr", ".psq")
 
 

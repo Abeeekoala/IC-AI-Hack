@@ -318,7 +318,9 @@ def run_virulence(config: Config, store: RunStore, cache: Cache, s1: dict, runne
         return not_run(f"VFDB unavailable from S1 ({vf.get('status')}: {vf.get('reason', 'no detail')})")
     if not runner.available:
         return not_run("BLAST+ not found (native or Docker)")
-    ref = vf["cache_file"]
+    ref = vf.get("cache_file")
+    if not ref:
+        return not_run("S1 artifact has no VFDB cache file")
     vfdb_fasta = store.resolve(ref, cache.root)
     if not vfdb_fasta.is_file():
         return not_run(f"VFDB FASTA missing from cache: {vfdb_fasta}")

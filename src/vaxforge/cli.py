@@ -26,6 +26,7 @@ from . import __version__
 from . import s0_taxonomy as s0
 from . import s1_acquire as s1
 from . import s2_annotate as s2
+from . import tools
 from .artifacts import STAGE_ORDER, STAGES, Artifact, ContractError, RunStore
 from .cache import CacheMiss
 from .config import Config, ConfigError, load_config
@@ -34,7 +35,8 @@ from .tools import BlastRunner, ToolError
 
 EXIT_OK, EXIT_ERROR, EXIT_INPUT, EXIT_DATA = 0, 1, 2, 3
 CORE_STAGES = ("s0", "s1", "s2")
-EXTENSION_MODULES = ["s8_protocol", "s9_robot", "s9plus_animate", "s9_5_finetune", "s10_animal", "validate_cli"]
+EXTENSION_MODULES = ["s8_protocol", "s9_robot", "s9plus_animate", "s9_5_finetune", "s10_animal", "validate_cli",
+                     "s11_prereg", "s12_biosafety", "report"]
 
 
 def say(msg: str = "") -> None:
@@ -324,12 +326,19 @@ def cmd_doctor(args: argparse.Namespace) -> int:
         line("non-ASCII path", "BLAST+ cannot open these; BLAST databases go to an ASCII-only folder automatically")
     runner = BlastRunner(cfg, cache)
     d = runner.describe()
-    if runner.available:
+    if runner.available and d["mode"] == "docker":
+        st, detail = tools.docker_state(runner.docker, runner.image)
+        line("BLAST+", f"docker {d.get('version') or ''} {runner.image}: {detail}".replace("  ", " "),
+             "ok" if st == "ok" else "warn")
+    elif runner.available:
         line("BLAST+", f"{d['mode']} {d.get('version') or ''} {d.get('blastp') or d.get('image') or ''}".strip())
     else:
         line("BLAST+", "not found: S2 virulence annotation will be 'not_run' (install BLAST+ or Docker)", "warn")
     psort = s2.PsortbRunner(cfg, cache)
-    if psort.available:
+    if psort.available and psort.mode == "docker":
+        st, detail = tools.docker_state(psort.docker, psort.image)
+        line("PSORTb", f"docker ({psort.image}): {detail}", "ok" if st == "ok" else "warn")
+    elif psort.available:
         line("PSORTb", f"{psort.mode} ({psort.image})")
     else:
         line("PSORTb", "not found: localisation will be 'not_run' (never silently 'unknown') until Docker + the PSORTb "
@@ -428,7 +437,7 @@ def build_parser() -> argparse.ArgumentParser:
     d.set_defaults(func=cmd_doctor)
 
     # sub-commands contributed by other streams
-    for name in EXTENSION_MODULES:
+    for name in dict.fromkeys(EXTENSION_MODULES):  # a module listed twice must register once
         modname = f"vaxforge.{name}"
         try:
             mod = importlib.import_module(modname)

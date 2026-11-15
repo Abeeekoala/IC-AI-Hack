@@ -150,7 +150,11 @@ class HttpClient:
                 self.sleep(self.backoff * (2 ** attempt))
         if isinstance(last_exc, HttpError):
             raise last_exc
-        raise HttpError(0, url, message=f"network failure for {url}: {last_exc}") from last_exc
+        hint = ""
+        if "CERTIFICATE_VERIFY_FAILED" in str(last_exc):
+            hint = (" (certificate check failed: on macOS with the python.org Python, run "
+                    "'Install Certificates.command' in /Applications/Python 3.x/ once)")
+        raise HttpError(0, url, message=f"network failure for {url}: {last_exc}{hint}") from last_exc
 
     # -- public ----------------------------------------------------------------
     def get(self, url: str, params: Mapping[str, object] | None = None,

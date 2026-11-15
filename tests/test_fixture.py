@@ -68,3 +68,30 @@ def test_fixture_s0_and_s1_have_the_fields_downstream_reads(run):
     s1 = run.read_artifact("s1").payload
     assert s1["proteome"]["upid"] == "UP000000425" and s1["proteome"]["n_sequences"] == 40
     assert s1["proteome"]["fixture_subset"]["of_n_sequences"] == 2003
+
+
+def test_s2_on_fixture_without_vfdb_cache_file_is_not_run_not_a_crash(tmp_path):
+    import shutil
+    from vaxforge import tools
+    from vaxforge.config import load_config
+
+    dst = tmp_path / "run"
+    shutil.copytree(FIX, dst)
+    (dst / "s2_annotate.json").unlink()
+    store = RunStore(dst)
+    s1 = store.read_artifact("s1").payload
+    s1["reference_dbs"]["vfdb"].pop("cache_file", None)
+    org = store.read_artifact("s0").payload["organism"]
+    cfg = load_config()
+    runner = tools.BlastRunner(cfg, tmp_path / "cache")
+    warnings: list[str] = []
+    blocks, info = S2.run_virulence(cfg, store, None, s1, runner, [], "x", org, warnings)
+    assert info["status"] == "not_run" and "no VFDB cache file" in info["reason"]
+
+
+def test_docker_state_reports_missing_and_dead_daemon():
+    from vaxforge import tools
+
+    assert tools.docker_state(None)[0] == "missing"
+    state, detail = tools.docker_state("definitely-not-a-docker-binary-xyz", "img")
+    assert state == "no_daemon" and "daemon not running" in detail
