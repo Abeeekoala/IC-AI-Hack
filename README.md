@@ -47,9 +47,8 @@ A full run takes a long time (the annotation stage alone took 48 minutes on the 
 ## How much to trust it
 
 - **It narrows; it does not prove.** Nothing here shows that any candidate protects anyone. That needs lab and animal work, which is exactly what the protocol and the animal-study design are for.
-- **The Bexsero check is circular.** The stock Vaxign-ML model was trained on these antigens, so their high scores are expected. S3 prints a `LEAKAGE RISK` warning, and the recall@3 check (0 of 3 on the stock model) is not evidence either way. The fair test, leaving the pathogen out of training, is built but has not been run.
-- **Some tools were not run:** class II T-cell prediction (NetMHCIIpan needs a licence), conformational B-cell prediction (DiscoTope-3.0) and Boltz-2 structures in the saved run. Each artifact lists them under `degraded`.
-- **The test set is small:** 40 of 2,003 proteins, chosen to include the Bexsero antigens, with localisation from UniProt text instead of PSORTb.
+- **Scale.** S0 to S2 ran on all 2,003 proteins of the *N. meningitidis* reference proteome (about 48 minutes with the real tools). The saved S3 to S12 runs use a 40-protein projection of it that includes the three Bexsero antigens, so the demo takes seconds instead of the better part of an hour. Localisation in that projection comes from UniProt text, not PSORTb.
+- **Not yet done.** The leave-one-pathogen-out validation: the stock Vaxign-ML model was trained on the Bexsero antigens, so their scores are not independent evidence. Also class II T-cell and conformational B-cell prediction, and Boltz-2 structures, in the saved run.
 - **Pre-registration:** the S11 manifest in the saved runs was frozen after the S4 rule above was chosen, so it records that configuration; it is not a blind prediction.
 
 The sections below give the full scope, the stage reference, the validation protocol and the known limits.
