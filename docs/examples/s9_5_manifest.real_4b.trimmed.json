@@ -1,0 +1,28 @@
+{
+  "_about": {
+    "what": "TRIMMED copy of the REAL training manifest of the same Adaption run 82c660bc-2c35-4917-b4d1-e7c58039b904.",
+    "how_made": "The three per-row lists (included, excluded, dropped_for_refusal) were removed; every other key is unchanged. Removed: 1000 included, 2121 excluded, 0 dropped_for_refusal entries.",
+    "use": "Input for finetune.manifest in vaxforge run and for tests/test_report.py. Not enough to re-check the leakage audit."
+  },
+  "schema_version": 1,
+  "training_method": "instruction",
+  "augmentation": "none",
+  "heldout_families": [
+    "a1-a12-100ul",
+    "ampure-bead-cleanup",
+    "colony-pcr-screening",
+    "ecoli-heat-shock-transformation",
+    "golden-gate-assembly",
+    "opentrons-rna-extraction",
+    "split-200ul-two-wells"
+  ],
+  "min_rows": 1000,
+  "max_row_chars": 32000,
+  "counts": {
+    "candidates": 3121,
+    "included": 1000,
+    "excluded": 2121,
+    "included_synthetic": 571
+  },
+  "meets_min_rows": true
+}
