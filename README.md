@@ -63,6 +63,54 @@ A full run takes a long time (the annotation stage alone took 48 minutes on the 
 
 **Before real use.** Volumes and times in the generated programs are defaults and must be set from your kit's instructions. Gene synthesis must not be ordered until the S12 biosecurity gate clears the sequence.
 
+## How it works in more detail
+
+**From a whole proteome to a short list.** Each step removes proteins for a stated reason. The numbers are from the saved *N. meningitidis* run (a 40-protein projection of the 2,003-protein proteome).
+
+```mermaid
+flowchart LR
+    A["Pathogen name<br/>S0 to S2: all 2,003 proteins<br/>annotated"] --> B["Rank by predicted<br/>protective power (S3)<br/>40 proteins, 30 go on"]
+    B --> C["Safety and strain checks (S4)<br/>human lookalikes, allergens,<br/>toxins, strain variation<br/>27 kept, 3 removed"]
+    C --> D["Immune targets (S5, S6)<br/>T-cell and antibody epitopes,<br/>population coverage"]
+    D --> E["Structures for the top 20 (S7)"]
+    E --> F["Shortlist: top 3 go to the lab<br/>protocol, robot code, animal study"]
+```
+
+**How every number can be traced.** Each stage writes one file that records where its numbers came from. A change anywhere upstream is detected.
+
+```mermaid
+flowchart TD
+    T["Tool and version<br/>e.g. Vaxign-ML, BLAST+ 2.17"] --> S["Stage file (JSON)<br/>parameters, results, warnings,<br/>status: ran or NOT RUN"]
+    I["Digest of the previous<br/>stage's file"] --> S
+    S --> H["Own digest (SHA-256)"]
+    H --> N["Next stage records<br/>this digest as its input"]
+    H --> V["vaxforge verify re-checks<br/>the whole chain"]
+```
+
+**From candidate to lab bench.** Everything on this side is a design or a program, never a measurement.
+
+```mermaid
+flowchart TD
+    C["Top candidates"] --> P["S8: lab protocol<br/>controls, cost, timeline,<br/>what result would prove it wrong"]
+    P --> R["S9: robot code<br/>Opentrons OT-2 Python"]
+    R --> M["Opentrons simulator<br/>+ physical-rule checks"]
+    M -->|pass| W["S9+: animation of<br/>the robot run"]
+    M -->|fail| X["Rejected with<br/>the exact error"]
+    P --> A["S10: animal-study design<br/>groups, doses, sample size,<br/>ethics checklist"]
+    A --> Z["Each prediction linked to the assay<br/>that could refute it"]
+    P --> B["S12: biosecurity gate<br/>before any gene synthesis order"]
+```
+
+## What the outputs look like
+
+**The evidence report** (`vaxforge report`) is one self-contained page per run. Every value shows the stage and tool version that produced it, and a dash marks anything that was not computed. This is the saved *N. meningitidis* run, labelled as a fixture, not a result.
+
+![VaxForge evidence report: what this run did, what to trust, and where each value came from](docs/images/report_overview.png)
+
+**The product design** (Figma-based) shows the same chain as screens: one per stage group, each with an owner card and an origin badge on every value (fixture, generated, not run).
+
+![VaxForge product design cover: four streams, sixteen screens and origin badges](docs/images/product_design.png)
+
 ## How much to trust it
 
 - **It narrows; it does not prove.** Nothing here shows that any candidate protects anyone. That needs lab and animal work, which is exactly what the protocol and the animal-study design are for.
