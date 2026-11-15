@@ -27,6 +27,8 @@ import json
 import sys
 from pathlib import Path
 
+from .config import ConfigError
+
 FAMILIES_FILE = Path(__file__).resolve().parents[2] / "validation" / "heldout_families.json"
 MIN_SFT_ROWS = 1000  # Adaption's documented SFT minimum ("effective rows"; what that counts is unverified)
 EXCLUDED_SOURCES = {
@@ -217,17 +219,72 @@ def _not_run_reasons(store, config):
     return reasons
 
 
+ADAPTION_FIELDS = ("run_id", "base_model_id", "trained_model_name", "training_method", "training_type", "status",
+                   "iterations_completed", "max_iterations", "best_win_rate", "target_win_rate", "target_reached",
+                   "checkpoint_sha256", "created_at_utc", "completed_at_utc", "caveat")
+
+
+def _attach(store, config):
+    """Copy the files named by finetune.evidence (adaption_evidence.json, from s9_5_adaption.record_evidence) and
+    finetune.manifest (the training manifest) into data/s9_5/ and summarise them. -> None when no evidence is configured.
+    Nothing is computed here: the numbers are the ones those files carry."""
+    evidence_path, manifest_path = config.get("finetune.evidence"), config.get("finetune.manifest")
+    if not evidence_path:
+        if manifest_path:
+            raise ConfigError("finetune.manifest is set but finetune.evidence is not")
+        return None
+    try:
+        evidence = json.loads(Path(evidence_path).read_text(encoding="utf-8"))
+        manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8")) if manifest_path else None
+    except (OSError, ValueError) as e:
+        raise ConfigError(f"S9.5: cannot read the fine-tune evidence: {e}") from None
+    if not isinstance(evidence, dict) or not evidence.get("run_id") or not evidence.get("status"):
+        raise ConfigError("S9.5: finetune.evidence is not an adaption_evidence.json (needs run_id and status)")
+    refs = {}
+    for key, src in (("evidence", evidence_path), ("manifest", manifest_path)):
+        if not src:
+            refs[key] = None
+            continue
+        dest = store.data_path("s9_5", "adaption_evidence.json" if key == "evidence" else "manifest.json")
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(Path(src).read_bytes())
+        refs[key] = store.run_ref(dest)
+    counts = None
+    if manifest is not None:
+        c = manifest.get("counts") or {}
+        counts = {"candidates": c.get("candidates"), "included": c.get("included"), "included_synthetic": c.get("included_synthetic"),
+                  "meets_min_rows": manifest.get("meets_min_rows"), "max_row_chars": manifest.get("max_row_chars")}
+    return {"refs": refs, "adaption": {k: evidence.get(k) for k in ADAPTION_FIELDS}, "manifest_counts": counts}
+
+
 def run(store, config):
     """The `vaxforge run` entrypoint for stage s9_5 (README S9.5).
 
     S9.5 is additive and `vaxforge run` stops on any status but "ok", so this stage writes "ok" and says in the payload
-    that the fine-tune was not run, and why. It never records a result it did not compute."""
+    that the fine-tune was not run, and why. With ``finetune.evidence`` set to an ``adaption_evidence.json`` (and
+    optionally ``finetune.manifest``), it records that evidence instead (status ``evidence_attached``): the files are
+    copied to ``data/s9_5/`` with their hashes and summarised. The stage still trains and evaluates nothing itself, and
+    ``held_out_win_rate`` stays null until our own evaluation (``vaxforge finetune winrate``) is attached. It never
+    records a result it did not compute."""
+    attached = _attach(store, config)
     reasons = _not_run_reasons(store, config)
-    payload = {"fine_tune": {"status": "not_run", "reasons": reasons},
-               "base_model_id": config.get("finetune.base_model_id"), "model_id": config.get("finetune.model_id")}
-    return store.write_artifact(
-        STAGE, payload, params={"eval_tasks": config.get("finetune.eval_tasks"), "seed": config.get("finetune.seed")},
-        inputs=[s for s in ("s8", "s9") if store.has(s)], status="ok", warnings=["S9.5 not run: " + "; ".join(reasons)])
+    params = {"eval_tasks": config.get("finetune.eval_tasks"), "seed": config.get("finetune.seed")}
+    if attached is None:
+        fine_tune = {"status": "not_run", "reasons": reasons}
+        warnings = ["S9.5 not run: " + "; ".join(reasons)]
+    else:
+        a = attached["adaption"]
+        fine_tune = {"status": "evidence_attached", "reasons": [], "evidence": attached["refs"]["evidence"],
+                     "manifest": attached["refs"]["manifest"], "adaption": a, "manifest_counts": attached["manifest_counts"],
+                     "held_out_win_rate": None}
+        params["evidence_run_id"] = a["run_id"]
+        warnings = ["S9.5: Adaption's best_win_rate is the platform's own number on evaluations it derives from the uploaded "
+                    "data; this run holds no held-out win rate of ours (held_out_win_rate is null)"]
+    base = config.get("finetune.base_model_id") or (attached and attached["adaption"]["base_model_id"]) or None
+    payload = {"fine_tune": fine_tune, "base_model_id": base,
+               "model_id": config.get("finetune.model_id") or (attached and attached["adaption"]["run_id"]) or None}
+    return store.write_artifact(STAGE, payload, params=params, inputs=[s for s in ("s8", "s9") if store.has(s)],
+                                status="ok", warnings=warnings)
 
 
 def _validation_module(name):
