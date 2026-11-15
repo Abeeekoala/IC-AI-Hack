@@ -1,0 +1,313 @@
+{
+ "session_id": "s02_plasmid_assembly",
+ "title": "Plasmid assembly reaction set-up",
+ "covers": [
+  "s02"
+ ],
+ "modules": [
+  {
+   "key": "temp",
+   "name": "temperature module gen2",
+   "slot": "3"
+  }
+ ],
+ "labware": [
+  {
+   "key": "rxn",
+   "load_name": "opentrons_96_aluminumblock_nest_wellplate_100ul",
+   "slot": "3",
+   "module": "temp",
+   "label": "Assembly reactions on the 4 C block",
+   "kind": "plate"
+  },
+  {
+   "key": "tubes",
+   "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "slot": "2",
+   "module": null,
+   "label": "Reagent tubes",
+   "kind": "tubes"
+  },
+  {
+   "key": "tips_p20_1",
+   "load_name": "opentrons_96_tiprack_20ul",
+   "slot": "11",
+   "module": null,
+   "label": "p20 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p20",
+   "api_name": "p20_single_gen2",
+   "mount": "left",
+   "channels": 1,
+   "tipracks": [
+    "tips_p20_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "reagent": "nuclease-free water",
+   "volume_ul": 56.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "reagent": "assembly buffer (10x)",
+   "volume_ul": 34.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A3"
+   },
+   "reagent": "linearised expression vector",
+   "volume_ul": 34.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A4"
+   },
+   "reagent": "insert (synthesised gene fragment)",
+   "volume_ul": 32.0,
+   "source": "robot_loaded",
+   "note": "vendor delivery; S12 biosecurity screening must precede ordering"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A5"
+   },
+   "reagent": "assembly enzyme mix",
+   "volume_ul": 34.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s02",
+   "op": "set_temp",
+   "module": "temp",
+   "celsius": 4.0,
+   "wait": true
+  },
+  {
+   "step": "s02",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 12.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s02",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 14.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s02",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 2.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A1"
+    },
+    {
+     "labware": "rxn",
+     "well": "A2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s02",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 2.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A3"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A1"
+    },
+    {
+     "labware": "rxn",
+     "well": "A2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s02",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 2.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A4"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s02",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 2.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A5"
+   },
+   "dst": [
+    {
+     "labware": "rxn",
+     "well": "A1"
+    },
+    {
+     "labware": "rxn",
+     "well": "A2"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    5,
+    10.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s02",
+   "op": "set_temp",
+   "module": "temp",
+   "celsius": 37.0,
+   "wait": true
+  },
+  {
+   "step": "s02",
+   "op": "delay",
+   "seconds": 3600.0,
+   "text": "assembly incubation (enzyme-specific; replace with the supplier programme)"
+  },
+  {
+   "step": "s02",
+   "op": "set_temp",
+   "module": "temp",
+   "celsius": 4.0,
+   "wait": true
+  },
+  {
+   "step": "s02",
+   "op": "pause",
+   "text": "HUMAN [s02]: If the supplier programme needs thermal cycling, run it in a thermocycler (not part of this robot run). Keep the reactions cold, then resume to finish the session."
+  },
+  {
+   "step": "s02",
+   "op": "deactivate_temp",
+   "module": "temp"
+  }
+ ],
+ "tips_needed": {
+  "p20": 9
+ },
+ "notes": [
+  "Assembly chemistry and thermal programme are not specified by S8; the 4 C hold + single incubation here is a stand-in."
+ ],
+ "layouts": {
+  "Reaction block": {
+   "candidate assembly": "A1",
+   "no-insert assembly control": "A2"
+  }
+ }
+}

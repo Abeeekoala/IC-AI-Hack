@@ -27,6 +27,27 @@ VaxForge is built around the opposite commitment.
 
 ---
 
+## 0.1 Pre-run on *N. meningitidis* (what the demo shows)
+
+A full run waits on several tools, so the demo shows a **pre-run** that is saved in [`results/nmb_real_run/`](results/nmb_real_run/) (artifacts for S0 to S12, a self-contained `report.html`, and a one-page `SUMMARY.md`). It was run on 2026-11-15 on the 40-protein *N. meningitidis* fixture with the real tools listed below, and `vaxforge verify results/nmb_real_run` passes.
+
+| Stage | Result on this run |
+|---|---|
+| S3 | Real Vaxign-ML scores (stock model). 30 candidates go to S4. fHbp ranks 14th, NadA 7th, NHBA 9th |
+| S4 | BLAST+, AlgPred2, ToxinPred2 and a second-strain conservancy check ran. 30 in, **27 kept**, 3 rejected (frpA, frpC: toxicity; lldD: human homology). **fHbp, NadA and NHBA are all kept**, with their flags recorded |
+| S5 | MHCflurry (class I; an open-source alternative to NetMHCpan) and BepiPred-3.0 ran |
+| S6 | World class I population coverage 98.5% |
+| S7 | Boltz-2 was not run on this machine, so the final order is sequence-only (NHBA 7th, NadA 10th, fHbp 15th) |
+| S8 to S12 | Protocol, simulator-checked robot code, animal-study design, pre-registration and biosecurity gate, offline |
+
+**How to read it**
+- The three vaccine antigens (fHbp, NadA, NHBA) pass S4 because allergenicity and conservancy **flag** instead of reject (§2, S4). With strict settings the first real run rejected all three, as they are strain-variable by design. We chose the flag setting after seeing that, so this is a demonstration of how the pipeline works, not independent validation. The fair test, leave-one-pathogen-out with a retrained model, has not been run.
+- The stock Vaxign-ML model was trained on these antigens (S3 prints a `LEAKAGE RISK` warning), so their high scores are expected and are not evidence.
+- Not run, and listed in each artifact's `degraded` field: class II T-cell prediction (NetMHCIIpan needs a DTU licence), conformational B-cell prediction (DiscoTope-3.0), and Boltz-2 structures. S2 localisation is a UniProt-text stand-in, not PSORTb. The set is 40 of 2,003 proteins and deliberately includes the Bexsero antigens.
+- Nothing here measures whether any candidate protects anyone; that needs lab and animal work. What the project shows is the narrowing from a proteome to an explained shortlist and a falsifiable plan for the lab.
+
+---
+
 ## 1. Architecture
 
 ```mermaid
@@ -128,9 +149,11 @@ Four gates, all absent from naive pipelines:
 | Gate | Why | Tool |
 |---|---|---|
 | Human-proteome homology | Antigens resembling self-proteins risk autoimmunity | `blastp` vs human proteome → shared peptides re-checked against IEDB human MHC ligands (NERVE 2.0 approach) |
-| Allergenicity | Allergenic candidates are non-starters | AlgPred 2.0 (@0.45) |
-| Toxicity | Toxic candidates are non-starters | ToxinPred2 (@0.8) |
-| Conservancy | Strain-variable antigens fail on strain switch | `blastp` vs a second strain proteome |
+| Allergenicity | Allergenic candidates need a second look | AlgPred 2.0 (@0.45); **flags** (`s4.allergenicity.on_fail: flag`) |
+| Toxicity | Toxic candidates are non-starters | ToxinPred2 (@0.8); **rejects** |
+| Conservancy | Strain-variable antigens fail on strain switch | `blastp` vs a second strain proteome; **flags** (`s4.conservancy.on_fail: flag`) |
+
+**Reject versus flag.** Human homology and toxicity reject. Allergenicity and conservancy flag: the protein stays in the shortlist, the failing gate and its score are recorded in `flags`, and the lab decides. We changed these two defaults after the first real *N. meningitidis* run: with `reject`, AlgPred2 and the conservancy check removed all three Bexsero antigens (fHbp, NadA, NHBA). Those antigens are strain-variable by design, which is why the vaccine uses several variants, and NadA scores 0.596 on AlgPred2 against the 0.45 cut-off. Set either gate back to `reject` in `config.yaml` to restore the strict behaviour. **This setting was chosen after seeing that result**, so the Bexsero case below shows the pipeline working as designed; it is not independent evidence that it works (§3).
 
 **Counter-caution:** over-aggressive subtractive filtering can discard subdominant but protective epitopes. Log every rejection with its reason so a rejected candidate can be recovered and inspected.
 
@@ -474,6 +497,8 @@ Report these; do not let a judge discover them.
 | Trial outcome prediction | HINT reports PR-AUC 0.772/0.607/0.623 (Ph 1/2/3) on its own benchmark; on an independent evaluation of 2,163 trials its balanced accuracy was 0.470–0.594 with overall MCC 0.050. In the same evaluation GPT-4o-mini degenerated to predicting "success" for everything (balanced accuracy 0.500, recall 1.000, specificity 0.000) |
 | Vaccine industry base rate | Phase 1 → approval 39.6% (industry-sponsored), 6.8% (non-industry). The narrowest transition is Phase 2 → 3 at 65.4% — exactly the point where immunogenicity data exists but efficacy data does not, which is the furthest any in-silico immune model can reach |
 | Fine-tuning for protocol code (S9.5) | Improves syntactic and procedural conformance to the Opentrons API and to protocol conventions. Does **not** improve biological validity: a protocol that compiles and passes simulation can still ruin an experiment, and the win rate inherits that limit |
+
+**S4 gate settings.** The allergenicity and conservancy defaults (flag, not reject) were chosen after seeing that strict settings removed fHbp, NadA and NHBA, so any Bexsero result is a demonstration, not validation. The IEDB human-ligand re-check was not run, so human-homology rejections may be over-aggressive.
 
 ---
 

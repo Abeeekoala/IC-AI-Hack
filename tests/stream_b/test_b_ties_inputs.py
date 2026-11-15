@@ -167,3 +167,19 @@ def test_the_committed_real_vaxign_ml_scores_cover_the_whole_fixture_and_run_thr
     assert pl["leakage_audit"]["holdout_enforced"] is False and any("LEAKAGE RISK" in w for w in env["warnings"])
     assert pl["ranking"][0]["protein_id"] == max(rows, key=lambda r: float(r[1]))[0]
     assert pl["ranking"][0]["protegenicity"] == pytest.approx(max(float(r[1]) for r in rows) / 100)
+
+
+# ----------------------------------------------------------------------------- S4 flag mode (variable antigens are kept, not rejected)
+def test_s4_cli_gate_flags_instead_of_rejecting_when_on_fail_is_flag(monkeypatch):
+    from vaxforge import s4_filter
+
+    def fake_run_cmd(argv, **kw):
+        out = argv[argv.index("-o") + 1]
+        open(out, "w").write("ID,Sequence,ML_Score,Prediction\nP1,AAAA,0.60,Allergen\nP2,CCCC,0.10,Non-Allergen\n")
+    monkeypatch.setattr(s4_filter, "run_cmd", fake_run_cmd)
+    cands = [{"protein_id": "P1", "sequence": "AAAA"}, {"protein_id": "P2", "sequence": "CCCC"}]
+    hard = s4_filter.CliScoreGate("allergenicity", "AlgPred 2.0", ["x"], 0.45, 1).evaluate(cands)
+    soft = s4_filter.CliScoreGate("allergenicity", "AlgPred 2.0", ["x"], 0.45, 1, on_fail="flag").evaluate(cands)
+    assert (hard["P1"].status, hard["P2"].status) == ("reject", "pass")
+    assert (soft["P1"].status, soft["P2"].status) == ("flag", "pass")
+    assert "0.600" in soft["P1"].reason                              # the score that triggered the flag stays visible

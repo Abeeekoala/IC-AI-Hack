@@ -180,13 +180,15 @@ def parse_predictor_csv(text: str) -> dict[str, float]:
 
 
 class CliScoreGate(Gate):
-    """Allergenicity (AlgPred 2.0) / toxicity (ToxinPred2): reject when score >= threshold."""
+    """Allergenicity (AlgPred 2.0) / toxicity (ToxinPred2): score >= threshold is a reject, or only a flag when ``on_fail='flag'``."""
 
-    def __init__(self, name: str, tool_name: str, argv: Sequence[str], threshold: float, model: int, timeout: float = 3600):
+    def __init__(self, name: str, tool_name: str, argv: Sequence[str], threshold: float, model: int, timeout: float = 3600,
+                 on_fail: str = "reject"):
         self.name, self.tool_name, self.argv, self.threshold, self.model, self.timeout = name, tool_name, list(argv), threshold, model, timeout
+        self.on_fail = "flag" if on_fail == "flag" else "reject"
 
     def thresholds(self) -> dict:
-        return {"score_threshold": self.threshold, "model": self.model}
+        return {"score_threshold": self.threshold, "model": self.model, "on_fail": self.on_fail}
 
     def tool_info(self) -> dict:
         return tool_record(self.tool_name, version=None, backend="cli", fidelity="reference", model=self.model,
@@ -207,7 +209,7 @@ class CliScoreGate(Gate):
             if s is None:
                 res[c["protein_id"]] = GateResult("unavailable", f"{self.tool_name} returned no score for this sequence")
             elif s >= self.threshold:
-                res[c["protein_id"]] = GateResult("reject", f"{self.tool_name} score {s:.3f} >= {self.threshold}", {"score": s})
+                res[c["protein_id"]] = GateResult(self.on_fail, f"{self.tool_name} score {s:.3f} >= {self.threshold}", {"score": s})
             else:
                 res[c["protein_id"]] = GateResult("pass", f"{self.tool_name} score {s:.3f} < {self.threshold}", {"score": s})
         return res
@@ -312,7 +314,7 @@ def build_gates(cfg: Mapping, context: Mapping, refdata: RefData, run_dir: Path,
             gates[key] = "disabled"
             continue
         argv = resolve_executable(tools[tool_key], default_cmd)
-        gates[key] = (CliScoreGate(key, nice, argv, float(thr[key]), int(c["model"])) if argv
+        gates[key] = (CliScoreGate(key, nice, argv, float(thr[key]), int(c["model"]), on_fail=c.get("on_fail", "reject")) if argv
                       else f"unavailable: '{tools[tool_key] or default_cmd}' not found (pip install {default_cmd})")
 
     # conservancy
