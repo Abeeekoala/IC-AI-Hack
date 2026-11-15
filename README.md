@@ -314,8 +314,9 @@ Three runs on the same 1,000-row set, SFT (`instruction`) with LoRA, created wit
 |---|---|---|---|---|---|
 | Qwen/Qwen3.5-4B | `82c660bc-2c35-4917-b4d1-e7c58039b904` | 1 of 2 | 0.6 | **0.7832** (run page: adapted 78, base 22) | 41 minutes |
 | Qwen/Qwen3.5-2B | `d84a8798-c9ef-441d-872c-0a6c409dcbd3` | 1 of 2 | 0.6 | 0.6037 | about 20 minutes |
+| Qwen/Qwen3.5-9B | `eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1` | 2 of 3 | 0.85 | **0.9439** (run page: adapted 94, base 6; 0.8411 after the first iteration) | about 62 minutes |
 
-Both stopped at the first iteration because they passed the target. The 4B checkpoint (a PEFT LoRA adapter, sha256 `c7b45c546dfb9732c6074c03bbffeba94f629e311c171ef6571db2fe8999ec3d`) was downloaded; our own held-out win rate for it is measured separately and is reported where it exists.
+The 4B and 2B runs stopped at the first iteration because they passed their 0.6 target. The 9B run was given a higher target (0.85): its first iteration reached 0.8411, it continued, and the second reached 0.9439. The 4B checkpoint (a PEFT LoRA adapter, sha256 `c7b45c546dfb9732c6074c03bbffeba94f629e311c171ef6571db2fe8999ec3d`) and the 9B checkpoint (sha256 `9cb4180229315caa62c780e1495c5b94304fcaee201dabe82555d94d6f4dc2f5`) were downloaded. We did not serve the 9B adapter locally (the 16 GB machine had little memory to spare while serving the 4B one, and a 9B evaluation was not attempted), so our own held-out win rate is measured on the 4B adapter only and is reported where it exists; the 9B number is Adaption's alone. The real evidence files are in `docs/examples/` (`s9_5_adaption_evidence.real_4b.json`, `..._9b.json`), and `vaxforge demo-offline` attaches the 9B one.
 
 #### Evidence for the Adaption track
 
