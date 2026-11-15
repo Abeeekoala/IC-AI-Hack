@@ -1,0 +1,28 @@
+{
+  "_about": {
+    "what": "TRIMMED copy of the REAL training manifest of the 1,000-row training set that all three Adaption runs used: 82c660bc-2c35-4917-b4d1-e7c58039b904 (4B), d84a8798-c9ef-441d-872c-0a6c409dcbd3 (2B) and eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1 (9B). The three uploads are the same file (identical upload SHA-256 2ff993a95c5acbe3bfbf89bae1b8e93155ed92e9737bc385b9c7d184576c0018, a scrubbed copy of the training file this manifest describes). The file name says 4B because it was made first.",
+    "how_made": "The three per-row lists (included, excluded, dropped_for_refusal) were removed; every other key is unchanged. Removed: 1000 included, 2121 excluded, 0 dropped_for_refusal entries.",
+    "use": "Input for finetune.manifest in vaxforge run and for tests/test_report.py. Not enough to re-check the leakage audit."
+  },
+  "schema_version": 1,
+  "training_method": "instruction",
+  "augmentation": "none",
+  "heldout_families": [
+    "a1-a12-100ul",
+    "ampure-bead-cleanup",
+    "colony-pcr-screening",
+    "ecoli-heat-shock-transformation",
+    "golden-gate-assembly",
+    "opentrons-rna-extraction",
+    "split-200ul-two-wells"
+  ],
+  "min_rows": 1000,
+  "max_row_chars": 32000,
+  "counts": {
+    "candidates": 3121,
+    "included": 1000,
+    "excluded": 2121,
+    "included_synthetic": 571
+  },
+  "meets_min_rows": true
+}

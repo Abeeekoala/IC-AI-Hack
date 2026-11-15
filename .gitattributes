@@ -3,3 +3,6 @@
 # core.autocrlf=true converting LF to CRLF on checkout would make verification fail.
 fixtures/** -text
 tests/data/** -text
+# The committed demo run folders (demo_data/) are the same kind of data: some sidecars written on Windows have CRLF and their sha256 is
+# recorded in the artifacts, so git must store and check them out byte for byte.
+demo_data/** -text

@@ -1,0 +1,153 @@
+{
+  "acquire": {
+    "blastdb": true,
+    "comparison": {
+      "enabled": true,
+      "upid": "auto"
+    },
+    "human": {
+      "enabled": true,
+      "reviewed_only": true,
+      "upid": "UP000005640"
+    },
+    "iedb": {
+      "enabled": false,
+      "url": "https://www.iedb.org/downloader.php?file_name=doc/mhc_ligand_full_single_file.zip"
+    },
+    "protegen": {
+      "category": "all",
+      "enabled": true,
+      "index_url": "https://violinet.org/protegen/download/index.php"
+    },
+    "proteome": {
+      "fasta": null,
+      "upid": "auto"
+    },
+    "vfdb": {
+      "enabled": true,
+      "set": "A",
+      "url_A": "http://www.mgc.ac.cn/VFs/Down/VFDB_setA_pro.fas.gz",
+      "url_B": "http://www.mgc.ac.cn/VFs/Down/VFDB_setB_pro.fas.gz"
+    }
+  },
+  "annotate": {
+    "accessibility": {
+      "Cellwall": "accessible",
+      "Cytoplasmic": "inaccessible",
+      "CytoplasmicMembrane": "partial",
+      "Extracellular": "accessible",
+      "OuterMembrane": "accessible",
+      "Periplasmic": "inaccessible",
+      "Unknown": "unknown"
+    },
+    "psortb": {
+      "gram": "auto",
+      "image": "brinkmanlab/psortb_commandline:1.0.2",
+      "mode": "auto",
+      "timeout_s": 7200
+    },
+    "vfdb": {
+      "blast_evalue": 0.001,
+      "max_evalue": 1e-05,
+      "max_hits": 5,
+      "min_identity": 30.0,
+      "min_query_coverage": 50.0,
+      "strong_identity": 50.0,
+      "strong_query_coverage": 80.0,
+      "threads": 0
+    }
+  },
+  "cache": {
+    "max_age_days": null
+  },
+  "epitopes": {
+    "bcell_tool": "bepipred-3.0",
+    "mhc_class_ii_weight": 0.3
+  },
+  "finetune": {
+    "base_model_id": null,
+    "eval_tasks": 11,
+    "evidence": "docs/examples/s9_5_adaption_evidence.real_9b.json",
+    "manifest": "docs/examples/s9_5_manifest.real_4b.trimmed.json",
+    "model_id": null,
+    "seed": 20261114
+  },
+  "network": {
+    "backoff_s": 1.5,
+    "ncbi": {
+      "api_key": null,
+      "email": null,
+      "tool": "vaxforge"
+    },
+    "offline": true,
+    "retries": 3,
+    "timeout_s": 60,
+    "user_agent": "vaxforge/0.1 (hackathon research prototype)"
+  },
+  "paths": {
+    "cache_dir": "cache",
+    "runs_dir": "runs"
+  },
+  "pipeline": {
+    "top_k": 20
+  },
+  "reproducibility": {
+    "pin_versions": true,
+    "seed": 20261114
+  },
+  "s3": {
+    "backend": "scores_file",
+    "scores_file": "docs/examples/vaxign_ml_scores.nmb_fixture.tsv"
+  },
+  "s7": {
+    "boltz": {
+      "msa": "empty"
+    }
+  },
+  "streamc": {
+    "backend": "template",
+    "endotoxin_limit_eu_per_ug": null,
+    "model": null,
+    "ot_python": null,
+    "prices": {},
+    "proteins": null,
+    "readouts": [
+      "elisa",
+      "rt_qpcr"
+    ],
+    "robot_params": {},
+    "s12_status": "pending",
+    "s8_backend": "template",
+    "s8_model": null,
+    "simulate_runs": true,
+    "study": {},
+    "top_k": 3
+  },
+  "structure": {
+    "engine": "boltz-2",
+    "refolder": [
+      "esmfold",
+      "af2-no-msa"
+    ]
+  },
+  "taxonomy": {
+    "aliases": {},
+    "fuzzy": true,
+    "genus_candidates": 15,
+    "search_retmax": 20
+  },
+  "thresholds": {
+    "allergenicity": 0.45,
+    "conservancy_identity": 0.8,
+    "protegenicity": [
+      0.9,
+      0.85
+    ],
+    "toxicity": 0.8
+  },
+  "tools": {
+    "blast_bin_dir": null,
+    "blast_image": "ncbi/blast:2.16.0",
+    "docker": "docker"
+  }
+}

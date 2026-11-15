@@ -287,15 +287,28 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 
 DEMO_STAGES = "s3,s4,s5,s6,s7,s8,s9,s9plus,s9_5,s10,s11,s12"
-_EXAMPLES = Path(__file__).resolve().parents[2] / "docs" / "examples"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+_EXAMPLES = REPO_ROOT / "docs" / "examples"
 DEFAULT_DEMO_SCORES = _EXAMPLES / "vaxign_ml_scores.nmb_fixture.tsv"                    # stream B, real Vaxign-ML
 DEMO_EVIDENCE = _EXAMPLES / "s9_5_adaption_evidence.real_9b.json"                        # stream D, a real earlier Adaption run
 DEMO_MANIFEST = _EXAMPLES / "s9_5_manifest.real_4b.trimmed.json"
 
 
+def demo_path(path: Path) -> str:
+    """The text of a file setting handed to the stages: repo-root-relative (POSIX slashes) when the command runs from the repo root,
+    else absolute. Relative paths keep local folder names out of config.resolved.json and S3's params, so a committed demo folder is
+    portable and its digests are the same on every machine."""
+    try:
+        if Path.cwd().resolve() == REPO_ROOT.resolve():
+            return path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError:                                   # the file lies outside the repo
+        pass
+    return str(path.resolve())
+
+
 def cmd_demo_offline(args: argparse.Namespace) -> int:
     """Offline demo: copy the committed fixture (S0-S2 of N. meningitidis) and run S3-S12 on the copy, no network."""
-    src = Path(args.fixture) if args.fixture else Path(__file__).resolve().parents[2] / "fixtures" / "nmb_fixture"
+    src = Path(args.fixture) if args.fixture else REPO_ROOT / "fixtures" / "nmb_fixture"
     if not (src / "manifest.json").is_file():
         raise ConfigError(f"fixture not found at {src} (expected a run folder with manifest.json; pass --fixture DIR)")
     out = Path(args.out)
@@ -320,7 +333,7 @@ def cmd_demo_offline(args: argparse.Namespace) -> int:
     if scores is not None:
         if not scores.is_file():
             raise ConfigError(f"scores file not found: {scores}")
-        argv += ["--set", "s3.backend=scores_file", "--set", f"s3.scores_file={json.dumps(str(scores))}"]
+        argv += ["--set", "s3.backend=scores_file", "--set", f"s3.scores_file={json.dumps(demo_path(scores))}"]
         say(f"  S3 ranks with the precomputed scores in {scores}")
         if scores == DEFAULT_DEMO_SCORES:
             say("  note: these are real Vaxign-ML scores from the stock model, which was trained on all of Protegen and so saw the Bexsero antigens "
@@ -330,7 +343,8 @@ def cmd_demo_offline(args: argparse.Namespace) -> int:
         say("  S3 uses the rule-based fallback ranker (no protegenicity term)")
     argv += ["--set", "s7.boltz.msa=empty"]
     if not args.no_evidence and DEMO_EVIDENCE.is_file() and DEMO_MANIFEST.is_file():
-        argv += ["--set", f"finetune.evidence={json.dumps(str(DEMO_EVIDENCE))}", "--set", f"finetune.manifest={json.dumps(str(DEMO_MANIFEST))}"]
+        argv += ["--set", f"finetune.evidence={json.dumps(demo_path(DEMO_EVIDENCE))}",
+                 "--set", f"finetune.manifest={json.dumps(demo_path(DEMO_MANIFEST))}"]
         say(f"  S9.5 attaches {DEMO_EVIDENCE.name} and {DEMO_MANIFEST.name}: a real earlier run, NOT produced by this demo")
         try:
             evidence = json.loads(DEMO_EVIDENCE.read_text(encoding="utf-8"))

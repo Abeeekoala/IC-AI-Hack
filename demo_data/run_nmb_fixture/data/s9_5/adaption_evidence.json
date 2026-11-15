@@ -1,0 +1,25 @@
+{
+  "_about": {
+    "what": "A REAL adaption_evidence.json (s9_5_adaption.record_evidence) of Adaption run eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1: Qwen/Qwen3.5-9B, SFT, LoRA, 2 of 3 iterations, target 0.85 reached.",
+    "how_made": "Copied unchanged from the run folder written by scripts/s9_5_adaption_run.py on 2026-11-15; only this _about key was added.",
+    "use": "Input for finetune.evidence in `vaxforge demo-offline`. best_win_rate is Adaption's own number, not protocol quality; the run page shows adapted 94, base 6."
+  },
+  "base_model_id": "Qwen/Qwen3.5-9B",
+  "best_win_rate": 0.9439,
+  "caveat": "best_win_rate is Adaption's own optimisation target, measured on evaluations it derives from the uploaded dataset. It is not evidence of protocol quality; the held-out win rate is validation/winrate.py.",
+  "checkpoint_sha256": "9cb4180229315caa62c780e1495c5b94304fcaee201dabe82555d94d6f4dc2f5",
+  "completed_at_utc": "2026-11-15T03:30:40Z",
+  "created_at_utc": "2026-11-15T02:28:24Z",
+  "data_format": "chat",
+  "iterations_completed": 2,
+  "max_iterations": 3,
+  "recorded_at_utc": "2026-11-15T03:30:56Z",
+  "run_id": "eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1",
+  "schema_version": 1,
+  "status": "succeeded",
+  "target_reached": true,
+  "target_win_rate": 0.85,
+  "trained_model_name": "adaption_ot2_liquid_handling_sft",
+  "training_method": "instruction",
+  "training_type": "lora"
+}
