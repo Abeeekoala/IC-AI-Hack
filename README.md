@@ -426,6 +426,7 @@ A pipeline that runs is not a pipeline that works. This harness is the differenc
 - Negatives: UniProt proteins at <30% sequence identity, with homologues excluded at `blastp` E ≤ 1e-3.
 - Protocol: nested 5-fold cross-validation **plus leave-one-pathogen-out (LOPOV)**, following Vaxign-ML's published precedent.
 - Metrics: fold enrichment, precision@k, PR-AUC, rank-of-truth.
+- **Status (checked by an independent audit, 2026-11-15): only the metrics half exists.** `validation/lopov.py` computes precision@k, recall, fold enrichment, PR-AUC and rank-of-truth from per-fold scores the caller supplies (hand-checked on a toy input). It does not build the <30%-identity negatives, run the nested cross-validation or train a model with the holdout, and `training_set_assertion` reads "not checked" unless a reference set is supplied. The protocol above is the plan, not something this repository runs.
 
 **Tier 2 — Case retrieval: Bexsero.**
 Bexsero/4CMenB contains three recombinant antigens — **fHbp, NadA, NHBA** (50 µg each, plus 25 µg OMV supplying PorA 1.4). Run the pipeline on *N. meningitidis* serogroup B and report **recall@3** and **rank-of-truth**. A retrieval question with exactly three correct answers is far more legible to a judge than an AUC.
