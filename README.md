@@ -399,6 +399,8 @@ This prevents post-hoc selection. A metric chosen after seeing the answer is not
 
 Any sequence leaving the pipeline passes synthesis-provider screening before order. Draw this as a node in the architecture diagram, not as a disclaimer on the last slide — judges are assessing whether it is part of the system.
 
+In this build a candidate that S2 marks virulence-associated is **flagged for human review, not blocked**: virulence-associated proteins include real vaccine antigens (FHBP, NadA), so the flag is recorded in the artifact (`review`, `review_required`), repeated as a warning and printed by `vaxforge biosafety check`, and the run goes on. This is the project owner's decision for an exploratory demo build. The toxin check, sequence sanity, the selected-candidate check and provider screening still block, and a virulence flag that was never computed still blocks.
+
 ---
 
 ## 3. Retrospective validation — the part that makes the demo credible
