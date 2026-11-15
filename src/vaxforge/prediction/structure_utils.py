@@ -201,11 +201,19 @@ def lddt_ca(model: np.ndarray, reference: np.ndarray, *, cutoff: float = 15.0,
     return float(np.mean(per_residue)) if per_residue else 0.0
 
 
+def plddt_scale_factor(bfactors: np.ndarray) -> float:
+    """Factor that turns a pLDDT B-factor column into the 0-100 scale: 1.0 if the file already stores 0-100, 100.0 if it
+    stores 0-1 (any value above 1.0 means 0-100). Use this, never a prefix test on the ``scale_detected`` text:
+    ``"0-100"`` also starts with ``"0-1"``, which once made S7 hand DiscoTope pLDDT values 100 times too high."""
+    _need_numpy()
+    return 1.0 if float(np.asarray(bfactors, float).max()) > 1.0 else 100.0
+
+
 def plddt_summary(bfactors: np.ndarray) -> dict:
     """Mean pLDDT on a 0-100 scale (rescales if the file stores 0-1) plus confidence-band fractions."""
     _need_numpy()
     b = np.asarray(bfactors, float)
-    scale_100 = b.max() > 1.0
+    scale_100 = plddt_scale_factor(b) == 1.0
     v = b if scale_100 else b * 100.0
     return {
         "mean_plddt": float(v.mean()),

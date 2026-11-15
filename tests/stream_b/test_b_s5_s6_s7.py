@@ -15,7 +15,8 @@ from vaxforge.prediction import artifacts as art
 from vaxforge.prediction.config import deep_merge
 from vaxforge.prediction.netmhc import Binding, MHCflurryRunner
 from vaxforge.prediction.popcov import FrequencyTable
-from vaxforge.prediction.structure_utils import parse_structure_ca
+from vaxforge.prediction.discotope import DiscoTopeResidue
+from vaxforge.prediction.structure_utils import parse_structure_ca, plddt_scale_factor, plddt_summary
 
 
 def load(run_dir, stage):
@@ -363,6 +364,52 @@ def test_s7_flags_off_machine_servers(run_dir, cfg, tmp_path, freq_file):
     env = load(run_dir, "s7_structure")
     assert any("sent to third-party servers" in w and "ColabFold" in w for w in env["warnings"])
     assert any(t.get("sends_sequence_off_machine") for t in env["tools"])
+
+
+class RecordingDisco:
+    """DiscoTope stand-in that behaves like the real tool: its ``pLDDTs`` column is the B-factor column of the PDB it is
+    given (measured on a real Boltz-2 model: ratio 1.0), and it records what it received. ``FakeDisco`` ignores its input,
+    which is why a x100 scaling bug in S7 went unnoticed."""
+    name = "DiscoTope-3.0"
+
+    def __init__(self):
+        self.received_bfactors = []
+
+    def predict(self, structure, *, struc_type="alphafold"):
+        from pathlib import Path
+        bf = [float(ln[60:66]) for ln in Path(structure).read_text().splitlines() if ln.startswith("ATOM")]
+        self.received_bfactors.append(bf)
+        return [DiscoTopeResidue(i + 1, "A", 0.95 if 5 <= i < 15 else 0.2, 0.5, b, 5 <= i < 15) for i, b in enumerate(bf)]
+
+
+def test_plddt_scale_factor_is_exact_not_a_prefix_match_on_the_label():
+    import numpy as np
+    assert plddt_scale_factor(np.array([22.6, 36.3, 59.9])) == 1.0                  # 0-100 file: untouched
+    assert plddt_scale_factor(np.array([0.2, 0.5, 0.9])) == 100.0                  # 0-1 file: rescaled
+    assert plddt_summary(np.array([22.6, 59.9]))["scale_detected"] == "0-100"
+    assert plddt_summary(np.array([0.2, 0.9]))["scale_detected"].startswith("0-1 (rescaled")
+    assert "0-100".startswith("0-1")                                                 # the trap: the two labels share a prefix
+
+
+@pytest.mark.parametrize("stored, handed_to_disco, below_floor_fraction", [
+    (30.0, 30.0, 1.0),      # low-confidence 0-100 model: DiscoTope must see 30, and every epitope residue is below the floor of 70
+    (85.0, 85.0, 0.0),      # confident 0-100 model: DiscoTope must see 85 (not 8500), and none is below the floor
+    (0.30, 30.0, 1.0),      # model that stores 0-1: rewritten x100 for DiscoTope, floor compared on the 0-100 scale
+])
+def test_s7_gives_discotope_unscaled_plddt_and_the_floor_check_sees_low_confidence(run_dir, cfg, tmp_path, freq_file,
+                                                                                   stored, handed_to_disco, below_floor_fraction):
+    s7_inputs(run_dir, cfg, tmp_path, freq_file)
+    dt = RecordingDisco()
+    s7_structure.run(run_dir, cfg, folder=FakeFolder(plddt=stored), refolders=REFOLDERS(), discotope=dt)
+    assert dt.received_bfactors and all(b == pytest.approx(handed_to_disco, abs=0.01) for bf in dt.received_bfactors for b in bf)
+    top = [c for c in load(run_dir, "s7_structure")["payload"]["candidates"] if c["in_top_k"]]
+    for c in top:
+        ce = c["structure"]["conformational_epitopes"]
+        assert ce["status"] == "ran" and ce["n_epitope_residues"] > 0
+        assert ce["mean_plddt_input"] == pytest.approx(handed_to_disco, abs=0.01)         # was exactly 100x mean_plddt
+        assert ce["mean_plddt_input"] == pytest.approx(c["structure"]["mean_plddt"], abs=0.01)
+        assert ce["fraction_epitope_residues_below_floor"] == pytest.approx(below_floor_fraction)
+        assert ce["n_epitope_residues_below_floor"] == round(below_floor_fraction * ce["n_epitope_residues"])
 
 
 def test_s7_scoring_uses_percentiles_so_scales_do_not_dominate():
