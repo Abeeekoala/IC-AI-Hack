@@ -1,0 +1,142 @@
+{
+  "created_at": "2026-11-15T10:39:31Z",
+  "digest": "sha256:5806bd4d489114c5961321d084ea87c4262b121b4c689e61b78420a3eb50d390",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.2"
+  },
+  "inputs": {
+    "s2": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+    "s4": "sha256:c89da3d01ae4b5f635dc752dce062d734f9dc6bacc8bf859594195c381fe21ae",
+    "s8": "sha256:80987e39b721f7867af391aec152cd00e905305213b52df86cef4fa9e3c8a844"
+  },
+  "params": {
+    "alphabet": "ACDEFGHIKLMNPQRSTVWY",
+    "digest": "sha256 of the sequence, upper-case, whitespace removed",
+    "max_length": 10000,
+    "selection": "s4 candidates (the survivors)"
+  },
+  "payload": {
+    "limits": [
+      "The local checks are not a synthesis-screening result and never substitute for one.",
+      "No provider or network was contacted. The provider record is supplied by the user; this module checks that it covers every ordered sequence and records its sha256, but cannot verify that the screening happened or that the record is authentic.",
+      "Only whole S4 survivor sequences can match. A peptide or a nucleotide sequence does not match a candidate and is blocked."
+    ],
+    "order": {
+      "file": {
+        "bytes": 3120,
+        "name": "order.fasta",
+        "sha256": "9203c3db3f7966523431253142807e988318b1ae715375d549454422d3469cf6"
+      },
+      "n_sequences": 3,
+      "source": "s8",
+      "status": "supplied"
+    },
+    "provider_record": {
+      "status": "not_supplied"
+    },
+    "reasons": [
+      "no provider screening record was supplied, so no sequence is screened"
+    ],
+    "review": [
+      "sp|P0DH58|OMPA_NEIMB: virulence_flag: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked",
+      "tr|Q9JYA8|Q9JYA8_NEIMB: virulence_flag: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked",
+      "tr|Q9K0B4|Q9K0B4_NEIMB: virulence_flag: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked"
+    ],
+    "review_required": true,
+    "sequences": [
+      {
+        "digest": "sha256:a3e66fb9e7515d138b32f4b7dfa14bc0832d7e87bbdf4208fb7da5b99b07de96",
+        "id": "sp|P0DH58|OMPA_NEIMB",
+        "length": 392,
+        "local_checks": {
+          "selected_candidate": {
+            "detail": "matches S4 candidate sp|P0DH58|OMPA_NEIMB",
+            "result": "pass"
+          },
+          "sequence_sanity": {
+            "detail": "392 residues, standard amino acids only",
+            "result": "pass"
+          },
+          "toxin_flag": {
+            "detail": "sp|P0DH58|OMPA_NEIMB: S4 toxicity gate: pass",
+            "result": "pass"
+          },
+          "virulence_flag": {
+            "detail": "sp|P0DH58|OMPA_NEIMB: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked",
+            "result": "review"
+          }
+        },
+        "provider_verdict": "not_screened"
+      },
+      {
+        "digest": "sha256:e43732428aac10876f1f2dfbacf75b2430f372f66862fbb496f8c253031103a6",
+        "id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "length": 791,
+        "local_checks": {
+          "selected_candidate": {
+            "detail": "matches S4 candidate tr|Q9JYA8|Q9JYA8_NEIMB",
+            "result": "pass"
+          },
+          "sequence_sanity": {
+            "detail": "791 residues, standard amino acids only",
+            "result": "pass"
+          },
+          "toxin_flag": {
+            "detail": "tr|Q9JYA8|Q9JYA8_NEIMB: S4 toxicity gate: pass",
+            "result": "pass"
+          },
+          "virulence_flag": {
+            "detail": "tr|Q9JYA8|Q9JYA8_NEIMB: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked",
+            "result": "review"
+          }
+        },
+        "provider_verdict": "not_screened"
+      },
+      {
+        "digest": "sha256:61fdd1b7c652ac3465159af4fedfd7f7891fdb5758a64945bdcd8195aba5b7cc",
+        "id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "length": 1815,
+        "local_checks": {
+          "selected_candidate": {
+            "detail": "matches S4 candidate tr|Q9K0B4|Q9K0B4_NEIMB",
+            "result": "pass"
+          },
+          "sequence_sanity": {
+            "detail": "1815 residues, standard amino acids only",
+            "result": "pass"
+          },
+          "toxin_flag": {
+            "detail": "tr|Q9K0B4|Q9K0B4_NEIMB: S4 toxicity gate: pass",
+            "result": "pass"
+          },
+          "virulence_flag": {
+            "detail": "tr|Q9K0B4|Q9K0B4_NEIMB: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked",
+            "result": "review"
+          }
+        },
+        "provider_verdict": "not_screened"
+      }
+    ],
+    "state": "not_screened"
+  },
+  "producer": {
+    "module": "vaxforge.s12_biosafety",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "real_fixture",
+  "schema": "vaxforge/s12_biosafety/v1",
+  "stage": "s12",
+  "status": "ok",
+  "volatile": {
+    "order_path": "runs/real_fixture/data/s8/order.fasta",
+    "screening_path": null
+  },
+  "warnings": [
+    "S12 not_screened: no provider screening record was supplied, so no sequence is screened",
+    "S12 review (not blocking): sp|P0DH58|OMPA_NEIMB: virulence_flag: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked",
+    "S12 review (not blocking): tr|Q9JYA8|Q9JYA8_NEIMB: virulence_flag: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked",
+    "S12 review (not blocking): tr|Q9K0B4|Q9K0B4_NEIMB: virulence_flag: S2 records it as virulence-associated (evidence strong); flagged for human review, not blocked"
+  ]
+}

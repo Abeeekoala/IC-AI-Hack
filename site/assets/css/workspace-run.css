@@ -1,0 +1,44 @@
+/* Screens 04 to 06 (workspace-run.js). They reuse the ws- classes from workspace.css; this file only adds what those do not cover. */
+
+/* A grid track sized by min-content let wide tables push a screen past the column. Let every track shrink to the column. */
+.ws-screen { min-width: 0; }
+.ws-body { grid-template-columns: minmax(0, 1fr); }
+.ws-card, .ws-grid > * { min-width: 0; }
+.ws-tablewrap { max-width: 100%; }
+
+/* two generation lanes, side by side when there is room */
+.wsr-lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 16px; align-items: start; }
+.wsr-lane-note { margin: 0 0 12px; color: var(--mute); font-size: 13px; }
+.wsr-lane-note .pill { margin-right: 6px; }
+.wsr-states { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px 16px; }
+.wsr-states li { display: flex; align-items: baseline; gap: 8px; font-size: 13px; color: var(--mute); }
+.wsr-states li .pill { flex: none; }
+
+/* a table row you can select */
+.wsr-rowbtn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink); font: 500 12px "JetBrains Mono", Menlo, Consolas, monospace; cursor: pointer; text-align: left; }
+.wsr-rowbtn:hover { border-color: var(--accent); color: var(--accent); }
+.wsr-rowbtn[aria-pressed="true"] { background: var(--accent-tint); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+tr.is-sel td { background: #f1f8f7; }
+
+/* test results */
+.wsr-run { display: grid; gap: 12px; align-content: start; }
+.wsr-run h3 code { font-size: 12px; font-weight: 500; color: var(--mute); background: var(--line2); padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+.wsr-explain { margin: 0; color: var(--ink); }
+.wsr-checks { display: grid; gap: 8px; margin: 0; }
+.wsr-checks > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--line2); }
+.wsr-checks dt { margin: 0; font-weight: 600; font-size: 13px; color: var(--mute); }
+.wsr-checks dd { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.wsr-checks dd span { color: var(--mute); font-size: 13px; }
+.wsr-rules { width: 100%; min-width: 0; font-size: 13px; }
+.wsr-rules th, .wsr-rules td { padding: 6px 10px; }
+.wsr-code { margin: 10px 0 0; padding: 14px 16px; background: #0b1f23; color: #d5ebe7; border-radius: 8px; font: 400 12px/1.6 "JetBrains Mono", Menlo, Consolas, monospace; overflow: auto; max-height: 520px; white-space: pre; tab-size: 4; }
+.wsr-vout { margin-top: 8px; font-size: 13px; }
+.wsr-pick { border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; background: var(--card); margin: 0; }
+.wsr-pick legend { font-weight: 600; padding: 0 6px; }
+.wsr-simbox iframe, .wsr-iframe, .wsr-frame { width: 100%; height: 680px; border: 1px solid var(--line); border-radius: 8px; background: #fff; display: block; margin-top: 10px; }
+.wsr-sci, .wsr-soft { min-width: 0; }
+.wsr-summary { margin: 0 0 12px; }
+
+@media (max-width: 700px) {
+  .wsr-checks > div { grid-template-columns: 1fr; }
+}

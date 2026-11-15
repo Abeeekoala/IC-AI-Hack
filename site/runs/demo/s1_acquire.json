@@ -1,0 +1,209 @@
+{
+  "created_at": "2026-11-14T16:14:13Z",
+  "digest": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.15.0"
+  },
+  "inputs": {
+    "s0": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a"
+  },
+  "params": {
+    "blastdb": true,
+    "comparison": {
+      "enabled": true,
+      "upid": "auto"
+    },
+    "custom_fasta": null,
+    "fixture_subset_of": "runs/nmb",
+    "human": {
+      "enabled": true,
+      "reviewed_only": true,
+      "upid": "UP000005640"
+    },
+    "iedb_enabled": false,
+    "protegen": {
+      "category": "all",
+      "enabled": true
+    },
+    "proteome_upid": "auto",
+    "species_taxid": 487,
+    "taxid": 487,
+    "vfdb": {
+      "enabled": true,
+      "set": "A",
+      "url_A": "http://www.mgc.ac.cn/VFs/Down/VFDB_setA_pro.fas.gz",
+      "url_B": "http://www.mgc.ac.cn/VFs/Down/VFDB_setB_pro.fas.gz"
+    }
+  },
+  "payload": {
+    "blast_dbs": {
+      "comparison_proteome": {
+        "blast_version": "2.17.0+",
+        "fasta_sha256": "213b6ae5146e0d0cd8392e60bf9531c677ed41756bbbfb6c624ba769ab5976c3",
+        "how_to_open": "BlastRunner(config).db_prefix(name, fasta_sha256)",
+        "name": "comparison_proteome",
+        "status": "ok"
+      },
+      "human_proteome": {
+        "blast_version": "2.17.0+",
+        "fasta_sha256": "0444b7cf4f4ddca5467aee7e2d86d45fcf440a9a879c791ecfc4cc186ac0b3d7",
+        "how_to_open": "BlastRunner(config).db_prefix(name, fasta_sha256)",
+        "name": "human_proteome",
+        "status": "ok"
+      },
+      "proteome": {
+        "blast_version": "2.17.0+",
+        "fasta_sha256": "022f8e101ea38ad99268e5b393e47e400efbdf302b7c1916c4bc1b47f8bacf75",
+        "how_to_open": "BlastRunner(config).db_prefix(name, fasta_sha256)",
+        "name": "proteome",
+        "status": "ok"
+      },
+      "vfdb": {
+        "blast_version": "2.17.0+",
+        "fasta_sha256": "12fa8e115468b7211d754b5c74d0afb11719218d1553a218844aa2459da8a64a",
+        "how_to_open": "BlastRunner(config).db_prefix(name, fasta_sha256)",
+        "name": "vfdb",
+        "status": "ok"
+      }
+    },
+    "comparison_proteome": {
+      "busco_score": 99.0,
+      "declared_protein_count": 2457,
+      "genome_assembly": "GCA_000146655.1",
+      "n_sequences": 2455,
+      "name": "Neisseria meningitidis serogroup B (strain ATCC 13091 / M2091)",
+      "note": "sequences from UniParc (this proteome has no UniProtKB entries): ids are UPI accessions and headers carry no protein names",
+      "omitted_from_fixture": true,
+      "proteome_type": "Non Reference proteome",
+      "release": "2026_04",
+      "selection_reason": "auto: other strain of the same species ranked by UniProtKB entries, assembly level, BUSCO, size",
+      "sequence_source": "uniparc",
+      "source_url": "https://rest.uniprot.org/uniparc/stream?query=upid%3AUP000005526&format=fasta",
+      "stats": {
+        "max_length": 1777,
+        "min_length": 34,
+        "records": 2455,
+        "residues": 624484
+      },
+      "status": "ok",
+      "strain": "ATCC 13091 / M2091",
+      "taxid": 862513,
+      "upid": "UP000005526"
+    },
+    "proteome": {
+      "busco_score": 98.0,
+      "declared_protein_count": 2003,
+      "file": {
+        "bytes": 24777,
+        "path": "data/proteome.faa",
+        "records": 40,
+        "root": "run",
+        "sha256": "b1f85e4dcf8ca71959e93df8796ad6b7f16aaa48ba6536e3ee02144e12516801"
+      },
+      "fixture_subset": {
+        "of_n_sequences": 2003,
+        "selection": "4 Bexsero-relevant + 8 strongest VFDB hits + seeded random"
+      },
+      "genome_assembly": "GCA_000008805.1",
+      "n_sequences": 40,
+      "name": "Neisseria meningitidis serogroup B (strain ATCC BAA-335 / MC58)",
+      "omitted_from_fixture": true,
+      "proteome_type": "Reference proteome",
+      "release": "2026_04",
+      "sequence_source": "uniprotkb",
+      "source_url": "https://rest.uniprot.org/uniprotkb/stream?query=%28proteome%3AUP000000425%29&format=fasta",
+      "stats": {
+        "max_length": 1829,
+        "min_length": 59,
+        "records": 40,
+        "residues": 18451
+      },
+      "status": "ok",
+      "strain": "ATCC BAA-335 / MC58",
+      "taxid": 122586,
+      "upid": "UP000000425"
+    },
+    "proteome_selection": {
+      "candidates_considered": 1,
+      "from_taxid": 487,
+      "method": "reference_proteome"
+    },
+    "reference_dbs": {
+      "afnd": {
+        "note": "HLA allele frequencies come from IEDB Population Coverage inside S6 (stream B); nothing is downloaded here",
+        "status": "deferred_to_s6"
+      },
+      "human_proteome": {
+        "n_sequences": 20414,
+        "note": "Swiss-Prot human proteins only",
+        "omitted_from_fixture": true,
+        "release": "2026_04",
+        "reviewed_only": true,
+        "source_url": "https://rest.uniprot.org/uniprotkb/stream?query=%28proteome%3AUP000005640%29+AND+%28reviewed%3Atrue%29&format=fasta",
+        "status": "ok",
+        "upid": "UP000005640"
+      },
+      "iedb": {
+        "status": "disabled"
+      },
+      "protegen": {
+        "category": "all",
+        "n_sequences": 1652,
+        "note": "Stream D must hold these target-pathogen entries out of any training set before the Bexsero/LOPOV run.",
+        "omitted_from_fixture": true,
+        "redistribution": "licence not stated by Protegen - keep in the gitignored cache/runs folders, contact the authors before sharing",
+        "source_url": "https://violinet.org/protegen/download/protegen-all-4.0-2019-01-09.faa",
+        "status": "ok",
+        "target_matches": 19,
+        "target_names_searched": [
+          "Diplokokkus intracellularis meningitidis",
+          "Micrococcus intracellularis",
+          "Micrococcus meningitidis",
+          "Micrococcus meningitidis cerebrospinalis",
+          "Neisseria meningitidis",
+          "Neisseria weichselbaumii"
+        ],
+        "version": "4.0-2019-01-09"
+      },
+      "vfdb": {
+        "n_sequences": 4755,
+        "omitted_from_fixture": true,
+        "set": "A",
+        "source_url": "http://www.mgc.ac.cn/VFs/Down/VFDB_setA_pro.fas.gz",
+        "status": "ok",
+        "version": "Fri, 13 Nov 2026 11:30:06 GMT"
+      }
+    },
+    "resource_status": {
+      "afnd": "deferred_to_s6",
+      "blastdb:comparison_proteome": "ok",
+      "blastdb:human_proteome": "ok",
+      "blastdb:proteome": "ok",
+      "blastdb:vfdb": "ok",
+      "comparison_proteome": "ok",
+      "human_proteome": "ok",
+      "iedb": "disabled",
+      "protegen": "ok",
+      "proteome": "ok",
+      "vfdb": "ok"
+    },
+    "scientific_name": "Neisseria meningitidis",
+    "species_taxid": 487,
+    "taxid": 487
+  },
+  "producer": {
+    "module": "vaxforge.s1_acquire",
+    "tools": {
+      "blast": "2.17.0+",
+      "uniprot_release": "2026_04"
+    },
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "nmb_fixture",
+  "schema": "vaxforge/s1_acquire/v1",
+  "stage": "s1",
+  "status": "ok",
+  "volatile": {},
+  "warnings": []
+}

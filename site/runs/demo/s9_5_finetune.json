@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-11-15T10:35:44Z",
+  "digest": "sha256:5b1854c9633316baefc3bbd8d23b4f63733c1a61ec2aeb647365d9ae94cc42a5",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
+  },
+  "inputs": {
+    "s8": "sha256:367653dbd6090507b857514fbd743d60cb2e8e09f201ec315ef0380c607064f6",
+    "s9": "sha256:093cb8f8fc2f50e38d27eea60ba6804c1ea8f56e4bcef6e801d1f5e1d1cd9db0"
+  },
+  "params": {
+    "eval_tasks": 11,
+    "evidence_run_id": "eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1",
+    "seed": 20261114
+  },
+  "payload": {
+    "base_model_id": "Qwen/Qwen3.5-9B",
+    "fine_tune": {
+      "adaption": {
+        "base_model_id": "Qwen/Qwen3.5-9B",
+        "best_win_rate": 0.9439,
+        "caveat": "best_win_rate is Adaption's own optimisation target, measured on evaluations it derives from the uploaded dataset. It is not evidence of protocol quality; the held-out win rate is validation/winrate.py.",
+        "checkpoint_sha256": "9cb4180229315caa62c780e1495c5b94304fcaee201dabe82555d94d6f4dc2f5",
+        "completed_at_utc": "2026-11-15T03:30:40Z",
+        "created_at_utc": "2026-11-15T02:28:24Z",
+        "iterations_completed": 2,
+        "max_iterations": 3,
+        "run_id": "eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1",
+        "status": "succeeded",
+        "target_reached": true,
+        "target_win_rate": 0.85,
+        "trained_model_name": "adaption_ot2_liquid_handling_sft",
+        "training_method": "instruction",
+        "training_type": "lora"
+      },
+      "evidence": {
+        "bytes": 1421,
+        "path": "data/s9_5/adaption_evidence.json",
+        "root": "run",
+        "sha256": "6ce6ae567ac74f94dc3554e0d0d2c7b55a0411d274f64f2f6c47065e711ec6e0"
+      },
+      "held_out_win_rate": null,
+      "manifest": {
+        "bytes": 1378,
+        "path": "data/s9_5/manifest.json",
+        "root": "run",
+        "sha256": "5f955f074797f1d01d82bf8de7c1ee6ff3362fd7a343da1dbcc1deb00c2c87a0"
+      },
+      "manifest_counts": {
+        "candidates": 3121,
+        "included": 1000,
+        "included_synthetic": 571,
+        "max_row_chars": 32000,
+        "meets_min_rows": true
+      },
+      "reasons": [],
+      "status": "evidence_attached"
+    },
+    "model_id": "eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1"
+  },
+  "producer": {
+    "module": "vaxforge.s9_5_finetune",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "run_nmb_fixture",
+  "schema": "vaxforge/s9_5_finetune/v1",
+  "stage": "s9_5",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "S9.5: Adaption's best_win_rate is the platform's own number on evaluations it derives from the uploaded data; this run holds no held-out win rate of ours (held_out_win_rate is null)"
+  ]
+}

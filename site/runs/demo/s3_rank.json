@@ -1,0 +1,2880 @@
+{
+  "created_at": "2026-11-15T10:35:17Z",
+  "digest": "sha256:13d3c4acc714b455f12e6242040c5a4df78b3fc8165e940c98a734fa867eddce",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
+  },
+  "inputs": {
+    "s2": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3"
+  },
+  "params": {
+    "backend": "scores_file",
+    "docker_image": "e4ong1031/vaxign-ml:latest",
+    "fallback_weights": {
+      "localisation": 0.6,
+      "virulence": 0.4
+    },
+    "holdout": {
+      "note": null,
+      "taxids": []
+    },
+    "localisation_prior": {
+      "CellWall": 0.9,
+      "Cytoplasmic": 0.0,
+      "CytoplasmicMembrane": 0.4,
+      "Extracellular": 1.0,
+      "Multiple": 0.5,
+      "OuterMembrane": 1.0,
+      "Periplasmic": 0.5,
+      "Unknown": 0.5
+    },
+    "max_candidates": 150,
+    "min_candidates": 30,
+    "model_dir": null,
+    "organism_type": "auto",
+    "scores_file": "docs/examples/vaxign_ml_scores.nmb_fixture.tsv",
+    "seed": 20261114,
+    "thresholds": [
+      0.9,
+      0.85
+    ],
+    "virulence": {
+      "max_evalue": 1e-05,
+      "min_coverage": 0.5,
+      "min_identity": 0.3
+    },
+    "weights": {
+      "localisation": 0.0,
+      "protegenicity": 1.0,
+      "virulence": 0.0
+    }
+  },
+  "payload": {
+    "candidates": [
+      {
+        "accession": "Q9K0B4",
+        "composite_score": 0.99793909,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000261",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "iga",
+        "length": 1815,
+        "name": "IgA-specific serine endopeptidase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.99793909,
+        "protegenicity_raw": 99.793909,
+        "protein_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "rank": 1,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MKTKRFKINAISLSIFLAYALTPYSEAALVRDDVDYQIFRDFAENKGKFFVGATDLSVKNKQGQNIGNALSNVPMIDFSVADVNRRTLTVIDPQYAVSVKHVKGDEISYYGHHNGHLDVSNDENEYRSVAQNDYEPNKNWHHGNQGRLEDYNMARLNKFVTEVAPIAPTSAGGGVETYKDKNRFSEFVRVGAGTQFEYNSRYNMTELSRAYRYAIAGTPYQDVNVTSNLNQEGLIGFGDNSKHHSPEKLKEVLSQNALTNYAVLGDSGSPLFAYDKQEKRWVFLGAYDYWAGYQKNSWQEWNIYKKEFADEIKQRDNAGTIKGNGEHHWKTTGTNSHIGSTAVRLANNERDANNGQNVTFENNGTLVLDQNINQGAGGLFFKGDYTVKGINNDITWLGAGIDVADGKKVVWQVKNPNGDRLAKIGKGTLEINGTGVNQGQLKVGDGTVILNQQADADKKVQAFSQVGIVSGRGTLVLNSSNQINPDNLYFGFRGGRLDANGNDLTFEHIRNVDEGARIVNHNTGHASTITLTGKSLITDPKTISIHYIQNNDDDDAGYYYYRPRKPIPQGKDLYFKNYRYYALKSGGSVNAPMPENGQTENNDWILMGSTQEEAKKNAMNHKNNQRISGFSGFFGEENGKGHNGALNLNFNGKSAQNRFLLTGGTNLNGKISVTQGNVLLSGRPTPHARDFVNKSSARKDAHFSKNNEVVFEDDWINRTFKATEIAVNQSASFSSGRNVSDITANITATDNAKVNLGYKNGDEVCVRSDYTGYVTCNTGNLSDKALNSFGATQINGNVNLNQNAALVLGKAALWGQIQGQGNSRVSLNQHSKWHLTGDSQVHNLSLADSHIHLNNASDAQSANKYHTLKINHLSGNGHFHYLTHLAKNLGDKVLVKESASGHYQLHVQDKTGEPNQEGLNLFDASSVQDRSRLSVSLANNHVDLGALRYTIKTENGITRLYNPYAENRRRVKPAPSPATNTASQAQKATQTDGAQIAKPQNIVVAPPSPQANQAEEAKRQQAKAEQVKRQQAEAERKSAELAKQKAEAEREARELATRQKAEQERSSAELARRHEKEREAAELSAKQKVEAEREAQALAVRRKAEAEEAKRQAAELARRHEKEREAAELSAKQRVGEEERRQTAQSQPQRRKRRAAPQDYMAASQDRPKRRGHRSVQQNNVEIAQAQAELARRQQEERKAAELLAKQRAEAEREAQALAARRKAEAEEAKRQAAELAHRQEAERKAAELSANQKAAAEAQALAARQQKALARQQEEARKAAELAVKQKAETERKTAELAKQRAAAEAAKRQQEARQTAELARRQEAERQAAELSAKQKAETDREAAESAKRKAEEEEHRQAAQSQPQRRKRRAAPQDYMAASQNRPKRRGRRSTLPAPPSPSFDSSAYAAPRALHNPDWYENDYEEIPLDALEDENVSESVDTSDKQPQDNTELHEKYENDYEEIPLDALEDEDVSESVDTSDKQPQDNTELHEKVETVSLQPRAAQPRAQAATQLQAQAAAQADAVSTNTNSALSDAMASTQSILLDTGASLTRHIAQKSRADAEKNSVWMSNTGYGRDYASAQYRRFSSKRTQTQIGIDRSLSENMQIGGVLTYSDSQHTFDQASGKNTFVQANLYGKYYLNDAWYVAGDIGAGSLRSRLQTQQKANFNRASIQTGLTLGNTLKINQFEIVPSAGIRYSRLSSADYKLGNDSVKVSSMSVKTLTAGLDFAYRFKVGNLTVKPLLSAAYFANYGKGGVNVGGNSFVYKADNQQQYSAGAALLYRNVTLNVNGSITKGKQLEKQKSGQIKIQIRF",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.99793909,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JXZ0",
+        "composite_score": 0.99656515,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.93,
+            "evalue": 3.62e-86,
+            "hit": "VFG000163",
+            "identity": 0.29059999999999997,
+            "term": 0.0
+          }
+        },
+        "gene": "NMB1829",
+        "length": 708,
+        "name": "TonB-dependent receptor",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.99656515,
+        "protegenicity_raw": 99.656515,
+        "protein_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "rank": 2,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MGQFMSVFRINMTAATVLAALSSSVFAAQTEGLETVHIKGQRSYNAIATEKNGDYSSFAATVGTKIPASLREIPQSVSIITNQQVKDRNVDTFDQLARKTPGLRVLSNDDGRSSVYARGYEYSEYNIDGLPAQMQSINGTLPNLFAFDRVEVMRGPSGLFDSSGEMGGIVNLVRKRPTKAFQGHAAAGFGTHKQYKAEADVSGSLNSDGSVRGRVMAQTVGASPRPAEKNNRRETFYAAADWDINPDTVLGAGYLYQQRRLAPYNGLPADANNKLPSLPQHVFVGADWNKFKMHSHDVFADLKHYFGNGGYGKVGMRYSDRKADSNYTFAGSKLNNTGQADVAGLGTDIKQKAFAVDASYSRPFALGNTANEFVIGADYNRLRSTNEQGRSTLSKSVALDGFRALPYNGILQNARAGNKGFNHSVTEENLDETGLYAKTVFRPLEGLSLIAGGRVGHHKIESGDGKTLHKASKTKFTSYAGAVYDIDGSNSLYASASQLYTPQTSIGTDGKLLKPREGNQFEIGYKGSYMDDRLNTRVSFYRMKDKNAAAPLDSNNKKTRYAALGKRVMEGVETEISGAMTPKWQIHAGYSYLHSQIKTASNSRDEGIFLLMPKHSANLWTTYQVTSGLTIGGGVNAMSGITSSAGIHAGGYATFDAMAAYRFTPKLKLQINADNIFNRHYYARVGSESTFNIPGSERSLTANLRYSF",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.99656515,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JYA8",
+        "composite_score": 0.99404626,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000266",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "hmbR",
+        "length": 791,
+        "name": "Hemoglobin receptor",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.99404626,
+        "protegenicity_raw": 99.404626,
+        "protein_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "rank": 3,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MKPLQMLPIAALVGSIFGNPVLAADEAATETTPVKAEIKAVRVKGQRNAPAAVERVNLNRIKQEMIRDNKDLVRYSTDVGLSDSGRHQKGFAVRGVEGNRVGVSIDGVNLPDSEENSLYARYGNFNSSRLSIDPELVRNIEIVKGADSFNTGSGALGGGVNYQTLQGRDLLLDDRQFGVMMKNGYSTRNREWTNTLGFGVSNDRVDAALLYSQRRGHETESAGNRGYAVEGEGSGANIRGSARGIPDSSKHKYHSFLGKIAYQINDNHRIGASLNGQQGHNYTVEESYNLTASSWREADDVNRRRNANLFYEWMPDSNWLSSLKADFDYQKTKVAAVNNKGSFPMDYSTWTRNYNQKDLDEIYNRSMDTRFKRFTLRLDSHPLQLGGGRHRLSFKTFVSRRDFENLNRDDYYFSGRVVRTTSSIQHPVKTTNYGFSLSDQIQWNDVFSSRAGIRYDHTKMTPQELNAECHACDKTPPAANTYKGWSGFVGLAAQLNQAWRVGYDITSGYRVPNASEVYFTYNHGSGNWLPNPNLKAERSTTHTLSLQGRSEKGMLDANLYQSNYRNFLSEEQKLTTSGTPGCTEENAYYGICSDPYKEKLDWQMKNIDKARIRGIELTGRLNVDKVASFVPEGWKLFGSLGYAKSKLSGDNSLLSTQPLKVIAGIDYESPSEKWGVFSRLTYLGAKKVKDAQYTVYENKGWGTPLQKKVKDYPWLNKSAYVFDMYGFYKPAKNLTLRAGVYNLFNRKYTTWDSLRGLYSYSTTNAVDRDGKGLDRYRAPGRNYAVSLEWKF",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.99404626,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JXL6",
+        "composite_score": 0.9919853399999999,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.98,
+            "evalue": 0.0,
+            "hit": "VFG001149",
+            "identity": 0.5498,
+            "term": 0.538804
+          }
+        },
+        "gene": "hap",
+        "length": 1457,
+        "name": "Adhesion and penetration protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9919853399999999,
+        "protegenicity_raw": 99.198534,
+        "protein_id": "tr|Q9JXL6|Q9JXL6_NEIMB",
+        "rank": 4,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MKTTDKRTTETHRKAPKTGRIRFSPAYLAICLSFGILPQAWAGHTYFGINYQYYRDFAENKGKFAVGAKDIEVYNKKGELVGKSMTKAPMIDFSVVSRNGVAALVGDQYIVSVAHNGGYNNVDFGAEGRNPDQHRFTYKIVKRNNYKAGTKGHPYGGDYHMPRLHKFVTDAEPVEMTSYMDGRKYIDQNNYPDRVRIGAGRQYWRSDEDEPNNRESSYHIASAYSWLVGGNTFAQNGSGGGTVNLGSEKIKHSPYGFLPTGGSFGDSGSPMFIYDAQKQKWLINGVLQTGNPYIGKSNGFQLVRKDWFYDEIFAGDTHSVFYEPRQNGKYSFNDDNNGTGKINAKHEHNSLPNRLKTRTVQLFNVSLSETAREPVYHAAGGVNSYRPRLNNGENISFIDEGKGELILTSNINQGAGGLYFQGDFTVSPENNETWQGAGVHISEDSTVTWKVNGVANDRLSKIGKGTLHVQAKGENQGSISVGDGTVILDQQADDKGKKQAFSEIGLVSGRGTVQLNADNQFNPDKLYFGFRGGRLDLNGHSLSFHRIQNTDEGAMIVNHNQDKESTVTITGNKDIATTGNNNSLDSKKEIAYNGWFGEKDTTKTNGRLNLVYQPAAEDRTLLLSGGTNLNGNITQTNGKLFFSGRPTPHAYNHLNDHWSQKEGIPRGEIVWDNDWINRTFKAENFQIKGGQAVVSRNVAKVKGDWHLSNHAQAVFGVAPHQSHTICTRSDWTGLTNCVEKTITDDKVIASLTKTDISGNVDLADHAHLNLTGLATLNGNLSANGDTRYTVSHNATQNGNLSLVGNAQATFNQATLNGNTSASGNASFNLSDHAVQNGSLTLSGNAKANVSHSALNGNVSLADKAVFHFESSRFTGQISGGKDTALHLKDSEWTLPSGTELGNLNLDNATITLNSAYRHDAAGAQTGSATDAPRRRSRRSRRSLLSVTPPTSVESRFNTLTVNGKLNGQGTFRFMSELFGYRSDKLKLAESSEGTYTLAVNNTGNEPASLEQLTVVEGKDNKPLSENLNFTLQNEHVDAGAWRYQLIRKDGEFRLHNPVKEQELSDKLGKAEAKKQAEKDNAQSLDALIAAGRDAVEKTESVAEPARQAGGENVGIMQAEEEKKRVQADKDTALAKQREAETRPATTAFPRARRARRDLPQLQPQPQPQPQRDLISRYANSGLSEFSATLNSVFAVQDELDRVFAEDRRNAVWTSGIRDTKHYRSQDFRAYRQQTDLRQIGMQKNLGSGRVGILFSHNRTENTFDDGIGNSARLAHGAVFGQYGIDRFYIGISAGAGFSSGSLSDGIGGKIRRRVLHYGIQARYRAGFGGFGIEPHIGATRYFVQKADYRYENVNIATPGLAFNRYRAGIKADYSFKPAQHISITPYLSLSYTDAASGKVRTRVNTAVLAQDFGKTRSAEWGVNAEIKGFTLSLHAAAAKGPQLEAQHSAGIKLGYRW",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9919853399999999,
+          "virulence": 0.538804
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q06379",
+        "composite_score": 0.98809251,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000264",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "lbpA",
+        "length": 943,
+        "name": "Lactoferrin-binding protein A",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.98809251,
+        "protegenicity_raw": 98.809251,
+        "protein_id": "sp|Q06379|LBPA_NEIMB",
+        "rank": 5,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MNKKHGFPLTLTALAIATAFPAYAAQAGGATPDAAQTQSLKEITVRAAKVGRRSKEATGLGKIVKTSETLNKEQVLGIRDLTRYDPGVAVVEQGNGASGGYSIRGVDKNRVAVSVDGVAQIQAFTVQGSLSGYGGRGGSGAINEIEYENISTVEIDKGAGSSDHGSGALGGAVAFRTKEAADLISDGKSWGIQAKTAYGSKNRQFMKSLGAGFSKDGWEGLLIRTERQGRETRPHGDIADGVEYGIDRLDAFRQTYDIKRKTREPFFSVEGERESKPVAKLAGYGKYLNNQLNRWVKERIEQNQPLSAEEEAQVREAQARHENLSAQAYTGGGRILPDPMDYRSGSWLAKLGYRFGGRHYVGGVFEDTKQRYDIRDMTEKQYYGTDEAEKFRDKSGVYDGDDFRDGLYFVPNIEEWKGDKNLVRGIGLKYSRTKFIDEHHRRRRMGLLYRYENEAYSDNWADKAVLSFDKQGVATDNNTLKLNCAVYPAVDKSCRASADKPYSYDSSDRFHYREQHNVLNASFEKSLKNKWTKHHLTLGFGYDASKAISRPEQLSHNAARISESTGFDENNQDKYLLGKPEVVEGSVCGYIETLRSRKCVPRKINGSNIHISLNDRFSIGKYFDFSLGGRYDRKNFTTSEELVRSGRYVDRSWNSGILFKPNRHFSVSYRASSGFRTPSFQELFGIDIYHDYPKGWQRPALKSEKAANREIGLQWKGDFGFLEISSFRNRYTDMIAVADHKTKLPNQAGQLTEIDIRDYYNAQNMSLQGVNILGKIDWNGVYGKLPEGLYTTLAYNRIKPKSVSNRPGLSLRSYALDAVQPSRYVLGFGYDQPEGKWGANIMLTYSKGKNPDELAYLAGDQKRYSTKRASSSWSTADVSAYLNLKKRLTLRAAIYNIGNYRYVTWESLRQTAESTANRHGGDSNYGRYAAPGRNFSLALEMKF",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.98809251,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "P0DH58",
+        "composite_score": 0.98419968,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG006237",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "porA",
+        "length": 392,
+        "name": "Major outer membrane protein P.IA",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.98419968,
+        "protegenicity_raw": 98.419968,
+        "protein_id": "sp|P0DH58|OMPA_NEIMB",
+        "rank": 6,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MRKKLTALVLSALPLAAVADVSLYGEIKAGVEGRNYQLQLTEAQAANGGASGQVKVTKVTKAKSRIRTKISDFGSFIGFKGSEDLGDGLKAVWQLEQDVSVAGGGATQWGNRESFIGLAGEFGTLRAGRVANQFDDASQAIDPWDSNNDVASQLGIFKRHDDMPVSVRYDSPEFSGFSGSVQFVPIQNSKSAYTPAYYTKNTNNNLTLVPAVVGKPGSDVYYAGLNYKNGGFAGNYAFKYARHANVGRNAFELFLIGSGSDQAKGTDPLKNHQVHRLTGGYEEGGLNLALAAQLDLSENGDKTKNSTTEIAATASYRFGNAVPRISYAHGFDFIERGKKGENTSYDQIIAGVDYDFSKRTSAIVSGAWLKRNTGIGNYTQINAASVGLRHKF",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.98419968,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JXK7",
+        "composite_score": 0.97847493,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.6,
+            "evalue": 4.13e-40,
+            "hit": "VFG054578",
+            "identity": 0.4286,
+            "term": 0.25716
+          }
+        },
+        "gene": "nadA",
+        "length": 362,
+        "name": "Neisseria adhesin A",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.97847493,
+        "protegenicity_raw": 97.847493,
+        "protein_id": "sp|Q9JXK7|NADA1_NEIMB",
+        "rank": 7,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MKHFPSKVLTTAILATFCSGALAATSDDDVKKAATVAIVAAYNNGQEINGFKAGETIYDIGEDGTITQKDATAADVEADDFKGLGLKKVVTNLTKTVNENKQNVDAKVKAAESEIEKLTTKLADTDAALADTDAALDETTNALNKLGENITTFAEETKTNIVKIDEKLEAVADTVDKHAEAFNDIADSLDETNTKADEAVKTANEAKQTAEETKQNVDAKVKAAETAAGKAEAAAGTANTAADKAEAVAAKVTDIKADIATNKADIAKNSARIDSLDKNVANLRKETRQGLAEQAALSGLFQPYNVGRFNVTAAVGGYKSESAVAIGTGFRFTENFAAKAGVAVGTSSGSSAAYHVGVNYEW",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.97847493,
+          "virulence": 0.25716
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K0U9",
+        "composite_score": 0.97732997,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000262",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "tbp1",
+        "length": 915,
+        "name": "Transferrin-binding protein A",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.97732997,
+        "protegenicity_raw": 97.732997,
+        "protein_id": "sp|Q9K0U9|TBPA_NEIMB",
+        "rank": 8,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MQQQHLFRFNILCLSLMTALPAYAENVQAGQAQEKQLDTIQVKAKKQKTRRDNEVTGLGKLVKSSDTLSKEQVLNIRDLTRYDPGIAVVEQGRGASSGYSIRGMDKNRVSLTVDGVSQIQSYTAQAALGGTRTAGSSGAINEIEYENVKAVEISKGSNSVEQGSGALAGSVAFQTKTADDVIGEGRQWGIQSKTAYSGKNRGLTQSIALAGRIGGAEALLIHTGRRAGEIRAHEDAGRGVQSFNRLVPVEDSSNYAYFIVKEECKNGSYETCKANPKKDVVGKDERQTVSTRDYTGPNRFLADPLSYESRSWLFRPGFRFENKRHYIGGILEHTQQTFDTRDMTVPAFLTKAVFDANKKQAGSLPGNGKYAGNHKYGGLFTNGENGALVGAEYGTGVFYDETHTKSRYGLEYVYTNADKDTWADYARLSYDRQGIGLDNHFQQTHCSADGSDKYCRPSADKPFSYYKSDRVIYGESHRLLQAAFKKSFDTAKIRHNLSVNLGFDRFGSNLRHQDYYYQHANRAYSSNTPPQNNGKKISPNGSETSPYWVTIGRGNVVTGQICRLGNNTYTDCTPRSINGKSYYAAVRDNVRLGRWADVGAGLRYDYRSTHSDDGSVSTGTHRTLSWNAGIVLKPTDWLDLTYRTSTGFRLPSFAEMYGWRAGVQSKAVKIDPEKSFNKEAGIVFKGDFGNLEASWFNNAYRDLIVRGYEAQIKDGKEEAKGDPAYLNAQSARITGINILGKIDWNGVWDKLPEGWYSTFAYNRVRVRDIKKRADRTDIQSHLFDAIQPSRYVVGLGYDQPEGKWGVNGMLTYSKAKEITELLGSRALLNGNSRNTKATARRTRPWYIVDVSGYYTVKKHFTLRAGVYNLLNYRYVTWENVRQTAGGAVNQHKNVGVYNRYAAPGRNYTFSLEMKF",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.97732997,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q7DD37",
+        "composite_score": 0.9761850200000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "nhba",
+        "length": 488,
+        "name": "Neisserial heparin binding antigen",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9761850200000001,
+        "protegenicity_raw": 97.618502,
+        "protein_id": "sp|Q7DD37|NHBA_NEIMB",
+        "rank": 9,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MFKRSVIAMACIFALSACGGGGGGSPDVKSADTLSKPAAPVVSEKETEAKEDAPQAGSQGQGAPSAQGSQDMAAVSEENTGNGGAVTADNPKNEDEVAQNDMPQNAAGTDSSTPNHTPDPNMLAGNMENQATDAGESSQPANQPDMANAADGMQGDDPSAGGQNAGNTAAQGANQAGNNQAAGSSDPIPASNPAPANGGSNFGRVDLANGVLIDGPSQNITLTHCKGDSCSGNNFLDEEVQLKSEFEKLSDADKISNYKKDGKNDKFVGLVADSVQMKGINQYIIFYKPKPTSFARFRRSARSRRSLPAEMPLIPVNQADTLIVDGEAVSLTGHSGNIFAPEGNYRYLTYGAEKLPGGSYALRVQGEPAKGEMLAGAAVYNGEVLHFHTENGRPYPTRGRFAAKVDFGSKSVDGIIDSGDDLHMGTQKFKAAIDGNGFKGTWTENGSGDVSGKFYGPAGEEVAGKYSYRPTDAEKGGFGVFAGKKEQD",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9761850200000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K0K9",
+        "composite_score": 0.9741241100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG006300",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "frpA",
+        "length": 1302,
+        "name": "Iron-regulated protein FrpA",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9741241100000001,
+        "protegenicity_raw": 97.412411,
+        "protein_id": "sp|Q9K0K9|FRPA_NEIMB",
+        "rank": 10,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFSQYVDLINENNGRLPNTSEIERSYYKAVTENGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVIMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQFRDLFPNPEGWIDDGHQCFAPWVKETKKRNGKYHVYDPLALDLDGDGIETVAAKGFSGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQSLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9741241100000001,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K0U8",
+        "composite_score": 0.96771239,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "Periplasmic",
+            "prior": 0.5,
+            "raw": "Periplasmic",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "potD-1",
+        "length": 459,
+        "name": "Spermidine/putrescine ABC transporter, periplasmic spermidine/putrescine-binding protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.96771239,
+        "protegenicity_raw": 96.771239,
+        "protein_id": "tr|Q9K0U8|Q9K0U8_NEIMB",
+        "rank": 11,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MQAFSLYPPVGHPDSAKKRQNRADVFLPFWKQDNFLGKSVQYRFEFAQIYFTMPKPCAGVTMGRGDFFFSNLFHQESARMKKSVLAVLAALSLAACGGSEKNAVQPQADAASAANAEAAATDTLNIYNWSNYVDESTVEDFKKANNLKLTYDLYENNETLEAKMLTGKSGYDLVVPGIAFLPRQIEAGAYQKVNKDLIPNYKNIDPELLKMLETADPGNQYAVPYFSGVNTIAITAKGKELLGGKLPENGWDLLFKPEYTHKLKSCGIALWDTPSEMFPILLNYLGKDPKGSNPEDLKAAAEVLKSIRPDVKRFSPSIIDELARGDICLAAGNGGDLNLAKARSEEVKNNVGIEVLTPKGMGFWIESWLIPADAKNVANAHKYINYTLDPEIAAKNGIAVTFAPASKPAREKMPAELVNTRSIFPNEQDMKDGFVMPQMSTDAKKLSVSLWQKIKVGTN",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.96771239,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JYV5",
+        "composite_score": 0.9656514799999999,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG006303",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "frpC",
+        "length": 1829,
+        "name": "Iron-regulated protein FrpC",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9656514799999999,
+        "protegenicity_raw": 96.565148,
+        "protein_id": "sp|Q9JYV5|FRPC_NEIMB",
+        "rank": 12,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MNEGEVVLTPEQIQTLRGYASRGDTYGGWRYLANLGDRYADDAAAIVGKDANLNGLNLWMKKGVENLWDDTVGKKTRLEKFDRVALQHFRQYARLINQNNGRLPNTSEIERSYYKAVTDNGVSSSAAIDLVINRSLPDMADGYWALGLGIEAERIHNEQAVNNPNGSERDNRKQLISALDKGFDGSFKEKHFTFLQSVMMDVTKLGVEYTIDGWQKIGGWGNGIINDLYKSVVKREWTGIFEIVNNNIKQGNEAFKNEINSLVHDMKAAGKEFGDDLNTQWNNLTQAAEIIYNDIVDNTSQGIEKGVKAIKELSEKMKNAASDLADGSAEKAKQVVEDLAQAAKEAYENAKSTAEKAAQAAREFFKGLPSFKDLAEKFRDLFPNPEGWIDDGHQCLAPWVKETKKRNGKYHVYDPLALDLDGDGIETVATKGFAGSLFDHTNNGIRTATGWVSADDGLLVRDLNGNGIIDNGAELFGDNTKLADGSFAKHGYAALAELDSNGDNIINAADAAFQTLRVWQDLNQDGISQANELRTLEELGIQSLDLAYKDVNKNLGNGNTLAQQGSYTKTDGTTAKMGDLLLAADNLHSRFKDKVELTAEQAKAANLAGIGRLRDLREAAALSGDLANMLKAYSAAETKEAQLALLDNLIHKWAETDSNWGKKSPMRLSTDWTQTANEGIALTPSQVAQLKKNALVSLSDKAKAAIDAARDRIAVLDAYTGQDSNTLYYMSEEDALNIVKVTNDTYDHLAKNIYQNLLFQTRLQPYLNQISFKMENDTFTLDFSGLVQAFNHVKETNPQKAFVDLAEMLAYGELRSWYEGRRLMTDYVEEAKKAGKFEDYQKVLGQETVALLAKTSGTQADDILQNVGFGHNKNVSLYGNDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDTVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQYYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGNTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLNGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGKGFGQDAVYNYDYATGRKDIIRFTDGITADMLTFTREGNHLLIKAKDGSGQVTVQSYFQNDGSGAYRIDEIHFDNGKVLDVATVKELVQQSTDGSDRLYAYQSGSTLNGGLGDDYLYGADGDDLLNGDAGNDSIYSGNGNDTLDGGEGNDALYGYNGNDALNGGEGNDHLNGEDGNDTLIGGAGNDYLEGGSGSDTYVFGEGFGQDTVYNYHVDKNSDTMHFKGFKAADVHFIRSGSDLVLSASEQDNVRISGFFYGENHRVDTFVFDDAAISNPDFAKYINAGNNLVQSMSVFGSNTAATGGNVDANIQSVQQPLLVTPSA",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9656514799999999,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JS61",
+        "composite_score": 0.95465995,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "ilvD1",
+        "length": 619,
+        "name": "Dihydroxy-acid dehydratase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.95465995,
+        "protegenicity_raw": 95.465995,
+        "protein_id": "sp|Q9JS61|ILVD_NEIMB",
+        "rank": 13,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MPEYRSKTSTHGRNMAGARALWRATGVMETDFGKPIIAVANSFTQFVPGHVHLHNMGQLVAREIEKAGAIAKEFNTIAIDDGIAMGHSGMLYSLPSRDLIADSIEYMVNAHCADALVCISNCDKITPGMLIAAMRLNIPTIFVSGGPMEAGKVIGVANIQPERRLDLIDAMIESADDNVSNRQVEEVEQNACPTCGSCSGMFTANSMNCLTEALGLSLPGNGSYLATHAGRKELFLEAGRMIVEITKRYYEQNDETVLPRSIATKKAFENAMTMDIAMGGSTNTILHLLAVANEAGVDFKMADIDRLSRVVPCICKTAPNNHDYYMEDVHRAGGIFAILKELDKAGKLHTDVHTIHAPTLKDAIEQWDVTNPENTRAIERFKAAPGGVRTTQAFSQNRMWKTLDLDREKGCIRDVAHAYSQDGGLAVLFGNIAERGCVVKTAGVDESILKFTGRARVFESQEDAVEGILGNQIVAGDIVIIRYEGPKGGPGMQEMLYPTSYLKSKGLGKACALLTDGRFSGGTSGLSIGHASPEAAEGGAIGLVHEGDTVEIDIPNRSIHLAISDEELAARRAEMEARGSKAWKPKNRDRYVSAALRAYGAMATSADKGAVRDVAQIER",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.95465995,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JXV4",
+        "composite_score": 0.953515,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG037136",
+            "identity": 0.9964,
+            "term": 0.9964
+          }
+        },
+        "gene": "fhbP",
+        "length": 274,
+        "name": "Factor H binding protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.953515,
+        "protegenicity_raw": 95.3515,
+        "protein_id": "sp|Q9JXV4|FHBP_NEIMB",
+        "rank": 14,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MNRTAFCCLSLTTALILTACSSGGGGVAADIGAGLADALTAPLDHKDKGLQSLTLDQSVRKNEKLKLAAQGAEKTYGNGDSLNTGKLKNDKVSRFDFIRQIEVDGQLITLESGEFQVYKQSHSALTAFQTEQIQDSEHSGKMVAKRQFRIGDIAGEHTSFDKLPEGGRATYRGTAFGSDDAGGKLTYTIDFAAKQGNGKIEHLKSPELNVDLAAADIKPDGKRHAVISGSVLYNQAEKGSYSLGIFGGKAQEVAGSAEVKTVNGIRHIGLAAKQ",
+        "taxid": 487,
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.953515,
+          "virulence": 0.9964
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q7DDC4",
+        "composite_score": 0.94092054,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "lldD",
+        "length": 390,
+        "name": "L-lactate dehydrogenase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.94092054,
+        "protegenicity_raw": 94.092054,
+        "protein_id": "tr|Q7DDC4|Q7DDC4_NEIMB",
+        "rank": 15,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MKRDLSKMTCIEDLRRVAKRKMPRMFYDYIDSGSWTETTYRENTSDFKDIRFRQKVLVNMEGRSLETKMIGQDVKMPVAIAPTGFTGMAHADGEILAARAAEKFGIPFTLSTMSICSIEDVAENTSAPFWFQLYVMRDREFMENLIKRAKDAKCSALVLTADLQVLGQRHKDIKNGLSAPPKPTIANLINLATKPEWCMKMLNTERRTFRNIVGHAKNVGDLSSLSSWTSEQFDPRLSWDDVARIKDLWGGKLIIKGIMEPEDAEKAAKSGADALIVSNHGGRQLDDTVSAIKALPDIVSAVGSDIEVWMDSGIRSGQDILKAWALGAKGTMIGRAFLYGLGAYGEEGVTRALEILYKEMDISMAFTGHRDIQDVDASILRGKDWGRETV",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.94092054,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JY67",
+        "composite_score": 0.9276391099999999,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG036992",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "mtrD",
+        "length": 1067,
+        "name": "Efflux pump membrane transporter",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9276391099999999,
+        "protegenicity_raw": 92.763911,
+        "protein_id": "tr|Q9JY67|Q9JY67_NEIMB",
+        "rank": 16,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MAKFFIDRPIFAWVISIFIIAAGIFGIKSLPVSQYPSVAAPTITLRATYPGASAQVMEDSVLSVIERNMNGVEGLDYMSTSADSSGSGSVSLTFTPDTDENLAQVEVQNKLSEVLSTLPATVQQYGVTVSKARSNFLMIVMLSSDVQSTEEMNDYAQRNIVPELQRIEGVGQVRLFGAQRAMRIWVDPKKLQNYNLSFADVGSALSAQNVQISAGSIGSLPAVRGQTVTATVTAQGQLGTAEEFGNVILRANTDGSNVYLKDVARVGLGMEDYSSSTRLNGVNTTGMAVMLSNSGNAMATAKAVKERMATLEKYFPQGMSWKTPYDTSKFVEISIEKVIHTLIEAMVLVFVVMYLFLQNIRYTLIPTIVVPISLLGGFAFISYMGMSINVLTMFAMVLVIGIVVDDAIVVVENVERIMAGEGLPPKEATKKAMGQISGAVIGITAVLISVFVPLAMFSGATGNIYKQFALTMASSIAFSAFLALTLTPALCATMLKTIPKGHHEEKKGFFGWFNKKFNSWTHGYEGRVAKVLRKTFRMMVVYIGLAVVGVFLFMRLPTSFLPTEDQGFVMVSVQLPAGATQERTNATLAQVTQLAKSIPEIENIITVSGFSFSGSGQNMAMGFAILKDWNERTAPGSDAVAIAGKLTGMMMGTLKDGFGIAVVPPPILELGNGSGLSINLQDRNNTGHTALLAKRNELIQKMRASGLFDPSTVRAGGLEDSPQLKIDINRAAAAAQGISFADIRTALASALSSSYVSDFPNQGRLQRVMVQADEDARMQPADILNLTVPNKSGVAVPLSTIATVSWENGTEQSVRFNGYPSMKLSASPATGVSTGQAMAAVQKMVDELGGGYSLEWGGQSREEAKGGSQTLILYGLAVAAVFLVLAALYESWSIPLAVILVIPLGLIGAAAGVTGRNLFEGLLGSVPSFANDIYFQVGFVTVMGLSAKNAILIIEFAKDLQAQGKSAVEAALEAARLRFRPIIMTSFAFILGVVPLYIAGGASSASQRAIGTTVFWGMLIGTLLSVFLVPLFYVVVRKFFKETAHEHEMAVKHAAEAGITGSDDSQH",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.9276391099999999,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K070",
+        "composite_score": 0.9200824400000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.76,
+            "evalue": 2.78e-65,
+            "hit": "VFG038249",
+            "identity": 0.4545,
+            "term": 0.34542
+          }
+        },
+        "gene": "NMB0749",
+        "length": 312,
+        "name": "Penicillin-binding protein 4",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9200824400000001,
+        "protegenicity_raw": 92.008244,
+        "protein_id": "tr|Q9K070|Q9K070_NEIMB",
+        "rank": 17,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MSIHTLKRLPSSLLLGLCLSLPSAHLFADNDILGQFLEQNMLTSSDPIEIFAESTIHPTNTQAITGGLILSSQSALVVNNKTGQILYQKNADRIMPIASISKLMSAMVVLDANLDMNETVTITPDEIDRIKGTGSRLAIGTALTRKKLLHLSLMSSENRATHALGRTYPGGMGAFVAAMNRKAQSLGMYGSRFYEPTGLNFQNVSTAKDLSLMVNAAAQYPQIRTNSTSNYASVQTKNGQQNYKNSNALVREGMWNIELQKTGYIREAGRSMVVKANIQNQPVTIVLLNSPTSATRVNDARKIESWMLQQRS",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9200824400000001,
+          "virulence": 0.34542
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K1F5",
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.98,
+            "evalue": 1.7e-106,
+            "hit": "VFG013384",
+            "identity": 0.4386,
+            "term": 0.429828
+          }
+        },
+        "gene": "lpxB",
+        "length": 384,
+        "name": "Lipid-A-disaccharide synthase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "sp|Q9K1F5|LPXB_NEIMB",
+        "rank": 18,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MADKKSPLIAVSVGEASGDLLGAHLIRAIRKRCPQARFTGIGGELMKAEGFESLYDQERLAVRGFVEVVRRLPEILRIRRGLVRDLLSLKPDVFVGIDAPDFNLGVAEKLKRSGIPTVHYVSPSVWAWRRERVGKIVHQVNRVLCLFPMEPQLYLDAGGRAEFVGHPMAQLMPLEDDRETARQTLGVDAGIPVFALLPGSRVSEIDYMAPVFFQTALLLLERYPAARFLLPAATEATKRRLAEVLQRPEFAGLPLTVIDRQSETVCRAADAVLVTSGTATLEVALCKRPMVISYKISPLTYAYVKRKIKVPHVGLPNILLGKEAVPELLQSEAKPEKLAAALADWYEHPDKVAALQQDFRALHLLLKKDTADLAARAVLEEAGC",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.429828
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "accession": "Q4W563",
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 3.8e-147,
+            "hit": "VFG006179",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "pilN",
+        "length": 199,
+        "name": "PilN protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q4W563|Q4W563_NEIMB",
+        "rank": 19,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MNNLIKINLLPYREEMNKRKQQQFKTLMYGAVLTGVAAVAATYLFIDNMINNQSERNTLLETSIAHLDTELSEIQKLKQEKDAFLIKKNKIEELQLKRLQAAKILDSLNEAVPGSTYLTSLDAVTADSYRLSGRTSSDNRVAAMMRAMPNTGIFKQPELLSIKKNNSHQEFTLQATLQPIVKAAESKENPASGNAQEAN",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 1.0
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "accession": "Q7DD77",
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 1.79e-136,
+            "hit": "VFG006187",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "pilP",
+        "length": 181,
+        "name": "PilP protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q7DD77|Q7DD77_NEIMB",
+        "rank": 20,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MKHYALLISFLALSACSQGSEDLNEWMAQTRREAKAEIIPFQAPTLPVAPVYSPPQLTGPNAFDFRRMETDKKGENAPDTKRIKETLEKFSLENMRYVGILKSGQKVSGFIEAEGYVYTVGVGNYLGQNYGRIESITDDSIVLNELIEDSTGNWVSRKAELLLNSSDKNTEQAAAPAAEQN",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 1.0
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "accession": "Q9JZD1",
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1107",
+        "length": 200,
+        "name": "Lipoprotein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q9JZD1|Q9JZD1_NEIMB",
+        "rank": 21,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MNMKKLISAICVSIVLSACNQQSKTAQAEEPVQSIQAADCTAPMDITVEQYLINLEQAFKTQNVSTKIHNKNIVKTDCGYDLTLVMDFGAIALKLDEQQKIRAISVGYILKTDGEKGQNLVNNAINGLHSIQAVLSLTTTDKLGESEAGKQLFTALTEVVKESNQTGATAQKDVPADGILYSVVFEKETNTIAIIGRKQP",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.0
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "accession": "Q9JXM3",
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1975",
+        "length": 511,
+        "name": "Transporter",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q9JXM3|Q9JXM3_NEIMB",
+        "rank": 22,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MSDSKTKERATFGTRRAFMIAAIGSAVGLGNIWRFPYIAFENGGGAFILPYLVALLTAGIPLLLLDYAIGHRYRGSAPLAFRRLGRWFEPVGWWNVMTNIVICIYYAVIIGWAASYTYYSVNAAWGADPQGFFFKDFLQMAGPEALGLDFVGKVAGPLAGVWVFTAAIMALGVQKGVARASSFFMPLLLVMFLIMVGISLTLPGAAKGLDALFTPDWSKLADSKVWVAAYGQIFFSLSICFGIMVTYSSYLKKKTDLGGTGLVVGFANSSFELLAGIGVFAALGFMAQAGGKAVNEVASGGIGLAFIAFPTIINQAPMGWLIGILFFGSLVFAGVTSMISILEVIVAAIQDKLNIGRVNATLLVCIPMGIVSTLLFGTATGLPVLDVMDKFVNTYGIVAAGFVYVAAIIISGRLPELRKHLNALSSIRIGGLWTVCVVVTVVMLGYMLFKDTSGLMEKNYEGYPDGFLSIFGWGMSAALVVFGLLLSLLPWKHGQDFNVKDEHEHEQGEEK",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K0K4",
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "Cytoplasmic",
+            "prior": 0.0,
+            "raw": "Cytoplasmic",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "trmD",
+        "length": 249,
+        "name": "tRNA (guanine-N(1)-)-methyltransferase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "sp|Q9K0K4|TRMD_NEIMB",
+        "rank": 23,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MLIQAVTIFPEMFDSITRYGVTGRANRQGIWQFEAVNPRKFADNRLGYIDDRPFGGGPGMIMMAPPLHAAIEHAKTQSSQAAKVIYLSPQGKPLTHQKAVELAELPHLILLCGRYEGIDERLLQSSVDEEISIGDFVVSGGELPAMMLMDAVLRLVPGVLGDMQSAEQDSFSSGILDCPHYTKPLEFQGMAVPEVLRSGNHGLIAEWRLEQSLRRTLERRPDLLEKRVLIPKESRLLETIRQEQREIQS",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.0,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K0Q7",
+        "composite_score": 0.90886192,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0527",
+        "length": 140,
+        "name": "6-carboxy-5,6,7,8-tetrahydropterin synthase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.90886192,
+        "protegenicity_raw": 90.886192,
+        "protein_id": "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+        "rank": 24,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MKITKIFTFDSSHMLDGHDGKCQNLHGHTYKLEITVSDGIIKGGAKDGMVMDFTDLKAIVKQHITDPFDHAFIYHGGNSRECQIAALLEGWNMKTLRLPCRTTAENMAVEMYGRLKNAGLNVCRVKLWETPTSCAEYEGE",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.90886192,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JZY3",
+        "composite_score": 0.89351958,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0850",
+        "length": 138,
+        "name": "MORN repeat protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.89351958,
+        "protegenicity_raw": 89.351958,
+        "protein_id": "tr|Q9JZY3|Q9JZY3_NEIMB",
+        "rank": 25,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MLKHLAFLLPAMMFALPTSAAVLTSYQEPGCTYDGNVGKDGKPAGKGTWRCQDGRNYTGSFKNGKFDGQGVYTVAANREIFIEPFNSDSTKFRNMVLSGTFKKGLAHGRFTVSQNGETLFIMKCENGMIKEVKLPKNK",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.89351958,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JZH8",
+        "composite_score": 0.860545,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1045",
+        "length": 264,
+        "name": "Serine/threonine protein kinase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.860545,
+        "protegenicity_raw": 86.0545,
+        "protein_id": "tr|Q9JZH8|Q9JZH8_NEIMB",
+        "rank": 26,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MTLPMQETRFSILLDELAAKQEAAIAPHLLADGTKVWIRKAGRHNARWRYALLGMVARYLKLGVLKPVPSLGGEPAIATESKRLYELRSAGIAVPELLAVRKNALMFGNLEGIPLDAQIRQEAEAGKSDAWLAGLEAIARVHKKRQFLSQAFARNMMSDGKNISFLDFEDDPSEVLTIAQCQARDWLCYIHSTALILKNGGLLEAAAEKWGGVLSDQPAEIQKLIAATVKPILPIRRLEHPRWGRDALRLAASISLISLADMPP",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.860545,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K1D2",
+        "composite_score": 0.85848409,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0230",
+        "length": 215,
+        "name": "Carboxyltransferase domain-containing protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.85848409,
+        "protegenicity_raw": 85.848409,
+        "protein_id": "tr|Q9K1D2|Q9K1D2_NEIMB",
+        "rank": 27,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MRIEITPISESALVYRLNAPSELGKQQKLWAFAAALGQHDRIEEVVVGMNNLTVFTRFDTDLATLADELQYVWEHTAVTDHQGKLVEIPVCYGGEYGPDLAEVAAFHQTVISEIVRRHTAQTYTVFMMGFQPGFPYLGGLPEALHTPRRAVPRTSVPAGSVGIGGSQTGVYPFASPGGWQIIGRTELPLFRADLNPPTLLAAGDQVRFVAERIEP",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.85848409,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9JXT3",
+        "composite_score": 0.85665216,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "dpnC",
+        "length": 267,
+        "name": "Type II restriction enzyme DpnI",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.85665216,
+        "protegenicity_raw": 85.665216,
+        "protein_id": "tr|Q9JXT3|Q9JXT3_NEIMB",
+        "rank": 28,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MNLFFDTELGKQQNKATHKIRVMSEAWLEKNGYCPCCGSKPMQRFANNKPVADLFCPNCHEQYELKSKNQKTIGNSVPDGAYHTMLERIRSDTNPNFFFLAYKKADYSIRQLVLVPKHFITPDMIIPRNKGIKNRPNHIMCSINLAPLPESGKIFLIDNSRIIEPETVLKKWQSNLFLRNQNAERKGWLLAVMKCIDQLPEEFTLSQMYEFENKLSIQFPQNNHIRDKIRQQLQILRDQNTIEFIGRGLYKKSINCAQLPRYFDFKS",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.85665216,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K0M6",
+        "composite_score": 0.85184337,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "nqrD",
+        "length": 208,
+        "name": "Na(+)-translocating NADH-quinone reductase subunit D",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.85184337,
+        "protegenicity_raw": 85.184337,
+        "protein_id": "sp|Q9K0M6|NQRD_NEIMB",
+        "rank": 29,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "sequence": "MADMKRLKHLMFSPFIDNNPIALQVLGICSALAVTTKLQTAIVMGISVALVTGFSSFFISLVRNYIPNSIRIIVQMAIIASLVTLVDQLLQAFAYELSKQLSVFVGLIITNCIVMGRAEAFAMKEPPLESLIDGIGNGAGYGIMLLVVATVRELIGSGKLLGYTVFQTVQDGGWYQTNGLFLLAPSAFFIIGFLIWGLRTWKPEQAEE",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.85184337,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "accession": "Q9K1H6",
+        "composite_score": 0.79367987,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.95,
+            "evalue": 4.73e-16,
+            "hit": "VFG052410",
+            "identity": 0.2645,
+            "term": 0.0
+          }
+        },
+        "gene": "zupT",
+        "length": 269,
+        "name": "Zinc transporter ZupT",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.79367987,
+        "protegenicity_raw": 79.367987,
+        "protein_id": "sp|Q9K1H6|ZUPT_NEIMB",
+        "rank": 30,
+        "selected": true,
+        "selected_reason": "rank_padding",
+        "sequence": "MPDFSMSNLAVAFSITLAAGLFTVLGSGLVMFSKTPNPRVLSFGLAFAGGAMVYVSLTEIFSKSSEAFAEIYDKDHAFAAATMAFLAGMGGIALIDRLVPNPHETLDAQDPSFQESKRRHIARVGMMAAFAITAHNFPEGLATFFATLENPAVGMPLALAIAIHNIPEGISIAAPVYFATRSRKKTVWACLLSGLAEPLGAALGYLVLQPFLSPAVFGSVFGVIAGVMVFLALDELLPAAKRYSDGHETVYGLTTGMAVIAVSLVLFHF",
+        "taxid": 487,
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.79367987,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      }
+    ],
+    "context": {
+      "n_proteins": 40,
+      "organism_type": "gram-",
+      "s2_meta": {
+        "lineage": [
+          "cellular organisms",
+          "Bacteria",
+          "Pseudomonadati",
+          "Pseudomonadota",
+          "Betaproteobacteria",
+          "Neisseriales",
+          "Neisseriaceae",
+          "Neisseria"
+        ],
+        "localisation_status_counts": {
+          "fixture_stand_in": 40
+        },
+        "organism": {
+          "domain": "bacteria",
+          "gram_basis": "lineage taxon Pseudomonadota -> Gram-negative",
+          "gram_stain": "negative",
+          "localisation_applicable": true,
+          "psortb_extra_args": [],
+          "psortb_flag": "-n",
+          "virulence_db_applicable": true
+        },
+        "organism_type": "gram-",
+        "proteome_id": "UP000000425",
+        "scientific_name": "Neisseria meningitidis",
+        "species_taxid": 487,
+        "stream_a": {
+          "protegen_target_file": null,
+          "run_id": "nmb_fixture",
+          "s1_resources": {
+            "human_proteome": "ok",
+            "iedb": "disabled",
+            "protegen": "ok",
+            "vfdb": "ok"
+          },
+          "s2_digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3"
+        },
+        "taxid": 487
+      },
+      "taxid": 487
+    },
+    "counts": {
+      "fold_enrichment": null,
+      "fold_enrichment_note": "Needs ground-truth positives; computed by the validation harness, not here.",
+      "n_proteins": 40,
+      "n_scored": 40,
+      "n_selected": 30,
+      "n_unscored": 0,
+      "threshold_summary": {
+        "0.85": {
+          "available": true,
+          "fraction_of_proteome": 0.725,
+          "n_pass": 29
+        },
+        "0.90": {
+          "available": true,
+          "fraction_of_proteome": 0.6,
+          "n_pass": 24
+        }
+      }
+    },
+    "degraded": [],
+    "leakage_audit": {
+      "declared_holdout_taxids": [],
+      "holdout_enforced": false,
+      "model": "Vaxign-ML (stock pretrained model, trained on all of Protegen)",
+      "note": "Scores supplied externally; whether the model held out the target pathogen is declared, not verified here.",
+      "requested_holdout": {
+        "note": null,
+        "taxids": []
+      },
+      "target_taxid": 487
+    },
+    "ranker": {
+      "backend": "scores_file",
+      "note": "Default weights reproduce the pure Vaxign-ML ordering; other terms are recorded as evidence only.",
+      "score_semantics": "protegenicity in [0,1] = Vaxign-ML percentile/100 (see tool record)",
+      "thresholds": [
+        0.9,
+        0.85
+      ],
+      "weights_used": {
+        "localisation": 0.0,
+        "protegenicity": 1.0,
+        "virulence": 0.0
+      }
+    },
+    "ranking": [
+      {
+        "composite_score": 0.99793909,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000261",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "iga",
+        "length": 1815,
+        "name": "IgA-specific serine endopeptidase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.99793909,
+        "protegenicity_raw": 99.793909,
+        "protein_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "rank": 1,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.99793909,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.99656515,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.93,
+            "evalue": 3.62e-86,
+            "hit": "VFG000163",
+            "identity": 0.29059999999999997,
+            "term": 0.0
+          }
+        },
+        "gene": "NMB1829",
+        "length": 708,
+        "name": "TonB-dependent receptor",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.99656515,
+        "protegenicity_raw": 99.656515,
+        "protein_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "rank": 2,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.99656515,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.99404626,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000266",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "hmbR",
+        "length": 791,
+        "name": "Hemoglobin receptor",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.99404626,
+        "protegenicity_raw": 99.404626,
+        "protein_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "rank": 3,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.99404626,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9919853399999999,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.98,
+            "evalue": 0.0,
+            "hit": "VFG001149",
+            "identity": 0.5498,
+            "term": 0.538804
+          }
+        },
+        "gene": "hap",
+        "length": 1457,
+        "name": "Adhesion and penetration protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9919853399999999,
+        "protegenicity_raw": 99.198534,
+        "protein_id": "tr|Q9JXL6|Q9JXL6_NEIMB",
+        "rank": 4,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9919853399999999,
+          "virulence": 0.538804
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.98809251,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000264",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "lbpA",
+        "length": 943,
+        "name": "Lactoferrin-binding protein A",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.98809251,
+        "protegenicity_raw": 98.809251,
+        "protein_id": "sp|Q06379|LBPA_NEIMB",
+        "rank": 5,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.98809251,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.98419968,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG006237",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "porA",
+        "length": 392,
+        "name": "Major outer membrane protein P.IA",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.98419968,
+        "protegenicity_raw": 98.419968,
+        "protein_id": "sp|P0DH58|OMPA_NEIMB",
+        "rank": 6,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.98419968,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.97847493,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.6,
+            "evalue": 4.13e-40,
+            "hit": "VFG054578",
+            "identity": 0.4286,
+            "term": 0.25716
+          }
+        },
+        "gene": "nadA",
+        "length": 362,
+        "name": "Neisseria adhesin A",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.97847493,
+        "protegenicity_raw": 97.847493,
+        "protein_id": "sp|Q9JXK7|NADA1_NEIMB",
+        "rank": 7,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.97847493,
+          "virulence": 0.25716
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.97732997,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG000262",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "tbp1",
+        "length": 915,
+        "name": "Transferrin-binding protein A",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.97732997,
+        "protegenicity_raw": 97.732997,
+        "protein_id": "sp|Q9K0U9|TBPA_NEIMB",
+        "rank": 8,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.97732997,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9761850200000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "nhba",
+        "length": 488,
+        "name": "Neisserial heparin binding antigen",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9761850200000001,
+        "protegenicity_raw": 97.618502,
+        "protein_id": "sp|Q7DD37|NHBA_NEIMB",
+        "rank": 9,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9761850200000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9741241100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG006300",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "frpA",
+        "length": 1302,
+        "name": "Iron-regulated protein FrpA",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9741241100000001,
+        "protegenicity_raw": 97.412411,
+        "protein_id": "sp|Q9K0K9|FRPA_NEIMB",
+        "rank": 10,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9741241100000001,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.96771239,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "Periplasmic",
+            "prior": 0.5,
+            "raw": "Periplasmic",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "potD-1",
+        "length": 459,
+        "name": "Spermidine/putrescine ABC transporter, periplasmic spermidine/putrescine-binding protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.96771239,
+        "protegenicity_raw": 96.771239,
+        "protein_id": "tr|Q9K0U8|Q9K0U8_NEIMB",
+        "rank": 11,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.96771239,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9656514799999999,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG006303",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "frpC",
+        "length": 1829,
+        "name": "Iron-regulated protein FrpC",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9656514799999999,
+        "protegenicity_raw": 96.565148,
+        "protein_id": "sp|Q9JYV5|FRPC_NEIMB",
+        "rank": 12,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.9656514799999999,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.95465995,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "ilvD1",
+        "length": 619,
+        "name": "Dihydroxy-acid dehydratase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.95465995,
+        "protegenicity_raw": 95.465995,
+        "protein_id": "sp|Q9JS61|ILVD_NEIMB",
+        "rank": 13,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.95465995,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.953515,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "OuterMembrane",
+            "prior": 1.0,
+            "raw": "OuterMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG037136",
+            "identity": 0.9964,
+            "term": 0.9964
+          }
+        },
+        "gene": "fhbP",
+        "length": 274,
+        "name": "Factor H binding protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.953515,
+        "protegenicity_raw": 95.3515,
+        "protein_id": "sp|Q9JXV4|FHBP_NEIMB",
+        "rank": 14,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 1.0,
+          "protegenicity": 0.953515,
+          "virulence": 0.9964
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.94092054,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "lldD",
+        "length": 390,
+        "name": "L-lactate dehydrogenase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.94092054,
+        "protegenicity_raw": 94.092054,
+        "protein_id": "tr|Q7DDC4|Q7DDC4_NEIMB",
+        "rank": 15,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.94092054,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9276391099999999,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 0.0,
+            "hit": "VFG036992",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "mtrD",
+        "length": 1067,
+        "name": "Efflux pump membrane transporter",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9276391099999999,
+        "protegenicity_raw": 92.763911,
+        "protein_id": "tr|Q9JY67|Q9JY67_NEIMB",
+        "rank": 16,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.9276391099999999,
+          "virulence": 1.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9200824400000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.76,
+            "evalue": 2.78e-65,
+            "hit": "VFG038249",
+            "identity": 0.4545,
+            "term": 0.34542
+          }
+        },
+        "gene": "NMB0749",
+        "length": 312,
+        "name": "Penicillin-binding protein 4",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9200824400000001,
+        "protegenicity_raw": 92.008244,
+        "protein_id": "tr|Q9K070|Q9K070_NEIMB",
+        "rank": 17,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9200824400000001,
+          "virulence": 0.34542
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.98,
+            "evalue": 1.7e-106,
+            "hit": "VFG013384",
+            "identity": 0.4386,
+            "term": 0.429828
+          }
+        },
+        "gene": "lpxB",
+        "length": 384,
+        "name": "Lipid-A-disaccharide synthase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "sp|Q9K1F5|LPXB_NEIMB",
+        "rank": 18,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.429828
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 3.8e-147,
+            "hit": "VFG006179",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "pilN",
+        "length": 199,
+        "name": "PilN protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q4W563|Q4W563_NEIMB",
+        "rank": 19,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 1.0
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 1.0,
+            "evalue": 1.79e-136,
+            "hit": "VFG006187",
+            "identity": 1.0,
+            "term": 1.0
+          }
+        },
+        "gene": "pilP",
+        "length": 181,
+        "name": "PilP protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q7DD77|Q7DD77_NEIMB",
+        "rank": 20,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 1.0
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1107",
+        "length": 200,
+        "name": "Lipoprotein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q9JZD1|Q9JZD1_NEIMB",
+        "rank": 21,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.0
+        },
+        "tie_group": {
+          "competition_rank": 18,
+          "size": 4
+        }
+      },
+      {
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1975",
+        "length": 511,
+        "name": "Transporter",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "tr|Q9JXM3|Q9JXM3_NEIMB",
+        "rank": 22,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.9090909100000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "Cytoplasmic",
+            "prior": 0.0,
+            "raw": "Cytoplasmic",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "trmD",
+        "length": 249,
+        "name": "tRNA (guanine-N(1)-)-methyltransferase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.9090909100000001,
+        "protegenicity_raw": 90.909091,
+        "protein_id": "sp|Q9K0K4|TRMD_NEIMB",
+        "rank": 23,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.0,
+          "protegenicity": 0.9090909100000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.90886192,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0527",
+        "length": 140,
+        "name": "6-carboxy-5,6,7,8-tetrahydropterin synthase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": true
+        },
+        "protegenicity": 0.90886192,
+        "protegenicity_raw": 90.886192,
+        "protein_id": "tr|Q9K0Q7|Q9K0Q7_NEIMB",
+        "rank": 24,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.90886192,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.89351958,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0850",
+        "length": 138,
+        "name": "MORN repeat protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.89351958,
+        "protegenicity_raw": 89.351958,
+        "protein_id": "tr|Q9JZY3|Q9JZY3_NEIMB",
+        "rank": 25,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.89351958,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.860545,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1045",
+        "length": 264,
+        "name": "Serine/threonine protein kinase",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.860545,
+        "protegenicity_raw": 86.0545,
+        "protein_id": "tr|Q9JZH8|Q9JZH8_NEIMB",
+        "rank": 26,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.860545,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.85848409,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0230",
+        "length": 215,
+        "name": "Carboxyltransferase domain-containing protein",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.85848409,
+        "protegenicity_raw": 85.848409,
+        "protein_id": "tr|Q9K1D2|Q9K1D2_NEIMB",
+        "rank": 27,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.85848409,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.85665216,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "dpnC",
+        "length": 267,
+        "name": "Type II restriction enzyme DpnI",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.85665216,
+        "protegenicity_raw": 85.665216,
+        "protein_id": "tr|Q9JXT3|Q9JXT3_NEIMB",
+        "rank": 28,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.85665216,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.85184337,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "nqrD",
+        "length": 208,
+        "name": "Na(+)-translocating NADH-quinone reductase subunit D",
+        "passes_thresholds": {
+          "0.85": true,
+          "0.90": false
+        },
+        "protegenicity": 0.85184337,
+        "protegenicity_raw": 85.184337,
+        "protein_id": "sp|Q9K0M6|NQRD_NEIMB",
+        "rank": 29,
+        "selected": true,
+        "selected_reason": "protegenicity>=0.85",
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.85184337,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.79367987,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.95,
+            "evalue": 4.73e-16,
+            "hit": "VFG052410",
+            "identity": 0.2645,
+            "term": 0.0
+          }
+        },
+        "gene": "zupT",
+        "length": 269,
+        "name": "Zinc transporter ZupT",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.79367987,
+        "protegenicity_raw": 79.367987,
+        "protein_id": "sp|Q9K1H6|ZUPT_NEIMB",
+        "rank": 30,
+        "selected": true,
+        "selected_reason": "rank_padding",
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.79367987,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.7781085400000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1915",
+        "length": 129,
+        "name": "Uncharacterized protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.7781085400000001,
+        "protegenicity_raw": 77.810854,
+        "protein_id": "tr|Q9JXR7|Q9JXR7_NEIMB",
+        "rank": 31,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.7781085400000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.76414014,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": {
+            "coverage": 0.87,
+            "evalue": 5.59e-15,
+            "hit": "VFG037274",
+            "identity": 0.3295,
+            "term": 0.286665
+          }
+        },
+        "gene": "NMB1077",
+        "length": 183,
+        "name": "ABC transporter, ATP-binding protein, truncation",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.76414014,
+        "protegenicity_raw": 76.414014,
+        "protein_id": "tr|Q4W570|Q4W570_NEIMB",
+        "rank": 32,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.76414014,
+          "virulence": 0.286665
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.70506068,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0897",
+        "length": 126,
+        "name": "Phage associated protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.70506068,
+        "protegenicity_raw": 70.506068,
+        "protein_id": "tr|Q9JZU4|Q9JZU4_NEIMB",
+        "rank": 33,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.70506068,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.6592626500000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1420",
+        "length": 79,
+        "name": "Putative Fis-like DNA-binding protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.6592626500000001,
+        "protegenicity_raw": 65.926265,
+        "protein_id": "sp|P64131|FISL_NEIMB",
+        "rank": 34,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.6592626500000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.58323792,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB2021",
+        "length": 88,
+        "name": "Probable Fe(2+)-trafficking protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.58323792,
+        "protegenicity_raw": 58.323792,
+        "protein_id": "sp|P67616|FETP_NEIMB",
+        "rank": 35,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.58323792,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.5713304300000001,
+        "evidence": {
+          "localisation": {
+            "is_unknown": false,
+            "label": "CytoplasmicMembrane",
+            "prior": 0.4,
+            "raw": "CytoplasmicMembrane",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0691",
+        "length": 165,
+        "name": "Colicin V production protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.5713304300000001,
+        "protegenicity_raw": 57.133043,
+        "protein_id": "tr|Q9K0C3|Q9K0C3_NEIMB",
+        "rank": 36,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.4,
+          "protegenicity": 0.5713304300000001,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.48706206,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1635",
+        "length": 73,
+        "name": "Uncharacterized protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.48706206,
+        "protegenicity_raw": 48.706206,
+        "protein_id": "tr|Q9JYD5|Q9JYD5_NEIMB",
+        "rank": 37,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.48706206,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.4465308,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1317",
+        "length": 134,
+        "name": "Uncharacterized protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.4465308,
+        "protegenicity_raw": 44.65308,
+        "protein_id": "tr|Q9JZ33|Q9JZ33_NEIMB",
+        "rank": 38,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.4465308,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.25509503,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB0236",
+        "length": 67,
+        "name": "Uncharacterized protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.25509503,
+        "protegenicity_raw": 25.509503,
+        "protein_id": "tr|Q9K1C6|Q9K1C6_NEIMB",
+        "rank": 39,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.25509503,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      },
+      {
+        "composite_score": 0.21914358,
+        "evidence": {
+          "localisation": {
+            "is_unknown": true,
+            "label": "Unknown",
+            "prior": 0.5,
+            "raw": "Unknown",
+            "score": null,
+            "source": "fixture_stand_in:uniprot_subcellular_location",
+            "status": "fixture_stand_in"
+          },
+          "virulence": null
+        },
+        "gene": "NMB1006",
+        "length": 59,
+        "name": "Uncharacterized protein",
+        "passes_thresholds": {
+          "0.85": false,
+          "0.90": false
+        },
+        "protegenicity": 0.21914358,
+        "protegenicity_raw": 21.914358,
+        "protein_id": "tr|Q9JZL0|Q9JZL0_NEIMB",
+        "rank": 40,
+        "selected": false,
+        "selected_reason": null,
+        "terms": {
+          "localisation": 0.5,
+          "protegenicity": 0.21914358,
+          "virulence": 0.0
+        },
+        "tie_group": null
+      }
+    ],
+    "ties": {
+      "basis": "equal composite_score, protegenicity and localisation prior (rounded to 9 decimals); inside a tie the order is by protein_id only, not by evidence",
+      "largest_group": {
+        "competition_rank": 18,
+        "size": 4
+      },
+      "n_groups": 1,
+      "n_tied_candidates": 4
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s3_rank",
+    "tools": {
+      "precomputed-protegenicity": "e4ong1031/vaxign-ml@sha256:7a647d55bb6a5154d8ee11ad78ef5fb18cc63cd2e98e23e04b172fbcb63fb4ec"
+    },
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "run_nmb_fixture",
+  "schema": "vaxforge/s3_rank/v1",
+  "stage": "s3",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "localisation for 40 proteins is a fixture stand-in from UniProt text, not PSORTb",
+    "4 candidates are tied with another one on composite score, protegenicity and localisation prior (largest tie: 4 at rank 18); inside a tie the order is by protein_id only, not by evidence (see tie_group)",
+    "LEAKAGE RISK: pretrained Vaxign-ML was trained on all Protegen entries; the target pathogen's known antigens are in its training set. Do not present their rediscovery as validation."
+  ]
+}

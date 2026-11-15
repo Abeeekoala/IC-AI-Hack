@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-11-15T10:39:30Z",
+  "digest": "sha256:25e8383d5a62405a885f739eca0999f63f70ace721de50dc7050f912ba85ba9c",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.2"
+  },
+  "inputs": {
+    "s9": "sha256:9415652d18c43fdeebddfc491baf3362c55947b7193a5ceddf436be4f5dc7fe1"
+  },
+  "params": {},
+  "payload": {
+    "reasons": [
+      "s9 did not run (code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set ...); see payload.reasons of s9_robot.json"
+    ],
+    "sessions": [],
+    "status": "not_run",
+    "summary": {
+      "n_animated": 0,
+      "n_sessions": 0,
+      "n_skipped": 0
+    }
+  },
+  "producer": {
+    "module": "vaxforge.s9plus_animate",
+    "tools": {},
+    "vaxforge_version": "0.1.0"
+  },
+  "run_id": "real_fixture",
+  "schema": "vaxforge/s9plus_animate/v1",
+  "stage": "s9plus",
+  "status": "ok",
+  "volatile": {},
+  "warnings": [
+    "S9+ not run: s9 did not run (code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set ...); see payload.reasons of s9_robot.json",
+    "Times in the animations are estimates from a fixed time model (timeline['time_model']), not measurements."
+  ]
+}

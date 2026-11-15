@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VaxForge workspace: review a recorded run</title><meta name="description" content="A replay of two recorded VaxForge runs in a three-part workspace. Review the ranked candidates, the structure evidence, a recorded model test and a handoff bundle, with the evidence for each item beside it. Nothing runs live."><meta name="theme-color" content="#08171a"><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"><link rel="stylesheet" href="assets/css/site.css"><link rel="stylesheet" href="assets/css/workspace.css"><link rel="stylesheet" href="assets/css/workspace-run.css"></head><body><a class="skip" href="#main">Skip to content</a><header class="site-nav"><div class="wrap nav-row"><a class="brand" href="index.html" aria-label="VaxForge, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5c6.6 0 12 4.3 12.6 10.6.7 6.8-4.6 15.4-12.9 16.4C8 30.4 3 24.9 3.4 17.7 3.8 9.2 9 2.5 16 2.5z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 8c4 0 7.5 2.7 7.8 6.6.3 4.4-3 9-7.7 9.5-4.5.5-7.7-3-7.5-7.3C8.8 12 11.7 8 16 8z" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".75"/><path d="M16 13.2c2 0 3.6 1.3 3.6 3.1 0 2-1.8 3.8-3.8 3.7-1.7-.1-3-1.3-3-2.9 0-2 1.4-3.9 3.2-3.9z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><circle cx="21.8" cy="9.6" r="2.3" fill="#f0a63a"/></svg>VaxForge</a><button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button><ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="pipeline.html">Pipeline</a></li><li><a href="workspace.html" aria-current="page">Workspace</a></li><li><a href="evidence.html">Evidence and limits</a></li><li><a class="btn btn-primary" href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Read the write-up</a></li></ul></div></header><main id="main"><section class="ws-wrap" aria-labelledby="ws-title">
+  <div class="ws" id="ws">
+    <aside class="ws-rail" aria-label="Workspace navigation">
+      <div class="ws-rail-head">
+        <h1 class="ws-title" id="ws-title">Workspace</h1>
+        <p class="ws-rail-sub">Review a recorded run</p>
+      </div>
+      <fieldset class="ws-runsw">
+        <legend>Run</legend>
+        <div class="ws-runlist">
+          <label class="ws-run is-on"><input type="radio" name="ws-run" value="demo" checked><span class="ws-run-t">Recorded offline run</span><span class="ws-run-d">Stored fixture, S3 to S12 run offline. The S4 to S7 tools were not installed.</span></label>
+          <label class="ws-run"><input type="radio" name="ws-run" value="real"><span class="ws-run-t">Real-tools run</span><span class="ws-run-d">Same fixture with real BLAST+, AlgPred2, ToxinPred2, MHCflurry and BepiPred-3.0.</span></label>
+        </div>
+      </fieldset>
+      <nav aria-label="Workflow">
+        <ol class="ws-steps" id="ws-steps">
+          <li><a class="ws-step-link" href="#/request" data-act="go" data-screen="request"><span class="ws-step-n">01</span><span>Request</span></a></li>
+          <li><a class="ws-step-link" href="#/candidates" data-act="go" data-screen="candidates"><span class="ws-step-n">02</span><span>Candidate review</span></a></li>
+          <li><a class="ws-step-link" href="#/structure" data-act="go" data-screen="structure"><span class="ws-step-n">03</span><span>Structure evidence</span></a></li>
+          <li><a class="ws-step-link" href="#/generate" data-act="go" data-screen="generate"><span class="ws-step-n">04</span><span>Generate with models</span></a></li>
+          <li><a class="ws-step-link" href="#/tests" data-act="go" data-screen="tests"><span class="ws-step-n">05</span><span>Test results</span></a></li>
+          <li><a class="ws-step-link" href="#/handoff" data-act="go" data-screen="handoff"><span class="ws-step-n">06</span><span>Handoff</span></a></li>
+        </ol>
+      </nav>
+      <p class="ws-rail-note">Replay mode: no job API is connected. Nothing on this page sends a request or runs code.</p>
+    </aside>
+
+    <div class="ws-main">
+      <div class="ws-top">
+        <nav aria-label="Breadcrumb">
+          <ol class="ws-crumbs" id="ws-crumbs"><li>Run</li><li aria-current="page">Request</li></ol>
+        </nav>
+        <div class="ws-top-r">
+          <span class="pill ws-pill-product">Working product · recorded run</span>
+          <span id="ws-runbadge"></span>
+          <button type="button" class="ws-btn ws-btn-sm ws-drawer-toggle" id="ws-drawer-toggle" data-act="drawer-toggle" aria-expanded="false" aria-controls="ws-drawer">Show evidence</button>
+        </div>
+      </div>
+      <div class="ws-central" id="ws-central" aria-busy="true">
+        <noscript><p class="ws-noscript">The workspace replays recorded runs in your browser, so it needs JavaScript. Without it, read the full evidence reports instead: <a href="runs/demo/report.html">Recorded offline run</a> and <a href="runs/real/report.html">Real-tools run</a>.</p></noscript>
+      </div>
+    </div>
+
+    <aside class="ws-drawer" id="ws-drawer" aria-label="Evidence drawer">
+      <div class="ws-dr-head">
+        <h2 class="ws-dr-h">Evidence</h2>
+        <button type="button" class="ws-btn ws-btn-sm ws-dr-close" data-act="drawer-close">Close</button>
+      </div>
+      <div class="ws-dr-scroll" id="ws-dr-scroll">
+        <div id="ws-dr-content"><p class="ws-empty-note">Select a candidate, stage or result to see its evidence here.</p></div>
+      </div>
+    </aside>
+  </div>
+  <div class="ws-sr" id="ws-live" aria-live="polite" aria-atomic="true"></div>
+</section>
+</main><footer class="site-foot"><div class="wrap"><div class="foot-grid"><div><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5c6.6 0 12 4.3 12.6 10.6.7 6.8-4.6 15.4-12.9 16.4C8 30.4 3 24.9 3.4 17.7 3.8 9.2 9 2.5 16 2.5z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M16 8c4 0 7.5 2.7 7.8 6.6.3 4.4-3 9-7.7 9.5-4.5.5-7.7-3-7.5-7.3C8.8 12 11.7 8 16 8z" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".75"/><path d="M16 13.2c2 0 3.6 1.3 3.6 3.1 0 2-1.8 3.8-3.8 3.7-1.7-.1-3-1.3-3-2.9 0-2 1.4-3.9 3.2-3.9z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><circle cx="21.8" cy="9.6" r="2.3" fill="#f0a63a"/></svg>VaxForge</a><p style="max-width:44ch">From a pathogen name to ranked candidate antigens, a protocol that says how it could be wrong, and robot code, with the evidence for how far to trust any of it.</p></div><div><h2>Explore</h2><ul><li><a href="pipeline.html">Pipeline, step by step</a></li><li><a href="workspace.html">Workspace</a></li><li><a href="evidence.html">Evidence and limits</a></li></ul></div><div><h2>Source</h2><ul><li><a href="https://github.com/Abeeekoala/IC-AI-Hack" rel="noopener" target="_blank">Repository on GitHub</a></li><li><a href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/docs/WRITEUP.md" rel="noopener" target="_blank">Submission write-up</a></li><li><a href="https://github.com/Abeeekoala/IC-AI-Hack/blob/main/README.md" rel="noopener" target="_blank">README and full spec</a></li></ul></div></div><div class="fine"><p><b>Candidates, not a vaccine.</b> Nothing on this site is a measured assay result. VaxForge is restricted to protective-antigen identification and will not be extended to work that raises virulence, transmissibility or immune escape.</p><p>Built for the IC AI Hack 2026. Figures come from the repository’s committed demo run (commit 494f85b). VaxForge is a placeholder name.</p></div></div></footer><script src="assets/js/site.js"></script><script src="assets/js/ws-verify.js" defer></script><script src="assets/js/workspace.js" defer></script><script src="assets/js/workspace-run.js" defer></script></body></html>

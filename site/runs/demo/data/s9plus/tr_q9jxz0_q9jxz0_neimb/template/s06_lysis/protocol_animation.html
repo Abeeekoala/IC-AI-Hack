@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>Protocol animation - protocol.py</title>
+<style>
+:root{
+  color-scheme: light dark;
+  --c-bg:#f5f6f8; --c-surface:#ffffff; --c-ink:#1b2430; --c-muted:#546070; --c-line:#d2d8df;
+  --c-deck:#e8ecf0; --c-slot:#b9c3ce; --c-lw:#ffffff; --c-lwline:#7a8696; --c-well:#6a7686;
+  --c-tipfull:#66727f; --c-tipused:#aab3be; --c-src:#b04500; --c-dst:#005a9c;
+  --c-gain:#0072b2; --c-loss:#c2540a; --c-ongain:#ffffff; --c-head:#1b2430; --c-trash:#d5dae0;
+  --c-accent:#0b5cad; --c-on-accent:#ffffff; --c-hl:#e4effa; --c-warn:#7a4a00;
+  --c-own-robot:#00695c; --c-own-part:#8a5a00; --c-own-human:#8e2c6b;
+  --shadow:0 1px 2px rgba(20,30,45,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --c-bg:#12161b; --c-surface:#1b2129; --c-ink:#e7ecf2; --c-muted:#a3aebb; --c-line:#37414d;
+    --c-deck:#0e1216; --c-slot:#3a4552; --c-lw:#222a34; --c-lwline:#7e8a99; --c-well:#9aa6b5;
+    --c-tipfull:#9aa6b5; --c-tipused:#4a5460; --c-src:#ff9a52; --c-dst:#6db6ff;
+    --c-gain:#56b4e9; --c-loss:#ff9a52; --c-ongain:#0b1118; --c-head:#e7ecf2; --c-trash:#2a323c;
+    --c-accent:#6db6ff; --c-on-accent:#0b1118; --c-hl:#243447; --c-warn:#f0b84a;
+    --c-own-robot:#4fd1b9; --c-own-part:#f0b84a; --c-own-human:#e79bc9;
+    --shadow:none;
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--c-bg);color:var(--c-ink);
+  font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-wrap:anywhere}
+.app{max-width:1320px;margin:0 auto;padding:12px 16px 36px}
+h1{font-size:20px;margin:0;line-height:1.25}
+h2{font-size:13px;margin:0 0 6px;letter-spacing:.06em;text-transform:uppercase;color:var(--c-muted)}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 20px;margin-bottom:12px}
+.sub{margin:2px 0 0;color:var(--c-muted);font-size:13px}
+.clock{text-align:right}
+.clock-t{font:600 22px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.clock-t .of{font:400 13px system-ui,sans-serif;color:var(--c-muted)}
+.clock-n{font-size:12px;font-weight:600;color:var(--c-warn)}
+.fatal{border:2px solid var(--c-own-human);border-radius:8px;padding:10px 12px;background:var(--c-surface)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,410px);gap:16px;align-items:start}
+.col-left,.col-right{min-width:0}
+.col-right>section,.col-right>details,.col-right>.panel{margin-bottom:14px}
+.below{margin-top:10px}
+.banner{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;min-height:56px;padding:8px 12px;
+  border:1px solid var(--c-line);border-radius:10px;background:var(--c-surface);margin-bottom:10px;box-shadow:var(--shadow)}
+.banner .bt{font-weight:600}
+.banner .bn{color:var(--c-muted);font-size:13px;flex:1 1 220px}
+.banner .muted{color:var(--c-muted);font-size:13px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border:2px solid currentColor;border-radius:6px;
+  font-weight:700;font-size:12px;letter-spacing:.04em;white-space:nowrap;background:var(--c-surface)}
+.badge .shape{display:inline-block;width:11px;height:11px;flex:none}
+.own-ROBOT{color:var(--c-own-robot)}
+.own-ROBOT .shape{border-radius:50%;background:currentColor}
+.own-ROBOT-PARTIAL{color:var(--c-own-part);border-style:dashed}
+.own-ROBOT-PARTIAL .shape{border-radius:50%;border:2px solid currentColor;background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.own-HUMAN{color:var(--c-own-human);border-style:double;border-width:4px;padding:0 6px}
+.own-HUMAN .shape{background:currentColor;-webkit-clip-path:polygon(50% 0,100% 100%,0 100%);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.host{width:100%}
+.box{position:relative;margin:0 auto}
+#deck{display:block;border:1px solid var(--c-line);border-radius:10px;touch-action:manipulation}
+.human{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;padding:12px;
+  background:rgba(10,14,20,.45);border-radius:10px}
+.human .card{max-width:440px;width:100%;background:var(--c-surface);color:var(--c-ink);border:4px double var(--c-own-human);
+  border-radius:12px;padding:14px 16px;text-align:left}
+.human .hd{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.03em;color:var(--c-own-human);margin-bottom:6px}
+.human .hd .shape{display:inline-block;width:14px;height:14px;background:currentColor;-webkit-clip-path:polygon(50% 0,100% 100%,0 100%);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.human p{margin:0 0 10px}
+.human .hs{font-size:12px;color:var(--c-muted)}
+.capbox{margin:0;padding:10px 12px;border:1px solid var(--c-line);border-radius:10px;background:var(--c-surface);min-height:6.6em}
+.caption{margin:0;font-weight:600;font-size:16px}
+.meta{margin:4px 0 0;color:var(--c-muted);font-size:13px}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
+button,select{font:inherit;color:var(--c-ink);background:var(--c-surface);border:1px solid var(--c-line);border-radius:8px;
+  padding:8px 12px;min-height:40px}
+button{cursor:pointer}
+button:hover:not([disabled]){border-color:var(--c-accent)}
+button[disabled]{opacity:.5;cursor:default}
+button.primary{background:var(--c-accent);color:var(--c-on-accent);border-color:var(--c-accent);font-weight:700;min-width:84px}
+:focus-visible{outline:3px solid var(--c-accent);outline-offset:2px}
+.controls label{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--c-muted)}
+.scrub{flex:1 1 100%;display:flex;align-items:center;gap:10px}
+.scrub input{flex:1;min-width:0;height:28px;accent-color:var(--c-accent)}
+.inspect{margin:0 0 8px;color:var(--c-muted);font-size:13px;min-height:1.4em}
+.legend{list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;font-size:12.5px;color:var(--c-muted)}
+.legend li{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:16px;height:16px;flex:none;text-align:center;line-height:14px;font:700 13px/14px system-ui,sans-serif}
+.sw.tip{border-radius:50%;background:var(--c-tipfull)}
+.sw.tipused{border-radius:50%;border:1.5px dashed var(--c-tipused)}
+.sw.src{border:2.5px dashed var(--c-src);border-radius:50%}
+.sw.dst{border:2.5px solid var(--c-dst);border-radius:50%}
+.sw.gain{border-radius:50%;background:var(--c-gain);color:var(--c-ongain)}
+.sw.loss{border-radius:50%;border:1.5px solid var(--c-loss);color:var(--c-loss);
+  background:repeating-linear-gradient(45deg,var(--c-loss) 0 2px,transparent 2px 5px)}
+.sw.head{border-radius:50%;background:var(--c-head)}
+.sw.headh{border-radius:50%;border:2px solid var(--c-head)}
+.stat{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0 0 8px;font-size:13px}
+.stat dt{color:var(--c-muted)} .stat dd{margin:0;font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-direction:column;gap:4px;margin:0 0 8px;padding:0;list-style:none;font-size:13px}
+.chips li{border:1px solid var(--c-line);border-radius:8px;padding:4px 8px;background:var(--c-surface)}
+.chips li.on{border-color:var(--c-accent);box-shadow:inset 3px 0 0 var(--c-accent)}
+.steps{list-style:none;margin:0;padding:0;max-height:min(58vh,620px);overflow:auto;position:relative;
+  border:1px solid var(--c-line);border-radius:10px;background:var(--c-surface)}
+.steps li{margin:0;padding:0}
+.steps .ph{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;padding:6px 8px;background:var(--c-bg);
+  border-bottom:1px solid var(--c-line);font-size:12.5px;font-weight:600}
+.steps .stp{display:grid;grid-template-columns:2.4em 3.6em minmax(0,1fr) auto;gap:6px;align-items:baseline;width:100%;
+  text-align:left;border:0;border-bottom:1px solid var(--c-line);border-radius:0;background:transparent;
+  padding:5px 8px;min-height:32px;font-size:13px}
+.steps .stp .n{color:var(--c-muted);font-variant-numeric:tabular-nums}
+.steps .stp .k{font:700 10.5px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--c-muted);letter-spacing:.03em}
+.steps .stp .tm{color:var(--c-muted);font-variant-numeric:tabular-nums;font-size:12px}
+.steps .stp.lv1 .tx{padding-left:12px}.steps .stp.lv2 .tx{padding-left:24px}.steps .stp.lv3 .tx{padding-left:36px}
+.steps .stp.grp .tx{font-style:italic}
+.steps .stp[aria-current="step"]{background:var(--c-hl);box-shadow:inset 4px 0 0 var(--c-accent);font-weight:700}
+.steps .stp.hum .k{color:var(--c-own-human)}
+details.tm summary{cursor:pointer;font-weight:600;padding:6px 0}
+.tm table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0}
+.tm td{padding:2px 6px;border-bottom:1px solid var(--c-line);vertical-align:top}
+.tm td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.tm ul{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--c-muted)}
+.warn{margin:0 0 10px;padding:8px 12px;border:1px solid var(--c-warn);border-radius:8px;font-size:13px;color:var(--c-warn)}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.fail{max-width:760px;margin:24px auto;padding:18px 20px;border:2px solid var(--c-own-human);border-radius:12px;background:var(--c-surface)}
+.fail h1{display:flex;align-items:center;gap:10px}
+.fail pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--c-bg);border:1px solid var(--c-line);border-radius:8px;padding:10px;font-size:13px}
+.fail ul{padding-left:18px}
+@media (max-width:900px){
+  .layout{display:flex;flex-direction:column;gap:12px}
+  .col-left,.col-right{display:contents}
+  .banner{order:1}.host{order:2}.panel{order:3}.below{order:4}.run{order:5}.stepsec{order:6}.tm{order:7}
+  .col-right>section,.col-right>details,.col-right>.panel{margin-bottom:0}
+  .below{margin-top:0}
+  .steps{max-height:50vh}
+  .clock{text-align:left}
+}
+@media (max-width:520px){
+  body{font-size:14px}
+  .app{padding:8px 12px 28px}
+  .caption{font-size:15px}
+  button,select{padding:8px 10px}
+  .controls{gap:6px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<p id="fatal" class="fatal" role="alert" hidden></p>
+<header class="top">
+  <div>
+    <h1>OT-2 protocol animation</h1>
+    <p class="sub" id="sub"></p>
+  </div>
+  <div class="clock" role="group" aria-label="Estimated run time">
+    <div class="clock-t"><span id="t-now">00:00</span> <span class="of">of</span> <span id="t-total">00:00</span></div>
+    <div class="clock-n">Estimated time - not measured on a robot</div>
+  </div>
+</header>
+<div id="warnings"></div>
+<main class="layout">
+  <div class="col-left">
+    <div id="banner" class="banner" role="group" aria-label="Protocol phase"></div>
+    <div class="host" id="host">
+      <div class="box" id="box">
+        <canvas id="deck" role="img" aria-label="Top-down view of the OT-2 deck. The caption describes the current step in words."></canvas>
+        <div class="human" id="human" hidden>
+          <div class="card" role="group" aria-label="Human step">
+            <div class="hd"><i class="shape" aria-hidden="true"></i><span>HUMAN STEP - robot paused</span></div>
+            <p id="human-msg"></p>
+            <p class="hs" id="human-step"></p>
+            <button type="button" class="primary" id="resume">Resume</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="below" id="below">
+      <p class="inspect" id="inspect">Hover or tap a well to read its net change. Keys: Space = play/pause, Left/Right = step.</p>
+      <ul class="legend" aria-label="Legend">
+        <li><i class="sw tip" aria-hidden="true"></i>tip available</li>
+        <li><i class="sw tipused" aria-hidden="true"></i>tip used (dashed)</li>
+        <li><i class="sw src" aria-hidden="true"></i>source well (dashed ring)</li>
+        <li><i class="sw dst" aria-hidden="true"></i>destination well (solid ring)</li>
+        <li><i class="sw gain" aria-hidden="true">+</i>net gain</li>
+        <li><i class="sw loss" aria-hidden="true">&minus;</i>net loss (hatched)</li>
+        <li><i class="sw head" aria-hidden="true"></i>pipette with tip (filled)</li>
+        <li><i class="sw headh" aria-hidden="true"></i>pipette, no tip (hollow)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-right">
+    <div class="panel" id="panel">
+      <div class="capbox">
+        <p class="caption" id="caption"></p>
+        <p class="meta" id="meta"></p>
+      </div>
+      <div class="controls" role="group" aria-label="Playback controls">
+        <button type="button" id="btn-restart">Restart</button>
+        <button type="button" id="btn-back" aria-label="Step back">&larr; Back</button>
+        <button type="button" id="btn-play" class="primary">Play</button>
+        <button type="button" id="btn-next" aria-label="Step forward">Next &rarr;</button>
+        <label>Speed
+          <select id="speed" aria-label="Playback speed">
+            <option value="0.5">0.5&times;</option><option value="1">1&times;</option><option value="2">2&times;</option>
+            <option value="4" selected>4&times;</option><option value="8">8&times;</option><option value="16">16&times;</option>
+            <option value="32">32&times;</option><option value="64">64&times;</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="skipdelays" checked> Fast-forward waits</label>
+        <div class="scrub"><input type="range" id="scrub" min="0" max="0" step="any" value="0" aria-label="Scrub through the run"><span id="steplab" class="meta"></span></div>
+      </div>
+    </div>
+    <section class="run" aria-labelledby="h-run"><h2 id="h-run">Run state</h2>
+      <dl class="stat" id="st-totals"></dl>
+      <ul class="chips" id="st-pips" aria-label="Pipettes"></ul>
+      <ul class="chips" id="st-mods" aria-label="Modules"></ul>
+      <ul class="chips" id="st-racks" aria-label="Tip racks"></ul>
+      <h2 id="h-nets">Largest net changes so far</h2>
+      <ul class="chips" id="st-nets" aria-labelledby="h-nets"></ul>
+    </section>
+    <section class="stepsec" aria-labelledby="h-steps"><h2 id="h-steps">Steps</h2>
+      <ol class="steps" id="steps"></ol>
+    </section>
+    <details class="tm"><summary>How the time is estimated</summary><div id="tm-body"></div></details>
+  </div>
+</main>
+</div>
+<div id="live" class="sr" aria-live="polite" aria-atomic="true"></div>
+<noscript><p class="fatal">This player needs JavaScript. The timeline is embedded in this file as JSON.</p></noscript>
+
+<script type="application/json" id="vf-timeline">{"schema":"vaxforge.timeline/1","ok":true,"error":null,"source":{"sim_schema":"vaxforge.ot_sim/1","protocol_file":"protocol.py","opentrons_version":"7.5.0","api_level":"2.19"},"time_model":{"estimate_only":true,"headline":"Estimated time - not measured on a robot","constants":{"gantry_speed_mm_s":250.0,"default_flow_rate_ul_s":10.0,"pick_up_tip_s":3.0,"drop_tip_s":2.0,"blow_out_s":1.0,"touch_tip_s":3.0,"temperature_set_s":60.0,"temperature_wait_s":60.0,"temperature_deactivate_s":1.0,"magnet_move_s":5.0,"home_s":5.0,"comment_s":0.0,"unknown_command_s":0.0,"home_xy_mm":[385.0,321.0]},"rules":["Every time here is an ESTIMATE computed from the simulator's command list. Nothing was measured on a robot.","Aspirate / dispense: volume (\u00b5L, per channel) divided by the flow rate. The flow rate is the one the simulator printed for that command; if it printed none, default_flow_rate_ul_s is used.","Gantry travel: straight-line XY distance between consecutive pipette positions divided by gantry_speed_mm_s (constant speed; no acceleration, no Z travel, mount offset ignored). The first move starts from home_xy_mm.","Tip pick-up, tip drop, blow-out, touch-tip: fixed seconds (pick_up_tip_s, drop_tip_s, blow_out_s, touch_tip_s) on top of the travel time.","Delay: the exact number of seconds written in the protocol.","Temperature module set / wait: a placeholder (temperature_set_s, temperature_wait_s). The real time depends on the module and the temperature change.","Magnetic module engage / disengage, temperature deactivate, home: fixed placeholders (magnet_move_s, temperature_deactivate_s, home_s).","Pause: a HUMAN step. The robot waits for a person, so no duration is estimated and none is added to the total.","Comments, unrecognised commands and the headers of transfer / distribute / consolidate / mix take 0 s. Only their primitive steps (pick-up, aspirate, dispense, ...) carry time and volume, so nothing is counted twice."]},"deck":{"units":"mm","frame":"origin = front-left corner of slot 1; +x to the right; +y towards the back of the robot","extent":{"w":392.76,"h":356.98},"footprint":[127.76,85.48],"home":[385.0,321.0],"channel_pitch_mm":9.0,"slots":[{"slot":"1","x":0.0,"y":0.0,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"2","x":132.5,"y":0.0,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"3","x":265.0,"y":0.0,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"4","x":0.0,"y":90.5,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"5","x":132.5,"y":90.5,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"6","x":265.0,"y":90.5,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"7","x":0.0,"y":181.0,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"8","x":132.5,"y":181.0,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"9","x":265.0,"y":181.0,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"10","x":0.0,"y":271.5,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"11","x":132.5,"y":271.5,"w":127.76,"h":85.48,"kind":"slot"},{"slot":"12","x":265.0,"y":271.5,"w":127.76,"h":85.48,"kind":"trash"}],"labware":[{"slot":"5","load_name":"nest_96_wellplate_2ml_deep","display_name":"nest_96_wellplate_2ml_deep","label":"nest 96 wellplate 2ml deep","kind":"plate","module":null,"rect":[132.5,90.5,127.76,85.48],"wells":{"A1":{"x":146.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B1":{"x":146.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C1":{"x":146.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D1":{"x":146.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E1":{"x":146.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F1":{"x":146.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G1":{"x":146.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H1":{"x":146.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A2":{"x":155.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B2":{"x":155.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C2":{"x":155.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D2":{"x":155.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E2":{"x":155.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F2":{"x":155.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G2":{"x":155.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H2":{"x":155.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A3":{"x":164.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B3":{"x":164.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C3":{"x":164.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D3":{"x":164.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E3":{"x":164.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F3":{"x":164.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G3":{"x":164.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H3":{"x":164.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A4":{"x":173.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B4":{"x":173.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C4":{"x":173.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D4":{"x":173.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E4":{"x":173.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F4":{"x":173.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G4":{"x":173.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H4":{"x":173.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A5":{"x":182.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B5":{"x":182.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C5":{"x":182.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D5":{"x":182.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E5":{"x":182.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F5":{"x":182.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G5":{"x":182.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H5":{"x":182.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A6":{"x":191.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B6":{"x":191.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C6":{"x":191.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D6":{"x":191.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E6":{"x":191.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F6":{"x":191.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G6":{"x":191.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H6":{"x":191.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A7":{"x":200.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B7":{"x":200.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C7":{"x":200.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D7":{"x":200.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E7":{"x":200.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F7":{"x":200.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G7":{"x":200.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H7":{"x":200.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A8":{"x":209.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B8":{"x":209.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C8":{"x":209.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D8":{"x":209.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E8":{"x":209.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F8":{"x":209.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G8":{"x":209.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H8":{"x":209.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A9":{"x":218.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B9":{"x":218.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C9":{"x":218.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D9":{"x":218.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E9":{"x":218.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F9":{"x":218.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G9":{"x":218.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H9":{"x":218.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A10":{"x":227.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B10":{"x":227.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C10":{"x":227.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D10":{"x":227.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E10":{"x":227.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F10":{"x":227.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G10":{"x":227.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H10":{"x":227.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A11":{"x":236.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B11":{"x":236.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C11":{"x":236.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D11":{"x":236.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E11":{"x":236.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F11":{"x":236.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G11":{"x":236.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H11":{"x":236.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"A12":{"x":245.8,"y":164.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"B12":{"x":245.8,"y":155.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"C12":{"x":245.8,"y":146.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"D12":{"x":245.8,"y":137.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"E12":{"x":245.8,"y":128.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"F12":{"x":245.8,"y":119.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"G12":{"x":245.8,"y":110.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0},"H12":{"x":245.8,"y":101.65,"shape":"rect","w":8.2,"h":8.2,"max_ul":2000.0}}},{"slot":"2","load_name":"nest_12_reservoir_15ml","display_name":"nest_12_reservoir_15ml","label":"nest 12 reservoir 15ml","kind":"reservoir","module":null,"rect":[132.5,0.0,127.76,85.48],"wells":{"A1":{"x":146.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A2":{"x":155.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A3":{"x":164.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A4":{"x":173.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A5":{"x":182.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A6":{"x":191.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A7":{"x":200.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A8":{"x":209.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A9":{"x":218.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A10":{"x":227.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A11":{"x":236.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0},"A12":{"x":245.88,"y":42.78,"shape":"rect","w":8.2,"h":71.2,"max_ul":15000.0}}},{"slot":"11","load_name":"opentrons_96_tiprack_300ul","display_name":"opentrons_96_tiprack_300ul","label":"opentrons 96 tiprack 300ul","kind":"tiprack","module":null,"rect":[132.5,271.5,127.76,85.48],"wells":{"A1":{"x":146.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B1":{"x":146.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C1":{"x":146.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D1":{"x":146.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E1":{"x":146.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F1":{"x":146.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G1":{"x":146.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H1":{"x":146.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A2":{"x":155.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B2":{"x":155.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C2":{"x":155.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D2":{"x":155.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E2":{"x":155.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F2":{"x":155.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G2":{"x":155.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H2":{"x":155.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A3":{"x":164.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B3":{"x":164.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C3":{"x":164.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D3":{"x":164.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E3":{"x":164.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F3":{"x":164.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G3":{"x":164.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H3":{"x":164.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A4":{"x":173.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B4":{"x":173.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C4":{"x":173.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D4":{"x":173.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E4":{"x":173.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F4":{"x":173.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G4":{"x":173.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H4":{"x":173.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A5":{"x":182.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B5":{"x":182.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C5":{"x":182.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D5":{"x":182.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E5":{"x":182.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F5":{"x":182.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G5":{"x":182.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H5":{"x":182.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A6":{"x":191.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B6":{"x":191.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C6":{"x":191.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D6":{"x":191.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E6":{"x":191.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F6":{"x":191.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G6":{"x":191.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H6":{"x":191.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A7":{"x":200.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B7":{"x":200.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C7":{"x":200.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D7":{"x":200.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E7":{"x":200.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F7":{"x":200.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G7":{"x":200.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H7":{"x":200.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A8":{"x":209.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B8":{"x":209.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C8":{"x":209.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D8":{"x":209.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E8":{"x":209.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F8":{"x":209.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G8":{"x":209.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H8":{"x":209.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A9":{"x":218.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B9":{"x":218.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C9":{"x":218.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D9":{"x":218.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E9":{"x":218.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F9":{"x":218.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G9":{"x":218.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H9":{"x":218.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A10":{"x":227.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B10":{"x":227.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C10":{"x":227.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D10":{"x":227.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E10":{"x":227.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F10":{"x":227.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G10":{"x":227.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H10":{"x":227.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A11":{"x":236.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B11":{"x":236.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C11":{"x":236.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D11":{"x":236.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E11":{"x":236.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F11":{"x":236.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G11":{"x":236.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H11":{"x":236.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"A12":{"x":245.88,"y":345.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"B12":{"x":245.88,"y":336.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"C12":{"x":245.88,"y":327.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"D12":{"x":245.88,"y":318.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"E12":{"x":245.88,"y":309.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"F12":{"x":245.88,"y":300.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"G12":{"x":245.88,"y":291.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0},"H12":{"x":245.88,"y":282.74,"shape":"circle","w":5.23,"h":5.23,"max_ul":300.0}}}],"modules":[],"pipettes":[{"mount":"right","name":"p300_single_gen2","channels":1,"min_volume_ul":20.0,"max_volume_ul":300.0,"channel_offsets_y":[0.0]}],"trash":{"slot":"12","rect":[265.0,271.5,127.76,85.48],"point":[328.88,314.24]}},"initial_state":{"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"head":[385.0,321.0]},"frames":[{"index":0,"event_idx":0,"level":0,"parent":null,"kind":"comment","raw_kind":null,"is_group":false,"caption":"Phase s06: Lyse cells; clarify lysate","detail":"ROBOT-PARTIAL - Reagent addition yes; sonication/centrifugation no.","text":"[s06] Lyse cells; clarify lysate | ROBOT-PARTIAL | Reagent addition yes; sonication/centrifugation no.","start_s":0.0,"end_s":0.0,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":null,"head_mount":null,"head_before":[385.0,321.0],"head_after":[385.0,321.0],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":0,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":1,"event_idx":1,"level":0,"parent":null,"kind":"transfer","raw_kind":null,"is_group":true,"caption":"Transfer 300 \u00b5L: A1 of reservoir (slot 2) \u2192 A1, B1, C1, D1, E1, F1 of plate (slot 5)","detail":"group header - the steps below do the work; no time or volume counted here","text":"Transferring 300.0 from A1 of NEST 12 Well Reservoir 15 mL on slot 2 to A1 of NEST 96 Deep Well Plate 2mL on slot 5","start_s":0.0,"end_s":0.0,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[385.0,321.0],"head_after":[385.0,321.0],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":300.0,"focus":[{"key":"2:A1","role":"source"},{"key":"5:A1","role":"dest"},{"key":"5:B1","role":"dest"},{"key":"5:C1","role":"dest"},{"key":"5:D1","role":"dest"},{"key":"5:E1","role":"dest"},{"key":"5:F1","role":"dest"}],"focus_preview":true,"well_net_ul":{},"tips_consumed":[],"tips_used_total":0,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":2,"event_idx":2,"level":1,"parent":1,"kind":"pick_up_tip","raw_kind":null,"is_group":false,"caption":"Pick up tip A1 from tip rack (slot 11)","detail":"","text":"Picking up tip from A1 of Opentrons OT-2 96 Tip Rack 300 \u00b5L on slot 11","start_s":0.0,"end_s":3.958,"duration_s":3.958,"move_s":0.958,"action_s":3.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[385.0,321.0],"head_after":[146.88,345.74],"move_mm":239.4,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"11:A1","role":"tip"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":["11:A1"],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":3,"event_idx":3,"level":1,"parent":1,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 300 \u00b5L from A1 of reservoir (slot 2)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec","start_s":3.958,"end_s":8.4,"duration_s":4.443,"move_s":1.212,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,345.74],"head_after":[146.88,42.78],"move_mm":302.96,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"2:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"2:A1":-300.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":300.0}},"phase":0},{"index":4,"event_idx":4,"level":1,"parent":1,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 300 \u00b5L into A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Dispensing 300.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":8.4,"end_s":12.118,"duration_s":3.718,"move_s":0.487,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,42.78],"head_after":[146.8,164.65],"move_mm":121.87,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:A1":300.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":5,"event_idx":5,"level":1,"parent":1,"kind":"mix","raw_kind":null,"is_group":true,"caption":"Mix 5x with 200 \u00b5L at A1 of plate (slot 5)","detail":"group header - the steps below do the work; no time or volume counted here","text":"Mixing 5 times with a volume of 200.0 ul","start_s":12.118,"end_s":12.118,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":200.0,"focus":[{"key":"5:A1","role":"here"}],"focus_preview":true,"well_net_ul":{},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":6,"event_idx":6,"level":2,"parent":5,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":12.118,"end_s":14.272,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:A1":100.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":7,"event_idx":7,"level":2,"parent":5,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":14.272,"end_s":16.426,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:A1":300.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":8,"event_idx":8,"level":2,"parent":5,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":16.426,"end_s":18.58,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:A1":100.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":9,"event_idx":9,"level":2,"parent":5,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":18.58,"end_s":20.733,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:A1":300.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":10,"event_idx":10,"level":2,"parent":5,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":20.733,"end_s":22.887,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:A1":100.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":11,"event_idx":11,"level":2,"parent":5,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":22.887,"end_s":25.041,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:A1":300.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":12,"event_idx":12,"level":2,"parent":5,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":25.041,"end_s":27.195,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:A1":100.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":13,"event_idx":13,"level":2,"parent":5,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":27.195,"end_s":29.349,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:A1":300.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":14,"event_idx":14,"level":2,"parent":5,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":29.349,"end_s":31.502,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:A1":100.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":15,"event_idx":15,"level":2,"parent":5,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into A1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into A1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":31.502,"end_s":33.656,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[146.8,164.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:A1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:A1":300.0},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":16,"event_idx":16,"level":1,"parent":1,"kind":"drop_tip","raw_kind":null,"is_group":false,"caption":"Drop tip into trash (slot 12)","detail":"","text":"Dropping tip into Trash Bin on slot 12","start_s":33.656,"end_s":36.599,"duration_s":2.943,"move_s":0.943,"action_s":2.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,164.65],"head_after":[328.88,314.24],"move_mm":235.65,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"trash:12","role":"trash"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":1,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":17,"event_idx":17,"level":1,"parent":1,"kind":"pick_up_tip","raw_kind":null,"is_group":false,"caption":"Pick up tip B1 from tip rack (slot 11)","detail":"","text":"Picking up tip from B1 of Opentrons OT-2 96 Tip Rack 300 \u00b5L on slot 11","start_s":36.599,"end_s":40.332,"duration_s":3.734,"move_s":0.734,"action_s":3.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[328.88,314.24],"head_after":[146.88,336.74],"move_mm":183.39,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"11:B1","role":"tip"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":["11:B1"],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":18,"event_idx":18,"level":1,"parent":1,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 300 \u00b5L from A1 of reservoir (slot 2)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec","start_s":40.332,"end_s":44.739,"duration_s":4.407,"move_s":1.176,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,336.74],"head_after":[146.88,42.78],"move_mm":293.96,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"2:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"2:A1":-600.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":300.0}},"phase":0},{"index":19,"event_idx":19,"level":1,"parent":1,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 300 \u00b5L into B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Dispensing 300.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":44.739,"end_s":48.421,"duration_s":3.682,"move_s":0.451,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,42.78],"head_after":[146.8,155.65],"move_mm":112.87,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:B1":300.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":20,"event_idx":20,"level":1,"parent":1,"kind":"mix","raw_kind":null,"is_group":true,"caption":"Mix 5x with 200 \u00b5L at B1 of plate (slot 5)","detail":"group header - the steps below do the work; no time or volume counted here","text":"Mixing 5 times with a volume of 200.0 ul","start_s":48.421,"end_s":48.421,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":200.0,"focus":[{"key":"5:B1","role":"here"}],"focus_preview":true,"well_net_ul":{},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":21,"event_idx":21,"level":2,"parent":20,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":48.421,"end_s":50.575,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:B1":100.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":22,"event_idx":22,"level":2,"parent":20,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":50.575,"end_s":52.728,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:B1":300.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":23,"event_idx":23,"level":2,"parent":20,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":52.728,"end_s":54.882,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:B1":100.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":24,"event_idx":24,"level":2,"parent":20,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":54.882,"end_s":57.036,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:B1":300.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":25,"event_idx":25,"level":2,"parent":20,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":57.036,"end_s":59.19,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:B1":100.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":26,"event_idx":26,"level":2,"parent":20,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":59.19,"end_s":61.344,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:B1":300.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":27,"event_idx":27,"level":2,"parent":20,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":61.344,"end_s":63.497,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:B1":100.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":28,"event_idx":28,"level":2,"parent":20,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":63.497,"end_s":65.651,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:B1":300.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":29,"event_idx":29,"level":2,"parent":20,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":65.651,"end_s":67.805,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:B1":100.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":30,"event_idx":30,"level":2,"parent":20,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into B1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into B1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":67.805,"end_s":69.959,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[146.8,155.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:B1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:B1":300.0},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":31,"event_idx":31,"level":1,"parent":1,"kind":"drop_tip","raw_kind":null,"is_group":false,"caption":"Drop tip into trash (slot 12)","detail":"","text":"Dropping tip into Trash Bin on slot 12","start_s":69.959,"end_s":72.925,"duration_s":2.966,"move_s":0.966,"action_s":2.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,155.65],"head_after":[328.88,314.24],"move_mm":241.46,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"trash:12","role":"trash"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":2,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":32,"event_idx":32,"level":1,"parent":1,"kind":"pick_up_tip","raw_kind":null,"is_group":false,"caption":"Pick up tip C1 from tip rack (slot 11)","detail":"","text":"Picking up tip from C1 of Opentrons OT-2 96 Tip Rack 300 \u00b5L on slot 11","start_s":72.925,"end_s":76.655,"duration_s":3.73,"move_s":0.73,"action_s":3.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[328.88,314.24],"head_after":[146.88,327.74],"move_mm":182.5,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"11:C1","role":"tip"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":["11:C1"],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":33,"event_idx":33,"level":1,"parent":1,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 300 \u00b5L from A1 of reservoir (slot 2)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec","start_s":76.655,"end_s":81.025,"duration_s":4.371,"move_s":1.14,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,327.74],"head_after":[146.88,42.78],"move_mm":284.96,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"2:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"2:A1":-900.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":300.0}},"phase":0},{"index":34,"event_idx":34,"level":1,"parent":1,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 300 \u00b5L into C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Dispensing 300.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":81.025,"end_s":84.671,"duration_s":3.646,"move_s":0.415,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,42.78],"head_after":[146.8,146.65],"move_mm":103.87,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:C1":300.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":35,"event_idx":35,"level":1,"parent":1,"kind":"mix","raw_kind":null,"is_group":true,"caption":"Mix 5x with 200 \u00b5L at C1 of plate (slot 5)","detail":"group header - the steps below do the work; no time or volume counted here","text":"Mixing 5 times with a volume of 200.0 ul","start_s":84.671,"end_s":84.671,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":200.0,"focus":[{"key":"5:C1","role":"here"}],"focus_preview":true,"well_net_ul":{},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":36,"event_idx":36,"level":2,"parent":35,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":84.671,"end_s":86.825,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:C1":100.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":37,"event_idx":37,"level":2,"parent":35,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":86.825,"end_s":88.979,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:C1":300.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":38,"event_idx":38,"level":2,"parent":35,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":88.979,"end_s":91.133,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:C1":100.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":39,"event_idx":39,"level":2,"parent":35,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":91.133,"end_s":93.286,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:C1":300.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":40,"event_idx":40,"level":2,"parent":35,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":93.286,"end_s":95.44,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:C1":100.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":41,"event_idx":41,"level":2,"parent":35,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":95.44,"end_s":97.594,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:C1":300.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":42,"event_idx":42,"level":2,"parent":35,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":97.594,"end_s":99.748,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:C1":100.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":43,"event_idx":43,"level":2,"parent":35,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":99.748,"end_s":101.901,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:C1":300.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":44,"event_idx":44,"level":2,"parent":35,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":101.901,"end_s":104.055,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:C1":100.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":45,"event_idx":45,"level":2,"parent":35,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into C1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into C1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":104.055,"end_s":106.209,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[146.8,146.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:C1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:C1":300.0},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":46,"event_idx":46,"level":1,"parent":1,"kind":"drop_tip","raw_kind":null,"is_group":false,"caption":"Drop tip into trash (slot 12)","detail":"","text":"Dropping tip into Trash Bin on slot 12","start_s":106.209,"end_s":109.199,"duration_s":2.99,"move_s":0.99,"action_s":2.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,146.65],"head_after":[328.88,314.24],"move_mm":247.47,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"trash:12","role":"trash"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":3,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":47,"event_idx":47,"level":1,"parent":1,"kind":"pick_up_tip","raw_kind":null,"is_group":false,"caption":"Pick up tip D1 from tip rack (slot 11)","detail":"","text":"Picking up tip from D1 of Opentrons OT-2 96 Tip Rack 300 \u00b5L on slot 11","start_s":109.199,"end_s":112.927,"duration_s":3.728,"move_s":0.728,"action_s":3.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[328.88,314.24],"head_after":[146.88,318.74],"move_mm":182.06,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"11:D1","role":"tip"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":["11:D1"],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":48,"event_idx":48,"level":1,"parent":1,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 300 \u00b5L from A1 of reservoir (slot 2)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec","start_s":112.927,"end_s":117.262,"duration_s":4.335,"move_s":1.104,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,318.74],"head_after":[146.88,42.78],"move_mm":275.96,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"2:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"2:A1":-1200.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":300.0}},"phase":0},{"index":49,"event_idx":49,"level":1,"parent":1,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 300 \u00b5L into D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Dispensing 300.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":117.262,"end_s":120.872,"duration_s":3.61,"move_s":0.379,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,42.78],"head_after":[146.8,137.65],"move_mm":94.87,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:D1":300.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":50,"event_idx":50,"level":1,"parent":1,"kind":"mix","raw_kind":null,"is_group":true,"caption":"Mix 5x with 200 \u00b5L at D1 of plate (slot 5)","detail":"group header - the steps below do the work; no time or volume counted here","text":"Mixing 5 times with a volume of 200.0 ul","start_s":120.872,"end_s":120.872,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":200.0,"focus":[{"key":"5:D1","role":"here"}],"focus_preview":true,"well_net_ul":{},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":51,"event_idx":51,"level":2,"parent":50,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":120.872,"end_s":123.025,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:D1":100.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":52,"event_idx":52,"level":2,"parent":50,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":123.025,"end_s":125.179,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:D1":300.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":53,"event_idx":53,"level":2,"parent":50,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":125.179,"end_s":127.333,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:D1":100.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":54,"event_idx":54,"level":2,"parent":50,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":127.333,"end_s":129.487,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:D1":300.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":55,"event_idx":55,"level":2,"parent":50,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":129.487,"end_s":131.641,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:D1":100.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":56,"event_idx":56,"level":2,"parent":50,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":131.641,"end_s":133.794,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:D1":300.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":57,"event_idx":57,"level":2,"parent":50,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":133.794,"end_s":135.948,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:D1":100.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":58,"event_idx":58,"level":2,"parent":50,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":135.948,"end_s":138.102,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:D1":300.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":59,"event_idx":59,"level":2,"parent":50,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":138.102,"end_s":140.256,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:D1":100.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":60,"event_idx":60,"level":2,"parent":50,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into D1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into D1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":140.256,"end_s":142.41,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[146.8,137.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:D1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:D1":300.0},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":61,"event_idx":61,"level":1,"parent":1,"kind":"drop_tip","raw_kind":null,"is_group":false,"caption":"Drop tip into trash (slot 12)","detail":"","text":"Dropping tip into Trash Bin on slot 12","start_s":142.41,"end_s":145.424,"duration_s":3.015,"move_s":1.015,"action_s":2.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,137.65],"head_after":[328.88,314.24],"move_mm":253.65,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"trash:12","role":"trash"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":4,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":62,"event_idx":62,"level":1,"parent":1,"kind":"pick_up_tip","raw_kind":null,"is_group":false,"caption":"Pick up tip E1 from tip rack (slot 11)","detail":"","text":"Picking up tip from E1 of Opentrons OT-2 96 Tip Rack 300 \u00b5L on slot 11","start_s":145.424,"end_s":149.152,"duration_s":3.728,"move_s":0.728,"action_s":3.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[328.88,314.24],"head_after":[146.88,309.74],"move_mm":182.06,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"11:E1","role":"tip"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":["11:E1"],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":63,"event_idx":63,"level":1,"parent":1,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 300 \u00b5L from A1 of reservoir (slot 2)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec","start_s":149.152,"end_s":153.451,"duration_s":4.299,"move_s":1.068,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,309.74],"head_after":[146.88,42.78],"move_mm":266.96,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"2:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"2:A1":-1500.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":300.0}},"phase":0},{"index":64,"event_idx":64,"level":1,"parent":1,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 300 \u00b5L into E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Dispensing 300.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":153.451,"end_s":157.025,"duration_s":3.574,"move_s":0.343,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,42.78],"head_after":[146.8,128.65],"move_mm":85.87,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:E1":300.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":65,"event_idx":65,"level":1,"parent":1,"kind":"mix","raw_kind":null,"is_group":true,"caption":"Mix 5x with 200 \u00b5L at E1 of plate (slot 5)","detail":"group header - the steps below do the work; no time or volume counted here","text":"Mixing 5 times with a volume of 200.0 ul","start_s":157.025,"end_s":157.025,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":200.0,"focus":[{"key":"5:E1","role":"here"}],"focus_preview":true,"well_net_ul":{},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":66,"event_idx":66,"level":2,"parent":65,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":157.025,"end_s":159.179,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:E1":100.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":67,"event_idx":67,"level":2,"parent":65,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":159.179,"end_s":161.333,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:E1":300.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":68,"event_idx":68,"level":2,"parent":65,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":161.333,"end_s":163.486,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:E1":100.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":69,"event_idx":69,"level":2,"parent":65,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":163.486,"end_s":165.64,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:E1":300.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":70,"event_idx":70,"level":2,"parent":65,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":165.64,"end_s":167.794,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:E1":100.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":71,"event_idx":71,"level":2,"parent":65,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":167.794,"end_s":169.948,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:E1":300.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":72,"event_idx":72,"level":2,"parent":65,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":169.948,"end_s":172.101,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:E1":100.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":73,"event_idx":73,"level":2,"parent":65,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":172.101,"end_s":174.255,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:E1":300.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":74,"event_idx":74,"level":2,"parent":65,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":174.255,"end_s":176.409,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:E1":100.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":75,"event_idx":75,"level":2,"parent":65,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into E1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into E1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":176.409,"end_s":178.563,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[146.8,128.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:E1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:E1":300.0},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":76,"event_idx":76,"level":1,"parent":1,"kind":"drop_tip","raw_kind":null,"is_group":false,"caption":"Drop tip into trash (slot 12)","detail":"","text":"Dropping tip into Trash Bin on slot 12","start_s":178.563,"end_s":181.603,"duration_s":3.04,"move_s":1.04,"action_s":2.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,128.65],"head_after":[328.88,314.24],"move_mm":259.99,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"trash:12","role":"trash"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":5,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":77,"event_idx":77,"level":1,"parent":1,"kind":"pick_up_tip","raw_kind":null,"is_group":false,"caption":"Pick up tip F1 from tip rack (slot 11)","detail":"","text":"Picking up tip from F1 of Opentrons OT-2 96 Tip Rack 300 \u00b5L on slot 11","start_s":181.603,"end_s":185.333,"duration_s":3.73,"move_s":0.73,"action_s":3.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[328.88,314.24],"head_after":[146.88,300.74],"move_mm":182.5,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"11:F1","role":"tip"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":["11:F1"],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":78,"event_idx":78,"level":1,"parent":1,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 300 \u00b5L from A1 of reservoir (slot 2)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Aspirating 300.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot 2 at 92.86 uL/sec","start_s":185.333,"end_s":189.595,"duration_s":4.263,"move_s":1.032,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,300.74],"head_after":[146.88,42.78],"move_mm":257.96,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"2:A1","role":"source"}],"focus_preview":false,"well_net_ul":{"2:A1":-1800.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":300.0}},"phase":0},{"index":79,"event_idx":79,"level":1,"parent":1,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 300 \u00b5L into F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 3.23 s","text":"Dispensing 300.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":189.595,"end_s":193.133,"duration_s":3.538,"move_s":0.307,"action_s":3.231,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.88,42.78],"head_after":[146.8,119.65],"move_mm":76.87,"volume_ul":300.0,"volume_total_ul":300.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:F1":300.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":80,"event_idx":80,"level":1,"parent":1,"kind":"mix","raw_kind":null,"is_group":true,"caption":"Mix 5x with 200 \u00b5L at F1 of plate (slot 5)","detail":"group header - the steps below do the work; no time or volume counted here","text":"Mixing 5 times with a volume of 200.0 ul","start_s":193.133,"end_s":193.133,"duration_s":0.0,"move_s":0.0,"action_s":0.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":200.0,"focus":[{"key":"5:F1","role":"here"}],"focus_preview":true,"well_net_ul":{},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":81,"event_idx":81,"level":2,"parent":80,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":193.133,"end_s":195.287,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:F1":100.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":82,"event_idx":82,"level":2,"parent":80,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":195.287,"end_s":197.441,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:F1":300.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":83,"event_idx":83,"level":2,"parent":80,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":197.441,"end_s":199.595,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:F1":100.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":84,"event_idx":84,"level":2,"parent":80,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":199.595,"end_s":201.749,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:F1":300.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":85,"event_idx":85,"level":2,"parent":80,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":201.749,"end_s":203.902,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:F1":100.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":86,"event_idx":86,"level":2,"parent":80,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":203.902,"end_s":206.056,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:F1":300.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":87,"event_idx":87,"level":2,"parent":80,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":206.056,"end_s":208.21,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:F1":100.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":88,"event_idx":88,"level":2,"parent":80,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":208.21,"end_s":210.364,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:F1":300.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":89,"event_idx":89,"level":2,"parent":80,"kind":"aspirate","raw_kind":null,"is_group":false,"caption":"Aspirate 200 \u00b5L from F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Aspirating 200.0 uL from F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":210.364,"end_s":212.517,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"source"}],"focus_preview":false,"well_net_ul":{"5:F1":100.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":200.0}},"phase":0},{"index":90,"event_idx":90,"level":2,"parent":80,"kind":"dispense","raw_kind":null,"is_group":false,"caption":"Dispense 200 \u00b5L into F1 of plate (slot 5)","detail":"92.86 \u00b5L/s, about 2.15 s","text":"Dispensing 200.0 uL into F1 of NEST 96 Deep Well Plate 2mL on slot 5 at 92.86 uL/sec","start_s":212.517,"end_s":214.671,"duration_s":2.154,"move_s":0.0,"action_s":2.154,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[146.8,119.65],"move_mm":0.0,"volume_ul":200.0,"volume_total_ul":200.0,"group_volume_ul":null,"focus":[{"key":"5:F1","role":"dest"}],"focus_preview":false,"well_net_ul":{"5:F1":300.0},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":true,"held_ul":0.0}},"phase":0},{"index":91,"event_idx":91,"level":1,"parent":1,"kind":"drop_tip","raw_kind":null,"is_group":false,"caption":"Drop tip into trash (slot 12)","detail":"","text":"Dropping tip into Trash Bin on slot 12","start_s":214.671,"end_s":217.737,"duration_s":3.066,"move_s":1.066,"action_s":2.0,"human":false,"human_step":null,"pipette":{"mount":"right","name":"p300_single_gen2","channels":1},"head_mount":"right","head_before":[146.8,119.65],"head_after":[328.88,314.24],"move_mm":266.49,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[{"key":"trash:12","role":"trash"}],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0},{"index":92,"event_idx":92,"level":0,"parent":null,"kind":"pause","raw_kind":null,"is_group":false,"caption":"HUMAN STEP - robot paused: Incubate / sonicate as the lysis method requires, then centrifuge to clarify. Sonication and centrifugation are not automated. Transfer clarified lysate to the purification plate (next session).","detail":"a person must act and resume; no duration is estimated","text":"Pausing robot operation: HUMAN [s06]: Incubate / sonicate as the lysis method requires, then centrifuge to clarify. Sonication and centrifugation are not automated. Transfer clarified lysate to the purification plate (next session).","start_s":217.737,"end_s":217.737,"duration_s":null,"move_s":0.0,"action_s":0.0,"human":true,"human_step":{"step_id":"s06","message":"Incubate / sonicate as the lysis method requires, then centrifuge to clarify. Sonication and centrifugation are not automated. Transfer clarified lysate to the purification plate (next session)."},"pipette":null,"head_mount":"right","head_before":[328.88,314.24],"head_after":[328.88,314.24],"move_mm":0.0,"volume_ul":null,"volume_total_ul":null,"group_volume_ul":null,"focus":[],"focus_preview":false,"well_net_ul":{},"tips_consumed":[],"tips_used_total":6,"modules":{},"pipettes":{"right":{"tip":false,"held_ul":0.0}},"phase":0}],"phases":[{"index":0,"step_id":"s06","title":"Lyse cells; clarify lysate","owner":"ROBOT-PARTIAL","note":"Reagent addition yes; sonication/centrifugation no.","first_frame":0,"last_frame":92,"start_s":0.0,"end_s":217.737}],"totals":{"frames":93,"estimated_total_s":217.737,"human_pauses":1,"human_frames":[92],"tip_pickups":6,"tips_used":6,"tips_consumed_by_rack":{"11":["A1","B1","C1","D1","E1","F1"]},"aspirations":36,"dispenses":36,"volume_aspirated_ul":7800.0,"volume_dispensed_ul":7800.0,"volume_moved_ul":7800.0,"gantry_distance_mm":4935.6,"max_abs_net_ul":1800.0,"final_net_ul":{"2:A1":-1800.0,"5:A1":300.0,"5:B1":300.0,"5:C1":300.0,"5:D1":300.0,"5:E1":300.0,"5:F1":300.0},"time_by_kind_s":{"aspirate":90.728,"comment":0.0,"dispense":86.382,"drop_tip":18.019,"mix":0.0,"pick_up_tip":22.608,"transfer":0.0},"notes":["volume_aspirated_ul / volume_dispensed_ul sum channels x per-channel volume over the primitive steps, mixing strokes included; group headers are not counted.","volume_moved_ul equals volume_dispensed_ul (liquid delivered).","estimated_total_s excludes the time people take for human steps."]},"warnings":[]}</script>
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------ data */
+  var T = null;
+  try {
+    T = JSON.parse(document.getElementById('vf-timeline').textContent);
+  } catch (err) {
+    T = null;
+  }
+  var fatalEl = document.getElementById('fatal');
+  function fatal(msg) {
+    if (fatalEl) { fatalEl.hidden = false; fatalEl.textContent = msg; }
+  }
+  if (!T || typeof T !== 'object' || !T.deck || !Array.isArray(T.frames)) {
+    fatal('The embedded timeline could not be read, so the player cannot start.');
+    return;
+  }
+  var canvasEl = document.getElementById('deck');
+  var ctx = canvasEl && canvasEl.getContext ? canvasEl.getContext('2d') : null;
+  if (!ctx) {
+    fatal('This browser cannot draw on a canvas. The step list and captions still work.');
+  }
+
+  var MINUS = '\u2212', MU = '\u00b5', DEG = '\u00b0', TIMES = '\u00d7', ARROW = '\u2192', ELL = '\u2026', MID = '\u00b7';
+  var DELAY_REAL_CAP_S = 2.0;  // with "fast-forward waits" on, a wait never takes longer than this in real time
+  var CP_EVERY = 64;           // state checkpoint spacing (frames) for fast scrubbing
+  var PAD_MM = 12;
+  var FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+
+  var D = T.deck;
+  var FRAMES = T.frames;
+  var N = FRAMES.length;
+  var PHASES = T.phases || [];
+  var TOT = T.totals || {};
+  var EXT = D.extent || { w: 392.76, h: 356.98 };
+  var HOME = (D.home && D.home.length === 2) ? D.home : [385, 321];
+  var NETMAX = TOT.max_abs_net_ul || 1;
+
+  /* ------------------------------------------------------------------ helpers */
+  function $(id) { return document.getElementById(id); }
+  function mk(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) { e.className = cls; }
+    if (text !== undefined && text !== null) { e.textContent = text; }
+    return e;
+  }
+  function clear(e) { while (e.firstChild) { e.removeChild(e.firstChild); } }
+  function has(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  function fmtNum(v, dp) {
+    if (typeof v !== 'number' || !isFinite(v)) { return '?'; }
+    var p = Math.pow(10, dp === undefined ? 2 : dp);
+    var r = Math.round(v * p) / p;
+    if (r === 0) { r = 0; }
+    return String(r);
+  }
+  function fmtSigned(v) {
+    if (v > 0) { return '+' + fmtNum(v); }
+    if (v < 0) { return MINUS + fmtNum(-v); }
+    return '0';
+  }
+  function p2(x) { return (x < 10 ? '0' : '') + x; }
+  function fmtClock(s) {
+    var n = Math.max(0, Math.floor((s || 0) + 1e-6));
+    var h = Math.floor(n / 3600), m = Math.floor((n % 3600) / 60), sec = n % 60;
+    return (h > 0 ? h + ':' + p2(m) : p2(m)) + ':' + p2(sec);
+  }
+
+  var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var reduced = !!(mqReduce && mqReduce.matches);
+  if (mqReduce && mqReduce.addEventListener) {
+    mqReduce.addEventListener('change', function () { reduced = mqReduce.matches; markDirty(); });
+  }
+
+  /* ------------------------------------------------------------------ deck model */
+  var PIP = {};
+  (D.pipettes || []).forEach(function (p) { PIP[p.mount] = p; });
+  var WELL = {}, WELL_LIST = [], LW_BY_SLOT = {}, SLOT_BY_ID = {};
+  (D.slots || []).forEach(function (s) { SLOT_BY_ID[s.slot] = s; });
+  (D.labware || []).forEach(function (lw) {
+    if (lw.slot) { LW_BY_SLOT[lw.slot] = lw; }
+    Object.keys(lw.wells || {}).forEach(function (name) {
+      var w = lw.wells[name];
+      var g = { key: lw.slot + ':' + name, slot: lw.slot, name: name, x: w.x, y: w.y, w: w.w, h: w.h,
+                circle: w.shape === 'circle', max: w.max_ul, tip: lw.kind === 'tiprack', lw: lw };
+      WELL[g.key] = g;
+      WELL_LIST.push(g);
+    });
+  });
+  var TRASH = D.trash || null;
+
+  /* ------------------------------------------------------------------ run state (sparse deltas -> snapshots) */
+  var INIT = T.initial_state || { modules: {}, pipettes: {} };
+  function freshState() { return { net: {}, tips: {}, mods: INIT.modules || {}, pips: INIT.pipettes || {} }; }
+  function cloneState(s) { return { net: Object.assign({}, s.net), tips: Object.assign({}, s.tips), mods: s.mods, pips: s.pips }; }
+  function applyFrame(s, f) {
+    var k, wn = f.well_net_ul, tc = f.tips_consumed;
+    if (wn) { for (k in wn) { if (has(wn, k)) { s.net[k] = wn[k]; } } }
+    if (tc) { for (var j = 0; j < tc.length; j++) { s.tips[tc[j]] = 1; } }
+    if (f.modules) { s.mods = f.modules; }
+    if (f.pipettes) { s.pips = f.pipettes; }
+  }
+  var CPS = [freshState()];
+  (function buildCheckpoints() {
+    var s = cloneState(CPS[0]);
+    for (var i = 0; i < N; i++) {
+      applyFrame(s, FRAMES[i]);
+      if ((i + 1) % CP_EVERY === 0) { CPS.push(cloneState(s)); }
+    }
+  })();
+  function stateBefore(i) {
+    var c = Math.floor(i / CP_EVERY);
+    var s = cloneState(CPS[c]);
+    for (var j = c * CP_EVERY; j < i; j++) { applyFrame(s, FRAMES[j]); }
+    return s;
+  }
+
+  /* ------------------------------------------------------------------ player state */
+  var cur = 0, prog = 0, playing = false;
+  var speed = 4, skipDelays = true;
+  var base = stateBefore(0);
+  var disp = null;
+  var dirty = true, lastTs = null;
+  var shownKey = '', shownStatus = '';
+
+  function atEnd() { return N > 0 && cur === N - 1 && prog >= 1; }
+  function isLongWait(f) { return f.kind === 'delay' || f.kind === 'temperature_set' || f.kind === 'temperature_wait'; }
+  function markDirty() { dirty = true; }
+
+  function setPos(i, p) {
+    if (N === 0) { cur = 0; prog = 0; markDirty(); return; }
+    i = clamp(Math.floor(i), 0, N - 1);
+    p = clamp(p, 0, 1);
+    if (FRAMES[i].human) { p = 0; }
+    if (i === cur + 1) { applyFrame(base, FRAMES[cur]); }
+    else if (i !== cur) { base = stateBefore(i); }
+    cur = i;
+    prog = p;
+    markDirty();
+  }
+  function finishRun() {
+    if (N === 0) { return; }
+    if (cur !== N - 1) { base = stateBefore(N - 1); cur = N - 1; }
+    prog = 1;
+    playing = false;
+    updateButtons();
+    announce('End of run. ' + FRAMES[N - 1].caption, true);
+    markDirty();
+  }
+  var focusResume = false;
+  function enterHuman() {
+    playing = false;
+    prog = 0;
+    focusResume = true;   // focus the Resume button once the overlay is visible (see updateText)
+    updateButtons();
+    markDirty();
+    announce(FRAMES[cur].caption, true);
+  }
+  function resume() {
+    var f = FRAMES[cur];
+    if (!(f && f.human && prog < 1)) { return; }
+    if (cur >= N - 1) { finishRun(); return; }
+    applyFrame(base, f);
+    cur += 1;
+    prog = 0;
+    playing = true;
+    lastTs = null;
+    updateButtons();
+    markDirty();
+    if (FRAMES[cur].human) { enterHuman(); }
+  }
+  function play() {
+    if (N === 0) { return; }
+    if (atEnd()) { setPos(0, 0); }
+    var f = FRAMES[cur];
+    if (f.human && prog < 1) { resume(); return; }
+    playing = true;
+    lastTs = null;
+    updateButtons();
+    markDirty();
+  }
+  function pause() {
+    if (!playing) { return; }
+    playing = false;
+    updateButtons();
+    markDirty();
+    announce(N ? FRAMES[cur].caption : '', true);
+  }
+  function togglePlay() { if (playing) { pause(); } else { play(); } }
+  function restart() { playing = false; setPos(0, 0); updateButtons(); announce('Restarted at the beginning.', true); }
+  function stepBy(dir) {
+    if (N === 0) { return; }
+    playing = false;
+    var f = FRAMES[cur];
+    if (dir > 0) {
+      if (atEnd()) { /* already at the end */ }
+      else if (f.human && prog < 1) { if (cur >= N - 1) { finishRun(); } else { setPos(cur + 1, 1); } }
+      else if (prog < 1) { setPos(cur, 1); }
+      else if (cur < N - 1) { setPos(cur + 1, 1); }
+    } else {
+      if (cur === 0 && (prog === 0 || !f.human)) { setPos(0, 0); }
+      else if (f.human && prog >= 1) { setPos(cur, 0); }
+      else if (cur > 0) { setPos(cur - 1, 1); }
+    }
+    updateButtons();
+    announce(FRAMES[cur].caption, true);
+  }
+  function setSpeed(v) { speed = v; markDirty(); }
+
+  // Real seconds a zero-duration step (comment, group header, unknown command) stays on screen. The estimated
+  // clock does not move during it. Comments get longer the more text they carry; everything shortens with speed.
+  function dwellReal(f) {
+    var b = 0.5;
+    if (f.kind === 'comment' || f.kind === 'other') { b = clamp(0.8 + 0.03 * (f.caption || '').length, 0.8, 3.0); }
+    return b / clamp(speed / 2, 1, 4);
+  }
+
+  function advance(dtReal) {
+    var guard = 0;
+    while (dtReal > 1e-9 && playing && guard++ < 20000) {
+      var f = FRAMES[cur];
+      if (f.human) { enterHuman(); return; }
+      var dur = f.duration_s || 0;
+      var remReal;
+      if (dur > 0) {
+        var rate = speed;
+        if (skipDelays && isLongWait(f)) { rate = Math.max(rate, dur / DELAY_REAL_CAP_S); }
+        remReal = (1 - prog) * dur / rate;
+      } else {
+        remReal = (1 - prog) * dwellReal(f);
+      }
+      if (remReal > dtReal) {
+        prog += (dtReal / remReal) * (1 - prog);
+        dtReal = 0;
+      } else {
+        dtReal -= remReal;
+        if (cur >= N - 1) { prog = 1; finishRun(); return; }
+        applyFrame(base, f);
+        cur += 1;
+        prog = 0;
+        if (FRAMES[cur].human) { enterHuman(); return; }
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------ colours */
+  var C = {};
+  var COLOR_NAMES = ['bg', 'surface', 'ink', 'muted', 'line', 'deck', 'slot', 'lw', 'lwline', 'well', 'tipfull',
+                     'tipused', 'src', 'dst', 'gain', 'loss', 'ongain', 'head', 'trash', 'accent'];
+  var lossPattern = null;
+  function readColors() {
+    var cs = getComputedStyle(document.documentElement);
+    COLOR_NAMES.forEach(function (n) { C[n] = (cs.getPropertyValue('--c-' + n) || '').trim() || '#888888'; });
+    if (!ctx) { return; }
+    var pc = document.createElement('canvas');
+    pc.width = 6; pc.height = 6;
+    var pg = pc.getContext('2d');
+    pg.fillStyle = C.lw; pg.fillRect(0, 0, 6, 6);
+    pg.strokeStyle = C.loss; pg.lineWidth = 1.6;
+    pg.beginPath();
+    pg.moveTo(-1, 7); pg.lineTo(7, -1); pg.moveTo(-1, 1); pg.lineTo(1, -1); pg.moveTo(5, 7); pg.lineTo(7, 5);
+    pg.stroke();
+    lossPattern = ctx.createPattern(pc, 'repeat');
+  }
+  if (window.matchMedia) {
+    var mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mqDark.addEventListener) { mqDark.addEventListener('change', function () { readColors(); markDirty(); }); }
+  }
+
+  /* ------------------------------------------------------------------ canvas geometry */
+  var host = $('host'), box = $('box'), panelEl = $('panel');
+  var mqNarrow = window.matchMedia ? window.matchMedia('(max-width: 900px)') : null;
+  var scale = 1, cssW = 0, cssH = 0, dpr = 1, lastHostW = 0;
+  function S(mm) { return mm * scale; }
+  function X(x) { return (x + PAD_MM) * scale; }
+  function Y(y) { return (EXT.h - y + PAD_MM) * scale; }
+  function layout() {
+    if (!ctx) { return; }
+    var hostW = host.clientWidth || 600;
+    var worldW = EXT.w + 2 * PAD_MM, worldH = EXT.h + 2 * PAD_MM;
+    // Keep the controls on screen: the deck may use the viewport height left under the banner (wide layout)
+    // or left above the caption/controls panel (stacked layout).
+    var narrow = !!(mqNarrow && mqNarrow.matches);
+    var top = host.getBoundingClientRect().top + (window.pageYOffset || 0);
+    var reserved = top + 14 + (narrow ? panelEl.offsetHeight + 12 : 0);
+    var maxH = Math.max(300, (window.innerHeight || 800) - reserved);
+    var w = Math.max(260, Math.min(hostW, maxH * worldW / worldH));
+    scale = w / worldW;
+    cssW = Math.round(w);
+    cssH = Math.round(worldH * scale);
+    dpr = Math.min(window.devicePixelRatio || 1, 3);
+    box.style.width = cssW + 'px';
+    canvasEl.style.width = cssW + 'px';
+    canvasEl.style.height = cssH + 'px';
+    canvasEl.width = Math.round(cssW * dpr);
+    canvasEl.height = Math.round(cssH * dpr);
+    lastHostW = hostW;
+    markDirty();
+  }
+
+  /* ------------------------------------------------------------------ drawing helpers */
+  var TWO_PI = Math.PI * 2;
+  function rrPath(x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w / 2, h / 2));
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y); ctx.arcTo(x + w, y, x + w, y + r, r);
+    ctx.lineTo(x + w, y + h - r); ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+    ctx.lineTo(x + r, y + h); ctx.arcTo(x, y + h, x, y + h - r, r);
+    ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + r, y, r);
+    ctx.closePath();
+  }
+  function fitText(text, maxW) {
+    if (ctx.measureText(text).width <= maxW) { return text; }
+    var s = text;
+    while (s.length > 1 && ctx.measureText(s + ELL).width > maxW) { s = s.slice(0, -1); }
+    return s + ELL;
+  }
+  function wellPath(g, grow, shrink) {
+    var cx = X(g.x), cy = Y(g.y), k = shrink === undefined ? 1 : shrink;
+    if (g.circle) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, Math.max(1, S(g.w / 2) * k + grow), 0, TWO_PI);
+    } else {
+      var w = S(g.w) * k + 2 * grow, h = S(g.h) * k + 2 * grow;
+      rrPath(cx - w / 2, cy - h / 2, w, h, Math.min(3, w / 3, h / 3));
+    }
+  }
+  function slotRect(slot) {
+    var lw = LW_BY_SLOT[slot];
+    if (lw && lw.rect) { return lw.rect; }
+    var s = SLOT_BY_ID[slot];
+    return s ? [s.x, s.y, s.w, s.h] : null;
+  }
+
+  /* ------------------------------------------------------------------ display model for (cur, prog) */
+  function computeDisp() {
+    var f = N ? FRAMES[cur] : null;
+    var d = { f: f, applied: false, ap: 0, mp: 1, mv: 0, head: [HOME[0], HOME[1]], headMount: null,
+              mods: base.mods, pips: base.pips, newTips: {} };
+    disp = d;
+    if (!f) { return d; }
+    var dur = f.duration_s || 0;
+    var mv = Math.min(f.move_s || 0, dur);
+    var t = prog * dur;
+    d.mv = mv;
+    d.applied = !f.human && prog > 0 && t >= mv - 1e-9;
+    if (mv > 0) { d.mp = clamp(t / mv, 0, 1); }
+    var act = dur - mv;
+    d.ap = act > 0 ? clamp((t - mv) / act, 0, 1) : (d.applied ? 1 : 0);
+    var e = reduced ? (prog > 0 ? 1 : 0) : ease(d.mp);
+    if (mv <= 0) { e = 1; }
+    var hb = f.head_before || HOME, ha = f.head_after || hb;
+    d.head = [lerp(hb[0], ha[0], e), lerp(hb[1], ha[1], e)];
+    d.from = hb;
+    d.headMount = f.head_mount;
+    if (d.applied) {
+      if (f.modules) { d.mods = f.modules; }
+      if (f.pipettes) { d.pips = f.pipettes; }
+      (f.tips_consumed || []).forEach(function (k) { d.newTips[k] = 1; });
+    }
+    return d;
+  }
+  function netOf(key) {
+    var b = has(base.net, key) ? base.net[key] : 0;
+    var f = disp.f;
+    if (f && f.well_net_ul && has(f.well_net_ul, key)) {
+      var a = f.well_net_ul[key];
+      if (reduced) { return disp.applied ? a : b; }
+      return lerp(b, a, disp.ap);
+    }
+    return b;
+  }
+
+  /* ------------------------------------------------------------------ drawing */
+  function drawAll() {
+    if (!ctx || !C.bg) { return; }
+    var W = cssW, H = cssH;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+    rrPath(X(-5), Y(EXT.h + 5), S(EXT.w + 10), S(EXT.h + 10), S(5));
+    ctx.fillStyle = C.deck; ctx.fill();
+    drawSlots();
+    drawLabware();
+    drawModules();
+    drawFocus();
+    drawHead();
+    drawCallouts();
+  }
+
+  function drawSlots() {
+    (D.slots || []).forEach(function (s) {
+      var x = X(s.x), y = Y(s.y + s.h), w = S(s.w), h = S(s.h);
+      ctx.save();
+      if (s.kind === 'trash') {
+        rrPath(x, y, w, h, S(3));
+        ctx.fillStyle = C.trash; ctx.fill();
+        ctx.strokeStyle = C.lwline; ctx.lineWidth = 1.25; ctx.stroke();
+        ctx.save(); ctx.clip();
+        ctx.strokeStyle = C.slot; ctx.lineWidth = 1;
+        for (var k = -h; k < w; k += 9) { ctx.beginPath(); ctx.moveTo(x + k, y + h); ctx.lineTo(x + k + h, y); ctx.stroke(); }
+        ctx.restore();
+        ctx.fillStyle = C.ink; ctx.font = '700 ' + clamp(S(5), 9, 13) + 'px ' + FONT;
+        ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+        ctx.fillText(s.slot + ' ' + MID + ' TRASH (fixed)', x + 5, y + 4);
+      } else if (!LW_BY_SLOT[s.slot]) {
+        rrPath(x, y, w, h, S(3));
+        ctx.setLineDash([4, 4]); ctx.strokeStyle = C.slot; ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = C.slot; ctx.font = '700 ' + clamp(S(20), 14, 40) + 'px ' + FONT;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(s.slot, x + w / 2, y + h / 2);
+      }
+      ctx.restore();
+    });
+  }
+
+  function drawLabware() {
+    (D.labware || []).forEach(function (lw) {
+      var r = lw.rect;
+      if (r) {
+        var x = X(r[0]), y = Y(r[1] + r[3]), w = S(r[2]), h = S(r[3]);
+        ctx.save();
+        rrPath(x, y, w, h, S(3));
+        ctx.fillStyle = C.lw; ctx.fill();
+        ctx.strokeStyle = C.lwline; ctx.lineWidth = 1.25; ctx.stroke();
+        var fs = clamp(S(5.4), 8.5, 13);
+        ctx.font = '700 ' + fs + 'px ' + FONT;
+        ctx.fillStyle = C.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+        var title = scale >= 1.0 ? (lw.slot + ' ' + MID + ' ' + (lw.label || lw.load_name || '')) : String(lw.slot);
+        ctx.fillText(fitText(title, w - 8), x + 4, y + 3);
+        ctx.restore();
+      }
+      var names = Object.keys(lw.wells || {});
+      for (var i = 0; i < names.length; i++) { drawWell(WELL[lw.slot + ':' + names[i]]); }
+    });
+  }
+
+  function drawWell(g) {
+    if (!g) { return; }
+    var cx = X(g.x), cy = Y(g.y);
+    ctx.save();
+    if (g.tip) {
+      var used = !!(base.tips[g.key] || disp.newTips[g.key]);
+      var rr = Math.max(1.3, S(g.w / 2) * 0.8);
+      ctx.beginPath(); ctx.arc(cx, cy, rr, 0, TWO_PI);
+      if (used) { ctx.setLineDash([2, 2]); ctx.lineWidth = 1; ctx.strokeStyle = C.tipused; ctx.stroke(); }
+      else { ctx.fillStyle = C.tipfull; ctx.fill(); }
+      ctx.restore();
+      return;
+    }
+    wellPath(g, 0);
+    ctx.lineWidth = 1; ctx.strokeStyle = C.well; ctx.stroke();
+    var net = netOf(g.key);
+    if (Math.abs(net) > 1e-9) {
+      var f = Math.min(1, Math.abs(net) / NETMAX);
+      var k = 0.45 + 0.55 * Math.sqrt(f);
+      wellPath(g, 0, k);
+      if (net > 0) {
+        ctx.fillStyle = C.gain; ctx.fill();
+      } else {
+        ctx.fillStyle = lossPattern || C.loss; ctx.fill();
+        ctx.lineWidth = 1.2; ctx.strokeStyle = C.loss; ctx.stroke();
+      }
+      var minPx = Math.min(S(g.w), S(g.h)) * k;
+      if (minPx >= 7) {
+        var L = Math.min(minPx * 0.32, 5);
+        ctx.lineWidth = 1.6; ctx.lineCap = 'round';
+        ctx.strokeStyle = net > 0 ? C.ongain : C.loss;
+        ctx.beginPath(); ctx.moveTo(cx - L, cy); ctx.lineTo(cx + L, cy);
+        if (net > 0) { ctx.moveTo(cx, cy - L); ctx.lineTo(cx, cy + L); }
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+
+  function pill(text, x, y, border, filled) {
+    ctx.save();
+    var fs = clamp(S(3.9), 8.5, 11.5);
+    ctx.font = '700 ' + fs + 'px ' + FONT;
+    var tw = ctx.measureText(text).width;
+    var h = fs + 6, w = tw + 22;
+    rrPath(x, y, w, h, h / 2);
+    ctx.fillStyle = C.surface; ctx.fill();
+    ctx.lineWidth = 1.6; ctx.strokeStyle = border; ctx.stroke();
+    return { ctx: ctx, w: w, h: h, fs: fs, restore: function () { ctx.restore(); } };
+  }
+
+  function drawModules() {
+    (D.modules || []).forEach(function (m) {
+      var rect = slotRect(m.slot);
+      if (!rect) { return; }
+      var st = disp.mods && disp.mods[m.slot] ? disp.mods[m.slot] : {};
+      var text, on = false, square = false;
+      if (m.type === 'temperature') {
+        on = st.setpoint_c !== null && st.setpoint_c !== undefined;
+        text = 'TEMP ' + (on ? fmtNum(st.setpoint_c, 1) + DEG + 'C set-point' : 'off');
+      } else if (m.type === 'magnetic') {
+        on = !!st.engaged; square = true;
+        text = 'MAG ' + (on ? 'engaged' : 'disengaged');
+      } else {
+        text = (m.name || 'module');
+      }
+      var x = X(rect[0]) + 5, yb = Y(rect[1]) - 4;
+      var p = pill(text, x, yb - (clamp(S(3.9), 8.5, 11.5) + 6), on ? C.accent : C.lwline, on);
+      var fs = p.fs, cx = x + 10, cy = yb - p.h / 2;
+      ctx.lineWidth = 1.5; ctx.strokeStyle = C.ink; ctx.fillStyle = C.ink;
+      if (square) { if (on) { ctx.fillRect(cx - 3.5, cy - 3.5, 7, 7); } else { ctx.strokeRect(cx - 3.5, cy - 3.5, 7, 7); } }
+      else { ctx.beginPath(); ctx.arc(cx, cy, 3.6, 0, TWO_PI); if (on) { ctx.fill(); } else { ctx.stroke(); } }
+      ctx.fillStyle = C.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(text, x + 18, cy + 0.5);
+      p.restore();
+    });
+  }
+
+  function callout(text, cx, topY, botY, color, frac) {
+    ctx.save();
+    var fs = clamp(S(4.2), 9, 12.5);
+    ctx.font = '700 ' + fs + 'px ' + FONT;
+    var w = ctx.measureText(text).width + 14, h = fs + 10;
+    var x = clamp(cx - w / 2, 2, Math.max(2, cssW - w - 2));
+    var y = topY - h - 5;
+    if (y < 2) { y = botY + 5; }
+    rrPath(x, y, w, h, 6);
+    ctx.fillStyle = C.surface; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = color; ctx.stroke();
+    ctx.fillStyle = C.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, x + 7, y + (h - 3) / 2);
+    if (frac !== null) { ctx.fillStyle = color; ctx.fillRect(x + 4, y + h - 5, (w - 8) * frac, 2.5); }
+    ctx.restore();
+  }
+
+  var pendingCallouts = [];
+  function drawCallouts() {
+    for (var i = 0; i < pendingCallouts.length; i++) {
+      var c = pendingCallouts[i];
+      callout(c.txt, c.cx, c.top, c.bot, c.col, c.frac);
+    }
+    pendingCallouts = [];
+  }
+
+  function drawFocus() {
+    var f = disp.f;
+    pendingCallouts = [];
+    if (!f || !f.focus || !f.focus.length) { return; }
+    var preview = !!f.focus_preview;
+    var boxes = {};
+    f.focus.forEach(function (fc) {
+      ctx.save();
+      ctx.lineWidth = preview ? 1.5 : 2.6;
+      if (fc.role === 'source') { ctx.strokeStyle = C.src; ctx.setLineDash([5, 3]); }
+      else if (fc.role === 'dest') { ctx.strokeStyle = C.dst; }
+      else if (fc.role === 'tip') { ctx.strokeStyle = C.ink; }
+      else { ctx.strokeStyle = C.ink; ctx.setLineDash([1.5, 2.5]); }
+      if (preview) { ctx.globalAlpha = 0.75; }
+      var bx;
+      if (fc.role === 'trash') {
+        var tr = TRASH && TRASH.rect;
+        if (tr) {
+          rrPath(X(tr[0]) - 2, Y(tr[1] + tr[3]) - 2, S(tr[2]) + 4, S(tr[3]) + 4, S(3));
+          ctx.stroke();
+          bx = { x0: X(tr[0]), x1: X(tr[0] + tr[2]), y0: Y(tr[1] + tr[3]), y1: Y(tr[1]) };
+        }
+      } else {
+        var g = WELL[fc.key];
+        if (g) {
+          wellPath(g, 2.5);
+          ctx.stroke();
+          var hw = (g.circle ? S(g.w / 2) : S(g.w) / 2) + 3, hh = (g.circle ? S(g.w / 2) : S(g.h) / 2) + 3;
+          bx = { x0: X(g.x) - hw, x1: X(g.x) + hw, y0: Y(g.y) - hh, y1: Y(g.y) + hh };
+        }
+      }
+      ctx.restore();
+      if (bx) {
+        var b = boxes[fc.role];
+        if (!b) { boxes[fc.role] = bx; }
+        else { b.x0 = Math.min(b.x0, bx.x0); b.x1 = Math.max(b.x1, bx.x1); b.y0 = Math.min(b.y0, bx.y0); b.y1 = Math.max(b.y1, bx.y1); }
+      }
+    });
+    if (preview) { return; }
+    var ch = (f.pipette && f.pipette.channels) || 1;
+    var v = f.volume_ul;
+    var frac = reduced ? null : (disp.applied && disp.ap < 1 ? disp.ap : (disp.ap >= 1 ? 1 : 0));
+    ['source', 'dest', 'tip'].forEach(function (role) {
+      var b = boxes[role];
+      if (!b) { return; }
+      var cx = (b.x0 + b.x1) / 2, txt, col;
+      if (role === 'source') { txt = 'SOURCE ' + MINUS + fmtNum(v) + ' ' + MU + 'L' + (ch > 1 ? ' ' + TIMES + ' ' + ch : ''); col = C.src; }
+      else if (role === 'dest') { txt = 'DEST +' + fmtNum(v) + ' ' + MU + 'L' + (ch > 1 ? ' ' + TIMES + ' ' + ch : ''); col = C.dst; }
+      else { txt = ch > 1 ? 'TIPS ' + TIMES + ' ' + ch : 'TIP'; col = C.ink; }
+      pendingCallouts.push({ txt: txt, cx: cx, top: b.y0, bot: b.y1, col: col, frac: role === 'tip' ? null : frac });
+    });
+  }
+
+  function drawHead() {
+    var d = disp;
+    var mount = d.headMount;
+    var info = mount && PIP[mount] ? PIP[mount] : null;
+    var offs = info && info.channel_offsets_y && info.channel_offsets_y.length ? info.channel_offsets_y : [0];
+    var ch = offs.length;
+    var ps = (mount && d.pips && d.pips[mount]) ? d.pips[mount] : null;
+    var hasTip = !!(ps && ps.tip);
+    var hx = X(d.head[0]);
+    var rc = Math.max(2.8, S(2.3));
+    ctx.save();
+    if (!reduced && d.mv > 0 && d.mp > 0 && d.mp < 1 && d.from) {
+      ctx.setLineDash([3, 4]); ctx.lineWidth = 1.5; ctx.strokeStyle = C.muted; ctx.globalAlpha = 0.8;
+      ctx.beginPath(); ctx.moveTo(X(d.from[0]), Y(d.from[1])); ctx.lineTo(hx, Y(d.head[1])); ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha = 1;
+    }
+    var yTop = Y(d.head[1] + offs[0]), yBot = Y(d.head[1] + offs[ch - 1]);
+    ctx.lineWidth = 1.6; ctx.strokeStyle = C.head; ctx.fillStyle = C.surface;
+    if (ch > 1) { rrPath(hx - S(5.5), yTop - S(4.5), S(11), (yBot - yTop) + S(9), S(3)); }
+    else { ctx.beginPath(); ctx.arc(hx, yTop, S(5), 0, TWO_PI); }
+    ctx.globalAlpha = 0.55; ctx.fill(); ctx.globalAlpha = 0.9; ctx.stroke(); ctx.globalAlpha = 1;
+    for (var k = 0; k < ch; k++) {
+      var cy = Y(d.head[1] + offs[k]);
+      ctx.beginPath(); ctx.arc(hx, cy, rc, 0, TWO_PI);
+      if (hasTip) { ctx.fillStyle = C.head; ctx.fill(); ctx.lineWidth = 1; ctx.strokeStyle = C.surface; ctx.stroke(); }
+      else { ctx.fillStyle = C.surface; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = C.head; ctx.stroke(); }
+    }
+    // mount tag beside the head (callouts sit above the target wells, so keep this out of their way)
+    var lab = mount ? ((mount === 'left' ? 'L' : (mount === 'right' ? 'R' : mount)) + ' ' + ch + '-ch' + (hasTip ? ' + tip' : '')) : 'gantry at home';
+    var fs = clamp(S(3.8), 8.5, 11);
+    ctx.font = '700 ' + fs + 'px ' + FONT;
+    var tw = ctx.measureText(lab).width + 8;
+    var midY = (yTop + yBot) / 2;
+    var lx = hx + S(7.5);
+    if (lx + tw > cssW - 2) { lx = hx - S(7.5) - tw; }
+    ctx.globalAlpha = 0.92;
+    rrPath(lx, midY - fs / 2 - 3, tw, fs + 6, 4);
+    ctx.fillStyle = C.surface; ctx.fill();
+    ctx.lineWidth = 1; ctx.strokeStyle = C.head; ctx.stroke();
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = C.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(lab, lx + 4, midY + 0.5);
+    ctx.restore();
+  }
+
+  /* ------------------------------------------------------------------ text, banner, status, list */
+  var capEl = $('caption'), metaEl = $('meta'), bannerEl = $('banner'), humanEl = $('human');
+  var tNow = $('t-now'), tTotal = $('t-total'), scrubEl = $('scrub'), stepLab = $('steplab');
+  var liveEl = $('live'), inspectEl = $('inspect'), listEl = $('steps');
+  var btnPlay = $('btn-play'), btnBack = $('btn-back'), btnNext = $('btn-next'), btnRestart = $('btn-restart');
+  var lastAnnounce = 0;
+
+  function announce(text, force) {
+    var now = Date.now();
+    if (force || now - lastAnnounce > 1500) { liveEl.textContent = text || ''; lastAnnounce = now; }
+  }
+  function updateButtons() {
+    var waitingHuman = !!(N && FRAMES[cur].human && prog < 1);
+    var label = playing ? 'Pause' : (waitingHuman ? 'Resume' : (atEnd() ? 'Replay' : 'Play'));
+    btnPlay.textContent = label;
+    btnPlay.setAttribute('aria-label', label === 'Replay' ? 'Replay from the start' : (label === 'Resume' ? 'Resume after the human step' : label));
+    var none = N === 0;
+    btnPlay.disabled = none; btnBack.disabled = none; btnNext.disabled = none; btnRestart.disabled = none;
+    scrubEl.disabled = none;
+  }
+  function badge(owner) {
+    var b = mk('span', 'badge own-' + owner);
+    b.appendChild(mk('i', 'shape'));
+    b.lastChild.setAttribute('aria-hidden', 'true');
+    b.appendChild(mk('span', null, owner));
+    return b;
+  }
+  function updateBanner(f) {
+    clear(bannerEl);
+    var ph = (f && f.phase !== null && f.phase !== undefined) ? PHASES[f.phase] : null;
+    if (ph) {
+      bannerEl.appendChild(badge(ph.owner));
+      bannerEl.appendChild(mk('span', 'bt', ph.step_id + ' ' + MID + ' ' + ph.title));
+      if (ph.note) { bannerEl.appendChild(mk('span', 'bn', ph.note)); }
+      bannerEl.appendChild(mk('span', 'muted', 'phase ' + (ph.index + 1) + ' of ' + PHASES.length));
+    } else if (PHASES.length) {
+      bannerEl.appendChild(mk('span', 'muted', 'Before the first annotated phase.'));
+    } else {
+      bannerEl.appendChild(mk('span', 'muted', 'No phase annotations ([step] title | OWNER | note) were found in this run log.'));
+    }
+    if (f && f.human && !(ph && ph.owner === 'HUMAN')) {
+      bannerEl.appendChild(badge('HUMAN'));
+      bannerEl.appendChild(mk('span', 'bt', 'human step in progress'));
+    }
+  }
+
+  var TAG = { pick_up_tip: 'TIP+', drop_tip: 'TIP-', aspirate: 'ASP', dispense: 'DSP', blow_out: 'BLOW', touch_tip: 'TOUCH',
+              mix: 'MIX', transfer: 'XFER', distribute: 'DIST', consolidate: 'CONS', temperature_set: 'TEMP',
+              temperature_wait: 'TEMP', temperature_deactivate: 'TEMP', magnet_engage: 'MAG', magnet_disengage: 'MAG',
+              delay: 'WAIT', pause: 'HUMAN', home: 'HOME', comment: 'NOTE', other: 'OTHER' };
+  var stepBtns = [];
+  function buildList() {
+    clear(listEl);
+    var lastPhase = null;
+    FRAMES.forEach(function (f, i) {
+      if (f.phase !== null && f.phase !== undefined && f.phase !== lastPhase && PHASES[f.phase] && PHASES[f.phase].first_frame === i) {
+        var ph = PHASES[f.phase];
+        var li0 = mk('li', 'ph');
+        li0.appendChild(badge(ph.owner));
+        li0.appendChild(mk('span', null, ph.step_id + ' ' + MID + ' ' + ph.title));
+        listEl.appendChild(li0);
+      }
+      lastPhase = f.phase;
+      var li = mk('li');
+      var b = mk('button', 'stp lv' + Math.min(3, f.level || 0) + (f.is_group ? ' grp' : '') + (f.human ? ' hum' : ''));
+      b.type = 'button';
+      b.setAttribute('data-i', String(i));
+      if (f.text) { b.title = f.text; }
+      b.appendChild(mk('span', 'n', String(i + 1)));
+      b.appendChild(mk('span', 'k', TAG[f.kind] || 'OTHER'));
+      b.appendChild(mk('span', 'tx', f.caption));
+      b.appendChild(mk('span', 'tm', f.human ? 'human' : fmtClock(f.start_s)));
+      li.appendChild(b);
+      listEl.appendChild(li);
+      stepBtns[i] = b;
+    });
+  }
+  listEl.addEventListener('click', function (e) {
+    var t = e.target;
+    while (t && t !== listEl && !(t.getAttribute && t.getAttribute('data-i') !== null)) { t = t.parentNode; }
+    if (!t || t === listEl) { return; }
+    playing = false;
+    setPos(parseInt(t.getAttribute('data-i'), 10), 1);
+    updateButtons();
+    announce(FRAMES[cur].caption, true);
+  });
+  var curBtn = null;
+  function highlightStep() {
+    if (curBtn) { curBtn.removeAttribute('aria-current'); }
+    curBtn = stepBtns[cur] || null;
+    if (!curBtn) { return; }
+    curBtn.setAttribute('aria-current', 'step');
+    var top = curBtn.parentNode.offsetTop, h = curBtn.offsetHeight;
+    if (top < listEl.scrollTop + 4 || top + h > listEl.scrollTop + listEl.clientHeight - 4) {
+      listEl.scrollTop = Math.max(0, top - listEl.clientHeight / 2 + h / 2);
+    }
+  }
+
+  function kv(dl, k, v) { dl.appendChild(mk('dt', null, k)); dl.appendChild(mk('dd', null, v)); }
+  function buildStaticPanels() {
+    var dl = $('st-totals'); clear(dl);
+    kv(dl, 'Estimated total', fmtClock(TOT.estimated_total_s || 0) + ' (estimate)');
+    kv(dl, 'Steps', String(N));
+    kv(dl, 'Tips used', String(TOT.tips_used || 0) + ' (' + (TOT.tip_pickups || 0) + ' pick-ups)');
+    kv(dl, 'Aspirations', String(TOT.aspirations || 0));
+    kv(dl, 'Dispensed', fmtNum(TOT.volume_dispensed_ul || 0) + ' ' + MU + 'L (all channels)');
+    kv(dl, 'Human steps', String(TOT.human_pauses || 0));
+    var wb = $('warnings'); clear(wb);
+    (T.warnings || []).forEach(function (w) { wb.appendChild(mk('p', 'warn', w)); });
+    var tm = T.time_model || {}, body = $('tm-body'); clear(body);
+    body.appendChild(mk('p', null, tm.headline || 'Estimated time - not measured on a robot'));
+    var table = mk('table');
+    var cons = tm.constants || {};
+    Object.keys(cons).forEach(function (k) {
+      var tr = mk('tr');
+      tr.appendChild(mk('td', null, k));
+      tr.appendChild(mk('td', null, Array.isArray(cons[k]) ? cons[k].join(', ') : String(cons[k])));
+      table.appendChild(tr);
+    });
+    body.appendChild(table);
+    var ul = mk('ul');
+    (tm.rules || []).forEach(function (r) { ul.appendChild(mk('li', null, r)); });
+    body.appendChild(ul);
+    var src = T.source || {};
+    var bits = [];
+    if (src.protocol_file) { bits.push(src.protocol_file); }
+    if (src.opentrons_version) { bits.push('Opentrons ' + src.opentrons_version); }
+    if (src.api_level) { bits.push('API ' + src.api_level); }
+    $('sub').textContent = bits.join(' ' + MID + ' ') || 'Simulated Opentrons OT-2 protocol';
+    tTotal.textContent = fmtClock(TOT.estimated_total_s || 0);
+  }
+
+  function updateStatus() {
+    var f = disp.f;
+    var pipsEl = $('st-pips'); clear(pipsEl);
+    (D.pipettes || []).forEach(function (p) {
+      var ps = disp.pips && disp.pips[p.mount] ? disp.pips[p.mount] : { tip: false, held_ul: 0 };
+      var active = disp.headMount === p.mount && f && f.pipette;
+      var li = mk('li', active ? 'on' : '',
+        p.mount.toUpperCase() + ' ' + MID + ' ' + (p.name || 'pipette') + ' (' + p.channels + '-ch) ' + MID + ' tip: ' +
+        (ps.tip ? 'attached' : 'none') + (ps.tip ? ' ' + MID + ' holds ' + fmtNum(ps.held_ul) + ' ' + MU + 'L/ch (computed)' : '') +
+        (active ? ' ' + MID + ' ACTIVE' : ''));
+      pipsEl.appendChild(li);
+    });
+    if (!(D.pipettes || []).length) { pipsEl.appendChild(mk('li', null, 'No pipette listed.')); }
+    var modsEl = $('st-mods'); clear(modsEl);
+    (D.modules || []).forEach(function (m) {
+      var st = disp.mods && disp.mods[m.slot] ? disp.mods[m.slot] : {};
+      var s = 'slot ' + m.slot + ' ' + MID + ' ' + m.name + ': ';
+      if (m.type === 'temperature') { s += (st.setpoint_c === null || st.setpoint_c === undefined) ? 'no set-point' : 'set-point ' + fmtNum(st.setpoint_c, 1) + ' ' + DEG + 'C (commanded, not measured)'; }
+      else if (m.type === 'magnetic') { s += st.engaged ? 'engaged' : 'disengaged'; }
+      else { s += 'state not tracked'; }
+      modsEl.appendChild(mk('li', null, s));
+    });
+    if (!(D.modules || []).length) { modsEl.appendChild(mk('li', null, 'No modules on the deck.')); }
+    var racksEl = $('st-racks'); clear(racksEl);
+    (D.labware || []).forEach(function (lw) {
+      if (lw.kind !== 'tiprack') { return; }
+      var total = 0, used = 0;
+      Object.keys(lw.wells || {}).forEach(function (n) {
+        total += 1;
+        var k = lw.slot + ':' + n;
+        if (base.tips[k] || disp.newTips[k]) { used += 1; }
+      });
+      racksEl.appendChild(mk('li', null, 'Tip rack, slot ' + lw.slot + ': ' + used + ' of ' + total + ' tips used'));
+    });
+    if (!racksEl.firstChild) { racksEl.appendChild(mk('li', null, 'No tip rack on the deck.')); }
+    var net = Object.assign({}, base.net);
+    if (f && disp.applied && f.well_net_ul) { Object.assign(net, f.well_net_ul); }
+    var keys = Object.keys(net).filter(function (k) { return Math.abs(net[k]) > 1e-9; });
+    keys.sort(function (a, b) { return Math.abs(net[b]) - Math.abs(net[a]); });
+    var netsEl = $('st-nets'); clear(netsEl);
+    $('h-nets').textContent = 'Largest net changes so far' + (keys.length ? ' (' + keys.length + ' wells changed)' : '');
+    keys.slice(0, 6).forEach(function (k) {
+      var parts = k.split(':');
+      netsEl.appendChild(mk('li', null, 'slot ' + parts[0] + ' ' + parts[1] + ': ' + fmtSigned(net[k]) + ' ' + MU + 'L net'));
+    });
+    if (!keys.length) { netsEl.appendChild(mk('li', null, 'No net volume change yet.')); }
+  }
+
+  function updateText() {
+    var f = N ? FRAMES[cur] : null;
+    if (!f) {
+      capEl.textContent = 'No robot commands were logged for this protocol, so there is nothing to animate.';
+      metaEl.textContent = '';
+      updateBanner(null);
+      humanEl.hidden = true;
+      return;
+    }
+    var atStart = cur === 0 && prog === 0 && !playing;
+    capEl.textContent = atStart ? 'Ready. Press Play (Space) to run ' + N + ' steps. First step: ' + f.caption : f.caption;
+    var t = 'Step ' + (cur + 1) + ' of ' + N + ' ' + MID + ' est. ' + fmtClock(f.start_s) +
+      (f.human ? ' (no duration: waits for a person)' : (f.duration_s ? ' to ' + fmtClock(f.end_s) : ''));
+    if (f.detail) { t += ' ' + MID + ' ' + f.detail; }
+    metaEl.textContent = t;
+    updateBanner(f);
+    var humanOn = !!(f.human && prog < 1);
+    humanEl.hidden = !humanOn;
+    if (!humanOn) { focusResume = false; }
+    if (humanOn && focusResume) {
+      focusResume = false;
+      try { $('resume').focus(); } catch (err) { /* focus is a convenience only */ }
+    }
+    if (humanOn) {
+      $('human-msg').textContent = (f.human_step && f.human_step.message) || 'The protocol asks for a human step here.';
+      $('human-step').textContent = (f.human_step && f.human_step.step_id ? 'Protocol step ' + f.human_step.step_id + '. ' : '') +
+        'The robot is waiting. No time is estimated for this step.';
+    }
+    stepLab.textContent = (cur + 1) + ' / ' + N;
+    highlightStep();
+  }
+
+  var scrubbing = false;   // true only while the pointer is dragging the slider
+  function updateClock() {
+    var f = N ? FRAMES[cur] : null;
+    var t = 0;
+    if (f) { t = f.human ? f.start_s : lerp(f.start_s, f.end_s, prog); }
+    tNow.textContent = fmtClock(t);
+    if (N) {
+      var v = cur + prog;
+      scrubEl.max = String(N);
+      if (!scrubbing) { scrubEl.value = String(v); }
+      scrubEl.setAttribute('aria-valuetext', 'Step ' + (cur + 1) + ' of ' + N + ', ' + fmtClock(t) + ' estimated');
+    }
+  }
+
+  function renderAll() {
+    computeDisp();
+    drawAll();
+    var key = cur + '|' + (disp.applied ? 1 : 0) + '|' + (prog >= 1 ? 1 : 0) + '|' + (playing ? 1 : 0) + '|' + (N && FRAMES[cur].human ? 1 : 0);
+    if (key !== shownKey) {
+      shownKey = key;
+      updateText();
+      updateButtons();
+    }
+    var skey = cur + '|' + (disp.applied ? 1 : 0) + '|' + (disp.headMount || '');
+    if (skey !== shownStatus) { shownStatus = skey; updateStatus(); }
+    updateClock();
+    if (playing && N) { announce(FRAMES[cur].caption, false); }
+  }
+
+  /* ------------------------------------------------------------------ hover / tap inspector */
+  function inspectAt(ev) {
+    if (!ctx) { return; }
+    var rect = canvasEl.getBoundingClientRect();
+    var px = ev.clientX - rect.left, py = ev.clientY - rect.top;
+    var mx = px / scale - PAD_MM, my = EXT.h + PAD_MM - py / scale;
+    var hit = null;
+    for (var i = 0; i < WELL_LIST.length && !hit; i++) {
+      var g = WELL_LIST[i];
+      var dx = Math.abs(g.x - mx), dy = Math.abs(g.y - my);
+      if (g.circle ? (dx * dx + dy * dy <= Math.pow(g.w / 2 + 0.7, 2)) : (dx <= g.w / 2 + 0.5 && dy <= g.h / 2 + 0.5)) { hit = g; }
+    }
+    if (hit) {
+      var s = 'Slot ' + hit.slot + ', well ' + hit.name + ' (' + (hit.lw.label || hit.lw.load_name) + '): ';
+      if (hit.tip) { s += (base.tips[hit.key] || disp.newTips[hit.key]) ? 'tip used' : 'tip available'; }
+      else {
+        var n = netOf(hit.key);
+        s += 'net change ' + fmtSigned(n) + ' ' + MU + 'L since the start of the run (initial volume unknown)';
+        if (hit.max) { s += '; capacity ' + fmtNum(hit.max) + ' ' + MU + 'L'; }
+      }
+      inspectEl.textContent = s;
+      return;
+    }
+    for (var slot in LW_BY_SLOT) {
+      if (!has(LW_BY_SLOT, slot)) { continue; }
+      var r = LW_BY_SLOT[slot].rect;
+      if (r && mx >= r[0] && mx <= r[0] + r[2] && my >= r[1] && my <= r[1] + r[3]) {
+        inspectEl.textContent = 'Slot ' + slot + ': ' + (LW_BY_SLOT[slot].display_name || LW_BY_SLOT[slot].load_name) +
+          (LW_BY_SLOT[slot].module ? ' on ' + LW_BY_SLOT[slot].module : '');
+        return;
+      }
+    }
+    inspectEl.textContent = 'Hover or tap a well to read its net change. Keys: Space = play/pause, Left/Right = step.';
+  }
+  if (canvasEl) {
+    canvasEl.addEventListener('pointermove', inspectAt);
+    canvasEl.addEventListener('pointerdown', inspectAt);
+  }
+
+  /* ------------------------------------------------------------------ wiring */
+  btnPlay.addEventListener('click', togglePlay);
+  btnBack.addEventListener('click', function () { stepBy(-1); });
+  btnNext.addEventListener('click', function () { stepBy(1); });
+  btnRestart.addEventListener('click', restart);
+  $('resume').addEventListener('click', function () { resume(); });
+  $('speed').addEventListener('change', function (e) { setSpeed(parseFloat(e.target.value) || 1); });
+  $('skipdelays').addEventListener('change', function (e) { skipDelays = !!e.target.checked; markDirty(); });
+  scrubEl.addEventListener('input', function () {
+    if (N === 0) { return; }
+    var v = parseFloat(scrubEl.value);
+    if (!isFinite(v)) { return; }
+    var i = Math.min(N - 1, Math.floor(v));
+    setPos(i, v >= N ? 1 : v - i);
+    if (v >= N) { prog = 1; }
+    updateButtons();
+  });
+  scrubEl.addEventListener('change', function () { announce(N ? FRAMES[cur].caption : '', true); });
+  scrubEl.addEventListener('pointerdown', function () { scrubbing = true; });
+  window.addEventListener('pointerup', function () { scrubbing = false; });
+  window.addEventListener('pointercancel', function () { scrubbing = false; });
+
+  // Space = play/pause and Left/Right = step, everywhere except where the browser's own key meaning matters:
+  // a select (arrows change the option), a checkbox (Space toggles it) and the step list (Space/Enter jump to a step).
+  function keyInfo(t) {
+    var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
+    var isInput = tag === 'input';
+    return {
+      typing: tag === 'select' || tag === 'textarea' || (isInput && t.type !== 'range' && t.type !== 'checkbox'),
+      keepSpace: (isInput && t.type === 'checkbox') || !!(t && listEl.contains(t))
+    };
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) { return; }
+    var k = keyInfo(e.target);
+    if (k.typing) { return; }
+    if (e.key === ' ' || e.key === 'Spacebar') {
+      if (k.keepSpace) { return; }
+      e.preventDefault();
+      togglePlay();
+    } else if (e.key === 'ArrowRight') { e.preventDefault(); stepBy(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); stepBy(-1); }
+  });
+  document.addEventListener('keyup', function (e) {
+    if (e.key !== ' ' && e.key !== 'Spacebar') { return; }
+    var k = keyInfo(e.target);
+    if (!k.typing && !k.keepSpace) { e.preventDefault(); }   // stop a focused button from also "clicking" on key-up
+  });
+
+  // One display frame: advance the playhead by dt real seconds (when playing), then redraw if anything changed.
+  function frameStep(dt) {
+    if (playing) { advance(dt); dirty = true; }
+    if (dirty) { dirty = false; renderAll(); }
+  }
+  function tick(ts) {
+    window.requestAnimationFrame(tick);
+    if (lastTs === null) { lastTs = ts; }
+    var dt = Math.min(Math.max((ts - lastTs) / 1000, 0), 0.25);
+    lastTs = ts;
+    frameStep(dt);
+  }
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () { if (Math.abs((host.clientWidth || 0) - lastHostW) > 1) { layout(); } }).observe(host);
+  }
+  window.addEventListener('resize', layout);
+  if (mqNarrow && mqNarrow.addEventListener) { mqNarrow.addEventListener('change', layout); }
+
+  readColors();
+  buildStaticPanels();
+  buildList();
+  layout();
+  updateButtons();
+  renderAll();
+  window.requestAnimationFrame(tick);
+
+  /* small hook for debugging and automated checks; the page does not need it */
+  window.vaxforgePlayer = {
+    frames: N,
+    goto: function (i, p) { playing = false; setPos(i, p === undefined ? 1 : p); updateButtons(); markDirty(); },
+    play: play, pause: pause, step: stepBy, restart: restart,
+    tick: frameStep,
+    state: function () {
+      return { cur: cur, prog: prog, playing: playing, speed: speed, reduced: reduced,
+               head: disp ? [Math.round(disp.head[0] * 100) / 100, Math.round(disp.head[1] * 100) / 100] : null,
+               human: !!(N && FRAMES[cur].human && prog < 1) };
+    }
+  };
+})();
+</script>
+</body>
+</html>

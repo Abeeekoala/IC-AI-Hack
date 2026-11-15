@@ -1,0 +1,113 @@
+{
+  "config_digest": "sha256:692398a935bcf730494a0ac4244dbebc7cde3ef740a6a6757625f803b36d43fa",
+  "created_at": "2026-11-14T16:14:13Z",
+  "run_id": "real_fixture",
+  "stages": {
+    "s0": {
+      "artifact": "s0_taxonomy.json",
+      "digest": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s1": {
+      "artifact": "s1_acquire.json",
+      "digest": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 0
+    },
+    "s10": {
+      "artifact": "s10_animal.json",
+      "digest": "sha256:a74e8804ba1c7e5a47d9ddd2eb6f6433bee426f3322eae4fbc382d53ea119131",
+      "finished_at": "2026-11-15T10:39:31Z",
+      "status": "ok",
+      "warnings": 19
+    },
+    "s11": {
+      "artifact": "s11_prereg.json",
+      "digest": "sha256:5e306fab76daf5e166d84a68624a8d1f4959b710f428bd3c731490e166753a24",
+      "finished_at": "2026-11-15T10:39:31Z",
+      "status": "ok",
+      "warnings": 0
+    },
+    "s12": {
+      "artifact": "s12_biosafety.json",
+      "digest": "sha256:5806bd4d489114c5961321d084ea87c4262b121b4c689e61b78420a3eb50d390",
+      "finished_at": "2026-11-15T10:39:31Z",
+      "status": "ok",
+      "warnings": 4
+    },
+    "s2": {
+      "artifact": "s2_annotate.json",
+      "digest": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
+      "finished_at": "2026-11-14T16:14:13Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s3": {
+      "artifact": "s3_rank.json",
+      "digest": "sha256:13d3c4acc714b455f12e6242040c5a4df78b3fc8165e940c98a734fa867eddce",
+      "finished_at": "2026-11-15T10:34:33Z",
+      "status": "ok",
+      "warnings": 3
+    },
+    "s4": {
+      "artifact": "s4_filter.json",
+      "digest": "sha256:c89da3d01ae4b5f635dc752dce062d734f9dc6bacc8bf859594195c381fe21ae",
+      "finished_at": "2026-11-15T10:34:43Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s5": {
+      "artifact": "s5_epitopes.json",
+      "digest": "sha256:b7ef385e31a83ebcd1be02598e30572b2caad90fa6a67274ecb64a7d2329b96e",
+      "finished_at": "2026-11-15T10:39:23Z",
+      "status": "ok",
+      "warnings": 3
+    },
+    "s6": {
+      "artifact": "s6_coverage.json",
+      "digest": "sha256:7b118cc995d126d199779c3ba9d92a4669c4d338842a6f679af32cc61e21dc2b",
+      "finished_at": "2026-11-15T10:39:30Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s7": {
+      "artifact": "s7_structure.json",
+      "digest": "sha256:f33e718a2d9201429dcab0333388cb82546076df5f2e0a68934f4d09a748e597",
+      "finished_at": "2026-11-15T10:39:30Z",
+      "status": "ok",
+      "warnings": 2
+    },
+    "s8": {
+      "artifact": "s8_protocol.json",
+      "digest": "sha256:80987e39b721f7867af391aec152cd00e905305213b52df86cef4fa9e3c8a844",
+      "finished_at": "2026-11-15T10:39:30Z",
+      "status": "ok",
+      "warnings": 14
+    },
+    "s9": {
+      "artifact": "s9_robot.json",
+      "digest": "sha256:9415652d18c43fdeebddfc491baf3362c55947b7193a5ceddf436be4f5dc7fe1",
+      "finished_at": "2026-11-15T10:39:30Z",
+      "status": "ok",
+      "warnings": 3
+    },
+    "s9_5": {
+      "artifact": "s9_5_finetune.json",
+      "digest": "sha256:54f63569eac07cb0fc1077a8355211908444ccafe27648c3aed5ffc6341d505f",
+      "finished_at": "2026-11-15T10:39:30Z",
+      "status": "ok",
+      "warnings": 1
+    },
+    "s9plus": {
+      "artifact": "s9plus_animate.json",
+      "digest": "sha256:25e8383d5a62405a885f739eca0999f63f70ace721de50dc7050f912ba85ba9c",
+      "finished_at": "2026-11-15T10:39:30Z",
+      "status": "ok",
+      "warnings": 2
+    }
+  },
+  "vaxforge_version": "0.1.0"
+}
