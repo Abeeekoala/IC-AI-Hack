@@ -261,7 +261,7 @@ def main(argv=None):
     if run:
         sha = None
         if run.get("download_available"):
-            dest = out / f"checkpoint_{state['run_id']}.tar.gz"
+            dest = out / f"checkpoint_{state['run_id']}.tar.zst"  # observed: Zstandard data, not gzip (unpack with `tar -xf`)
             if not dest.exists():
                 sha = ad.download_checkpoint(state["run_id"], dest)
                 say(f"checkpoint downloaded: {dest} sha256 {sha[:16]}")
