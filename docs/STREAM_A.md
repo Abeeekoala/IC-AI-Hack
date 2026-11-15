@@ -16,6 +16,22 @@ python -m pytest                              # 80+ tests, all offline (BLAST te
 ```
 `vaxforge resolve "N. meningitidis" --json` runs S0 alone. `acquire RUN_DIR` / `annotate RUN_DIR` rerun S1 / S2 alone. Set `NCBI_EMAIL` (NCBI asks for one) and optionally `NCBI_API_KEY`.
 
+**Offline demo** (`make demo-offline`, or `python -m vaxforge demo-offline --out runs/demo --force`): copies the committed fixture and runs S3-S12 on the copy with
+`--offline`. S0-S2 are the committed fixture, not a live run, and its S2 localisation is a stand-in, not PSORTb. To keep the demo offline it never uses S3's `auto`
+backend (which would start the Vaxign-ML Docker image, and pull 4.9 GB the first time): by default it sets `s3.backend=scores_file` with stream B's real Vaxign-ML scores
+`docs/examples/vaxign_ml_scores.nmb_fixture.tsv` (stock model, trained on all of Protegen: `holdout_enforced` is false, S3 prints a LEAKAGE RISK warning, and the Bexsero
+recall on this run is not a validation); `--scores-file FILE` uses your own scores, `--rule-based` sets `s3.backend=subtractive_filter` (the rule-based fallback). It also sets
+`s7.boltz.msa=empty` (the default `server` would send the sequences to an MSA server). It also attaches stream D's real earlier Adaption run to S9.5
+(`finetune.evidence` / `finetune.manifest` = the two `docs/examples/s9_5_*real_4b*` files, status `evidence_attached`) and says so before the run: that run was not produced
+by the demo, and its `best_win_rate` is Adaption's own target, not protocol quality; `--no-evidence` leaves S9.5 as "no fine-tune ran". `make` picks `python3` when it runs, else `python`.
+`vaxforge run --out RUN_DIR --stages s7,s8` runs later stages on an existing folder without `--pathogen`; only S0 needs a target.
+`--set KEY=VALUE` (repeatable, any command) overrides one config value for that run; the value is read as JSON when it parses (`true`, `3`, `"text"`), else as text.
+
+**The closing line of `run`** says `(verify: ok)` only for a clean run. It says `(degraded: ...; verify: ok)` when S2 virulence or localisation has any status other than
+`ok` / `not_applicable`, or when a later stage wrote a non-empty `payload.degraded` (a list of reason strings; stream B writes it for S3-S7): the reasons are printed
+above the line under `degraded (why):`, and the line itself counts them per stage. `vaxforge doctor` also lists the
+S3-S12 tools (Opentrons interpreter, Vaxign-ML image, AlgPred2, ToxinPred2, NetMHCpan, NetMHCIIpan, MHCflurry, BepiPred3, DiscoTope3, Boltz) as found / not found; it runs none of them.
+
 ## What each stage does
 
 **S0** - plain-language name to one taxid. Tiers: exact NCBI lookup -> small alias table -> abbreviation expansion ("N. meningitidis", "Staph aureus")

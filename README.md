@@ -78,7 +78,7 @@ Every stage is a pure function over the previous stage's artifact. Artifacts are
 The user types `Neisseria meningitidis` or `SARS-CoV-2`, not a taxid. Two failure modes must be handled explicitly rather than silently:
 
 - **Synonymy.** Many bacterial species have been renamed. NCBI Taxonomy carries synonyms; resolve through them and surface which name was matched.
-- **Ambiguity.** `Neisseria` matches a genus, not a species. `E. coli` matches thousands of strains. Return the candidate list for user confirmation; never silently take the first hit.
+- **Ambiguity.** `Neisseria` matches a genus, not a species: return the candidate list for user confirmation; never silently take the first hit. A name that resolves to exactly one species is accepted, loudly: `E. coli` becomes *Escherichia coli* (taxid 562) with a note that thousands of strains sit below it, S1 then takes the species' UniProt reference proteome, and `--taxid` pins one strain.
 
 On failure, return the nearest matches rather than an error. Implementation uses `esearch` against `db=taxonomy`. Register your `tool` and `email` parameters with NCBI; with an API key the default limit is 10 requests/second.
 
@@ -487,6 +487,21 @@ make warm-cache PATHOGENS="Neisseria meningitidis,SARS-CoV-2"
 # Full pipeline
 vaxforge run --pathogen "Neisseria meningitidis" --top-k 20 --out runs/nmb
 
+# Offline demo, no network and no container: copies the committed fixture (S0-S2) and runs S3-S12 on the copy
+make demo-offline                                      # = vaxforge demo-offline --out runs/demo --force; S3 uses the real Vaxign-ML scores in docs/examples (stock model: not a validation)
+make demo-offline DEMO_FLAGS=--rule-based              # S3 with the rule-based fallback instead (or DEMO_FLAGS="--scores-file FILE" for your own scores)
+vaxforge run --out runs/demo --stages s7,s8 --offline  # later stages on an existing run folder need no --pathogen
+vaxforge run ... --set s3.backend=scores_file          # --set KEY=VALUE overrides one config value for this run
+
+# Look at, check and report on a run
+vaxforge show runs/nmb                                 # summary of the stages in a run folder
+vaxforge verify runs/nmb                               # digests, upstream chain, file hashes
+vaxforge report runs/nmb --out report.html             # one self-contained HTML page for the run
+vaxforge prereg verify runs/nmb                        # S11: recompute the pre-registration digest
+vaxforge biosafety check ORDER.fasta --run runs/nmb    # S12: check an order list before it goes to a synthesis provider
+vaxforge finetune manifest                             # S9.5 tools (manifest, check, tasks, generate, grade, winrate): see --help
+vaxforge doctor --online                               # tools, cache, network; S3-S12 tools are listed as found / not found only
+
 # Retrospective validation (do this before the demo)
 vaxforge validate lopov INPUT.json --k 3 5 10          # leave-one-pathogen-out metrics (input format: validation/lopov.py)
 vaxforge validate bexsero runs/nmb/s3_rank.json --k 3  # recall@3 of the Bexsero antigens in the S3 ranking
@@ -496,6 +511,8 @@ vaxforge compile-protocol runs/nmb/protocol.json --target opentrons-ot2
 
 # Animal study proposal for the top candidates
 vaxforge animal-study runs/nmb --species hla-transgenic --arms 4 --power 0.8
+# After this, `vaxforge verify runs/nmb` reports s11 as STALE: a stage upstream of S11 was re-written after S11 recorded
+# its digests, so S11's chain no longer matches. That is expected, not corruption; it is flagged on purpose.
 ```
 
 Docker is required for BLAST+ and Vaxign-ML. A GPU with ≥16 GB VRAM is recommended for S7; the pipeline degrades gracefully to sequence-only ranking without one.

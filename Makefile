@@ -1,13 +1,16 @@
 # VaxForge - stream A Makefile (README section 5).
 # No `make` on Windows?  Every target is a one-liner around `python -m vaxforge ...` - run that directly.
+# PY is python3 when that runs (a Mac often has no `python`), else python; override with `make PY=/path/to/python ...`.
 
-PY        ?= python
+PY        ?= $(shell python3 -c "import sys" >/dev/null 2>&1 && echo python3 || echo python)
 PATHOGENS ?= Neisseria meningitidis,SARS-CoV-2
 PATHOGEN  ?= Neisseria meningitidis
 OUT       ?= runs/nmb
 TOP_K     ?= 20
+DEMO_OUT  ?= runs/demo
+DEMO_FLAGS ?=
 
-.PHONY: setup warm-cache run offline-run test verify doctor fixture docker-pull
+.PHONY: setup warm-cache run offline-run demo-offline test verify doctor fixture docker-pull
 
 setup:            ## python deps (+ Docker images when Docker is installed)
 	$(PY) -m pip install -e ".[dev]"
@@ -26,6 +29,9 @@ run:              ## S0-S2 (and any later stage that is installed)
 
 offline-run:      ## same, but never touch the network (cache only)
 	$(PY) -m vaxforge run --pathogen "$(PATHOGEN)" --top-k $(TOP_K) --out $(OUT) --offline
+
+demo-offline:     ## offline demo: copy fixtures/nmb_fixture to $(DEMO_OUT), run S3-S12 on it (no network, no container); DEMO_FLAGS="--rule-based" or "--scores-file F"
+	$(PY) -m vaxforge demo-offline --out $(DEMO_OUT) --force $(DEMO_FLAGS)
 
 verify:           ## check a run folder's digests, upstream chain and file hashes
 	$(PY) -m vaxforge verify $(OUT)
