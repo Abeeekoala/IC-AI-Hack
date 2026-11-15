@@ -61,7 +61,8 @@ def test_the_stage_is_the_one_vaxforge_run_calls(store, tmp_path):
 
 def test_the_shipped_config_has_the_finetune_section():
     section = cli.load_config(None).section("finetune")
-    assert section == {"base_model_id": None, "model_id": None, "eval_tasks": 11, "seed": 20261114}
+    assert section == {"base_model_id": None, "model_id": None, "eval_tasks": 11, "seed": 20261114,
+                       "evidence": None, "manifest": None}
 
 
 def _candidates(path, n):
@@ -96,3 +97,44 @@ def test_a_missing_checkout_is_a_clear_error_not_a_crash(monkeypatch, tmp_path, 
     monkeypatch.setattr(ft, "_validation_module", lambda name: (_ for _ in ()).throw(ValueError("no validation/ here")))
     assert cli.main(["finetune", "winrate", str(tmp_path / "r.jsonl")]) == 1
     assert "no validation/ here" in capsys.readouterr().err
+
+
+# ---- attaching real Adaption evidence ----------------------------------------------------------------------------------
+
+EVIDENCE = {"schema_version": 1, "run_id": "82c660bc-2c35-4917-b4d1-e7c58039b904", "status": "succeeded", "training_method": "instruction",
+            "base_model_id": "Qwen/Qwen3.5-4B", "trained_model_name": "adaption_ot2_liquid_handling_sft", "training_type": "lora",
+            "iterations_completed": 1, "max_iterations": 2, "best_win_rate": 0.7832, "target_win_rate": 0.6, "target_reached": True,
+            "checkpoint_sha256": "c" * 64, "created_at_utc": "2026-11-15T01:43:38Z", "completed_at_utc": "2026-11-15T02:24:45Z",
+            "caveat": "best_win_rate is Adaption's own optimisation target"}
+MANIFEST = {"counts": {"candidates": 3121, "included": 1000, "included_synthetic": 571}, "meets_min_rows": True, "max_row_chars": 32000}
+
+
+def write_json(path, doc):
+    path.write_text(json.dumps(doc), encoding="utf-8")
+    return str(path)
+
+
+def test_configured_evidence_is_attached_hashed_and_summarised_without_inventing_a_win_rate_of_ours(store, tmp_path):
+    ev, man = write_json(tmp_path / "ev.json", EVIDENCE), write_json(tmp_path / "man.json", MANIFEST)
+    data = {"finetune": {**UNSET["finetune"], "evidence": ev, "manifest": man}}
+    art = ft.run(store, cfg(tmp_path, data))
+    fine_tune = art.payload["fine_tune"]
+    assert fine_tune["status"] == "evidence_attached" and fine_tune["reasons"] == []
+    assert fine_tune["adaption"]["best_win_rate"] == 0.7832 and fine_tune["adaption"]["run_id"] == EVIDENCE["run_id"]
+    assert fine_tune["manifest_counts"] == {"candidates": 3121, "included": 1000, "included_synthetic": 571,
+                                            "meets_min_rows": True, "max_row_chars": 32000}
+    assert fine_tune["held_out_win_rate"] is None  # ours is not computed here
+    assert art.payload["base_model_id"] == "Qwen/Qwen3.5-4B" and art.payload["model_id"] == EVIDENCE["run_id"]
+    assert any("platform's own number" in w for w in art.warnings) and art.status == "ok"
+    assert (store.run_dir / "data" / "s9_5" / "adaption_evidence.json").is_file() and store.verify() == []
+
+
+def test_a_file_that_is_not_adaption_evidence_is_a_config_error(store, tmp_path):
+    from vaxforge.config import ConfigError
+    bad = write_json(tmp_path / "bad.json", {"hello": 1})
+    with pytest.raises(ConfigError, match="not an adaption_evidence.json"):
+        ft.run(store, cfg(tmp_path, {"finetune": {**UNSET["finetune"], "evidence": bad}}))
+    with pytest.raises(ConfigError, match="cannot read"):
+        ft.run(store, cfg(tmp_path, {"finetune": {**UNSET["finetune"], "evidence": str(tmp_path / "missing.json")}}))
+    with pytest.raises(ConfigError, match="finetune.evidence is not"):
+        ft.run(store, cfg(tmp_path, {"finetune": {**UNSET["finetune"], "manifest": write_json(tmp_path / "m.json", MANIFEST)}}))
