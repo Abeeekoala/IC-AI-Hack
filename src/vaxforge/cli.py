@@ -287,6 +287,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 
 DEMO_STAGES = "s3,s4,s5,s6,s7,s8,s9,s9plus,s9_5,s10,s11,s12"
+DEFAULT_DEMO_SCORES = Path(__file__).resolve().parents[2] / "docs" / "examples" / "vaxign_ml_scores.nmb_fixture.tsv"   # stream B, real Vaxign-ML
 
 
 def cmd_demo_offline(args: argparse.Namespace) -> int:
@@ -308,15 +309,22 @@ def cmd_demo_offline(args: argparse.Namespace) -> int:
             argv += [flag, str(value)]
     # Nothing may start a container or leave the machine in an "offline" demo: S3 would otherwise try the Vaxign-ML Docker
     # image first (backend auto), and S7's Boltz would ask the MSA server (msa: server) for the sequences.
-    if args.scores_file:
-        scores = Path(args.scores_file).resolve()
+    if args.rule_based and args.scores_file:
+        raise ConfigError("--rule-based and --scores-file exclude each other")
+    scores: Path | None = None
+    if not args.rule_based:
+        scores = Path(args.scores_file).resolve() if args.scores_file else (DEFAULT_DEMO_SCORES if DEFAULT_DEMO_SCORES.is_file() else None)
+    if scores is not None:
         if not scores.is_file():
             raise ConfigError(f"scores file not found: {scores}")
         argv += ["--set", "s3.backend=scores_file", "--set", f"s3.scores_file={json.dumps(str(scores))}"]
         say(f"  S3 ranks with the precomputed scores in {scores}")
+        if scores == DEFAULT_DEMO_SCORES:
+            say("  note: these are real Vaxign-ML scores from the stock model, which was trained on all of Protegen and so saw the Bexsero antigens "
+                "(holdout_enforced is false and S3 prints a LEAKAGE RISK warning): the Bexsero recall on this run is not a validation")
     else:
         argv += ["--set", "s3.backend=subtractive_filter"]
-        say("  S3 uses the rule-based fallback ranker (no precomputed scores given: pass --scores-file FILE)")
+        say("  S3 uses the rule-based fallback ranker (no protegenicity term)")
     argv += ["--set", "s7.boltz.msa=empty"]
     for item in args.overrides:
         argv += ["--set", item]
@@ -594,7 +602,9 @@ def build_parser() -> argparse.ArgumentParser:
                         help="offline demo: copy the committed fixture (S0-S2) and run S3-S12 on the copy, no network")
     dm.add_argument("--out", default="runs/demo", help="folder for the copy (default: runs/demo)")
     dm.add_argument("--fixture", help="a run folder to copy instead of fixtures/nmb_fixture")
-    dm.add_argument("--scores-file", help="precomputed protegenicity scores for S3 (sets s3.backend=scores_file and s3.scores_file)")
+    dm.add_argument("--scores-file", help="precomputed protegenicity scores for S3 (sets s3.backend=scores_file and s3.scores_file); "
+                                          "default: docs/examples/vaxign_ml_scores.nmb_fixture.tsv when it exists")
+    dm.add_argument("--rule-based", action="store_true", help="rank S3 with the rule-based fallback instead of a scores file")
     dm.add_argument("--force", action="store_true", help="replace --out when it already has files")
     dm.set_defaults(func=cmd_demo_offline)
 

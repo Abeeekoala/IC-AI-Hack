@@ -7,7 +7,7 @@ PATHOGEN  ?= Neisseria meningitidis
 OUT       ?= runs/nmb
 TOP_K     ?= 20
 DEMO_OUT  ?= runs/demo
-DEMO_SCORES ?=
+DEMO_FLAGS ?=
 
 .PHONY: setup warm-cache run offline-run demo-offline test verify doctor fixture docker-pull
 
@@ -29,8 +29,8 @@ run:              ## S0-S2 (and any later stage that is installed)
 offline-run:      ## same, but never touch the network (cache only)
 	$(PY) -m vaxforge run --pathogen "$(PATHOGEN)" --top-k $(TOP_K) --out $(OUT) --offline
 
-demo-offline:     ## offline demo: copy fixtures/nmb_fixture to $(DEMO_OUT), run S3-S12 on it (no network, no container); DEMO_SCORES=file for S3 scores
-	$(PY) -m vaxforge demo-offline --out $(DEMO_OUT) --force $(if $(DEMO_SCORES),--scores-file $(DEMO_SCORES),)
+demo-offline:     ## offline demo: copy fixtures/nmb_fixture to $(DEMO_OUT), run S3-S12 on it (no network, no container); DEMO_FLAGS="--rule-based" or "--scores-file F"
+	$(PY) -m vaxforge demo-offline --out $(DEMO_OUT) --force $(DEMO_FLAGS)
 
 verify:           ## check a run folder's digests, upstream chain and file hashes
 	$(PY) -m vaxforge verify $(OUT)

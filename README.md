@@ -488,8 +488,8 @@ make warm-cache PATHOGENS="Neisseria meningitidis,SARS-CoV-2"
 vaxforge run --pathogen "Neisseria meningitidis" --top-k 20 --out runs/nmb
 
 # Offline demo, no network and no container: copies the committed fixture (S0-S2) and runs S3-S12 on the copy
-make demo-offline                                      # = vaxforge demo-offline --out runs/demo --force
-make demo-offline DEMO_SCORES=path/to/scores.tsv       # S3 ranks with precomputed protegenicity scores instead of the rule-based fallback
+make demo-offline                                      # = vaxforge demo-offline --out runs/demo --force; S3 uses the real Vaxign-ML scores in docs/examples (stock model: not a validation)
+make demo-offline DEMO_FLAGS=--rule-based              # S3 with the rule-based fallback instead (or DEMO_FLAGS="--scores-file FILE" for your own scores)
 vaxforge run --out runs/demo --stages s7,s8 --offline  # later stages on an existing run folder need no --pathogen
 vaxforge run ... --set s3.backend=scores_file          # --set KEY=VALUE overrides one config value for this run
 

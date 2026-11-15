@@ -267,9 +267,12 @@ def test_degraded_by_stage_reads_only_non_empty_lists(tmp_path, monkeypatch):
     assert cli.degraded_by_stage(store) == {"s3": ["fallback ranker", "no scores file"]}
 
 
-def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path, monkeypatch):
+def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path, monkeypatch, capsys):
     calls: list[list[str]] = []
     monkeypatch.setattr(cli, "main", lambda argv=None: calls.append(list(argv)) or 0)
+    default_scores = tmp_path / "default_scores.tsv"                                     # stands in for stream B's file in docs/examples
+    default_scores.write_text("protein_id\tscore\nQ1\t90\n", encoding="utf-8")
+    monkeypatch.setattr(cli, "DEFAULT_DEMO_SCORES", default_scores)
     out = tmp_path / "demo"
 
     def go(*extra: str) -> int:
@@ -279,24 +282,35 @@ def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path,
     def sets(argv: list[str]) -> list[str]:
         return [argv[i + 1] for i, a in enumerate(argv) if a == "--set"]
 
-    assert go() == 0
+    def scores_used(argv: list[str]) -> Path:
+        key, value = cli.parse_override(next(x for x in sets(argv) if x.startswith("s3.scores_file=")))
+        assert key == "s3.scores_file"
+        return Path(value)
+
+    assert go() == 0                                                                      # default: the real Vaxign-ML scores file
     assert (out / "manifest.json").is_file() and (out / "s2_annotate.json").is_file()
     argv = calls[-1]
     assert argv[0] == "run" and "--offline" in argv and "--non-interactive" in argv and "--pathogen" not in argv
     assert argv[argv.index("--stages") + 1] == cli.DEMO_STAGES and "s0" not in cli.DEMO_STAGES.split(",")
-    assert "s3.backend=subtractive_filter" in sets(argv) and "s7.boltz.msa=empty" in sets(argv)    # no container, no MSA server
+    assert "s3.backend=scores_file" in sets(argv) and scores_used(argv) == default_scores
+    assert "s7.boltz.msa=empty" in sets(argv)                                             # no MSA server, no container (never backend auto)
+    text = capsys.readouterr().out
+    assert "holdout_enforced is false" in text and "not a validation" in text             # said plainly, not buried in a warning
 
     with pytest.raises(ConfigError, match="not empty"):                                  # never overwrite silently
         go()
     (out / "marker.txt").write_text("x", encoding="utf-8")
-    scores = tmp_path / "scores.tsv"
-    scores.write_text("protein_id\tscore\nQ1\t0.9\n", encoding="utf-8")
-    assert go("--force", "--scores-file", str(scores)) == 0
+    own = tmp_path / "own_scores.tsv"
+    own.write_text("protein_id\tscore\nQ1\t0.9\n", encoding="utf-8")
+    assert go("--force", "--scores-file", str(own)) == 0
     assert not (out / "marker.txt").exists()                                              # --force replaced the folder
-    s = sets(calls[-1])
-    assert "s3.backend=scores_file" in s and "s3.backend=subtractive_filter" not in s
-    key, value = cli.parse_override(next(x for x in s if x.startswith("s3.scores_file=")))
-    assert key == "s3.scores_file" and Path(value) == scores.resolve()
+    assert "s3.backend=scores_file" in sets(calls[-1]) and scores_used(calls[-1]) == own.resolve()
+    assert "holdout_enforced is false" not in capsys.readouterr().out                    # the caveat belongs to the default file only
+
+    assert go("--force", "--rule-based") == 0
+    assert "s3.backend=subtractive_filter" in sets(calls[-1]) and not any(x.startswith("s3.scores_file=") for x in sets(calls[-1]))
+    with pytest.raises(ConfigError, match="exclude each other"):
+        go("--force", "--rule-based", "--scores-file", str(own))
     with pytest.raises(ConfigError, match="scores file not found"):
         go("--force", "--scores-file", str(tmp_path / "missing.tsv"))
 
