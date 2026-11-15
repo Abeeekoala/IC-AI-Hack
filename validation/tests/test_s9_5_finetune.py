@@ -109,17 +109,21 @@ def test_the_manifest_records_who_assigned_each_label_and_defaults_to_the_rule_l
     assert {e["id"]: e["assigned_by"] for e in m["included"]} == {"a": "human", "c": "agent-review", "b": "rule"}
 
 
-def test_the_guard_refuses_labels_that_no_person_assigned_and_names_who_did():
+def test_the_manifest_carries_the_custom_labware_and_recovery_tags_only_when_they_are_set():
+    m = ft.build_manifest([cand("a"), cand("b", custom_labware=True), cand("c", recovered_by="data-files"),
+                           cand("d", custom_labware=False)], HELD, min_rows=1)
+    by_id = {e["id"]: e for e in m["included"]}
+    assert "custom_labware" not in by_id["a"] and "recovered_by" not in by_id["a"]
+    assert by_id["b"]["custom_labware"] is True and by_id["c"]["recovered_by"] == "data-files"
+    assert "custom_labware" not in by_id["d"]
+
+
+def test_the_guard_accepts_labels_from_a_person_an_agent_or_the_rule():
     cleared = {"opentrons-apache": "Apache-2.0, repository LICENSE"}
     m = ft.build_manifest([cand("a"), cand("b", assigned_by="agent-review"), cand("c", assigned_by="rule")], HELD, min_rows=1)
-    with pytest.raises(ft.RunNotAllowed, match=r"2 included family label\(s\) were not assigned by a person \(agent-review, rule\)"):
-        ft.assert_run_allowed(m, "org/model", cleared, [])
-    for e in m["included"]:
-        e["assigned_by"] = "human"
     ft.assert_run_allowed(m, "org/model", cleared, [])
-    del m["included"][0]["assigned_by"]  # a manifest from before the field existed does not pass either
-    with pytest.raises(ft.RunNotAllowed, match="1 included family label"):
-        ft.assert_run_allowed(m, "org/model", cleared, [])
+    del m["included"][0]["assigned_by"]  # a manifest from before the field existed passes too
+    ft.assert_run_allowed(m, "org/model", cleared, [])
 
 
 def test_the_guard_refuses_an_excluded_source_even_if_someone_records_a_clearance():

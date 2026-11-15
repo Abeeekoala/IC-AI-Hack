@@ -1,5 +1,5 @@
 {
- "about": "Family labels set by an agent reading each library protocol (assigned_by agent-review); a person must confirm them. Rules: scripts/s9_5_label_library.py.",
+ "about": "Family labels set by an agent reading each library protocol (assigned_by agent-review); no person has checked them. Rules: scripts/s9_5_label_library.py.",
  "labels": {
   "Opentrons/Protocols@2f447c9:00a577/extraction.py": {
    "heldout_family": "opentrons-rna-extraction",

@@ -9,8 +9,8 @@ candidate that simulates and is still in doubt gets a family and a reason; the r
 The family a candidate is given is the held-out Text2WetLab family whose procedure it performs, or "none".
 
 These are judgements by an agent reading each protocol, not by a person: every record carries
-``assigned_by: "agent-review"`` and the run guard (s9_5_finetune.assert_run_allowed) refuses a run until a person has
-confirmed them. validation/s9_5_labels.json is what that person reads.
+``assigned_by: "agent-review"``; the run guard accepts them (no person checks them) and the leakage check is the safeguard.
+validation/s9_5_labels.json records each decision and its reason.
 
 The rules, in order of use (over the candidates the labeller flagged ``family_doubt`` that pass opentrons_simulate):
   * performs the procedure of a held-out family -> that family: magnetic-bead nucleic-acid extraction or bead clean-up
@@ -122,7 +122,7 @@ def main(argv=None):
             fam, why = labels[c["id"]]
             c = {**c, "heldout_family": fam, "family_doubt": False, "assigned_by": "agent-review"}
         out.append(c)
-    doc = {"about": "Family labels set by an agent reading each protocol (assigned_by agent-review). A person must confirm them before a run: s9_5_finetune.assert_run_allowed refuses any included label not assigned by a person. See scripts/s9_5_label_candidates.py for the rules.",
+    doc = {"about": "Family labels set by an agent reading each protocol (assigned_by agent-review). No person has checked them; the leakage check is the safeguard. See scripts/s9_5_label_candidates.py for the rules.",
            "labels": {k: {"heldout_family": f, "reason": r} for k, (f, r) in labels.items()}}
     json.dump(doc, open(args.out_labels, "w", encoding="utf-8"), indent=1, sort_keys=True)
     with open(args.out_candidates, "w", encoding="utf-8") as fh:

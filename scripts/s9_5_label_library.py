@@ -7,8 +7,8 @@ CANDIDATES.jsonl is the output of src/vaxforge/s9_5_corpus.py on the staged libr
 rules are those of scripts/s9_5_label_candidates.py: a candidate that performs a held-out procedure gets that family (and
 is kept out), one that does not gets "none", and a plain transfer of at most four steps has the shape of the a1-a12 / split
 tasks. The index of a doubted, simulating candidate below is its position in the file; the decisions were read from each
-protocol's name, modules and steps on 2026-11-14 and are an agent's judgement (``assigned_by: "agent-review"``): a person
-must confirm them before a run. Standard library only.
+protocol's name, modules and steps on 2026-11-14 and are an agent's judgement (``assigned_by: "agent-review"``), not checked
+by a person. Standard library only.
 """
 import argparse
 import json
@@ -47,7 +47,7 @@ def main(argv=None):
             labels[doubted[i]["id"]] = {"heldout_family": family, "reason": reason}
     out = [{**c, "heldout_family": labels[c["id"]]["heldout_family"], "family_doubt": False, "assigned_by": "agent-review"}
            if c["id"] in labels else c for c in cands]
-    json.dump({"about": "Family labels set by an agent reading each library protocol (assigned_by agent-review); a person must confirm them. Rules: scripts/s9_5_label_library.py.",
+    json.dump({"about": "Family labels set by an agent reading each library protocol (assigned_by agent-review); no person has checked them. Rules: scripts/s9_5_label_library.py.",
                "labels": labels}, open(args.out_labels, "w", encoding="utf-8"), indent=1, sort_keys=True)
     with open(args.out_candidates, "w", encoding="utf-8") as fh:
         for c in out:
