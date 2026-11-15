@@ -1,0 +1,649 @@
+{
+ "session_id": "s11_antigen_stimulation",
+ "title": "Antigen / control addition to seeded THP-1 plate",
+ "covers": [
+  "s11"
+ ],
+ "modules": [],
+ "labware": [
+  {
+   "key": "tubes",
+   "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "slot": "2",
+   "module": null,
+   "label": "Stimulus tubes (human-prepared)",
+   "kind": "tubes"
+  },
+  {
+   "key": "cells",
+   "load_name": "corning_96_wellplate_360ul_flat",
+   "slot": "5",
+   "module": null,
+   "label": "Seeded, differentiated THP-1 plate",
+   "kind": "plate"
+  },
+  {
+   "key": "tips_p20_1",
+   "load_name": "opentrons_96_tiprack_20ul",
+   "slot": "11",
+   "module": null,
+   "label": "p20 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p20",
+   "api_name": "p20_single_gen2",
+   "mount": "left",
+   "channels": 1,
+   "tipracks": [
+    "tips_p20_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "A1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "A2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "A3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "B1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "B2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "B3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "C1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "C2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "C3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "D1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "D2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "D3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "E1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "E2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "E3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "F1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "F2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "F3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "G1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "G2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "G3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "H1"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "H2"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "cells",
+    "well": "H3"
+   },
+   "reagent": "THP-1 cells in medium",
+   "volume_ul": 180.0,
+   "source": "human_prepared",
+   "note": "seeded and differentiated by the human"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "reagent": "vehicle / buffer only",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "human-prepared stimulus"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "reagent": "antigen mid dose",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "human-prepared stimulus"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "B1"
+   },
+   "reagent": "LPS positive control",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "human-prepared stimulus"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "B2"
+   },
+   "reagent": "antigen high dose",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "human-prepared stimulus"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "C1"
+   },
+   "reagent": "endotoxin-matched LPS control",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "prepare at the LPS level measured by LAL for the matching antigen dose"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "C2"
+   },
+   "reagent": "antigen mid dose + polymyxin B",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "human-prepared stimulus"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "D1"
+   },
+   "reagent": "antigen low dose",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "human-prepared stimulus"
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "D2"
+   },
+   "reagent": "mock-purification eluate",
+   "volume_ul": 90.0,
+   "source": "robot_loaded",
+   "note": "human-prepared stimulus"
+  }
+ ],
+ "actions": [
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "A1"
+    },
+    {
+     "labware": "cells",
+     "well": "A2"
+    },
+    {
+     "labware": "cells",
+     "well": "A3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "vehicle / buffer only"
+  },
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "B1"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "B1"
+    },
+    {
+     "labware": "cells",
+     "well": "B2"
+    },
+    {
+     "labware": "cells",
+     "well": "B3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "LPS positive control"
+  },
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "C1"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "C1"
+    },
+    {
+     "labware": "cells",
+     "well": "C2"
+    },
+    {
+     "labware": "cells",
+     "well": "C3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "endotoxin-matched LPS control"
+  },
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "D1"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "D1"
+    },
+    {
+     "labware": "cells",
+     "well": "D2"
+    },
+    {
+     "labware": "cells",
+     "well": "D3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "antigen low dose"
+  },
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "E1"
+    },
+    {
+     "labware": "cells",
+     "well": "E2"
+    },
+    {
+     "labware": "cells",
+     "well": "E3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "antigen mid dose"
+  },
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "B2"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "F1"
+    },
+    {
+     "labware": "cells",
+     "well": "F2"
+    },
+    {
+     "labware": "cells",
+     "well": "F3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "antigen high dose"
+  },
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "C2"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "G1"
+    },
+    {
+     "labware": "cells",
+     "well": "G2"
+    },
+    {
+     "labware": "cells",
+     "well": "G3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "antigen mid dose + polymyxin B"
+  },
+  {
+   "step": "s11",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 20.0,
+   "src": {
+    "labware": "tubes",
+    "well": "D2"
+   },
+   "dst": [
+    {
+     "labware": "cells",
+     "well": "H1"
+    },
+    {
+     "labware": "cells",
+     "well": "H2"
+    },
+    {
+     "labware": "cells",
+     "well": "H3"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": "mock-purification eluate"
+  },
+  {
+   "step": "s11",
+   "op": "pause",
+   "text": "HUMAN [s11]: Return the plate to the 37 C / 5% CO2 incubator for the stimulation period, then collect supernatants (ELISA) and lyse cells (RT-qPCR). The incubator is not automated."
+  }
+ ],
+ "tips_needed": {
+  "p20": 24
+ },
+ "notes": [
+  "Sterility: the OT-2 is not sterile by itself. Run inside a biosafety cabinet / HEPA enclosure with sterile filter tips.",
+  "S8 control list for this step: vehicle/buffer only; LPS positive control; endotoxin-matched LPS control (at the measured residual level); polymyxin B-treated antigen; empty-vector mock-purification eluate"
+ ],
+ "layouts": {
+  "Stimulation plate (rows = conditions, columns = replicates)": {
+   "vehicle / buffer only": "A1,A2,A3",
+   "LPS positive control": "B1,B2,B3",
+   "endotoxin-matched LPS control": "C1,C2,C3",
+   "antigen low dose": "D1,D2,D3",
+   "antigen mid dose": "E1,E2,E3",
+   "antigen high dose": "F1,F2,F3",
+   "antigen mid dose + polymyxin B": "G1,G2,G3",
+   "mock-purification eluate": "H1,H2,H3"
+  }
+ }
+}

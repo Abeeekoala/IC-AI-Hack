@@ -1,0 +1,121 @@
+{
+ "session_id": "s06_lysis",
+ "title": "Lysis reagent addition",
+ "covers": [
+  "s06"
+ ],
+ "modules": [],
+ "labware": [
+  {
+   "key": "pel",
+   "load_name": "nest_96_wellplate_2ml_deep",
+   "slot": "5",
+   "module": null,
+   "label": "Cell pellets (supernatant removed by the human)",
+   "kind": "plate"
+  },
+  {
+   "key": "res",
+   "load_name": "nest_12_reservoir_15ml",
+   "slot": "2",
+   "module": null,
+   "label": "Lysis buffer",
+   "kind": "reservoir"
+  },
+  {
+   "key": "tips_p300_1",
+   "load_name": "opentrons_96_tiprack_300ul",
+   "slot": "11",
+   "module": null,
+   "label": "p300 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p300",
+   "api_name": "p300_single_gen2",
+   "mount": "right",
+   "channels": 1,
+   "tipracks": [
+    "tips_p300_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "res",
+    "well": "A1"
+   },
+   "reagent": "lysis buffer",
+   "volume_ul": 2300.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s06",
+   "op": "transfer",
+   "pipette": "p300",
+   "volume": 300.0,
+   "src": {
+    "labware": "res",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "pel",
+     "well": "A1"
+    },
+    {
+     "labware": "pel",
+     "well": "B1"
+    },
+    {
+     "labware": "pel",
+     "well": "C1"
+    },
+    {
+     "labware": "pel",
+     "well": "D1"
+    },
+    {
+     "labware": "pel",
+     "well": "E1"
+    },
+    {
+     "labware": "pel",
+     "well": "F1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": [
+    5,
+    200.0
+   ],
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s06",
+   "op": "pause",
+   "text": "HUMAN [s06]: Incubate / sonicate as the lysis method requires, then centrifuge to clarify. Sonication and centrifugation are not automated. Transfer clarified lysate to the purification plate (next session)."
+  }
+ ],
+ "tips_needed": {
+  "p300": 6
+ },
+ "notes": [],
+ "layouts": {
+  "Pellet plate": {
+   "induced": "A1,B1,C1",
+   "uninduced control": "D1,E1,F1"
+  }
+ }
+}

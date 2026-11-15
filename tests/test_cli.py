@@ -297,7 +297,7 @@ def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path,
     argv = calls[-1]
     assert argv[0] == "run" and "--offline" in argv and "--non-interactive" in argv and "--pathogen" not in argv
     assert argv[argv.index("--stages") + 1] == cli.DEMO_STAGES and "s0" not in cli.DEMO_STAGES.split(",")
-    assert "s3.backend=scores_file" in sets(argv) and scores_used(argv) == default_scores
+    assert "s3.backend=scores_file" in sets(argv) and scores_used(argv) == default_scores.resolve()
     assert "s7.boltz.msa=empty" in sets(argv)                                             # no MSA server, no container (never backend auto)
     text = capsys.readouterr().out
     assert "holdout_enforced is false" in text and "not a validation" in text             # said plainly, not buried in a warning
@@ -305,7 +305,8 @@ def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path,
     s = sets(argv)
     ev_key, ev_value = cli.parse_override(next(x for x in s if x.startswith("finetune.evidence=")))
     mf_key, mf_value = cli.parse_override(next(x for x in s if x.startswith("finetune.manifest=")))
-    assert (ev_key, Path(ev_value)) == ("finetune.evidence", evidence) and (mf_key, Path(mf_value)) == ("finetune.manifest", manifest)
+    assert (ev_key, Path(ev_value)) == ("finetune.evidence", evidence.resolve())
+    assert (mf_key, Path(mf_value)) == ("finetune.manifest", manifest.resolve())
 
     with pytest.raises(ConfigError, match="not empty"):                                  # never overwrite silently
         go()
@@ -324,6 +325,42 @@ def test_demo_offline_copies_the_fixture_and_keeps_every_stage_offline(tmp_path,
         go("--force", "--rule-based", "--scores-file", str(own))
     with pytest.raises(ConfigError, match="scores file not found"):
         go("--force", "--scores-file", str(tmp_path / "missing.tsv"))
+
+
+def test_demo_offline_writes_repo_relative_paths_when_run_from_the_repo_root(tmp_path, monkeypatch):
+    """A committed demo folder must not carry local folder names: relative from the repo root, absolute from anywhere else."""
+    calls: list[list[str]] = []
+    monkeypatch.setattr(cli, "main", lambda argv=None: calls.append(list(argv)) or 0)
+    root = tmp_path / "repo"
+    examples = root / "docs" / "examples"
+    examples.mkdir(parents=True)
+    scores, evidence, manifest = examples / "scores.tsv", examples / "evidence.json", examples / "manifest.json"
+    scores.write_text("protein_id\tscore\nQ1\t90\n", encoding="utf-8")
+    evidence.write_text("{}", encoding="utf-8")
+    manifest.write_text("{}", encoding="utf-8")
+    fixture = root / "fixture"
+    fixture.mkdir()
+    (fixture / "manifest.json").write_text("{}", encoding="utf-8")
+    for name, value in (("REPO_ROOT", root), ("DEFAULT_DEMO_SCORES", scores), ("DEMO_EVIDENCE", evidence), ("DEMO_MANIFEST", manifest)):
+        monkeypatch.setattr(cli, name, value)
+
+    def sets(argv: list[str]) -> dict[str, object]:
+        return dict(cli.parse_override(argv[i + 1]) for i, a in enumerate(argv) if a == "--set")
+
+    def run_demo(out: Path) -> dict[str, object]:
+        args = cli.build_parser().parse_args(["demo-offline", "--out", str(out), "--fixture", str(fixture)])
+        assert args.func(args) == 0
+        return sets(calls[-1])
+
+    monkeypatch.chdir(root)
+    here = run_demo(root / "demo_data" / "run")
+    assert here["s3.scores_file"] == "docs/examples/scores.tsv"
+    assert here["finetune.evidence"] == "docs/examples/evidence.json" and here["finetune.manifest"] == "docs/examples/manifest.json"
+    other = tmp_path / "elsewhere"
+    other.mkdir()
+    monkeypatch.chdir(other)
+    away = run_demo(tmp_path / "demo2")
+    assert Path(str(away["s3.scores_file"])).is_absolute() and Path(str(away["finetune.evidence"])).is_absolute()
 
 
 def test_set_option_overrides_config_values_and_rejects_garbage(project):

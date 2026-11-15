@@ -26,6 +26,8 @@ recall on this run is not a validation); `--scores-file FILE` uses your own scor
 by the demo, and its `best_win_rate` is Adaption's own target, not protocol quality; `--no-evidence` leaves S9.5 as "no fine-tune ran". `make` picks `python3` when it runs, else `python`.
 `vaxforge run --out RUN_DIR --stages s7,s8` runs later stages on an existing folder without `--pathogen`; only S0 needs a target.
 `--set KEY=VALUE` (repeatable, any command) overrides one config value for that run; the value is read as JSON when it parses (`true`, `3`, `"text"`), else as text.
+Run from the repo root, `demo-offline` hands the stages repo-root-relative file paths (scores, Adaption evidence and manifest), so `config.resolved.json` and S3's params hold no local
+folder names; from any other folder it uses absolute paths. The result of that command is committed as `demo_data/run_nmb_fixture/` (its README says what is real, fixture and stand-in).
 
 **The closing line of `run`** says `(verify: ok)` only for a clean run. It says `(degraded: ...; verify: ok)` when S2 virulence or localisation has any status other than
 `ok` / `not_applicable`, or when a later stage wrote a non-empty `payload.degraded` (a list of reason strings; stream B writes it for S3-S7): the reasons are printed

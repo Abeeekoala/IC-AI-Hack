@@ -1,0 +1,300 @@
+{
+ "session_id": "s05_expression_induction",
+ "title": "Inducer addition to expression cultures",
+ "covers": [
+  "s05"
+ ],
+ "modules": [],
+ "labware": [
+  {
+   "key": "cult",
+   "load_name": "nest_96_wellplate_2ml_deep",
+   "slot": "5",
+   "module": null,
+   "label": "Expression cultures (human-inoculated)",
+   "kind": "plate"
+  },
+  {
+   "key": "tubes",
+   "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+   "slot": "2",
+   "module": null,
+   "label": "Inducer + vehicle",
+   "kind": "tubes"
+  },
+  {
+   "key": "tips_p20_1",
+   "load_name": "opentrons_96_tiprack_20ul",
+   "slot": "11",
+   "module": null,
+   "label": "p20 tips",
+   "kind": "tiprack"
+  },
+  {
+   "key": "tips_p300_1",
+   "load_name": "opentrons_96_tiprack_300ul",
+   "slot": "10",
+   "module": null,
+   "label": "p300 tips",
+   "kind": "tiprack"
+  }
+ ],
+ "pipettes": [
+  {
+   "key": "p20",
+   "api_name": "p20_single_gen2",
+   "mount": "left",
+   "channels": 1,
+   "tipracks": [
+    "tips_p20_1"
+   ]
+  },
+  {
+   "key": "p300",
+   "api_name": "p300_single_gen2",
+   "mount": "right",
+   "channels": 1,
+   "tipracks": [
+    "tips_p300_1"
+   ]
+  }
+ ],
+ "liquids": [
+  {
+   "ref": {
+    "labware": "cult",
+    "well": "A1"
+   },
+   "reagent": "expression culture (to be induced)",
+   "volume_ul": 1000.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cult",
+    "well": "B1"
+   },
+   "reagent": "expression culture (to be induced)",
+   "volume_ul": 1000.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cult",
+    "well": "C1"
+   },
+   "reagent": "expression culture (to be induced)",
+   "volume_ul": 1000.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cult",
+    "well": "D1"
+   },
+   "reagent": "expression culture (uninduced control)",
+   "volume_ul": 1000.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cult",
+    "well": "E1"
+   },
+   "reagent": "expression culture (uninduced control)",
+   "volume_ul": 1000.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "cult",
+    "well": "F1"
+   },
+   "reagent": "expression culture (uninduced control)",
+   "volume_ul": 1000.0,
+   "source": "human_prepared",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "reagent": "inducer stock",
+   "volume_ul": 45.0,
+   "source": "robot_loaded",
+   "note": null
+  },
+  {
+   "ref": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "reagent": "vehicle (same solvent, no inducer)",
+   "volume_ul": 45.0,
+   "source": "robot_loaded",
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "step": "s05",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 5.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A1"
+   },
+   "dst": [
+    {
+     "labware": "cult",
+     "well": "A1"
+    },
+    {
+     "labware": "cult",
+     "well": "B1"
+    },
+    {
+     "labware": "cult",
+     "well": "C1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s05",
+   "op": "transfer",
+   "pipette": "p20",
+   "volume": 5.0,
+   "src": {
+    "labware": "tubes",
+    "well": "A2"
+   },
+   "dst": [
+    {
+     "labware": "cult",
+     "well": "D1"
+    },
+    {
+     "labware": "cult",
+     "well": "E1"
+    },
+    {
+     "labware": "cult",
+     "well": "F1"
+    }
+   ],
+   "new_tip": "always",
+   "mix_before": null,
+   "mix_after": null,
+   "src_pos": "bottom",
+   "src_z": null,
+   "dst_pos": "bottom",
+   "dst_z": null,
+   "reagent": null
+  },
+  {
+   "step": "s05",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "cult",
+    "well": "A1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s05",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "cult",
+    "well": "B1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s05",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "cult",
+    "well": "C1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s05",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "cult",
+    "well": "D1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s05",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "cult",
+    "well": "E1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s05",
+   "op": "mix",
+   "pipette": "p300",
+   "reps": 5,
+   "volume": 100.0,
+   "at": {
+    "labware": "cult",
+    "well": "F1"
+   },
+   "new_tip": "once"
+  },
+  {
+   "step": "s05",
+   "op": "pause",
+   "text": "HUMAN [s05]: Move the plate to the shaking incubator for expression. Shaking incubation is not automated."
+  }
+ ],
+ "tips_needed": {
+  "p20": 6,
+  "p300": 6
+ },
+ "notes": [
+  "Inducer volume = culture x final/stock = 1000 x 0.5/100 = 5 uL."
+ ],
+ "layouts": {
+  "Culture plate": {
+   "induced": "A1,B1,C1",
+   "uninduced control": "D1,E1,F1"
+  }
+ }
+}
