@@ -33,7 +33,7 @@ from .prediction.config import coerce_config
 from .prediction.errors import ConfigError, ContractError, ToolFailed, ToolUnavailable
 from .prediction.fasta import sanitise, write_fasta
 from .prediction.schema import Protein, load_s2_annotations
-from .prediction.scoring import composite
+from .prediction.scoring import composite, groups_split_by_cut, tie_groups, tie_key_round, tie_summary
 from .prediction.tools import docker_available, docker_wrap, run_cmd, tool_record
 
 STAGE = "s3_rank"
@@ -282,7 +282,10 @@ class ScoresFileBackend:
         if bad:
             raise ContractError(f"{self.path.name}: scores outside [0, 1] for {bad[:3]} (set 'scale': 100 in the sidecar?)")
         declared = meta.get("holdout_taxids")
-        leak = {"model": meta.get("model", f"scores file {self.path.name}"), "holdout_enforced": None,
+        leak = {"model": meta.get("model", f"scores file {self.path.name}"),
+                # the sidecar may declare ``"holdout_enforced": false`` (e.g. a stock Vaxign-ML model trained on all of
+                # Protegen), which switches on the LEAKAGE RISK warning; otherwise it stays unknown (None), never True
+                "holdout_enforced": False if meta.get("holdout_enforced") is False else None,
                 "declared_holdout_taxids": declared,
                 "note": "Scores supplied externally; whether the model held out the target pathogen is declared, not verified here."}
         tool = tool_record("precomputed-protegenicity", version=meta.get("version"), backend="scores_file",
@@ -405,6 +408,10 @@ def run(target: Any, cfg: Any = None, *, s2_path: str | Path | None = None,
         warnings.append(f"localisation for {lsc['fixture_stand_in']} proteins is a fixture stand-in from UniProt text, not PSORTb")
     rows.sort(key=lambda r: (r["composite"] is None, -(r["composite"] or 0.0), -(r["prot"] or 0.0),
                              -r["terms"]["localisation"], r["p"].protein_id))
+    # `rank` stays the ordinal position (stable, readers rely on it). Candidates the evidence cannot tell apart
+    # (equal composite, protegenicity and localisation prior) are ordered by protein_id only: mark them as a tie.
+    tgroups = tie_groups([(tie_key_round(r["composite"]), tie_key_round(r["prot"]), tie_key_round(r["terms"]["localisation"]))
+                          for r in rows])
 
     lenient = min(thresholds)
     selected_ids: dict[str, str] = {}
@@ -426,11 +433,22 @@ def run(target: Any, cfg: Any = None, *, s2_path: str | Path | None = None,
         ordered = ordered[: s3["max_candidates"]]
         warnings.append(f"{truncated} candidates above the threshold were cut by s3.max_candidates={s3['max_candidates']}")
     keep = set(ordered)
+    ties = {**tie_summary(tgroups), "basis": "equal composite_score, protegenicity and localisation prior (rounded to 9 decimals); "
+                                            "inside a tie the order is by protein_id only, not by evidence"}
+    if ties["n_groups"]:
+        lg = ties["largest_group"]
+        warnings.append(f"{ties['n_tied_candidates']} candidates are tied with another one on composite score, protegenicity and "
+                        f"localisation prior (largest tie: {lg['size']} at rank {lg['competition_rank']}); inside a tie the order is "
+                        f"by protein_id only, not by evidence (see tie_group)")
+    for g in groups_split_by_cut(tgroups, [r["p"].protein_id in keep for r in rows]):
+        warnings.append(f"the candidate cut falls inside a tie: {g['kept']} of {g['size']} candidates tied at rank "
+                        f"{g['competition_rank']} were kept, chosen by protein_id order and not by evidence")
 
     def entry(rank: int, r: dict, with_seq: bool) -> dict:
         p: Protein = r["p"]
         e = {
             "protein_id": p.protein_id, "name": p.name, "gene": p.gene, "length": p.length, "rank": rank,
+            "tie_group": tgroups[rank - 1],
             "composite_score": r["composite"], "protegenicity": r["prot"],
             "protegenicity_raw": None if result is None else result.raw.get(p.protein_id),
             "passes_thresholds": {f"{t:.2f}": (None if r["prot"] is None else r["prot"] >= t) for t in thresholds},
@@ -487,6 +505,7 @@ def run(target: Any, cfg: Any = None, *, s2_path: str | Path | None = None,
                    "n_selected": len(ordered), "threshold_summary": summary,
                    "fold_enrichment": None,
                    "fold_enrichment_note": "Needs ground-truth positives; computed by the validation harness, not here."},
+        "ties": ties,
         "candidates": candidates,
         "ranking": ranking_entries,
     }

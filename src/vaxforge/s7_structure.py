@@ -31,7 +31,7 @@ from .prediction.config import coerce_config
 from .prediction.discotope import DiscoTopeRunner, summarise as discotope_summary
 from .prediction.errors import ContractError, ToolFailed, ToolUnavailable
 from .prediction.folders import BoltzRunner, ColabFoldSingleSeqRunner, ESMFoldRunner, rewrite_bfactors
-from .prediction.scoring import composite, percentile_ranks
+from .prediction.scoring import composite, groups_split_by_cut, percentile_ranks, tie_groups, tie_key_round, tie_summary
 from .prediction.structure_utils import (lddt_ca, parse_structure_ca, plddt_scale_factor, plddt_summary,
                                          rmsd_after_superposition, tm_score)
 from .prediction.tools import resolve_executable, tool_record
@@ -155,6 +155,17 @@ def run(target: Any, cfg: Any = None, *, s6_path: str | Path | None = None,
         warnings.append(f"only the top {top_k} of {len(cands)} candidates are folded and structure-ranked")
     if not any(pre[p]["terms_used"] for p in pre):
         warnings.append("no usable S3/S5/S6 terms for pre-selection; ordering falls back to S3 rank only")
+
+    def s3_position(c: Mapping) -> Any:
+        """Where S3 placed the candidate: the competition rank of its tie group (so an S3 tie is still a tie here), else its rank."""
+        s3 = (c.get("upstream") or {}).get("s3") or {}
+        return (s3.get("tie_group") or {}).get("competition_rank") or s3.get("rank")
+
+    pre_groups = tie_groups([(tie_key_round(pre[c["protein_id"]]["score"]), s3_position(c)) for c in order])
+    for g in groups_split_by_cut(pre_groups, [i < len(top) for i in range(len(order))]):
+        warnings.append(f"the top-{top_k} cut falls inside a tie: {g['kept']} of {g['size']} candidates tied on the pre-structure "
+                        f"score (and the S3 position) at pre-structure rank {g['competition_rank']} were kept, chosen by S3 order "
+                        f"and protein_id, not by evidence")
 
     # ---- 2. Boltz-2 --------------------------------------------------------------------------
     fold_status: dict[str, Any]
@@ -303,6 +314,17 @@ def run(target: Any, cfg: Any = None, *, s6_path: str | Path | None = None,
                                             -(pre[c["protein_id"]]["score"] or 0.0), c["protein_id"]))
     rest = [c for c in order if c["protein_id"] not in set(top_ids)]
     ranked = top_sorted + rest
+    # `rank` stays the ordinal position; candidates the scores cannot tell apart are marked as a tie (ordered by protein_id only)
+    top_groups = tie_groups([(tie_key_round(final[c["protein_id"]]["score"]), tie_key_round(pre[c["protein_id"]]["score"]))
+                             for c in top_sorted])
+    rest_groups = tie_groups([(tie_key_round(pre[c["protein_id"]]["score"]), s3_position(c)) for c in rest], start=len(top_sorted) + 1)
+    tgroups = top_groups + rest_groups
+    top_ties = tie_summary(top_groups)
+    if top_ties["n_groups"]:
+        lg = top_ties["largest_group"]
+        warnings.append(f"{top_ties['n_tied_candidates']} of the top {len(top_sorted)} candidates are tied on the final score and the "
+                        f"pre-structure score (largest tie: {lg['size']} at rank {lg['competition_rank']}); inside a tie the order is "
+                        f"by protein_id only, not by evidence (see tie_group)")
 
     out_cands = []
     for i, c in enumerate(ranked):
@@ -310,7 +332,8 @@ def run(target: Any, cfg: Any = None, *, s6_path: str | Path | None = None,
         in_top = pid in set(top_ids)
         rec = {k: v for k, v in c.items()}
         rec.update({
-            "rank": i + 1, "in_top_k": in_top, "rank_basis": "structure_informed" if in_top and folder is not None else "pre_structure",
+            "rank": i + 1, "tie_group": tgroups[i], "in_top_k": in_top,
+            "rank_basis": "structure_informed" if in_top and folder is not None else "pre_structure",
             "scores": {
                 "pre_structure": pre[pid]["score"],
                 "final": final[pid]["score"] if in_top else None,
@@ -340,6 +363,9 @@ def run(target: Any, cfg: Any = None, *, s6_path: str | Path | None = None,
             "validator_policy": "report every validator used; spread across validators is part of the result",
         },
         "final_candidates": [c["protein_id"] for c in top_sorted],
+        "ties": {"top_k": top_ties, "rest": tie_summary(rest_groups),
+                 "basis": "top-k: equal final score and pre-structure score; rest: equal pre-structure score and S3 position. "
+                          "`rank` is the ordinal position; inside a tie the order is by protein_id only, not by evidence"},
         "candidates": out_cands,
         "epitope_set": s6["payload"]["epitope_set"],
         "set_level_coverage": s6["payload"]["set_level"],

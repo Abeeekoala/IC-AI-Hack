@@ -14,38 +14,49 @@ therefore a JSON contract, not a Python API.
 
 ## 1. Files and envelope
 
-All five stages write `runs/<run_id>/<stage>.json` (atomic write) and may add sidecars under `runs/<run_id>/s5|s6|s7/`.
+All five stages write through stream A's `RunStore` (see `docs/ARTIFACT_CONTRACT.md`): `runs/<run_id>/<stage module>.json`, one `run(store, config)` per stage module. In store mode `run()` returns the artifact's path. Sidecar files go under `runs/<run_id>/data/s5|s6|s7/` and the payload refers to them with run-folder file references `{root: "run", path, sha256, bytes}`.
 
-| Stage | Reads | Writes |
-|---|---|---|
-| S3 | `s2_annotate.json` | `s3_rank.json` |
-| S4 | `s3_rank.json` | `s4_filter.json` |
-| S5 | `s4_filter.json` | `s5_epitopes.json`, `s5/<id>_tcell.tsv`, `s5/<id>_bepipred.tsv` |
-| S6 | `s5_epitopes.json` + HLA frequency table | `s6_coverage.json`, `s6/iedb_epitope_allele.tsv` |
-| S7 | `s6_coverage.json` | `s7_structure.json`, `s7/<id>/{boltz2,esmfold,af2_no_msa}.pdb` |
+| Stage | Declared `inputs` | Reads | Writes |
+|---|---|---|---|
+| S3 | `s2` | `s2_annotate.json` (sequences from the proteome FASTA its file reference points to) | `s3_rank.json` |
+| S4 | `s3`, `s1` | `s3_rank.json`, S1's proteomes and BLAST databases | `s4_filter.json` |
+| S5 | `s4` | `s4_filter.json` | `s5_epitopes.json`, `data/s5/<id>_tcell.tsv`, `data/s5/<id>_bepipred.tsv` |
+| S6 | `s5` | `s5_epitopes.json` + HLA frequency table | `s6_coverage.json`, `data/s6/iedb_epitope_allele.tsv` |
+| S7 | `s6` | `s6_coverage.json` (S5's results reach S7 through S6) | `s7_structure.json`, `data/s7/<id>/{boltz2,esmfold,af2_no_msa}.pdb`, `boltz2_confidence.json` |
 
+The declared `inputs` are what `vaxforge verify` compares: re-running a stage changes its digest and flags every stage that lists it as `STALE`. They are set in `prediction/artifacts.py` (`DECLARED_INPUTS`), not left to the `RunStore` defaults (its default for `s7` is `s4`, which left S7 un-flagged after S6 changed).
 Each stage's output is **self-contained for the next stage** (candidates carry their sequences and evidence forward).
 
-Envelope (same for all five):
+Envelope (stream A's, same for all five; `payload` is what this document describes):
 
 ```jsonc
 {
-  "schema": "vaxforge.s3_rank/1", "stage": "s3_rank",
-  "artifact_id": "sha256:...",          // hash of schema+stage+input ids+params+tools+payload (NOT created_at)
-  "run_id": "nmb", "created_at": "2026-11-14T15:00:00Z",
-  "inputs":  [{"stage": "s2_annotate", "artifact_id": "sha256:...", "path": "s2_annotate.json"}],
+  "schema": "vaxforge/s3_rank/v1", "stage": "s3", "run_id": "nmb", "created_at": "2026-11-14T15:00:00Z",
+  "environment": {"python", "platform"},
+  "producer": {"module", "vaxforge_version", "tools": {"<tool name>": "<version>"}},   // name -> version string only
   "params":  { ...resolved config slice... },
-  "tools":   [{"name","version","backend","fidelity": "reference|alternative|fallback", ...}],
-  "warnings": ["..."],                  // human-readable; includes LEAKAGE / DEGRADED / INCOMPLETE SCREENING banners
-  "payload": { ... }
+  "inputs":  {"s2": "sha256:..."},                 // upstream stage -> its digest (the staleness check)
+  "status": "ok", "warnings": ["..."],             // human-readable; includes LEAKAGE / DEGRADED / INCOMPLETE SCREENING banners
+  "payload": { ... }, "volatile": {...}, "digest": "sha256:..."   // digest excludes created_at and volatile
 }
 ```
 
-* `fidelity`: `reference` = the tool the README names; `alternative` = open-source stand-in (only MHCflurry for class I,
-  and our own population-coverage implementation); `fallback` = transparent heuristic, **not** the named tool (S3 only).
-* Re-running with identical inputs/params/tool versions yields an identical `artifact_id`.
-  A stage skips work if `<stage>.json` already has the same input ids + params (`--force` to override).
-* `ranker.backend == "subtractive_filter"` artifacts are *not* reused once `auto` could run Vaxign-ML.
+* `producer.tools` holds only name -> version; a tool without a version is recorded under its backend name, and `fidelity`
+  (`reference` = the tool the README names; `alternative` = open-source stand-in, only MHCflurry for class I and our own
+  population-coverage implementation; `fallback` = transparent heuristic, **not** the named tool, S3 only) is NOT stored there.
+  Read the fidelity and any "sent to a third-party server" statement from `warnings` and from the payload (`ranker`, `analysis`).
+* Every stage writes status `ok` even when a tool was missing; what could not run is in `payload` and `warnings`.
+* A stage is skipped if its artifact already has the same params and the same upstream digests (`--force` to override);
+  the tool versions that were available are not part of that comparison, so a result produced without a tool is reused after
+  the tool appears unless `--force` is given (S3 is the exception: a fallback ranking is not reused once Vaxign-ML could run).
+* Without a `RunStore` (a folder with no `manifest.json`, as the unit tests use) the same payloads are written in stream B's own
+  envelope (`artifact_id`, `inputs` as a list, `tools` as a list of records with `backend`, `fidelity`, `sends_sequence_off_machine`).
+
+**Ties.** `rank` is always the ordinal position (1, 2, 3, ...), so readers can rely on it. Candidates the evidence cannot tell apart
+are ordered by `protein_id` only; they carry `tie_group: {size, competition_rank}` (`null` when unique) and the payload has a `ties`
+summary. S3: equal composite score, protegenicity and localisation prior. S7: equal final and pre-structure score (top-k) or equal
+pre-structure score and S3 position (the rest). A warning is written when a selection cut (S3 `max_candidates`, S7 `top_k`) falls
+inside a tie, because which members were kept is then decided by `protein_id`, not by evidence.
 
 Positions are **1-based inclusive** everywhere. Percentages are fractions in [0, 1].
 
@@ -110,7 +121,8 @@ Config keys stream B adds (all with defaults in `prediction/config.py:DEFAULTS`;
   "counts":   {"n_proteins","n_scored","n_unscored","n_selected",
                "threshold_summary": {"0.90": {"n_pass","fraction_of_proteome","available"}, "0.85": {...}},
                "fold_enrichment": null},                       // needs ground truth -> validation harness
-  "candidates": [ {protein_id, name, gene, length, rank, composite_score, protegenicity, protegenicity_raw,
+  "ties":     {n_groups, n_tied_candidates, largest_group: {size, competition_rank} | null, basis},
+  "candidates": [ {protein_id, name, gene, length, rank, tie_group, composite_score, protegenicity, protegenicity_raw,
                    passes_thresholds: {"0.90": bool|null, "0.85": ...}, terms, evidence:{localisation, virulence},
                    selected, selected_reason, sequence, taxid} ],   // the set handed to S4, in rank order
   "ranking":    [ ...same fields, no sequence, ALL proteins... ]
@@ -228,7 +240,7 @@ Gate semantics (all thresholds configurable; the README gives only allergenicity
       "fairness": {"available": true, "reference_population": "Europe", "budget_k", "mode", "reference_set": [...],
                    "rows": [{population, coverage_with_reference_optimised_set, coverage_with_own_optimised_set, coverage_lost, sample_size}],
                    "mean_coverage_lost_excluding_reference", "max_coverage_lost", "note"},
-      "iedb_crosscheck_file": {"path": "s6/iedb_epitope_allele.tsv", "sha256", "use"} },
+      "iedb_crosscheck_file": {"file": {"root": "run", "path": "data/s6/iedb_epitope_allele.tsv", "sha256", "bytes"}, "use"} },
   "candidates": [ ...S5 candidate (bulky lists removed)..., "coverage": {score, score_population, mode_used, n_selected_epitopes,
                    by_mode_at_score_population, by_population: {pop: coverage}, min_population} ],
   "epitope_set": {...passthrough...}, "limits": [...]
@@ -242,7 +254,7 @@ and so do we — LD is ignored); a heterozygote's hits are the sum over its two 
 frequencies > 1 are renormalised and < 1 get an `UNKNOWN` allele; **`pc90` is a linearly interpolated real number** (0.18 when coverage is
 below 90 %), reported as `pc90`, with the integer definition kept as `pc90_integer`. The IEDB tool matches allele names as exact strings and
 does not understand DQ/DP heterodimers; we look a heterodimer up exactly and otherwise use its beta chain (`approximations`), and the exported
-`s6/iedb_epitope_allele.tsv` uses the same mapping so the official tool reproduces our numbers. The IEDB data has **no DRB3/DRB4/DRB5**, so
+`data/s6/iedb_epitope_allele.tsv` uses the same mapping so the official tool reproduces our numbers. The IEDB data has **no DRB3/DRB4/DRB5**, so
 those panel alleles are reported in `unmapped_alleles` and add nothing.
 `set_level.fairness_by_budget` repeats the fairness analysis for budgets 1, 2, 3, 5, 10: on real data the Europe-vs-own gap is real only at
 k=1 (West Africa -9 points, Central Africa -13) and closes by k=3 because a pool of ~200 promiscuous epitopes saturates the 27-allele panel.
@@ -293,7 +305,7 @@ coverage 0.078 with every panel allele — missing data, not a bad epitope set).
 | S7 structure -> folded vs denatured binding | `candidates[].structure.conformational_epitopes`, `.mean_plddt`, `.validator_agreement` |
 | Functional protection | not produced by B (needs a correlate; do not assume one exists) |
 
-For S11 (pre-registration): every `artifact_id`, `params`, `tools[].version` and the thresholds are already in the envelope.
+For S11 (pre-registration): every stage `digest`, `params`, `producer.tools` version (see section 1: it can be a backend name when a tool has no version) and the thresholds are already in the envelope.
 For S12 (biosecurity gate): sequences leaving B are `candidates[].sequence` and `epitope_set.*[].peptide`.
 
 ## 9. Deliberate deviations from the README / PDF (please sanity-check)

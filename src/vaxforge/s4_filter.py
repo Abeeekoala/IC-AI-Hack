@@ -416,8 +416,8 @@ def run(target: Any, cfg: Any = None, *, s3_path: str | Path | None = None,
         results = {n: per_gate[n][pid].as_dict() for n in per_gate}
         rejected_by = [n for n in per_gate if per_gate[n][pid].status == "reject"]
         entry = {k: v for k, v in c.items()}
-        entry["s3"] = {k: c.get(k) for k in ("rank", "composite_score", "protegenicity", "passes_thresholds", "terms", "evidence")}
-        for k in ("rank", "composite_score", "protegenicity", "protegenicity_raw", "passes_thresholds", "terms", "evidence",
+        entry["s3"] = {k: c.get(k) for k in ("rank", "tie_group", "composite_score", "protegenicity", "passes_thresholds", "terms", "evidence")}
+        for k in ("rank", "tie_group", "composite_score", "protegenicity", "protegenicity_raw", "passes_thresholds", "terms", "evidence",
                   "selected", "selected_reason"):
             entry.pop(k, None)
         entry["gates"] = results
