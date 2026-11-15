@@ -63,10 +63,16 @@ ALLOWED_IMPORTS = {"opentrons", "math", "typing", "itertools", "string", "collec
 BANNED_NAMES = {
     "open", "exec", "eval", "compile", "globals", "locals", "vars", "getattr", "setattr", "delattr", "hasattr", "__import__",
     "SystemExit", "KeyboardInterrupt", "BaseException", "input", "breakpoint", "exit", "quit", "type", "memoryview", "help", "dir",
+    # Module globals that hand out `open`, `__import__` and the import machinery by key or by attribute: a bare `__builtins__[...]`
+    # names no banned function. (As ATTRIBUTES all of these are refused already: a leading `_`, or `builtins` in `BANNED_ATTRS`.)
+    "__builtins__", "builtins", "__loader__", "__spec__", "__dict__",
 }
 BANNED_ATTRS = {
     "os", "sys", "subprocess", "builtins", "importlib", "system", "popen", "modules", "environ", "stdout", "stderr", "stdin",
     "write", "writelines", "exit", "getenv", "open", "read_text", "write_text", "unlink", "remove",
+    # `typing.get_type_hints` evaluates string annotations, and `from __future__ import annotations` makes every annotation a string.
+    # No saved program uses it. Being in this set it is refused as an imported name (`_name_allowed`) and as an attribute.
+    "get_type_hints",
 }
 # What may be imported from `opentrons`. Its modules re-export `os`, `Path`, `shutil`, `subprocess` and more (`opentrons.config`
 # and the top-level package both do), so `from opentrons import ...` takes only the two names below and every other
@@ -119,17 +125,61 @@ def _name_allowed(module: str, name: str) -> bool:
     return name != "types"  # the stdlib module; the Opentrons one is `from opentrons import types`, decided above
 
 
+# The same two rules hold for ATTRIBUTES of the module objects `opentrons`, `protocol_api` and `types`, because
+# `opentrons.config.Path(...)` and `protocol_api.labware.save_definition(...)` pass every import check above: `opentrons.X` only for
+# X in `_OPENTRONS_SUBMODULES`, `protocol_api.X` and `types.X` only for a capitalised X. All 56 saved programs read exactly one such
+# attribute, `protocol_api.ProtocolContext`, so no lower-case name is allowed. The rule follows the NAMES an import binds (aliases
+# included, followed to the real module), not values: a module held under another name (`m = opentrons`) is not followed.
+def _bound_modules(tree: ast.AST) -> dict[str, set[str]]:
+    """The names an import binds to an `opentrons` module, each alias followed to the real module, in every scope of the file.
+
+    `import opentrons as o` gives {"o": {"opentrons"}}, `import opentrons.types` gives {"opentrons": {"opentrons"}} (it binds the
+    package), `from opentrons import protocol_api as p` and `import opentrons.protocol_api as p` give {"p": {"opentrons.protocol_api"}}.
+    A name that no import binds to one of them (`ctx`, a local dict called `types`) is absent. A name is a set because two imports
+    may bind it to different modules; the lint then judges an attribute against each.
+    """
+    bound: dict[str, set[str]] = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for a in node.names:
+                if a.name in _OPENTRONS_MODULES:  # without `as`, `import opentrons.types` binds the package `opentrons`
+                    bound.setdefault(a.asname or "opentrons", set()).add(a.name if a.asname else "opentrons")
+        elif isinstance(node, ast.ImportFrom) and node.module == "opentrons" and not node.level:
+            for a in node.names:
+                if a.name in _OPENTRONS_SUBMODULES:
+                    bound.setdefault(a.asname or a.name, set()).add(f"opentrons.{a.name}")
+    return bound
+
+
+def _modules_of(node: ast.expr, bound: dict[str, set[str]]) -> set[str]:
+    """The `opentrons` modules the expression `node` is: a name in `bound`, or `<opentrons>.protocol_api` / `<opentrons>.types`."""
+    if isinstance(node, ast.Name):
+        return bound.get(node.id, set())
+    if isinstance(node, ast.Attribute) and node.attr in _OPENTRONS_SUBMODULES and "opentrons" in _modules_of(node.value, bound):
+        return {f"opentrons.{node.attr}"}
+    return set()
+
+
+def _attribute_allowed(module: str, attr: str) -> bool:
+    """May `attr` be read from this `opentrons` module object? (An attribute starting with `_` or in `BANNED_ATTRS` is judged apart.)"""
+    return attr in _OPENTRONS_SUBMODULES if module == "opentrons" else attr[0].isupper()
+
+
 def static_lint(source: str) -> list[str]:
     """Reasons NOT to execute `source`. Empty list = may be simulated.
 
     Imports are judged by module AND by name: the module root must be in `ALLOWED_IMPORTS`, of `opentrons` only the modules in
     `_OPENTRONS_MODULES` may be imported, and every name in a `from` import is judged by its real name (`_name_allowed`), so
-    `from opentrons.config import os as o` is refused. A filter, not a sandbox (see the comment above `ALLOWED_IMPORTS`).
+    `from opentrons.config import os as o` is refused. Attributes of the imported `opentrons` modules are judged too
+    (`_attribute_allowed`), so `opentrons.config.Path` and `protocol_api.labware.save_definition` are refused, also through an
+    import alias (`import opentrons as o`); a module held under another name (`m = opentrons`) is not followed.
+    A filter, not a sandbox (see the comment above `ALLOWED_IMPORTS`).
     """
     try:
         tree = ast.parse(source)
     except SyntaxError as exc:
         return [f"syntax error: {exc.msg} (line {exc.lineno})"]
+    bound = _bound_modules(tree)
     out: set[str] = set()
     for node in ast.walk(tree):
         line = getattr(node, "lineno", 0)
@@ -148,6 +198,9 @@ def static_lint(source: str) -> list[str]:
         elif isinstance(node, ast.Attribute):
             if node.attr.startswith("_") or node.attr in BANNED_ATTRS:
                 out.add(f"line {line}: attribute .{node.attr}")
+            else:  # the finding names the REAL module, never the alias: `o.config` with `import opentrons as o` reads `opentrons.config`
+                out.update(f"line {line}: attribute {m}.{node.attr}" for m in _modules_of(node.value, bound)
+                           if not _attribute_allowed(m, node.attr))
         elif isinstance(node, (ast.Assign, ast.AugAssign, ast.AnnAssign, ast.Delete, ast.For, ast.withitem)):
             if isinstance(node, (ast.Assign, ast.Delete)):
                 targets = node.targets

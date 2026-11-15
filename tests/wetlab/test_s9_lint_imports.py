@@ -4,6 +4,10 @@
 names were never looked at, so `from opentrons.config import os as o` passed (`opentrons.config` re-exports `os`, `Path`,
 `shutil` and `subprocess`). The lint is a filter for model-written code, not a sandbox; these tests claim nothing more.
 
+Task H15 adds the attribute side (the sections "attribute chains" and "builtins and get_type_hints"): once the imports were judged,
+`opentrons.config.Path(...)` and `protocol_api.labware.save_definition(...)` still passed, because the attributes of an allowed
+module were never looked at. Those probes are strings handed to `static_lint`, like everything else here.
+
 Every test here calls `static_lint` on a string, or on the text of a file. Nothing executes protocol code or starts the
 simulator, and the audit's proof of concept is only ever parsed. Files are written under pytest's `tmp_path` and nowhere else.
 """
@@ -224,6 +228,198 @@ def test_every_public_name_of_the_two_opentrons_modules_is_accepted():
             assert static_lint(f"from {module} import {name} as alias\n") == [], (module, name)
 
 
+# --------------------------------------------------------------------------- attribute chains through allowed imports (task H15)
+
+# PR #71 judged the imports. A module that may be imported still hands out attributes, and those reach what the imports no longer do:
+# `opentrons.config.Path(...)`, and `protocol_api.labware.save_definition(...)` (it writes a file). The module objects `opentrons`,
+# `protocol_api` and `types` are followed through every import alias to the real module: `opentrons.X` is for X in {protocol_api,
+# types} only, `protocol_api.X` and `types.X` for a capitalised X only. A finding names the real module, never the alias. A module
+# held under another name (`m = opentrons`) is not followed, and no test here says otherwise. Only strings are linted: the probes
+# are parsed and never run.
+CONFIG = ["line 2: attribute opentrons.config"]
+LABWARE = ["line 2: attribute opentrons.protocol_api.labware"]
+CHAINS_REFUSED = [
+    # the two probes of PR #71's report, as written ...
+    ("import opentrons\nopentrons.config.Path('x')\n", CONFIG),
+    ("from opentrons import protocol_api\nprotocol_api.labware.save_definition({})\n", LABWARE),
+    # ... and under every way of naming the module: an alias, or the package that `import opentrons.<submodule>` binds
+    ("import opentrons as o\no.config.Path('x')\n", CONFIG),
+    ("import opentrons.protocol_api\nopentrons.config.Path('x')\n", CONFIG),
+    ("import opentrons.types as t, opentrons as o\no.config.Path('x')\n", CONFIG),
+    ("from opentrons import protocol_api as p\np.labware.save_definition({})\n", LABWARE),
+    ("import opentrons.protocol_api as p\np.labware.save_definition({})\n", LABWARE),
+    ("import opentrons\nopentrons.protocol_api.labware.save_definition({})\n", LABWARE),
+    ("import opentrons as o\no.protocol_api.labware.save_definition({})\n", LABWARE),
+    ("import opentrons.protocol_api\nopentrons.protocol_api.labware.save_definition({})\n", LABWARE),
+    # `types`, and the other lower-case names of `protocol_api` (submodules and helpers)
+    ("from opentrons import types\ntypes.enum.Enum\n", ["line 2: attribute opentrons.types.enum"]),
+    ("from opentrons import types as t\nt.sqrt(2)\n", ["line 2: attribute opentrons.types.sqrt"]),
+    ("import opentrons.types as t\nt.enum\n", ["line 2: attribute opentrons.types.enum"]),
+    ("import opentrons\nopentrons.types.enum\n", ["line 2: attribute opentrons.types.enum"]),
+    ("from opentrons import protocol_api\nprotocol_api.create_protocol_context()\n",
+     ["line 2: attribute opentrons.protocol_api.create_protocol_context"]),
+    ("from opentrons import protocol_api\nprotocol_api.validation\n", ["line 2: attribute opentrons.protocol_api.validation"]),
+    # `opentrons.X` for any X but protocol_api and types, a capitalised X too; only the first link of a chain is a finding
+    ("import opentrons\nopentrons.simulate.get_protocol_api('2.19')\n", ["line 2: attribute opentrons.simulate"]),
+    ("import opentrons\nopentrons.execute.get_protocol_api('2.19')\n", ["line 2: attribute opentrons.execute"]),
+    ("import opentrons\nopentrons.Path\n", ["line 2: attribute opentrons.Path"]),
+    ("import opentrons\nopentrons.ProtocolContext\n", ["line 2: attribute opentrons.ProtocolContext"]),
+    ("import opentrons\nopentrons.protocols.api_support.util.APIVersionError\n", ["line 2: attribute opentrons.protocols"]),
+    # an attribute that was refused before keeps its old finding (once, not twice)
+    ("import opentrons\nopentrons.os\n", ["line 2: attribute .os"]),
+    ("from opentrons import protocol_api\nprotocol_api._core\n", ["line 2: attribute ._core"]),
+    ("import opentrons\nopentrons.__version__\n", ["line 2: attribute .__version__"]),
+    # the alias is never looked at: an innocent one does not save the attribute
+    ("import opentrons as math\nmath.config\n", CONFIG),
+    ("from opentrons import protocol_api as Point\nPoint.labware\n", LABWARE),
+    # a name that two imports bind to different modules is judged against both
+    ("import opentrons as m\nfrom opentrons import types as m\nm.Point\n", ["line 3: attribute opentrons.Point"]),
+    # wherever the attribute is written: function, annotation, decorator, default value, comprehension, class body, nested import
+    ("import opentrons\ndef run(ctx):\n    return [opentrons.config for x in ctx]\n", ["line 3: attribute opentrons.config"]),
+    ("import opentrons\ndef run(ctx: opentrons.config.Path): pass\n", CONFIG),
+    ("import opentrons\n@opentrons.config.deco\ndef run(ctx): pass\n", CONFIG),
+    ("import opentrons\ndef run(ctx, x=opentrons.config): pass\n", CONFIG),
+    ("import opentrons\nclass A:\n    x = opentrons.config\n", ["line 3: attribute opentrons.config"]),
+    ("def run(ctx):\n    import opentrons\n    opentrons.config.Path('x')\n", ["line 3: attribute opentrons.config"]),
+    ("import opentrons.protocol_api as p\ndef run(ctx):\n    p.labware.save_definition({})\n",
+     ["line 3: attribute opentrons.protocol_api.labware"]),
+    # writing to an attribute of a module is refused twice over
+    ("import opentrons\nopentrons.config = 1\n", ["line 2: assignment to an attribute", "line 2: attribute opentrons.config"]),
+]
+
+
+@pytest.mark.parametrize("src,findings", CHAINS_REFUSED)
+def test_refused_attribute_chain(src, findings):
+    assert static_lint(src) == findings
+    assert all(re.fullmatch(r"line \d+: (attribute \S+|assignment to an attribute)", f) for f in findings)  # the style of the others
+
+
+# Every way of naming a module object: (what is imported, how the module is written after it). `MODULE_SPELLINGS` adds the real module.
+PACKAGE_SPELLINGS = [("import opentrons\n", "opentrons"), ("import opentrons.protocol_api\n", "opentrons"),
+                     ("import opentrons.types\n", "opentrons"), ("import opentrons as o\n", "o")]
+PROTOCOL_API_SPELLINGS = [("import opentrons\n", "opentrons.protocol_api"), ("import opentrons.protocol_api\n", "opentrons.protocol_api"),
+                          ("import opentrons as o\n", "o.protocol_api"), ("from opentrons import protocol_api\n", "protocol_api"),
+                          ("from opentrons import protocol_api as pa\n", "pa"), ("import opentrons.protocol_api as pa\n", "pa")]
+TYPES_SPELLINGS = [("import opentrons\n", "opentrons.types"), ("import opentrons.types\n", "opentrons.types"),
+                   ("import opentrons as o\n", "o.types"), ("from opentrons import types\n", "types"),
+                   ("from opentrons import types as t\n", "t"), ("import opentrons.types as t\n", "t")]
+MODULE_SPELLINGS = [(real, imports, module)
+                    for real, spellings in (("opentrons.protocol_api", PROTOCOL_API_SPELLINGS), ("opentrons.types", TYPES_SPELLINGS))
+                    for imports, module in spellings]
+LOWER_CASE = ["labware", "config", "save_definition", "execute", "simulate", "validation", "create_protocol_context", "core", "deck",
+              "enum", "sqrt", "types", "protocol_api"]
+CAPITALISED = ["ProtocolContext", "InstrumentContext", "Labware", "Well", "COLUMN", "ALL", "OFF_DECK", "Point", "Location", "Mount"]
+
+
+@pytest.mark.parametrize("real,imports,module", MODULE_SPELLINGS)
+def test_a_lower_case_attribute_of_protocol_api_or_types_is_refused_under_every_spelling(real, imports, module):
+    line = imports.count("\n") + 1
+    for name in LOWER_CASE:
+        assert static_lint(f"{imports}{module}.{name}\n") == [f"line {line}: attribute {real}.{name}"], name
+
+
+@pytest.mark.parametrize("real,imports,module", MODULE_SPELLINGS)
+def test_a_capitalised_attribute_of_protocol_api_or_types_is_accepted_under_every_spelling(real, imports, module):
+    for name in CAPITALISED:
+        assert static_lint(f"{imports}{module}.{name}\n") == [], (real, name)
+
+
+@pytest.mark.parametrize("imports,module", PACKAGE_SPELLINGS)
+def test_the_opentrons_package_gives_out_protocol_api_and_types_and_nothing_else(imports, module):
+    line = imports.count("\n") + 1
+    for name in ("protocol_api", "types"):
+        assert static_lint(f"{imports}{module}.{name}\n") == [], name
+    # a capitalised name is no exception here: `Point` and `ProtocolContext` live in the submodules, not in the package
+    for name in ["config", "simulate", "execute", "protocols", "hardware_control", "util", "logging", "Path", "ProtocolContext", "Point",
+                 "COLUMN"]:
+        assert static_lint(f"{imports}{module}.{name}\n") == [f"line {line}: attribute opentrons.{name}"], name
+
+
+CHAINS_ACCEPTED = [
+    "from opentrons import protocol_api\ndef run(ctx: protocol_api.ProtocolContext): pass\n",  # the annotation every saved program has
+    "import opentrons\ndef run(ctx: opentrons.protocol_api.ProtocolContext): pass\n",
+    "import opentrons.protocol_api\ndef run(ctx: opentrons.protocol_api.ProtocolContext): pass\n",
+    "import opentrons.protocol_api as p\ndef run(ctx: p.ProtocolContext): pass\n",
+    "from opentrons import types\nstart = types.Point(0, 0, 10)\nwhere = types.Location(start, None)\n",
+    "from opentrons import types as t\nleft = t.Mount.LEFT\n",  # an attribute of a class is not an attribute of the module
+    "import opentrons.types as t\nstart = t.Point(x=1, y=2, z=3)\n",
+    "import opentrons\nstart = opentrons.types.Point(1, 2, 3)\n",
+    "from opentrons import protocol_api\nwhole = protocol_api.ALL\ncolumn = protocol_api.COLUMN\n",
+    # a variable that is not an imported module keeps every attribute
+    "from opentrons import protocol_api\n"
+    "def run(ctx: protocol_api.ProtocolContext):\n"
+    "    plate = ctx.load_labware('nest_96_wellplate_200ul_flat', '1')\n"
+    "    pip = ctx.load_instrument('p300_single_gen2', 'right')\n"
+    "    pip.transfer(10, plate['A1'], plate['B1'])\n"
+    "    ctx.comment('done')\n",
+    "def run(ctx):\n    ctx.load_labware('nest_96_wellplate_200ul_flat', '1')\n",
+    "types = {'a': 1}\nfor key, value in types.items():\n    pass\n",  # a local called `types` is not `opentrons.types`
+    "import math as p\nx = p.ceil(1.2)\n",  # an alias is followed to its real module: this one is not an opentrons module
+]
+
+
+@pytest.mark.parametrize("src", CHAINS_ACCEPTED)
+def test_accepted_attribute_chain(src):
+    assert static_lint(src) == []
+
+
+# --------------------------------------------------------------------------- builtins and get_type_hints (task H15)
+
+# `BANNED_NAMES` had `__import__` but not `__builtins__`, so a bare `__builtins__[...]` named no banned function. As attributes
+# these names were refused already (a leading `_`, and `builtins` in `BANNED_ATTRS`); the tests pin both forms.
+BUILTINS_NAMES = ["__builtins__", "builtins", "__import__", "__loader__", "__spec__", "__dict__"]
+
+
+def test_the_ban_lists_hold_the_new_names():
+    assert set(BUILTINS_NAMES) <= BANNED_NAMES
+    assert {"builtins", "get_type_hints"} <= BANNED_ATTRS
+
+
+@pytest.mark.parametrize("name", BUILTINS_NAMES)
+def test_a_name_that_reaches_the_builtins_is_a_finding_as_a_name_and_as_an_attribute(name):
+    assert static_lint(f"x = {name}\n") == [f"line 1: name {name}"]
+    assert static_lint(f"{name} = 1\n") == [f"line 1: name {name}"]  # as an assignment target too
+    assert static_lint(f"x = ctx.{name}\n") == [f"line 1: attribute .{name}"]
+
+
+def test_a_bare_builtins_lookup_is_refused_in_each_of_its_forms():
+    assert static_lint("x = __builtins__['open']\n") == ["line 1: name __builtins__"]
+    assert static_lint("def run(ctx):\n    f = __builtins__['open']\n") == ["line 2: name __builtins__"]
+    assert static_lint("x = __builtins__.__dict__\n") == ["line 1: attribute .__dict__", "line 1: name __builtins__"]
+    assert static_lint("x = __loader__.name\n") == ["line 1: name __loader__"]
+    assert static_lint("x = __spec__.loader\n") == ["line 1: name __spec__"]
+
+
+# `typing.get_type_hints` evaluates string annotations, and `from __future__ import annotations` makes every annotation a string.
+# No saved program uses it. It is refused as an imported name (under any alias: the real name is judged) and as an attribute.
+GET_TYPE_HINTS_REFUSED = [
+    ("from typing import get_type_hints\n", ["line 1: from typing import get_type_hints"]),
+    ("from typing import get_type_hints as hints\n", ["line 1: from typing import get_type_hints"]),
+    ("from typing import get_args, get_type_hints, get_origin\n", ["line 1: from typing import get_type_hints"]),
+    ("from collections import get_type_hints\n", ["line 1: from collections import get_type_hints"]),  # whichever module hands it out
+    ("import typing\nhints = typing.get_type_hints(run)\n", ["line 2: attribute .get_type_hints"]),
+    ("import typing as t\nhints = t.get_type_hints(run)\n", ["line 2: attribute .get_type_hints"]),
+    ("import typing\nhints = typing.get_type_hints\n", ["line 2: attribute .get_type_hints"]),  # a reference, not only a call
+    ("import typing\ndef run(ctx, f=typing.get_type_hints): pass\n", ["line 2: attribute .get_type_hints"]),
+]
+
+
+@pytest.mark.parametrize("src,findings", GET_TYPE_HINTS_REFUSED)
+def test_get_type_hints_is_refused(src, findings):
+    assert static_lint(src) == findings
+
+
+@pytest.mark.parametrize("src", [
+    "from typing import get_args, get_origin\n",  # its neighbours in `typing` are not banned
+    "import typing\nx = typing.get_origin(int)\n",
+    # string annotations stay fine: what is refused is evaluating them
+    "from __future__ import annotations\nfrom opentrons import protocol_api\ndef run(ctx: protocol_api.ProtocolContext): pass\n",
+    "from opentrons import protocol_api\ndef run(ctx: 'protocol_api.ProtocolContext'): pass\n",
+])
+def test_the_neighbours_of_get_type_hints_and_string_annotations_are_accepted(src):
+    assert static_lint(src) == []
+
+
 # --------------------------------------------------------------------------- the saved programs must still pass
 
 
@@ -250,6 +446,38 @@ def test_every_saved_program_still_passes_the_lint():
     assert "from opentrons import protocol_api" in used
     for statement in sorted(used):  # every import the saved programs use is accepted on its own as well
         assert static_lint(statement + "\n") == [], statement
+
+
+def module_attributes_of(source):
+    """(name, attribute) for each `<name>.<attribute>` in `source` where the name is `opentrons`, `protocol_api` or `types`."""
+    return {(n.value.id, n.attr) for n in ast.walk(ast.parse(source))
+            if isinstance(n, ast.Attribute) and isinstance(n.value, ast.Name) and n.value.id in {"opentrons", "protocol_api", "types"}}
+
+
+@pytest.mark.skipif(not CORPUS.is_dir(), reason="docs/streamc_llm_eval is not in this checkout, so the saved LLM programs cannot be linted")
+def test_the_saved_programs_read_only_attributes_that_the_attribute_rule_accepts():
+    """The attributes of `opentrons` / `protocol_api` / `types` that the 56 saved programs read, as of task H15: only
+    `protocol_api.ProtocolContext`, the annotation of `run`. None reads anything from `types` or from `opentrons` itself, and none
+    a lower-case attribute of a module, so the attribute rule needed no allowed lower-case name. Each attribute is accepted on its
+    own as well (the programs as a whole are linted in the test above).
+    """
+    used = set().union(*(module_attributes_of(p.read_text(encoding="utf-8")) for p in saved_programs()))
+    assert ("protocol_api", "ProtocolContext") in used
+    for name, attribute in sorted(used):
+        imports = "import opentrons\n" if name == "opentrons" else f"from opentrons import {name}\n"
+        assert static_lint(f"{imports}{name}.{attribute}\n") == [], (name, attribute)
+
+
+@pytest.mark.skipif(not CORPUS.is_dir(), reason="docs/streamc_llm_eval is not in this checkout, so the saved LLM programs cannot be linted")
+def test_the_two_probes_are_refused_when_appended_to_each_saved_program():
+    """Lint only: a probe appended to the text of a saved program is parsed, never run, and is that program's one finding."""
+    probes = [("\nprotocol_api.labware.save_definition({})\n", r"line \d+: attribute opentrons\.protocol_api\.labware"),
+              ("\nimport opentrons as o\no.config.Path('x')\n", r"line \d+: attribute opentrons\.config")]
+    for program in saved_programs():
+        text = program.read_text(encoding="utf-8")
+        for probe, finding in probes:
+            found = static_lint(text + probe)
+            assert len(found) == 1 and re.fullmatch(finding, found[0]), (program.relative_to(CORPUS).as_posix(), found)
 
 
 def test_the_template_backends_13_programs_still_pass_the_lint(tmp_path):
