@@ -281,3 +281,29 @@ Variables bound in the new content: `plddt/low`, `plddt/very-low`, `text/mute`, 
 - The lower half of frames with short text still has empty space beside the 800 x 450 scene; accepted.
 - Scene sketches are wireframes: no screenshot of the named Figma frame or terminal output is embedded.
 - Not observed: any frame at 100% zoom; checked at 34% and 81% only. Not checked: that every number in the new content matches the artifact it cites beyond reading it against the plan and the 04c sample JSON as I typed it.
+
+## Log: seventh session (pass 7: storyboard re-sync to the 257-word plan)
+
+2026-11-15. Chrome and the Figma web editor only, file `pzytlXMGdl8JuSNivTeOOq`, page `Demo video (2:00)`. No Figma MCP tool called, nothing committed, pushed or posted, VaxForge page and old team file untouched. Source: `DEMO_VIDEO_PLAN.md` as modified 03:45 (257 narration words, per shot 29, 39, 41, 38, 31, 45, 19, 15) and the CAPTIONS dict in `/Users/abrahamlin/vaxforge-work/demo/make_storyboard.py`. Method: select the text layer in the Layers panel, Return, select all, type (the row positions stay put while the text grows).
+
+**Frames changed.** Shot 2 `30:410`, Shot 3 `30:427`, Shot 4 `30:444`, Shot 5 `30:461`, Shot 6 `30:478`, Run of show `30:540`. Shots 1 `30:392`, 7 `30:495` and 8 `30:512` were read against the plan and already match; not edited.
+
+**Text re-synced.**
+- Shot 2: narration, on-screen, evidence, caption (new CAPTIONS wording) and the data line ("make demo-offline: s3 to s12 ok, under a minute; S0 to S2 are the stored fixture").
+- Shot 3: narration (the MSA `[FILL]` sentence is gone, plan text restored), on-screen text. Amber `[FILL]` chip deleted. Caption unchanged (matches the dict).
+- Shot 4: narration, on-screen, evidence; data line "recall@3 0 of 3; fHbp 14, NadA 7, NHBA 9; leakage assertion not checked". Caption already matched.
+- Shot 5: narration, on-screen; data line "opentrons_simulate 7.5.0: 36 of 36 programs pass; placeholder parameters". Evidence and caption already matched.
+- Shot 6: narration, evidence, on-screen, caption (new wording). Scene now shows two things: the heading "Adaption's own evaluation (9B): base 6 / adapted 94" over two bars (base 6 wide 45, adapted 94 wide 709, same scale of about 7.5 px per point; the bars carry only "6" and "94" because a "base 6" label does not fit a 45 px bar) and a grey full-width line "Our own held-out test (4B adapter): 0 wins, 0 losses, 10 ties, no measurable difference". The held-out line was made by copying the base bar frame (so it reuses `text/mute` fill); heading and held-out text set to 24 and 16 px to fit the 800 x 450 scene. Caption stays last (cut and pasted back after the new line).
+- Run of show: story (257 words with the per-shot counts; "the built cut is 115.8 s", a number from the lead's message, not from the plan file), the seven do-not-claim items, the five prerequisites; prize map "Best use of Adaption" note now "Adaption's own evaluation, not a held-out result; our own held-out test: no measurable difference". Frame height is now 2754 (Hug).
+
+**`[FILL]`.** Only shot 6 keeps the amber chip and the `[FILL]` for the leaderboard row. Removed from shot 3. Shots 1, 2, 4, 5, 7, 8 have none.
+
+**Abridged on the frames (the plan cell is longer).** Shot 2 evidence (dropped "stream B's", the 35 s measurement detail and "image and date" tail); shot 2 on-screen (dropped "because it shows the pre-run fixture state"); shot 3 on-screen (dropped the "(captured: ...)" clause); shot 4 evidence (dropped the file path, the exact `vaxforge validate` command line and the ties figures); shot 6 evidence (dropped the 4B/2B run ids, the `~/vaxforge-work` capture path, the S9.5 report mention and the report file path); shot 6 on-screen (dropped "generated from the attached evidence"); do-not-claim 6 (dropped the PR and bypass details); prerequisite 6 reworded in the same words but shorter. The cause is the 1080 px frame height: the full evidence cells do not fit under the narration. The plan file remains the full text.
+
+**Slips.** The first shot 2 evidence run (full length) overflowed the frame and was retyped shorter. Shot 3's first on-screen text was too long (caption clipped); shortened. A mis-click while expanding layers zoomed the canvas to 1176% on a chip label in shot 3; nothing was edited, I pressed Escape and refit. Typing "\n" in a text edit makes a paragraph break, as wanted.
+
+**Not done.** The unverified-pill status variant and owner-card-04 tightness on the VaxForge page: not started (budget; the details were not in this session's brief, only in the lead's one-line mention). Scenes remain wireframes with no screenshots. Layer names inside bars and chips are Figma defaults.
+
+**Not checked.** Frames only viewed at 34% and 25% zoom, not 100%. Shots 7 and 8 data lines ("Variables: 29, of which 19 are colour"; the limits list) were left as they were. The 115.8 s figure is as given by the lead, not re-measured here. I did not re-count the 257 words.
+
+**Addendum to the seventh session (plan as modified 03:50).** Shot 6 `30:478` ON SCREEN now reads "Adaption run page (captured), then our held-out win-rate report (terminal)", the short form of the plan's new cell (the real `vaxforge finetune winrate` report, terminal). The sentence about the report's S9.5 section and Figma `07b` is removed, as the plan says it is out of the cut. Nothing else changed. The earlier line above that lists the S9.5 section in shot 6's On screen text is superseded by this one. Viewed at 34% only.
