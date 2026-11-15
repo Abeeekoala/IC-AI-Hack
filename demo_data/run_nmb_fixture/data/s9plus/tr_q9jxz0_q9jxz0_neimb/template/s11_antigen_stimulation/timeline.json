@@ -1,0 +1,8140 @@
+{
+ "schema": "vaxforge.timeline/1",
+ "ok": true,
+ "error": null,
+ "source": {
+  "sim_schema": "vaxforge.ot_sim/1",
+  "protocol_file": "protocol.py",
+  "opentrons_version": "7.5.0",
+  "api_level": "2.19"
+ },
+ "time_model": {
+  "estimate_only": true,
+  "headline": "Estimated time - not measured on a robot",
+  "constants": {
+   "gantry_speed_mm_s": 250.0,
+   "default_flow_rate_ul_s": 10.0,
+   "pick_up_tip_s": 3.0,
+   "drop_tip_s": 2.0,
+   "blow_out_s": 1.0,
+   "touch_tip_s": 3.0,
+   "temperature_set_s": 60.0,
+   "temperature_wait_s": 60.0,
+   "temperature_deactivate_s": 1.0,
+   "magnet_move_s": 5.0,
+   "home_s": 5.0,
+   "comment_s": 0.0,
+   "unknown_command_s": 0.0,
+   "home_xy_mm": [
+    385.0,
+    321.0
+   ]
+  },
+  "rules": [
+   "Every time here is an ESTIMATE computed from the simulator's command list. Nothing was measured on a robot.",
+   "Aspirate / dispense: volume (µL, per channel) divided by the flow rate. The flow rate is the one the simulator printed for that command; if it printed none, default_flow_rate_ul_s is used.",
+   "Gantry travel: straight-line XY distance between consecutive pipette positions divided by gantry_speed_mm_s (constant speed; no acceleration, no Z travel, mount offset ignored). The first move starts from home_xy_mm.",
+   "Tip pick-up, tip drop, blow-out, touch-tip: fixed seconds (pick_up_tip_s, drop_tip_s, blow_out_s, touch_tip_s) on top of the travel time.",
+   "Delay: the exact number of seconds written in the protocol.",
+   "Temperature module set / wait: a placeholder (temperature_set_s, temperature_wait_s). The real time depends on the module and the temperature change.",
+   "Magnetic module engage / disengage, temperature deactivate, home: fixed placeholders (magnet_move_s, temperature_deactivate_s, home_s).",
+   "Pause: a HUMAN step. The robot waits for a person, so no duration is estimated and none is added to the total.",
+   "Comments, unrecognised commands and the headers of transfer / distribute / consolidate / mix take 0 s. Only their primitive steps (pick-up, aspirate, dispense, ...) carry time and volume, so nothing is counted twice."
+  ]
+ },
+ "deck": {
+  "units": "mm",
+  "frame": "origin = front-left corner of slot 1; +x to the right; +y towards the back of the robot",
+  "extent": {
+   "w": 392.76,
+   "h": 356.98
+  },
+  "footprint": [
+   127.76,
+   85.48
+  ],
+  "home": [
+   385.0,
+   321.0
+  ],
+  "channel_pitch_mm": 9.0,
+  "slots": [
+   {
+    "slot": "1",
+    "x": 0.0,
+    "y": 0.0,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "2",
+    "x": 132.5,
+    "y": 0.0,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "3",
+    "x": 265.0,
+    "y": 0.0,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "4",
+    "x": 0.0,
+    "y": 90.5,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "5",
+    "x": 132.5,
+    "y": 90.5,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "6",
+    "x": 265.0,
+    "y": 90.5,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "7",
+    "x": 0.0,
+    "y": 181.0,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "8",
+    "x": 132.5,
+    "y": 181.0,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "9",
+    "x": 265.0,
+    "y": 181.0,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "10",
+    "x": 0.0,
+    "y": 271.5,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "11",
+    "x": 132.5,
+    "y": 271.5,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "slot"
+   },
+   {
+    "slot": "12",
+    "x": 265.0,
+    "y": 271.5,
+    "w": 127.76,
+    "h": 85.48,
+    "kind": "trash"
+   }
+  ],
+  "labware": [
+   {
+    "slot": "2",
+    "load_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "display_name": "opentrons_24_tuberack_nest_1.5ml_snapcap",
+    "label": "opentrons 24 tuberack nest 1.5ml snapcap",
+    "kind": "tubes",
+    "module": null,
+    "rect": [
+     132.5,
+     0.0,
+     127.76,
+     85.48
+    ],
+    "wells": {
+     "A1": {
+      "x": 150.71,
+      "y": 75.43,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "B1": {
+      "x": 150.71,
+      "y": 56.15,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "C1": {
+      "x": 150.71,
+      "y": 36.87,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "D1": {
+      "x": 150.71,
+      "y": 17.59,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "A2": {
+      "x": 170.6,
+      "y": 75.43,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "B2": {
+      "x": 170.6,
+      "y": 56.15,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "C2": {
+      "x": 170.6,
+      "y": 36.87,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "D2": {
+      "x": 170.6,
+      "y": 17.59,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "A3": {
+      "x": 190.49,
+      "y": 75.43,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "B3": {
+      "x": 190.49,
+      "y": 56.15,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "C3": {
+      "x": 190.49,
+      "y": 36.87,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "D3": {
+      "x": 190.49,
+      "y": 17.59,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "A4": {
+      "x": 210.38,
+      "y": 75.43,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "B4": {
+      "x": 210.38,
+      "y": 56.15,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "C4": {
+      "x": 210.38,
+      "y": 36.87,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "D4": {
+      "x": 210.38,
+      "y": 17.59,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "A5": {
+      "x": 230.27,
+      "y": 75.43,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "B5": {
+      "x": 230.27,
+      "y": 56.15,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "C5": {
+      "x": 230.27,
+      "y": 36.87,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "D5": {
+      "x": 230.27,
+      "y": 17.59,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "A6": {
+      "x": 250.16,
+      "y": 75.43,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "B6": {
+      "x": 250.16,
+      "y": 56.15,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "C6": {
+      "x": 250.16,
+      "y": 36.87,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     },
+     "D6": {
+      "x": 250.16,
+      "y": 17.59,
+      "shape": "circle",
+      "w": 10.2,
+      "h": 10.2,
+      "max_ul": 1500.0
+     }
+    }
+   },
+   {
+    "slot": "5",
+    "load_name": "corning_96_wellplate_360ul_flat",
+    "display_name": "corning_96_wellplate_360ul_flat",
+    "label": "corning 96 wellplate 360ul flat",
+    "kind": "plate",
+    "module": null,
+    "rect": [
+     132.5,
+     90.5,
+     127.76,
+     85.48
+    ],
+    "wells": {
+     "A1": {
+      "x": 146.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B1": {
+      "x": 146.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C1": {
+      "x": 146.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D1": {
+      "x": 146.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E1": {
+      "x": 146.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F1": {
+      "x": 146.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G1": {
+      "x": 146.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H1": {
+      "x": 146.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A2": {
+      "x": 155.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B2": {
+      "x": 155.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C2": {
+      "x": 155.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D2": {
+      "x": 155.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E2": {
+      "x": 155.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F2": {
+      "x": 155.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G2": {
+      "x": 155.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H2": {
+      "x": 155.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A3": {
+      "x": 164.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B3": {
+      "x": 164.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C3": {
+      "x": 164.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D3": {
+      "x": 164.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E3": {
+      "x": 164.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F3": {
+      "x": 164.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G3": {
+      "x": 164.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H3": {
+      "x": 164.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A4": {
+      "x": 173.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B4": {
+      "x": 173.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C4": {
+      "x": 173.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D4": {
+      "x": 173.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E4": {
+      "x": 173.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F4": {
+      "x": 173.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G4": {
+      "x": 173.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H4": {
+      "x": 173.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A5": {
+      "x": 182.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B5": {
+      "x": 182.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C5": {
+      "x": 182.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D5": {
+      "x": 182.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E5": {
+      "x": 182.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F5": {
+      "x": 182.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G5": {
+      "x": 182.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H5": {
+      "x": 182.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A6": {
+      "x": 191.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B6": {
+      "x": 191.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C6": {
+      "x": 191.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D6": {
+      "x": 191.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E6": {
+      "x": 191.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F6": {
+      "x": 191.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G6": {
+      "x": 191.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H6": {
+      "x": 191.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A7": {
+      "x": 200.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B7": {
+      "x": 200.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C7": {
+      "x": 200.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D7": {
+      "x": 200.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E7": {
+      "x": 200.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F7": {
+      "x": 200.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G7": {
+      "x": 200.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H7": {
+      "x": 200.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A8": {
+      "x": 209.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B8": {
+      "x": 209.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C8": {
+      "x": 209.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D8": {
+      "x": 209.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E8": {
+      "x": 209.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F8": {
+      "x": 209.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G8": {
+      "x": 209.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H8": {
+      "x": 209.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A9": {
+      "x": 218.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B9": {
+      "x": 218.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C9": {
+      "x": 218.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D9": {
+      "x": 218.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E9": {
+      "x": 218.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F9": {
+      "x": 218.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G9": {
+      "x": 218.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H9": {
+      "x": 218.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A10": {
+      "x": 227.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B10": {
+      "x": 227.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C10": {
+      "x": 227.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D10": {
+      "x": 227.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E10": {
+      "x": 227.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F10": {
+      "x": 227.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G10": {
+      "x": 227.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H10": {
+      "x": 227.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A11": {
+      "x": 236.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B11": {
+      "x": 236.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C11": {
+      "x": 236.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D11": {
+      "x": 236.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E11": {
+      "x": 236.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F11": {
+      "x": 236.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G11": {
+      "x": 236.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H11": {
+      "x": 236.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "A12": {
+      "x": 245.88,
+      "y": 164.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "B12": {
+      "x": 245.88,
+      "y": 155.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "C12": {
+      "x": 245.88,
+      "y": 146.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "D12": {
+      "x": 245.88,
+      "y": 137.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "E12": {
+      "x": 245.88,
+      "y": 128.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "F12": {
+      "x": 245.88,
+      "y": 119.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "G12": {
+      "x": 245.88,
+      "y": 110.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     },
+     "H12": {
+      "x": 245.88,
+      "y": 101.74,
+      "shape": "circle",
+      "w": 6.86,
+      "h": 6.86,
+      "max_ul": 360.0
+     }
+    }
+   },
+   {
+    "slot": "11",
+    "load_name": "opentrons_96_tiprack_20ul",
+    "display_name": "opentrons_96_tiprack_20ul",
+    "label": "opentrons 96 tiprack 20ul",
+    "kind": "tiprack",
+    "module": null,
+    "rect": [
+     132.5,
+     271.5,
+     127.76,
+     85.48
+    ],
+    "wells": {
+     "A1": {
+      "x": 146.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B1": {
+      "x": 146.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C1": {
+      "x": 146.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D1": {
+      "x": 146.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E1": {
+      "x": 146.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F1": {
+      "x": 146.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G1": {
+      "x": 146.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H1": {
+      "x": 146.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A2": {
+      "x": 155.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B2": {
+      "x": 155.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C2": {
+      "x": 155.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D2": {
+      "x": 155.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E2": {
+      "x": 155.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F2": {
+      "x": 155.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G2": {
+      "x": 155.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H2": {
+      "x": 155.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A3": {
+      "x": 164.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B3": {
+      "x": 164.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C3": {
+      "x": 164.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D3": {
+      "x": 164.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E3": {
+      "x": 164.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F3": {
+      "x": 164.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G3": {
+      "x": 164.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H3": {
+      "x": 164.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A4": {
+      "x": 173.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B4": {
+      "x": 173.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C4": {
+      "x": 173.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D4": {
+      "x": 173.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E4": {
+      "x": 173.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F4": {
+      "x": 173.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G4": {
+      "x": 173.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H4": {
+      "x": 173.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A5": {
+      "x": 182.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B5": {
+      "x": 182.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C5": {
+      "x": 182.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D5": {
+      "x": 182.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E5": {
+      "x": 182.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F5": {
+      "x": 182.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G5": {
+      "x": 182.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H5": {
+      "x": 182.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A6": {
+      "x": 191.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B6": {
+      "x": 191.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C6": {
+      "x": 191.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D6": {
+      "x": 191.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E6": {
+      "x": 191.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F6": {
+      "x": 191.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G6": {
+      "x": 191.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H6": {
+      "x": 191.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A7": {
+      "x": 200.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B7": {
+      "x": 200.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C7": {
+      "x": 200.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D7": {
+      "x": 200.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E7": {
+      "x": 200.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F7": {
+      "x": 200.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G7": {
+      "x": 200.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H7": {
+      "x": 200.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A8": {
+      "x": 209.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B8": {
+      "x": 209.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C8": {
+      "x": 209.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D8": {
+      "x": 209.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E8": {
+      "x": 209.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F8": {
+      "x": 209.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G8": {
+      "x": 209.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H8": {
+      "x": 209.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A9": {
+      "x": 218.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B9": {
+      "x": 218.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C9": {
+      "x": 218.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D9": {
+      "x": 218.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E9": {
+      "x": 218.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F9": {
+      "x": 218.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G9": {
+      "x": 218.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H9": {
+      "x": 218.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A10": {
+      "x": 227.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B10": {
+      "x": 227.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C10": {
+      "x": 227.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D10": {
+      "x": 227.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E10": {
+      "x": 227.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F10": {
+      "x": 227.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G10": {
+      "x": 227.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H10": {
+      "x": 227.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A11": {
+      "x": 236.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B11": {
+      "x": 236.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C11": {
+      "x": 236.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D11": {
+      "x": 236.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E11": {
+      "x": 236.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F11": {
+      "x": 236.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G11": {
+      "x": 236.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H11": {
+      "x": 236.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "A12": {
+      "x": 245.88,
+      "y": 345.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "B12": {
+      "x": 245.88,
+      "y": 336.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "C12": {
+      "x": 245.88,
+      "y": 327.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "D12": {
+      "x": 245.88,
+      "y": 318.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "E12": {
+      "x": 245.88,
+      "y": 309.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "F12": {
+      "x": 245.88,
+      "y": 300.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "G12": {
+      "x": 245.88,
+      "y": 291.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     },
+     "H12": {
+      "x": 245.88,
+      "y": 282.74,
+      "shape": "circle",
+      "w": 3.27,
+      "h": 3.27,
+      "max_ul": 20.0
+     }
+    }
+   }
+  ],
+  "modules": [],
+  "pipettes": [
+   {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1,
+    "min_volume_ul": 1.0,
+    "max_volume_ul": 20.0,
+    "channel_offsets_y": [
+     0.0
+    ]
+   }
+  ],
+  "trash": {
+   "slot": "12",
+   "rect": [
+    265.0,
+    271.5,
+    127.76,
+    85.48
+   ],
+   "point": [
+    328.88,
+    314.24
+   ]
+  }
+ },
+ "initial_state": {
+  "modules": {},
+  "pipettes": {
+   "left": {
+    "tip": false,
+    "held_ul": 0.0
+   }
+  },
+  "head": [
+   385.0,
+   321.0
+  ]
+ },
+ "frames": [
+  {
+   "index": 0,
+   "event_idx": 0,
+   "level": 0,
+   "parent": null,
+   "kind": "comment",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Phase s11: Stimulate differentiated THP-1 with purified antigen",
+   "detail": "ROBOT - Addition to seeded plate.",
+   "text": "[s11] Stimulate differentiated THP-1 with purified antigen | ROBOT | Addition to seeded plate.",
+   "start_s": 0.0,
+   "end_s": 0.0,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": null,
+   "head_mount": null,
+   "head_before": [
+    385.0,
+    321.0
+   ],
+   "head_after": [
+    385.0,
+    321.0
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 0,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 1,
+   "event_idx": 1,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: A1 of tube rack (slot 2) → A1, A2, A3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to A1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 0.0,
+   "end_s": 0.0,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    385.0,
+    321.0
+   ],
+   "head_after": [
+    385.0,
+    321.0
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:A1",
+     "role": "source"
+    },
+    {
+     "key": "5:A1",
+     "role": "dest"
+    },
+    {
+     "key": "5:A2",
+     "role": "dest"
+    },
+    {
+     "key": "5:A3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 0,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 2,
+   "event_idx": 2,
+   "level": 1,
+   "parent": 1,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip A1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from A1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 0.0,
+   "end_s": 3.958,
+   "duration_s": 3.958,
+   "move_s": 0.958,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    385.0,
+    321.0
+   ],
+   "head_after": [
+    146.88,
+    345.74
+   ],
+   "move_mm": 239.4,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:A1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:A1"
+   ],
+   "tips_used_total": 1,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 3,
+   "event_idx": 3,
+   "level": 1,
+   "parent": 1,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from A1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 3.958,
+   "end_s": 7.684,
+   "duration_s": 3.727,
+   "move_s": 1.081,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    345.74
+   ],
+   "head_after": [
+    150.71,
+    75.43
+   ],
+   "move_mm": 270.34,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:A1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:A1": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 1,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 4,
+   "event_idx": 4,
+   "level": 1,
+   "parent": 1,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into A1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into A1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 7.684,
+   "end_s": 10.688,
+   "duration_s": 3.003,
+   "move_s": 0.358,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    75.43
+   ],
+   "head_after": [
+    146.88,
+    164.74
+   ],
+   "move_mm": 89.39,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:A1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:A1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 1,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 5,
+   "event_idx": 5,
+   "level": 1,
+   "parent": 1,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 10.688,
+   "end_s": 13.63,
+   "duration_s": 2.942,
+   "move_s": 0.942,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    164.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 235.53,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 1,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 6,
+   "event_idx": 6,
+   "level": 1,
+   "parent": 1,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip B1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from B1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 13.63,
+   "end_s": 17.363,
+   "duration_s": 3.734,
+   "move_s": 0.734,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    146.88,
+    336.74
+   ],
+   "move_mm": 183.39,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:B1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:B1"
+   ],
+   "tips_used_total": 2,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 7,
+   "event_idx": 7,
+   "level": 1,
+   "parent": 1,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from A1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 17.363,
+   "end_s": 21.054,
+   "duration_s": 3.691,
+   "move_s": 1.045,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    336.74
+   ],
+   "head_after": [
+    150.71,
+    75.43
+   ],
+   "move_mm": 261.34,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:A1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:A1": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 2,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 8,
+   "event_idx": 8,
+   "level": 1,
+   "parent": 1,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into A2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into A2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 21.054,
+   "end_s": 24.057,
+   "duration_s": 3.003,
+   "move_s": 0.358,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    75.43
+   ],
+   "head_after": [
+    155.88,
+    164.74
+   ],
+   "move_mm": 89.46,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:A2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:A2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 2,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 9,
+   "event_idx": 9,
+   "level": 1,
+   "parent": 1,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 24.057,
+   "end_s": 26.972,
+   "duration_s": 2.915,
+   "move_s": 0.915,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    164.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 228.65,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 2,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 10,
+   "event_idx": 10,
+   "level": 1,
+   "parent": 1,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip C1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from C1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 26.972,
+   "end_s": 30.702,
+   "duration_s": 3.73,
+   "move_s": 0.73,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    146.88,
+    327.74
+   ],
+   "move_mm": 182.5,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:C1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:C1"
+   ],
+   "tips_used_total": 3,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 11,
+   "event_idx": 11,
+   "level": 1,
+   "parent": 1,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from A1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from A1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 30.702,
+   "end_s": 34.357,
+   "duration_s": 3.655,
+   "move_s": 1.009,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    327.74
+   ],
+   "head_after": [
+    150.71,
+    75.43
+   ],
+   "move_mm": 252.34,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:A1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:A1": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 3,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 12,
+   "event_idx": 12,
+   "level": 1,
+   "parent": 1,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into A3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into A3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 34.357,
+   "end_s": 37.364,
+   "duration_s": 3.007,
+   "move_s": 0.362,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    75.43
+   ],
+   "head_after": [
+    164.88,
+    164.74
+   ],
+   "move_mm": 90.43,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:A3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:A3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 3,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 13,
+   "event_idx": 13,
+   "level": 1,
+   "parent": 1,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 37.364,
+   "end_s": 40.252,
+   "duration_s": 2.888,
+   "move_s": 0.888,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    164.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 221.91,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 3,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 14,
+   "event_idx": 14,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: B1 of tube rack (slot 2) → B1, B2, B3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from B1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to B1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 40.252,
+   "end_s": 40.252,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:B1",
+     "role": "source"
+    },
+    {
+     "key": "5:B1",
+     "role": "dest"
+    },
+    {
+     "key": "5:B2",
+     "role": "dest"
+    },
+    {
+     "key": "5:B3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 3,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 15,
+   "event_idx": 15,
+   "level": 1,
+   "parent": 14,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip D1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from D1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 40.252,
+   "end_s": 43.98,
+   "duration_s": 3.728,
+   "move_s": 0.728,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    146.88,
+    318.74
+   ],
+   "move_mm": 182.06,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:D1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:D1"
+   ],
+   "tips_used_total": 4,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 16,
+   "event_idx": 16,
+   "level": 1,
+   "parent": 14,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from B1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from B1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 43.98,
+   "end_s": 47.676,
+   "duration_s": 3.696,
+   "move_s": 1.05,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    318.74
+   ],
+   "head_after": [
+    150.71,
+    56.15
+   ],
+   "move_mm": 262.62,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:B1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:B1": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 4,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 17,
+   "event_idx": 17,
+   "level": 1,
+   "parent": 14,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into B1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into B1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 47.676,
+   "end_s": 50.72,
+   "duration_s": 3.044,
+   "move_s": 0.399,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    56.15
+   ],
+   "head_after": [
+    146.88,
+    155.74
+   ],
+   "move_mm": 99.66,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:B1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:B1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 4,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 18,
+   "event_idx": 18,
+   "level": 1,
+   "parent": 14,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 50.72,
+   "end_s": 53.685,
+   "duration_s": 2.965,
+   "move_s": 0.965,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    155.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 241.34,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 4,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 19,
+   "event_idx": 19,
+   "level": 1,
+   "parent": 14,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip E1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from E1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 53.685,
+   "end_s": 57.414,
+   "duration_s": 3.728,
+   "move_s": 0.728,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    146.88,
+    309.74
+   ],
+   "move_mm": 182.06,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:E1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:E1"
+   ],
+   "tips_used_total": 5,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 20,
+   "event_idx": 20,
+   "level": 1,
+   "parent": 14,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from B1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from B1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 57.414,
+   "end_s": 61.074,
+   "duration_s": 3.66,
+   "move_s": 1.014,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    309.74
+   ],
+   "head_after": [
+    150.71,
+    56.15
+   ],
+   "move_mm": 253.62,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:B1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:B1": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 5,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 21,
+   "event_idx": 21,
+   "level": 1,
+   "parent": 14,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into B2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into B2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 61.074,
+   "end_s": 64.118,
+   "duration_s": 3.044,
+   "move_s": 0.399,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    56.15
+   ],
+   "head_after": [
+    155.88,
+    155.74
+   ],
+   "move_mm": 99.72,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:B2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:B2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 5,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 22,
+   "event_idx": 22,
+   "level": 1,
+   "parent": 14,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 64.118,
+   "end_s": 67.057,
+   "duration_s": 2.939,
+   "move_s": 0.939,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    155.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 234.63,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 5,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 23,
+   "event_idx": 23,
+   "level": 1,
+   "parent": 14,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip F1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from F1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 67.057,
+   "end_s": 70.787,
+   "duration_s": 3.73,
+   "move_s": 0.73,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    146.88,
+    300.74
+   ],
+   "move_mm": 182.5,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:F1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:F1"
+   ],
+   "tips_used_total": 6,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 24,
+   "event_idx": 24,
+   "level": 1,
+   "parent": 14,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from B1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from B1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 70.787,
+   "end_s": 74.411,
+   "duration_s": 3.624,
+   "move_s": 0.978,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    300.74
+   ],
+   "head_after": [
+    150.71,
+    56.15
+   ],
+   "move_mm": 244.62,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:B1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:B1": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 6,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 25,
+   "event_idx": 25,
+   "level": 1,
+   "parent": 14,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into B3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into B3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 74.411,
+   "end_s": 77.458,
+   "duration_s": 3.048,
+   "move_s": 0.402,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    56.15
+   ],
+   "head_after": [
+    164.88,
+    155.74
+   ],
+   "move_mm": 100.59,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:B3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:B3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 6,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 26,
+   "event_idx": 26,
+   "level": 1,
+   "parent": 14,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 77.458,
+   "end_s": 80.371,
+   "duration_s": 2.912,
+   "move_s": 0.912,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    155.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 228.08,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 6,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 27,
+   "event_idx": 27,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: C1 of tube rack (slot 2) → C1, C2, C3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from C1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to C1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 80.371,
+   "end_s": 80.371,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:C1",
+     "role": "source"
+    },
+    {
+     "key": "5:C1",
+     "role": "dest"
+    },
+    {
+     "key": "5:C2",
+     "role": "dest"
+    },
+    {
+     "key": "5:C3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 6,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 28,
+   "event_idx": 28,
+   "level": 1,
+   "parent": 27,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip G1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from G1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 80.371,
+   "end_s": 84.104,
+   "duration_s": 3.734,
+   "move_s": 0.734,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    146.88,
+    291.74
+   ],
+   "move_mm": 183.39,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:G1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:G1"
+   ],
+   "tips_used_total": 7,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 29,
+   "event_idx": 29,
+   "level": 1,
+   "parent": 27,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from C1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from C1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 84.104,
+   "end_s": 87.769,
+   "duration_s": 3.665,
+   "move_s": 1.02,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    291.74
+   ],
+   "head_after": [
+    150.71,
+    36.87
+   ],
+   "move_mm": 254.9,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:C1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:C1": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 7,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 30,
+   "event_idx": 30,
+   "level": 1,
+   "parent": 27,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into C1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into C1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 87.769,
+   "end_s": 90.855,
+   "duration_s": 3.085,
+   "move_s": 0.44,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    36.87
+   ],
+   "head_after": [
+    146.88,
+    146.74
+   ],
+   "move_mm": 109.94,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:C1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:C1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 7,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 31,
+   "event_idx": 31,
+   "level": 1,
+   "parent": 27,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 90.855,
+   "end_s": 93.844,
+   "duration_s": 2.989,
+   "move_s": 0.989,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    146.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 247.35,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 7,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 32,
+   "event_idx": 32,
+   "level": 1,
+   "parent": 27,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip H1 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from H1 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 93.844,
+   "end_s": 97.583,
+   "duration_s": 3.739,
+   "move_s": 0.739,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    146.88,
+    282.74
+   ],
+   "move_mm": 184.71,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:H1",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:H1"
+   ],
+   "tips_used_total": 8,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 33,
+   "event_idx": 33,
+   "level": 1,
+   "parent": 27,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from C1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from C1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 97.583,
+   "end_s": 101.212,
+   "duration_s": 3.629,
+   "move_s": 0.984,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    282.74
+   ],
+   "head_after": [
+    150.71,
+    36.87
+   ],
+   "move_mm": 245.9,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:C1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:C1": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 8,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 34,
+   "event_idx": 34,
+   "level": 1,
+   "parent": 27,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into C2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into C2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 101.212,
+   "end_s": 104.297,
+   "duration_s": 3.085,
+   "move_s": 0.44,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    36.87
+   ],
+   "head_after": [
+    155.88,
+    146.74
+   ],
+   "move_mm": 109.99,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:C2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:C2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 8,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 35,
+   "event_idx": 35,
+   "level": 1,
+   "parent": 27,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 104.297,
+   "end_s": 107.261,
+   "duration_s": 2.963,
+   "move_s": 0.963,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    146.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 240.8,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 8,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 36,
+   "event_idx": 36,
+   "level": 1,
+   "parent": 27,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip A2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from A2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 107.261,
+   "end_s": 110.964,
+   "duration_s": 3.703,
+   "move_s": 0.703,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    345.74
+   ],
+   "move_mm": 175.84,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:A2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:A2"
+   ],
+   "tips_used_total": 9,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 37,
+   "event_idx": 37,
+   "level": 1,
+   "parent": 27,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from C1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from C1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 110.964,
+   "end_s": 114.845,
+   "duration_s": 3.881,
+   "move_s": 1.236,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    345.74
+   ],
+   "head_after": [
+    150.71,
+    36.87
+   ],
+   "move_mm": 308.91,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:C1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:C1": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 9,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 38,
+   "event_idx": 38,
+   "level": 1,
+   "parent": 27,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into C3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into C3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 114.845,
+   "end_s": 117.934,
+   "duration_s": 3.089,
+   "move_s": 0.443,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    36.87
+   ],
+   "head_after": [
+    164.88,
+    146.74
+   ],
+   "move_mm": 110.78,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:C3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:C3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 9,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 39,
+   "event_idx": 39,
+   "level": 1,
+   "parent": 27,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 117.934,
+   "end_s": 120.871,
+   "duration_s": 2.938,
+   "move_s": 0.938,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    146.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 234.42,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 9,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 40,
+   "event_idx": 40,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: D1 of tube rack (slot 2) → D1, D2, D3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from D1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to D1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 120.871,
+   "end_s": 120.871,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:D1",
+     "role": "source"
+    },
+    {
+     "key": "5:D1",
+     "role": "dest"
+    },
+    {
+     "key": "5:D2",
+     "role": "dest"
+    },
+    {
+     "key": "5:D3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 9,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 41,
+   "event_idx": 41,
+   "level": 1,
+   "parent": 40,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip B2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from B2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 120.871,
+   "end_s": 124.569,
+   "duration_s": 3.698,
+   "move_s": 0.698,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    336.74
+   ],
+   "move_mm": 174.46,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:B2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:B2"
+   ],
+   "tips_used_total": 10,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 42,
+   "event_idx": 42,
+   "level": 1,
+   "parent": 40,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from D1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from D1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 124.569,
+   "end_s": 128.492,
+   "duration_s": 3.922,
+   "move_s": 1.277,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    336.74
+   ],
+   "head_after": [
+    150.71,
+    17.59
+   ],
+   "move_mm": 319.19,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:D1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:D1": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 10,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 43,
+   "event_idx": 43,
+   "level": 1,
+   "parent": 40,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into D1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into D1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 128.492,
+   "end_s": 131.618,
+   "duration_s": 3.126,
+   "move_s": 0.481,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    17.59
+   ],
+   "head_after": [
+    146.88,
+    137.74
+   ],
+   "move_mm": 120.21,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:D1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:D1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 10,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 44,
+   "event_idx": 44,
+   "level": 1,
+   "parent": 40,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 131.618,
+   "end_s": 134.632,
+   "duration_s": 3.014,
+   "move_s": 1.014,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    137.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 253.53,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 10,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 45,
+   "event_idx": 45,
+   "level": 1,
+   "parent": 40,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip C2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from C2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 134.632,
+   "end_s": 138.326,
+   "duration_s": 3.694,
+   "move_s": 0.694,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    327.74
+   ],
+   "move_mm": 173.53,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:C2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:C2"
+   ],
+   "tips_used_total": 11,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 46,
+   "event_idx": 46,
+   "level": 1,
+   "parent": 40,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from D1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from D1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 138.326,
+   "end_s": 142.212,
+   "duration_s": 3.886,
+   "move_s": 1.241,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    327.74
+   ],
+   "head_after": [
+    150.71,
+    17.59
+   ],
+   "move_mm": 310.19,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:D1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:D1": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 11,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 47,
+   "event_idx": 47,
+   "level": 1,
+   "parent": 40,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into D2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into D2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 142.212,
+   "end_s": 145.339,
+   "duration_s": 3.127,
+   "move_s": 0.481,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    17.59
+   ],
+   "head_after": [
+    155.88,
+    137.74
+   ],
+   "move_mm": 120.26,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:D2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:D2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 11,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 48,
+   "event_idx": 48,
+   "level": 1,
+   "parent": 40,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 145.339,
+   "end_s": 148.327,
+   "duration_s": 2.989,
+   "move_s": 0.989,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    137.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 247.15,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 11,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 49,
+   "event_idx": 49,
+   "level": 1,
+   "parent": 40,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip D2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from D2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 148.327,
+   "end_s": 152.02,
+   "duration_s": 3.692,
+   "move_s": 0.692,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    318.74
+   ],
+   "move_mm": 173.06,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:D2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:D2"
+   ],
+   "tips_used_total": 12,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 50,
+   "event_idx": 50,
+   "level": 1,
+   "parent": 40,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from D1 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from D1 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 152.02,
+   "end_s": 155.87,
+   "duration_s": 3.85,
+   "move_s": 1.205,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    318.74
+   ],
+   "head_after": [
+    150.71,
+    17.59
+   ],
+   "move_mm": 301.19,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:D1",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:D1": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 12,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 51,
+   "event_idx": 51,
+   "level": 1,
+   "parent": 40,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into D3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into D3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 155.87,
+   "end_s": 158.999,
+   "duration_s": 3.129,
+   "move_s": 0.484,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    150.71,
+    17.59
+   ],
+   "head_after": [
+    164.88,
+    137.74
+   ],
+   "move_mm": 120.98,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:D3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:D3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 12,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 52,
+   "event_idx": 52,
+   "level": 1,
+   "parent": 40,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 158.999,
+   "end_s": 161.963,
+   "duration_s": 2.964,
+   "move_s": 0.964,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    137.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 240.93,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 12,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 53,
+   "event_idx": 53,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: A2 of tube rack (slot 2) → E1, E2, E3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from A2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to E1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 161.963,
+   "end_s": 161.963,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:A2",
+     "role": "source"
+    },
+    {
+     "key": "5:E1",
+     "role": "dest"
+    },
+    {
+     "key": "5:E2",
+     "role": "dest"
+    },
+    {
+     "key": "5:E3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 12,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 54,
+   "event_idx": 54,
+   "level": 1,
+   "parent": 53,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip E2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from E2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 161.963,
+   "end_s": 165.655,
+   "duration_s": 3.692,
+   "move_s": 0.692,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    309.74
+   ],
+   "move_mm": 173.06,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:E2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:E2"
+   ],
+   "tips_used_total": 13,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 55,
+   "event_idx": 55,
+   "level": 1,
+   "parent": 53,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from A2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from A2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 165.655,
+   "end_s": 169.24,
+   "duration_s": 3.585,
+   "move_s": 0.939,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    309.74
+   ],
+   "head_after": [
+    170.6,
+    75.43
+   ],
+   "move_mm": 234.77,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:A2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:A2": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 13,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 56,
+   "event_idx": 56,
+   "level": 1,
+   "parent": 53,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into E1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into E1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 169.24,
+   "end_s": 172.119,
+   "duration_s": 2.879,
+   "move_s": 0.233,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    75.43
+   ],
+   "head_after": [
+    146.88,
+    128.74
+   ],
+   "move_mm": 58.35,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:E1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:E1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 13,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 57,
+   "event_idx": 57,
+   "level": 1,
+   "parent": 53,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 172.119,
+   "end_s": 175.158,
+   "duration_s": 3.039,
+   "move_s": 1.039,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    128.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 259.87,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 13,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 58,
+   "event_idx": 58,
+   "level": 1,
+   "parent": 53,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip F2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from F2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 175.158,
+   "end_s": 178.852,
+   "duration_s": 3.694,
+   "move_s": 0.694,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    300.74
+   ],
+   "move_mm": 173.53,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:F2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:F2"
+   ],
+   "tips_used_total": 14,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 59,
+   "event_idx": 59,
+   "level": 1,
+   "parent": 53,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from A2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from A2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 178.852,
+   "end_s": 182.401,
+   "duration_s": 3.549,
+   "move_s": 0.903,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    300.74
+   ],
+   "head_after": [
+    170.6,
+    75.43
+   ],
+   "move_mm": 225.79,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:A2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:A2": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 14,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 60,
+   "event_idx": 60,
+   "level": 1,
+   "parent": 53,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into E2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into E2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 182.401,
+   "end_s": 185.268,
+   "duration_s": 2.867,
+   "move_s": 0.221,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    75.43
+   ],
+   "head_after": [
+    155.88,
+    128.74
+   ],
+   "move_mm": 55.3,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:E2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:E2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 14,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 61,
+   "event_idx": 61,
+   "level": 1,
+   "parent": 53,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 185.268,
+   "end_s": 188.282,
+   "duration_s": 3.015,
+   "move_s": 1.015,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    128.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 253.65,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 14,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 62,
+   "event_idx": 62,
+   "level": 1,
+   "parent": 53,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip G2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from G2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 188.282,
+   "end_s": 191.98,
+   "duration_s": 3.698,
+   "move_s": 0.698,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    291.74
+   ],
+   "move_mm": 174.46,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:G2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:G2"
+   ],
+   "tips_used_total": 15,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 63,
+   "event_idx": 63,
+   "level": 1,
+   "parent": 53,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from A2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from A2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 191.98,
+   "end_s": 195.493,
+   "duration_s": 3.513,
+   "move_s": 0.867,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    291.74
+   ],
+   "head_after": [
+    170.6,
+    75.43
+   ],
+   "move_mm": 216.81,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:A2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:A2": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 15,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 64,
+   "event_idx": 64,
+   "level": 1,
+   "parent": 53,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into E3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into E3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 195.493,
+   "end_s": 198.353,
+   "duration_s": 2.86,
+   "move_s": 0.214,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    75.43
+   ],
+   "head_after": [
+    164.88,
+    128.74
+   ],
+   "move_mm": 53.62,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:E3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:E3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 15,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 65,
+   "event_idx": 65,
+   "level": 1,
+   "parent": 53,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 198.353,
+   "end_s": 201.343,
+   "duration_s": 2.99,
+   "move_s": 0.99,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    128.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 247.6,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 15,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 66,
+   "event_idx": 66,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: B2 of tube rack (slot 2) → F1, F2, F3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from B2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to F1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 201.343,
+   "end_s": 201.343,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:B2",
+     "role": "source"
+    },
+    {
+     "key": "5:F1",
+     "role": "dest"
+    },
+    {
+     "key": "5:F2",
+     "role": "dest"
+    },
+    {
+     "key": "5:F3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 15,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 67,
+   "event_idx": 67,
+   "level": 1,
+   "parent": 66,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip H2 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from H2 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 201.343,
+   "end_s": 205.047,
+   "duration_s": 3.703,
+   "move_s": 0.703,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    155.88,
+    282.74
+   ],
+   "move_mm": 175.84,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:H2",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:H2"
+   ],
+   "tips_used_total": 16,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 68,
+   "event_idx": 68,
+   "level": 1,
+   "parent": 66,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from B2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from B2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 205.047,
+   "end_s": 208.601,
+   "duration_s": 3.554,
+   "move_s": 0.908,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    282.74
+   ],
+   "head_after": [
+    170.6,
+    56.15
+   ],
+   "move_mm": 227.07,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:B2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:B2": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 16,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 69,
+   "event_idx": 69,
+   "level": 1,
+   "parent": 66,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into F1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into F1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 208.601,
+   "end_s": 211.518,
+   "duration_s": 2.917,
+   "move_s": 0.271,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    56.15
+   ],
+   "head_after": [
+    146.88,
+    119.74
+   ],
+   "move_mm": 67.87,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:F1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:F1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 16,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 70,
+   "event_idx": 70,
+   "level": 1,
+   "parent": 66,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 211.518,
+   "end_s": 214.583,
+   "duration_s": 3.065,
+   "move_s": 1.065,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    119.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 266.37,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 16,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 71,
+   "event_idx": 71,
+   "level": 1,
+   "parent": 66,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip A3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from A3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 214.583,
+   "end_s": 218.251,
+   "duration_s": 3.668,
+   "move_s": 0.668,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    345.74
+   ],
+   "move_mm": 167.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:A3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:A3"
+   ],
+   "tips_used_total": 17,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 72,
+   "event_idx": 72,
+   "level": 1,
+   "parent": 66,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from B2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from B2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 218.251,
+   "end_s": 222.055,
+   "duration_s": 3.804,
+   "move_s": 1.159,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    345.74
+   ],
+   "head_after": [
+    170.6,
+    56.15
+   ],
+   "move_mm": 289.65,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:B2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:B2": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 17,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 73,
+   "event_idx": 73,
+   "level": 1,
+   "parent": 66,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into F2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into F2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 222.055,
+   "end_s": 224.962,
+   "duration_s": 2.907,
+   "move_s": 0.261,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    56.15
+   ],
+   "head_after": [
+    155.88,
+    119.74
+   ],
+   "move_mm": 65.27,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:F2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:F2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 17,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 74,
+   "event_idx": 74,
+   "level": 1,
+   "parent": 66,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 224.962,
+   "end_s": 228.003,
+   "duration_s": 3.041,
+   "move_s": 1.041,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    119.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 260.31,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 17,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 75,
+   "event_idx": 75,
+   "level": 1,
+   "parent": 66,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip B3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from B3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 228.003,
+   "end_s": 231.665,
+   "duration_s": 3.662,
+   "move_s": 0.662,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    336.74
+   ],
+   "move_mm": 165.54,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:B3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:B3"
+   ],
+   "tips_used_total": 18,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 76,
+   "event_idx": 76,
+   "level": 1,
+   "parent": 66,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from B2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from B2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 231.665,
+   "end_s": 235.433,
+   "duration_s": 3.768,
+   "move_s": 1.123,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    336.74
+   ],
+   "head_after": [
+    170.6,
+    56.15
+   ],
+   "move_mm": 280.65,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:B2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:B2": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 18,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 77,
+   "event_idx": 77,
+   "level": 1,
+   "parent": 66,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into F3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into F3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 235.433,
+   "end_s": 238.334,
+   "duration_s": 2.901,
+   "move_s": 0.255,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    56.15
+   ],
+   "head_after": [
+    164.88,
+    119.74
+   ],
+   "move_mm": 63.85,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:F3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:F3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 18,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 78,
+   "event_idx": 78,
+   "level": 1,
+   "parent": 66,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 238.334,
+   "end_s": 241.352,
+   "duration_s": 3.018,
+   "move_s": 1.018,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    119.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 254.41,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 18,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 79,
+   "event_idx": 79,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: C2 of tube rack (slot 2) → G1, G2, G3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from C2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to G1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 241.352,
+   "end_s": 241.352,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:C2",
+     "role": "source"
+    },
+    {
+     "key": "5:G1",
+     "role": "dest"
+    },
+    {
+     "key": "5:G2",
+     "role": "dest"
+    },
+    {
+     "key": "5:G3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 18,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 80,
+   "event_idx": 80,
+   "level": 1,
+   "parent": 79,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip C3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from C3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 241.352,
+   "end_s": 245.01,
+   "duration_s": 3.658,
+   "move_s": 0.658,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    327.74
+   ],
+   "move_mm": 164.55,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:C3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:C3"
+   ],
+   "tips_used_total": 19,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 81,
+   "event_idx": 81,
+   "level": 1,
+   "parent": 79,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from C2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from C2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 245.01,
+   "end_s": 248.819,
+   "duration_s": 3.809,
+   "move_s": 1.164,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    327.74
+   ],
+   "head_after": [
+    170.6,
+    36.87
+   ],
+   "move_mm": 290.93,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:C2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:C2": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 19,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 82,
+   "event_idx": 82,
+   "level": 1,
+   "parent": 79,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into G1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into G1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 248.819,
+   "end_s": 251.775,
+   "duration_s": 2.956,
+   "move_s": 0.31,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    36.87
+   ],
+   "head_after": [
+    146.88,
+    110.74
+   ],
+   "move_mm": 77.58,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:G1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:G1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 19,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 83,
+   "event_idx": 83,
+   "level": 1,
+   "parent": 79,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 251.775,
+   "end_s": 254.867,
+   "duration_s": 3.092,
+   "move_s": 1.092,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    110.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 273.01,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 19,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 84,
+   "event_idx": 84,
+   "level": 1,
+   "parent": 79,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip D3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from D3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 254.867,
+   "end_s": 258.523,
+   "duration_s": 3.656,
+   "move_s": 0.656,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    318.74
+   ],
+   "move_mm": 164.06,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:D3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:D3"
+   ],
+   "tips_used_total": 20,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 85,
+   "event_idx": 85,
+   "level": 1,
+   "parent": 79,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from C2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from C2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 258.523,
+   "end_s": 262.296,
+   "duration_s": 3.773,
+   "move_s": 1.128,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    318.74
+   ],
+   "head_after": [
+    170.6,
+    36.87
+   ],
+   "move_mm": 281.93,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:C2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:C2": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 20,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 86,
+   "event_idx": 86,
+   "level": 1,
+   "parent": 79,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into G2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into G2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 262.296,
+   "end_s": 265.243,
+   "duration_s": 2.947,
+   "move_s": 0.301,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    36.87
+   ],
+   "head_after": [
+    155.88,
+    110.74
+   ],
+   "move_mm": 75.32,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:G2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:G2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 20,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 87,
+   "event_idx": 87,
+   "level": 1,
+   "parent": 79,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 265.243,
+   "end_s": 268.312,
+   "duration_s": 3.068,
+   "move_s": 1.068,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    110.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 267.1,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 20,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 88,
+   "event_idx": 88,
+   "level": 1,
+   "parent": 79,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip E3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from E3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 268.312,
+   "end_s": 271.968,
+   "duration_s": 3.656,
+   "move_s": 0.656,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    309.74
+   ],
+   "move_mm": 164.06,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:E3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:E3"
+   ],
+   "tips_used_total": 21,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 89,
+   "event_idx": 89,
+   "level": 1,
+   "parent": 79,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from C2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from C2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 271.968,
+   "end_s": 275.705,
+   "duration_s": 3.737,
+   "move_s": 1.092,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    309.74
+   ],
+   "head_after": [
+    170.6,
+    36.87
+   ],
+   "move_mm": 272.93,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:C2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:C2": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 21,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 90,
+   "event_idx": 90,
+   "level": 1,
+   "parent": 79,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into G3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into G3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 275.705,
+   "end_s": 278.647,
+   "duration_s": 2.942,
+   "move_s": 0.296,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    36.87
+   ],
+   "head_after": [
+    164.88,
+    110.74
+   ],
+   "move_mm": 74.09,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:G3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:G3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 21,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 91,
+   "event_idx": 91,
+   "level": 1,
+   "parent": 79,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 278.647,
+   "end_s": 281.692,
+   "duration_s": 3.045,
+   "move_s": 1.045,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    110.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 261.36,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 21,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 92,
+   "event_idx": 92,
+   "level": 0,
+   "parent": null,
+   "kind": "transfer",
+   "raw_kind": null,
+   "is_group": true,
+   "caption": "Transfer 20 µL: D2 of tube rack (slot 2) → H1, H2, H3 of plate (slot 5)",
+   "detail": "group header - the steps below do the work; no time or volume counted here",
+   "text": "Transferring 20.0 from D2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 to H1 of Corning 96 Well Plate 360 µL Flat on slot 5",
+   "start_s": 281.692,
+   "end_s": 281.692,
+   "duration_s": 0.0,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": 20.0,
+   "focus": [
+    {
+     "key": "2:D2",
+     "role": "source"
+    },
+    {
+     "key": "5:H1",
+     "role": "dest"
+    },
+    {
+     "key": "5:H2",
+     "role": "dest"
+    },
+    {
+     "key": "5:H3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": true,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 21,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 93,
+   "event_idx": 93,
+   "level": 1,
+   "parent": 92,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip F3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from F3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 281.692,
+   "end_s": 285.351,
+   "duration_s": 3.658,
+   "move_s": 0.658,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    300.74
+   ],
+   "move_mm": 164.55,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:F3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:F3"
+   ],
+   "tips_used_total": 22,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 94,
+   "event_idx": 94,
+   "level": 1,
+   "parent": 92,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from D2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from D2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 285.351,
+   "end_s": 289.129,
+   "duration_s": 3.778,
+   "move_s": 1.133,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    300.74
+   ],
+   "head_after": [
+    170.6,
+    17.59
+   ],
+   "move_mm": 283.21,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:D2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:D2": -20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 22,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 95,
+   "event_idx": 95,
+   "level": 1,
+   "parent": 92,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into H1 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into H1 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 289.129,
+   "end_s": 292.124,
+   "duration_s": 2.995,
+   "move_s": 0.35,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    17.59
+   ],
+   "head_after": [
+    146.88,
+    101.74
+   ],
+   "move_mm": 87.43,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:H1",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:H1": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 22,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 96,
+   "event_idx": 96,
+   "level": 1,
+   "parent": 92,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 292.124,
+   "end_s": 295.243,
+   "duration_s": 3.119,
+   "move_s": 1.119,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    146.88,
+    101.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 279.79,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 22,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 97,
+   "event_idx": 97,
+   "level": 1,
+   "parent": 92,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip G3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from G3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 295.243,
+   "end_s": 298.906,
+   "duration_s": 3.662,
+   "move_s": 0.662,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    291.74
+   ],
+   "move_mm": 165.54,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:G3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:G3"
+   ],
+   "tips_used_total": 23,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 98,
+   "event_idx": 98,
+   "level": 1,
+   "parent": 92,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from D2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from D2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 298.906,
+   "end_s": 302.648,
+   "duration_s": 3.742,
+   "move_s": 1.097,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    291.74
+   ],
+   "head_after": [
+    170.6,
+    17.59
+   ],
+   "move_mm": 274.21,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:D2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:D2": -40.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 23,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 99,
+   "event_idx": 99,
+   "level": 1,
+   "parent": 92,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into H2 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into H2 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 302.648,
+   "end_s": 305.635,
+   "duration_s": 2.987,
+   "move_s": 0.342,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    17.59
+   ],
+   "head_after": [
+    155.88,
+    101.74
+   ],
+   "move_mm": 85.43,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:H2",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:H2": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 23,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 100,
+   "event_idx": 100,
+   "level": 1,
+   "parent": 92,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 305.635,
+   "end_s": 308.731,
+   "duration_s": 3.096,
+   "move_s": 1.096,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    155.88,
+    101.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 274.02,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 23,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 101,
+   "event_idx": 101,
+   "level": 1,
+   "parent": 92,
+   "kind": "pick_up_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Pick up tip H3 from tip rack (slot 11)",
+   "detail": "",
+   "text": "Picking up tip from H3 of Opentrons OT-2 96 Tip Rack 20 µL on slot 11",
+   "start_s": 308.731,
+   "end_s": 312.399,
+   "duration_s": 3.668,
+   "move_s": 0.668,
+   "action_s": 3.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    164.88,
+    282.74
+   ],
+   "move_mm": 167.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "11:H3",
+     "role": "tip"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [
+    "11:H3"
+   ],
+   "tips_used_total": 24,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 102,
+   "event_idx": 102,
+   "level": 1,
+   "parent": 92,
+   "kind": "aspirate",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Aspirate 20 µL from D2 of tube rack (slot 2)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Aspirating 20.0 uL from D2 of Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap on slot 2 at 7.56 uL/sec",
+   "start_s": 312.399,
+   "end_s": 316.105,
+   "duration_s": 3.706,
+   "move_s": 1.061,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    282.74
+   ],
+   "head_after": [
+    170.6,
+    17.59
+   ],
+   "move_mm": 265.21,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "2:D2",
+     "role": "source"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "2:D2": -60.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 24,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 20.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 103,
+   "event_idx": 103,
+   "level": 1,
+   "parent": 92,
+   "kind": "dispense",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Dispense 20 µL into H3 of plate (slot 5)",
+   "detail": "7.56 µL/s, about 2.65 s",
+   "text": "Dispensing 20.0 uL into H3 of Corning 96 Well Plate 360 µL Flat on slot 5 at 7.56 uL/sec",
+   "start_s": 316.105,
+   "end_s": 319.088,
+   "duration_s": 2.983,
+   "move_s": 0.337,
+   "action_s": 2.646,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    170.6,
+    17.59
+   ],
+   "head_after": [
+    164.88,
+    101.74
+   ],
+   "move_mm": 84.34,
+   "volume_ul": 20.0,
+   "volume_total_ul": 20.0,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "5:H3",
+     "role": "dest"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {
+    "5:H3": 20.0
+   },
+   "tips_consumed": [],
+   "tips_used_total": 24,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": true,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 104,
+   "event_idx": 104,
+   "level": 1,
+   "parent": 92,
+   "kind": "drop_tip",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "Drop tip into trash (slot 12)",
+   "detail": "",
+   "text": "Dropping tip into Trash Bin on slot 12",
+   "start_s": 319.088,
+   "end_s": 322.162,
+   "duration_s": 3.074,
+   "move_s": 1.074,
+   "action_s": 2.0,
+   "human": false,
+   "human_step": null,
+   "pipette": {
+    "mount": "left",
+    "name": "p20_single_gen2",
+    "channels": 1
+   },
+   "head_mount": "left",
+   "head_before": [
+    164.88,
+    101.74
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 268.43,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [
+    {
+     "key": "trash:12",
+     "role": "trash"
+    }
+   ],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 24,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  },
+  {
+   "index": 105,
+   "event_idx": 105,
+   "level": 0,
+   "parent": null,
+   "kind": "pause",
+   "raw_kind": null,
+   "is_group": false,
+   "caption": "HUMAN STEP - robot paused: Return the plate to the 37 C / 5% CO2 incubator for the stimulation period, then collect supernatants (ELISA) and lyse cells (RT-qPCR). The incubator is not automated.",
+   "detail": "a person must act and resume; no duration is estimated",
+   "text": "Pausing robot operation: HUMAN [s11]: Return the plate to the 37 C / 5% CO2 incubator for the stimulation period, then collect supernatants (ELISA) and lyse cells (RT-qPCR). The incubator is not automated.",
+   "start_s": 322.162,
+   "end_s": 322.162,
+   "duration_s": null,
+   "move_s": 0.0,
+   "action_s": 0.0,
+   "human": true,
+   "human_step": {
+    "step_id": "s11",
+    "message": "Return the plate to the 37 C / 5% CO2 incubator for the stimulation period, then collect supernatants (ELISA) and lyse cells (RT-qPCR). The incubator is not automated."
+   },
+   "pipette": null,
+   "head_mount": "left",
+   "head_before": [
+    328.88,
+    314.24
+   ],
+   "head_after": [
+    328.88,
+    314.24
+   ],
+   "move_mm": 0.0,
+   "volume_ul": null,
+   "volume_total_ul": null,
+   "group_volume_ul": null,
+   "focus": [],
+   "focus_preview": false,
+   "well_net_ul": {},
+   "tips_consumed": [],
+   "tips_used_total": 24,
+   "modules": {},
+   "pipettes": {
+    "left": {
+     "tip": false,
+     "held_ul": 0.0
+    }
+   },
+   "phase": 0
+  }
+ ],
+ "phases": [
+  {
+   "index": 0,
+   "step_id": "s11",
+   "title": "Stimulate differentiated THP-1 with purified antigen",
+   "owner": "ROBOT",
+   "note": "Addition to seeded plate.",
+   "first_frame": 0,
+   "last_frame": 105,
+   "start_s": 0.0,
+   "end_s": 322.162
+  }
+ ],
+ "totals": {
+  "frames": 106,
+  "estimated_total_s": 322.162,
+  "human_pauses": 1,
+  "human_frames": [
+   105
+  ],
+  "tip_pickups": 24,
+  "tips_used": 24,
+  "tips_consumed_by_rack": {
+   "11": [
+    "A1",
+    "B1",
+    "C1",
+    "D1",
+    "E1",
+    "F1",
+    "G1",
+    "H1",
+    "A2",
+    "B2",
+    "C2",
+    "D2",
+    "E2",
+    "F2",
+    "G2",
+    "H2",
+    "A3",
+    "B3",
+    "C3",
+    "D3",
+    "E3",
+    "F3",
+    "G3",
+    "H3"
+   ]
+  },
+  "aspirations": 24,
+  "dispenses": 24,
+  "volume_aspirated_ul": 480.0,
+  "volume_dispensed_ul": 480.0,
+  "volume_moved_ul": 480.0,
+  "gantry_distance_mm": 18794.5,
+  "max_abs_net_ul": 60.0,
+  "final_net_ul": {
+   "2:A1": -60.0,
+   "5:A1": 20.0,
+   "5:A2": 20.0,
+   "5:A3": 20.0,
+   "2:B1": -60.0,
+   "5:B1": 20.0,
+   "5:B2": 20.0,
+   "5:B3": 20.0,
+   "2:C1": -60.0,
+   "5:C1": 20.0,
+   "5:C2": 20.0,
+   "5:C3": 20.0,
+   "2:D1": -60.0,
+   "5:D1": 20.0,
+   "5:D2": 20.0,
+   "5:D3": 20.0,
+   "2:A2": -60.0,
+   "5:E1": 20.0,
+   "5:E2": 20.0,
+   "5:E3": 20.0,
+   "2:B2": -60.0,
+   "5:F1": 20.0,
+   "5:F2": 20.0,
+   "5:F3": 20.0,
+   "2:C2": -60.0,
+   "5:G1": 20.0,
+   "5:G2": 20.0,
+   "5:G3": 20.0,
+   "2:D2": -60.0,
+   "5:H1": 20.0,
+   "5:H2": 20.0,
+   "5:H3": 20.0
+  },
+  "time_by_kind_s": {
+   "aspirate": 89.205,
+   "comment": 0.0,
+   "dispense": 71.932,
+   "drop_tip": 72.081,
+   "pick_up_tip": 88.944,
+   "transfer": 0.0
+  },
+  "notes": [
+   "volume_aspirated_ul / volume_dispensed_ul sum channels x per-channel volume over the primitive steps, mixing strokes included; group headers are not counted.",
+   "volume_moved_ul equals volume_dispensed_ul (liquid delivered).",
+   "estimated_total_s excludes the time people take for human steps."
+  ]
+ },
+ "warnings": []
+}

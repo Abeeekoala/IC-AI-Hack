@@ -1,14 +1,14 @@
 {
-  "created_at": "2026-11-15T10:11:08Z",
-  "digest": "sha256:cf4aff4af5e5d2c861c4c1e381739050695c2707b1f82ff99b2da6c287d62c45",
+  "created_at": "2026-11-15T10:35:19Z",
+  "digest": "sha256:367653dbd6090507b857514fbd743d60cb2e8e09f201ec315ef0380c607064f6",
   "environment": {
-    "platform": "Windows-11-10.0.26300-SP0",
-    "python": "3.15.0"
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
   },
   "inputs": {
     "s0": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
     "s2": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
-    "s7": "sha256:4287531ff67d3d7e1afad09e8eb5509ec724d3d5df2092a510c8010bae4f2dcd"
+    "s7": "sha256:487e158fd45f6ccb2fb0711eea2f9f483ec24e943eef9e59405b2d0a8ef3a532"
   },
   "params": {
     "endotoxin_limit_eu_per_ug": null,
@@ -3520,7 +3520,7 @@
     "S3 LEAKAGE RISK (stream B's banner): the pretrained Vaxign-ML model was trained on all Protegen entries, so recovering known antigens is not validation",
     "S4 screening was INCOMPLETE: gate(s) human_homology, allergenicity, toxicity, conservancy did not run, so these candidates were carried forward unscreened for them",
     "S5 analyses that did not run: bcell_linear (unavailable: BepiPred-3.0 not configured (tools.bepipred3); BepiPred-2.0 is never used as a substitute); class_i (unavailable: no class I predictor available (backend=auto; netMHCpan not found, mhcflurry not installed)); class_ii (unavailable: netMHCIIpan not found (DTU licence; see docs/TOOLS_SETUP.md)); conformational (unavailable: DiscoTope-3.0 not configured (tools.discotope3)). The epitopes they would have produced do not exist",
-    "S6 population coverage did not run (could not obtain HLA frequencies: offline mode: refusing to fetch https://downloads.iedb.org/tools/population/LATEST/IEDB_Population_Coverage-3.0.2.tar.gz): there is no coverage data",
+    "S6 population coverage did not run (S5 produced no selected T-cell epitopes (T-cell prediction unavailable or no binders)): there is no coverage data",
     "S7 DEGRADED to sequence-only ranking (boltz not found on PATH (pip install boltz; MIT licence)): every structure field is empty and the final order rests on the S3, T-cell, B-cell and coverage terms that exist",
     "tr|Q9K0U8|Q9K0U8_NEIMB: S2 localisation is Periplasmic (accessibility inaccessible); it is in S7's final order, so check that it can be expressed and presented before choosing it",
     "sp|Q9JS61|ILVD_NEIMB: S2 localisation is Unknown (accessibility unknown); it is in S7's final order, so check that it can be expressed and presented before choosing it",

@@ -1,23 +1,704 @@
 {
-  "created_at": "2026-11-15T10:11:10Z",
-  "digest": "sha256:8a37cbf43b384ed0ae5fcefc6817fe5f1bc4e80ac56fc08bce64ab37c0e9edd8",
+  "created_at": "2026-11-15T10:35:44Z",
+  "digest": "sha256:52ba762fe27deae2376b2c04b129d006d3ae0310b4c53f49ce3a518a664f14af",
   "environment": {
-    "platform": "Windows-11-10.0.26300-SP0",
-    "python": "3.15.0"
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
   },
   "inputs": {
-    "s9": "sha256:0794347512718e9056d25bce6089cafb9469315b89a2074f0868b037fc26d763"
+    "s9": "sha256:093cb8f8fc2f50e38d27eea60ba6804c1ea8f56e4bcef6e801d1f5e1d1cd9db0"
   },
   "params": {},
   "payload": {
-    "reasons": [
-      "s9 did not run (code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set ...); see payload.reasons of s9_robot.json"
+    "sessions": [
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 144995,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly/protocol_animation.html",
+          "root": "run",
+          "sha256": "47e8ff55b33c3dd773532c558f22a3fe4080aa109e81aa5e13a1c4996997c728"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s02_plasmid_assembly",
+        "timeline": {
+          "bytes": 122386,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s02_plasmid_assembly/timeline.json",
+          "root": "run",
+          "sha256": "c19e6aca4e6ac6f1cad27c39ad3f03cb22946a798ebb6a10e41b1cbda064ff1d"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 126940,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation/protocol_animation.html",
+          "root": "run",
+          "sha256": "5af6f3d0e7b6255df6ef23d83f0d98d75171b1639483985a295a7089507b4f6c"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s03_transformation",
+        "timeline": {
+          "bytes": 105256,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s03_transformation/timeline.json",
+          "root": "run",
+          "sha256": "66b74395e815b1813c33ae33f1046fb4715c8bd6ef3d86ff30f6e897addc85e8"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 221140,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr/protocol_animation.html",
+          "root": "run",
+          "sha256": "9d6cdd3545d996c11b4e30ab08b002617eff39436557484f5bdc4a6f9cfa2783"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s04_colony_pcr",
+        "timeline": {
+          "bytes": 233219,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s04_colony_pcr/timeline.json",
+          "root": "run",
+          "sha256": "5683bb91efa0b50f141f25dcdc2d1eb6455b5cd7adcd1567a5e4e0245556c679"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 179424,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction/protocol_animation.html",
+          "root": "run",
+          "sha256": "92ecbd4461cb42eeffa02b91dc77257da9a466b03e89e31a2eb871a601b2e551"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s05_expression_induction",
+        "timeline": {
+          "bytes": 173550,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s05_expression_induction/timeline.json",
+          "root": "run",
+          "sha256": "5a684a9b25ddc059c9b5ac17e36f07da19b0cd17b6befb8abe87db394763498c"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 157146,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis/protocol_animation.html",
+          "root": "run",
+          "sha256": "f2749f8cb0828cd93db595f05c73d4f485fc9c2ed9fdbbe5199bbf5d374e6b04"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s06_lysis",
+        "timeline": {
+          "bytes": 138187,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s06_lysis/timeline.json",
+          "root": "run",
+          "sha256": "1ae3c76e7b8b1de4ca577ed13c02c82e9d560d683db8a13f6a132d10a3a107e0"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 340784,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification/protocol_animation.html",
+          "root": "run",
+          "sha256": "1f9ce2710fb750a917b1af59830046edc57bb2a6cb843d19f9737ee5c2001a32"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s07_ni_nta_purification",
+        "timeline": {
+          "bytes": 391022,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s07_ni_nta_purification/timeline.json",
+          "root": "run",
+          "sha256": "f71c287e252a0bf6b5bb5938cffec748f77eaaf5fc5cf640a86a06f21dcf7ade"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 123145,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal/protocol_animation.html",
+          "root": "run",
+          "sha256": "9fbf05b88838a2c644d55e3e79b7dd71d6956a942d333f2100338a592dc561a7"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s08_endotoxin_removal",
+        "timeline": {
+          "bytes": 96052,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s08_endotoxin_removal/timeline.json",
+          "root": "run",
+          "sha256": "d8d30d85127f96e233845dbbf658109c8deb0eb187b5a3f46286b3bf1c950f75"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 270115,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay/protocol_animation.html",
+          "root": "run",
+          "sha256": "1dfbafe4b793c29dc69ac1aa74efcb8827ea6fbb5d4ac7546ce908e4d6acf3b3"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s09_lal_assay",
+        "timeline": {
+          "bytes": 295007,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s09_lal_assay/timeline.json",
+          "root": "run",
+          "sha256": "76a19aa5b6a83cd21025a8c9f74a2e00af49fcb6e79731f22421b4ce3f27d843"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 168887,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation/protocol_animation.html",
+          "root": "run",
+          "sha256": "d0ba09539c0336bb4578e7edabcedf4250a75bd18e3a7f7c65472d7add7a9aca"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s11_antigen_stimulation",
+        "timeline": {
+          "bytes": 154805,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s11_antigen_stimulation/timeline.json",
+          "root": "run",
+          "sha256": "95b4aae8a39524375f72fc8ae02272bd5ed5faeda0d82b47a3f79b76f390e094"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 287177,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup/protocol_animation.html",
+          "root": "run",
+          "sha256": "682c75192fd83c94282cc14da3a1d005581665a7e5559ebc66a2d08fcb56c857"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s12_elisa_setup",
+        "timeline": {
+          "bytes": 315260,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_setup/timeline.json",
+          "root": "run",
+          "sha256": "475b8f746e14c6b78179e7649a889fd03e393314be6a8239a172daf7fb96017d"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 529898,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop/protocol_animation.html",
+          "root": "run",
+          "sha256": "10af688bbda27f56bc3d2567497ee447022c918732c5dabccdf195a7d0842c00"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s12_elisa_develop",
+        "timeline": {
+          "bytes": 676780,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s12_elisa_develop/timeline.json",
+          "root": "run",
+          "sha256": "ec99cb3daffb590660daa4ed4359b7acaf41d9ba18edb81a0cc2783d5d67c053"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9K0B4|Q9K0B4_NEIMB",
+        "html": {
+          "bytes": 1302691,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr/protocol_animation.html",
+          "root": "run",
+          "sha256": "e99065219412d7dcc0a459820ca4ebf61e3962fb7b411674786db1d23d3b90b8"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s13_rt_qpcr",
+        "timeline": {
+          "bytes": 1697258,
+          "path": "data/s9plus/tr_q9k0b4_q9k0b4_neimb/template/s13_rt_qpcr/timeline.json",
+          "root": "run",
+          "sha256": "a255ee6e66e2cd15059bc2784fb061e4bdf637c5df97d7a6c6fb1cb2ae2cf24f"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 144995,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s02_plasmid_assembly/protocol_animation.html",
+          "root": "run",
+          "sha256": "47e8ff55b33c3dd773532c558f22a3fe4080aa109e81aa5e13a1c4996997c728"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s02_plasmid_assembly",
+        "timeline": {
+          "bytes": 122386,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s02_plasmid_assembly/timeline.json",
+          "root": "run",
+          "sha256": "c19e6aca4e6ac6f1cad27c39ad3f03cb22946a798ebb6a10e41b1cbda064ff1d"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 126940,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s03_transformation/protocol_animation.html",
+          "root": "run",
+          "sha256": "5af6f3d0e7b6255df6ef23d83f0d98d75171b1639483985a295a7089507b4f6c"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s03_transformation",
+        "timeline": {
+          "bytes": 105256,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s03_transformation/timeline.json",
+          "root": "run",
+          "sha256": "66b74395e815b1813c33ae33f1046fb4715c8bd6ef3d86ff30f6e897addc85e8"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 221140,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s04_colony_pcr/protocol_animation.html",
+          "root": "run",
+          "sha256": "9d6cdd3545d996c11b4e30ab08b002617eff39436557484f5bdc4a6f9cfa2783"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s04_colony_pcr",
+        "timeline": {
+          "bytes": 233219,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s04_colony_pcr/timeline.json",
+          "root": "run",
+          "sha256": "5683bb91efa0b50f141f25dcdc2d1eb6455b5cd7adcd1567a5e4e0245556c679"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 179424,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s05_expression_induction/protocol_animation.html",
+          "root": "run",
+          "sha256": "92ecbd4461cb42eeffa02b91dc77257da9a466b03e89e31a2eb871a601b2e551"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s05_expression_induction",
+        "timeline": {
+          "bytes": 173550,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s05_expression_induction/timeline.json",
+          "root": "run",
+          "sha256": "5a684a9b25ddc059c9b5ac17e36f07da19b0cd17b6befb8abe87db394763498c"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 157146,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s06_lysis/protocol_animation.html",
+          "root": "run",
+          "sha256": "f2749f8cb0828cd93db595f05c73d4f485fc9c2ed9fdbbe5199bbf5d374e6b04"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s06_lysis",
+        "timeline": {
+          "bytes": 138187,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s06_lysis/timeline.json",
+          "root": "run",
+          "sha256": "1ae3c76e7b8b1de4ca577ed13c02c82e9d560d683db8a13f6a132d10a3a107e0"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 340784,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s07_ni_nta_purification/protocol_animation.html",
+          "root": "run",
+          "sha256": "1f9ce2710fb750a917b1af59830046edc57bb2a6cb843d19f9737ee5c2001a32"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s07_ni_nta_purification",
+        "timeline": {
+          "bytes": 391022,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s07_ni_nta_purification/timeline.json",
+          "root": "run",
+          "sha256": "f71c287e252a0bf6b5bb5938cffec748f77eaaf5fc5cf640a86a06f21dcf7ade"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 123145,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s08_endotoxin_removal/protocol_animation.html",
+          "root": "run",
+          "sha256": "9fbf05b88838a2c644d55e3e79b7dd71d6956a942d333f2100338a592dc561a7"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s08_endotoxin_removal",
+        "timeline": {
+          "bytes": 96052,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s08_endotoxin_removal/timeline.json",
+          "root": "run",
+          "sha256": "d8d30d85127f96e233845dbbf658109c8deb0eb187b5a3f46286b3bf1c950f75"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 270115,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s09_lal_assay/protocol_animation.html",
+          "root": "run",
+          "sha256": "1dfbafe4b793c29dc69ac1aa74efcb8827ea6fbb5d4ac7546ce908e4d6acf3b3"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s09_lal_assay",
+        "timeline": {
+          "bytes": 295007,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s09_lal_assay/timeline.json",
+          "root": "run",
+          "sha256": "76a19aa5b6a83cd21025a8c9f74a2e00af49fcb6e79731f22421b4ce3f27d843"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 168887,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s11_antigen_stimulation/protocol_animation.html",
+          "root": "run",
+          "sha256": "d0ba09539c0336bb4578e7edabcedf4250a75bd18e3a7f7c65472d7add7a9aca"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s11_antigen_stimulation",
+        "timeline": {
+          "bytes": 154805,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s11_antigen_stimulation/timeline.json",
+          "root": "run",
+          "sha256": "95b4aae8a39524375f72fc8ae02272bd5ed5faeda0d82b47a3f79b76f390e094"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 287177,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_setup/protocol_animation.html",
+          "root": "run",
+          "sha256": "682c75192fd83c94282cc14da3a1d005581665a7e5559ebc66a2d08fcb56c857"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s12_elisa_setup",
+        "timeline": {
+          "bytes": 315260,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_setup/timeline.json",
+          "root": "run",
+          "sha256": "475b8f746e14c6b78179e7649a889fd03e393314be6a8239a172daf7fb96017d"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 529898,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_develop/protocol_animation.html",
+          "root": "run",
+          "sha256": "10af688bbda27f56bc3d2567497ee447022c918732c5dabccdf195a7d0842c00"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s12_elisa_develop",
+        "timeline": {
+          "bytes": 676780,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s12_elisa_develop/timeline.json",
+          "root": "run",
+          "sha256": "ec99cb3daffb590660daa4ed4359b7acaf41d9ba18edb81a0cc2783d5d67c053"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JXZ0|Q9JXZ0_NEIMB",
+        "html": {
+          "bytes": 1302691,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s13_rt_qpcr/protocol_animation.html",
+          "root": "run",
+          "sha256": "e99065219412d7dcc0a459820ca4ebf61e3962fb7b411674786db1d23d3b90b8"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s13_rt_qpcr",
+        "timeline": {
+          "bytes": 1697258,
+          "path": "data/s9plus/tr_q9jxz0_q9jxz0_neimb/template/s13_rt_qpcr/timeline.json",
+          "root": "run",
+          "sha256": "a255ee6e66e2cd15059bc2784fb061e4bdf637c5df97d7a6c6fb1cb2ae2cf24f"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 144995,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly/protocol_animation.html",
+          "root": "run",
+          "sha256": "47e8ff55b33c3dd773532c558f22a3fe4080aa109e81aa5e13a1c4996997c728"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s02_plasmid_assembly",
+        "timeline": {
+          "bytes": 122386,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s02_plasmid_assembly/timeline.json",
+          "root": "run",
+          "sha256": "c19e6aca4e6ac6f1cad27c39ad3f03cb22946a798ebb6a10e41b1cbda064ff1d"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 126940,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s03_transformation/protocol_animation.html",
+          "root": "run",
+          "sha256": "5af6f3d0e7b6255df6ef23d83f0d98d75171b1639483985a295a7089507b4f6c"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s03_transformation",
+        "timeline": {
+          "bytes": 105256,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s03_transformation/timeline.json",
+          "root": "run",
+          "sha256": "66b74395e815b1813c33ae33f1046fb4715c8bd6ef3d86ff30f6e897addc85e8"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 221140,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr/protocol_animation.html",
+          "root": "run",
+          "sha256": "9d6cdd3545d996c11b4e30ab08b002617eff39436557484f5bdc4a6f9cfa2783"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s04_colony_pcr",
+        "timeline": {
+          "bytes": 233219,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s04_colony_pcr/timeline.json",
+          "root": "run",
+          "sha256": "5683bb91efa0b50f141f25dcdc2d1eb6455b5cd7adcd1567a5e4e0245556c679"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 179424,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction/protocol_animation.html",
+          "root": "run",
+          "sha256": "92ecbd4461cb42eeffa02b91dc77257da9a466b03e89e31a2eb871a601b2e551"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s05_expression_induction",
+        "timeline": {
+          "bytes": 173550,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s05_expression_induction/timeline.json",
+          "root": "run",
+          "sha256": "5a684a9b25ddc059c9b5ac17e36f07da19b0cd17b6befb8abe87db394763498c"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 157146,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s06_lysis/protocol_animation.html",
+          "root": "run",
+          "sha256": "f2749f8cb0828cd93db595f05c73d4f485fc9c2ed9fdbbe5199bbf5d374e6b04"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s06_lysis",
+        "timeline": {
+          "bytes": 138187,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s06_lysis/timeline.json",
+          "root": "run",
+          "sha256": "1ae3c76e7b8b1de4ca577ed13c02c82e9d560d683db8a13f6a132d10a3a107e0"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 340784,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification/protocol_animation.html",
+          "root": "run",
+          "sha256": "1f9ce2710fb750a917b1af59830046edc57bb2a6cb843d19f9737ee5c2001a32"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s07_ni_nta_purification",
+        "timeline": {
+          "bytes": 391022,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s07_ni_nta_purification/timeline.json",
+          "root": "run",
+          "sha256": "f71c287e252a0bf6b5bb5938cffec748f77eaaf5fc5cf640a86a06f21dcf7ade"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 123145,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal/protocol_animation.html",
+          "root": "run",
+          "sha256": "9fbf05b88838a2c644d55e3e79b7dd71d6956a942d333f2100338a592dc561a7"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s08_endotoxin_removal",
+        "timeline": {
+          "bytes": 96052,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s08_endotoxin_removal/timeline.json",
+          "root": "run",
+          "sha256": "d8d30d85127f96e233845dbbf658109c8deb0eb187b5a3f46286b3bf1c950f75"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 270115,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay/protocol_animation.html",
+          "root": "run",
+          "sha256": "1dfbafe4b793c29dc69ac1aa74efcb8827ea6fbb5d4ac7546ce908e4d6acf3b3"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s09_lal_assay",
+        "timeline": {
+          "bytes": 295007,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s09_lal_assay/timeline.json",
+          "root": "run",
+          "sha256": "76a19aa5b6a83cd21025a8c9f74a2e00af49fcb6e79731f22421b4ce3f27d843"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 168887,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation/protocol_animation.html",
+          "root": "run",
+          "sha256": "d0ba09539c0336bb4578e7edabcedf4250a75bd18e3a7f7c65472d7add7a9aca"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s11_antigen_stimulation",
+        "timeline": {
+          "bytes": 154805,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s11_antigen_stimulation/timeline.json",
+          "root": "run",
+          "sha256": "95b4aae8a39524375f72fc8ae02272bd5ed5faeda0d82b47a3f79b76f390e094"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 287177,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup/protocol_animation.html",
+          "root": "run",
+          "sha256": "682c75192fd83c94282cc14da3a1d005581665a7e5559ebc66a2d08fcb56c857"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s12_elisa_setup",
+        "timeline": {
+          "bytes": 315260,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s12_elisa_setup/timeline.json",
+          "root": "run",
+          "sha256": "475b8f746e14c6b78179e7649a889fd03e393314be6a8239a172daf7fb96017d"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 529898,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop/protocol_animation.html",
+          "root": "run",
+          "sha256": "10af688bbda27f56bc3d2567497ee447022c918732c5dabccdf195a7d0842c00"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s12_elisa_develop",
+        "timeline": {
+          "bytes": 676780,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s12_elisa_develop/timeline.json",
+          "root": "run",
+          "sha256": "ec99cb3daffb590660daa4ed4359b7acaf41d9ba18edb81a0cc2783d5d67c053"
+        }
+      },
+      {
+        "backend": "template",
+        "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
+        "html": {
+          "bytes": 1302691,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr/protocol_animation.html",
+          "root": "run",
+          "sha256": "e99065219412d7dcc0a459820ca4ebf61e3962fb7b411674786db1d23d3b90b8"
+        },
+        "ok": true,
+        "s9_outcome": "PASS",
+        "session_id": "s13_rt_qpcr",
+        "timeline": {
+          "bytes": 1697258,
+          "path": "data/s9plus/tr_q9jya8_q9jya8_neimb/template/s13_rt_qpcr/timeline.json",
+          "root": "run",
+          "sha256": "a255ee6e66e2cd15059bc2784fb061e4bdf637c5df97d7a6c6fb1cb2ae2cf24f"
+        }
+      }
     ],
-    "sessions": [],
-    "status": "not_run",
     "summary": {
-      "n_animated": 0,
-      "n_sessions": 0,
+      "n_animated": 36,
+      "n_sessions": 36,
       "n_skipped": 0
     }
   },
@@ -32,7 +713,6 @@
   "status": "ok",
   "volatile": {},
   "warnings": [
-    "S9+ not run: s9 did not run (code generated, not simulated: no Opentrons simulator was found, so 36 session(s) were not simulated and none can pass (UNVERIFIED is not a pass). Set ...); see payload.reasons of s9_robot.json",
     "Times in the animations are estimates from a fixed time model (timeline['time_model']), not measurements."
   ]
 }

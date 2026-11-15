@@ -1,7 +1,7 @@
 {
- "verdict": "UNVERIFIED",
+ "verdict": "PASS",
  "lint": [],
- "sim_ok": null,
+ "sim_ok": true,
  "sim_error": null,
  "sim_error_kind": null,
  "rule_counts": {
@@ -12,15 +12,8 @@
   "no_cross_contamination": 0
  },
  "n_rule_violations": 0,
- "findings": [
-  {
-   "severity": "warning",
-   "rule": "simulation",
-   "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-   "event_idx": null
-  }
- ],
+ "findings": [],
  "reference_diff": null,
- "n_events": 0,
+ "n_events": 93,
  "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
 }

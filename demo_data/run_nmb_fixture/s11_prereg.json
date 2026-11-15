@@ -1,24 +1,24 @@
 {
-  "created_at": "2026-11-15T10:11:10Z",
-  "digest": "sha256:5ad0875ae52ece767bf924273d2e0bf05757b6f4ae0d7228b83d5860c4946f62",
+  "created_at": "2026-11-15T10:35:44Z",
+  "digest": "sha256:a6a74a123b725be7dec9f885caec87d3a5f9b4d6e443ea180b5cf63d8be14353",
   "environment": {
-    "platform": "Windows-11-10.0.26300-SP0",
-    "python": "3.15.0"
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6"
   },
   "inputs": {
     "s0": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
     "s1": "sha256:27acb525956434ce013e71cbd358876fa282e8fc113e7804004a8f5b463a9b87",
-    "s10": "sha256:9d8b915b60430fcda04536cdaca822f2c2343e5b93cee17bf9cf5c79eb71189d",
+    "s10": "sha256:d8da7bd221ed2cb0c5614bf3da0851691a6b6a277b09fe3af1c89807000477c5",
     "s2": "sha256:3170f6106e50b4125381fe65640d43737fdc4af88877e8248eaf87ad27ebe9f3",
     "s3": "sha256:13d3c4acc714b455f12e6242040c5a4df78b3fc8165e940c98a734fa867eddce",
-    "s4": "sha256:5bedbe4c66280cf91d9951184be7199ebffcd3e4e4d3dca9552da4db880e2f96",
-    "s5": "sha256:e2b827469d7a81e3574f8f32167938da55314d7593517ad3f58b814810c5cdc8",
-    "s6": "sha256:a8f1ba17f232f74d4716a14fc4911f667b7311137af6a76ae8a93c7f1d4bcab8",
-    "s7": "sha256:4287531ff67d3d7e1afad09e8eb5509ec724d3d5df2092a510c8010bae4f2dcd",
-    "s8": "sha256:cf4aff4af5e5d2c861c4c1e381739050695c2707b1f82ff99b2da6c287d62c45",
-    "s9": "sha256:0794347512718e9056d25bce6089cafb9469315b89a2074f0868b037fc26d763",
-    "s9_5": "sha256:a894e25058a5e0994f95a82d26d937e0e9fa444725e9a9a31dfc09d7644c4f63",
-    "s9plus": "sha256:8a37cbf43b384ed0ae5fcefc6817fe5f1bc4e80ac56fc08bce64ab37c0e9edd8"
+    "s4": "sha256:f1fcbc51e2721bf6ecad6244afd068a93e34f6c41a386e7992c90cfbed41a0e2",
+    "s5": "sha256:5c3b1e03e73a30a7df2954219075ceca6b20675c67f79764e04ba15168b98b7e",
+    "s6": "sha256:f94d5b2fb48820f1e38933bf94c4abdad3139558938bd67ba026ae36950ec348",
+    "s7": "sha256:487e158fd45f6ccb2fb0711eea2f9f483ec24e943eef9e59405b2d0a8ef3a532",
+    "s8": "sha256:367653dbd6090507b857514fbd743d60cb2e8e09f201ec315ef0380c607064f6",
+    "s9": "sha256:093cb8f8fc2f50e38d27eea60ba6804c1ea8f56e4bcef6e801d1f5e1d1cd9db0",
+    "s9_5": "sha256:5b1854c9633316baefc3bbd8d23b4f63733c1a61ec2aeb647365d9ae94cc42a5",
+    "s9plus": "sha256:52ba762fe27deae2376b2c04b129d006d3ae0310b4c53f49ce3a518a664f14af"
   },
   "params": {
     "validation_dir": "validation"
@@ -302,7 +302,7 @@
           ]
         }
       },
-      "registered_at": "2026-11-15T10:11:10Z",
+      "registered_at": "2026-11-15T10:35:44Z",
       "upstream": {
         "s0": {
           "digest": "sha256:70f4ca7f4f73d2581b2436054caeed7fa2bab41937deca2d598a4b4ce79c6d3a",
@@ -323,10 +323,10 @@
           "vaxforge_version": "0.1.0"
         },
         "s10": {
-          "digest": "sha256:9d8b915b60430fcda04536cdaca822f2c2343e5b93cee17bf9cf5c79eb71189d",
+          "digest": "sha256:d8da7bd221ed2cb0c5614bf3da0851691a6b6a277b09fe3af1c89807000477c5",
           "status": "ok",
           "tools": {
-            "scipy": "1.18.1"
+            "scipy": "1.17.1"
           },
           "vaxforge_version": "0.1.0"
         },
@@ -348,51 +348,51 @@
           "vaxforge_version": "0.1.0"
         },
         "s4": {
-          "digest": "sha256:5bedbe4c66280cf91d9951184be7199ebffcd3e4e4d3dca9552da4db880e2f96",
+          "digest": "sha256:f1fcbc51e2721bf6ecad6244afd068a93e34f6c41a386e7992c90cfbed41a0e2",
           "status": "ok",
           "tools": {},
           "vaxforge_version": "0.1.0"
         },
         "s5": {
-          "digest": "sha256:e2b827469d7a81e3574f8f32167938da55314d7593517ad3f58b814810c5cdc8",
+          "digest": "sha256:5c3b1e03e73a30a7df2954219075ceca6b20675c67f79764e04ba15168b98b7e",
           "status": "ok",
           "tools": {},
           "vaxforge_version": "0.1.0"
         },
         "s6": {
-          "digest": "sha256:a8f1ba17f232f74d4716a14fc4911f667b7311137af6a76ae8a93c7f1d4bcab8",
+          "digest": "sha256:f94d5b2fb48820f1e38933bf94c4abdad3139558938bd67ba026ae36950ec348",
           "status": "ok",
           "tools": {},
           "vaxforge_version": "0.1.0"
         },
         "s7": {
-          "digest": "sha256:4287531ff67d3d7e1afad09e8eb5509ec724d3d5df2092a510c8010bae4f2dcd",
+          "digest": "sha256:487e158fd45f6ccb2fb0711eea2f9f483ec24e943eef9e59405b2d0a8ef3a532",
           "status": "ok",
           "tools": {},
           "vaxforge_version": "0.1.0"
         },
         "s8": {
-          "digest": "sha256:cf4aff4af5e5d2c861c4c1e381739050695c2707b1f82ff99b2da6c287d62c45",
+          "digest": "sha256:367653dbd6090507b857514fbd743d60cb2e8e09f201ec315ef0380c607064f6",
           "status": "ok",
           "tools": {},
           "vaxforge_version": "0.1.0"
         },
         "s9": {
-          "digest": "sha256:0794347512718e9056d25bce6089cafb9469315b89a2074f0868b037fc26d763",
+          "digest": "sha256:093cb8f8fc2f50e38d27eea60ba6804c1ea8f56e4bcef6e801d1f5e1d1cd9db0",
           "status": "ok",
           "tools": {
-            "opentrons": "not_run"
+            "opentrons": "7.5.0"
           },
           "vaxforge_version": "0.1.0"
         },
         "s9_5": {
-          "digest": "sha256:a894e25058a5e0994f95a82d26d937e0e9fa444725e9a9a31dfc09d7644c4f63",
+          "digest": "sha256:5b1854c9633316baefc3bbd8d23b4f63733c1a61ec2aeb647365d9ae94cc42a5",
           "status": "ok",
           "tools": {},
           "vaxforge_version": "0.1.0"
         },
         "s9plus": {
-          "digest": "sha256:8a37cbf43b384ed0ae5fcefc6817fe5f1bc4e80ac56fc08bce64ab37c0e9edd8",
+          "digest": "sha256:52ba762fe27deae2376b2c04b129d006d3ae0310b4c53f49ce3a518a664f14af",
           "status": "ok",
           "tools": {},
           "vaxforge_version": "0.1.0"
@@ -400,7 +400,7 @@
       },
       "validation_dir": "validation"
     },
-    "frozen_digest": "sha256:71620bf8d0f08bf05c236d42b2efcc09545e5ee1d316f22557276d0439fd19ab",
+    "frozen_digest": "sha256:fc0ab87bfadbe6697cb40e79183ef474ad83a3394cbdd11adb0e15608cdf0dcf",
     "note": "registered_at is this machine's clock. It is evidence of when this was frozen only once frozen_digest is published somewhere the team does not control (a git tag, a public post). Nothing here publishes it."
   },
   "producer": {

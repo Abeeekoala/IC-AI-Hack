@@ -2,8 +2,8 @@
  "schema_version": "s9.v1",
  "candidate_id": "tr|Q9JYA8|Q9JYA8_NEIMB",
  "protein_name": "Hemoglobin receptor (hmbR)",
- "opentrons_version": null,
- "simulated": false,
+ "opentrons_version": "7.5.0",
+ "simulated": true,
  "parameters_status": "PLACEHOLDER PARAMETERS: volumes, times and temperatures are coarse defaults, not validated for any kit, enzyme, cell line or assay. Set them from the kit insert / your SOP before use.",
  "biosecurity": "S12 biosecurity gate NOT EVIDENCED to S9. Do not order gene synthesis or run these protocols until the S12 gate clears the sequence.",
  "runs": [
@@ -17,11 +17,11 @@
      "covers": [
       "s02"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s02_plasmid_assembly.py",
      "setup_file": "template/s02_plasmid_assembly.setup.md",
      "plan_file": "template/s02_plasmid_assembly.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s02_plasmid_assembly.sim.json",
      "grade_file": "template/s02_plasmid_assembly.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -32,9 +32,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -45,16 +45,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 71,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -67,11 +60,11 @@
      "covers": [
       "s03"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s03_transformation.py",
      "setup_file": "template/s03_transformation.setup.md",
      "plan_file": "template/s03_transformation.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s03_transformation.sim.json",
      "grade_file": "template/s03_transformation.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -83,9 +76,9 @@
      },
      "n_human_pauses": 2,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -96,16 +89,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 33,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -118,11 +104,11 @@
      "covers": [
       "s04"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s04_colony_pcr.py",
      "setup_file": "template/s04_colony_pcr.setup.md",
      "plan_file": "template/s04_colony_pcr.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s04_colony_pcr.sim.json",
      "grade_file": "template/s04_colony_pcr.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -134,9 +120,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -147,16 +133,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 133,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -169,11 +148,11 @@
      "covers": [
       "s05"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s05_expression_induction.py",
      "setup_file": "template/s05_expression_induction.setup.md",
      "plan_file": "template/s05_expression_induction.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s05_expression_induction.sim.json",
      "grade_file": "template/s05_expression_induction.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -185,9 +164,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -198,16 +177,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 106,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -220,11 +192,11 @@
      "covers": [
       "s06"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s06_lysis.py",
      "setup_file": "template/s06_lysis.setup.md",
      "plan_file": "template/s06_lysis.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s06_lysis.sim.json",
      "grade_file": "template/s06_lysis.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -235,9 +207,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -248,16 +220,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 93,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -270,11 +235,11 @@
      "covers": [
       "s07"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s07_ni_nta_purification.py",
      "setup_file": "template/s07_ni_nta_purification.setup.md",
      "plan_file": "template/s07_ni_nta_purification.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s07_ni_nta_purification.sim.json",
      "grade_file": "template/s07_ni_nta_purification.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -285,9 +250,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -298,16 +263,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 286,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -320,11 +278,11 @@
      "covers": [
       "s08"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s08_endotoxin_removal.py",
      "setup_file": "template/s08_endotoxin_removal.setup.md",
      "plan_file": "template/s08_endotoxin_removal.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s08_endotoxin_removal.sim.json",
      "grade_file": "template/s08_endotoxin_removal.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -335,9 +293,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -348,16 +306,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 43,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -370,11 +321,11 @@
      "covers": [
       "s09"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s09_lal_assay.py",
      "setup_file": "template/s09_lal_assay.setup.md",
      "plan_file": "template/s09_lal_assay.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s09_lal_assay.sim.json",
      "grade_file": "template/s09_lal_assay.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -386,9 +337,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -399,16 +350,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 207,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -421,11 +365,11 @@
      "covers": [
       "s11"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s11_antigen_stimulation.py",
      "setup_file": "template/s11_antigen_stimulation.setup.md",
      "plan_file": "template/s11_antigen_stimulation.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s11_antigen_stimulation.sim.json",
      "grade_file": "template/s11_antigen_stimulation.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -436,9 +380,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -449,16 +393,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 106,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -471,11 +408,11 @@
      "covers": [
       "s12"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s12_elisa_setup.py",
      "setup_file": "template/s12_elisa_setup.setup.md",
      "plan_file": "template/s12_elisa_setup.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s12_elisa_setup.sim.json",
      "grade_file": "template/s12_elisa_setup.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -486,9 +423,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -499,16 +436,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 236,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -521,11 +451,11 @@
      "covers": [
       "s12"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s12_elisa_develop.py",
      "setup_file": "template/s12_elisa_develop.setup.md",
      "plan_file": "template/s12_elisa_develop.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s12_elisa_develop.sim.json",
      "grade_file": "template/s12_elisa_develop.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -536,9 +466,9 @@
      },
      "n_human_pauses": 4,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -549,16 +479,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 392,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -571,11 +494,11 @@
      "covers": [
       "s13"
      ],
-     "outcome": "UNVERIFIED",
+     "outcome": "PASS",
      "code_file": "template/s13_rt_qpcr.py",
      "setup_file": "template/s13_rt_qpcr.setup.md",
      "plan_file": "template/s13_rt_qpcr.plan.json",
-     "sim_file": null,
+     "sim_file": "template/s13_rt_qpcr.sim.json",
      "grade_file": "template/s13_rt_qpcr.grade.json",
      "animation_file": null,
      "animation_error": null,
@@ -587,9 +510,9 @@
      },
      "n_human_pauses": 1,
      "grade": {
-      "verdict": "UNVERIFIED",
+      "verdict": "PASS",
       "lint": [],
-      "sim_ok": null,
+      "sim_ok": true,
       "sim_error": null,
       "sim_error_kind": null,
       "rule_counts": {
@@ -600,16 +523,9 @@
        "no_cross_contamination": 0
       },
       "n_rule_violations": 0,
-      "findings": [
-       {
-        "severity": "warning",
-        "rule": "simulation",
-        "message": "no Opentrons interpreter available (set VAXFORGE_OT_PYTHON)",
-        "event_idx": null
-       }
-      ],
+      "findings": [],
       "reference_diff": null,
-      "n_events": 0,
+      "n_events": 1273,
       "note": "A PASS means the code ran and broke none of the checked rules; it does not mean the protocol is right for the experiment."
      },
      "refusal_kind": null,
@@ -750,7 +666,6 @@
  ],
  "notes": [
   "A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.",
-  "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.",
-  "No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0."
+  "Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code."
  ]
 }

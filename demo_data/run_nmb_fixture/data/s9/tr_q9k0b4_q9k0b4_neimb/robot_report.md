@@ -4,26 +4,26 @@
 
 > S12 biosecurity gate NOT EVIDENCED to S9. Do not order gene synthesis or run these protocols until the S12 gate clears the sequence.
 
-Simulator: Opentrons NOT RUN. Rules checked: tip_before_aspirate, no_overdispense, no_aspirate_from_empty_well, tip_dropped_at_end, no_cross_contamination.
+Simulator: Opentrons 7.5.0. Rules checked: tip_before_aspirate, no_overdispense, no_aspirate_from_empty_well, tip_dropped_at_end, no_cross_contamination.
 
 ## Backend `template`
 
-Outcome tally: {'UNVERIFIED': 12}
+Outcome tally: {'PASS': 12}
 
 | Session | Outcome | Tips | Rule violations | Findings |
 |---|---|---|---|---|
-| `s02_plasmid_assembly` | **UNVERIFIED** | 9 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s03_transformation` | **UNVERIFIED** | 5 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s04_colony_pcr` | **UNVERIFIED** | 12 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s05_expression_induction` | **UNVERIFIED** | 12 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s06_lysis` | **UNVERIFIED** | 6 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s07_ni_nta_purification` | **UNVERIFIED** | 22 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s08_endotoxin_removal` | **UNVERIFIED** | 4 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s09_lal_assay` | **UNVERIFIED** | 23 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s11_antigen_stimulation` | **UNVERIFIED** | 24 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s12_elisa_setup` | **UNVERIFIED** | 39 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s12_elisa_develop` | **UNVERIFIED** | 61 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
-| `s13_rt_qpcr` | **UNVERIFIED** | 93 | 0 | warning: simulation: no Opentrons interpreter available (set VAXFORGE_OT_PYTHON) |
+| `s02_plasmid_assembly` | **PASS** | 9 | 0 |  |
+| `s03_transformation` | **PASS** | 5 | 0 |  |
+| `s04_colony_pcr` | **PASS** | 12 | 0 |  |
+| `s05_expression_induction` | **PASS** | 12 | 0 |  |
+| `s06_lysis` | **PASS** | 6 | 0 |  |
+| `s07_ni_nta_purification` | **PASS** | 22 | 0 |  |
+| `s08_endotoxin_removal` | **PASS** | 4 | 0 |  |
+| `s09_lal_assay` | **PASS** | 23 | 0 |  |
+| `s11_antigen_stimulation` | **PASS** | 24 | 0 |  |
+| `s12_elisa_setup` | **PASS** | 39 | 0 |  |
+| `s12_elisa_develop` | **PASS** | 61 | 0 |  |
+| `s13_rt_qpcr` | **PASS** | 93 | 0 |  |
 
 ## Automatability coverage (README matrix)
 
@@ -47,4 +47,3 @@ Outcome tally: {'UNVERIFIED': 12}
 
 - A PASS means the code simulated in Opentrons 7.5.0 and broke none of the five physical rules or the plan; it does NOT mean the protocol is right for the experiment.
 - Reading plates, sealing, incubating, centrifuging, sonicating, plating and cell culture are human steps; each appears as a `HUMAN [step]` pause in the code.
-- No Opentrons interpreter was found, so nothing was simulated (outcome UNVERIFIED). Set VAXFORGE_OT_PYTHON to a Python 3.10 environment with opentrons==7.5.0.
