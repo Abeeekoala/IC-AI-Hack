@@ -1,72 +1,146 @@
-# Demo video plan: 2:00
+# VaxForge demo: production reset
 
-Stream D. A shot list for a two-minute video that has to do three jobs at once: present the science (the AI for Science track), show evidence of how Figma was used (Best-Designed AI Product) and show evidence of how Adaption was used (Best Use of Adaption). Each shot carries tags: **[Sci]**, **[Figma]**, **[Adaption]**.
+Production plan, 15 November 2026. **Latest owner direction:** see [Demo UI and Figma canvas journey](DEMO_UI_PLAN.md) for the product screens, real Anthropic/local-adapter request-and-test flow, and revised 1:56 canvas-navigation timeline. That brief supersedes the earlier timing and narration below; retain the evidence and production standards here. Supersedes the previous eight-shot plan. **This is a production plan and replacement script, not a rebuilt or approved film.** The existing 115.97-second MP4, its narration and storyboard remain the old version. Do not distribute it as the revised cut.
 
-Status of this plan: the video it describes is built (115.97 s, 1920 x 1080, eight shots) and every shot below matches it. No `[FILL]` is left in the shot table. Anything that would be a `[FILL]` is a number that does not exist: do not say it, show it or round it up (see "Do not claim"). The one such item is a leaderboard rank for the 9B or 4B run: neither is listed (only the 2B run is, with a Domain Win Rate of 35.5%), so the video claims no rank.
+## Creative direction
 
-## The three prizes in one line each (from the organisers' text we were given)
+**From a pathogen name to a shortlist a researcher can interrogate, and an experiment handoff they can review.**
 
-- **Best Use of Adaption:** fine-tune a model with Adaption, ranked on Adaption's leaderboard by win rate against the base model; in the presentation, explain why we qualify and show evidence of how Adaption was used.
-- **Best-Designed AI Product (Figma):** an AI product as well designed as it is smart, designed in Figma or built with Figma Make; in the demo, explain why we qualify and show evidence of how Figma was used.
-- **AI for Science (main track, sponsors Boltz and Tamarind Bio; £700 + credits):** "Use AI to speed up how we understand and design molecules, cells and materials." The only other text we have is the track card; the judging criteria are not in the repository. We align with the README's position (§0, §3, §7, §8): held-out validation, limits disclosed up front, nothing built that raises virulence, claims only as strong as their tests.
-- **Best use of Boltz (bounty inside that track, Boltz credits):** "Best use of Boltz's biomolecular models: structure, binding affinity or molecule design." What VaxForge actually uses Boltz-2 for is **structure only** (S7, top-k candidates). It produces no affinity number, because Boltz-2's affinity head covers protein to small-molecule binding only (docs/CONTRACT_S3_S7.md). See "Boltz in the video".
+The researcher is the protagonist. Their question is: “Which candidates deserve our lab's attention, and why?” Show the answer developing through one workflow. The promise is reduced manual triage; the measured evidence is the duration of an offline fixture run, not a measured saving in researcher hours.
 
-## Shot list
+Target **116 seconds**, including a four-second ending hold; hard ceiling 120 seconds. A self-contained voice-over is the recommended format, with captions so the film also works muted. No presenter must talk over the soundtrack. Aim for calm, interested delivery, not a trailer voice or a rapid feature recital.
 
-**Narrative (set by the project lead, 2026-11-15):** VaxForge is an end-to-end tool that saves researchers the slow, manual triage between "a pathogen" and "the few candidates worth a lab's time", so their effort goes into testing the most promising candidate. The video shows that funnel, then proves it can be trusted, then hands the researcher something to run. Time saved is shown with measured numbers from our own runs (stages 3 to 12 offline: 15.8, 16.7 and 17.0 s on the final main, 26.5 s in the run captured for the video; see the write-up), never with a claim about how long a person would take.
+The owner explicitly authorized pushing the completed plan directly to main. That supersedes the earlier local-only restriction for these documentation changes and the usual PR workflow. No board posts, issue creation, Figma edits, video uploads, purchases, hosted voice generation or model calls are part of this planning pass. Work is isolated from the owner's dirty checkout in `wt_demo_plan` and rebased onto current main before pushing.
 
-Speaking pace is about 2.3 words a second, so 2:00 is roughly 275 words. The narration below is 257 words (counted, per shot [29, 39, 41, 38, 31, 45, 19, 15]); the built-in voice at 165 words a minute reads it at about 2.6 words a second, so keep it at or under 275; recount after every edit.
+## Why the old cut feels weak
 
-| # | Time | On screen | Narration | Evidence the viewer sees | Tag |
-|---|---|---|---|---|---|
-| 1 | 0:00 to 0:12 | Figma: Cover, then `00 Overview and key` | A pathogen has thousands of proteins. Choosing the few worth a lab's time is slow and hard to audit. VaxForge does it from one name, and shows its working. | The pipeline strip S0 to S12 on one screen | Sci, Figma |
-| 2 | 0:12 to 0:30 | Terminal `make demo-offline` (real output, captured; stream A, PR #68, main eab8cc0), then Figma `01 Run launcher` (design; the static `02 Pipeline overview` mock is left out because it shows the pre-run fixture state) | VaxForge starts from a pathogen name. Here a stored forty-protein subset stands in for the first three stages, and one command runs the other ten offline, on real Vaxign-ML scores. Missing tools show as not run. Under a minute. | `make demo-offline` finishing: it copies the committed fixture, ranks with stream B's real Vaxign-ML scores, runs s3 to s12 offline, attaches the real Adaption evidence (printed as NOT produced by the demo), prints each stage's `degraded (why)` reasons and the closing line (measured 2026-11-15 on this Mac: all ok, 26.5 s wall time in the captured run, 35 s and 52 s with a fine-tune and a local model running; re-measured later on the final main with the simulator environment set: 15.8, 16.7 and 17.0 s, S9 simulating 36 of 36 sessions; the narration says under a minute, which holds for all of them); "40 of 2003 (fixture subset)"; the S4 line "incomplete screening: 4 gates did not run" read from the run; the Vaxign-ML scores file's image and date (stream B, PR 1) | Sci |
-| 3 | 0:30 to 0:50 | Figma `03 Ranked candidates` (design), then the Figma editor on `04c Structure (S7)` at 100% with the panels hidden (captured: run-mode badge, then the pLDDT band chart and epitope counts) | Every candidate keeps its evidence chain: rank, gates passed, epitopes, and a Boltz-2 structure with its confidence and run mode on screen. In this offline smoke run most epitope residues sit below the confidence floor, and the screen says that too. | One candidate opened down to its gate results; 04c with the run-mode badge, the pLDDT bands and "epitope residues below the floor of 70: 22 of 22, 10 of 21, 31 of 31" (real sample, PR #46); an owner card | Sci, Figma, Boltz |
-| 4 | 0:50 to 1:04 | Figma `05 Validation` (design), then the real `vaxforge validate bexsero` output | Then a credibility check: do the three licensed Bexsero antigens reach the top three? Here, no: ranks seven, nine and fourteen. The model saw them in training, so VaxForge calls this test circular. That honesty is the point. | Bexsero recall@3 = 0 of 3 on the real Vaxign-ML scores (docs/examples/vaxign_ml_scores.nmb_fixture.tsv, stream B, PR #62): top 3 are IgA protease, NMB1829 and HmbR; NadA is 7th, NHBA 9th, fHbp 14th of 40, all above S3's 0.90 threshold; `vaxforge validate bexsero RUN/s3_rank.json --k 3` printed, 2026-11-15 02:48Z: `leakage assertion: not checked`, `recall@3: 0.0 (0/3; ties best 0.00, worst 0.00)`, fHbp rank 14, NadA rank 7, NHBA rank 9; the line `holdout_enforced: false` and the LEAKAGE RISK warning; do not say these ranks validate or invalidate the pipeline | Sci |
-| 5 | 1:04 to 1:20 | Report sections Wet-lab protocol and Robot code (generated by `python -m vaxforge.report RUN` from the same run), then real `opentrons_simulate` output | The researcher gets what to test: a protocol with a falsification condition, and thirty-six OT-2 programs that pass the simulator, so effort goes to the most promising candidate, not to triage. | Simulator output passing (36 of 36 files re-simulated with `opentrons_simulate` 7.5.0 by the audit, 2026-11-15); the automatability matrix; the S12 line (`blocked`, 3 items FOR YOUR REVIEW) | Sci |
-| 6 | 1:20 to 1:40 | The Adaption run page (captured), then the real `vaxforge finetune winrate` report of our held-out test (terminal). The report's S9.5 section (Figma `07b` is its design) is left out of the cut: for the 9B run it reads "held-out win rate: not run", true but confusing next to the 4B result | We fine-tuned the code generator with Adaption on 429 real OT-2 protocols and 571 synthetic rows, leakage-checked. Adaption's own evaluation: the adapted 9B model wins 94% against 6%. Our own held-out simulator test, on the 4B adapter, found no difference: neither passed. We report both. | Manifest counts (429 real, 571 synthetic, 42.9% real); the Adaption run page, Training Winrates chart base 6 / adapted 94 (captured: `~/vaxforge-work/demo/adaption_9b_winrate.jpg`; run `eeee1dc9-d699-4618-a3a2-8ca9e8ad4dc1`, Qwen3.5-9B, `best_win_rate` 0.9439, 2 of 3 iterations; the 4B run `82c660bc-...` reached 0.7832, the 2B run 0.6037); the report's S9.5 section reading the same evidence; our own held-out test of the 4B adapter (`vaxforge finetune winrate`, real report `docs/examples/s9_5_winrate_report.real_4b.json`, 2026-11-15): 0 wins, 0 losses, 10 ties, all "neither passes" (no program from either arm passed `opentrons_simulate`), verdict "no measurable difference"; no leaderboard row is shown and no rank is claimed: the 9B and 4B runs are not listed, and the only listed run is the 2B (Code domain, rank 26 of 33, Domain Win Rate 35.5%; all 446 entries read on 2026-11-15, see the write-up) | Adaption |
-| 7 | 1:40 to 1:52 | Figma editor: layers, Variables panel, version history; `How Figma was used` | The whole product was designed in Figma: editable layers, colours bound to variables, an owner card on every screen. | The Variables panel (29 variables, 19 of them colour, as counted in the editor on 2026-11-15; how many are bound was not checked); version history; the file's process log | Figma |
-| 8 | 1:52 to 2:00 | Figma `10 Limits and absent` | Candidate antigens, not a vaccine, and every claim has a test that can refute it. | The limits list | Sci |
+Reviewed the build script, storyboard, terminal capture, sampled contact sheet and source evidence. The old MP4 probes at 115.970612 seconds. Audio quality criticism comes from the owner; this review did not independently audition it.
 
-## What must be true before each shot is recorded
+- Full-page screenshots carry navigation, dense tables and paragraphs. The viewer has to hunt for the point while listening to a different sentence.
+- The builder fits images to width and scrolls tall ones from top to bottom. That moves content because of image height, rather than because the story needs it.
+- Image changes use equal or preset weights inside a scene. They are not tied to spoken phrases or actions.
+- Eight separately generated speech clips reset cadence; adding 0.7 seconds after each clip cannot create a continuous performance.
+- The film switches between light Figma screens, dark reports, terminal JSON and a dashboard without a stable visual frame.
+- A long Bexsero detour interrupts the journey before the researcher sees the useful handoff. Keep the result in the write-up; do not call it validation.
+- The ending is a limits page. End with the user's desired outcome, while keeping the relevant limits next to each claim.
+- “Every candidate ... a Boltz-2 structure” can imply a continuous successful run. The offline chain did not run Boltz; the CPU sample is separate, with different proteins.
 
-1. Shot 2: `make demo-offline` runs to the end on the machine that records (DONE 2026-11-15 on this Mac, main eab8cc0: all stages ok, S9.5 evidence_attached). It needs the Opentrons venv (`VAXFORGE_OT_PYTHON`, `tools/setup-ot-venv.sh`) for S9; nothing is fetched.
-2. Shot 4: `vaxforge validate bexsero runs/demo/s3_rank.json --k 3` has been run on the demo run (DONE 2026-11-15: recall@3 0.0, fHbp 14, NadA 7, NHBA 9; `leakage assertion: not checked`). The number is shown only with the circularity statement.
-3. Shot 5: S8 and S9 run on the final candidate set; `opentrons_simulate` output captured; stream C's refusal count read from the run, not typed.
-4. Shot 6: the Adaption runs are done (2026-11-15: 4B 0.7832, 2B 0.6037, 9B 0.9439, all `succeeded`) and our own held-out test of the 4B adapter is done (0 wins, 0 losses, 10 ties: no measurable difference). Say "Adaption's own evaluation" for 94% against 6%: it is the platform's number, not ours. The held-out result is for the 4B adapter only and is stated as such, next to the 9B number, never merged with it. Do not mention a leaderboard rank until the public page lists the run.
-5. Shot 7: Figma file open on the final version; the second pass of checks (the independent re-check) done.
+Changing the voice alone will not solve these problems.
 
-## Do not claim
+## What professional production practice contributes
 
-- An Adaption leaderboard rank for the 9B or 4B run (neither is listed). Only the 2B run is listed, in the Code domain: rank 26 of 33, Domain Win Rate 35.5%, Task Win Rate 60.4%, normalised score -0.34 (2026-11-15). If that row is shown, show it as it is. The 94% (9B) and 78% (4B) are Adaption's own win rates on evaluations it derives from our data, not held-out results. The local rehearsal (Qwen3-4B, 7 matched tasks: 1 win, 1 loss, 5 ties) found no measurable difference; if it is mentioned, say that.
-- That the fine-tune makes better protocols. Our own held-out test found no measurable difference (neither arm passed the simulator on 10 tasks; a floor effect with listed limits, README S9.5). The only supported statement is what Adaption measured, labelled as Adaption's.
-- That the family labels were checked by a person. They are an agent's reading; the leakage check is the safeguard (README §S9.5).
-- Wet-lab results, efficacy, safety or that anything is a vaccine. The outputs are candidates and a protocol that has not been run.
-- That a Bexsero recall of 0 of 3 on this subset says the pipeline works or fails: it is 40 proteins, the model saw the antigens in training, and the leakage assertion was not checked.
-- That model-written robot code is safe to run. S9's `static_lint` is a filter, not a sandbox: stream C closed the reported import bypass (PR #71, checked by me with the lint only on 2026-11-15), but a bare `__builtins__[...]` and `typing.get_type_hints` still pass it (stream C's own list, board 03:29Z); say "passes the simulator", never "safe".
-- That the report or the chain is complete: in the offline demo the four S4 gates, the T-cell and B-cell predictors, population coverage and Boltz all report `not run`, and S12 stays `blocked`; the video says so.
+These are production references, not claims that any vendor guarantees a prize:
 
-## Evidence we can show for each prize
+1. [Wistia's production guide](https://wistia.com/blog/video-production): plan the script and shoot for the edit; rehearse, record multiple takes and leave handles at shot boundaries. Apply this as a timed audio storyboard before expensive capture work. Record two seconds before and after each UI action.
+2. [Wistia's own product demo](https://wistia.com/demo): the published transcript introduces user needs and then demonstrates the associated product actions. Apply that task-first structure here; do not copy its much longer scope.
+3. [Screen Studio's animation guide](https://screen.studio/guide/animations): cursor movement and screen animation can be controlled separately; its focused mode settles quickly for reading. Apply restrained focus changes and stable reading holds. This is a reference for behavior, not a purchase recommendation.
+4. [Wistia's export guidance](https://support.wistia.com/en/articles/8268259-media-export-settings): use a conventional MP4/H.264 delivery file and constant frame rate. Produce a local 1920×1080 master; verify the actual export.
 
-| Prize | Show | Where it lives |
+Our specific creative choices: one narrative spine, one visual frame, short readable evidence inserts, one continuous voice performance, and cuts motivated by actions. Avoid decorative zooms, stock laboratory footage, fake typing, swooshes and cinematic transitions.
+
+## Replacement timeline and narration
+
+The narration below is the proposed master. Captions must be generated from the final recorded words, not independently paraphrased. The on-screen labels are additional evidence, not substitute subtitles. Timings are edit budgets, to be checked against the recorded performance.
+
+| Time | What the viewer sees and why | Exact voice-over |
 |---|---|---|
-| Adaption | Manifest (included rows, real share, tags), generation manifest, win-rate report, Adaption job id and dashboard, leaderboard row, spend | `runs/.../s9_5`, `validation/`, Adaption dashboard |
-| Figma | Import from code to editable layers, variables panel, owner cards, version history, the plain process log | Figma file `pzytlXMGdl8JuSNivTeOOq`, `docs/design/FIGMA_EVIDENCE.md` |
-| AI for Science | Bexsero numbers (0 of 3, circular), leakage report, simulator output, biosecurity gate, limits; LOPOV is metrics code only and has no result, so it is not claimed | `validation/`, `README.md` §3 §7 §8 |
-| Best use of Boltz (bounty) | Boltz-2 structures of the top-k candidates, their confidence, the refolder cross-check and the epitope-residue confidence | `runs/.../s7_structure.json`, `s7/<id>/*.pdb` (stream B) |
+| 0:00–0:09 | Start on a clean product view with a pathogen name and a shortlist preview. Headline: “Which candidates deserve lab time?” No logo-only intro. | A pathogen has thousands of proteins. Which ones deserve a lab's time? VaxForge brings the triage into one reviewable workflow. |
+| 0:09–0:24 | Show the launcher design, clearly tagged “Figma design”, then a clean insert of the real captured run. Keep “40 of 2,003 proteins · fixture subset” visible. Show “S0–S2 stored; S3–S12 offline” and “Unavailable tools: not run”. The capture says 26.5 s; do not replace it with a different run's time. | Start with a pathogen name. This demonstration uses forty proteins from a stored fixture. The offline stages finish in under a minute, with unavailable tools clearly marked. |
+| 0:24–0:37 | Signature Figma-to-product transition (detailed below): establish the editable Ranked candidates frame, align its heading with the real report, then hand off to the browser. Click a real candidate link and land on its evidence. Persistent label: “Incomplete screening”. | Here is the Figma design, alongside the working report. Open a candidate to inspect its evidence and missing checks. The shortlist is a starting point for review. |
+| 0:37–0:54 | Explicit cut to “Separate Boltz-2 sample · CPU · no MSA”. Show the three mean-confidence values 58.2 / 67.4 / 36.3, with “Low confidence; weak structural evidence”. If the original structure files can be verified, show one matching fold beside its own confidence. Otherwise use the confidence chart; never invent a molecule. | Boltz-2 adds structural evidence. This separate CPU smoke run used no sequence alignment, and confidence is low. VaxForge exposes that uncertainty so researchers can judge how much weight to give the prediction. |
+| 0:54–1:09 | Return explicitly to “Offline demo report”. Highlight the protocol's falsification condition, then the real “36/36 simulator PASS” summary. Keep “Placeholder parameters · no lab testing” visible. Use the same candidate as before when the artifacts permit it. | The handoff includes a protocol with a condition that could disprove the hypothesis, plus thirty-six robot programs that passed simulation. These still require scientific review; no laboratory testing has happened. |
+| 1:09–1:30 | Adaption proof insert in the same visual frame. Header “Code-generator training · earlier runs”. Show “1,000 rows: 429 real / 571 synthetic; leakage check: 0 violations”. Then hold two equally legible evaluation cards together: “9B · Adaption evaluation: adapted 94% / base 6%” and “4B · our held-out simulator test: 0 wins / 0 losses / 10 ties; neither arm passed”. Label “Different models and evaluations; no demonstrated quality improvement”. | We used Adaption to fine-tune the code generator on one thousand leakage-checked rows. Its nine-billion-parameter run reports ninety-four percent wins. Our separate held-out test of the four-billion adapter found no measurable difference: neither arm passed simulation. |
+| 1:30–1:42 | Brief design-system callback: show a status-pill component and variables in Figma, then match-cut to the corresponding real report state. Show “16 editable screens · 19 colour variables”. Keep the result visible longer than the editor. Do not claim all colours are bound to variables. | Designed in Figma, the product makes evidence, missing checks and next actions visible together, so researchers can see what needs attention. |
+| 1:42–1:48 | Return to report handoff; readable status card “Not cleared for synthesis” with “Missing toxicity results” and “No provider screening record”. Retain literal artifact state `blocked` in the evidence detail. | Synthesis remains blocked because toxicity results and provider screening are missing. The report makes those outstanding requirements explicit. |
+| 1:48–1:52 | Return to the opening shortlist/handoff composition. End line: “From pathogen to a reviewable research shortlist.” Small but readable: “Candidate hypotheses · no lab validation”. | VaxForge: less manual triage, more focused research. |
+| 1:52–1:56 | Four-second ending hold. Export target 1:56; the remaining four seconds before 2:00 are contingency, not additional content. | No additional speech. |
 
-## Boltz in the video
+The eight spoken scenes plus closing line are 218 words (whitespace count; scene counts 20, 27, 27, 32, 30, 36, 21, 18, 7). Check per-scene budgets against the recorded delivery before capture. Do not speed up dense scientific terms to force a fit. Trim wording or reallocate time first. Finish the closing line by 1:52 and hold to 1:56. The six-second S12 line is the tightest beat: borrow up to two seconds from the preceding Figma beat if natural delivery needs it.
 
-True today (docs/TOOLS_SETUP.md, docs/STREAM_B.md, and the real sample `docs/examples/s7_structure.real_mc58_boltz_cpu.json`, stream B, PR #44): Boltz-2 2.2.1 is wired into S7 and was run on CPU in offline single-sequence mode, fast smoke settings, on 3 proteins of the MC58 proteome (not the 40-protein fixture; none is a Bexsero antigen). The models are low confidence: mean pLDDT 58.2, 67.4 and 36.3 (the last has 89% of residues at or below 50), so stream B's own notes call S7's structure term weak evidence in that mode. Per-residue confidence is not in the artifact (only the mean and four band fractions). Stream B fixed a scaling bug in the epitope-below-floor fraction (PR #46, 2026-11-15); the corrected sample reads: epitope residues below the pLDDT floor of 70 are 22 of 22, 10 of 21 and 31 of 31 for the three proteins, so in this smoke run most predicted epitope residues sit in low-confidence regions. That is the honest message to show. ESMFold and AF2-no-MSA did not run, so there are no agreement values; the screen says "not run". The default `s7.boltz.msa: server` sends each sequence to the ColabFold MSA server; `empty` stays offline. No affinity value is produced. S7 also reports how three other refolders agree with the Boltz-2 model.
+## Signature transition: Figma into the working product
 
-So in shot 3, show the structure **with its confidence and the mode it was run in**; do not present a low-confidence fold as a finding. If we want the Boltz bounty to be a real contender, the open option is a better run: Boltz-2 with an MSA on a GPU for the top-k (Tamarind Bio is a sponsor, and the track card lists Boltz credits), then show the pLDDT of the predicted epitope residues next to the epitope predictions. That is stream B's stage and needs the lead's decision and an account; nothing has been started.
+Owner direction: make the design-to-product handoff a memorable visual moment, then demonstrate actual behavior. Put the primary transition at 0:24, where the story moves from running the pipeline to reviewing its shortlist. This replaces footage within the existing 13-second scene; it adds no runtime.
 
-## Storyboard in Figma (for the design agent)
+| Time | Capture and edit |
+|---|---|
+| 0:24–0:26 | Show the genuine Figma editor on “03 Ranked candidates”, with the layer panel visible. Select the heading layer so editability is unmistakable. Label “Figma design”. |
+| 0:26–0:28 | Ease into the frame until the “Ranked candidates” heading and first evidence row become the visual anchor. The editor chrome moves out of view through the crop; avoid a dramatic fly-through. |
+| 0:28–0:29 | Match the real report's heading position and scale to the design heading. Use a 10–14-frame soft wipe at 30 fps, keeping the heading stationary while the actual report replaces the design. Change the label to “Working report · recorded fixture run”. |
+| 0:29–0:34 | Continue with an uninterrupted browser recording. Move the cursor to a candidate's real link, click, and let the browser navigate to its evidence anchor. Hold the candidate identity and source evidence long enough to read. |
+| 0:34–0:37 | Focus on the missing-check state and provenance. Finish the sentence over the working report, then move to the separately labelled Boltz sample. |
 
-Add a second page named `Demo video (2:00)` to the file. One 1920 x 1080 frame per shot, named `Shot 1 · 0:00 to 0:12 · Hook`, laid out left to right in order, each holding: the shot number and time range, a thumbnail or a reference label naming the Figma frame or terminal view to show, the narration text, the evidence the viewer sees, and the tag chips (Sci, Figma, Adaption). A first frame holds the run of show: total time, the pace, the "Do not claim" list and the prerequisites. Use the file's own variables and type styles. `[FILL]` values stay visibly marked as placeholders on the frames. Do not copy thumbnails as images of the whole UI: reference the frame by name.
+The smoothness comes from a shared visual anchor, controlled motion and continuous narration. The click AFTER the transition is the proof that we have reached working software. No dissolve over the click or its response, and no invented loading state.
 
-## Open questions for the lead
+Implementation evidence checked: `src/vaxforge/report.py` says its sections follow the Figma shell; `ranked()` emits candidate links to real `#c…` anchors. `render()` includes ranked candidates, candidate detail and the other report sections. This is an offline HTML evidence report, not a live run launcher. It is not pixel-identical to the Figma design: the report's overall layout and navigation differ. Align a heading/card crop rather than implying a seamless full-screen implementation. If the crops still do not match cleanly, use a brief side-by-side labelled “Design” / “Working report”, then expand the report. Do not redraw the report to fake fidelity.
 
-1. The AI for Science track's judging criteria (we only have the track card), so the shot order and wording can match them.
-2. Is two minutes a hard limit, and is a voice-over or on-camera presenter expected?
-3. Do we record before or after the real Adaption run? Shot 6 depends on it.
+The process log also records HTML-to-Figma imports followed by editor work; this was iterative design and implementation, not verified one-click Figma-to-code generation. Narration therefore says “the Figma design, alongside the working report”. The transition communicates the relationship without inventing development chronology.
+
+Capture both views at the same display scale and output resolution. Record actual editor selection and actual report navigation separately, with two-second handles. Freeze the pointer during the wipe, then use the real pointer movement from the browser clip. Keep the fixture badge visible once the report is on screen; do not blend mismatched scores or candidate identities across the wipe. Rehearse with a candidate present in both views, or transition on the heading alone when design/sample data differ.
+
+The later 1:30 Figma beat is a short callback: component → implemented state → researcher action. It should explain why the design is useful rather than repeat a tour of the editor. This is an edit specification; these transitions have not yet been captured or rendered.
+
+## Visual and transition treatment
+
+Use the existing Figma palette and typography; neutral background, one accent, generous margins. Keep one outer frame across report, Figma and Adaption inserts. Do not recolour source evidence in ways that change status meaning.
+
+At 1080p use roughly 48–64 px headlines, 28–36 px important labels, and at least 24 px source labels. Check at 50% playback size. If a source screenshot cannot be read, crop closer rather than adding a caption that asks the viewer to trust it. Subtitles get a dedicated lower safe area and never cover a status or metric.
+
+Each beat: establish the view, perform one action, hold the result. Use direct cuts for navigation; carry the next sentence across a cut where it sounds natural. Use a short eased zoom only to direct attention to a specific result. Settle before the key number is spoken. No constant panning. Keep the cursor quiet while reading.
+
+Use clear source badges: “Figma design”, “Recorded offline run”, “Separate Boltz sample”, “Earlier Adaption run”. These prevent polished editing from falsely implying a fully connected live application. Do not show a Figma click causing a real execution unless that integration exists.
+
+## Voice and sound decision
+
+**Recommendation: a natural human voice-over, recorded separately from screen capture.** A teammate who understands the product can make technical language feel intentional. It need not be an on-camera performance. Record two full takes in a quiet soft-furnished room, microphone distance consistent, then pickups for difficult terms. Preserve breaths and short pauses. Use one continuous edited voice track.
+
+If human recording is unavailable, audition a natural synthetic voice on the opening and the Adaption paragraph before committing to the full script. Use an already available local engine first. A hosted voice service requires explicit permission to send the script; any cost requires explicit permission too. No voice cloning. Do not assume that changing macOS Daniel's rate is sufficient. No specific replacement voice has been auditioned or selected in this planning pass.
+
+Audio finish: light noise cleanup, gentle compression, consistent loudness (working target about −16 LUFS integrated, true peak at or below −1 dBTP). Check on headphones and laptop speakers. Start without music. Add only a licensed, unobtrusive bed if it improves the film; narration must remain effortless to understand. No synthetic UI clicks or transition whooshes.
+
+## Evidence lock and factual boundaries
+
+| Claim / asset | Source and required qualification |
+|---|---|
+| Offline run under a minute | `demo/term/run.txt` records 26.5 s. Final-main repeats 15.8 / 16.7 / 17.0 s are documented in `docs/WRITEUP.md`; no new timing was run for this plan. These are execution durations, not person-hours saved. |
+| Fixture scope | `fixtures/nmb_fixture/FIXTURE.md`, recorded run and write-up: 40 of 2,003; stored S0–S2; S2 localisation stand-in, not live PSORTb. |
+| Missing stages | Captured run: four S4 gates, epitope tools, coverage and Boltz did not run. Do not draw a funnel in which “not run” becomes “passed”. |
+| Boltz | `docs/examples/s7_structure.real_mc58_boltz_cpu.json`: means round to 58.2 / 67.4 / 36.3. Different proteins/run from the offline demo. No GPU/MSA run, affinity, antigen discovery, design or validation claim. No refolder agreement result. |
+| Adaption platform result | `docs/examples/s9_5_adaption_evidence.real_9b.json`: best_win_rate 0.9439; existing dashboard capture shows 94 / 6. It is the platform's evaluation, not our held-out result. No leaderboard rank. |
+| Training composition | `docs/examples/s9_5_manifest.real_4b.trimmed.json` and write-up: 1,000 rows, 429 real and 571 synthetic. Say rows, not 429 distinct source protocols. Leakage check is not human verification of labels. |
+| Held-out result | `docs/examples/s9_5_winrate_report.real_4b.json`: 0 wins, 0 losses, 10 ties, neither arm passed. Different model from 9B; no measurable difference is not demonstrated equivalence or improvement. |
+| Simulator | Existing report/capture and `wt_a/runs/demo/s9_robot.json`: 36 passing sessions. Simulation is not experimental correctness or safe execution. Do not imply these were produced by the successful 9B adapter. |
+| Figma | `docs/design/FIGMA_EVIDENCE.md`: 16 editable screens, 19 colour variables, status-pill component, owner cards. Process evidence, not proof of implementation or usability testing. |
+| S12 | `wt_a/runs/demo/s12_biosafety.json` and `src/vaxforge/s12_biosafety.py`: toxicity not evaluated; provider record not supplied. Keep blocked. Virulence review flags are separate and are not the blocking cause in this run. |
+
+Keep Bexsero's 0/3 circular result and LOPOV's unrun status in the write-up and optional Q&A evidence. Removing their dedicated scene does not turn the pipeline into a validated one. Do not say “validated shortlist”, “ready for the lab”, “vaccine”, efficacy, safety, lab testing, leaderboard placement or measured researcher hours saved.
+
+S12 is a local handoff check before synthesis, not a provider's screening service. A stage envelope of `ok` means it wrote its result; that result can still be `blocked`. Do not turn it green for the video, invent a provider record, or equate a reviewed draft with clearance. No provider was contacted.
+
+The Boltz award case remains limited by the available evidence. Better editing can make the use understandable; it cannot supply the missing GPU/MSA result or scientific validation. A new run would be separate work owned by stream B and would require permission for uploads/compute.
+
+## Practical production sequence
+
+1. **Story and evidence lock (45–60 min estimate).** Confirm the script against the listed artifacts; choose the exact report candidate and verify each crop. Save a local evidence ledger with file, digest/run, number, source mode and shot. No live reruns needed for planning.
+2. **Voice test and audio storyboard (30–60 min).** Make a 20-second audition; then assemble the full voice with rough stills. Test whether an unfamiliar viewer can explain the input, useful output and major limitation. Fix the story before polishing.
+3. **Capture (60–90 min).** Record short local report interactions and read-only Figma editor evidence. Keep two-second handles. Crop browser chrome and personal account details. The Figma storyboard is currently the old version; do not silently update its remotely saved page under local-only authorization.
+4. **Edit (90–150 min).** Put voice on the timeline first; place captures at spoken cues; build only the explanatory overlays needed. Use an existing local editor if available. Existing ffmpeg tooling can assemble a draft, but its image-weight timing and per-shot `say` generation must not dictate the final edit. If extending it, support imported voice, explicit cue times, intentional crop/hold regions and actual screen clips; do not build a new video platform.
+5. **Review and finish (30–45 min).** Check every shot and transition at full speed, muted, and at half display size. Fix readability and audio. Render only after the story works.
+
+Estimated focused production effort: roughly 4–7 hours, excluding waiting for a human recording or new evidence. This is an estimate, not a promise or a claim about research time saved.
+
+## Acceptance and handoff
+
+- New filename, e.g. `vaxforge_demo_v2_review.mp4`, local only. Preserve the old export and storyboard for comparison.
+- Probe duration ≤120 seconds; target 116 including end hold. No speeded-up narration to pass the check.
+- Make a contact sheet containing every shot, plus boundary frames; inspect all and play the entire film. A contact sheet alone cannot verify transitions or sound.
+- Every visible number has a source in the ledger. Inspect fine print too; remove stale fixture metrics and unrelated account UI.
+- No emails, personal account names, local user paths, avatars, account menus or notifications. Review source footage and final export; crops must hold throughout transitions.
+- Captions transcribe the final audio. This plan, the new storyboard and captions share identical narration. Update all together in the next authorized production change; do not claim the old MP4 matches this replacement script.
+- Keep `docs/WRITEUP.md` factually aligned. It may include more detail than the film. No new scientific claims or results are introduced by this revision.
+- Readable simultaneous Adaption labels: 9B platform evaluation and 4B held-out simulator result. No leaderboard insert.
+- Boltz sample switch is explicit. S12 still says blocked with the plain-English reason.
+- Final local package: MP4, captions, storyboard/script, evidence ledger, contact sheet. Owner receives local paths; publication and delivery remain the owner's decision.
+
+## Main-branch reconciliation
+
+Current main adds a recorded 2B leaderboard entry in `docs/WRITEUP.md`; the 9B and 4B runs remain unlisted according to that update. Preserve that write-up and do not repeat the obsolete statement that none of the runs is listed. The film still shows no leaderboard row or rank, consistent with the owner's requested scope. Main also supplies `demo_data/run_nmb_fixture/` with simulator-backed fixture artifacts; those are not outputs of the planned new Anthropic/local-model request.
