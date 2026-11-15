@@ -48,6 +48,21 @@ A full run takes a long time (the annotation stage alone took 48 minutes on the 
 
 **The Bexsero antigens.** The licensed Bexsero vaccine uses three *N. meningitidis* antigens (fHbp, NadA, NHBA). They differ between strains, so S4 **flags** a strain-variability or allergen-score failure and keeps the protein, instead of discarding it; toxicity and human similarity still remove proteins. All three stay in the shortlist with their flags recorded. We chose that rule after a first strict run removed all three, so this is a demonstration of how the pipeline treats variable antigens, not held-out validation (see below).
 
+## Robot code: from protocol to a liquid-handling robot (S9)
+
+**What it does.** The lab protocol (S8) is a plan written in words. S9 turns its liquid-handling steps (pipetting, dilution series, Golden Gate gene assembly, transformation, colony PCR set-up) into Python for the **Opentrons OT-2**, a benchtop pipetting robot. A protocol step that the robot cannot do, such as cell culture or reading an instrument, is marked as a human step in an automation table, so nobody assumes the robot covers it.
+
+**How we check it before anyone runs it.**
+- **Simulator:** every program is run in the official Opentrons simulator (7.5.0). A program that fails, for example by asking a pipette for more liquid than it holds, is rejected with the exact error.
+- **Physical-rule checks:** volumes, tip use and labware are compared with what the plan says.
+- **Safety filter:** the code is scanned for anything it should not do before it runs. This is a filter, not a sandbox, so we say that the code "passes the simulator", never that it is "safe".
+
+**What the saved demo run shows.** For the three top candidates it writes 36 robot sessions, and all 36 pass the simulator (`demo_data/run_nmb_fixture/`). Each session also gets a short animation of the deck and the pipetting, so a reviewer can watch what the robot would do (S9+).
+
+**Learning from past protocols (S9.5).** We also fine-tuned the code-writing model with Adaption's AutoScientist (details in the stage table above). The fine-tune is judged by the same simulator, not by opinion.
+
+**Before real use.** Volumes and times in the generated programs are defaults and must be set from your kit's instructions. Gene synthesis must not be ordered until the S12 biosecurity gate clears the sequence.
+
 ## How much to trust it
 
 - **It narrows; it does not prove.** Nothing here shows that any candidate protects anyone. That needs lab and animal work, which is exactly what the protocol and the animal-study design are for.
