@@ -473,8 +473,8 @@ make warm-cache PATHOGENS="Neisseria meningitidis,SARS-CoV-2"
 vaxforge run --pathogen "Neisseria meningitidis" --top-k 20 --out runs/nmb
 
 # Retrospective validation (do this before the demo)
-vaxforge validate --protocol lopov --holdout "Neisseria meningitidis"
-vaxforge validate --case bexsero --report recall@3
+vaxforge validate lopov INPUT.json --k 3 5 10          # leave-one-pathogen-out metrics (input format: validation/lopov.py)
+vaxforge validate bexsero runs/nmb/s3_rank.json --k 3  # recall@3 of the Bexsero antigens in the S3 ranking
 
 # Robot code only, from an existing protocol artifact
 vaxforge compile-protocol runs/nmb/protocol.json --target opentrons-ot2
