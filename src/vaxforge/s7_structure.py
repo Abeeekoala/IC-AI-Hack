@@ -32,7 +32,8 @@ from .prediction.discotope import DiscoTopeRunner, summarise as discotope_summar
 from .prediction.errors import ContractError, ToolFailed, ToolUnavailable
 from .prediction.folders import BoltzRunner, ColabFoldSingleSeqRunner, ESMFoldRunner, rewrite_bfactors
 from .prediction.scoring import composite, percentile_ranks
-from .prediction.structure_utils import lddt_ca, parse_structure_ca, plddt_summary, rmsd_after_superposition, tm_score
+from .prediction.structure_utils import (lddt_ca, parse_structure_ca, plddt_scale_factor, plddt_summary,
+                                         rmsd_after_superposition, tm_score)
 from .prediction.tools import resolve_executable, tool_record
 
 STAGE = "s7_structure"
@@ -262,13 +263,13 @@ def run(target: Any, cfg: Any = None, *, s6_path: str | Path | None = None,
         # ---- 4. DiscoTope-3.0 on the Boltz-2 model -----------------------------------------
         if dt is not None and s7["conformational_on_boltz"]:
             try:
-                scale = 100.0 if ps["scale_detected"].startswith("0-1") else 1.0
+                scale = plddt_scale_factor(ca.bfactors)          # 1.0 for a 0-100 model, 100.0 only if the file stores 0-1
                 use = rewrite_bfactors(fr.pdb, sdir / "boltz2_af_bfactor.pdb", scale) if scale != 1.0 else fr.pdb
                 resid = dt.predict(use, struc_type="alphafold")
                 thr = cfg["s5"]["conformational"]["score_threshold"]
                 summ = discotope_summary(resid, thr)
                 epi_ids = set(summ.pop("epitope_residues"))
-                pl = {rid: b * (100.0 if scale != 1.0 else 1.0) for rid, b in zip(ca.resids, ca.bfactors)}
+                pl = {rid: b * scale for rid, b in zip(ca.resids, ca.bfactors)}
                 floor = float(s7["plddt_floor_for_epitope_confidence"])
                 low = [r for r in epi_ids if pl.get(r, 100.0) < floor]
                 entry["conformational_epitopes"] = {"status": "ran", "tool": "DiscoTope-3.0", **summ,
