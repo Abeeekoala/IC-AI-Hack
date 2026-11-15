@@ -1,6 +1,33 @@
 # Screen fields to artifact paths
 
-Companion to `docs/design/vaxforge_product_design.html` (one canvas, 15 screens plus an overview and a foundations frame). For each screen: the field it shows, the artifact path that supplies it, and whether that path exists on `main` today. Stream C (S8, S9, S9+, S10) should read sections 06, 07 and 08 and answer the "Check" lines.
+Companion to `docs/design/vaxforge_product_design.html` and to the Figma file `VaxForge` (one page, one product design). For each screen: the field it shows, the artifact path that supplies it, and whether that path exists on `main` today. Each screen also has an **Owner and attention** card in the Figma file, to the right of its frame. The card lists the same artifact paths, the fields that exist only in some states, the states to build and the rules to watch for. The card text is in the HTML source.
+
+## Frame names in Figma
+
+A frame is named `<screen code> <name>`, the same code the board uses. Layer names come from `aria-label` attributes in the HTML (see `FIGMA_EVIDENCE.md`).
+
+| Frame | Data owner (AGENTS.md section 4) | Section of this file |
+|---|---|---|
+| Cover, How to read this file, How Figma was used | D | none (no data) |
+| 00 Overview and key | D | 00 |
+| 01 Run launcher | A | 01 |
+| 01b Data and annotation | A | 01b |
+| 02 Pipeline overview | all lanes; surface by D | 02 |
+| 03 Ranked candidates | B (S2 columns from A) | 03 |
+| 03b Safety and conservancy | B | 03b |
+| 04 Candidate detail | B (S2 rows from A) | 04 |
+| 04b Epitopes and coverage | B | 04b |
+| 04c Structure | B | 04c |
+| 05 Validation | D (S3 leakage audit from B) | 05 |
+| 06 Wet-lab protocol | C | 06 |
+| 07 Robot code | C | 07 |
+| 07b S9.5 evidence panel | D (refusal detector from C) | 07b |
+| 08 Animal study | C | 08 |
+| 09 Pre-registration and gate | D | 09 |
+| 10 Limits and absent | D | 10 |
+| Design system (was C Foundations) | D | Design system |
+
+The facts marked "stream C, 2026-11-14" below were posted by stream C on the board and are folded in here. Items marked "not on main yet" are not in the code on `main`; their names may change. The S8 and S10 fields that stream C listed as pending are on `main` since PR #37 (merge `1e17aaf`); I read the names in `origin/main` (`s8_protocol.py`, `s8_cost.py`, `s8_narrative.py`, `s10_animal.py`) but did not run that code.
 
 Paths are relative to `runs/<run_id>/`. `payload.x[]` means a list. Artifact files are named after the stage module (`s8_protocol.json`, `s9_robot.json`, `s9plus_animate.json`, `s9_5_finetune.json`, `s10_animal.json`). Sidecar files live under `data/` and are referenced by a run ref (`{root, path, sha256, bytes}`).
 
@@ -106,14 +133,29 @@ Every screen also reads the envelope of each stage it shows: `status`, `warnings
 
 ## 04c Structure (S7)
 
-| Field | Path | Status |
-|---|---|---|
-| Final order | `s7_structure.json payload.final_candidates[]` | contract |
-| Rank, final score, rank basis | `payload.candidates[].{rank,rank_basis,scores.final,scores.pre_structure,scores.terms_missing}` | contract |
-| Structure status, pLDDT, validators | `payload.candidates[].structure.{status,engine,mean_plddt,validators,validator_agreement}` | contract |
-| Degraded to sequence only | `payload.analysis.degraded_to_sequence_only` | contract |
-| Affinity and docking not implemented | `payload.analysis.affinity`, `payload.analysis.docking` | contract |
-| Final weights | `config s7.final_weights`, `payload.candidates[].scores.weights` | contract |
+04c shows a real S7 sample, not the 40-protein fixture run: `docs/examples/s7_structure.real_mc58_boltz_cpu.json` (stream B, PRs 44 and 46; on origin/main). It holds 3 proteins of the N. meningitidis MC58 proteome, Boltz-2 2.2.1, CPU, no MSA, fast smoke settings; none is a Bexsero antigen. Paths below are relative to the file's `payload`. Every card carries a REAL SAMPLE or DOC chip.
+
+| Card | Field | Path | Status |
+|---|---|---|---|
+| Run mode | Tool, version, MSA mode, accelerator, seed control, sequence left the machine | `analysis.folding.{tool,version,msa_mode,accelerator,seed_controlled,seed_note}` | real sample |
+| Run mode | Badge "Offline, single-sequence: low-confidence mode" | derived from `analysis.folding.msa_mode == "empty"` | derived |
+| Candidates | Rank, protein, final score | `candidates[].{rank,scores.final}` | real sample |
+| Candidates | Structure status, mean pLDDT | `candidates[].structure.{status,mean_plddt}` (`ran`, `not_selected`) | real sample |
+| Candidates | Validator agreement | `candidates[].structure.validator_agreement` (null, "no validator ran") | real sample |
+| Candidates | Rank basis | `candidates[].rank_basis` (`structure_informed`, `pre_structure`) | real sample |
+| Confidence | Stacked bar of four pLDDT band fractions | `candidates[].structure.{frac_very_high_gt90,frac_confident_70_90,frac_low_50_70,frac_very_low_le50}`; colours bound to the `plddt/*` variables | real sample |
+| Confidence | Epitope-segment track (bracketed, not coloured by confidence) | `structure.n_residues_modelled`, `structure.conformational_epitopes.{epitope_segments,n_epitope_residues}`; one candidate drawn (Q7DDG6) | real sample |
+| Confidence | Epitope residues below the pLDDT floor of 70 | `structure.conformational_epitopes.{plddt_floor,n_epitope_residues_below_floor,n_epitope_residues}` (the pair of counts; the fraction field is not shown); reads 22 of 22, 10 of 21, 31 of 31 | real sample |
+| Agreement | ESMFold and AF2-no-MSA columns, every cell "not run" | `analysis.validators.{esmfold,af2-no-msa}.{status,reason}` (status `unavailable`) | real sample |
+| Agreement | "no validator ran" | `candidates[].structure.validator_agreement` (`value` null, `n_validators` 0) | real sample |
+| Absent by design | Affinity not implemented | `analysis.affinity.reason` | real sample |
+| Absent by design | Docking not implemented | `analysis.docking.reason` | real sample |
+| Status vocabulary | `ran, failed, skipped, unavailable, not_selected`, `degraded_to_sequence_only` | `candidates[].structure.status`, `analysis.degraded_to_sequence_only` | contract |
+| Final score | How the final score is built; weights | `config s7.final_weights`, `docs/CONTRACT_S3_S7.md` section 7 | doc only |
+| 3D view slot | Model file the HTML report loads (no protein drawn in Figma) | `candidates[].structure.model_file.{root,path,sha256,bytes}` (root `run`, path `data/s7/<id>/boltz2.pdb`) | real sample |
+| What would refute it | "folded vs denatured binding" | `docs/CONTRACT_S3_S7.md` section 8 (S10 falsification row for S7) | doc only |
+
+Not in the artifact, so not drawn: per-residue pLDDT (only the mean and four band fractions; per-residue values sit in the PDB B-factor column). `fraction_epitope_residues_below_floor` and `mean_plddt_input` are not shown; the screen shows the counts instead. A second run (MSA, GPU) is absent, not mocked.
 
 ## 05 Validation
 
@@ -135,7 +177,8 @@ Candidate entries are at `s8_protocol.json payload.candidates[]`. When S3 to S7 
 | Field | Path | Status |
 |---|---|---|
 | Candidate id, name, rank, rank source, length, localisation | `payload.candidates[].{candidate_id,protein_name,rank,rank_source,length_aa,localisation}` | on main |
-| Selection banner | `payload.selection.{source,reason}`, `warnings[0]` | on main |
+| Selection banner | `payload.selection.source` plus `warnings[0]`. `payload.selection.reason` exists only when `selection.source == "none"`. The S7 case adds `rank_source`, `n_final_candidates`, `s7_top_k`, `top_k`, `used[]`, `degraded_to_sequence_only`. The S2 stand-in case adds `requested`, `matched`. (stream C, 2026-11-14) | on main |
+| Artifact-level state | `payload.status` and `payload.reasons`: present only when the stage is `not_run` or `refused`; absent means normal. Same for S9, S9+ and S10. (stream C, 2026-11-14) | on main |
 | Step id, kind, title | `payload.candidates[].protocol.steps[].{step_id,kind,title}` | on main |
 | Owner chip (ROBOT, ROBOT-PARTIAL, HUMAN) | `steps[].automation` (`full`, `partial`, `manual`) plus `steps[].automation_note` | on main (the UI maps `full` to ROBOT, `partial` to ROBOT-PARTIAL, `manual` to HUMAN, as `s9_robot` does in `coverage[].owner`) |
 | Depends on | `steps[].depends_on[]` | on main |
@@ -147,12 +190,14 @@ Candidate entries are at `s8_protocol.json payload.candidates[]`. When S3 to S7 
 | Endotoxin limit state | `protocol.config.endotoxin_limit_eu_per_ug` (null shows "NOT YET SET"); gate text on step `s09` | on main |
 | Readouts | `protocol.config.readouts[]` | on main |
 | Estimate basis note | `protocol.estimate_basis` | on main |
-| Cost range | `protocol.cost_gbp_range` (always null today) | on main as null; **value not on main** (in progress) |
-| Reagent quantities | `steps[].reagents[]` holds names only; volumes are set in S9 | **not on main** (in progress) |
-| Order FASTA for gene synthesis | none. S12 reads a user-supplied FASTA (`s12_biosafety.py read_order`) | **not on main** (in progress) |
+| Cost range | `protocol.cost_gbp_range` (always null today) | on main as null |
+| Cost estimate | `payload.cost{status: not_estimated \| partial \| estimated, basis, items[], total, ...}`. No prices are built in, so the status is `not_estimated` today and the screen shows "not estimated", never a number. | on main (PR #37) |
+| Reagent quantities | `steps[].quantities[{name, microlitres, source}]`. `steps[].reagents[]` still holds names only. | on main (PR #37) |
+| Order FASTA for gene synthesis | `payload.order_fasta` (run ref `{root, path, sha256, bytes, records}`) and `payload.order_fasta_missing[]`. S12 reads a user-supplied FASTA (`s12_biosafety.py read_order`). The file is not cleared for synthesis. | on main (PR #37) |
+| Step narrative | `steps[].narrative` and `narrative_source`; `payload.narratives` | on main (PR #37) |
 | Protocol markdown | `candidates/<id>/protocol.md` under the stand-alone tree; not referenced from the artifact payload | sidecar |
 
-Check (stream C): when the order FASTA lands, which key holds it, and does each record's id match what S12's `read_order` expects? When quantities land, is it `steps[].reagents[]` as objects (name, quantity, unit) or a new key? The screen has three dashed "not on main" boxes ready for these.
+Answered by stream C (2026-11-14) and merged in PR #37: the keys above. Still to check: does each order FASTA record id match what S12's `read_order` expects? The design's owner card for 06 lists these fields under "On main (PR #37)". The screen frame draws dashed placeholder boxes for the order FASTA, the quantities and the cost, because I found no committed run artifact that contains them (only tests do); the cost box says `not_estimated` today.
 
 ## 07 Robot code (S9, S9+)
 
@@ -170,10 +215,11 @@ Entries are at `s9_robot.json payload.candidates[].backends[].sessions[]`.
 | Grade: rule counts, lint, findings, sim error | `sessions[].grade.{verdict,sim_ok,sim_error,lint[],rule_counts{},n_rule_violations,findings[]}` | on main |
 | Refusal record | `sessions[].refusal.{kind,detail}` | on main |
 | Code file (excerpt) | `sessions[].files.code` (run ref to the `.py`) | on main |
-| Operator sheet (deck table, load list) | `sessions[].files.setup` (run ref to `.setup.md`) and `files.plan` (`.plan.json`) | sidecar. The screen shows the deck rows parsed from markdown. **Check (stream C): which keys of `.plan.json` are stable, so the deck, pipettes and liquids can be read from JSON?** |
+| Operator sheet (deck table, load list) | `sessions[].files.setup` (run ref to `.setup.md`) and `files.plan` (`.plan.json`). Keys of `.plan.json` (stream C, 2026-11-14): `session_id`, `title`, `covers[]`, `modules[{key,name,slot}]`, `labware[{key,load_name,slot,module,label,kind}]`, `pipettes[{key,api_name,mount,channels,tipracks[]}]`, `liquids[{ref,reagent,volume_ul,source,note}]`, `actions[{step,op,...}]`, `tips_needed{pipette:count}`, `notes[]`, `layouts{name:rows}` | on main (sidecar file). The deck, pipettes and liquids can be read from this JSON instead of the markdown. |
 | Step ownership table | `payload.candidates[].coverage[].{step_id,kind,title,owner,sessions[],human_remainder}` | on main |
-| Artifact-level state | `payload.status` (`not_run`, `refused`) and `payload.reasons[]` | on main |
-| S9+ state and animation | `s9plus_animate.json payload.sessions[].{ok,timeline,html,skipped}`, `payload.summary`, `payload.status`, `payload.reasons[]` | on main |
+| Artifact-level state | `payload.status` (`not_run`, `refused`) and `payload.reasons[]`: present only in those states; absent means normal | on main |
+| S9+ sessions | `s9plus_animate.json payload.sessions[]`. Always present per session: `backend`, `candidate_id`, `html`, `ok`, `s9_outcome`, `session_id`, `timeline`. `skipped` (a string) exists only on a skipped session; the count is `payload.summary.n_skipped`. (stream C, 2026-11-14) | on main |
+| S9+ artifact state | `s9plus_animate.json payload.status`, `payload.reasons[]`, `payload.summary`: status and reasons only when not run or refused | on main |
 | Animation time note | `warnings[]` ("times are estimates") | on main |
 | S9.5 card | `s9_5_finetune.json payload.fine_tune.{status,reasons[]}`, `payload.base_model_id`, `payload.model_id` | on main |
 
@@ -185,7 +231,7 @@ Entries are at `s9_robot.json payload.candidates[].backends[].sessions[]`.
 | Base model id, trained model id | `payload.base_model_id`, `payload.model_id` | on main (both null today) |
 | Win, loss, tie rates, intervals, n, verdict | `validation/winrate.py score()`: `rates, counts, intervals, n, families, tie_breakdown, decided_by, verdict, win_rate_reportable, withheld` | on main (script output; **not written into `s9_5_finetune.json`**) |
 | Refusal rates, base vs fine-tune, and red flag | `score()` `refusal.{heldout,probe}`, `refusal_comparison`, `red_flag_splits` | on main (script output) |
-| Training data provenance table | README section S9.5 text; the row-level `origin` and `assigned_by` are in the training manifest from `vaxforge finetune manifest` | README text only. **Not on main as an artifact field.** |
+| Training data provenance table | README section S9.5 text; the row-level `origin` and `assigned_by` are in the training manifest from `vaxforge finetune manifest`. Family labels are an agent's reading (`assigned_by: agent-review`); no person has checked them; the leakage check is the safeguard (lead decision, 2026-11-14; README wording to follow). | README text only. **Not on main as an artifact field.** |
 | Size check (real pairs, synthetic rows, minimum) | README section S9.5; counts are not in any artifact | **not on main** |
 | Held-out families | `validation/heldout_families.json families{}` | on main |
 | Leakage check result | `validation/leakage_check.py` exit status and violation list | on main (script output) |
@@ -201,6 +247,7 @@ The stage writes the whole design to `s10_animal.json payload.design`; the table
 | Field | Path | Status |
 |---|---|---|
 | Selection banner | `payload.selection`, `warnings[]` (the "S3-S7 not available" line) | on main |
+| Artifact-level state | `payload.status` and `payload.reasons`: present only when the stage is `not_run` or `refused`; absent means normal (stream C, 2026-11-14) | on main |
 | Candidates included | `payload.candidates_included[]` | on main |
 | Species, strain status, sex, age, HLA match | `design.species_selection.{species,strain,strain_status,sex,age_weeks_range,human_mhc_predictions_under_test,hla_alleles_to_match}` | on main |
 | Challenge model and correlate statements | `design.challenge_model.{status,statement}`, `design.correlate.{correlate,statement}` | on main |
@@ -217,7 +264,7 @@ The stage writes the whole design to `s10_animal.json payload.design`; the table
 | README "falsified if" column | fixed text, README section S10; shown beside the row because `falsified_if` is empty when a row is not testable | fixed |
 | Study markdown | `payload.study_file` (run ref) | sidecar |
 
-Check (stream C): `falsified_if` is empty for `not_testable_no_upstream_prediction` rows, so the screen shows the README rule beside it. If you prefer the rule inside the artifact, add it as `rule_if_testable`.
+`falsified_if` is empty for `not_testable_no_upstream_prediction` rows, so the screen shows the README rule beside it. Stream C added `rule_if_testable` to each row of `design.falsification_map[]` (on main, PR #37). The README rule still sits beside the row in the design.
 
 ## 09 Pre-registration and gate (S11, S12)
 
@@ -241,20 +288,25 @@ Check (stream C): `falsified_if` is empty for `not_testable_no_upstream_predicti
 |---|---|---|
 | Honest ceilings and deliberately absent | fixed text; `report.py CEILINGS` and `ABSENT` (README sections 4 and 7) | on main |
 
-## C Foundations
+## Design system (was C Foundations)
 
-No data. Palette from `report.py` CSS, accent teal as in the earlier Figma file.
+No data. Palette from `report.py` CSS, accent teal as in the earlier Figma file. Token values are also in `docs/design/vaxforge_tokens.json` (27 colours, 9 spacing steps, 7 radii).
+
+## Cover, How to read this file, How Figma was used
+
+No data. Fixed text. The first two describe the file and the card format; the last is process evidence (`docs/design/FIGMA_EVIDENCE.md` holds the dated log).
 
 ---
 
-## Fields the design needs that are not on main yet
+## Fields the design needs that were not on main, and what happened to them
 
 | Screen | Field | Owner | Note |
 |---|---|---|---|
-| 06 | Order FASTA | C (S8) | In progress. Feeds S12's `--order` file. |
-| 06 | Reagent quantities | C (S8) | In progress. Today `reagents[]` is names only. |
-| 06 | Cost | C (S8) | In progress. `cost_gbp_range` is null. |
-| 07 | Deck, pipettes, liquids as JSON | C (S9) | Today only in `.setup.md`; `.plan.json` keys not documented. |
+| 06 | `payload.order_fasta`, `order_fasta_missing[]` | C (S8) | On main (PR #37). Feeds S12's `--order` file. |
+| 06 | `steps[].quantities[{name, microlitres, source}]` | C (S8) | On main (PR #37). `reagents[]` is still names only. |
+| 06 | `payload.cost{status, basis, items[], total}` | C (S8) | On main (PR #37). No prices built in: status is `not_estimated` today and no price is shown as real. `cost_gbp_range` is null. |
+| 06 | `steps[].narrative`, `narrative_source`; `payload.narratives` | C (S8) | On main (PR #37). |
+| 08 | `design.falsification_map[].rule_if_testable` | C (S10) | On main (PR #37). The README rule is still shown beside the row. |
 | 05 | Names and schema of the files under `validation/` | D | None fixed. |
 | 07b | Win-rate report and manifest counts as artifact fields | D | Today script output and README prose. |
 | 04 | Per-candidate uncertainty | B or D | Roadmap item only. |

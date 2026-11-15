@@ -1,0 +1,63 @@
+{
+  "color": {
+    "surface": {
+      "canvas": { "$type": "color", "$value": "#d9dbe0", "$description": "page behind the frames" },
+      "bg": { "$type": "color", "$value": "#f6f6f3", "$description": "screen background" },
+      "card": { "$type": "color", "$value": "#ffffff", "$description": "cards, tables" },
+      "side": { "$type": "color", "$value": "#1b1f24", "$description": "sidebar" }
+    },
+    "text": {
+      "ink": { "$type": "color", "$value": "#1b1f24", "$description": "primary text" },
+      "mute": { "$type": "color", "$value": "#59626e", "$description": "secondary text" },
+      "faint": { "$type": "color", "$value": "#7b838e", "$description": "captions, labels" }
+    },
+    "line": {
+      "line": { "$type": "color", "$value": "#d6d9de", "$description": "borders" },
+      "line-2": { "$type": "color", "$value": "#e8eaed", "$description": "row dividers" }
+    },
+    "accent": {
+      "accent": { "$type": "color", "$value": "#0f6b6b", "$description": "primary action, current nav" },
+      "accent-tint": { "$type": "color", "$value": "#e0f0ef", "$description": "accent fill" }
+    },
+    "state": {
+      "ok": { "$type": "color", "$value": "#1c6b3b" },
+      "ok-bg": { "$type": "color", "$value": "#e2f3e8" },
+      "not-run": { "$type": "color", "$value": "#525a66" },
+      "not-run-bg": { "$type": "color", "$value": "#e8eaee" },
+      "warn": { "$type": "color", "$value": "#7a4a00" },
+      "warn-bg": { "$type": "color", "$value": "#fdecc8" },
+      "bad": { "$type": "color", "$value": "#8e1b1b" },
+      "bad-bg": { "$type": "color", "$value": "#fbe3e3" },
+      "info": { "$type": "color", "$value": "#164e87" },
+      "info-bg": { "$type": "color", "$value": "#e0ecf8" },
+      "blocked": { "$type": "color", "$value": "#5b2a86" },
+      "blocked-bg": { "$type": "color", "$value": "#eee3f8" }
+    },
+    "fixture": {
+      "fixture-bg": { "$type": "color", "$value": "#ffe08a", "$description": "fixture chip fill" },
+      "fixture-ink": { "$type": "color", "$value": "#4a3200", "$description": "fixture chip text" },
+      "ceiling-bg": { "$type": "color", "$value": "#fff6dc", "$description": "honest ceiling fill" },
+      "ceiling-line": { "$type": "color", "$value": "#b7791f", "$description": "honest ceiling rule" }
+    }
+  },
+  "spacing": {
+    "4": { "$type": "number", "$value": 4 },
+    "6": { "$type": "number", "$value": 6 },
+    "8": { "$type": "number", "$value": 8 },
+    "10": { "$type": "number", "$value": 10 },
+    "12": { "$type": "number", "$value": 12 },
+    "16": { "$type": "number", "$value": 16 },
+    "20": { "$type": "number", "$value": 20 },
+    "24": { "$type": "number", "$value": 24 },
+    "32": { "$type": "number", "$value": 32 }
+  },
+  "radius": {
+    "bar": { "$type": "number", "$value": 3 },
+    "badge": { "$type": "number", "$value": 4 },
+    "button": { "$type": "number", "$value": 6, "$description": "button, input" },
+    "table": { "$type": "number", "$value": 8, "$description": "table, callout" },
+    "card": { "$type": "number", "$value": 10, "$description": "card, tile" },
+    "owner-card": { "$type": "number", "$value": 12 },
+    "pill": { "$type": "number", "$value": 11 }
+  }
+}
