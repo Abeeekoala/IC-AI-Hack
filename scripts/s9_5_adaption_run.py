@@ -209,7 +209,8 @@ def main(argv=None):
     guard()
     say("run guard: passes")
 
-    key = f"{KEY_PREFIX}{sha256_file(upload)[:20]}"
+    slug = re.sub(r"[^a-z0-9]+", "-", args.model.lower()).strip("-")
+    key = f"{KEY_PREFIX}{sha256_file(upload)[:12]}-{slug}-i{args.max_iterations}"  # one key per (data, model, iterations)
     if not args.send:
         say("DRY RUN: nothing is sent. The requests that --send would make:")
         print(json.dumps(ad.upload_training_file(upload, name=DATASET_NAME).to_dict(), indent=1))
