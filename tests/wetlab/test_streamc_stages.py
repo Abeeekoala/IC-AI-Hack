@@ -729,17 +729,29 @@ def test_our_subcommands_are_registered_in_vaxforge_and_do_not_clash(command):
 
 def test_the_readme_commands_parse():
     parser = cli.build_parser()
-    a = parser.parse_args(["compile-protocol", "runs/nmb/protocol.json", "--target", "opentrons-ot2"])
-    assert a.target == "opentrons-ot2" and a.source == "runs/nmb/protocol.json"
-    b = parser.parse_args(["animal-study", "runs/nmb", "--species", "hla-transgenic", "--arms", "4", "--power", "0.8"])
-    assert (b.run_dir, b.species, b.arms, b.power) == ("runs/nmb", "hla-transgenic", "4", 0.8)
+    a = parser.parse_args(["compile-protocol", "runs/nmb", "--target", "opentrons-ot2"])  # a run folder: `run` writes no protocol.json
+    assert a.target == "opentrons-ot2" and a.source == "runs/nmb" and a.out is None
+    b = parser.parse_args(["animal-study", "runs/nmb", "--species", "hla-transgenic", "--power", "0.8"])
+    assert (b.run_dir, b.species, b.power) == ("runs/nmb", "hla-transgenic", 0.8)
     with pytest.raises(SystemExit):
         parser.parse_args(["compile-protocol", "p.json", "--target", "flex"])
 
 
+def test_arms_is_refused_by_the_vaxforge_command_with_the_reason(tmp_path, capsys):
+    run = copy_run(tmp_path / "run").run_dir
+    with pytest.raises(SystemExit) as exc:  # this README example used to run and ignore the flag
+        cli.build_parser().parse_args(["animal-study", "runs/nmb", "--species", "hla-transgenic", "--arms", "4", "--power", "0.8"])
+    assert exc.value.code == 2
+    assert "vaxforge animal-study: error: --arms is not supported" in capsys.readouterr().err
+    with pytest.raises(SystemExit):
+        cli.main(["animal-study", str(run), "--proteins", "fhbp,nada", "--arms", "4"])
+    assert "--licensed-vaccine" in capsys.readouterr().err
+    assert not RunStore(run).has("s10")  # nothing was run
+
+
 def test_animal_study_on_a_run_folder_runs_the_s10_stage(tmp_path, capsys):
     run = copy_run(tmp_path / "run").run_dir
-    code = cli.main(["animal-study", str(run), "--proteins", "fhbp,nada", "--species", "hla-transgenic", "--arms", "4", "--power", "0.8"])
+    code = cli.main(["animal-study", str(run), "--proteins", "fhbp,nada", "--species", "hla-transgenic", "--power", "0.8"])
     out = capsys.readouterr()
     assert code == 0, out.out + out.err
     st = RunStore(run)

@@ -212,7 +212,7 @@ def test_top_k_limits_the_shortlist(tmp_path):
 
 def test_the_readme_study_flags_are_accepted_by_run_too(tmp_path):
     code, _, stderr = cli("run", FIXTURE, "--out", tmp_path / "o", "--top-k", 1, "--no-simulate", "--no-animation",
-                          "--species", "hla-transgenic", "--power", "0.8", "--arms", "4")
+                          "--species", "hla-transgenic", "--power", "0.8")
     assert code == 1 and stderr == ""  # exit 1 only because nothing was simulated
     cfg = read_json(tmp_path / "o" / "animal_study" / "animal_study.json")["config"]
     assert cfg["species"] == "mouse_hla_transgenic" and cfg["power"] == 0.8
@@ -286,14 +286,61 @@ def test_animal_study_top_k(tmp_path):
 
 
 def test_readme_flags_are_accepted_and_applied(tmp_path):
-    flags = ("--species", "hla-transgenic", "--power", "0.8")
-    code, _, stderr = cli("animal-study", FIXTURE, *flags, "--arms", "4", "--out", tmp_path / "with_arms")
+    code, _, stderr = cli("animal-study", FIXTURE, "--species", "hla-transgenic", "--power", "0.8", "--out", tmp_path / "study")
     assert code == 0 and stderr == ""
-    cfg = read_json(tmp_path / "with_arms" / "animal_study.json")["config"]
+    cfg = read_json(tmp_path / "study" / "animal_study.json")["config"]
     assert cfg["species"] == "mouse_hla_transgenic" and cfg["goal"] == "hla_epitope_validation" and cfg["power"] == 0.8
-    # `--arms` is accepted for README compatibility and ignored: the arms follow from the candidates and the controls
-    cli("animal-study", FIXTURE, *flags, "--out", tmp_path / "without_arms")
-    assert read_text(tmp_path / "with_arms" / "animal_study.json") == read_text(tmp_path / "without_arms" / "animal_study.json")
+
+
+# `--arms N` used to be accepted and thrown away (identical design for --arms 2 and --arms 4), while the README showed it as a setting.
+# StudyConfig has no arm-count field and `design_study` derives the arms, so it is now refused, with the reason and the settings that DO move it.
+
+
+@pytest.mark.parametrize("flag", [["--arms", "2"], ["--arms", "4"], ["--arms=4"], ["--arms"]], ids=["two", "four", "equals", "no_value"])
+def test_arms_is_refused_with_the_reason_and_nothing_is_written(tmp_path, capsys, flag):
+    with pytest.raises(SystemExit) as exc:
+        main(["animal-study", str(FIXTURE), "--species", "hla-transgenic", *flag, "--out", str(tmp_path / "o")])
+    assert exc.value.code == 2
+    err = capsys.readouterr().err
+    assert "--arms is not supported (it used to be accepted and ignored)" in err
+    for lever in ("--top-k", "--licensed-vaccine", "dose_levels_ug", "dose_ranging", "--study-config"):
+        assert lever in err, lever
+    assert not (tmp_path / "o").exists()  # refused while parsing: no design was built
+
+
+def test_arms_is_refused_by_run_too(tmp_path, capsys):
+    with pytest.raises(SystemExit) as exc:
+        main(["run", str(FIXTURE), "--out", str(tmp_path / "o"), "--no-simulate", "--arms", "4"])
+    assert exc.value.code == 2 and "--arms is not supported" in capsys.readouterr().err
+    assert not (tmp_path / "o").exists()
+
+
+def test_arms_is_not_advertised_in_the_help(capsys):
+    for command in ("animal-study", "run"):
+        with pytest.raises(SystemExit) as exc:
+            main([command, "--help"])
+        assert exc.value.code == 0
+        assert "--arms" not in capsys.readouterr().out
+
+
+def _arm_count(tmp_path, name, *flags) -> int:
+    cli("animal-study", FIXTURE, "--out", tmp_path / name, *flags)
+    design = read_json(tmp_path / name / "animal_study.json")
+    assert design["power_analysis"]["n_arms"] == len(design["arms"])
+    return len(design["arms"])
+
+
+def test_the_settings_the_arms_message_names_do_change_the_arm_count(tmp_path):
+    base = _arm_count(tmp_path, "base")
+    assert base == 7  # 3 dose levels for the top candidate + one arm each for the 2 further candidates (top-k 3) + adjuvant only + naive/PBS
+    assert _arm_count(tmp_path, "k1", "--top-k", 1) == base - 2
+    assert _arm_count(tmp_path, "k2", "--top-k", 2) == base - 1
+    assert _arm_count(tmp_path, "licensed", "--licensed-vaccine", "yes") == base + 1  # the positive control
+    study = tmp_path / "study.json"
+    study.write_text(json.dumps(dict(dose_levels_ug=[2, 10, 50, 100])), encoding="utf-8")
+    assert _arm_count(tmp_path, "dose", "--study-config", study) == base + 1  # a fourth dose level for the top candidate
+    study.write_text(json.dumps(dict(dose_ranging="all_candidates")), encoding="utf-8")
+    assert _arm_count(tmp_path, "all", "--top-k", 2, "--study-config", study) == 3 + 3 + 2  # every candidate gets every dose level
 
 
 @pytest.mark.parametrize(

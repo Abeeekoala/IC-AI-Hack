@@ -507,10 +507,10 @@ vaxforge validate lopov INPUT.json --k 3 5 10          # leave-one-pathogen-out 
 vaxforge validate bexsero runs/nmb/s3_rank.json --k 3  # recall@3 of the Bexsero antigens in the S3 ranking
 
 # Robot code only, from an existing protocol artifact
-vaxforge compile-protocol runs/nmb/protocol.json --target opentrons-ot2
+vaxforge compile-protocol runs/nmb --target opentrons-ot2
 
 # Animal study proposal for the top candidates
-vaxforge animal-study runs/nmb --species hla-transgenic --arms 4 --power 0.8
+vaxforge animal-study runs/nmb --species hla-transgenic --power 0.8
 # After this, `vaxforge verify runs/nmb` reports s11 as STALE: a stage upstream of S11 was re-written after S11 recorded
 # its digests, so S11's chain no longer matches. That is expected, not corruption; it is flagged on purpose.
 ```

@@ -8,7 +8,6 @@ Every test works on a copy of fixtures/nmb_fixture under `tmp_path`.
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import json
 import os
 import re
@@ -20,6 +19,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from b_tools_guard import needs_toolless_machine
 
 from vaxforge import s8_protocol, s12_biosafety
 from vaxforge.artifacts import RunStore
@@ -198,10 +198,8 @@ def test_the_stage_carries_that_gate_into_the_artifact(store):
 # B's real stages (no tool, no network: the chain is degraded but valid), then OUR S8, then `python -m vaxforge.s12_biosafety check ...`.
 # `vaxforge biosafety check` is not registered in cli.EXTENSION_MODULES yet, so the module form (the one S8's gate text names) is the one tested.
 
-B_TOOLS = ("blastp", "makeblastdb", "docker", "netMHCpan", "netMHCIIpan", "algpred2", "toxinpred2", "boltz", "colabfold_batch")
-needs_toolless_machine = pytest.mark.skipif(
-    any(shutil.which(t) for t in B_TOOLS) or importlib.util.find_spec("mhcflurry") is not None,
-    reason="a stream B tool is installed here, so B's real stages would run it and the chain would not be the degraded one this test builds")
+# `needs_toolless_machine` (b_tools_guard.py, shared with test_streamc_upstream.py) skips only when a tool is USABLE: a `docker` executable
+# whose daemon is stopped does not count.
 
 
 def _module(name: str, *args) -> subprocess.CompletedProcess:

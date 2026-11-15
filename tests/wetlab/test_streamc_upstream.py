@@ -12,7 +12,6 @@ Everything works on a COPY of `fixtures/nmb_fixture` under `tmp_path`; tests tha
 
 from __future__ import annotations
 
-import importlib.util
 import json
 import os
 import re
@@ -23,6 +22,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from b_tools_guard import needs_toolless_machine
 
 from vaxforge import s8_protocol, s9_robot, s9plus_animate, s10_animal
 from vaxforge.artifacts import ContractError, RunStore
@@ -44,10 +44,8 @@ from vaxforge.streamc_models import RANK_SOURCE_S7_FINAL, RANK_SOURCE_USER_SELEC
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURE = ROOT / "fixtures" / "nmb_fixture"
 needs_ot = pytest.mark.skipif(find_ot_python() is None, reason="no Opentrons 7.5.0 interpreter (set VAXFORGE_OT_PYTHON)")
-B_TOOLS = ("blastp", "makeblastdb", "docker", "netMHCpan", "netMHCIIpan", "algpred2", "toxinpred2", "boltz", "colabfold_batch")
-needs_toolless_machine = pytest.mark.skipif(
-    any(shutil.which(t) for t in B_TOOLS) or importlib.util.find_spec("mhcflurry") is not None,
-    reason="a stream B tool is installed here, so B's real stages would run it (this test pins the tool-less outcome)")
+# `needs_toolless_machine` (b_tools_guard.py, shared with test_s8_order_fasta.py) skips only when a stream B tool is USABLE here: a `docker`
+# executable whose daemon is stopped does not count.
 
 FHBP, NADA, NHBA, PORA = "sp|Q9JXV4|FHBP_NEIMB", "sp|Q9JXK7|NADA1_NEIMB", "sp|Q7DD37|NHBA_NEIMB", "sp|P0DH58|OMPA_NEIMB"
 SEQ = {r.id: r.seq for r in read_fasta(FIXTURE / "data" / "proteome.faa")}
@@ -526,6 +524,85 @@ def test_s8_and_s10_record_s7_in_their_inputs_and_say_where_the_candidates_came_
     assert "S3 LEAKAGE RISK" in " ".join(a8.warnings) and STAND_IN_WARNING not in a8.warnings + a10.warnings
     assert run.store.verify() == []
     assert s8_protocol.run(run.store, c).digest == a8.digest and s10_animal.run(run.store, c).digest == a10.digest  # re-run: same digests
+
+
+# ---- the declared inputs are exactly the artifacts that were read
+#
+# An audit saw S8 and S10 declare [s0, s2, s7] and asked for s5 and s6 as well, because the epitopes and the coverage come from them. They come
+# from S7: its payload re-exports `epitope_set` and every candidate's `coverage` (B's contract, section 7), and the adapter never opens an
+# S3-S6 artifact (it only asks `store.has` which of them exist, to choose between S7 and the S2 stand-in). So s0, s2 and s7 are the truth, and
+# declaring s5 or s6 would claim a read that does not happen. S7's own inputs are stream B's to declare; once S7 lists s5 and s6, `verify`
+# flags S7 when they change, and S8 and S10 once S7 has been re-run with other results (their recorded S7 digest then differs). Chasing that
+# chain is `verify`'s job, not ours. These tests keep the declaration honest.
+
+
+@pytest.fixture
+def reads(monkeypatch):
+    """The stage ids passed to `RunStore.read_artifact` while a stage computes, that is before its own `write_artifact`.
+
+    The write is left out on purpose: it reads every DECLARED input once more to take its digest, so counting it would make "declared ==
+    read" true by construction.
+    """
+    seen: list[str] = []
+    writing: list[bool] = []
+    real_read, real_write = RunStore.read_artifact, RunStore.write_artifact
+
+    def spy_read(self, stage, verify=True):
+        if not writing:
+            seen.append(stage)
+        return real_read(self, stage, verify)
+
+    def spy_write(self, *args, **kwargs):
+        writing.append(True)
+        try:
+            return real_write(self, *args, **kwargs)
+        finally:
+            writing.pop()
+
+    monkeypatch.setattr(RunStore, "read_artifact", spy_read)
+    monkeypatch.setattr(RunStore, "write_artifact", spy_write)
+    return seen
+
+
+def _route(tmp_path, name: str):
+    """(store, config, the artifacts that route reads) for each way `load_inputs_from_store` can end."""
+    if name == "stand_in":  # no S3-S7 artifact: the proteins a person names, from S2
+        return copy_run(tmp_path / "run"), cfg(proteins=["fhbp"], top_k=1), {"s0", "s2"}
+    r = fresh(tmp_path, s7_status="failed" if name == "s7_not_ok" else "ok", s7_warnings=["synthetic S7 failure"] if name == "s7_not_ok" else ())
+    if name == "s7_missing":  # S3-S6 exist, S7 does not: nothing is read but S0
+        r.store.artifact_path("s7").unlink()
+    return r.store, cfg(top_k=3, study=HLA_STUDY), {"s7": {"s0", "s2", "s7"}, "s7_not_ok": {"s0", "s7"}, "s7_missing": {"s0"}}[name]
+
+
+@pytest.mark.parametrize("stage", [s8_protocol, s10_animal], ids=["s8", "s10"])
+@pytest.mark.parametrize("route", ["s7", "s7_not_ok", "s7_missing", "stand_in"])
+def test_s8_and_s10_declare_exactly_the_artifacts_they_read_and_never_open_s3_to_s6(tmp_path, reads, route, stage):
+    store, conf, expected = _route(tmp_path, route)
+    reads.clear()  # building the chain read artifacts too; only what the stage itself reads counts
+    art = stage.run(store, conf)
+    assert set(reads) == expected == set(art.inputs)
+    assert not set(reads) & {"s3", "s4", "s5", "s6"}
+    assert art.inputs == {s: store.digest_of(s) for s in expected}  # and each declared digest is that of the artifact read
+
+
+def _edit(store: RunStore, stage: str) -> None:
+    """Write `stage` again with the same params, inputs, tools and status but one more payload field: an upstream re-run that gave other results."""
+    a = store.read_artifact(stage)
+    payload = json.loads(json.dumps(a.payload))
+    payload["edited_by_the_test"] = True
+    store.write_artifact(stage, payload, params=a.params, inputs=list(a.inputs), tools=a.producer["tools"], status=a.status, warnings=a.warnings)
+
+
+@pytest.mark.parametrize("upstream", ["s0", "s2", "s7"])
+def test_verify_flags_s8_and_s10_when_an_artifact_they_read_changes(run, upstream):
+    c = cfg(top_k=3, study=HLA_STUDY)
+    s8_protocol.run(run.store, c)
+    s10_animal.run(run.store, c)
+    assert run.store.verify() == []
+    _edit(run.store, upstream)
+    problems = run.store.verify()
+    for stage in ("s8", "s10"):
+        assert any(p.startswith(f"{stage}: STALE - built from {upstream} ") for p in problems), (stage, problems)
 
 
 def test_s10_rows_are_testable_where_b_supplied_data_and_not_testable_where_it_did_not(run):
