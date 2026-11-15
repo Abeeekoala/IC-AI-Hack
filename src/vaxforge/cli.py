@@ -15,9 +15,11 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import importlib.util
 import json
 import os
 import re
+import shutil
 import sys
 from pathlib import Path
 from typing import Callable
@@ -50,6 +52,18 @@ def slugify(text: str) -> str:
 # ----------------------------------------------------------------------------
 # helpers
 # ----------------------------------------------------------------------------
+def parse_override(item: str) -> tuple[str, object]:
+    """``KEY=VALUE`` from ``--set``: the value is read as JSON when it parses (true, 3, "text", [1, 2]), else kept as text."""
+    key, sep, raw = item.partition("=")
+    if not sep or not key.strip():
+        raise ConfigError(f"--set expects KEY=VALUE, for example --set s3.backend=scores_file (got {item!r})")
+    try:
+        value: object = json.loads(raw)
+    except ValueError:
+        value = raw
+    return key.strip(), value
+
+
 def load_from_args(args: argparse.Namespace) -> Config:
     cfg = load_config(getattr(args, "config", None))
     if getattr(args, "offline", False):
@@ -60,6 +74,9 @@ def load_from_args(args: argparse.Namespace) -> Config:
         cfg.set("pipeline.top_k", int(args.top_k))
     if getattr(args, "cache_dir", None):
         cfg.set("paths.cache_dir", args.cache_dir)
+    for item in getattr(args, "overrides", None) or []:         # --set KEY=VALUE, applied last so it wins
+        key, value = parse_override(item)
+        cfg.set(key, value)
     return cfg
 
 
@@ -134,15 +151,44 @@ def report_s1(art: Artifact) -> None:
     print_warnings(art)
 
 
-def closing_line(stages: list[str], s2_art: Artifact | None) -> str:
-    """Last line of `run`: names what ran, and says so when S2 virulence or localisation was not_run."""
-    degraded = []
+S2_OK_STATUSES = ("ok", "not_applicable")
+
+
+def degraded_by_stage(store: RunStore) -> dict[str, list[str]]:
+    """``payload.degraded`` (a list of short reason strings; stream B writes it for S3-S7) of every later stage that has one."""
+    found: dict[str, list[str]] = {}
+    for stage in store.stages_present():
+        if stage in CORE_STAGES:
+            continue
+        try:
+            payload = store.read_artifact(stage).payload
+        except ContractError:
+            continue
+        reasons = payload.get("degraded") if isinstance(payload, dict) else None
+        if isinstance(reasons, list) and reasons:
+            found[stage] = [str(r) for r in reasons]
+    return found
+
+
+def closing_line(stages: list[str], s2_art: Artifact | None, degraded: dict[str, list[str]] | None = None) -> str:
+    """Last line of `run`: names what ran and says so when the run was degraded.
+
+    Degraded means: S2 virulence or localisation did not run (any status other than ok / not_applicable), or a later
+    stage wrote a non-empty ``payload.degraded`` (``degraded`` maps stage -> reasons).
+    """
+    parts: list[str] = []
     if s2_art is not None:
         summary = s2_art.payload.get("summary", {})
+        by_status: dict[str, list[str]] = {}
         for label in ("virulence", "localisation"):
-            if summary.get(label, {}).get("run_status") == "not_run":
-                degraded.append(label)
-    note = f"degraded: S2 {' and '.join(degraded)} not_run; " if degraded else ""
+            status = summary.get(label, {}).get("run_status")
+            if status and status not in S2_OK_STATUSES:
+                by_status.setdefault(str(status), []).append(label)
+        for status, labels in by_status.items():
+            parts.append(f"S2 {' and '.join(labels)} {status}")
+    for stage, reasons in (degraded or {}).items():
+        parts.append(f"{stage.upper()}: {', '.join(reasons)}")
+    note = f"degraded: {'; '.join(parts)}; " if parts else ""
     return f"done. artifacts: {', '.join(stages)}  ({note}verify: ok)"
 
 
@@ -178,15 +224,22 @@ def run_extra_stage(stage: str, store: RunStore, cfg: Config) -> tuple[str, Arti
 
 def cmd_run(args: argparse.Namespace) -> int:
     cfg = load_from_args(args)
-    if not args.pathogen and args.taxid is None:
-        raise ConfigError("give --pathogen NAME or --taxid N")
-    out = Path(args.out) if args.out else cfg.runs_dir / slugify(args.pathogen or f"taxid_{args.taxid}")
-    store = RunStore(out, run_id=args.run_id, cache_dir=cfg.cache_dir)
-    store.snapshot_config(cfg)
     wanted = [s.strip() for s in args.stages.split(",")] if args.stages else list(STAGE_ORDER)
     bad = [s for s in wanted if s not in STAGES]
     if bad:
         raise ConfigError(f"unknown stage(s) {bad}; known: {', '.join(STAGE_ORDER)}")
+    has_target = bool(args.pathogen) or args.taxid is not None
+    if "s0" in wanted and not has_target:
+        raise ConfigError("give --pathogen NAME or --taxid N (only S0 needs it: with --stages that leave s0 out, "
+                          "--out RUN_DIR alone runs the later stages on an existing run folder)")
+    if args.out:
+        out = Path(args.out)
+    elif has_target:
+        out = cfg.runs_dir / slugify(args.pathogen or f"taxid_{args.taxid}")
+    else:
+        raise ConfigError("give --out RUN_DIR: without --pathogen or --taxid there is no folder name to derive")
+    store = RunStore(out, run_id=args.run_id, cache_dir=cfg.cache_dir)
+    store.snapshot_config(cfg)
     say(f"run dir: {out}   (offline={cfg.offline})")
 
     if "s0" in wanted:
@@ -220,9 +273,47 @@ def cmd_run(args: argparse.Namespace) -> int:
         for p in problems:
             say(f"  - {p}")
         return EXIT_ERROR
+    s2_art = a2 if "s2" in wanted else (store.read_artifact("s2") if store.has("s2") else None)
     say()
-    say(closing_line(store.stages_present(), a2 if "s2" in wanted else None))
+    say(closing_line(store.stages_present(), s2_art, degraded_by_stage(store)))
     return EXIT_OK
+
+
+DEMO_STAGES = "s3,s4,s5,s6,s7,s8,s9,s9plus,s9_5,s10,s11,s12"
+
+
+def cmd_demo_offline(args: argparse.Namespace) -> int:
+    """Offline demo: copy the committed fixture (S0-S2 of N. meningitidis) and run S3-S12 on the copy, no network."""
+    src = Path(args.fixture) if args.fixture else Path(__file__).resolve().parents[2] / "fixtures" / "nmb_fixture"
+    if not (src / "manifest.json").is_file():
+        raise ConfigError(f"fixture not found at {src} (expected a run folder with manifest.json; pass --fixture DIR)")
+    out = Path(args.out)
+    if out.exists() and any(out.iterdir()):
+        if not args.force:
+            raise ConfigError(f"{out} is not empty: pass --force to replace it, or choose another --out")
+        shutil.rmtree(out)
+    shutil.copytree(src, out, dirs_exist_ok=True)
+    say(f"copied the committed fixture {src} -> {out}")
+    say("  S0-S2 are the committed fixture, not a live run; its S2 localisation is a stand-in, not PSORTb (see fixtures/nmb_fixture/FIXTURE.md)")
+    argv = ["run", "--out", str(out), "--stages", DEMO_STAGES, "--offline", "--non-interactive"]
+    for flag, value in (("--config", args.config), ("--cache-dir", args.cache_dir)):
+        if value:
+            argv += [flag, str(value)]
+    # Nothing may start a container or leave the machine in an "offline" demo: S3 would otherwise try the Vaxign-ML Docker
+    # image first (backend auto), and S7's Boltz would ask the MSA server (msa: server) for the sequences.
+    if args.scores_file:
+        scores = Path(args.scores_file).resolve()
+        if not scores.is_file():
+            raise ConfigError(f"scores file not found: {scores}")
+        argv += ["--set", "s3.backend=scores_file", "--set", f"s3.scores_file={json.dumps(str(scores))}"]
+        say(f"  S3 ranks with the precomputed scores in {scores}")
+    else:
+        argv += ["--set", "s3.backend=subtractive_filter"]
+        say("  S3 uses the rule-based fallback ranker (no precomputed scores given: pass --scores-file FILE)")
+    argv += ["--set", "s7.boltz.msa=empty"]
+    for item in args.overrides:
+        argv += ["--set", item]
+    return main(argv)
 
 
 def cmd_resolve(args: argparse.Namespace) -> int:
@@ -310,6 +401,67 @@ def cmd_show(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def pipeline_tool_checks(cfg: Config) -> list[tuple[str, str, str]]:
+    """One advisory line per external tool the later stages (S3-S12) use: ``(label, text, level)``.
+
+    This only says found / not found (and, for the Docker image, whether the daemon and image are there). It never claims
+    that a tool works: nothing is run, so a broken install still shows as found.
+    """
+    try:
+        from .prediction.tools import resolve_executable
+    except ImportError:                                       # stream B's package is not installed: plain PATH lookup
+        def resolve_executable(cmd, default=None):            # type: ignore[misc]
+            name = str(cmd or default or "").split()
+            found = shutil.which(name[0]) if name else None
+            return [found, *name[1:]] if found else None
+
+    rows: list[tuple[str, str, str]] = []
+
+    # S9: the Opentrons simulator runs in its own interpreter (Opentrons 7.5.0 needs Python 3.10)
+    env = os.environ.get("VAXFORGE_OT_PYTHON")
+    if env:
+        if Path(env).is_file():
+            rows.append(("Opentrons (S9)", f"VAXFORGE_OT_PYTHON = {env} (file exists; not probed)", "ok"))
+        else:
+            rows.append(("Opentrons (S9)", f"VAXFORGE_OT_PYTHON points at a file that does not exist: {env}", "warn"))
+    else:
+        here = Path(__file__).resolve()
+        found_py = next((str(p) for root in (Path.cwd(), here.parents[2]) for venv in (".venv-ot", ".venv-wetlab")
+                         for p in (root / venv / "Scripts" / "python.exe", root / venv / "bin" / "python") if p.is_file()), None)
+        if found_py:
+            rows.append(("Opentrons (S9)", f"interpreter found at {found_py} (not probed)", "ok"))
+        else:
+            rows.append(("Opentrons (S9)", "no interpreter found: S9 cannot simulate its code "
+                                           "(set VAXFORGE_OT_PYTHON; tools/setup-ot-venv.sh makes one)", "warn"))
+
+    # S3: Vaxign-ML runs from a Docker image
+    docker = tools.find_executable(str(cfg.get("tools.docker", "docker")))
+    image = str(cfg.get("s3.vaxign_ml.docker_image", "e4ong1031/vaxign-ml:latest"))
+    state, detail = tools.docker_state(docker, image)
+    rows.append(("Vaxign-ML (S3)", f"{image}: {detail}" + ("" if state == "ok" else "; S3 falls back to the rule-based ranking"),
+                 "ok" if state == "ok" else "warn"))
+
+    # S4-S7: command-line tools; None as the default means "must be set in config.yaml"
+    for label, key, default, hint in (
+            ("AlgPred2 (S4)", "tools.algpred2", "algpred2", "pip install algpred2"),
+            ("ToxinPred2 (S4)", "tools.toxinpred2", "toxinpred2", "pip install toxinpred2"),
+            ("NetMHCpan (S5)", "tools.netmhcpan", "netMHCpan", "licensed download; set tools.netmhcpan"),
+            ("NetMHCIIpan (S5)", "tools.netmhciipan", "netMHCIIpan", "licensed download; set tools.netmhciipan"),
+            ("BepiPred3 (S5)", "tools.bepipred3", None, "set tools.bepipred3 in config.yaml"),
+            ("DiscoTope3 (S5)", "tools.discotope3", None, "set tools.discotope3 in config.yaml; S7 uses it too"),
+            ("Boltz (S7)", "tools.boltz", "boltz", "pip install boltz")):
+        argv = resolve_executable(cfg.get(key), default)
+        if argv:
+            rows.append((label, f"found: {argv[0]}", "ok"))
+        else:
+            rows.append((label, f"not found ({hint}); that analysis is skipped or degraded", "warn"))
+    if importlib.util.find_spec("mhcflurry") is not None:
+        rows.append(("MHCflurry (S5)", "python package found", "ok"))
+    else:
+        rows.append(("MHCflurry (S5)", "python package not found (pip install mhcflurry); class I falls back or is skipped", "warn"))
+    return rows
+
+
 def cmd_doctor(args: argparse.Namespace) -> int:
     cfg = load_from_args(args)
     broken = False
@@ -360,6 +512,9 @@ def cmd_doctor(args: argparse.Namespace) -> int:
     else:
         line("PSORTb", "not found: localisation will be 'not_run' (never silently 'unknown') until Docker + the PSORTb "
                        "image are available, or you pass --psortb-results FILE", "warn")
+    say("  later stages S3-S12 (advisory: found / not found only; this does not test that a tool works):")
+    for label, text, level in pipeline_tool_checks(cfg):
+        line(label, text, level)
     if cfg.get("network.ncbi.email"):
         line("NCBI email", "set")
     else:
@@ -399,6 +554,9 @@ def build_parser() -> argparse.ArgumentParser:
     common.add_argument("--offline", action="store_true", help="never touch the network; use the cache only")
     common.add_argument("--refresh", action="store_true", help="ignore cached downloads and fetch again")
     common.add_argument("--cache-dir", help="override paths.cache_dir")
+    common.add_argument("--set", dest="overrides", action="append", default=[], metavar="KEY=VALUE",
+                        help="override one config value for this run, e.g. --set s3.backend=scores_file "
+                             "(the value is read as JSON when it parses, else as text; repeatable)")
 
     p = argparse.ArgumentParser(prog="vaxforge", description="VaxForge - stream A: S0 taxonomy, S1 acquisition, S2 annotation")
     p.add_argument("--version", action="version", version=f"vaxforge {__version__}")
@@ -419,10 +577,19 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--out", help="run directory (default: runs/<pathogen>)")
     r.add_argument("--run-id", help="run id recorded in artifacts (default: the folder name)")
     r.add_argument("--top-k", type=int, help="candidates carried into S7 (config pipeline.top_k)")
-    r.add_argument("--stages", help="comma-separated subset, e.g. s0,s1,s2 (default: every stage that is installed)")
+    r.add_argument("--stages", help="comma-separated subset, e.g. s0,s1,s2 (default: every stage that is installed). "
+                                    "Without s0 in the list, --pathogen is not needed: --out names an existing run folder")
     r.add_argument("--non-interactive", action="store_true", help="never prompt; ambiguity exits with code 2")
     add_s1_s2_flags(r)
     r.set_defaults(func=cmd_run)
+
+    dm = sub.add_parser("demo-offline", parents=[common],
+                        help="offline demo: copy the committed fixture (S0-S2) and run S3-S12 on the copy, no network")
+    dm.add_argument("--out", default="runs/demo", help="folder for the copy (default: runs/demo)")
+    dm.add_argument("--fixture", help="a run folder to copy instead of fixtures/nmb_fixture")
+    dm.add_argument("--scores-file", help="precomputed protegenicity scores for S3 (sets s3.backend=scores_file and s3.scores_file)")
+    dm.add_argument("--force", action="store_true", help="replace --out when it already has files")
+    dm.set_defaults(func=cmd_demo_offline)
 
     rs = sub.add_parser("resolve", parents=[common], help="S0 only: resolve a name to a taxid (writes nothing)")
     rs.add_argument("name", nargs="?")
